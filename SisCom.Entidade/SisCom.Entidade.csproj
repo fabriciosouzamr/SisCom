@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Sistema\" />
+  </ItemGroup>
+
+  <Import Project="..\Funcoes\Funcoes.projitems" Label="Shared" />
+
+</Project>

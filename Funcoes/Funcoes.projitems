@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>c59933f5-5180-4525-84c6-44b21bdbaaf2</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Funcoes</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Classe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Valor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entity\Entity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\INotifier.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Lista.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notifications\Notification.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PagedList\FilteredPagedListParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PagedList\PagedList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PagedList\PagedListParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Resources\ResourcesUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Texto.cs" />
+  </ItemGroup>
+</Project>
