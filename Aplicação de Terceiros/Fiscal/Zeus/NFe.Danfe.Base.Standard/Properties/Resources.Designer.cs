@@ -58,12 +58,12 @@ namespace NFe.Danfe.Base.Standard.Properties {
             set {
                 resourceCulture = value;
             }
-        }
-        
+        }		
+		
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Byte[].
         /// </summary>
-        internal static byte[] OpenSans_CondBold {
+        public static byte[] OpenSans_CondBold {
             get {
                 object obj = ResourceManager.GetObject("OpenSans_CondBold", resourceCulture);
                 return ((byte[])(obj));
@@ -73,7 +73,7 @@ namespace NFe.Danfe.Base.Standard.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Byte[].
         /// </summary>
-        internal static byte[] OpenSans_CondLight {
+        public static byte[] OpenSans_CondLight {
             get {
                 object obj = ResourceManager.GetObject("OpenSans_CondLight", resourceCulture);
                 return ((byte[])(obj));
@@ -83,7 +83,7 @@ namespace NFe.Danfe.Base.Standard.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Byte[].
         /// </summary>
-        internal static byte[] OpenSans_CondLightItalic {
+        public static byte[] OpenSans_CondLightItalic {
             get {
                 object obj = ResourceManager.GetObject("OpenSans_CondLightItalic", resourceCulture);
                 return ((byte[])(obj));
@@ -93,7 +93,7 @@ namespace NFe.Danfe.Base.Standard.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Byte[].
         /// </summary>
-        internal static byte[] UbuntuCondensed_Regular {
+        public static byte[] UbuntuCondensed_Regular {
             get {
                 object obj = ResourceManager.GetObject("UbuntuCondensed_Regular", resourceCulture);
                 return ((byte[])(obj));
