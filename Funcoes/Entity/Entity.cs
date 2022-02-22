@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Funcoes.Classes
+namespace Funcoes._Entity
 {
     public abstract class Entity
     {

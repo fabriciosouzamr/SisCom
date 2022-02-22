@@ -1,12 +1,17 @@
-﻿using SisCom.Aplicacao.Classes;
+﻿using Funcoes.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SisCom.Aplicacao.Classes;
+using SisCom.Aplicacao.Formularios;
+using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Windows.Forms;
 
 namespace SisCom.Aplicacao
 {
-    public partial class frmMDI : Form
+    public partial class frmMDI : FormMain
     {
-        public frmMDI()
+        public frmMDI(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory) : base(serviceProvider, dbCtxFactory)
         {
             InitializeComponent();
         }
@@ -28,8 +33,8 @@ namespace SisCom.Aplicacao
 
         private void cmdCadastro_Click(object sender, EventArgs e)
         {
-            frmCadastros Form = new frmCadastros();
-            Form.Show();
+            var form = this.ServiceProvider().GetRequiredService<frmCadastro>();
+            form.ShowDialog(this);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
-using Funcoes.Classes;
+using Funcoes._Entity;
 using Funcoes.Interfaces;
 using Funcoes.Notifications;
 using System;
@@ -63,14 +63,19 @@ namespace SisCom.Negocio.Services
             return _repository.Search(predicate);
         }
 
-        public virtual Task<List<TEntity>> GetAll()
+        public virtual Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null)
         {
-            return _repository.GetAll();
+            return _repository.GetAll(order);
         }
 
-        public virtual async Task<List<TEntity>> Combo()
+        public virtual async Task<List<TEntity>> Combo(Expression<Func<TEntity, object>> order = null)
         {
-            return await _repository.Combo();
+            return await _repository.Combo(order);
+        }
+
+        public virtual async Task<List<TEntity>> ComboSearch(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> order = null)
+        {
+            return await _repository.ComboSearch(predicate, order);
         }
 
         //public virtual Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)

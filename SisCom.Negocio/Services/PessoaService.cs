@@ -6,6 +6,7 @@ using SisCom.Negocio.Models.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Negocio.Services
@@ -59,9 +60,9 @@ namespace SisCom.Negocio.Services
             ), parameters);
         }
 
-        public virtual async Task<List<Pessoa>> ComboFornecedor()
+        public virtual async Task<List<Pessoa>> ComboFornecedor(Expression<Func<Pessoa, object>> order = null)
         {
-            return await _PessoaRepository.ComboSearch(f => f.Fornecedor == true);
+            return await _PessoaRepository.ComboSearch(f => f.Fornecedor == true, order);
         }
 
         public override void Dispose()

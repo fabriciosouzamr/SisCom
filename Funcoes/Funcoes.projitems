@@ -10,12 +10,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Classe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Declaracoes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\ServiceScopeFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Valor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entity\Entity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enum\AmbienteSistemas.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enum\CreditoDebito.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enum\EntradaSaida.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enum\TipoPessoa.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\INotifier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Lista.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IServiceScopeFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notifications\Notification.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PagedList\FilteredPagedListParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PagedList\PagedList.cs" />

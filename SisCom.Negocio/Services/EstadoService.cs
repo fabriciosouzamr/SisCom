@@ -3,7 +3,6 @@ using Funcoes.PagedList;
 using SisCom.Entidade.Modelos;
 using SisCom.Negocio.Interfaces;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SisCom.Negocio.Services

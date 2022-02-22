@@ -2,7 +2,7 @@
 using System.Data;
 using System.Reflection;
 
-namespace Funcoes
+namespace Funcoes._Classes
 {
     public static class Lista
     {

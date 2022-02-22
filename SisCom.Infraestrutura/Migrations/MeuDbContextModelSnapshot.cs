@@ -68,6 +68,74 @@ namespace SisCom.Infraestrutura.Migrations
                     b.ToTable("Cidades");
                 });
 
+            modelBuilder.Entity("SisCom.Entidade.Modelos.Empresa", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CNPJ")
+                        .IsRequired()
+                        .HasColumnType("varchar(14)");
+
+                    b.Property<double>("CreditoSimplesNacional")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<string>("EMail")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("End_Bairro")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("End_CEP")
+                        .HasColumnType("varchar(8)");
+
+                    b.Property<Guid?>("End_CidadeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("End_Logradouro")
+                        .HasColumnType("varchar(60)");
+
+                    b.Property<string>("End_Numero")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("Fantasia")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("InscricaoEstadual")
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<string>("InscricaoEstadual_SubTributaria")
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<string>("InscricaoMunicipal")
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<string>("RazaoSocial")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("RegimeTributario")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Telefone")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Unidade")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("End_CidadeId");
+
+                    b.ToTable("Empresas");
+                });
+
             modelBuilder.Entity("SisCom.Entidade.Modelos.Estado", b =>
                 {
                     b.Property<Guid>("Id")
@@ -97,218 +165,218 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ad2c4330-6ed6-4bff-87b9-fb48f06b7355"),
+                            Id = new Guid("9616a0cc-5e55-47ce-b473-615b6fda6929"),
                             Codigo = "AC",
                             Nome = "Acre",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("a63ada3a-6073-4aee-b609-a089522cfbf5"),
+                            Id = new Guid("ea159fab-1f24-4735-8060-a7bc80bfaf04"),
                             Codigo = "AL",
                             Nome = "Alagoas",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("49ed77db-5cfb-4fd4-9c76-df8e1787c3f8"),
+                            Id = new Guid("783d76e1-0ef0-4f48-867a-1b9b464df5e9"),
                             Codigo = "AP",
                             Nome = "Amapá",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("f46b8cd5-c6b1-462e-8ee5-a23a942970e9"),
+                            Id = new Guid("cadebc30-4f17-4dac-b46a-0c572c7e04fc"),
                             Codigo = "AM",
                             Nome = "Amazonas",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("f3e7ffc6-467f-404b-9bf0-ed8842f9f739"),
+                            Id = new Guid("d747d9c2-047e-4561-9676-54fa0fb95ad3"),
                             Codigo = "BA",
                             Nome = "Bahia",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("960288b4-3d57-47da-aa26-5a3b3445652a"),
+                            Id = new Guid("7c13c965-8e97-4aad-a92a-44862152857c"),
                             Codigo = "CE",
                             Nome = "Ceará",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("4231c998-2425-4ff9-bed3-1b8f0cee38f8"),
+                            Id = new Guid("77dfc781-f790-4587-99bd-087118bcc474"),
                             Codigo = "DF",
                             Nome = "Distrito Federal",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("50fb081a-939d-45e2-9ab9-b426e5c6592c"),
+                            Id = new Guid("02e96beb-cb98-4a08-bcd9-df018cd3bd7b"),
                             Codigo = "ES",
                             Nome = "Espirito Santo",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("adfc2af9-21f7-4c96-bc07-26dbf57a9b92"),
+                            Id = new Guid("9037e387-2eb4-40a5-bd99-b22968dffe17"),
                             Codigo = "GO",
                             Nome = "Goias",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("3af3ef90-4be5-43b3-8fd2-3d79ad0236f1"),
+                            Id = new Guid("8ba2a165-3a52-4518-99e2-a808925b9228"),
                             Codigo = "MA",
                             Nome = "Maranhão",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("9fdd40f6-d339-4a42-8283-0bc16568df56"),
+                            Id = new Guid("9ec8e867-4304-46e4-9699-6b86dbc07e57"),
                             Codigo = "MS",
                             Nome = "Mato Grosso do Sul",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("78c3d90e-0c0b-4133-aa9d-efdd383d1787"),
+                            Id = new Guid("781c2f81-bc6a-4845-944c-61dc6df18bee"),
                             Codigo = "MT",
                             Nome = "Mato Grosso",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("316299c0-f09f-4564-80e4-0a9b4fb3126e"),
+                            Id = new Guid("d5026560-d966-4cf7-a6e0-1331b23d90b2"),
                             Codigo = "MG",
                             Nome = "Minas Gerais",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("10de653b-80a1-4fd8-ae27-41f24236d875"),
+                            Id = new Guid("4a4aac65-e2c3-44e2-aa5a-9f33596608a8"),
                             Codigo = "PA",
                             Nome = "Pará",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("3505aecd-b180-4b55-a52f-aaebca7e694c"),
+                            Id = new Guid("30793823-a5f7-433a-9666-16ca4618705d"),
                             Codigo = "PB",
                             Nome = "Paraíba",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("258208d1-3bf0-4c89-954d-3bcbb3dd1744"),
+                            Id = new Guid("ddc62734-e8a3-4a0e-b320-e04857c68e3e"),
                             Codigo = "PR",
                             Nome = "Paraná",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("91f27bd9-01ec-4017-a0cc-7d64573c7d3d"),
+                            Id = new Guid("5faac871-d3e6-4a58-9746-29a11d8ddfe4"),
                             Codigo = "PE",
                             Nome = "Pernambuco",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("4bae038c-8360-4c72-becd-b67ac5ecfd29"),
+                            Id = new Guid("61e04229-6a43-481a-9050-cf8eaded6210"),
                             Codigo = "PI",
                             Nome = "Piauí",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("92701b58-91b6-4fe8-b53e-9b20aee7190f"),
+                            Id = new Guid("69dbd44d-330b-449e-bcf5-63de519571cf"),
                             Codigo = "RJ",
                             Nome = "Rio de Janeiro",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("b8b49a76-0495-4c6f-8cd2-7821b2a359b6"),
+                            Id = new Guid("e43ce966-e63e-4446-bcb8-6b793aab1cbe"),
                             Codigo = "RN",
                             Nome = "Rio Grande do Norte",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("1eff192d-655c-4c49-845e-195dce5f5469"),
+                            Id = new Guid("e5578c22-b5f5-4c3c-8a23-d95c202e213c"),
                             Codigo = "RS",
                             Nome = "Rio Grande do Sul",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("ae34808a-ae8c-4b3e-b66b-63688a2b5a8b"),
+                            Id = new Guid("93cd8035-83ea-4451-9003-21f03c2a79e3"),
                             Codigo = "RO",
                             Nome = "Rondônia",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("dcb12e9b-9c99-4e9a-b7dc-4229547c4f36"),
+                            Id = new Guid("bd258451-f46e-4de7-a7e2-91040b7340e5"),
                             Codigo = "RR",
                             Nome = "Roraima",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("506d2aa6-6caa-483a-b6df-a5e0e5157e33"),
+                            Id = new Guid("f4e044e4-8709-4eab-bb7c-e9d2c5765298"),
                             Codigo = "SC",
                             Nome = "Santa Catarina",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("dc3af8d3-f287-44d6-9188-f867608a3caf"),
+                            Id = new Guid("27f89ec5-da57-4e0d-a354-8d5c46c65c8a"),
                             Codigo = "SP",
                             Nome = "São Paulo",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("55e5fb6c-ee9e-4575-afed-6b4e4cb67972"),
+                            Id = new Guid("0e1aaf33-b3c3-4f0f-9afd-7bb6b1ad00c4"),
                             Codigo = "SE",
                             Nome = "Sergipe",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("a49e7adb-9fc9-48f1-93b7-e7df032a8fc5"),
+                            Id = new Guid("5d1591a2-72f3-45be-afd7-752af8199c4b"),
                             Codigo = "EX",
                             Nome = "Exterior",
-                            PaisId = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -326,10 +394,14 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("QuantidadeBloqueada")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("QuantidadeEmEstoque")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
@@ -341,6 +413,24 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasIndex("MercadoriaId");
 
                     b.ToTable("Estoques");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.Fabricante", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Fabricantes");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.GrupoCFOP", b =>
@@ -369,7 +459,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c71222a1-5995-4639-a4dd-10e417e80757"),
+                            Id = new Guid("29088a5e-44dd-47cd-903f-1be74dc27e98"),
                             Nome = "1.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO ESTADO",
                             TipoOperacaoCFOP = 1,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -377,7 +467,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("024a5d61-71b1-4e6f-ad9c-22c615b28672"),
+                            Id = new Guid("48283b6d-4630-4918-a2db-8661e24757e4"),
                             Nome = "2.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DE OUTROS ESTADOS",
                             TipoOperacaoCFOP = 2,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -385,7 +475,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("59b25494-31dc-47b1-85c7-91596f21bf7c"),
+                            Id = new Guid("a95d2d30-6f3a-49a3-af8e-a68347e79057"),
                             Nome = "3.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO EXTERIOR",
                             TipoOperacaoCFOP = 3,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -393,7 +483,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d539a6f2-1126-40d1-b5f2-061251360ea0"),
+                            Id = new Guid("9f2ddede-b9de-43f1-afd7-047743058bc9"),
                             Nome = "5.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O ESTADO",
                             TipoOperacaoCFOP = 5,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -401,7 +491,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("74127c3d-c081-427e-9410-a88887adca4d"),
+                            Id = new Guid("eace3cfc-9844-42b2-aef0-9bc0a4a4fc3e"),
                             Nome = "6.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA OUTROS ESTADOS",
                             TipoOperacaoCFOP = 6,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -409,7 +499,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("431c0276-b0c1-43e9-8aac-3913eff95dcf"),
+                            Id = new Guid("09600943-ca75-4ac9-b9df-11d7804828ff"),
                             Nome = "7.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O EXTERIOR",
                             TipoOperacaoCFOP = 7,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -499,22 +589,32 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<double>("Estoque_PesoBruto")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Estoque_PesoLiquido")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<string>("Estoque_Pratileira")
                         .HasColumnType("varchar(20)");
 
                     b.Property<double>("Estoque_Quantidade")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Estoque_QuantidadeMinimo")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Estoque_TributacaoNFCe_AliquotaICMS")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<Guid>("Estoque_TributacaoNFCe_TabelaCFOPId")
                         .HasColumnType("uniqueidentifier");
@@ -544,13 +644,19 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("varchar(200)");
 
                     b.Property<double>("Fiscal_NFE_COFINS_Aliquota")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_NFE_IPI_Aliquota")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_NFE_PIS_Aliquota")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<Guid>("Fiscal_NFE_TabelaCST_COFINSId")
                         .HasColumnType("uniqueidentifier");
@@ -562,22 +668,32 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Fiscal_NFS_ICMSST_Aliquota")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_NFS_ICMSST_ReducaoBase")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<Guid>("Fiscal_NFS_ICMSST_TabelaModalidadeDeterminacaoBCICMSId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Fiscal_NFS_ICMSST_ValorAdicional")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_NFS_ICMS_Deferimento")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_NFS_ICMS_ReducaoBase")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<Guid>("Fiscal_NFS_ICMS_TabelaModalidadeDeterminacaoBCICMSId")
                         .HasColumnType("uniqueidentifier");
@@ -586,7 +702,9 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Fiscal_NFS_ICMS_ValorAdicional")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<Guid>("Fiscal_NFS_IPI_TabelaCST_IPIId")
                         .HasColumnType("uniqueidentifier");
@@ -598,10 +716,14 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Fiscal_NFS_IPI_ValorAliquota")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_NFS_PISCOFINS_COFINS_ValorAliquota")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<Guid>("Fiscal_NFS_PISCOFINS_GrupoNaturezaReceitaId")
                         .HasColumnType("uniqueidentifier");
@@ -613,31 +735,47 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Fiscal_NFS_PISCOFINS_PIS_ValorAliquota")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<Guid>("Fiscal_NFS_PISCOFINS_TabelaNaturezaReceitaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Fiscal_NFS_TributosEstaduais")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_NFS_TributosFederais")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_NFS_TributosMunicipais")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_NFS_TributosTotal")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_NFS_ValorTributosTotal")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_OutrosNVE")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("Fiscal_OutrosPMC")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<Guid>("Fiscal_SPED_TabelaSpedCodigoGeneroId")
                         .HasColumnType("uniqueidentifier");
@@ -708,85 +846,139 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Preco_CalculoPrecificacao")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_CalculoPreco")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_Comissao")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_CustoFixo")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_CustoMercadoria")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_Embalagem")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_EncFinanceiro")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_Frete")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_ICMS_Compra")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_ICMS_Fronteira")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_ICMS_Venda")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_IPI")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_ImpostoFederais")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_MargemA")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_MargemB")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_MargemC")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_MargemSugerido")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_MargemVenda")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_Marketing")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_OutrosCustos")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_PontoEquilibrio")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_PrecoA")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_PrecoB")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_PrecoC")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_PrecoCompra")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_PrecoSugerido")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Preco_PrecoVenda")
-                        .HasColumnType("money");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValue(0m);
 
                     b.Property<bool>("Producao_Configuracao_NaoBaixarComposicaoVenda")
                         .HasColumnType("bit");
@@ -920,7 +1112,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6c4ba1ac-6225-492d-ad1d-7687cfa89e05"),
+                            Id = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
                             Nome = "Brasil",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -936,9 +1128,6 @@ namespace SisCom.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(14)");
 
-                    b.Property<Guid?>("CidadeId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("EMail")
                         .HasColumnType("varchar(100)");
 
@@ -947,6 +1136,9 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<string>("End_CEP")
                         .HasColumnType("varchar(8)");
+
+                    b.Property<Guid?>("End_CidadeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("End_Logradouro")
                         .HasColumnType("varchar(60)");
@@ -1002,7 +1194,12 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CidadeId");
+                    b.HasIndex("CNPJ_CPF")
+                        .IsUnique()
+                        .HasDatabaseName("idx_pessoas_CNPJ_CPF")
+                        .HasFillFactor(80);
+
+                    b.HasIndex("End_CidadeId");
 
                     b.ToTable("Pessoas");
                 });
@@ -1247,7 +1444,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("826c0e7b-0c0b-4899-9610-4cf735a58707"),
+                            Id = new Guid("e8b02720-3ab5-4cf4-91ef-100d5564f0e3"),
                             Codigo = "00",
                             Descricao = "Entrada com Recuperação de Crédito",
                             DestacarIPI = true,
@@ -1256,7 +1453,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f5f6aaad-a151-41a3-8ff1-7a4a593805f5"),
+                            Id = new Guid("beeb5abc-570b-4059-8c69-924d210bcb8a"),
                             Codigo = "01",
                             Descricao = "Entrada Tributável com Alíquota Zero",
                             DestacarIPI = false,
@@ -1265,7 +1462,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a05caf24-efd0-424d-882f-14e984371c6e"),
+                            Id = new Guid("f5a83bdc-28e9-42da-8ff8-a23745aa4fc8"),
                             Codigo = "02",
                             Descricao = "Entrada Isenta",
                             DestacarIPI = false,
@@ -1274,7 +1471,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8c9225db-7bc5-445a-b0ae-88b1611ac9ca"),
+                            Id = new Guid("602b93c7-cb76-427f-8d43-fa95734f5825"),
                             Codigo = "03",
                             Descricao = "Entrada Não-Tributada",
                             DestacarIPI = false,
@@ -1283,7 +1480,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("acf97aff-65d7-4101-9897-8ebde36a3fa6"),
+                            Id = new Guid("d30a07ec-712f-48f4-9fbd-41ff4c0edc3f"),
                             Codigo = "04",
                             Descricao = "Entrada Imune",
                             DestacarIPI = false,
@@ -1292,7 +1489,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("920389f1-7931-4d88-828b-59c8b7b0f526"),
+                            Id = new Guid("8c4cc729-2060-4145-9076-013f11a13839"),
                             Codigo = "05",
                             Descricao = "Entrada com Suspensão",
                             DestacarIPI = false,
@@ -1301,7 +1498,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("62ca2fc6-7a38-4991-a0bb-040697f5c544"),
+                            Id = new Guid("cb1f9af0-5732-4d99-b150-4303cd6d279e"),
                             Codigo = "49",
                             Descricao = "Outras Entradas",
                             DestacarIPI = true,
@@ -1310,7 +1507,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6ae0378e-c2d1-4017-b829-d8e8684e03cd"),
+                            Id = new Guid("cd072319-87e9-4ad0-adc4-0a6f699d2f3c"),
                             Codigo = "50",
                             Descricao = "Saída Tributada",
                             DestacarIPI = true,
@@ -1319,7 +1516,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("537ca43c-8ee4-4f52-bb17-672c7e792675"),
+                            Id = new Guid("689fc616-e300-4e37-b96e-0939d9b53b84"),
                             Codigo = "51",
                             Descricao = "Saída Tributável com Alíquota Zero",
                             DestacarIPI = false,
@@ -1328,7 +1525,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f32b1200-9c3c-4743-8b35-cf6489511b79"),
+                            Id = new Guid("4e7d10d6-4f7b-414e-8f90-00c7daf0b9d8"),
                             Codigo = "52",
                             Descricao = "Saída Isenta",
                             DestacarIPI = false,
@@ -1337,7 +1534,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e68f2eb0-d044-4c0a-81fa-82315b69700d"),
+                            Id = new Guid("563077dd-5009-4d93-950a-a3e159e20b31"),
                             Codigo = "53",
                             Descricao = "Saída Não-Tributada",
                             DestacarIPI = false,
@@ -1346,7 +1543,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b0128c87-9377-4ef8-b8fa-c2d8fe157add"),
+                            Id = new Guid("6da9f8e2-21b9-4583-8819-908880649c6c"),
                             Codigo = "54",
                             Descricao = "Saída Imune",
                             DestacarIPI = false,
@@ -1355,7 +1552,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b551a356-50e8-4afb-809a-28268da7ca49"),
+                            Id = new Guid("a27a29aa-f9d8-4113-849b-05b6d3b8a185"),
                             Codigo = "55",
                             Descricao = "Saída com Suspensão",
                             DestacarIPI = false,
@@ -1364,7 +1561,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6d1e5803-ec26-4a88-a055-e69cf50854e3"),
+                            Id = new Guid("e7b56194-81c8-465d-bde3-9ef4ad16e9f6"),
                             Codigo = "99",
                             Descricao = "Outras Saídas",
                             DestacarIPI = true,
@@ -1406,7 +1603,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9844509e-9df3-4b7f-b410-03e253758886"),
+                            Id = new Guid("9dc9a904-b000-4399-8d05-eb7b05b31fdb"),
                             Codigo = "01",
                             Descricao = "Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo))",
                             DestacarPIS_COFINS = true,
@@ -1416,7 +1613,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("70608042-f7a4-4ef2-a610-a6be73793ba7"),
+                            Id = new Guid("62fb953b-59d5-46e4-93e0-452c73a93d0f"),
                             Codigo = "02",
                             Descricao = "Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada))",
                             DestacarPIS_COFINS = true,
@@ -1426,7 +1623,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2bb9b5e9-6b9f-43ba-8678-72babf4b7fb7"),
+                            Id = new Guid("4a060ac5-323a-45b5-b31e-cf6451bf8927"),
                             Codigo = "03",
                             Descricao = "Operação Tributável (base de cálculo = quantidade vendida x alíquota por unidade de produto)",
                             DestacarPIS_COFINS = true,
@@ -1436,7 +1633,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c36d3efb-c594-4b65-ab81-c2c19a49da1c"),
+                            Id = new Guid("ab72c8dd-0de3-4fc7-bd4e-e44b728b0087"),
                             Codigo = "04",
                             Descricao = "Operação Tributável (tributação monofásica (alíquota zero))",
                             DestacarPIS_COFINS = false,
@@ -1446,7 +1643,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("76a63e9f-682d-43ce-b5a7-4a6d65d00196"),
+                            Id = new Guid("069ec88d-7e64-4f0a-974f-a6cf58d005aa"),
                             Codigo = "05",
                             Descricao = "Operação Tributável por Substituição Tributária",
                             DestacarPIS_COFINS = false,
@@ -1456,7 +1653,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6f24530f-933f-4c5d-aaa6-319f94a37b0f"),
+                            Id = new Guid("9b2c6396-2b15-4f67-9774-7db6933d9eb1"),
                             Codigo = "06",
                             Descricao = "Operação Tributável (alíquota zero)",
                             DestacarPIS_COFINS = false,
@@ -1466,7 +1663,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bd0f0a25-7cc3-4899-94ff-5dbb5f08d7ce"),
+                            Id = new Guid("3f6337a9-ece6-4b10-865a-205418f7dab9"),
                             Codigo = "07",
                             Descricao = "Operação Isenta da Contribuição",
                             DestacarPIS_COFINS = false,
@@ -1476,7 +1673,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ffc82589-c781-4110-b551-73a64a6e993a"),
+                            Id = new Guid("64a8843d-4753-430f-a34a-bb03988ef8d7"),
                             Codigo = "08",
                             Descricao = "Operação Sem Incidência da Contribuição",
                             DestacarPIS_COFINS = false,
@@ -1486,7 +1683,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bdf84b24-b4b5-4d52-8286-18cdc1810d3f"),
+                            Id = new Guid("1434aaea-4dd6-4a6c-a034-a6e5f4bde6a6"),
                             Codigo = "09",
                             Descricao = "Operação com Suspensão da Contribuição",
                             DestacarPIS_COFINS = false,
@@ -1496,7 +1693,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("97f66672-de13-41cc-a888-b241bd565144"),
+                            Id = new Guid("3297a71f-d8d5-44ec-842f-b7221bacd0b2"),
                             Codigo = "49",
                             Descricao = "Outras Operações de Saída",
                             DestacarPIS_COFINS = true,
@@ -1506,7 +1703,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("afc8766b-e119-4ae0-a7d4-73f7bbfa5db9"),
+                            Id = new Guid("4dc0569d-356d-4c0d-a733-6ce1aaf3e881"),
                             Codigo = "50",
                             Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno",
                             DestacarPIS_COFINS = true,
@@ -1516,7 +1713,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f415962a-77c9-4b74-b9ab-7eb9ba525254"),
+                            Id = new Guid("20c16dfe-5c3b-44d1-b9b1-767bb1145fc0"),
                             Codigo = "51",
                             Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno",
                             DestacarPIS_COFINS = true,
@@ -1526,7 +1723,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a9d4917b-91d4-45e5-8c9a-4985863e5467"),
+                            Id = new Guid("ed26bbf9-9413-47a3-83ee-827802f6435e"),
                             Codigo = "52",
                             Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação",
                             DestacarPIS_COFINS = true,
@@ -1536,7 +1733,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f7dadbe5-fb15-4baa-b517-4dd2293a7b02"),
+                            Id = new Guid("a1f78cbf-9fa4-4809-bc44-9a85a2980332"),
                             Codigo = "53",
                             Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não - Tributadas no Mercado Interno",
                             DestacarPIS_COFINS = true,
@@ -1546,7 +1743,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3efd8f83-51c1-41ab-ae8d-856675137db4"),
+                            Id = new Guid("a06107ee-941c-4ed5-b655-c3deba5c5b17"),
                             Codigo = "54",
                             Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
@@ -1556,7 +1753,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8577744b-c794-4b45-9c7c-3f09b6b6aa2a"),
+                            Id = new Guid("532d1324-623b-427d-9cc4-3ae7c1739788"),
                             Codigo = "55",
                             Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Não Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
@@ -1566,7 +1763,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("db37e539-d770-4052-a0c2-dab668727017"),
+                            Id = new Guid("bed9db31-d4d8-4b72-8729-d80d85b058a8"),
                             Codigo = "56",
                             Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não - Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
@@ -1576,7 +1773,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("12c7142f-7775-42fc-a9f7-658d170aaf3f"),
+                            Id = new Guid("1ecf9d9f-66a0-4400-9b56-25c702475dd5"),
                             Codigo = "60",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno",
                             DestacarPIS_COFINS = true,
@@ -1586,7 +1783,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d1a1d37c-d31a-4923-8206-2bc304a161f4"),
+                            Id = new Guid("58b0b3f1-74bc-4407-ada3-c06b40684423"),
                             Codigo = "61",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita Não - Tributada no Mercado Interno",
                             DestacarPIS_COFINS = true,
@@ -1596,7 +1793,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e764afc0-ba3a-4a51-baae-3e65eee40049"),
+                            Id = new Guid("bf6970b9-52d7-4c53-a024-c0c5fafd2caa"),
                             Codigo = "62",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação",
                             DestacarPIS_COFINS = true,
@@ -1606,7 +1803,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("108123b9-5ee4-43fa-8813-5243f84dee9e"),
+                            Id = new Guid("c882c2af-a565-42df-8b96-fca693a877d2"),
                             Codigo = "63",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno",
                             DestacarPIS_COFINS = true,
@@ -1616,7 +1813,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("226441e0-8b26-4ace-82d6-1640ced3ecec"),
+                            Id = new Guid("94461050-8a45-472b-af8d-78999391b57a"),
                             Codigo = "64",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
@@ -1626,7 +1823,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4c43efa5-1510-4300-9a66-31c732e08874"),
+                            Id = new Guid("e478d8bf-294a-4c34-a375-7d9bdbaedfbd"),
                             Codigo = "65",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
@@ -1636,7 +1833,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("715eca90-359a-4c00-b1b0-70efc93c046f"),
+                            Id = new Guid("33b1bcbc-4223-433a-9c49-e8e3ded1acdb"),
                             Codigo = "66",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
@@ -1646,7 +1843,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2666d449-f3ec-4b2b-8785-7d8f9ca2e707"),
+                            Id = new Guid("74d70ee3-6ea6-4a28-aec7-d687f211aad5"),
                             Codigo = "67",
                             Descricao = "Crédito Presumido -Outras Operações",
                             DestacarPIS_COFINS = true,
@@ -1656,7 +1853,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("edb571c9-8a8d-49aa-8244-3b22c5f28f3b"),
+                            Id = new Guid("da82e943-d00d-437e-8091-604f07cf1e7f"),
                             Codigo = "70",
                             Descricao = "Operação de Aquisição sem Direito a Crédito",
                             DestacarPIS_COFINS = false,
@@ -1666,7 +1863,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f50c21d0-fe33-4fa2-be17-ac6b970a0577"),
+                            Id = new Guid("fd4b01a8-6004-464b-9669-17bac490d0e9"),
                             Codigo = "71",
                             Descricao = "Operação de Aquisição com Isenção",
                             DestacarPIS_COFINS = false,
@@ -1676,7 +1873,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f602af8b-1010-4c76-83f8-a5e59bde4133"),
+                            Id = new Guid("ba190994-8e03-4a54-a3a2-b52015f57916"),
                             Codigo = "72",
                             Descricao = "Operação de Aquisição com Suspensão",
                             DestacarPIS_COFINS = false,
@@ -1686,7 +1883,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f429489a-3ed4-4dca-b970-311ce492c17f"),
+                            Id = new Guid("d8c0faa3-c2e9-4276-9c0d-96e4935fbf37"),
                             Codigo = "73",
                             Descricao = "Operação de Aquisição a Alíquota Zero",
                             DestacarPIS_COFINS = false,
@@ -1696,7 +1893,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e7e1f0b1-005c-4a7c-adbb-d95f91aee351"),
+                            Id = new Guid("067a178f-c4ac-4b97-a295-e649cee16504"),
                             Codigo = "74",
                             Descricao = "Operação de Aquisição sem Incidência da Contribuição",
                             DestacarPIS_COFINS = false,
@@ -1706,7 +1903,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a1aafeb6-1c1c-40e4-b2d8-d43d3a1067ac"),
+                            Id = new Guid("fe29b6e2-5f43-471c-8ff1-d35386cb24fc"),
                             Codigo = "75",
                             Descricao = "Operação de Aquisição por Substituição Tributária",
                             DestacarPIS_COFINS = false,
@@ -1716,7 +1913,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4adf26c9-6b53-4883-99d7-e0de2f15a82f"),
+                            Id = new Guid("aabf2def-1afa-44f6-8e16-01716f2b2cf0"),
                             Codigo = "98",
                             Descricao = "Outras Operações de Entrada",
                             DestacarPIS_COFINS = true,
@@ -1726,7 +1923,7 @@ namespace SisCom.Infraestrutura.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c6dfa821-a09a-4501-aed3-b9359a1958fc"),
+                            Id = new Guid("3aab7950-67bf-4e08-97e8-ac85b440091e"),
                             Codigo = "99",
                             Descricao = "Outras Operações",
                             DestacarPIS_COFINS = true,
@@ -1933,28 +2130,28 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("69b5005a-4daa-4bd0-8436-ea4a81f7aae9"),
+                            Id = new Guid("c53efb17-c0e8-4b77-8adf-6a84e712b1af"),
                             Codigo = "01",
                             Descricao = "Normal(% TRIBUTADO)",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("a5f195e4-c22c-47c4-bee3-6e246b35c333"),
+                            Id = new Guid("6aea67de-fb91-4afd-97cb-6373c2844acc"),
                             Codigo = "FF",
                             Descricao = "Substituição",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("606093b1-6829-41fa-b5a5-6d0b280ddc90"),
+                            Id = new Guid("723e08dd-e36a-4542-9143-14b678991263"),
                             Codigo = "II",
                             Descricao = "Isento",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("ac4050eb-39ca-4f2f-89f0-881cf983ec43"),
+                            Id = new Guid("ba820c12-eb1d-4c76-9b39-9b23ce344222"),
                             Codigo = "NN",
                             Descricao = "Não Incidente",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2046,25 +2243,25 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("308fb9a9-da5d-450b-aae9-39e05a4568db"),
+                            Id = new Guid("c585cae1-1e59-4230-b6e4-ec6be789a038"),
                             Nome = "VEÍCULO",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("a2908802-b160-406f-92e8-263c77d38b4f"),
+                            Id = new Guid("1c0edc94-6bad-4ecc-a574-09079a27e594"),
                             Nome = "COMBUSTÍVEL",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("99ca99a2-8cc0-49b0-b1e8-677954769275"),
+                            Id = new Guid("81be89af-18fd-4b66-9b56-e3760aa78459"),
                             Nome = "MEDICAMENTO",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("7cc18d07-67cc-4493-a086-6e548cfe7167"),
+                            Id = new Guid("80d06387-7d47-4061-8ed0-b446c914026f"),
                             Nome = "ARMAMENTO",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -2121,77 +2318,77 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e61d7d37-5256-4e82-9e9e-d9019c58d2a4"),
+                            Id = new Guid("151ab54e-2001-4b93-8c6d-67b3f8a6aacd"),
                             Codigo = "UND",
                             Nome = "Unidade",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("a263e1a5-8fe8-4a87-bccc-42a0f4450dce"),
+                            Id = new Guid("9b835b25-a62a-4ab5-aaa2-7b78a63aab74"),
                             Codigo = "CXA",
                             Nome = "Caixa",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("b41276fe-c11b-4a85-9597-a0ae0d7eff2d"),
+                            Id = new Guid("e60e19b4-2e48-4411-914c-f0d2549b5627"),
                             Codigo = "PCA",
                             Nome = "Peca",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("4276b984-230e-479e-a94f-e0676acda5b8"),
+                            Id = new Guid("c9fa9eee-87c9-483d-b058-6fe87ac742c5"),
                             Codigo = "MTR",
                             Nome = "Metro",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("e7ec7811-fa37-4ec3-9d79-38bcfdb71c23"),
+                            Id = new Guid("6a23d044-473f-4368-b4da-df37200dc203"),
                             Codigo = "KG",
                             Nome = "Kilograma",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("21c4d228-59e2-4809-b1e2-72eaac11c3fd"),
+                            Id = new Guid("d71ea258-a580-4238-ab91-3d67a9b4e9e7"),
                             Codigo = "LTR",
                             Nome = "Litro ",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("495b154f-7d61-4810-8d00-65b5bc7561f8"),
+                            Id = new Guid("0ae878fa-5373-49d8-b47d-d18178c58f72"),
                             Codigo = "PCT",
                             Nome = "Pacote",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("59ace6e2-353c-4c9b-ba95-48db036a50cb"),
+                            Id = new Guid("3a6ea3c3-2215-4ef0-a649-719372e0ada3"),
                             Codigo = "SCO",
                             Nome = "Saco",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("19fbc344-df61-483e-9d24-bf5b27a51620"),
+                            Id = new Guid("50f54727-42fe-4830-ac7c-db5bde27b72a"),
                             Codigo = "FRC",
                             Nome = "Frasco",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("70a412a6-6a94-4af0-8c02-f2cef9b7067a"),
+                            Id = new Guid("f9820688-ba90-4a07-be82-b03f0b8a4dbc"),
                             Codigo = "GR",
                             Nome = "Grama",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("2b37d296-c0ba-4c9e-9961-c350955b244c"),
+                            Id = new Guid("ac893d32-f53c-4482-86d3-77b8587d9525"),
                             Codigo = "FRD",
                             Nome = "Fardo",
                             UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2228,6 +2425,15 @@ namespace SisCom.Infraestrutura.Migrations
                         .IsRequired();
 
                     b.Navigation("Estado");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.Empresa", b =>
+                {
+                    b.HasOne("SisCom.Entidade.Modelos.Cidade", "End_Cidade")
+                        .WithMany()
+                        .HasForeignKey("End_CidadeId");
+
+                    b.Navigation("End_Cidade");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Estado", b =>
@@ -2503,11 +2709,11 @@ namespace SisCom.Infraestrutura.Migrations
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Pessoa", b =>
                 {
-                    b.HasOne("SisCom.Entidade.Modelos.Cidade", "Cidade")
+                    b.HasOne("SisCom.Entidade.Modelos.Cidade", "End_Cidade")
                         .WithMany()
-                        .HasForeignKey("CidadeId");
+                        .HasForeignKey("End_CidadeId");
 
-                    b.Navigation("Cidade");
+                    b.Navigation("End_Cidade");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.SubGrupoMercadoria", b =>

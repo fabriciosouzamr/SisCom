@@ -1,10 +1,12 @@
 ﻿using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
+using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
@@ -12,10 +14,13 @@ namespace SisCom.Aplicacao.Controllers
     public class GrupoMercadoriaController
     {
         static GrupoMercadoriaService _grupoMercadoriaService;
+        private readonly MeuDbContext MeuDbContext;
 
-        static GrupoMercadoriaController()
+        public GrupoMercadoriaController(MeuDbContext MeuDbContext)
         {
-            _grupoMercadoriaService = new GrupoMercadoriaService(new GrupoRepository(Declaracoes.dbContext), null);
+            this.MeuDbContext = MeuDbContext;
+
+            _grupoMercadoriaService = new GrupoMercadoriaService(new GrupoRepository(this.MeuDbContext), null);
         }
 
         public async Task<GrupoMercadoriaViewModel> Adicionar(GrupoMercadoriaViewModel grupoMercadoriaViewModel)
@@ -57,9 +62,9 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<GrupoMercadoriaViewModel>>(obterTodos);
         }
 
-        public  async Task<IEnumerable<GrupoMercadoriaComboViewModel>> Combo()
+        public async Task<IEnumerable<GrupoMercadoriaComboViewModel>> Combo(Expression<Func<GrupoMercadoria, object>> order = null)
         {
-            var combo = await _grupoMercadoriaService.Combo();
+            var combo = await _grupoMercadoriaService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<GrupoMercadoriaComboViewModel>>(combo);
         }
     }

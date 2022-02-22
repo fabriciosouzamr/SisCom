@@ -22,8 +22,16 @@ namespace SisCom.Aplicacao.Configuration
             services.AddScoped<ICidadeService, CidadeService>();
             #endregion
             #region Estado
+            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+            services.AddScoped<IEmpresaService, EmpresaService>();
+            #endregion
+            #region Estado
             services.AddScoped<IEstadoRepository, EstadoRepository>();
             services.AddScoped<IEstadoService, EstadoService>();
+            #endregion
+            #region Fabricante
+            services.AddScoped<IFabricanteRepository, FabricanteRepository>();
+            services.AddScoped<IFabricanteService, FabricanteService>();
             #endregion
             #region Grupo       
             services.AddScoped<IGrupoMercadoriaRepository, GrupoRepository>();

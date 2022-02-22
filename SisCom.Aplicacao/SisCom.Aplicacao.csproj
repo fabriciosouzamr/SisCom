@@ -17,6 +17,7 @@
     <Compile Include="..\Combo_ComboBox.cs" Link="Compartilhado\Combo_ComboBox.cs" />
     <Compile Include="..\Data_DateTimePicker.cs" Link="Compartilhado\Data_DateTimePicker.cs" />
     <Compile Include="..\Grid_DataGridView.cs" Link="Compartilhado\Grid_DataGridView.cs" />
+    <Compile Include="..\Texto_TextBox.cs" Link="Compartilhado\Texto_TextBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />

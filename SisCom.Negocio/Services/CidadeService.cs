@@ -3,6 +3,7 @@ using Funcoes.PagedList;
 using SisCom.Entidade.Modelos;
 using SisCom.Negocio.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,6 +43,36 @@ namespace SisCom.Negocio.Services
         }
 
         public Task Remover(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task ICidadeService.Adicionar(Cidade Cidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task ICidadeService.Atualizar(Cidade Cidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task ICidadeService.Remover(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<Cidade>> ICidadeService.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Cidade> ICidadeService.GetById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IPagedList<Cidade>> ICidadeService.GetPagedList(FilteredPagedListParameters parameters)
         {
             throw new NotImplementedException();
         }

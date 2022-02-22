@@ -64,5 +64,10 @@ namespace SisCom.Negocio.Services
         {
             _SubGrupoRepository?.Dispose();
         }
+
+        public Task<List<SubGrupoMercadoria>> Combo()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

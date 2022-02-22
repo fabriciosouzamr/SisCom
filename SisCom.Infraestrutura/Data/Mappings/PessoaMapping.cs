@@ -15,7 +15,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
         {
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.CidadeId)
+            builder.Property(p => p.End_CidadeId)
                 .IsRequired(false);
 
             builder.Property(p => p.Nome)

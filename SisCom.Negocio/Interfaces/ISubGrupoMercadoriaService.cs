@@ -2,8 +2,7 @@
 using SisCom.Entidade.Modelos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Negocio.Interfaces
@@ -13,9 +12,9 @@ namespace SisCom.Negocio.Interfaces
         Task Adicionar(SubGrupoMercadoria SubGrupo);
         Task Atualizar(SubGrupoMercadoria SubGrupo);
         Task Remover(Guid id);
-        Task<List<SubGrupoMercadoria>> GetAll();
+        Task<List<SubGrupoMercadoria>> GetAll(Expression<Func<SubGrupoMercadoria, object>> order = null);
 
-        Task<List<SubGrupoMercadoria>> Combo();
+        Task<List<SubGrupoMercadoria>> Combo(Expression<Func<SubGrupoMercadoria, object>> order = null);
         Task<SubGrupoMercadoria> GetById(Guid id);
 
         Task<IPagedList<SubGrupoMercadoria>> GetPagedList(FilteredPagedListParameters parameters);

@@ -1,11 +1,7 @@
-﻿using SisCom.Entidade.Enum;
+﻿using Funcoes._Enum;
 using SisCom.Entidade.Modelos;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.ViewModels
 {

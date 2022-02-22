@@ -2,8 +2,7 @@
 using SisCom.Entidade.Modelos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Negocio.Interfaces
@@ -13,10 +12,10 @@ namespace SisCom.Negocio.Interfaces
         Task Adicionar(Pessoa Pessoa);
         Task Atualizar(Pessoa Pessoa);
         Task Remover(Guid id);
-        Task<List<Pessoa>> GetAll();
+        Task<List<Pessoa>> GetAll(Expression<Func<Pessoa, object>> order = null);
 
-        Task<List<Pessoa>> Combo();
-        Task<List<Pessoa>> ComboFornecedor();
+        Task<List<Pessoa>> Combo(Expression<Func<Pessoa, object>> order = null);
+        Task<List<Pessoa>> ComboFornecedor(Expression<Func<Pessoa, object>> order = null);
         Task<Pessoa> GetById(Guid id);
 
         Task<IPagedList<Pessoa>> GetPagedList(FilteredPagedListParameters parameters);

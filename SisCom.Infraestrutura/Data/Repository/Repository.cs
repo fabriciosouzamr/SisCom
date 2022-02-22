@@ -1,5 +1,4 @@
-﻿using Funcoes.Classes;
-using Funcoes.Interfaces;
+﻿using Funcoes.Interfaces;
 using Funcoes.PagedList;
 using Microsoft.EntityFrameworkCore;
 using SisCom.Infraestrutura.Data.Context;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using Funcoes._Entity;
 
 namespace SisCom.Infraestrutura.Data.Repository
 {
@@ -28,9 +28,14 @@ namespace SisCom.Infraestrutura.Data.Repository
             return await DbSet.Where(predicate).ToListAsync();
         }
 
+        public bool Exists(Expression<Func<TEntity, bool>> predicate)
+        {
+            return DbSet.Where(predicate).Any();
+        }
+
         public virtual async Task<TEntity> GetById(Guid id, params Expression<Func<TEntity, object>>[] includes)
         {
-            var includedData = DbSet.AsNoTracking().AsQueryable();
+            var includedData = DbSet.AsQueryable();
             foreach (var include in includes)
             {
                 includedData = includedData.Include(include);
@@ -40,7 +45,7 @@ namespace SisCom.Infraestrutura.Data.Repository
 
         public virtual async Task<TEntity> GetById(Guid id)
         {
-            return await DbSet.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+            return await DbSet.FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public virtual async Task<List<TEntity>> GetAll()
@@ -48,19 +53,31 @@ namespace SisCom.Infraestrutura.Data.Repository
             return await DbSet.ToListAsync();
         }
 
+        public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null)
+        {
+            return await DbSet.OrderBy(order ?? (e => e.Id)).ToListAsync();
+        }
+
         public virtual async Task<List<TEntity>> Combo()
         {
             return await DbSet.ToListAsync();
         }
 
-        public virtual async Task<List<TEntity>> ComboSearch(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task<List<TEntity>> Combo(Expression<Func<TEntity, object>> order = null)
         {
-            return await DbSet.Where(predicate).ToListAsync();
+            if (order==null)
+            {
+                return await DbSet.ToListAsync();
+            }
+            else
+            {
+                return await DbSet.OrderBy(order ?? (e => e.Id)).ToListAsync();
+            }
         }
 
-        public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null)
+        public virtual async Task<List<TEntity>> ComboSearch(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> order = null)
         {
-            return await DbSet.OrderBy(order ?? (e => e.Id)).ToListAsync();
+            return await DbSet.Where(predicate).OrderBy(order ?? (e => e.Id)).ToListAsync();
         }
 
         public async Task<IPagedList<TEntity>> GetPagedList(Expression<Func<TEntity, bool>> predicate, PagedListParameters parameters)
@@ -69,12 +86,6 @@ namespace SisCom.Infraestrutura.Data.Repository
             dadosFiltrados = dadosFiltrados.OrderBy(parameters.Sort);
 
             return await PagedList<TEntity>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
-        }
-
-        public virtual async Task Insert(TEntity entity)
-        {
-            DbSet.Add(entity);
-            await SaveChanges();
         }
 
         public void BeginTransaction()
@@ -92,6 +103,12 @@ namespace SisCom.Infraestrutura.Data.Repository
             Db.Database.RollbackTransaction();
         }
 
+        public virtual async Task Insert(TEntity entity)
+        {
+            DbSet.Add(entity);
+            await SaveChanges();
+        }
+
         public virtual async Task Update(TEntity entity)
         {
             DbSet.Update(entity);
@@ -106,7 +123,7 @@ namespace SisCom.Infraestrutura.Data.Repository
 
         public async Task<int> SaveChanges()
         {
-            return await Db.SaveChangesAsync();
+            return Db.SaveChanges();
         }
 
         public void Dispose()

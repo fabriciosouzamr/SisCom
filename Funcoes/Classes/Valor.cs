@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 
-namespace Funcoes.Classes
+namespace Funcoes._Classes
 {
     public static class Valor
     {

@@ -2,6 +2,7 @@
 using SisCom.Entidade.Modelos;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Negocio.Interfaces
@@ -11,9 +12,9 @@ namespace SisCom.Negocio.Interfaces
         Task Adicionar(Pais Pais);
         Task Atualizar(Pais Pais);
         Task Remover(Guid id);
-        Task<List<Pais>> GetAll();
+        Task<List<Pais>> GetAll(Expression<Func<Pais, object>> order = null);
 
-        Task<List<Pais>> Combo();
+        Task<List<Pais>> Combo(Expression<Func<Pais, object>> order = null);
         Task<Pais> GetById(Guid id);
 
         Task<IPagedList<Pais>> GetPagedList(FilteredPagedListParameters parameters);

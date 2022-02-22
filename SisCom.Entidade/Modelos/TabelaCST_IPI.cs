@@ -1,5 +1,5 @@
-﻿using Funcoes.Classes;
-using SisCom.Entidade.Enum;
+﻿using Funcoes._Entity;
+using Funcoes._Enum;
 
 namespace SisCom.Entidade.Modelos
 {

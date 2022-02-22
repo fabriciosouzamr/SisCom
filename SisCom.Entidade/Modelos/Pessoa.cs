@@ -1,5 +1,5 @@
-﻿using Funcoes.Classes;
-using SisCom.Entidade.Enum;
+﻿using Funcoes._Entity;
+using Funcoes._Enum;
 using System;
 
 namespace SisCom.Entidade.Modelos
@@ -18,7 +18,7 @@ namespace SisCom.Entidade.Modelos
         public string End_Bairro { get; set; }
         public string End_PontoReferencia { get; set; }
 
-        public Cidade Cidade { get; set; }
+        public Cidade End_Cidade { get; set; }
         public string Telefone { get; set; }
         public string FAX { get; set; }
         public string NomeContato { get; set; }
@@ -32,6 +32,6 @@ namespace SisCom.Entidade.Modelos
         public bool Fabricante { get; set; }
 
         /* EF Relation */
-        public Nullable<Guid> CidadeId { get; set; }
+        public Nullable<Guid> End_CidadeId { get; set; }
     }
 }

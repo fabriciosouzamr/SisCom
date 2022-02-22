@@ -3,6 +3,7 @@ using Funcoes.PagedList;
 using SisCom.Entidade.Modelos;
 using SisCom.Negocio.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,6 +43,11 @@ namespace SisCom.Negocio.Services
         }
 
         public Task Remover(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Pais>> Combo()
         {
             throw new NotImplementedException();
         }

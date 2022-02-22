@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Funcoes._Enum;
+using Microsoft.EntityFrameworkCore;
+using SisCom.Entidade.Enum;
 using SisCom.Entidade.Modelos;
 using System;
 using System.Linq;
@@ -13,7 +15,6 @@ namespace SisCom.Infraestrutura.Data.Context
 
         public MeuDbContext(DbContextOptions<MeuDbContext> options) : base(options)
         {
-
         }
 
         public MeuDbContext(string connectionString)
@@ -23,8 +24,6 @@ namespace SisCom.Infraestrutura.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress;Initial Catalog=SisCom;User ID=sa;Password=832285;MultipleActiveResultSets=true;Trusted_Connection=True");
-            //optionsBuilder.UseSqlServer(_connectionString);
         }
 
         public DbSet<Almoxarifado> Almoxarifados { get; set; }
@@ -32,8 +31,10 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<TabelaCFOP> TabelaCFOPs { get; set; }
         public DbSet<TabelaCNAE> TabelaCNAEs { get; set; }
+        public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Estado> Estados { get; set; }
         public DbSet<Estoque> Estoques { get; set; }
+        public DbSet<Fabricante> Fabricantes { get; set; }
         public DbSet<GrupoMercadoria> GrupoMercadorias { get; set; }
         public DbSet<GrupoCFOP> GrupoCFOPs { get; set; }
         public DbSet<Pais> Paises { get; set; }
@@ -52,9 +53,13 @@ namespace SisCom.Infraestrutura.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var property in modelBuilder.Model.GetEntityTypes()
-                .SelectMany(e => e.GetProperties()
-                    .Where(p => p.ClrType == typeof(string))))
-                property.SetColumnType("varchar(100)");
+                .SelectMany(e => e.GetProperties()))
+            {
+                if (property.ClrType == typeof(string))
+                    property.SetColumnType("varchar(100)");
+                else if (property.ClrType == typeof(float) || property.ClrType == typeof(double) || property.ClrType == typeof(decimal))
+                    property.SetDefaultValue(0);
+            }
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MeuDbContext).Assembly);
 
@@ -72,6 +77,15 @@ namespace SisCom.Infraestrutura.Data.Context
             //    .HasForeignKey(bc => bc.MercadoriaSimilarId);
 
             Guid PaisId = Guid.NewGuid();
+
+            #region Indices
+            modelBuilder
+                .Entity<Pessoa>()
+                .HasIndex(p => new { p.CNPJ_CPF })
+                .HasDatabaseName("idx_pessoas_CNPJ_CPF")
+                .HasFillFactor(80)
+                .IsUnique();
+            #endregion
 
             modelBuilder
                 .Entity<Pais>()
@@ -109,29 +123,29 @@ namespace SisCom.Infraestrutura.Data.Context
 
             modelBuilder
                 .Entity<GrupoCFOP>()
-                .HasData(new GrupoCFOP { Nome = "1.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO ESTADO", TipoOperacaoCFOP = Entidade.Enum.TipoOperacaoCFOP.EntradaDentroEstado },
-                         new GrupoCFOP { Nome = "2.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DE OUTROS ESTADOS", TipoOperacaoCFOP = Entidade.Enum.TipoOperacaoCFOP.EntradaForaEstado },
-                         new GrupoCFOP { Nome = "3.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO EXTERIOR", TipoOperacaoCFOP = Entidade.Enum.TipoOperacaoCFOP.EntradaExterior },
-                         new GrupoCFOP { Nome = "5.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O ESTADO", TipoOperacaoCFOP = Entidade.Enum.TipoOperacaoCFOP.SaidaDentroEstado },
-                         new GrupoCFOP { Nome = "6.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA OUTROS ESTADOS", TipoOperacaoCFOP = Entidade.Enum.TipoOperacaoCFOP.SaidaForaEstado },
-                         new GrupoCFOP { Nome = "7.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O EXTERIOR", TipoOperacaoCFOP = Entidade.Enum.TipoOperacaoCFOP.SaidaExterior });
+                .HasData(new GrupoCFOP { Nome = "1.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO ESTADO", TipoOperacaoCFOP = TipoOperacaoCFOP.EntradaDentroEstado },
+                         new GrupoCFOP { Nome = "2.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DE OUTROS ESTADOS", TipoOperacaoCFOP = TipoOperacaoCFOP.EntradaForaEstado },
+                         new GrupoCFOP { Nome = "3.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO EXTERIOR", TipoOperacaoCFOP = TipoOperacaoCFOP.EntradaExterior },
+                         new GrupoCFOP { Nome = "5.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O ESTADO", TipoOperacaoCFOP = TipoOperacaoCFOP.SaidaDentroEstado },
+                         new GrupoCFOP { Nome = "6.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA OUTROS ESTADOS", TipoOperacaoCFOP = TipoOperacaoCFOP.SaidaForaEstado },
+                         new GrupoCFOP { Nome = "7.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O EXTERIOR", TipoOperacaoCFOP = TipoOperacaoCFOP.SaidaExterior });
 
             modelBuilder
                 .Entity<TabelaCST_IPI>()
-                .HasData(new TabelaCST_IPI { Codigo = "00", Descricao = "Entrada com Recuperação de Crédito", EntradaSaida = Entidade.Enum.EntradaSaida.Entrada, DestacarIPI = true },
-                         new TabelaCST_IPI { Codigo = "01", Descricao = "Entrada Tributável com Alíquota Zero", EntradaSaida = Entidade.Enum.EntradaSaida.Entrada },
-                         new TabelaCST_IPI { Codigo = "02", Descricao = "Entrada Isenta", EntradaSaida = Entidade.Enum.EntradaSaida.Entrada },
-                         new TabelaCST_IPI { Codigo = "03", Descricao = "Entrada Não-Tributada", EntradaSaida = Entidade.Enum.EntradaSaida.Entrada },
-                         new TabelaCST_IPI { Codigo = "04", Descricao = "Entrada Imune", EntradaSaida = Entidade.Enum.EntradaSaida.Entrada },
-                         new TabelaCST_IPI { Codigo = "05", Descricao = "Entrada com Suspensão", EntradaSaida = Entidade.Enum.EntradaSaida.Entrada },
-                         new TabelaCST_IPI { Codigo = "49", Descricao = "Outras Entradas", EntradaSaida = Entidade.Enum.EntradaSaida.Entrada, DestacarIPI = true },
-                         new TabelaCST_IPI { Codigo = "50", Descricao = "Saída Tributada", EntradaSaida = Entidade.Enum.EntradaSaida.Saida, DestacarIPI = true },
-                         new TabelaCST_IPI { Codigo = "51", Descricao = "Saída Tributável com Alíquota Zero", EntradaSaida = Entidade.Enum.EntradaSaida.Saida },
-                         new TabelaCST_IPI { Codigo = "52", Descricao = "Saída Isenta", EntradaSaida = Entidade.Enum.EntradaSaida.Saida },
-                         new TabelaCST_IPI { Codigo = "53", Descricao = "Saída Não-Tributada", EntradaSaida = Entidade.Enum.EntradaSaida.Saida },
-                         new TabelaCST_IPI { Codigo = "54", Descricao = "Saída Imune", EntradaSaida = Entidade.Enum.EntradaSaida.Saida },
-                         new TabelaCST_IPI { Codigo = "55", Descricao = "Saída com Suspensão", EntradaSaida = Entidade.Enum.EntradaSaida.Saida },
-                         new TabelaCST_IPI { Codigo = "99", Descricao = "Outras Saídas", EntradaSaida = Entidade.Enum.EntradaSaida.Saida, DestacarIPI = true });
+                .HasData(new TabelaCST_IPI { Codigo = "00", Descricao = "Entrada com Recuperação de Crédito", EntradaSaida = EntradaSaida.Entrada, DestacarIPI = true },
+                         new TabelaCST_IPI { Codigo = "01", Descricao = "Entrada Tributável com Alíquota Zero", EntradaSaida = EntradaSaida.Entrada },
+                         new TabelaCST_IPI { Codigo = "02", Descricao = "Entrada Isenta", EntradaSaida = EntradaSaida.Entrada },
+                         new TabelaCST_IPI { Codigo = "03", Descricao = "Entrada Não-Tributada", EntradaSaida = EntradaSaida.Entrada },
+                         new TabelaCST_IPI { Codigo = "04", Descricao = "Entrada Imune", EntradaSaida = EntradaSaida.Entrada },
+                         new TabelaCST_IPI { Codigo = "05", Descricao = "Entrada com Suspensão", EntradaSaida = EntradaSaida.Entrada },
+                         new TabelaCST_IPI { Codigo = "49", Descricao = "Outras Entradas", EntradaSaida = EntradaSaida.Entrada, DestacarIPI = true },
+                         new TabelaCST_IPI { Codigo = "50", Descricao = "Saída Tributada", EntradaSaida = EntradaSaida.Saida, DestacarIPI = true },
+                         new TabelaCST_IPI { Codigo = "51", Descricao = "Saída Tributável com Alíquota Zero", EntradaSaida = EntradaSaida.Saida },
+                         new TabelaCST_IPI { Codigo = "52", Descricao = "Saída Isenta", EntradaSaida = EntradaSaida.Saida },
+                         new TabelaCST_IPI { Codigo = "53", Descricao = "Saída Não-Tributada", EntradaSaida = EntradaSaida.Saida },
+                         new TabelaCST_IPI { Codigo = "54", Descricao = "Saída Imune", EntradaSaida = EntradaSaida.Saida },
+                         new TabelaCST_IPI { Codigo = "55", Descricao = "Saída com Suspensão", EntradaSaida = EntradaSaida.Saida },
+                         new TabelaCST_IPI { Codigo = "99", Descricao = "Outras Saídas", EntradaSaida = EntradaSaida.Saida, DestacarIPI = true });
 
             modelBuilder
                 .Entity<TabelaCST_PIS_COFINS>()

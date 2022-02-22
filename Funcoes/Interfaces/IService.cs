@@ -1,4 +1,4 @@
-﻿using Funcoes.Classes;
+﻿using Funcoes._Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -11,7 +11,7 @@ namespace Funcoes.Interfaces
     {
         //Task Adicionar(TEntity entity);
         Task<TEntity> GetById(Guid id, params Expression<Func<TEntity, object>>[] includes);
-        Task<List<TEntity>> GetAll();
+        Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null);
         //Task Atualizar(TEntity entity);
         //Task Remover(Guid id);
         //Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate);

@@ -1,9 +1,12 @@
 ﻿using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
+using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
@@ -11,10 +14,13 @@ namespace SisCom.Aplicacao.Controllers
     public class PessoaController
     {
         static PessoaService _PessoaService;
+        private readonly MeuDbContext MeuDbContext;
 
-        static PessoaController()
+        public PessoaController(MeuDbContext MeuDbContext)
         {
-            _PessoaService = new PessoaService(new PessoaRepository(Declaracoes.dbContext), null);
+            this.MeuDbContext = MeuDbContext;
+
+            _PessoaService = new PessoaService(new PessoaRepository(MeuDbContext), null);
         }
 
         public PessoaViewModel Adicionar(PessoaViewModel PessoaViewModel)
@@ -35,9 +41,9 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<PessoaComboViewModel>>(combo);
         }
 
-        public async Task<IEnumerable<PessoaComboViewModel>> ComboFornecedor()
+        public async Task<IEnumerable<PessoaComboViewModel>> ComboFornecedor(Expression<Func<Pessoa, object>> order = null)
         {
-            var combo = await _PessoaService.ComboFornecedor();
+            var combo = await _PessoaService.ComboFornecedor(order);
             return Declaracoes.mapper.Map<IEnumerable<PessoaComboViewModel>>(combo);
         }
     }

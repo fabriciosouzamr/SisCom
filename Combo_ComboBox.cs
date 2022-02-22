@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 public class Combo_ComboBox
@@ -7,11 +9,33 @@ public class Combo_ComboBox
 							    string ValueMember, 
 							    string DisplayMember, 
 								ComboBoxStyle DropDownStyle = ComboBoxStyle.DropDown,
-								object DataSource = null)
+								object DataSource = null,
+								Type myEnum = null)
 	{
 		Combo.ValueMember = ValueMember;
 		Combo.DisplayMember = DisplayMember;
 		Combo.DropDownStyle = DropDownStyle;
-		Combo.DataSource = DataSource;
+
+		if (DataSource != null)
+		{
+			Combo.DataSource = DataSource;
+		}
+		else if (myEnum != null)
+		{
+			Combo.ValueMember = "Value";
+			Combo.DisplayMember = "Description";
+			Combo.DataSource = Enum.GetValues(myEnum)
+									.Cast<Enum>()
+									.Select(value => new {
+										(Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+										value })
+									.OrderBy(item => item.value)
+									.ToList();
+		}
 	}
+
+	public static bool Selecionado(ComboBox Combo)
+    {
+		return (Combo.SelectedIndex != -1);
+    }
 }
