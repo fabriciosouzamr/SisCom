@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -37,5 +38,18 @@ public class Combo_ComboBox
 	public static bool Selecionado(ComboBox Combo)
     {
 		return (Combo.SelectedIndex != -1);
+    }
+
+	public static void Selecionar(ComboBox Combo, object Valor, int Posicao)
+    {
+		 
+		foreach (IEnumerable<Type> Item in Combo.Items)
+		{
+			if (Item == Valor)
+            {
+				Combo.SelectedItem = Item;
+				return;
+			}
+        }
     }
 }

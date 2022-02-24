@@ -13,6 +13,7 @@
     <EmbeddedResource Remove="Form1.resx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\API_Consultas.cs" Link="Compartilhado\API_Consultas.cs" />
     <Compile Include="..\CaixaMensagem.cs" Link="Compartilhado\CaixaMensagem.cs" />
     <Compile Include="..\Combo_ComboBox.cs" Link="Compartilhado\Combo_ComboBox.cs" />
     <Compile Include="..\Data_DateTimePicker.cs" Link="Compartilhado\Data_DateTimePicker.cs" />
@@ -20,6 +21,7 @@
     <Compile Include="..\Texto_TextBox.cs" Link="Compartilhado\Texto_TextBox.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Azure.Core" Version="1.22.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.12">
       <PrivateAssets>all</PrivateAssets>
@@ -29,6 +31,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+    <PackageReference Include="RestSharp" Version="107.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SisCom.Infraestrutura\SisCom.Infraestrutura.csproj" />

@@ -76,39 +76,39 @@ namespace SisCom.Aplicacao.Formularios
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.label35 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.txtCodigoCliente = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textInscricaoEstadual = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateCadastro = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboContribuinte = new System.Windows.Forms.ComboBox();
             this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textEnderecoLogradouro = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textEnderecoNumero = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboEndrecoPais = new System.Windows.Forms.ComboBox();
+            this.comboEnderecoCidade = new System.Windows.Forms.ComboBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.botaoGrupoProduto = new System.Windows.Forms.Button();
+            this.textInscricaoMunicipal = new System.Windows.Forms.TextBox();
+            this.textRG = new System.Windows.Forms.TextBox();
+            this.textCPFCNPJ = new System.Windows.Forms.TextBox();
+            this.botaotEndrecoCEP = new System.Windows.Forms.Button();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboEnderecoUF = new System.Windows.Forms.ComboBox();
+            this.textEnderecoBairro = new System.Windows.Forms.TextBox();
+            this.textEnderecoCEP = new System.Windows.Forms.TextBox();
+            this.textRazaoSocial = new System.Windows.Forms.TextBox();
+            this.textNome = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -117,32 +117,8 @@ namespace SisCom.Aplicacao.Formularios
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboTipoPessoa = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.tabDadosCobrancaIB = new System.Windows.Forms.TabPage();
-            this.tabComplementares = new System.Windows.Forms.TabPage();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.label42 = new System.Windows.Forms.Label();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.tabAgenda = new System.Windows.Forms.TabPage();
-            this.tabUltimasCompras = new System.Windows.Forms.TabPage();
-            this.tabFinanceiras = new System.Windows.Forms.TabPage();
-            this.tabCreditos = new System.Windows.Forms.TabPage();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabContatosSMS = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnlPesquisar.SuspendLayout();
@@ -153,9 +129,6 @@ namespace SisCom.Aplicacao.Formularios
             this.tabEnderecos.SuspendLayout();
             this.tabIdentificacao.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tabComplementares.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -300,6 +273,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoPagamentos.Name = "botaoPagamentos";
             this.botaoPagamentos.Size = new System.Drawing.Size(53, 56);
             this.botaoPagamentos.TabIndex = 36;
+            this.botaoPagamentos.TabStop = false;
             this.botaoPagamentos.UseVisualStyleBackColor = true;
             // 
             // label3
@@ -332,7 +306,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoConsultarCNPJ.Name = "botaoConsultarCNPJ";
             this.botaoConsultarCNPJ.Size = new System.Drawing.Size(53, 56);
             this.botaoConsultarCNPJ.TabIndex = 33;
+            this.botaoConsultarCNPJ.TabStop = false;
             this.botaoConsultarCNPJ.UseVisualStyleBackColor = true;
+            this.botaoConsultarCNPJ.Click += new System.EventHandler(this.botaoConsultarCNPJ_Click);
             // 
             // botaoCompras
             // 
@@ -341,6 +317,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoCompras.Name = "botaoCompras";
             this.botaoCompras.Size = new System.Drawing.Size(53, 56);
             this.botaoCompras.TabIndex = 32;
+            this.botaoCompras.TabStop = false;
             this.botaoCompras.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -361,6 +338,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoImprimir.Name = "botaoImprimir";
             this.botaoImprimir.Size = new System.Drawing.Size(53, 56);
             this.botaoImprimir.TabIndex = 30;
+            this.botaoImprimir.TabStop = false;
             this.botaoImprimir.UseVisualStyleBackColor = true;
             // 
             // label7
@@ -403,6 +381,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoFechar.Name = "botaoFechar";
             this.botaoFechar.Size = new System.Drawing.Size(53, 56);
             this.botaoFechar.TabIndex = 20;
+            this.botaoFechar.TabStop = false;
             this.botaoFechar.UseVisualStyleBackColor = true;
             this.botaoFechar.Click += new System.EventHandler(this.botaoFechar_Click);
             // 
@@ -413,6 +392,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoNovo.Name = "botaoNovo";
             this.botaoNovo.Size = new System.Drawing.Size(53, 56);
             this.botaoNovo.TabIndex = 19;
+            this.botaoNovo.TabStop = false;
             this.botaoNovo.UseVisualStyleBackColor = true;
             // 
             // botaoExcluir
@@ -422,6 +402,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoExcluir.Name = "botaoExcluir";
             this.botaoExcluir.Size = new System.Drawing.Size(53, 56);
             this.botaoExcluir.TabIndex = 18;
+            this.botaoExcluir.TabStop = false;
             this.botaoExcluir.UseVisualStyleBackColor = true;
             // 
             // botaoPosterior
@@ -431,6 +412,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoPosterior.Name = "botaoPosterior";
             this.botaoPosterior.Size = new System.Drawing.Size(53, 56);
             this.botaoPosterior.TabIndex = 12;
+            this.botaoPosterior.TabStop = false;
             this.botaoPosterior.UseVisualStyleBackColor = true;
             // 
             // botaoAnterior
@@ -440,6 +422,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoAnterior.Name = "botaoAnterior";
             this.botaoAnterior.Size = new System.Drawing.Size(53, 56);
             this.botaoAnterior.TabIndex = 11;
+            this.botaoAnterior.TabStop = false;
             this.botaoAnterior.UseVisualStyleBackColor = true;
             // 
             // panel3
@@ -454,14 +437,6 @@ namespace SisCom.Aplicacao.Formularios
             // tabEnderecos
             // 
             this.tabEnderecos.Controls.Add(this.tabIdentificacao);
-            this.tabEnderecos.Controls.Add(this.tabDadosCobrancaIB);
-            this.tabEnderecos.Controls.Add(this.tabComplementares);
-            this.tabEnderecos.Controls.Add(this.tabAgenda);
-            this.tabEnderecos.Controls.Add(this.tabUltimasCompras);
-            this.tabEnderecos.Controls.Add(this.tabFinanceiras);
-            this.tabEnderecos.Controls.Add(this.tabCreditos);
-            this.tabEnderecos.Controls.Add(this.tabPage1);
-            this.tabEnderecos.Controls.Add(this.tabContatosSMS);
             this.tabEnderecos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabEnderecos.Location = new System.Drawing.Point(0, 0);
             this.tabEnderecos.Name = "tabEnderecos";
@@ -487,39 +462,39 @@ namespace SisCom.Aplicacao.Formularios
             this.tabIdentificacao.Controls.Add(this.comboBox6);
             this.tabIdentificacao.Controls.Add(this.label35);
             this.tabIdentificacao.Controls.Add(this.dateTimePicker2);
-            this.tabIdentificacao.Controls.Add(this.textBox18);
+            this.tabIdentificacao.Controls.Add(this.txtCodigoCliente);
             this.tabIdentificacao.Controls.Add(this.label34);
-            this.tabIdentificacao.Controls.Add(this.textBox8);
+            this.tabIdentificacao.Controls.Add(this.textInscricaoEstadual);
             this.tabIdentificacao.Controls.Add(this.label20);
-            this.tabIdentificacao.Controls.Add(this.dateTimePicker1);
+            this.tabIdentificacao.Controls.Add(this.dateCadastro);
             this.tabIdentificacao.Controls.Add(this.label4);
-            this.tabIdentificacao.Controls.Add(this.comboBox5);
+            this.tabIdentificacao.Controls.Add(this.comboContribuinte);
             this.tabIdentificacao.Controls.Add(this.label32);
             this.tabIdentificacao.Controls.Add(this.label31);
             this.tabIdentificacao.Controls.Add(this.label28);
             this.tabIdentificacao.Controls.Add(this.textBox16);
             this.tabIdentificacao.Controls.Add(this.label27);
-            this.tabIdentificacao.Controls.Add(this.textBox14);
+            this.tabIdentificacao.Controls.Add(this.textEnderecoLogradouro);
             this.tabIdentificacao.Controls.Add(this.label26);
-            this.tabIdentificacao.Controls.Add(this.textBox13);
+            this.tabIdentificacao.Controls.Add(this.textEnderecoNumero);
             this.tabIdentificacao.Controls.Add(this.label25);
             this.tabIdentificacao.Controls.Add(this.label24);
-            this.tabIdentificacao.Controls.Add(this.comboBox4);
-            this.tabIdentificacao.Controls.Add(this.comboBox3);
+            this.tabIdentificacao.Controls.Add(this.comboEndrecoPais);
+            this.tabIdentificacao.Controls.Add(this.comboEnderecoCidade);
             this.tabIdentificacao.Controls.Add(this.label23);
             this.tabIdentificacao.Controls.Add(this.label22);
-            this.tabIdentificacao.Controls.Add(this.textBox12);
-            this.tabIdentificacao.Controls.Add(this.textBox11);
-            this.tabIdentificacao.Controls.Add(this.textBox10);
-            this.tabIdentificacao.Controls.Add(this.botaoGrupoProduto);
+            this.tabIdentificacao.Controls.Add(this.textInscricaoMunicipal);
+            this.tabIdentificacao.Controls.Add(this.textRG);
+            this.tabIdentificacao.Controls.Add(this.textCPFCNPJ);
+            this.tabIdentificacao.Controls.Add(this.botaotEndrecoCEP);
             this.tabIdentificacao.Controls.Add(this.textBox9);
             this.tabIdentificacao.Controls.Add(this.textBox7);
             this.tabIdentificacao.Controls.Add(this.textBox5);
-            this.tabIdentificacao.Controls.Add(this.comboBox2);
-            this.tabIdentificacao.Controls.Add(this.textBox4);
-            this.tabIdentificacao.Controls.Add(this.textBox3);
-            this.tabIdentificacao.Controls.Add(this.textBox2);
-            this.tabIdentificacao.Controls.Add(this.textBox1);
+            this.tabIdentificacao.Controls.Add(this.comboEnderecoUF);
+            this.tabIdentificacao.Controls.Add(this.textEnderecoBairro);
+            this.tabIdentificacao.Controls.Add(this.textEnderecoCEP);
+            this.tabIdentificacao.Controls.Add(this.textRazaoSocial);
+            this.tabIdentificacao.Controls.Add(this.textNome);
             this.tabIdentificacao.Controls.Add(this.label21);
             this.tabIdentificacao.Controls.Add(this.label19);
             this.tabIdentificacao.Controls.Add(this.label17);
@@ -528,7 +503,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tabIdentificacao.Controls.Add(this.label14);
             this.tabIdentificacao.Controls.Add(this.label13);
             this.tabIdentificacao.Controls.Add(this.label12);
-            this.tabIdentificacao.Controls.Add(this.comboBox1);
+            this.tabIdentificacao.Controls.Add(this.comboTipoPessoa);
             this.tabIdentificacao.Controls.Add(this.label11);
             this.tabIdentificacao.Location = new System.Drawing.Point(4, 24);
             this.tabIdentificacao.Name = "tabIdentificacao";
@@ -681,13 +656,13 @@ namespace SisCom.Aplicacao.Formularios
             this.dateTimePicker2.Size = new System.Drawing.Size(80, 23);
             this.dateTimePicker2.TabIndex = 53;
             // 
-            // textBox18
+            // txtCodigoCliente
             // 
-            this.textBox18.Location = new System.Drawing.Point(106, 62);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.ReadOnly = true;
-            this.textBox18.Size = new System.Drawing.Size(59, 23);
-            this.textBox18.TabIndex = 52;
+            this.txtCodigoCliente.Location = new System.Drawing.Point(106, 62);
+            this.txtCodigoCliente.Name = "txtCodigoCliente";
+            this.txtCodigoCliente.ReadOnly = true;
+            this.txtCodigoCliente.Size = new System.Drawing.Size(59, 23);
+            this.txtCodigoCliente.TabIndex = 52;
             // 
             // label34
             // 
@@ -698,12 +673,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label34.TabIndex = 51;
             this.label34.Text = "Insc. Estadual:";
             // 
-            // textBox8
+            // textInscricaoEstadual
             // 
-            this.textBox8.Location = new System.Drawing.Point(417, 35);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(177, 23);
-            this.textBox8.TabIndex = 50;
+            this.textInscricaoEstadual.Location = new System.Drawing.Point(417, 35);
+            this.textInscricaoEstadual.Name = "textInscricaoEstadual";
+            this.textInscricaoEstadual.Size = new System.Drawing.Size(177, 23);
+            this.textInscricaoEstadual.TabIndex = 50;
             // 
             // label20
             // 
@@ -714,13 +689,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label20.TabIndex = 49;
             this.label20.Text = "Data Cadastro:";
             // 
-            // dateTimePicker1
+            // dateCadastro
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(690, 7);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(80, 23);
-            this.dateTimePicker1.TabIndex = 48;
+            this.dateCadastro.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateCadastro.Location = new System.Drawing.Point(690, 7);
+            this.dateCadastro.Name = "dateCadastro";
+            this.dateCadastro.Size = new System.Drawing.Size(80, 23);
+            this.dateCadastro.TabIndex = 48;
             // 
             // label4
             // 
@@ -731,13 +706,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label4.TabIndex = 47;
             this.label4.Text = "Contribuinte:";
             // 
-            // comboBox5
+            // comboContribuinte
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(106, 34);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(224, 23);
-            this.comboBox5.TabIndex = 46;
+            this.comboContribuinte.FormattingEnabled = true;
+            this.comboContribuinte.Location = new System.Drawing.Point(106, 34);
+            this.comboContribuinte.Name = "comboContribuinte";
+            this.comboContribuinte.Size = new System.Drawing.Size(224, 23);
+            this.comboContribuinte.TabIndex = 46;
             // 
             // label32
             // 
@@ -782,12 +757,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label27.TabIndex = 35;
             this.label27.Text = "Endereço: ";
             // 
-            // textBox14
+            // textEndrecoLogradouro
             // 
-            this.textBox14.Location = new System.Drawing.Point(275, 116);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(358, 23);
-            this.textBox14.TabIndex = 34;
+            this.textEnderecoLogradouro.Location = new System.Drawing.Point(275, 116);
+            this.textEnderecoLogradouro.Name = "textEndrecoLogradouro";
+            this.textEnderecoLogradouro.Size = new System.Drawing.Size(358, 23);
+            this.textEnderecoLogradouro.TabIndex = 34;
             // 
             // label26
             // 
@@ -798,12 +773,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label26.TabIndex = 33;
             this.label26.Text = "Número:";
             // 
-            // textBox13
+            // textEndrecoNumero
             // 
-            this.textBox13.Location = new System.Drawing.Point(699, 116);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(70, 23);
-            this.textBox13.TabIndex = 32;
+            this.textEnderecoNumero.Location = new System.Drawing.Point(699, 116);
+            this.textEnderecoNumero.Name = "textEndrecoNumero";
+            this.textEnderecoNumero.Size = new System.Drawing.Size(70, 23);
+            this.textEnderecoNumero.TabIndex = 32;
             // 
             // label25
             // 
@@ -823,21 +798,21 @@ namespace SisCom.Aplicacao.Formularios
             this.label24.TabIndex = 30;
             this.label24.Text = "Cidade:";
             // 
-            // comboBox4
+            // comboEndrecoPais
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(619, 143);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(150, 23);
-            this.comboBox4.TabIndex = 29;
+            this.comboEndrecoPais.FormattingEnabled = true;
+            this.comboEndrecoPais.Location = new System.Drawing.Point(619, 143);
+            this.comboEndrecoPais.Name = "comboEndrecoPais";
+            this.comboEndrecoPais.Size = new System.Drawing.Size(150, 23);
+            this.comboEndrecoPais.TabIndex = 29;
             // 
-            // comboBox3
+            // comboEndrecoCidade
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(396, 143);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(180, 23);
-            this.comboBox3.TabIndex = 28;
+            this.comboEnderecoCidade.FormattingEnabled = true;
+            this.comboEnderecoCidade.Location = new System.Drawing.Point(396, 143);
+            this.comboEnderecoCidade.Name = "comboEndrecoCidade";
+            this.comboEnderecoCidade.Size = new System.Drawing.Size(180, 23);
+            this.comboEnderecoCidade.TabIndex = 28;
             // 
             // label23
             // 
@@ -857,34 +832,35 @@ namespace SisCom.Aplicacao.Formularios
             this.label22.TabIndex = 26;
             this.label22.Text = "RG.:";
             // 
-            // textBox12
+            // textInscricaoMunicipal
             // 
-            this.textBox12.Location = new System.Drawing.Point(690, 35);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(80, 23);
-            this.textBox12.TabIndex = 25;
+            this.textInscricaoMunicipal.Location = new System.Drawing.Point(690, 35);
+            this.textInscricaoMunicipal.Name = "textInscricaoMunicipal";
+            this.textInscricaoMunicipal.Size = new System.Drawing.Size(80, 23);
+            this.textInscricaoMunicipal.TabIndex = 25;
             // 
-            // textBox11
+            // textRG
             // 
-            this.textBox11.Location = new System.Drawing.Point(366, 7);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(228, 23);
-            this.textBox11.TabIndex = 24;
+            this.textRG.Location = new System.Drawing.Point(366, 7);
+            this.textRG.Name = "textRG";
+            this.textRG.Size = new System.Drawing.Size(228, 23);
+            this.textRG.TabIndex = 12;
             // 
-            // textBox10
+            // textCPFCNPJ
             // 
-            this.textBox10.Location = new System.Drawing.Point(148, 7);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(182, 23);
-            this.textBox10.TabIndex = 23;
+            this.textCPFCNPJ.Location = new System.Drawing.Point(148, 7);
+            this.textCPFCNPJ.Name = "textCPFCNPJ";
+            this.textCPFCNPJ.Size = new System.Drawing.Size(182, 23);
+            this.textCPFCNPJ.TabIndex = 11;
             // 
-            // botaoGrupoProduto
+            // botaotEndrecoCEP
             // 
-            this.botaoGrupoProduto.Location = new System.Drawing.Point(178, 116);
-            this.botaoGrupoProduto.Name = "botaoGrupoProduto";
-            this.botaoGrupoProduto.Size = new System.Drawing.Size(23, 23);
-            this.botaoGrupoProduto.TabIndex = 22;
-            this.botaoGrupoProduto.UseVisualStyleBackColor = true;
+            this.botaotEndrecoCEP.Location = new System.Drawing.Point(178, 116);
+            this.botaotEndrecoCEP.Name = "botaotEndrecoCEP";
+            this.botaotEndrecoCEP.Size = new System.Drawing.Size(23, 23);
+            this.botaotEndrecoCEP.TabIndex = 22;
+            this.botaotEndrecoCEP.UseVisualStyleBackColor = true;
+            this.botaotEndrecoCEP.Click += new System.EventHandler(this.botaotEndrecoCEP_Click);
             // 
             // textBox9
             // 
@@ -908,41 +884,41 @@ namespace SisCom.Aplicacao.Formularios
             this.textBox5.Size = new System.Drawing.Size(663, 23);
             this.textBox5.TabIndex = 17;
             // 
-            // comboBox2
+            // comboEndrecoUF
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(301, 143);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(40, 23);
-            this.comboBox2.TabIndex = 16;
+            this.comboEnderecoUF.FormattingEnabled = true;
+            this.comboEnderecoUF.Location = new System.Drawing.Point(301, 143);
+            this.comboEnderecoUF.Name = "comboEndrecoUF";
+            this.comboEnderecoUF.Size = new System.Drawing.Size(40, 23);
+            this.comboEnderecoUF.TabIndex = 16;
             // 
-            // textBox4
+            // textEndrecoBairro
             // 
-            this.textBox4.Location = new System.Drawing.Point(108, 143);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(161, 23);
-            this.textBox4.TabIndex = 15;
+            this.textEnderecoBairro.Location = new System.Drawing.Point(108, 143);
+            this.textEnderecoBairro.Name = "textEndrecoBairro";
+            this.textEnderecoBairro.Size = new System.Drawing.Size(161, 23);
+            this.textEnderecoBairro.TabIndex = 15;
             // 
-            // textBox3
+            // textEndrecoCEP
             // 
-            this.textBox3.Location = new System.Drawing.Point(106, 116);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(70, 23);
-            this.textBox3.TabIndex = 14;
+            this.textEnderecoCEP.Location = new System.Drawing.Point(106, 116);
+            this.textEnderecoCEP.Name = "textEndrecoCEP";
+            this.textEnderecoCEP.Size = new System.Drawing.Size(70, 23);
+            this.textEnderecoCEP.TabIndex = 14;
             // 
-            // textBox2
+            // textRazaoSocial
             // 
-            this.textBox2.Location = new System.Drawing.Point(106, 89);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(663, 23);
-            this.textBox2.TabIndex = 13;
+            this.textRazaoSocial.Location = new System.Drawing.Point(106, 89);
+            this.textRazaoSocial.Name = "textRazaoSocial";
+            this.textRazaoSocial.Size = new System.Drawing.Size(663, 23);
+            this.textRazaoSocial.TabIndex = 13;
             // 
-            // textBox1
+            // textNome
             // 
-            this.textBox1.Location = new System.Drawing.Point(173, 62);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(597, 23);
-            this.textBox1.TabIndex = 12;
+            this.textNome.Location = new System.Drawing.Point(173, 62);
+            this.textNome.Name = "textNome";
+            this.textNome.Size = new System.Drawing.Size(597, 23);
+            this.textNome.TabIndex = 12;
             // 
             // label21
             // 
@@ -1016,13 +992,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label12.TabIndex = 2;
             this.label12.Text = "Nome:";
             // 
-            // comboBox1
+            // comboTipoPessoa
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(106, 7);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(40, 23);
-            this.comboBox1.TabIndex = 1;
+            this.comboTipoPessoa.FormattingEnabled = true;
+            this.comboTipoPessoa.Location = new System.Drawing.Point(106, 7);
+            this.comboTipoPessoa.Name = "comboTipoPessoa";
+            this.comboTipoPessoa.Size = new System.Drawing.Size(40, 23);
+            this.comboTipoPessoa.TabIndex = 10;
             // 
             // label11
             // 
@@ -1032,231 +1008,6 @@ namespace SisCom.Aplicacao.Formularios
             this.label11.Size = new System.Drawing.Size(37, 15);
             this.label11.TabIndex = 0;
             this.label11.Text = "CNPJ:";
-            // 
-            // tabDadosCobrancaIB
-            // 
-            this.tabDadosCobrancaIB.Location = new System.Drawing.Point(4, 24);
-            this.tabDadosCobrancaIB.Name = "tabDadosCobrancaIB";
-            this.tabDadosCobrancaIB.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDadosCobrancaIB.Size = new System.Drawing.Size(776, 439);
-            this.tabDadosCobrancaIB.TabIndex = 1;
-            this.tabDadosCobrancaIB.Text = "Dados de Cobrança (IB)";
-            this.tabDadosCobrancaIB.UseVisualStyleBackColor = true;
-            // 
-            // tabComplementares
-            // 
-            this.tabComplementares.Controls.Add(this.label45);
-            this.tabComplementares.Controls.Add(this.label44);
-            this.tabComplementares.Controls.Add(this.label43);
-            this.tabComplementares.Controls.Add(this.numericUpDown3);
-            this.tabComplementares.Controls.Add(this.numericUpDown1);
-            this.tabComplementares.Controls.Add(this.comboBox9);
-            this.tabComplementares.Controls.Add(this.textBox20);
-            this.tabComplementares.Controls.Add(this.label42);
-            this.tabComplementares.Controls.Add(this.textBox19);
-            this.tabComplementares.Controls.Add(this.label41);
-            this.tabComplementares.Controls.Add(this.textBox17);
-            this.tabComplementares.Controls.Add(this.label40);
-            this.tabComplementares.Controls.Add(this.textBox15);
-            this.tabComplementares.Controls.Add(this.label39);
-            this.tabComplementares.Controls.Add(this.textBox6);
-            this.tabComplementares.Controls.Add(this.label38);
-            this.tabComplementares.Location = new System.Drawing.Point(4, 24);
-            this.tabComplementares.Name = "tabComplementares";
-            this.tabComplementares.Padding = new System.Windows.Forms.Padding(3);
-            this.tabComplementares.Size = new System.Drawing.Size(776, 439);
-            this.tabComplementares.TabIndex = 2;
-            this.tabComplementares.Text = "Complementares";
-            this.tabComplementares.UseVisualStyleBackColor = true;
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(591, 174);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(110, 15);
-            this.label45.TabIndex = 32;
-            this.label45.Text = "Residência Príopria:";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(264, 174);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(110, 15);
-            this.label44.TabIndex = 31;
-            this.label44.Text = "Tempo de Trabalho:";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(16, 174);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(43, 15);
-            this.label43.TabIndex = 30;
-            this.label43.Text = "Renda:";
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(380, 170);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(120, 23);
-            this.numericUpDown3.TabIndex = 29;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(104, 170);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 23);
-            this.numericUpDown1.TabIndex = 27;
-            // 
-            // comboBox9
-            // 
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(707, 170);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(60, 23);
-            this.comboBox9.TabIndex = 26;
-            // 
-            // textBox20
-            // 
-            this.textBox20.Location = new System.Drawing.Point(670, 62);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(97, 23);
-            this.textBox20.TabIndex = 25;
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(633, 66);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(31, 15);
-            this.label42.TabIndex = 24;
-            this.label42.Text = "CPF:";
-            // 
-            // textBox19
-            // 
-            this.textBox19.Location = new System.Drawing.Point(104, 143);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(663, 23);
-            this.textBox19.TabIndex = 21;
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(16, 147);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(86, 15);
-            this.label41.TabIndex = 20;
-            this.label41.Text = "Local Trabalho:";
-            // 
-            // textBox17
-            // 
-            this.textBox17.Location = new System.Drawing.Point(104, 116);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(663, 23);
-            this.textBox17.TabIndex = 19;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(16, 120);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(30, 15);
-            this.label40.TabIndex = 18;
-            this.label40.Text = "Mãe";
-            // 
-            // textBox15
-            // 
-            this.textBox15.Location = new System.Drawing.Point(104, 89);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(663, 23);
-            this.textBox15.TabIndex = 17;
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(16, 93);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(26, 15);
-            this.label39.TabIndex = 16;
-            this.label39.Text = "Pai:";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(104, 62);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(518, 23);
-            this.textBox6.TabIndex = 15;
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(16, 66);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(62, 15);
-            this.label38.TabIndex = 14;
-            this.label38.Text = "Conjugue:";
-            // 
-            // tabAgenda
-            // 
-            this.tabAgenda.Location = new System.Drawing.Point(4, 24);
-            this.tabAgenda.Name = "tabAgenda";
-            this.tabAgenda.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAgenda.Size = new System.Drawing.Size(776, 439);
-            this.tabAgenda.TabIndex = 3;
-            this.tabAgenda.Text = "Agenda";
-            this.tabAgenda.UseVisualStyleBackColor = true;
-            // 
-            // tabUltimasCompras
-            // 
-            this.tabUltimasCompras.Location = new System.Drawing.Point(4, 24);
-            this.tabUltimasCompras.Name = "tabUltimasCompras";
-            this.tabUltimasCompras.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUltimasCompras.Size = new System.Drawing.Size(776, 439);
-            this.tabUltimasCompras.TabIndex = 4;
-            this.tabUltimasCompras.Text = "Últimas Compras";
-            this.tabUltimasCompras.UseVisualStyleBackColor = true;
-            // 
-            // tabFinanceiras
-            // 
-            this.tabFinanceiras.Location = new System.Drawing.Point(4, 24);
-            this.tabFinanceiras.Name = "tabFinanceiras";
-            this.tabFinanceiras.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFinanceiras.Size = new System.Drawing.Size(776, 439);
-            this.tabFinanceiras.TabIndex = 5;
-            this.tabFinanceiras.Text = "Financeiras";
-            this.tabFinanceiras.UseVisualStyleBackColor = true;
-            // 
-            // tabCreditos
-            // 
-            this.tabCreditos.Location = new System.Drawing.Point(4, 24);
-            this.tabCreditos.Name = "tabCreditos";
-            this.tabCreditos.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCreditos.Size = new System.Drawing.Size(776, 439);
-            this.tabCreditos.TabIndex = 6;
-            this.tabCreditos.Text = "Créditos";
-            this.tabCreditos.UseVisualStyleBackColor = true;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(776, 439);
-            this.tabPage1.TabIndex = 7;
-            this.tabPage1.Text = "Endereços";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabContatosSMS
-            // 
-            this.tabContatosSMS.Location = new System.Drawing.Point(4, 24);
-            this.tabContatosSMS.Name = "tabContatosSMS";
-            this.tabContatosSMS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContatosSMS.Size = new System.Drawing.Size(776, 439);
-            this.tabContatosSMS.TabIndex = 8;
-            this.tabContatosSMS.Text = "Contatos SMS";
-            this.tabContatosSMS.UseVisualStyleBackColor = true;
             // 
             // frmCadastroClientes
             // 
@@ -1282,10 +1033,6 @@ namespace SisCom.Aplicacao.Formularios
             this.tabIdentificacao.ResumeLayout(false);
             this.tabIdentificacao.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tabComplementares.ResumeLayout(false);
-            this.tabComplementares.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1326,27 +1073,27 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox textEnderecoLogradouro;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textEnderecoNumero;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboEndrecoPais;
+        private System.Windows.Forms.ComboBox comboEnderecoCidade;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.Button botaoGrupoProduto;
+        private System.Windows.Forms.TextBox textInscricaoMunicipal;
+        private System.Windows.Forms.TextBox textRG;
+        private System.Windows.Forms.TextBox textCPFCNPJ;
+        private System.Windows.Forms.Button botaotEndrecoCEP;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox comboEnderecoUF;
+        private System.Windows.Forms.TextBox textEnderecoBairro;
+        private System.Windows.Forms.TextBox textEnderecoCEP;
+        private System.Windows.Forms.TextBox textRazaoSocial;
+        private System.Windows.Forms.TextBox textNome;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label17;
@@ -1355,23 +1102,15 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboTipoPessoa;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TabPage tabDadosCobrancaIB;
-        private System.Windows.Forms.TabPage tabComplementares;
-        private System.Windows.Forms.TabPage tabAgenda;
-        private System.Windows.Forms.TabPage tabUltimasCompras;
-        private System.Windows.Forms.TabPage tabFinanceiras;
-        private System.Windows.Forms.TabPage tabCreditos;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabContatosSMS;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox comboContribuinte;
+        private System.Windows.Forms.DateTimePicker dateCadastro;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox18;
+        private System.Windows.Forms.TextBox textInscricaoEstadual;
+        private System.Windows.Forms.TextBox txtCodigoCliente;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label36;
@@ -1388,21 +1127,5 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.ComboBox comboBox9;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Label label45;
     }
 }

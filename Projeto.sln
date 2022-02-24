@@ -35,6 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Componentes", "Componentes"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compartilhados", "Compartilhados", "{5DAEC066-FEC7-4E4C-A0A2-1896662B5262}"
 	ProjectSection(SolutionItems) = preProject
+		API_Consultas.cs = API_Consultas.cs
 		CaixaMensagem.cs = CaixaMensagem.cs
 		Combo_ComboBox.cs = Combo_ComboBox.cs
 		Data_DateTimePicker.cs = Data_DateTimePicker.cs

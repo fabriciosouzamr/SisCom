@@ -13,15 +13,15 @@ namespace SisCom.Aplicacao.Formularios
 {
     public class FormMain : Form
     {
-        private readonly IServiceScopeFactory<MeuDbContext> _dbCtxFactory;
-        private readonly IServiceProvider serviceProvider;
+        public readonly IServiceScopeFactory<MeuDbContext> _dbCtxFactory;
+        public readonly IServiceProvider _serviceProvider;
 
         IServiceScope<MeuDbContext> scope;
 
         public FormMain(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory)
         {
             this._dbCtxFactory = dbCtxFactory;
-            this.serviceProvider = serviceProvider;
+            this._serviceProvider = serviceProvider;
         }
 
         public MeuDbContext MeuDbContext()
@@ -43,7 +43,12 @@ namespace SisCom.Aplicacao.Formularios
 
         public IServiceProvider ServiceProvider()
         {
-            return serviceProvider;
+            return this._serviceProvider;
+        }
+
+        public IServiceScopeFactory<MeuDbContext> dbCtxFactory()
+        {
+            return this._dbCtxFactory;
         }
     }
 }
