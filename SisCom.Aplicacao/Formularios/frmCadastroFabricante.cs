@@ -10,46 +10,41 @@ using static Grid_DataGridView;
 
 namespace SisCom.Aplicacao.Formularios
 {
-    public partial class frmCadastroFabricante : Form
+    public partial class frmCadastroFabricante : FormMain
     {
-        FormMain FormMain;
-
         public event EventHandler GravacaoEfetuada;
 
         const int GridFabricante_Id = 0;
         const int GridFabricante_Nome = 1;
 
-        public frmCadastroFabricante(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory)
+        public frmCadastroFabricante(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
             InitializeComponent();
-            FormMain = new FormMain(serviceProvider, dbCtxFactory);
-
             Inicializar();
         }
-
+        #region Funcoes
         private async void Inicializar()
         {
             Grid_DataGridView.DataGridView_Formatar(dataFabricante);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(dataFabricante, "ID", "ID", 0);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(dataFabricante, "ID", "ID", TipoColuna.TextBox, 0);
             Grid_DataGridView.DataGridView_ColunaAdicionar(dataFabricante, "Nome", "Nome", TipoColuna.TextBox, 400, Declaracoes.CampoNome_Caracteres);
             GridAtualizar();
         }
 
         private async Task GridAtualizar()
         {
-            FabricanteController fabricanteController = new FabricanteController(FormMain.MeuDbContext());
+            FabricanteController fabricanteController = new FabricanteController(this.MeuDbContext(), this._notifier);
             object Data = await fabricanteController.ObterTodos(p => p.Nome);
             Grid_DataGridView.DataGridView_DataSource(dataFabricante, Data, true);
             fabricanteController = null;
-            FormMain.MeuDbContextDispose();
+            this.MeuDbContextDispose();
         }
-
         private async Task Gravar(Guid Id, string Nome)
         {
             try
             {
                 FabricanteViewModel fabricante = new FabricanteViewModel();
-                FabricanteController fabricanteController = new FabricanteController(FormMain.MeuDbContext());
+                FabricanteController fabricanteController = new FabricanteController(this.MeuDbContext(), this._notifier);
                 fabricante.Nome = Nome;
                 fabricante.Id = Id;
 
@@ -63,7 +58,7 @@ namespace SisCom.Aplicacao.Formularios
                 }
 
                 fabricanteController = null;
-                FormMain.MeuDbContextDispose();
+                this.MeuDbContextDispose();
 
                 GravacaoEfetuada.Invoke(this, EventArgs.Empty);
             }
@@ -72,13 +67,13 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao(Ex.Message);
             }
         }
-
         private async void Remover(Guid Id)
         {
-            FabricanteController fabricanteController = new FabricanteController(FormMain.MeuDbContext());
+            FabricanteController fabricanteController = new FabricanteController(this.MeuDbContext(), this._notifier);
             await fabricanteController.Remover(Id);
-            FormMain.MeuDbContextDispose();
+            this.MeuDbContextDispose();
         }
+        #endregion
 
         private void dataFabricante_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -89,7 +84,6 @@ namespace SisCom.Aplicacao.Formularios
                 //GridAtualizar();
             }
         }
-
         private void dataFabricante_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
             if (dataFabricante.Rows.Count != 0)
@@ -110,15 +104,11 @@ namespace SisCom.Aplicacao.Formularios
                 }
             }
         }
-
+        #region Botoes
         private void botaoFechar_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-        private void frmCadastrosFabricante_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            FormMain.Dispose();
-        }
+        #endregion
     }
 }

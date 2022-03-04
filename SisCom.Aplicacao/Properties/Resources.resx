@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DefaultConnection" xml:space="preserve">
-    <value>Data Source=.\sqlexpress;Initial Catalog=SisCom;User ID=sa;Password=832285;MultipleActiveResultSets=true;Trusted_Connection=True</value>
+    <value>Data Source=.\sqlexpress;Initial Catalog=SisCom;User ID=SisCom;Password=SisCom_123;MultipleActiveResultSets=true;Trusted_Connection=True</value>
   </data>
 </root>

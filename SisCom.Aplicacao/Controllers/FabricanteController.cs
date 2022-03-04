@@ -1,4 +1,6 @@
-﻿using SisCom.Aplicacao.ViewModels;
+﻿using Funcoes.Interfaces;
+using SisCom.Aplicacao.Classes;
+using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
@@ -15,11 +17,11 @@ namespace SisCom.Aplicacao.Controllers
         static FabricanteService _FabricanteService;
         private readonly MeuDbContext MeuDbContext;
 
-        public FabricanteController(MeuDbContext MeuDbContext)
+        public FabricanteController(MeuDbContext MeuDbContext, INotifier notifier)
         {
             this.MeuDbContext = MeuDbContext;
 
-            _FabricanteService = new FabricanteService(new FabricanteRepository(this.MeuDbContext), SisCom.Aplicacao.Classes.Declaracoes.Notifier);
+            _FabricanteService = new FabricanteService(new FabricanteRepository(this.MeuDbContext), notifier);
         }
 
         public async Task<FabricanteViewModel> Adicionar(FabricanteViewModel fabricanteViewModel)
@@ -48,10 +50,11 @@ namespace SisCom.Aplicacao.Controllers
             var obterTodos = await _FabricanteService.GetAll(order);
             return SisCom.Aplicacao.Classes.Declaracoes.mapper.Map<IEnumerable<FabricanteViewModel>>(obterTodos);
         }
-        public async Task<IEnumerable<FabricanteViewModel>> Combo(Expression<Func<Fabricante, object>> order = null)
+        public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<Fabricante, object>> order = null)
         {
             var combo = await _FabricanteService.Combo(order);
-            return SisCom.Aplicacao.Classes.Declaracoes.mapper.Map<IEnumerable<FabricanteViewModel>>(combo);
+            return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
         }
+
     }
 }

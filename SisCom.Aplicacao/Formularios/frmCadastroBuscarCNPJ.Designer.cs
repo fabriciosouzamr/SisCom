@@ -33,9 +33,9 @@ namespace SisCom.Aplicacao.Formularios
             this.panel1 = new System.Windows.Forms.Panel();
             this.botaoFechar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.maskedCNPJ = new System.Windows.Forms.MaskedTextBox();
             this.botaoConsultar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textCNPJ = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.botaoConfirmar = new System.Windows.Forms.Button();
@@ -72,12 +72,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label24 = new System.Windows.Forms.Label();
             this.comboEnderecoCidade = new System.Windows.Forms.ComboBox();
             this.botaoBuscaCEP = new System.Windows.Forms.Button();
-            this.comboEnderecoEstado = new System.Windows.Forms.ComboBox();
+            this.comboEnderecoUF = new System.Windows.Forms.ComboBox();
             this.textEnderecoBairro = new System.Windows.Forms.TextBox();
-            this.textEnderecoCEP = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.maskedEnderecoCEP = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -108,13 +108,20 @@ namespace SisCom.Aplicacao.Formularios
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.maskedCNPJ);
             this.panel2.Controls.Add(this.botaoConsultar);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.textCNPJ);
             this.panel2.Location = new System.Drawing.Point(5, 80);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(570, 34);
             this.panel2.TabIndex = 23;
+            // 
+            // maskedCNPJ
+            // 
+            this.maskedCNPJ.Location = new System.Drawing.Point(96, 5);
+            this.maskedCNPJ.Name = "maskedCNPJ";
+            this.maskedCNPJ.Size = new System.Drawing.Size(120, 23);
+            this.maskedCNPJ.TabIndex = 2;
             // 
             // botaoConsultar
             // 
@@ -134,13 +141,6 @@ namespace SisCom.Aplicacao.Formularios
             this.label2.Size = new System.Drawing.Size(37, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "CNPJ:";
-            // 
-            // textCNPJ
-            // 
-            this.textCNPJ.Location = new System.Drawing.Point(96, 5);
-            this.textCNPJ.Name = "textCNPJ";
-            this.textCNPJ.Size = new System.Drawing.Size(120, 23);
-            this.textCNPJ.TabIndex = 0;
             // 
             // panel3
             // 
@@ -344,6 +344,7 @@ namespace SisCom.Aplicacao.Formularios
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.White;
+            this.panel6.Controls.Add(this.maskedEnderecoCEP);
             this.panel6.Controls.Add(this.label17);
             this.panel6.Controls.Add(this.label13);
             this.panel6.Controls.Add(this.label12);
@@ -360,9 +361,8 @@ namespace SisCom.Aplicacao.Formularios
             this.panel6.Controls.Add(this.label24);
             this.panel6.Controls.Add(this.comboEnderecoCidade);
             this.panel6.Controls.Add(this.botaoBuscaCEP);
-            this.panel6.Controls.Add(this.comboEnderecoEstado);
+            this.panel6.Controls.Add(this.comboEnderecoUF);
             this.panel6.Controls.Add(this.textEnderecoBairro);
-            this.panel6.Controls.Add(this.textEnderecoCEP);
             this.panel6.Controls.Add(this.label16);
             this.panel6.Controls.Add(this.label15);
             this.panel6.Controls.Add(this.label14);
@@ -523,15 +523,16 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoBuscaCEP.TabIndex = 45;
             this.botaoBuscaCEP.TabStop = false;
             this.botaoBuscaCEP.UseVisualStyleBackColor = true;
+            this.botaoBuscaCEP.Click += new System.EventHandler(this.botaoBuscaCEP_Click);
             // 
-            // comboEnderecoEstado
+            // comboEnderecoUF
             // 
-            this.comboEnderecoEstado.FormattingEnabled = true;
-            this.comboEnderecoEstado.Location = new System.Drawing.Point(96, 113);
-            this.comboEnderecoEstado.Name = "comboEnderecoEstado";
-            this.comboEnderecoEstado.Size = new System.Drawing.Size(93, 23);
-            this.comboEnderecoEstado.TabIndex = 42;
-            this.comboEnderecoEstado.SelectedIndexChanged += new System.EventHandler(this.comboEnderecoEstado_SelectedIndexChanged);
+            this.comboEnderecoUF.FormattingEnabled = true;
+            this.comboEnderecoUF.Location = new System.Drawing.Point(96, 113);
+            this.comboEnderecoUF.Name = "comboEnderecoUF";
+            this.comboEnderecoUF.Size = new System.Drawing.Size(93, 23);
+            this.comboEnderecoUF.TabIndex = 42;
+            this.comboEnderecoUF.SelectedIndexChanged += new System.EventHandler(this.comboEnderecoUF_SelectedIndexChanged);
             // 
             // textEnderecoBairro
             // 
@@ -540,14 +541,6 @@ namespace SisCom.Aplicacao.Formularios
             this.textEnderecoBairro.Name = "textEnderecoBairro";
             this.textEnderecoBairro.Size = new System.Drawing.Size(300, 23);
             this.textEnderecoBairro.TabIndex = 14;
-            // 
-            // textEnderecoCEP
-            // 
-            this.textEnderecoCEP.Location = new System.Drawing.Point(96, 5);
-            this.textEnderecoCEP.MaxLength = 10;
-            this.textEnderecoCEP.Name = "textEnderecoCEP";
-            this.textEnderecoCEP.Size = new System.Drawing.Size(70, 23);
-            this.textEnderecoCEP.TabIndex = 10;
             // 
             // label16
             // 
@@ -576,6 +569,14 @@ namespace SisCom.Aplicacao.Formularios
             this.label14.TabIndex = 37;
             this.label14.Text = "CEP:";
             // 
+            // maskedCEP
+            // 
+            this.maskedEnderecoCEP.Location = new System.Drawing.Point(96, 5);
+            this.maskedEnderecoCEP.Mask = "00,000-000";
+            this.maskedEnderecoCEP.Name = "maskedCEP";
+            this.maskedEnderecoCEP.Size = new System.Drawing.Size(70, 23);
+            this.maskedEnderecoCEP.TabIndex = 58;
+            // 
             // frmCadastroBuscarCNPJ
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -590,6 +591,7 @@ namespace SisCom.Aplicacao.Formularios
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmCadastroBuscarCNPJ";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCadastroBuscarCNPJ";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -615,7 +617,6 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Button botaoConfirmar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textCNPJ;
         private System.Windows.Forms.Button botaoConsultar;
         private System.Windows.Forms.TextBox textRazaoSocial;
         private System.Windows.Forms.Label label3;
@@ -633,9 +634,8 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.ComboBox comboEnderecoCidade;
         private System.Windows.Forms.Button botaoBuscaCEP;
-        private System.Windows.Forms.ComboBox comboEnderecoEstado;
+        private System.Windows.Forms.ComboBox comboEnderecoUF;
         private System.Windows.Forms.TextBox textEnderecoBairro;
-        private System.Windows.Forms.TextBox textEnderecoCEP;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
@@ -656,5 +656,7 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.TextBox textSituacaoCadastral;
         private System.Windows.Forms.TextBox textMotivoSituacaoCadastral;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.MaskedTextBox maskedCNPJ;
+        private System.Windows.Forms.MaskedTextBox maskedEnderecoCEP;
     }
 }

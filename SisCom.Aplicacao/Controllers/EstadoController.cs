@@ -1,4 +1,5 @@
-﻿using SisCom.Aplicacao.Classes;
+﻿using Funcoes.Interfaces;
+using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
@@ -16,11 +17,11 @@ namespace SisCom.Aplicacao.Controllers
         static EstadoService _EstadoService;
         private readonly MeuDbContext MeuDbContext;
 
-        public EstadoController(MeuDbContext MeuDbContext)
+        public EstadoController(MeuDbContext MeuDbContext, INotifier notifier)
         {
             this.MeuDbContext = MeuDbContext;
 
-            _EstadoService = new EstadoService(new EstadoRepository(this.MeuDbContext), null);
+            _EstadoService = new EstadoService(new EstadoRepository(this.MeuDbContext), notifier);
         }
 
         public async Task<EstadoViewModel> Adicionar(EstadoViewModel EstadoViewModel)
@@ -68,10 +69,12 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<EstadoComboViewModel>>(combo);
         }
 
-        public async Task<IEnumerable<EstadoCodigoComboViewModel>> ComboCodigo(Expression<Func<Estado, object>> order = null)
+        public async Task<IEnumerable<CodigoNomeComboViewModel>> ComboCodigo(Expression<Func<Estado, object>> order = null)
         {
             var combo = await _EstadoService.Combo(order);
-            return Declaracoes.mapper.Map<IEnumerable<EstadoCodigoComboViewModel>>(combo);
+            var ret = Declaracoes.mapper.Map<IEnumerable<CodigoNomeComboViewModel>>(combo);
+
+            return Declaracoes.mapper.Map<IEnumerable<CodigoNomeComboViewModel>>(combo);
         }
     }
 }

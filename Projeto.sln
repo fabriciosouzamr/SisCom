@@ -40,6 +40,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compartilhados", "Compartil
 		Combo_ComboBox.cs = Combo_ComboBox.cs
 		Data_DateTimePicker.cs = Data_DateTimePicker.cs
 		Grid_DataGridView.cs = Grid_DataGridView.cs
+		Imagem.cs = Imagem.cs
+		NuvemFiscal.cs = NuvemFiscal.cs
+		Texto_MaskedTextBox.cs = Texto_MaskedTextBox.cs
 		Texto_TextBox.cs = Texto_TextBox.cs
 	EndProjectSection
 EndProject

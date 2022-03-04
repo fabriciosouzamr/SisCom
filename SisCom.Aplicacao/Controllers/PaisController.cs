@@ -1,7 +1,10 @@
-﻿using SisCom.Aplicacao.Classes;
+﻿using Funcoes.Interfaces;
+using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
+using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,10 +13,13 @@ namespace SisCom.Aplicacao.Controllers
     public class PaisController
     {
         static PaisService _PaisService;
+        private readonly MeuDbContext MeuDbContext;
 
-        static PaisController()
+        public PaisController(MeuDbContext MeuDbContext, INotifier notifier)
         {
-            _PaisService = new PaisService(new PaisRepository(Declaracoes.dbContext), Declaracoes.Notifier);
+            this.MeuDbContext = MeuDbContext;
+
+            _PaisService = new PaisService(new PaisRepository(this.MeuDbContext), notifier);
         }
 
         public async Task<IEnumerable<PaisViewModel>> ObterTodos()
@@ -25,6 +31,12 @@ namespace SisCom.Aplicacao.Controllers
         public async Task<IEnumerable<PaisViewModel>> Combo()
         {
             var combo = await _PaisService.Combo();
+            return Declaracoes.mapper.Map<IEnumerable<PaisViewModel>>(combo);
+        }
+
+        public async Task<IEnumerable<PaisViewModel>> ComboId(Guid Id)
+        {
+            var combo = await _PaisService.ComboSearch(p => p.Id == Id);
             return Declaracoes.mapper.Map<IEnumerable<PaisViewModel>>(combo);
         }
     }

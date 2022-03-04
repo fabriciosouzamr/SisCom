@@ -9,18 +9,18 @@ using static API_Consultas.AcoesAPI;
 
 namespace SisCom.Aplicacao.Formularios
 {
-    public partial class frmCadastroBuscarCNPJ : Form
+    public partial class frmCadastroBuscarCNPJ : FormMain
     {
         public formBuscarCNPJDados formBuscarCNPJDados;
-        FormMain FormMain;
 
-        public frmCadastroBuscarCNPJ(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory)
+        public frmCadastroBuscarCNPJ(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
             InitializeComponent();
-            FormMain = new FormMain(serviceProvider, dbCtxFactory);
 
             dateDataAbertura.Text = "";
             dateDataSituacaoCadastral.Text = "";
+
+            Texto_MaskedTextBox.FormatarTipoPessoa(Funcoes._Enum.TipoPessoaCliente.Juridica, maskedCNPJ);
 
             comboEstado_Carregar();
         }
@@ -30,21 +30,36 @@ namespace SisCom.Aplicacao.Formularios
             ConsultarCNPJ();
         }
 
-        private void ConsultarCNPJ()
+        private async Task ConsultarCNPJ()
         {
-            CNPJRetorno CNPJRetorno = ReceitaWS.ConsultarCNPJ(textCNPJ.Text);
+            if (!Funcoes._Classes.Validacao.CNPJ_Valido(maskedCNPJ.Text))
+            {
+                CaixaMensagem.Informacao("CNPJ Inválido");
+                return;
+            }
+
+            CNPJRetorno CNPJRetorno = ReceitaWS.ConsultarCNPJ(Funcoes._Classes.Texto.SomenteNumero(maskedCNPJ.Text));
 
             if (CNPJRetorno != null)
             {
                 textRazaoSocial.Text = CNPJRetorno.nome;
                 textNomeFantasia.Text = CNPJRetorno.fantasia;
-                textEnderecoCEP.Text = CNPJRetorno.cep;
+                maskedEnderecoCEP.Text = CNPJRetorno.cep;
                 textEnderecoLogradouro.Text = CNPJRetorno.logradouro;
                 textEnderecoNumero.Text = CNPJRetorno.numero;
                 textEnderecoComplemento.Text = CNPJRetorno.complemento;
                 textEnderecoBairro.Text = CNPJRetorno.bairro;
-                Combo_ComboBox.Selecionar(comboEnderecoEstado, CNPJRetorno.uf, 1);
-                Combo_ComboBox.Selecionar(comboEnderecoCidade, CNPJRetorno.municipio, 1);
+                comboEnderecoUF.Text = CNPJRetorno.uf;
+
+                await Classes.Forms.comboCidade_Carregar(this._serviceProvider,
+                                                         this._dbCtxFactory,
+                                                         this._notifier,
+                                                         (Guid)comboEnderecoUF.SelectedValue,
+                                                         CNPJRetorno.municipio,
+                                                         "",
+                                                         comboEnderecoUF,
+                                                         comboEnderecoCidade);
+
                 dateDataAbertura.Text = CNPJRetorno.abertura;
                 dateDataSituacaoCadastral.Text = CNPJRetorno.data_situacao;
                 textSituacaoCadastral.Text = CNPJRetorno.situacao;
@@ -68,43 +83,56 @@ namespace SisCom.Aplicacao.Formularios
             }
 
             formBuscarCNPJDados = new formBuscarCNPJDados();
-            formBuscarCNPJDados.CNPJ = textCNPJ.Text;
+            formBuscarCNPJDados.CNPJ = maskedCNPJ.Text;
             formBuscarCNPJDados.RazaoSocial = textRazaoSocial.Text;
             formBuscarCNPJDados.NomeFantasia = textNomeFantasia.Text;
-            formBuscarCNPJDados.CEP = textEnderecoCEP.Text;
+            formBuscarCNPJDados.CEP = maskedEnderecoCEP.Text;
             formBuscarCNPJDados.Logradouro = textEnderecoLogradouro.Text;
             formBuscarCNPJDados.Numero = textEnderecoNumero.Text;
             formBuscarCNPJDados.Complemento = textEnderecoComplemento.Text;
             formBuscarCNPJDados.Bairro = textEnderecoBairro.Text;
-            if (comboEnderecoEstado.SelectedValue != null) { formBuscarCNPJDados.Estado = (Guid)comboEnderecoEstado.SelectedValue; }
+            if (comboEnderecoUF.SelectedValue != null) { formBuscarCNPJDados.Estado = (Guid)comboEnderecoUF.SelectedValue; }
             if (comboEnderecoCidade.SelectedValue != null) { formBuscarCNPJDados.Cidade = (Guid)comboEnderecoCidade.SelectedValue; }
 
             Close();
         }
 
-        private void comboEnderecoEstado_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboEnderecoUF_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Combo_ComboBox.Selecionado(comboEnderecoEstado))
+            if (Combo_ComboBox.Selecionado(comboEnderecoUF))
             {
-                comboCidade_Carregar(Guid.Parse(comboEnderecoEstado.SelectedValue.ToString()));
+                comboCidade_Carregar(Guid.Parse(comboEnderecoUF.SelectedValue.ToString()));
             }
         }
 
         private async Task comboEstado_Carregar()
         {
-            Combo_ComboBox.Formatar(comboEnderecoEstado,
+            Combo_ComboBox.Formatar(comboEnderecoUF,
                                     "ID", "Codigo",
                                     ComboBoxStyle.DropDownList,
-                                    await (new EstadoController(FormMain.MeuDbContext())).ComboCodigo(p => p.Nome));
-            FormMain.MeuDbContextDispose();
+                                    await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Nome));
+            this.MeuDbContextDispose();
         }
         private async Task comboCidade_Carregar(Guid EstadoId)
         {
             Combo_ComboBox.Formatar(comboEnderecoCidade,
                                     "ID", "Nome",
                                     ComboBoxStyle.DropDownList,
-                                    await (new CidadeController(FormMain.MeuDbContext())).ComboEstado(EstadoId, p => p.Nome));
-            FormMain.MeuDbContextDispose();
+                                    await (new CidadeController(this.MeuDbContext(), this._notifier)).ComboEstado(EstadoId, p => p.Nome));
+            this.MeuDbContextDispose();
+        }
+
+        private void botaoBuscaCEP_Click(object sender, EventArgs e)
+        {
+            Forms.formBuscarCEPCarregar(this._serviceProvider,
+                                        this._dbCtxFactory,
+                                        this._notifier,
+                                        maskedEnderecoCEP.Text,
+                                        textEnderecoLogradouro,
+                                        textEnderecoBairro,
+                                        comboEnderecoUF,
+                                        comboEnderecoCidade,
+                                        textEnderecoComplemento);
         }
     }
 }

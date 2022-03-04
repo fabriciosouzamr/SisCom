@@ -58,9 +58,9 @@ namespace SisCom.Negocio.Services
             return _repository.GetById(id);
         }
 
-        public virtual Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate)
+        public virtual Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> order = null)
         {
-            return _repository.Search(predicate);
+            return _repository.Search(predicate, order);
         }
 
         public virtual Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null)
@@ -78,14 +78,14 @@ namespace SisCom.Negocio.Services
             return await _repository.ComboSearch(predicate, order);
         }
 
-        //public virtual Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
-        //{
-        //    return _repository.Buscar(predicate);
-        //}
-
         //public virtual Task Adicionar(TEntity entity)
         //{
         //    return _repository.Adicionar(entity);
+        //}
+
+        //public virtual Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
+        //{
+        //    return _repository.Buscar(predicate);
         //}
 
         //public virtual Task Atualizar(TEntity entity)

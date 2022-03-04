@@ -1,8 +1,13 @@
-﻿using SisCom.Aplicacao.Classes;
+﻿using Funcoes.Interfaces;
+using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
+using SisCom.Entidade.Modelos;
+using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
@@ -10,10 +15,13 @@ namespace SisCom.Aplicacao.Controllers
     public class UnidadeMedidaController
     {
         static UnidadeMedidaService _UnidadeMedidaService;
+        private readonly MeuDbContext MeuDbContext;
 
-        static UnidadeMedidaController()
+        public UnidadeMedidaController(MeuDbContext MeuDbContext, INotifier notifier)
         {
-            _UnidadeMedidaService = new UnidadeMedidaService(new UnidadeMedidaRepository(Declaracoes.dbContext), Declaracoes.Notifier);
+            this.MeuDbContext = MeuDbContext;
+
+            _UnidadeMedidaService = new UnidadeMedidaService(new UnidadeMedidaRepository(this.MeuDbContext), notifier);
         }
 
         public async Task<IEnumerable<UnidadeMedidaViewModel>> ObterTodos()
@@ -22,10 +30,10 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<UnidadeMedidaViewModel>>(obterTodos);
         }
 
-        public async Task<IEnumerable<UnidadeMedidaViewModel>> Combo()
+        public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<UnidadeMedida, object>> order = null)
         {
-            var combo = await _UnidadeMedidaService.Combo();
-            return Declaracoes.mapper.Map<IEnumerable<UnidadeMedidaViewModel>>(combo);
+            var combo = await _UnidadeMedidaService.Combo(order);
+            return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
         }
     }
 }

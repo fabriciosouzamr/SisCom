@@ -16,7 +16,8 @@ namespace SisCom.Infraestrutura.Data.Mappings
 
             builder.Property(p => p.Codigo)
                 .IsRequired()
-                .HasColumnType("varchar(10)");
+                .ValueGeneratedOnAdd()
+                .Metadata.SetAfterSaveBehavior(Microsoft.EntityFrameworkCore.Metadata.PropertySaveBehavior.Ignore);
 
             builder.Property(p => p.CodigoFabricante)
                 .HasColumnType("varchar(50)");
@@ -123,8 +124,8 @@ namespace SisCom.Infraestrutura.Data.Mappings
             builder.Property(p => p.FotoEspecificacao_URL)
                 .HasColumnType("varchar(200)");
 
-            builder.Property(p => p.FotoEspecificacao_Imagem_ContentType)
-                .HasMaxLength(20);
+            builder.Property(p => p.Observacao)
+                .HasColumnType("text");
 
             builder.ToTable("Mercadorias");
         }

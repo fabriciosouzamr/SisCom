@@ -11,19 +11,19 @@ namespace SisCom.Negocio.Services
 {
     public class EmpresaService : BaseService<Empresa>, IEmpresaService
     {
-        private readonly IEmpresaRepository _EmpresaRepository;
+        private readonly IEmpresaRepository _empresaRepository;
 
         public EmpresaService(IEmpresaRepository EmpresaRepository,
                               INotifier notificador) : base(notificador, EmpresaRepository)
         {
-            _EmpresaRepository = EmpresaRepository;
+            _empresaRepository = EmpresaRepository;
         }
 
         public virtual async Task Adicionar(Empresa Empresa)
         {
             try
             {
-                var empresa = await _EmpresaRepository.Search(f => f.CNPJ == Empresa.CNPJ || 
+                var empresa = await _empresaRepository.Search(f => f.CNPJ == Empresa.CNPJ || 
                                                                    f.RazaoSocial == Empresa.RazaoSocial ||
                                                                    f.Unidade == Empresa.Unidade);
 
@@ -33,7 +33,7 @@ namespace SisCom.Negocio.Services
                     return;
                 }
 
-                await _EmpresaRepository.Insert(Empresa);
+                await _empresaRepository.Insert(Empresa);
 
                 Notify("Empresa incluída.");
             }
@@ -49,7 +49,7 @@ namespace SisCom.Negocio.Services
             {
                 if (!RunValidation(new EmpresaValidation(), Empresa)) return;
 
-                var exists = _EmpresaRepository.Exists(f => (f.CNPJ == Empresa.CNPJ || 
+                var exists = _empresaRepository.Exists(f => (f.CNPJ == Empresa.CNPJ || 
                                                              f.Unidade == Empresa.Unidade || 
                                                              f.RazaoSocial == Empresa.RazaoSocial) && (f.Id != Empresa.Id));
 
@@ -59,7 +59,7 @@ namespace SisCom.Negocio.Services
                     return;
                 }
 
-                await _EmpresaRepository.Update(Empresa);
+                await _empresaRepository.Update(Empresa);
 
                 Notify("Empresa atualizada.");
             }
@@ -69,14 +69,16 @@ namespace SisCom.Negocio.Services
             }
         }
 
-        public async Task Remover(Guid id)
+        public async Task Excluir(Guid id)
         {
-            await _EmpresaRepository.Delete(id);
+            await _empresaRepository.Delete(id);
+
+            Notify("Exclusão Efetuada.");
         }
 
         public override void Dispose()
         {
-            _EmpresaRepository?.Dispose();
+            _empresaRepository?.Dispose();
         }
 
         public Task<IPagedList<Empresa>> GetPagedList(FilteredPagedListParameters parameters)

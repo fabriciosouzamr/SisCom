@@ -1,13 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Funcoes._Classes;
+using Funcoes.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using SisCom.Aplicacao.Classes;
+using SisCom.Aplicacao.Formularios;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Interfaces;
 using SisCom.Negocio.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Configuration
 {
@@ -15,7 +14,25 @@ namespace SisCom.Aplicacao.Configuration
     {
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
-            services.AddScoped<MeuDbContext>();
+            services.AddSingleton(typeof(IServiceScopeFactory<>), typeof(ServiceScopeFactory<>));
+            services.AddScoped<MeuDbContext, MeuDbContext>();
+            services.AddScoped<INotifier, Notifier>();
+
+            #region Fromularios
+            services.AddSingleton<frmMDI>();
+            services.AddTransient<frmCadastro>();
+            services.AddTransient<frmCadastroFabricante>();
+            services.AddTransient<frmCadastroFornecedores>();
+            services.AddTransient<frmCadastroMercadorias>();
+            services.AddTransient<frmCadastroMercadoriasVinculoFiscal>();
+            services.AddTransient<frmCadastroMercadoriasNCM>();
+            services.AddTransient<frmCadastroMercadoriasCST>();
+            services.AddTransient<frmCadastroClientes>();
+            services.AddTransient<frmCadastroFuncionarios>();
+            services.AddTransient<frmCadastroTransportadoras>();
+            services.AddTransient<frmCadastroTipoCliente>();
+            services.AddTransient<frmCadastroEmpresas>();
+            #endregion
 
             #region Cidade
             services.AddScoped<ICidadeRepository, CidadeRepository>();
@@ -33,9 +50,21 @@ namespace SisCom.Aplicacao.Configuration
             services.AddScoped<IFabricanteRepository, FabricanteRepository>();
             services.AddScoped<IFabricanteService, FabricanteService>();
             #endregion
+            #region Funcionario
+            services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
+            services.AddScoped<IFuncionarioService, FuncionarioService>();
+            #endregion
             #region Grupo       
             services.AddScoped<IGrupoMercadoriaRepository, GrupoRepository>();
             services.AddScoped<IGrupoMercadoriaService, GrupoMercadoriaService>();
+            #endregion
+            #region GrupoNaturezaReceita_CTS_PIS_COFINS
+            services.AddScoped<IGrupoNaturezaReceita_CTS_PIS_COFINSRepository, GrupoNaturezaReceita_CTS_PIS_COFINSRepository>();
+            services.AddScoped<IGrupoNaturezaReceita_CTS_PIS_COFINSService, GrupoNaturezaReceita_CTS_PIS_COFINSService>();
+            #endregion
+            #region Mercadoria
+            services.AddScoped<IMercadoriaRepository, MercadoriaRepository>();
+            services.AddScoped<IMercadoriaService, MercadoriaService>();
             #endregion
             #region Pais
             services.AddScoped<IPaisRepository, PaisRepository>();
@@ -53,6 +82,86 @@ namespace SisCom.Aplicacao.Configuration
             services.AddScoped<IUnidadeMedidaRepository, UnidadeMedidaRepository>();
             services.AddScoped<IUnidadeMedidaService, UnidadeMedidaService>();
             #endregion
+            #region TabelaANP
+            services.AddScoped<ITabelaANPRepository, TabelaANPRepository>();
+            services.AddScoped<ITabelaANPService, TabelaANPService>();
+            #endregion
+            #region TabelaBeneficioSPED
+            services.AddScoped<ITabelaBeneficioSPEDRepository, TabelaBeneficioSPEDRepository>();
+            services.AddScoped<ITabelaBeneficioSPEDService, TabelaBeneficioSPEDService>();
+            #endregion
+            #region TabelaCEST
+            services.AddScoped<ITabelaCESTRepository, TabelaCESTRepository>();
+            services.AddScoped<ITabelaCESTService, TabelaCESTService>();
+            #endregion
+            #region TabelaCFOP
+            services.AddScoped<ITabelaCFOPRepository, TabelaCFOPRepository>();
+            services.AddScoped<ITabelaCFOPService, TabelaCFOPService>();
+            #endregion
+            #region TabelaClasseEnquadramentoIPI
+            services.AddScoped<ITabelaClasseEnquadramentoIPIRepository, TabelaClasseEnquadramentoIPIRepository>();
+            services.AddScoped<ITabelaClasseEnquadramentoIPIService, TabelaClasseEnquadramentoIPIService>();
+            #endregion
+            #region TabelaCodigoEnquadramentoIPIs
+            services.AddScoped<ITabelaCodigoEnquadramentoIPIRepository, TabelaCodigoEnquadramentoIPIRepository>();
+            services.AddScoped<ITabelaCodigoEnquadramentoIPIService, TabelaCodigoEnquadramentoIPIService>();
+            #endregion
+            #region TabelaCST_CSOSN
+            services.AddScoped<ITabelaCST_CSOSNRepository, TabelaCST_CSOSNRepository>();
+            services.AddScoped<ITabelaCST_CSOSNService, TabelaCST_CSOSNService>();
+            #endregion
+            #region TabelaCST_PIS_COFINS
+            services.AddScoped<ITabelaCST_PIS_COFINSRepository, TabelaCST_PIS_COFINSRepository>();
+            services.AddScoped<ITabelaCST_PIS_COFINSService, TabelaCST_PIS_COFINSService>();
+            #endregion
+            #region TabelaCST_IPI
+            services.AddScoped<ITabelaCST_IPIRepository, TabelaCST_IPIRepository>();
+            services.AddScoped<ITabelaCST_IPIService, TabelaCST_IPIService>();
+            #endregion
+            #region TabelaNCM
+            services.AddScoped<ITabelaNCMRepository, TabelaNCMRepository>();
+            services.AddScoped<ITabelaNCMService, TabelaNCMService>();
+            #endregion
+            #region TabelaModalidadeDeterminacaoBCICMS
+            services.AddScoped<ITabelaModalidadeDeterminacaoBCICMSRepository, TabelaModalidadeDeterminacaoBCICMSRepository>();
+            services.AddScoped<ITabelaModalidadeDeterminacaoBCICMSService, TabelaModalidadeDeterminacaoBCICMSService>();
+            #endregion
+            #region TabelaMotivoDesoneracaoICMS
+            services.AddScoped<ITabelaMotivoDesoneracaoICMSRepository, TabelaMotivoDesoneracaoICMSRepository>();
+            services.AddScoped<ITabelaMotivoDesoneracaoICMSService, TabelaMotivoDesoneracaoICMSService>();
+            #endregion
+            #region TabelaNaturezaReceita_CTS_PIS_COFINS
+            services.AddScoped<ITabelaNaturezaReceita_CTS_PIS_COFINSRepository, TabelaNaturezaReceita_CTS_PIS_COFINSRepository>();
+            services.AddScoped<ITabelaNaturezaReceita_CTS_PIS_COFINSService, TabelaNaturezaReceita_CTS_PIS_COFINSService>();
+            #endregion
+            #region TabelaOrigemMercadoriaServico
+            services.AddScoped<ITabelaOrigemMercadoriaServicoRepository, TabelaOrigemMercadoriaServicoRepository>();
+            services.AddScoped<ITabelaOrigemMercadoriaServicoService, TabelaOrigemMercadoriaServicoService>();
+            #endregion
+            #region TabelaSpedCodigoGenero
+            services.AddScoped<ITabelaSpedCodigoGeneroRepository, TabelaSpedCodigoGeneroRepository>();
+            services.AddScoped<ITabelaSpedCodigoGeneroService, TabelaSpedCodigoGeneroService>();
+            #endregion
+            #region TabelaSpedInformacaoAdicionalItem
+            services.AddScoped<ITabelaSpedInformacaoAdicionalItemRepository, TabelaSpedInformacaoAdicionalItemRepository>();
+            services.AddScoped<ITabelaSpedInformacaoAdicionalItemService, TabelaSpedInformacaoAdicionalItemService>();
+            #endregion
+            #region TabelaSpedTipoItem
+            services.AddScoped<ITabelaSpedTipoItemRepository, TabelaSpedTipoItemRepository>();
+            services.AddScoped<ITabelaSpedTipoItemService, TabelaSpedTipoItemService>();
+            #endregion
+            #region TabelaSituacaoTributariaNFCe
+            services.AddScoped<ITabelaSituacaoTributariaNFCeRepository, TabelaSituacaoTributariaNFCeRepository>();
+            services.AddScoped<ITabelaSituacaoTributariaNFCeService, TabelaSituacaoTributariaNFCeService>();
+            #endregion
+            #region TipoMercadoria
+            services.AddScoped<ITipoMercadoriaRepository, TipoMercadoriaRepository>();
+            services.AddScoped<ITipoMercadoriaService, TipoMercadoriaService>();
+            #endregion
+            #region TipoServicoFiscal
+            services.AddScoped<ITipoServicoFiscalRepository, TipoServicoFiscalRepository>();
+            services.AddScoped<ITipoServicoFiscalService, TipoServicoFiscalService>();
+            #endregion
             #region VinculoFiscal
             services.AddScoped<IVinculoFiscalRepository, VinculoFiscalRepository>();
             services.AddScoped<IVinculoFiscalService, VinculoFiscalService>();
@@ -61,13 +170,11 @@ namespace SisCom.Aplicacao.Configuration
             //            services.AddScoped<IUserManualRepository, UserManualRepository>();
             //            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             //            services.AddScoped<IPermissionRepository, PermissionRepository>();
-            //            services.AddScoped<INotifier, Notifier>();
             //            services.AddScoped<ICustomLogger, CustomLogger>();
             //            services.AddScoped<IUserService, UserService>();
             //            services.AddScoped<IUserManualService, UserManualService>();
             //            services.AddScoped<IUserProfileService, UserProfileService>();
             //            services.AddScoped<IPermissionService, PermissionService>();
-            //            services.AddScoped<INotifier, Notifier>();
             //            services.AddScoped<ICustomLogger, CustomLogger>();
             //            services.AddScoped<IUserService, UserService>();
             //            services.AddScoped<IUserManualService, UserManualService>();

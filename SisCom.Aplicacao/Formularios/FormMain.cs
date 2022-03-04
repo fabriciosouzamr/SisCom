@@ -1,10 +1,5 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using Funcoes.Interfaces;
+﻿using Funcoes.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Windows.Forms;
@@ -15,13 +10,18 @@ namespace SisCom.Aplicacao.Formularios
     {
         public readonly IServiceScopeFactory<MeuDbContext> _dbCtxFactory;
         public readonly IServiceProvider _serviceProvider;
+        public readonly INotifier _notifier;
 
         IServiceScope<MeuDbContext> scope;
 
-        public FormMain(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory)
+        public FormMain(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier)
         {
             this._dbCtxFactory = dbCtxFactory;
             this._serviceProvider = serviceProvider;
+            this._notifier = notifier;
+
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         public MeuDbContext MeuDbContext()

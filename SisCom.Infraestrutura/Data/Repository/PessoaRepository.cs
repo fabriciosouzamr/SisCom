@@ -29,6 +29,12 @@ namespace SisCom.Infraestrutura.Data.Repository
                 .ToListAsync();
         }
 
+        public override async Task Update(Pessoa pessoa)
+        {
+            DbSet.Update(pessoa);
+            await SaveChanges();
+        }
+
         public async Task<IPagedList<Pessoa>> GetPagedList(FilteredPagedListParameters parameters)
         {
             var dadosFiltrados = Db.Pessoas

@@ -74,6 +74,9 @@ namespace SisCom.Infraestrutura.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
                     b.Property<string>("CNPJ")
                         .IsRequired()
                         .HasColumnType("varchar(14)");
@@ -83,26 +86,14 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("float")
                         .HasDefaultValue(0.0);
 
+                    b.Property<DateTime?>("DataDesativacao")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("EMail")
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("End_Bairro")
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<string>("End_CEP")
-                        .HasColumnType("varchar(8)");
-
-                    b.Property<Guid?>("End_CidadeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("End_Logradouro")
-                        .HasColumnType("varchar(60)");
-
-                    b.Property<string>("End_Numero")
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("Fantasia")
-                        .HasColumnType("varchar(100)");
+                    b.Property<byte[]>("ImagemLogomarca")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("InscricaoEstadual")
                         .HasColumnType("varchar(15)");
@@ -113,10 +104,51 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("InscricaoMunicipal")
                         .HasColumnType("varchar(15)");
 
-                    b.Property<string>("RazaoSocial")
+                    b.Property<int?>("MDFe_Ambiente")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MDFe_Serie")
+                        .HasColumnType("varchar(3)");
+
+                    b.Property<int?>("MDFe_TipoEmirssor")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NFE_Ambiente")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NFE_Layout")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NFE_Serie")
+                        .HasColumnType("varchar(2)");
+
+                    b.Property<string>("NFE_VersaoEmissor")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("NomeFantasia")
+                        .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.Property<int>("RegimeTributario")
+                    b.Property<int?>("NuvemFiscal_AmbienteWebService")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NuvemFiscal_Certificado")
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<bool>("NuvemFiscal_Usar")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PathLogomarca")
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int?>("RegimeTributario")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Sped_TipoGeracaoInventario")
                         .HasColumnType("int");
 
                     b.Property<string>("Telefone")
@@ -130,8 +162,6 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("End_CidadeId");
 
                     b.ToTable("Empresas");
                 });
@@ -165,219 +195,219 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9616a0cc-5e55-47ce-b473-615b6fda6929"),
+                            Id = new Guid("971c14e6-6903-4467-8794-4fcc17891694"),
                             Codigo = "AC",
                             Nome = "Acre",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(5995)
                         },
                         new
                         {
-                            Id = new Guid("ea159fab-1f24-4735-8060-a7bc80bfaf04"),
+                            Id = new Guid("932903c0-c73a-490f-b8b5-e4ef13b73c1f"),
                             Codigo = "AL",
                             Nome = "Alagoas",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6058)
                         },
                         new
                         {
-                            Id = new Guid("783d76e1-0ef0-4f48-867a-1b9b464df5e9"),
+                            Id = new Guid("ee65945d-19f7-4d25-80d9-aea6ba22fc41"),
                             Codigo = "AP",
                             Nome = "Amapá",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6062)
                         },
                         new
                         {
-                            Id = new Guid("cadebc30-4f17-4dac-b46a-0c572c7e04fc"),
+                            Id = new Guid("6d70dce6-75ff-4c4b-a16b-0b80e036e30f"),
                             Codigo = "AM",
                             Nome = "Amazonas",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6067)
                         },
                         new
                         {
-                            Id = new Guid("d747d9c2-047e-4561-9676-54fa0fb95ad3"),
+                            Id = new Guid("12b4bad9-6dbf-4ced-9c51-02252506fca4"),
                             Codigo = "BA",
                             Nome = "Bahia",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6091)
                         },
                         new
                         {
-                            Id = new Guid("7c13c965-8e97-4aad-a92a-44862152857c"),
+                            Id = new Guid("227b9123-fd38-4faa-b73e-e582b7b5fe4a"),
                             Codigo = "CE",
                             Nome = "Ceará",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6096)
                         },
                         new
                         {
-                            Id = new Guid("77dfc781-f790-4587-99bd-087118bcc474"),
+                            Id = new Guid("60559bf8-ab2c-47e3-bc73-165e86e66091"),
                             Codigo = "DF",
                             Nome = "Distrito Federal",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6100)
                         },
                         new
                         {
-                            Id = new Guid("02e96beb-cb98-4a08-bcd9-df018cd3bd7b"),
+                            Id = new Guid("d4f6c75d-8ac3-4142-b09b-49719ea628b6"),
                             Codigo = "ES",
                             Nome = "Espirito Santo",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6104)
                         },
                         new
                         {
-                            Id = new Guid("9037e387-2eb4-40a5-bd99-b22968dffe17"),
+                            Id = new Guid("1694ed05-6ff5-4c4f-aa86-04446e664fbb"),
                             Codigo = "GO",
                             Nome = "Goias",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6108)
                         },
                         new
                         {
-                            Id = new Guid("8ba2a165-3a52-4518-99e2-a808925b9228"),
+                            Id = new Guid("51c8bbd0-fede-4e2b-9855-845320a79906"),
                             Codigo = "MA",
                             Nome = "Maranhão",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6113)
                         },
                         new
                         {
-                            Id = new Guid("9ec8e867-4304-46e4-9699-6b86dbc07e57"),
+                            Id = new Guid("9e620a8d-f63a-4ce8-a7dc-421601baac14"),
                             Codigo = "MS",
                             Nome = "Mato Grosso do Sul",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6116)
                         },
                         new
                         {
-                            Id = new Guid("781c2f81-bc6a-4845-944c-61dc6df18bee"),
+                            Id = new Guid("7843f65a-da06-45a4-9a1e-7f9a42869c3c"),
                             Codigo = "MT",
                             Nome = "Mato Grosso",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6120)
                         },
                         new
                         {
-                            Id = new Guid("d5026560-d966-4cf7-a6e0-1331b23d90b2"),
+                            Id = new Guid("1ff917d9-a137-4f46-8112-889aa97b5a38"),
                             Codigo = "MG",
                             Nome = "Minas Gerais",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6127)
                         },
                         new
                         {
-                            Id = new Guid("4a4aac65-e2c3-44e2-aa5a-9f33596608a8"),
+                            Id = new Guid("5b72ffe2-f24c-4f38-af3e-76e0b629c949"),
                             Codigo = "PA",
                             Nome = "Pará",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6131)
                         },
                         new
                         {
-                            Id = new Guid("30793823-a5f7-433a-9666-16ca4618705d"),
+                            Id = new Guid("5ef8cb03-6b3e-4b81-b9e3-fd858715a172"),
                             Codigo = "PB",
                             Nome = "Paraíba",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6135)
                         },
                         new
                         {
-                            Id = new Guid("ddc62734-e8a3-4a0e-b320-e04857c68e3e"),
+                            Id = new Guid("db096a78-9151-4dd1-81d6-94d902425fe3"),
                             Codigo = "PR",
                             Nome = "Paraná",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6138)
                         },
                         new
                         {
-                            Id = new Guid("5faac871-d3e6-4a58-9746-29a11d8ddfe4"),
+                            Id = new Guid("88213846-705a-408b-97d1-0d2bfca2d40d"),
                             Codigo = "PE",
                             Nome = "Pernambuco",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6141)
                         },
                         new
                         {
-                            Id = new Guid("61e04229-6a43-481a-9050-cf8eaded6210"),
+                            Id = new Guid("e121afce-f11f-4361-b046-75ecd173dca0"),
                             Codigo = "PI",
                             Nome = "Piauí",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6146)
                         },
                         new
                         {
-                            Id = new Guid("69dbd44d-330b-449e-bcf5-63de519571cf"),
+                            Id = new Guid("a4e895e8-d411-4944-992c-a6871293da1c"),
                             Codigo = "RJ",
                             Nome = "Rio de Janeiro",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6149)
                         },
                         new
                         {
-                            Id = new Guid("e43ce966-e63e-4446-bcb8-6b793aab1cbe"),
+                            Id = new Guid("3c0b3730-a2ec-4ec9-8f51-df7b13c1cdee"),
                             Codigo = "RN",
                             Nome = "Rio Grande do Norte",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6152)
                         },
                         new
                         {
-                            Id = new Guid("e5578c22-b5f5-4c3c-8a23-d95c202e213c"),
+                            Id = new Guid("6ffdec0d-bb88-4380-b15f-b12fff160733"),
                             Codigo = "RS",
                             Nome = "Rio Grande do Sul",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6159)
                         },
                         new
                         {
-                            Id = new Guid("93cd8035-83ea-4451-9003-21f03c2a79e3"),
+                            Id = new Guid("f5902f8c-da79-4b99-b121-1642643ef2e0"),
                             Codigo = "RO",
                             Nome = "Rondônia",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6162)
                         },
                         new
                         {
-                            Id = new Guid("bd258451-f46e-4de7-a7e2-91040b7340e5"),
+                            Id = new Guid("eeebc2b4-1c83-4725-987a-ca66e09cb0a3"),
                             Codigo = "RR",
                             Nome = "Roraima",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6166)
                         },
                         new
                         {
-                            Id = new Guid("f4e044e4-8709-4eab-bb7c-e9d2c5765298"),
+                            Id = new Guid("dade771b-ab82-4c3a-97a2-f6a332c736d5"),
                             Codigo = "SC",
                             Nome = "Santa Catarina",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6169)
                         },
                         new
                         {
-                            Id = new Guid("27f89ec5-da57-4e0d-a354-8d5c46c65c8a"),
+                            Id = new Guid("18abf346-ad59-47e7-8c73-f9e4d9afa17b"),
                             Codigo = "SP",
                             Nome = "São Paulo",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6172)
                         },
                         new
                         {
-                            Id = new Guid("0e1aaf33-b3c3-4f0f-9afd-7bb6b1ad00c4"),
+                            Id = new Guid("265a5322-92c0-49bf-b7c8-77169fe7f7d8"),
                             Codigo = "SE",
                             Nome = "Sergipe",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6175)
                         },
                         new
                         {
-                            Id = new Guid("5d1591a2-72f3-45be-afd7-752af8199c4b"),
+                            Id = new Guid("3c32ea2c-9026-4caa-b759-e02f18fd71eb"),
                             Codigo = "EX",
                             Nome = "Exterior",
-                            PaisId = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PaisId = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(6179)
                         });
                 });
 
@@ -433,6 +463,53 @@ namespace SisCom.Infraestrutura.Migrations
                     b.ToTable("Fabricantes");
                 });
 
+            modelBuilder.Entity("SisCom.Entidade.Modelos.Funcionario", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("AcessoFinanceiro")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("AcessoFiscal")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Administrador")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Desativado")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Funcionarios");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("da27e6d8-a881-4ccc-8327-7706124fb272"),
+                            AcessoFinanceiro = true,
+                            AcessoFiscal = true,
+                            Administrador = true,
+                            Desativado = true,
+                            Nome = "Administrador",
+                            Senha = "1234",
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 781, DateTimeKind.Local).AddTicks(9151)
+                        });
+                });
+
             modelBuilder.Entity("SisCom.Entidade.Modelos.GrupoCFOP", b =>
                 {
                     b.Property<Guid>("Id")
@@ -459,51 +536,51 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("29088a5e-44dd-47cd-903f-1be74dc27e98"),
+                            Id = new Guid("38c5afbb-f5ce-49d1-8732-1f2062040ab4"),
                             Nome = "1.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO ESTADO",
                             TipoOperacaoCFOP = 1,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(482)
                         },
                         new
                         {
-                            Id = new Guid("48283b6d-4630-4918-a2db-8661e24757e4"),
+                            Id = new Guid("3b5e76c2-252e-4c8b-b0ae-f4d8619cc9b7"),
                             Nome = "2.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DE OUTROS ESTADOS",
                             TipoOperacaoCFOP = 2,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(497)
                         },
                         new
                         {
-                            Id = new Guid("a95d2d30-6f3a-49a3-af8e-a68347e79057"),
+                            Id = new Guid("7e5e23da-1b3b-40d3-90cf-9802a1da4559"),
                             Nome = "3.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO EXTERIOR",
                             TipoOperacaoCFOP = 3,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(501)
                         },
                         new
                         {
-                            Id = new Guid("9f2ddede-b9de-43f1-afd7-047743058bc9"),
+                            Id = new Guid("97b64ec3-6c73-4daa-b83d-c7f3b8e8755f"),
                             Nome = "5.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O ESTADO",
                             TipoOperacaoCFOP = 5,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(504)
                         },
                         new
                         {
-                            Id = new Guid("eace3cfc-9844-42b2-aef0-9bc0a4a4fc3e"),
+                            Id = new Guid("95a12925-2294-46da-a60d-772fb43603a8"),
                             Nome = "6.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA OUTROS ESTADOS",
                             TipoOperacaoCFOP = 6,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(508)
                         },
                         new
                         {
-                            Id = new Guid("09600943-ca75-4ac9-b9df-11d7804828ff"),
+                            Id = new Guid("a8c97764-ff04-4738-9e99-81905fed5d8b"),
                             Nome = "7.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O EXTERIOR",
                             TipoOperacaoCFOP = 7,
                             TipoOperacaoCFOPId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(512)
                         });
                 });
 
@@ -563,7 +640,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GrupoNaturezaReceita_CTS_PIS_COFINS");
+                    b.ToTable("GrupoNaturezaReceita_CTS_PIS_COFINSs");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Mercadoria", b =>
@@ -575,9 +652,10 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<bool>("Ativado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Codigo")
-                        .IsRequired()
-                        .HasColumnType("varchar(10)");
+                    b.Property<int>("Codigo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CodigoBarra")
                         .HasColumnType("varchar(50)");
@@ -585,7 +663,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("CodigoFabricante")
                         .HasColumnType("varchar(50)");
 
-                    b.Property<DateTime>("Estoque_AlteracaoPreco")
+                    b.Property<DateTime?>("Estoque_AlteracaoPreco")
                         .HasColumnType("datetime2");
 
                     b.Property<double>("Estoque_PesoBruto")
@@ -611,30 +689,33 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("float")
                         .HasDefaultValue(0.0);
 
-                    b.Property<double>("Estoque_TributacaoNFCe_AliquotaICMS")
+                    b.Property<decimal>("Estoque_TributacaoNFCe_AliquotaICMS")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<Guid>("Estoque_TributacaoNFCe_TabelaCFOPId")
+                    b.Property<Guid?>("Estoque_TributacaoNFCe_TabelaCFOPId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Estoque_TributacaoNFCe_TabelaSituacaoTributariaNFCeId")
+                    b.Property<Guid?>("Estoque_TributacaoNFCe_TabelaSituacaoTributariaNFCeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Estoque_TributacaoNFCe_TipoServicoFiscalId")
+                    b.Property<Guid?>("Estoque_TributacaoNFCe_TipoServicoFiscalId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Estoque_TributacaoNFCe_TipoServicoMunicipal")
                         .HasColumnType("varchar(10)");
 
-                    b.Property<DateTime>("Estoque_UltimaEntrada")
+                    b.Property<DateTime?>("Estoque_UltimaEntrada")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Estoque_UnidadeId")
+                    b.Property<Guid?>("Estoque_UnidadeMedidaId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("FabricanteId")
+                    b.Property<Guid?>("Estoque_UnidadeMedidaMedidaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("FabricanteId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Fiscal_CodigoAnvisa")
@@ -643,174 +724,174 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("Fiscal_InformacaoAdicional")
                         .HasColumnType("varchar(200)");
 
-                    b.Property<double>("Fiscal_NFE_COFINS_Aliquota")
+                    b.Property<decimal>("Fiscal_NFE_COFINS_Aliquota")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_NFE_IPI_Aliquota")
+                    b.Property<decimal>("Fiscal_NFE_IPI_Aliquota")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_NFE_PIS_Aliquota")
+                    b.Property<decimal>("Fiscal_NFE_PIS_Aliquota")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<Guid>("Fiscal_NFE_TabelaCST_COFINSId")
+                    b.Property<Guid?>("Fiscal_NFE_TabelaCST_COFINSId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_NFE_TabelaCST_IPIId")
+                    b.Property<Guid?>("Fiscal_NFE_TabelaCST_IPIId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_NFE_TabelaCST_PISId")
+                    b.Property<Guid?>("Fiscal_NFE_TabelaCST_PISId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Fiscal_NFS_ICMSST_Aliquota")
+                    b.Property<decimal>("Fiscal_NFS_ICMSST_Aliquota")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_NFS_ICMSST_ReducaoBase")
+                    b.Property<decimal>("Fiscal_NFS_ICMSST_ReducaoBase")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<Guid>("Fiscal_NFS_ICMSST_TabelaModalidadeDeterminacaoBCICMSId")
+                    b.Property<Guid?>("Fiscal_NFS_ICMSST_TabelaModalidadeDeterminacaoBCICMSId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Fiscal_NFS_ICMSST_ValorAdicional")
+                    b.Property<decimal>("Fiscal_NFS_ICMSST_ValorAdicional")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_NFS_ICMS_Deferimento")
+                    b.Property<decimal>("Fiscal_NFS_ICMS_Deferimento")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_NFS_ICMS_ReducaoBase")
+                    b.Property<decimal>("Fiscal_NFS_ICMS_ReducaoBase")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<Guid>("Fiscal_NFS_ICMS_TabelaModalidadeDeterminacaoBCICMSId")
+                    b.Property<Guid?>("Fiscal_NFS_ICMS_TabelaModalidadeDeterminacaoBCICMSId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_NFS_ICMS_TabelaMotivoDesoneracaoICMSId")
+                    b.Property<Guid?>("Fiscal_NFS_ICMS_TabelaMotivoDesoneracaoICMSId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Fiscal_NFS_ICMS_ValorAdicional")
+                    b.Property<decimal>("Fiscal_NFS_ICMS_ValorAdicional")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<Guid>("Fiscal_NFS_IPI_TabelaCST_IPIId")
+                    b.Property<Guid?>("Fiscal_NFS_IPI_TabelaCST_IPIId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_NFS_IPI_TabelaClasseEnquadramentoIPIId")
+                    b.Property<Guid?>("Fiscal_NFS_IPI_TabelaClasseEnquadramentoIPIId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_NFS_IPI_TabelaCodigoEnquadramentoIPIId")
+                    b.Property<Guid?>("Fiscal_NFS_IPI_TabelaCodigoEnquadramentoIPIId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Fiscal_NFS_IPI_ValorAliquota")
+                    b.Property<decimal>("Fiscal_NFS_IPI_ValorAliquota")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_NFS_PISCOFINS_COFINS_ValorAliquota")
+                    b.Property<decimal>("Fiscal_NFS_PISCOFINS_COFINS_ValorAliquota")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<Guid>("Fiscal_NFS_PISCOFINS_GrupoNaturezaReceitaId")
+                    b.Property<Guid?>("Fiscal_NFS_PISCOFINS_GrupoNaturezaReceitaId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_NFS_PISCOFINS_PIS_TabelaCSTCOFINSId")
+                    b.Property<Guid?>("Fiscal_NFS_PISCOFINS_PIS_TabelaCSTCOFINSId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_NFS_PISCOFINS_PIS_TabelaCSTPISId")
+                    b.Property<Guid?>("Fiscal_NFS_PISCOFINS_PIS_TabelaCSTPISId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Fiscal_NFS_PISCOFINS_PIS_ValorAliquota")
+                    b.Property<decimal>("Fiscal_NFS_PISCOFINS_PIS_ValorAliquota")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<Guid>("Fiscal_NFS_PISCOFINS_TabelaNaturezaReceitaId")
+                    b.Property<Guid?>("Fiscal_NFS_PISCOFINS_TabelaNaturezaReceitaId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Fiscal_NFS_TributosEstaduais")
+                    b.Property<decimal>("Fiscal_NFS_TributosEstaduais")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_NFS_TributosFederais")
+                    b.Property<decimal>("Fiscal_NFS_TributosFederais")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_NFS_TributosMunicipais")
+                    b.Property<decimal>("Fiscal_NFS_TributosMunicipais")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_NFS_TributosTotal")
+                    b.Property<decimal>("Fiscal_NFS_TributosTotal")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_NFS_ValorTributosTotal")
+                    b.Property<decimal>("Fiscal_NFS_ValorTributosTotal")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_OutrosNVE")
+                    b.Property<decimal>("Fiscal_OutrosNVE")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<double>("Fiscal_OutrosPMC")
+                    b.Property<decimal>("Fiscal_OutrosPMC")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<Guid>("Fiscal_SPED_TabelaSpedCodigoGeneroId")
+                    b.Property<Guid?>("Fiscal_SPED_TabelaSpedCodigoGeneroId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_SPED_TabelaSpedInformacaoAdicionalItemId")
+                    b.Property<Guid?>("Fiscal_SPED_TabelaSpedInformacaoAdicionalItemId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_SPED_TabelaSpedTipoItemId")
+                    b.Property<Guid?>("Fiscal_SPED_TabelaSpedTipoItemId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_TabelaANPId")
+                    b.Property<Guid?>("Fiscal_TabelaANPId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_TabelaBeneficioSPEDId")
+                    b.Property<Guid?>("Fiscal_TabelaBeneficioSPEDId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_TabelaCESTId")
+                    b.Property<Guid?>("Fiscal_TabelaCESTId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_TabelaCST_CSOSNId")
+                    b.Property<Guid?>("Fiscal_TabelaCST_CSOSNId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_TabelaNCMId")
+                    b.Property<Guid?>("Fiscal_TabelaNCMId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_TabelaOrigemMercadoriaServicoId")
+                    b.Property<Guid?>("Fiscal_TabelaOrigemMercadoriaServicoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_TipoMercadoriaId")
+                    b.Property<Guid?>("Fiscal_TipoMercadoriaId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Fiscal_VinculoFiscalId")
+                    b.Property<Guid?>("Fiscal_VinculoFiscalId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("FornecedorId")
+                    b.Property<Guid?>("FornecedorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FotoEspecificacao_Especificacao")
@@ -819,17 +900,13 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<byte[]>("FotoEspecificacao_Imagem")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("FotoEspecificacao_Imagem_ContentType")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
                     b.Property<string>("FotoEspecificacao_URL")
                         .HasColumnType("varchar(200)");
 
                     b.Property<bool>("FotoEspecificacao_UsarFoto")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("GrupoMercadoriaId")
+                    b.Property<Guid?>("GrupoMercadoriaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("NaoControlarEstoque")
@@ -842,8 +919,8 @@ namespace SisCom.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.Property<int>("Observacao")
-                        .HasColumnType("int");
+                    b.Property<string>("Observacao")
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Preco_CalculoPrecificacao")
                         .ValueGeneratedOnAdd()
@@ -986,7 +1063,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<int>("Producao_Configuracao_ValidadeDias")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("SubGrupoMercadoriaId")
+                    b.Property<Guid?>("SubGrupoMercadoriaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UltimaAtualizacao")
@@ -1000,7 +1077,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.HasIndex("Estoque_TributacaoNFCe_TipoServicoFiscalId");
 
-                    b.HasIndex("Estoque_UnidadeId");
+                    b.HasIndex("Estoque_UnidadeMedidaMedidaId");
 
                     b.HasIndex("FabricanteId");
 
@@ -1112,9 +1189,9 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ea6ae817-b291-4814-a845-de7c37f53f82"),
+                            Id = new Guid("2928f9c6-cbe6-4417-bbf9-bd525bfdf4c9"),
                             Nome = "Brasil",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 778, DateTimeKind.Local).AddTicks(9098)
                         });
                 });
 
@@ -1128,35 +1205,31 @@ namespace SisCom.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(14)");
 
+                    b.Property<int>("Codigo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DatCadastro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataNascimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Desativado")
+                        .HasColumnType("bit");
+
                     b.Property<string>("EMail")
                         .HasColumnType("varchar(100)");
-
-                    b.Property<string>("End_Bairro")
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<string>("End_CEP")
-                        .HasColumnType("varchar(8)");
-
-                    b.Property<Guid?>("End_CidadeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("End_Logradouro")
-                        .HasColumnType("varchar(60)");
-
-                    b.Property<string>("End_Numero")
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("End_PontoReferencia")
-                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("FAX")
                         .HasColumnType("varchar(20)");
 
-                    b.Property<bool>("Fabricante")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("Fornecedor")
                         .HasColumnType("bit");
+
+                    b.Property<byte[]>("Imagem")
+                        .HasColumnType("image");
 
                     b.Property<string>("InscricaoEstadual")
                         .HasColumnType("varchar(15)");
@@ -1171,14 +1244,23 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("NomeContato")
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("NomePopular")
+                    b.Property<string>("Observacoes")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RG")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("RazaoSocial")
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Observacoes")
-                        .HasColumnType("varchar(100)");
+                    b.Property<int?>("RegimeTributario")
+                        .HasColumnType("int");
 
                     b.Property<string>("Representante")
                         .HasColumnType("varchar(100)");
+
+                    b.Property<bool>("SelecionarEtiqueta")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Site")
                         .HasColumnType("varchar(100)");
@@ -1186,11 +1268,23 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("Telefone")
                         .HasColumnType("varchar(20)");
 
+                    b.Property<Guid?>("TipoClienteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("TipoContribuinte")
+                        .HasColumnType("int");
+
                     b.Property<int>("TipoPessoa")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("UsarFoto")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("VendedorId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -1199,7 +1293,9 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasDatabaseName("idx_pessoas_CNPJ_CPF")
                         .HasFillFactor(80);
 
-                    b.HasIndex("End_CidadeId");
+                    b.HasIndex("TipoClienteId");
+
+                    b.HasIndex("VendedorId");
 
                     b.ToTable("Pessoas");
                 });
@@ -1444,129 +1540,129 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e8b02720-3ab5-4cf4-91ef-100d5564f0e3"),
+                            Id = new Guid("bdc5345a-f3f9-4629-abbc-87640f6173dd"),
                             Codigo = "00",
                             Descricao = "Entrada com Recuperação de Crédito",
                             DestacarIPI = true,
                             EntradaSaida = 1,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2518)
                         },
                         new
                         {
-                            Id = new Guid("beeb5abc-570b-4059-8c69-924d210bcb8a"),
+                            Id = new Guid("68382e40-33b0-4630-a686-eb8f4d72b570"),
                             Codigo = "01",
                             Descricao = "Entrada Tributável com Alíquota Zero",
                             DestacarIPI = false,
                             EntradaSaida = 1,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2531)
                         },
                         new
                         {
-                            Id = new Guid("f5a83bdc-28e9-42da-8ff8-a23745aa4fc8"),
+                            Id = new Guid("77b2fc77-176e-4186-a2b7-9b1606093500"),
                             Codigo = "02",
                             Descricao = "Entrada Isenta",
                             DestacarIPI = false,
                             EntradaSaida = 1,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2542)
                         },
                         new
                         {
-                            Id = new Guid("602b93c7-cb76-427f-8d43-fa95734f5825"),
+                            Id = new Guid("36ebcacc-7a28-430c-92cc-5a7525155ae7"),
                             Codigo = "03",
                             Descricao = "Entrada Não-Tributada",
                             DestacarIPI = false,
                             EntradaSaida = 1,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2546)
                         },
                         new
                         {
-                            Id = new Guid("d30a07ec-712f-48f4-9fbd-41ff4c0edc3f"),
+                            Id = new Guid("aa7847ec-0036-4d04-a8fc-d2f8e954179d"),
                             Codigo = "04",
                             Descricao = "Entrada Imune",
                             DestacarIPI = false,
                             EntradaSaida = 1,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2549)
                         },
                         new
                         {
-                            Id = new Guid("8c4cc729-2060-4145-9076-013f11a13839"),
+                            Id = new Guid("95c06bbb-7201-4e86-8c87-8830eff579f5"),
                             Codigo = "05",
                             Descricao = "Entrada com Suspensão",
                             DestacarIPI = false,
                             EntradaSaida = 1,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2553)
                         },
                         new
                         {
-                            Id = new Guid("cb1f9af0-5732-4d99-b150-4303cd6d279e"),
+                            Id = new Guid("2ba13d85-3c88-4497-b36e-135e30ed5021"),
                             Codigo = "49",
                             Descricao = "Outras Entradas",
                             DestacarIPI = true,
                             EntradaSaida = 1,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2556)
                         },
                         new
                         {
-                            Id = new Guid("cd072319-87e9-4ad0-adc4-0a6f699d2f3c"),
+                            Id = new Guid("57e634a1-4f5f-4541-8b99-b3d35847213d"),
                             Codigo = "50",
                             Descricao = "Saída Tributada",
                             DestacarIPI = true,
                             EntradaSaida = 2,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2560)
                         },
                         new
                         {
-                            Id = new Guid("689fc616-e300-4e37-b96e-0939d9b53b84"),
+                            Id = new Guid("e70d1cfe-5b5d-43af-b492-1dceb780942b"),
                             Codigo = "51",
                             Descricao = "Saída Tributável com Alíquota Zero",
                             DestacarIPI = false,
                             EntradaSaida = 2,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2564)
                         },
                         new
                         {
-                            Id = new Guid("4e7d10d6-4f7b-414e-8f90-00c7daf0b9d8"),
+                            Id = new Guid("c56c4aea-a839-4916-8692-c44693f7408e"),
                             Codigo = "52",
                             Descricao = "Saída Isenta",
                             DestacarIPI = false,
                             EntradaSaida = 2,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2568)
                         },
                         new
                         {
-                            Id = new Guid("563077dd-5009-4d93-950a-a3e159e20b31"),
+                            Id = new Guid("7464b751-c514-48b4-b71c-da1d276a0520"),
                             Codigo = "53",
                             Descricao = "Saída Não-Tributada",
                             DestacarIPI = false,
                             EntradaSaida = 2,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2574)
                         },
                         new
                         {
-                            Id = new Guid("6da9f8e2-21b9-4583-8819-908880649c6c"),
+                            Id = new Guid("92c5d0cc-2d7b-46dc-8e73-bffd9f28272c"),
                             Codigo = "54",
                             Descricao = "Saída Imune",
                             DestacarIPI = false,
                             EntradaSaida = 2,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2577)
                         },
                         new
                         {
-                            Id = new Guid("a27a29aa-f9d8-4113-849b-05b6d3b8a185"),
+                            Id = new Guid("27d5e0d8-bff8-4af0-936a-3fa966066cb4"),
                             Codigo = "55",
                             Descricao = "Saída com Suspensão",
                             DestacarIPI = false,
                             EntradaSaida = 2,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2580)
                         },
                         new
                         {
-                            Id = new Guid("e7b56194-81c8-465d-bde3-9ef4ad16e9f6"),
+                            Id = new Guid("ce168fc0-7539-4b0d-b476-18c4b0b1ad60"),
                             Codigo = "99",
                             Descricao = "Outras Saídas",
                             DestacarIPI = true,
                             EntradaSaida = 2,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(2583)
                         });
                 });
 
@@ -1603,331 +1699,331 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9dc9a904-b000-4399-8d05-eb7b05b31fdb"),
+                            Id = new Guid("ddf89583-e3aa-460e-9922-b0487000d89c"),
                             Codigo = "01",
                             Descricao = "Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo))",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(4736),
                             UsaNaEntrada = false,
                             UsaNaSaida = true
                         },
                         new
                         {
-                            Id = new Guid("62fb953b-59d5-46e4-93e0-452c73a93d0f"),
+                            Id = new Guid("d3e9212d-55dd-44a9-9cdf-86c773379b38"),
                             Codigo = "02",
                             Descricao = "Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada))",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(4754),
                             UsaNaEntrada = false,
                             UsaNaSaida = true
                         },
                         new
                         {
-                            Id = new Guid("4a060ac5-323a-45b5-b31e-cf6451bf8927"),
+                            Id = new Guid("2a7212d1-ec9a-41f3-bf8a-d785238e432d"),
                             Codigo = "03",
                             Descricao = "Operação Tributável (base de cálculo = quantidade vendida x alíquota por unidade de produto)",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(4758),
                             UsaNaEntrada = false,
                             UsaNaSaida = true
                         },
                         new
                         {
-                            Id = new Guid("ab72c8dd-0de3-4fc7-bd4e-e44b728b0087"),
+                            Id = new Guid("d2fc723b-c790-42f7-94b5-07ef093dbbe7"),
                             Codigo = "04",
                             Descricao = "Operação Tributável (tributação monofásica (alíquota zero))",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(4761),
                             UsaNaEntrada = false,
                             UsaNaSaida = true
                         },
                         new
                         {
-                            Id = new Guid("069ec88d-7e64-4f0a-974f-a6cf58d005aa"),
+                            Id = new Guid("4a30dcbd-6b88-4749-ab73-cd7f19c2a1c4"),
                             Codigo = "05",
                             Descricao = "Operação Tributável por Substituição Tributária",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(4771),
                             UsaNaEntrada = false,
                             UsaNaSaida = true
                         },
                         new
                         {
-                            Id = new Guid("9b2c6396-2b15-4f67-9774-7db6933d9eb1"),
+                            Id = new Guid("d2cb5bc7-6c81-4725-9851-e8b24852841a"),
                             Codigo = "06",
                             Descricao = "Operação Tributável (alíquota zero)",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(4775),
                             UsaNaEntrada = false,
                             UsaNaSaida = true
                         },
                         new
                         {
-                            Id = new Guid("3f6337a9-ece6-4b10-865a-205418f7dab9"),
+                            Id = new Guid("3664428c-d082-420f-8bb2-b8edbfc7a694"),
                             Codigo = "07",
                             Descricao = "Operação Isenta da Contribuição",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(4778),
                             UsaNaEntrada = false,
                             UsaNaSaida = true
                         },
                         new
                         {
-                            Id = new Guid("64a8843d-4753-430f-a34a-bb03988ef8d7"),
+                            Id = new Guid("07522bc4-016a-48f8-9104-721e9f837288"),
                             Codigo = "08",
                             Descricao = "Operação Sem Incidência da Contribuição",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(4782),
                             UsaNaEntrada = false,
                             UsaNaSaida = true
                         },
                         new
                         {
-                            Id = new Guid("1434aaea-4dd6-4a6c-a034-a6e5f4bde6a6"),
+                            Id = new Guid("9d20dc73-49fe-431d-ae6d-f6380225cfba"),
                             Codigo = "09",
                             Descricao = "Operação com Suspensão da Contribuição",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(4786),
                             UsaNaEntrada = false,
                             UsaNaSaida = true
                         },
                         new
                         {
-                            Id = new Guid("3297a71f-d8d5-44ec-842f-b7221bacd0b2"),
+                            Id = new Guid("c1528d4f-37cb-4c2b-b0b3-e750bef2933e"),
                             Codigo = "49",
                             Descricao = "Outras Operações de Saída",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(4790),
                             UsaNaEntrada = false,
                             UsaNaSaida = true
                         },
                         new
                         {
-                            Id = new Guid("4dc0569d-356d-4c0d-a733-6ce1aaf3e881"),
+                            Id = new Guid("ce87c0f3-efab-491a-83bf-f865b4776a4c"),
                             Codigo = "50",
                             Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5151),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("20c16dfe-5c3b-44d1-b9b1-767bb1145fc0"),
+                            Id = new Guid("891f830f-cdb6-45e9-ba6d-d122e701ca9d"),
                             Codigo = "51",
                             Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5162),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("ed26bbf9-9413-47a3-83ee-827802f6435e"),
+                            Id = new Guid("4185f7ee-ec4a-40b6-b7b2-b0f2605b0d61"),
                             Codigo = "52",
                             Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5171),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("a1f78cbf-9fa4-4809-bc44-9a85a2980332"),
+                            Id = new Guid("ef961f9f-ef19-40a9-adfd-dead6da15713"),
                             Codigo = "53",
                             Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não - Tributadas no Mercado Interno",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5175),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("a06107ee-941c-4ed5-b655-c3deba5c5b17"),
+                            Id = new Guid("bb4b7a54-f23d-4852-a495-05f40300c678"),
                             Codigo = "54",
                             Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5178),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("532d1324-623b-427d-9cc4-3ae7c1739788"),
+                            Id = new Guid("067b343b-f84d-4d77-b775-8999670edd60"),
                             Codigo = "55",
                             Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Não Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5182),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("bed9db31-d4d8-4b72-8729-d80d85b058a8"),
+                            Id = new Guid("d6580629-a5c0-42e2-95f6-2d66609a1827"),
                             Codigo = "56",
                             Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não - Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5185),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("1ecf9d9f-66a0-4400-9b56-25c702475dd5"),
+                            Id = new Guid("cd8e68c5-f98f-450f-9d5f-8b1ba75272e2"),
                             Codigo = "60",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5189),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("58b0b3f1-74bc-4407-ada3-c06b40684423"),
+                            Id = new Guid("742f4257-ea04-43cd-9f8f-11a202a35494"),
                             Codigo = "61",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita Não - Tributada no Mercado Interno",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5192),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("bf6970b9-52d7-4c53-a024-c0c5fafd2caa"),
+                            Id = new Guid("dc50d618-7295-4fe6-9d74-b2118cd9e2a7"),
                             Codigo = "62",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5195),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("c882c2af-a565-42df-8b96-fca693a877d2"),
+                            Id = new Guid("6dbd631d-f505-461d-a097-f45651bae8b6"),
                             Codigo = "63",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5201),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("94461050-8a45-472b-af8d-78999391b57a"),
+                            Id = new Guid("ef9c920c-47a5-4814-9fd1-a1747724dd30"),
                             Codigo = "64",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5205),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("e478d8bf-294a-4c34-a375-7d9bdbaedfbd"),
+                            Id = new Guid("7ddb8f0f-5c53-41f1-8cfb-e20f280eb99e"),
                             Codigo = "65",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5208),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("33b1bcbc-4223-433a-9c49-e8e3ded1acdb"),
+                            Id = new Guid("1f3f4c42-2c63-4e70-bc50-8987d319af76"),
                             Codigo = "66",
                             Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5211),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("74d70ee3-6ea6-4a28-aec7-d687f211aad5"),
+                            Id = new Guid("afb18ec9-5e18-4320-a09c-8a6df17dfa52"),
                             Codigo = "67",
                             Descricao = "Crédito Presumido -Outras Operações",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5215),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("da82e943-d00d-437e-8091-604f07cf1e7f"),
+                            Id = new Guid("27f2b29c-41cb-40e4-a06e-fb3f8ac2c7e0"),
                             Codigo = "70",
                             Descricao = "Operação de Aquisição sem Direito a Crédito",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5219),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("fd4b01a8-6004-464b-9669-17bac490d0e9"),
+                            Id = new Guid("5c70f295-8592-4d90-8d4c-de78a1c5223b"),
                             Codigo = "71",
                             Descricao = "Operação de Aquisição com Isenção",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5222),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("ba190994-8e03-4a54-a3a2-b52015f57916"),
+                            Id = new Guid("3ca50010-fb85-4cba-8d26-7fa2a38bfe6e"),
                             Codigo = "72",
                             Descricao = "Operação de Aquisição com Suspensão",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5225),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("d8c0faa3-c2e9-4276-9c0d-96e4935fbf37"),
+                            Id = new Guid("1fb2e2d3-63e8-43bc-a247-5e3b6ea96e00"),
                             Codigo = "73",
                             Descricao = "Operação de Aquisição a Alíquota Zero",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5231),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("067a178f-c4ac-4b97-a295-e649cee16504"),
+                            Id = new Guid("7b09eced-cf84-4a4a-9a0d-f5ac8a4bc0d5"),
                             Codigo = "74",
                             Descricao = "Operação de Aquisição sem Incidência da Contribuição",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5234),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("fe29b6e2-5f43-471c-8ff1-d35386cb24fc"),
+                            Id = new Guid("22b0550b-4225-4a7a-9076-a2f6ddd65877"),
                             Codigo = "75",
                             Descricao = "Operação de Aquisição por Substituição Tributária",
                             DestacarPIS_COFINS = false,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5237),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("aabf2def-1afa-44f6-8e16-01716f2b2cf0"),
+                            Id = new Guid("8813b358-a3b6-4a1a-83c4-141277f52761"),
                             Codigo = "98",
                             Descricao = "Outras Operações de Entrada",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5240),
                             UsaNaEntrada = true,
                             UsaNaSaida = false
                         },
                         new
                         {
-                            Id = new Guid("3aab7950-67bf-4e08-97e8-ac85b440091e"),
+                            Id = new Guid("8ecabc23-81a5-4d05-8520-1974edd37d58"),
                             Codigo = "99",
                             Descricao = "Outras Operações",
                             DestacarPIS_COFINS = true,
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(5244),
                             UsaNaEntrada = true,
                             UsaNaSaida = true
                         });
@@ -2066,9 +2162,11 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Codigo")
-                        .HasColumnType("varchar(100)");
+                        .IsRequired()
+                        .HasColumnType("char(5)");
 
                     b.Property<string>("Descricao")
+                        .IsRequired()
                         .HasColumnType("varchar(100)");
 
                     b.Property<Guid>("GrupoNaturezaReceita_CTS_PIS_COFINSId")
@@ -2081,7 +2179,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.HasIndex("GrupoNaturezaReceita_CTS_PIS_COFINSId");
 
-                    b.ToTable("TabelaNaturezaReceita_CTS_PIS_COFINS");
+                    b.ToTable("TabelaNaturezaReceita_CTS_PIS_COFINSs");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.TabelaOrigemMercadoriaServico", b =>
@@ -2130,31 +2228,31 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c53efb17-c0e8-4b77-8adf-6a84e712b1af"),
+                            Id = new Guid("080f047f-58f9-466a-8432-8effa2060d5d"),
                             Codigo = "01",
                             Descricao = "Normal(% TRIBUTADO)",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(6676)
                         },
                         new
                         {
-                            Id = new Guid("6aea67de-fb91-4afd-97cb-6373c2844acc"),
+                            Id = new Guid("71abf482-3029-459c-8875-45051ad96737"),
                             Codigo = "FF",
                             Descricao = "Substituição",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(6689)
                         },
                         new
                         {
-                            Id = new Guid("723e08dd-e36a-4542-9143-14b678991263"),
+                            Id = new Guid("49c7c66a-3dd6-4c0b-aa54-546d6a6b0d23"),
                             Codigo = "II",
                             Descricao = "Isento",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(6692)
                         },
                         new
                         {
-                            Id = new Guid("ba820c12-eb1d-4c76-9b39-9b23ce344222"),
+                            Id = new Guid("e38c6e00-f0fa-4e42-accd-ca1239b1f681"),
                             Codigo = "NN",
                             Descricao = "Não Incidente",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(6701)
                         });
                 });
 
@@ -2224,6 +2322,31 @@ namespace SisCom.Infraestrutura.Migrations
                     b.ToTable("TabelaSpedTipoItems");
                 });
 
+            modelBuilder.Entity("SisCom.Entidade.Modelos.TipoCliente", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoClientes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7188fcb0-c909-4bf7-b2be-b01fe25d7380"),
+                            Nome = "CONSUMIDOR",
+                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
             modelBuilder.Entity("SisCom.Entidade.Modelos.TipoMercadoria", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2243,27 +2366,27 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c585cae1-1e59-4230-b6e4-ec6be789a038"),
+                            Id = new Guid("6ac65b65-6003-41a2-be66-341d65603caa"),
                             Nome = "VEÍCULO",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(8794)
                         },
                         new
                         {
-                            Id = new Guid("1c0edc94-6bad-4ecc-a574-09079a27e594"),
+                            Id = new Guid("a060c353-8c9b-4d54-9b9b-8678ea14ea42"),
                             Nome = "COMBUSTÍVEL",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(8808)
                         },
                         new
                         {
-                            Id = new Guid("81be89af-18fd-4b66-9b56-e3760aa78459"),
+                            Id = new Guid("6ac17134-3dbd-4d23-92f2-5c752b79c5f4"),
                             Nome = "MEDICAMENTO",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(8811)
                         },
                         new
                         {
-                            Id = new Guid("80d06387-7d47-4061-8ed0-b446c914026f"),
+                            Id = new Guid("081d7a38-93ac-4b02-aad2-9f50cc783746"),
                             Nome = "ARMAMENTO",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 782, DateTimeKind.Local).AddTicks(8814)
                         });
                 });
 
@@ -2318,80 +2441,80 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("151ab54e-2001-4b93-8c6d-67b3f8a6aacd"),
+                            Id = new Guid("7e67de11-e681-4303-8b84-89dfb7470f6b"),
                             Codigo = "UND",
                             Nome = "Unidade",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(77)
                         },
                         new
                         {
-                            Id = new Guid("9b835b25-a62a-4ab5-aaa2-7b78a63aab74"),
+                            Id = new Guid("6c169b00-4128-4fd3-a89e-00a4b326ca5a"),
                             Codigo = "CXA",
                             Nome = "Caixa",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(90)
                         },
                         new
                         {
-                            Id = new Guid("e60e19b4-2e48-4411-914c-f0d2549b5627"),
+                            Id = new Guid("1ebbe3bf-e8a6-4a79-88fb-e30494a7ba0a"),
                             Codigo = "PCA",
                             Nome = "Peca",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(100)
                         },
                         new
                         {
-                            Id = new Guid("c9fa9eee-87c9-483d-b058-6fe87ac742c5"),
+                            Id = new Guid("f47935ed-4ab5-46a7-9a88-5fc48d75b4e6"),
                             Codigo = "MTR",
                             Nome = "Metro",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(103)
                         },
                         new
                         {
-                            Id = new Guid("6a23d044-473f-4368-b4da-df37200dc203"),
+                            Id = new Guid("24b41325-3be1-4a90-92c6-f8c3eebab236"),
                             Codigo = "KG",
                             Nome = "Kilograma",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(106)
                         },
                         new
                         {
-                            Id = new Guid("d71ea258-a580-4238-ab91-3d67a9b4e9e7"),
+                            Id = new Guid("16b18a3b-4ca5-4e17-aa5f-2456f8fa9819"),
                             Codigo = "LTR",
                             Nome = "Litro ",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(110)
                         },
                         new
                         {
-                            Id = new Guid("0ae878fa-5373-49d8-b47d-d18178c58f72"),
+                            Id = new Guid("3e234e39-c6ee-4b9d-b479-e911a06578fb"),
                             Codigo = "PCT",
                             Nome = "Pacote",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(113)
                         },
                         new
                         {
-                            Id = new Guid("3a6ea3c3-2215-4ef0-a649-719372e0ada3"),
+                            Id = new Guid("b5fa02aa-0165-462f-aa6f-8347380a205d"),
                             Codigo = "SCO",
                             Nome = "Saco",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(116)
                         },
                         new
                         {
-                            Id = new Guid("50f54727-42fe-4830-ac7c-db5bde27b72a"),
+                            Id = new Guid("f76c0b6c-c074-49e4-b4f4-2a938bfd732f"),
                             Codigo = "FRC",
                             Nome = "Frasco",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(120)
                         },
                         new
                         {
-                            Id = new Guid("f9820688-ba90-4a07-be82-b03f0b8a4dbc"),
+                            Id = new Guid("9db13ddc-5f9a-4f5e-b8f0-d0937ff69abe"),
                             Codigo = "GR",
                             Nome = "Grama",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(123)
                         },
                         new
                         {
-                            Id = new Guid("ac893d32-f53c-4482-86d3-77b8587d9525"),
+                            Id = new Guid("3142866a-d9cc-4ede-b07e-87829aeb0f14"),
                             Codigo = "FRD",
                             Nome = "Fardo",
-                            UltimaAtualizacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UltimaAtualizacao = new DateTime(2022, 3, 4, 19, 9, 33, 783, DateTimeKind.Local).AddTicks(128)
                         });
                 });
 
@@ -2429,11 +2552,57 @@ namespace SisCom.Infraestrutura.Migrations
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Empresa", b =>
                 {
-                    b.HasOne("SisCom.Entidade.Modelos.Cidade", "End_Cidade")
-                        .WithMany()
-                        .HasForeignKey("End_CidadeId");
+                    b.OwnsOne("SisCom.Entidade.Modelos.Endereco", "Endereco", b1 =>
+                        {
+                            b1.Property<Guid>("EmpresaId")
+                                .HasColumnType("uniqueidentifier");
 
-                    b.Navigation("End_Cidade");
+                            b1.Property<string>("End_Bairro")
+                                .HasMaxLength(60)
+                                .HasColumnType("varchar(60)")
+                                .HasColumnName("End_Bairro");
+
+                            b1.Property<string>("End_CEP")
+                                .HasMaxLength(8)
+                                .HasColumnType("varchar(8)")
+                                .HasColumnName("End_CEP");
+
+                            b1.Property<Guid?>("End_CidadeId")
+                                .HasColumnType("uniqueidentifier")
+                                .HasColumnName("End_CidadeId");
+
+                            b1.Property<string>("End_Logradouro")
+                                .HasMaxLength(60)
+                                .HasColumnType("varchar(60)")
+                                .HasColumnName("End_Logradouro");
+
+                            b1.Property<string>("End_Numero")
+                                .HasMaxLength(8)
+                                .HasColumnType("varchar(8)")
+                                .HasColumnName("End_Numero");
+
+                            b1.Property<string>("End_PontoReferencia")
+                                .HasMaxLength(200)
+                                .HasColumnType("varchar(200)")
+                                .HasColumnName("End_PontoReferencia");
+
+                            b1.HasKey("EmpresaId");
+
+                            b1.HasIndex("End_CidadeId");
+
+                            b1.ToTable("Empresas");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EmpresaId");
+
+                            b1.HasOne("SisCom.Entidade.Modelos.Cidade", "End_Cidade")
+                                .WithMany()
+                                .HasForeignKey("End_CidadeId");
+
+                            b1.Navigation("End_Cidade");
+                        });
+
+                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Estado", b =>
@@ -2467,163 +2636,131 @@ namespace SisCom.Infraestrutura.Migrations
                 {
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCFOP", "Estoque_TributacaoNFCe_TabelaCFOP")
                         .WithMany()
-                        .HasForeignKey("Estoque_TributacaoNFCe_TabelaCFOPId")
-                        .IsRequired();
+                        .HasForeignKey("Estoque_TributacaoNFCe_TabelaCFOPId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaSituacaoTributariaNFCe", "Estoque_TributacaoNFCe_TabelaSituacaoTributariaNFCe")
                         .WithMany()
-                        .HasForeignKey("Estoque_TributacaoNFCe_TabelaSituacaoTributariaNFCeId")
-                        .IsRequired();
+                        .HasForeignKey("Estoque_TributacaoNFCe_TabelaSituacaoTributariaNFCeId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TipoServicoFiscal", "Estoque_TributacaoNFCe_TipoServicoFiscal")
                         .WithMany()
-                        .HasForeignKey("Estoque_TributacaoNFCe_TipoServicoFiscalId")
-                        .IsRequired();
+                        .HasForeignKey("Estoque_TributacaoNFCe_TipoServicoFiscalId");
 
-                    b.HasOne("SisCom.Entidade.Modelos.UnidadeMedida", "Estoque_Unidade")
+                    b.HasOne("SisCom.Entidade.Modelos.UnidadeMedida", "Estoque_UnidadeMedidaMedida")
                         .WithMany()
-                        .HasForeignKey("Estoque_UnidadeId")
-                        .IsRequired();
+                        .HasForeignKey("Estoque_UnidadeMedidaMedidaId");
 
                     b.HasOne("SisCom.Entidade.Modelos.Pessoa", "Fabricante")
                         .WithMany()
-                        .HasForeignKey("FabricanteId")
-                        .IsRequired();
+                        .HasForeignKey("FabricanteId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCST_PIS_COFINS", "Fiscal_NFE_TabelaCST_COFINS")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFE_TabelaCST_COFINSId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFE_TabelaCST_COFINSId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCST_IPI", "Fiscal_NFE_TabelaCST_IPI")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFE_TabelaCST_IPIId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFE_TabelaCST_IPIId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCST_PIS_COFINS", "Fiscal_NFE_TabelaCST_PIS")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFE_TabelaCST_PISId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFE_TabelaCST_PISId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaModalidadeDeterminacaoBCICMS", "Fiscal_NFS_ICMSST_TabelaModalidadeDeterminacaoBCICMS")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFS_ICMSST_TabelaModalidadeDeterminacaoBCICMSId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFS_ICMSST_TabelaModalidadeDeterminacaoBCICMSId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaModalidadeDeterminacaoBCICMS", "Fiscal_NFS_ICMS_TabelaModalidadeDeterminacaoBCICMS")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFS_ICMS_TabelaModalidadeDeterminacaoBCICMSId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFS_ICMS_TabelaModalidadeDeterminacaoBCICMSId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaMotivoDesoneracaoICMS", "Fiscal_NFS_ICMS_TabelaMotivoDesoneracaoICMS")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFS_ICMS_TabelaMotivoDesoneracaoICMSId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFS_ICMS_TabelaMotivoDesoneracaoICMSId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCST_IPI", "Fiscal_NFS_IPI_TabelaCST_IPI")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFS_IPI_TabelaCST_IPIId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFS_IPI_TabelaCST_IPIId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaClasseEnquadramentoIPI", "Fiscal_NFS_IPI_TabelaClasseEnquadramentoIPI")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFS_IPI_TabelaClasseEnquadramentoIPIId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFS_IPI_TabelaClasseEnquadramentoIPIId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCodigoEnquadramentoIPI", "Fiscal_NFS_IPI_TabelaCodigoEnquadramentoIPI")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFS_IPI_TabelaCodigoEnquadramentoIPIId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFS_IPI_TabelaCodigoEnquadramentoIPIId");
 
                     b.HasOne("SisCom.Entidade.Modelos.GrupoNaturezaReceita_CTS_PIS_COFINS", "Fiscal_NFS_PISCOFINS_GrupoNaturezaReceita")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFS_PISCOFINS_GrupoNaturezaReceitaId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFS_PISCOFINS_GrupoNaturezaReceitaId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCST_PIS_COFINS", "Fiscal_NFS_PISCOFINS_PIS_TabelaCSTCOFINS")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFS_PISCOFINS_PIS_TabelaCSTCOFINSId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFS_PISCOFINS_PIS_TabelaCSTCOFINSId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCST_PIS_COFINS", "Fiscal_NFS_PISCOFINS_PIS_TabelaCSTPIS")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFS_PISCOFINS_PIS_TabelaCSTPISId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFS_PISCOFINS_PIS_TabelaCSTPISId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaNaturezaReceita_CTS_PIS_COFINS", "Fiscal_NFS_PISCOFINS_TabelaNaturezaReceita")
                         .WithMany()
-                        .HasForeignKey("Fiscal_NFS_PISCOFINS_TabelaNaturezaReceitaId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_NFS_PISCOFINS_TabelaNaturezaReceitaId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaSpedCodigoGenero", "Fiscal_SPED_TabelaSpedCodigoGenero")
                         .WithMany()
-                        .HasForeignKey("Fiscal_SPED_TabelaSpedCodigoGeneroId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_SPED_TabelaSpedCodigoGeneroId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaSpedInformacaoAdicionalItem", "Fiscal_SPED_TabelaSpedInformacaoAdicionalItem")
                         .WithMany()
-                        .HasForeignKey("Fiscal_SPED_TabelaSpedInformacaoAdicionalItemId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_SPED_TabelaSpedInformacaoAdicionalItemId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaSpedTipoItem", "Fiscal_SPED_TabelaSpedTipoItem")
                         .WithMany()
-                        .HasForeignKey("Fiscal_SPED_TabelaSpedTipoItemId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_SPED_TabelaSpedTipoItemId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaANP", "Fiscal_TabelaANP")
                         .WithMany()
-                        .HasForeignKey("Fiscal_TabelaANPId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_TabelaANPId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaBeneficioSPED", "Fiscal_TabelaBeneficioSPED")
                         .WithMany()
-                        .HasForeignKey("Fiscal_TabelaBeneficioSPEDId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_TabelaBeneficioSPEDId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCEST", "Fiscal_TabelaCEST")
                         .WithMany()
-                        .HasForeignKey("Fiscal_TabelaCESTId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_TabelaCESTId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCST_CSOSN", "Fiscal_TabelaCST_CSOSN")
                         .WithMany()
-                        .HasForeignKey("Fiscal_TabelaCST_CSOSNId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_TabelaCST_CSOSNId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaNCM", "Fiscal_TabelaNCM")
                         .WithMany()
-                        .HasForeignKey("Fiscal_TabelaNCMId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_TabelaNCMId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaOrigemMercadoriaServico", "Fiscal_TabelaOrigemMercadoriaServico")
                         .WithMany()
-                        .HasForeignKey("Fiscal_TabelaOrigemMercadoriaServicoId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_TabelaOrigemMercadoriaServicoId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TipoMercadoria", "Fiscal_TipoMercadoria")
                         .WithMany()
-                        .HasForeignKey("Fiscal_TipoMercadoriaId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_TipoMercadoriaId");
 
                     b.HasOne("SisCom.Entidade.Modelos.VinculoFiscal", "Fiscal_VinculoFiscal")
                         .WithMany()
-                        .HasForeignKey("Fiscal_VinculoFiscalId")
-                        .IsRequired();
+                        .HasForeignKey("Fiscal_VinculoFiscalId");
 
                     b.HasOne("SisCom.Entidade.Modelos.Pessoa", "Fornecedor")
                         .WithMany()
-                        .HasForeignKey("FornecedorId")
-                        .IsRequired();
+                        .HasForeignKey("FornecedorId");
 
                     b.HasOne("SisCom.Entidade.Modelos.GrupoMercadoria", "GrupoMercadoria")
                         .WithMany()
-                        .HasForeignKey("GrupoMercadoriaId")
-                        .IsRequired();
+                        .HasForeignKey("GrupoMercadoriaId");
 
                     b.HasOne("SisCom.Entidade.Modelos.SubGrupoMercadoria", "SubGrupoMercadoria")
                         .WithMany()
-                        .HasForeignKey("SubGrupoMercadoriaId")
-                        .IsRequired();
+                        .HasForeignKey("SubGrupoMercadoriaId");
 
                     b.Navigation("Estoque_TributacaoNFCe_TabelaCFOP");
 
@@ -2631,7 +2768,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Navigation("Estoque_TributacaoNFCe_TipoServicoFiscal");
 
-                    b.Navigation("Estoque_Unidade");
+                    b.Navigation("Estoque_UnidadeMedidaMedida");
 
                     b.Navigation("Fabricante");
 
@@ -2709,11 +2846,69 @@ namespace SisCom.Infraestrutura.Migrations
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Pessoa", b =>
                 {
-                    b.HasOne("SisCom.Entidade.Modelos.Cidade", "End_Cidade")
+                    b.HasOne("SisCom.Entidade.Modelos.TipoCliente", "TipoCliente")
                         .WithMany()
-                        .HasForeignKey("End_CidadeId");
+                        .HasForeignKey("TipoClienteId");
 
-                    b.Navigation("End_Cidade");
+                    b.HasOne("SisCom.Entidade.Modelos.Funcionario", "Vendedor")
+                        .WithMany()
+                        .HasForeignKey("VendedorId");
+
+                    b.OwnsOne("SisCom.Entidade.Modelos.Endereco", "Endereco", b1 =>
+                        {
+                            b1.Property<Guid>("PessoaId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("End_Bairro")
+                                .HasMaxLength(60)
+                                .HasColumnType("nvarchar(60)")
+                                .HasColumnName("End_Bairro");
+
+                            b1.Property<string>("End_CEP")
+                                .HasMaxLength(8)
+                                .HasColumnType("nvarchar(8)")
+                                .HasColumnName("End_CEP");
+
+                            b1.Property<Guid?>("End_CidadeId")
+                                .HasColumnType("uniqueidentifier")
+                                .HasColumnName("End_CidadeId");
+
+                            b1.Property<string>("End_Logradouro")
+                                .HasMaxLength(60)
+                                .HasColumnType("nvarchar(60)")
+                                .HasColumnName("End_Logradouro");
+
+                            b1.Property<string>("End_Numero")
+                                .HasMaxLength(8)
+                                .HasColumnType("nvarchar(8)")
+                                .HasColumnName("End_Numero");
+
+                            b1.Property<string>("End_PontoReferencia")
+                                .HasMaxLength(200)
+                                .HasColumnType("nvarchar(200)")
+                                .HasColumnName("End_PontoReferencia");
+
+                            b1.HasKey("PessoaId");
+
+                            b1.HasIndex("End_CidadeId");
+
+                            b1.ToTable("Pessoas");
+
+                            b1.HasOne("SisCom.Entidade.Modelos.Cidade", "End_Cidade")
+                                .WithMany()
+                                .HasForeignKey("End_CidadeId");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PessoaId");
+
+                            b1.Navigation("End_Cidade");
+                        });
+
+                    b.Navigation("Endereco");
+
+                    b.Navigation("TipoCliente");
+
+                    b.Navigation("Vendedor");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.SubGrupoMercadoria", b =>

@@ -32,9 +32,9 @@ namespace SisCom.Negocio.Services
             _CidadeRepository?.Dispose();
         }
 
-        public Task Adicionar(Cidade Cidade)
+        public async Task Adicionar(Cidade Cidade)
         {
-            throw new NotImplementedException();
+            await _CidadeRepository.Insert(Cidade);
         }
 
         public Task Atualizar(Cidade Cidade)

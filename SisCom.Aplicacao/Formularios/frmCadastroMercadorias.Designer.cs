@@ -39,12 +39,10 @@ namespace SisCom.Aplicacao.Formularios
             this.labelPreco_ValorICMSVenda = new System.Windows.Forms.Label();
             this.labelPreco_ValorImpostosFederais = new System.Windows.Forms.Label();
             this.labelPreco_ValorCustoFixo = new System.Windows.Forms.Label();
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao = new System.Windows.Forms.ComboBox();
             this.label114 = new System.Windows.Forms.Label();
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota = new System.Windows.Forms.NumericUpDown();
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota = new System.Windows.Forms.NumericUpDown();
             this.label115 = new System.Windows.Forms.Label();
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo = new System.Windows.Forms.ComboBox();
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao = new System.Windows.Forms.ComboBox();
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo = new System.Windows.Forms.ComboBox();
             this.label116 = new System.Windows.Forms.Label();
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota = new System.Windows.Forms.NumericUpDown();
             this.label117 = new System.Windows.Forms.Label();
@@ -85,6 +83,8 @@ namespace SisCom.Aplicacao.Formularios
             this.label35 = new System.Windows.Forms.Label();
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_NaturezaReceita = new System.Windows.Forms.ComboBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao = new System.Windows.Forms.TextBox();
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao = new System.Windows.Forms.TextBox();
             this.label120 = new System.Windows.Forms.Label();
             this.label126 = new System.Windows.Forms.Label();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
@@ -178,19 +178,19 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Aliquota = new System.Windows.Forms.NumericUpDown();
             this.label95 = new System.Windows.Forms.Label();
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo = new System.Windows.Forms.ComboBox();
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao = new System.Windows.Forms.TextBox();
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao = new System.Windows.Forms.TextBox();
             this.label99 = new System.Windows.Forms.Label();
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Aliquota = new System.Windows.Forms.NumericUpDown();
             this.label100 = new System.Windows.Forms.Label();
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo = new System.Windows.Forms.ComboBox();
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao = new System.Windows.Forms.ComboBox();
             this.label97 = new System.Windows.Forms.Label();
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Aliquota = new System.Windows.Forms.NumericUpDown();
             this.label98 = new System.Windows.Forms.Label();
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.comboDetalhesFiscais_Beneficio = new System.Windows.Forms.ComboBox();
+            this.comboDetalhesFiscais_BeneficioSped = new System.Windows.Forms.ComboBox();
             this.botaoDetalhesFiscais_CST_CSOSN = new System.Windows.Forms.Button();
             this.comboDetalhesFiscais_CST_CSOSN_Descricao = new System.Windows.Forms.ComboBox();
             this.label93 = new System.Windows.Forms.Label();
@@ -205,7 +205,7 @@ namespace SisCom.Aplicacao.Formularios
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.botaoFabricante = new System.Windows.Forms.Button();
-            this.numericTributacao_ECFNFCeNFCeAliquota = new System.Windows.Forms.NumericUpDown();
+            this.numericTributacao_ECFNFCeNFCeAliquotaICMS = new System.Windows.Forms.NumericUpDown();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tbsPrecoEstoque = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -229,8 +229,8 @@ namespace SisCom.Aplicacao.Formularios
             this.label76 = new System.Windows.Forms.Label();
             this.dateEstoque_AlteracaoPreco = new System.Windows.Forms.DateTimePicker();
             this.dateEstoque_UltimaEntrada = new System.Windows.Forms.DateTimePicker();
-            this.numericEstoque_PrecoLiquido = new System.Windows.Forms.NumericUpDown();
-            this.numericEstoque_PrecoBruto = new System.Windows.Forms.NumericUpDown();
+            this.numericEstoque_PesoLiquido = new System.Windows.Forms.NumericUpDown();
+            this.numericEstoque_PesoBruto = new System.Windows.Forms.NumericUpDown();
             this.textEstoque_Pratileira = new System.Windows.Forms.TextBox();
             this.comboEstoque_Unidade = new System.Windows.Forms.ComboBox();
             this.numericEstoque_EstoqueMinimo = new System.Windows.Forms.NumericUpDown();
@@ -295,11 +295,11 @@ namespace SisCom.Aplicacao.Formularios
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.comboFabricante = new System.Windows.Forms.ComboBox();
-            this.comboSubGrupo = new System.Windows.Forms.ComboBox();
+            this.comboSubGrupoMercadoria = new System.Windows.Forms.ComboBox();
             this.comboFornecedor = new System.Windows.Forms.ComboBox();
-            this.comboGrupoProduto = new System.Windows.Forms.ComboBox();
+            this.comboGrupoMercadoria = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textMercadoria = new System.Windows.Forms.TextBox();
+            this.textNomeMercadoria = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.textCodigoNFe = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -318,6 +318,8 @@ namespace SisCom.Aplicacao.Formularios
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pnlMenuBotaoBotao = new System.Windows.Forms.Panel();
+            this.label39 = new System.Windows.Forms.Label();
+            this.botaoGravar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.botaoLancarBalanco = new System.Windows.Forms.Button();
             this.botaoGestorPreco = new System.Windows.Forms.Button();
@@ -331,7 +333,7 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboPesquisarPesquisa = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota)).BeginInit();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_ReducaoBase)).BeginInit();
@@ -385,14 +387,14 @@ namespace SisCom.Aplicacao.Formularios
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Aliquota)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericTributacao_ECFNFCeNFCeAliquota)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTributacao_ECFNFCeNFCeAliquotaICMS)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tbsPrecoEstoque.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlPrecoEstoquePesoTributacao.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericEstoque_PrecoLiquido)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericEstoque_PrecoBruto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericEstoque_PesoLiquido)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericEstoque_PesoBruto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericEstoque_EstoqueMinimo)).BeginInit();
             this.pnlPrecoEstoquePreco.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericMargem_PrecoC)).BeginInit();
@@ -474,7 +476,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_GrupoNaturezaReceita.Location = new System.Drawing.Point(60, 57);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_GrupoNaturezaReceita.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_GrupoNaturezaReceita";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_GrupoNaturezaReceita.Size = new System.Drawing.Size(324, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_GrupoNaturezaReceita.TabIndex = 111;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_GrupoNaturezaReceita.TabIndex = 141;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_GrupoNaturezaReceita.Text = "00";
             // 
             // labelPreco_ValorICMSVenda
@@ -507,15 +509,6 @@ namespace SisCom.Aplicacao.Formularios
             this.labelPreco_ValorCustoFixo.TabIndex = 94;
             this.labelPreco_ValorCustoFixo.Text = "R$ 100,00";
             // 
-            // comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao
-            // 
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.FormattingEnabled = true;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.Location = new System.Drawing.Point(100, 36);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao";
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.Size = new System.Drawing.Size(169, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.TabIndex = 110;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.Text = "00";
-            // 
             // label114
             // 
             this.label114.AutoSize = true;
@@ -526,13 +519,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label114.TabIndex = 109;
             this.label114.Text = "Alíquota:";
             // 
-            // comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota
+            // numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota
             // 
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota.DecimalPlaces = 2;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota.Location = new System.Drawing.Point(323, 36);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota";
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota.Size = new System.Drawing.Size(60, 22);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota.TabIndex = 108;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota.DecimalPlaces = 2;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota.Location = new System.Drawing.Point(323, 36);
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota";
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota.Size = new System.Drawing.Size(60, 22);
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota.TabIndex = 140;
             // 
             // label115
             // 
@@ -544,23 +537,14 @@ namespace SisCom.Aplicacao.Formularios
             this.label115.TabIndex = 107;
             this.label115.Text = "COFINS:";
             // 
-            // comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo
+            // comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo
             // 
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo.FormattingEnabled = true;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo.Location = new System.Drawing.Point(60, 36);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo";
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo.Size = new System.Drawing.Size(40, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo.TabIndex = 106;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo.Text = "00";
-            // 
-            // comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao
-            // 
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.FormattingEnabled = true;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.Location = new System.Drawing.Point(101, 15);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao";
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.Size = new System.Drawing.Size(169, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.TabIndex = 105;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.Text = "00";
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo.FormattingEnabled = true;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo.Location = new System.Drawing.Point(60, 36);
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo";
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo.Size = new System.Drawing.Size(40, 21);
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo.TabIndex = 138;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo.Text = "00";
             // 
             // label116
             // 
@@ -578,7 +562,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota.Location = new System.Drawing.Point(324, 15);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota.Size = new System.Drawing.Size(60, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota.TabIndex = 103;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota.TabIndex = 137;
             // 
             // label117
             // 
@@ -627,7 +611,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Desoneracao.Location = new System.Drawing.Point(105, 52);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Desoneracao.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Desoneracao";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Desoneracao.Size = new System.Drawing.Size(278, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Desoneracao.TabIndex = 96;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Desoneracao.TabIndex = 125;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Desoneracao.Text = "00";
             // 
             // label104
@@ -646,7 +630,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_ReducaoBase.Location = new System.Drawing.Point(338, 32);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_ReducaoBase.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_ReducaoBase";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_ReducaoBase.Size = new System.Drawing.Size(45, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_ReducaoBase.TabIndex = 94;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_ReducaoBase.TabIndex = 124;
             // 
             // label103
             // 
@@ -664,7 +648,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Deferimento.Location = new System.Drawing.Point(217, 32);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Deferimento.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Deferimento";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Deferimento.Size = new System.Drawing.Size(45, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Deferimento.TabIndex = 92;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Deferimento.TabIndex = 123;
             // 
             // label102
             // 
@@ -682,7 +666,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Adicional.Location = new System.Drawing.Point(105, 32);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Adicional.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Adicional";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Adicional.Size = new System.Drawing.Size(45, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Adicional.TabIndex = 90;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Adicional.TabIndex = 122;
             // 
             // label101
             // 
@@ -700,7 +684,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_MobilidadeBase.Location = new System.Drawing.Point(105, 11);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_MobilidadeBase.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_MobilidadeBase";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_MobilidadeBase.Size = new System.Drawing.Size(278, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_MobilidadeBase.TabIndex = 27;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_MobilidadeBase.TabIndex = 121;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_MobilidadeBase.Text = "00";
             // 
             // label105
@@ -719,7 +703,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Codigo.Location = new System.Drawing.Point(61, 15);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Codigo.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Codigo";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Codigo.Size = new System.Drawing.Size(40, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Codigo.TabIndex = 101;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Codigo.TabIndex = 135;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Codigo.Text = "00";
             // 
             // label123
@@ -748,7 +732,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ReducaoBase.Location = new System.Drawing.Point(338, 36);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ReducaoBase.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ReducaoBase";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ReducaoBase.Size = new System.Drawing.Size(45, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ReducaoBase.TabIndex = 102;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ReducaoBase.TabIndex = 129;
             // 
             // label107
             // 
@@ -766,7 +750,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_Aliquota.Location = new System.Drawing.Point(204, 36);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_Aliquota.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_Aliquota";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_Aliquota.Size = new System.Drawing.Size(45, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_Aliquota.TabIndex = 100;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_Aliquota.TabIndex = 128;
             // 
             // label108
             // 
@@ -784,7 +768,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ValorAdicional.Location = new System.Drawing.Point(105, 36);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ValorAdicional.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ValorAdicional";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ValorAdicional.Size = new System.Drawing.Size(45, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ValorAdicional.TabIndex = 98;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ValorAdicional.TabIndex = 127;
             // 
             // label109
             // 
@@ -802,7 +786,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ModalidadeBase.Location = new System.Drawing.Point(105, 15);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ModalidadeBase.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ModalidadeBase";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ModalidadeBase.Size = new System.Drawing.Size(278, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ModalidadeBase.TabIndex = 96;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ModalidadeBase.TabIndex = 126;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ModalidadeBase.Text = "00";
             // 
             // groupBox10
@@ -830,7 +814,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_CodigoEnquadramento.Location = new System.Drawing.Point(343, 32);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_CodigoEnquadramento.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_CodigoEnquadramento";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_CodigoEnquadramento.Size = new System.Drawing.Size(40, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_CodigoEnquadramento.TabIndex = 101;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_CodigoEnquadramento.TabIndex = 134;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_CodigoEnquadramento.Text = "00";
             // 
             // comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_ClasseEnquadramento
@@ -839,7 +823,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_ClasseEnquadramento.Location = new System.Drawing.Point(146, 32);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_ClasseEnquadramento.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_ClasseEnquadramento";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_ClasseEnquadramento.Size = new System.Drawing.Size(40, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_ClasseEnquadramento.TabIndex = 100;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_ClasseEnquadramento.TabIndex = 133;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_ClasseEnquadramento.Text = "00";
             // 
             // label113
@@ -868,7 +852,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Descricao.Location = new System.Drawing.Point(100, 11);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Descricao.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Descricao";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Descricao.Size = new System.Drawing.Size(169, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Descricao.TabIndex = 95;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Descricao.TabIndex = 131;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Descricao.Text = "00";
             // 
             // label110
@@ -887,7 +871,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Aliquota.Location = new System.Drawing.Point(323, 11);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Aliquota.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Aliquota";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Aliquota.Size = new System.Drawing.Size(60, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Aliquota.TabIndex = 93;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Aliquota.TabIndex = 132;
             // 
             // label111
             // 
@@ -905,7 +889,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Codigo.Location = new System.Drawing.Point(60, 11);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Codigo.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Codigo";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Codigo.Size = new System.Drawing.Size(40, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Codigo.TabIndex = 91;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Codigo.TabIndex = 130;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Codigo.Text = "00";
             // 
             // groupBox8
@@ -952,21 +936,21 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_NaturezaReceita.Location = new System.Drawing.Point(60, 78);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_NaturezaReceita.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_NaturezaReceita";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_NaturezaReceita.Size = new System.Drawing.Size(324, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_NaturezaReceita.TabIndex = 115;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_NaturezaReceita.TabIndex = 142;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_NaturezaReceita.Text = "00";
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao);
+            this.groupBox9.Controls.Add(this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao);
             this.groupBox9.Controls.Add(this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_NaturezaReceita);
             this.groupBox9.Controls.Add(this.label120);
             this.groupBox9.Controls.Add(this.label118);
             this.groupBox9.Controls.Add(this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_GrupoNaturezaReceita);
-            this.groupBox9.Controls.Add(this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao);
             this.groupBox9.Controls.Add(this.label114);
-            this.groupBox9.Controls.Add(this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota);
+            this.groupBox9.Controls.Add(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota);
             this.groupBox9.Controls.Add(this.label115);
-            this.groupBox9.Controls.Add(this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo);
-            this.groupBox9.Controls.Add(this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao);
+            this.groupBox9.Controls.Add(this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo);
             this.groupBox9.Controls.Add(this.label116);
             this.groupBox9.Controls.Add(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota);
             this.groupBox9.Controls.Add(this.label117);
@@ -978,6 +962,22 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox9.TabIndex = 3;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "PIS/CONFIS:";
+            // 
+            // textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao
+            // 
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.Location = new System.Drawing.Point(100, 36);
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.Name = "textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao";
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.ReadOnly = true;
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.Size = new System.Drawing.Size(169, 22);
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao.TabIndex = 144;
+            // 
+            // textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao
+            // 
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.Location = new System.Drawing.Point(101, 15);
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.Name = "textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao";
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.ReadOnly = true;
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.Size = new System.Drawing.Size(169, 22);
+            this.textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao.TabIndex = 143;
             // 
             // label120
             // 
@@ -1021,7 +1021,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_SPED_CodigoInformacaoAdicional.Location = new System.Drawing.Point(172, 53);
             this.comboDetalhesFiscais_SPED_CodigoInformacaoAdicional.Name = "comboDetalhesFiscais_SPED_CodigoInformacaoAdicional";
             this.comboDetalhesFiscais_SPED_CodigoInformacaoAdicional.Size = new System.Drawing.Size(211, 21);
-            this.comboDetalhesFiscais_SPED_CodigoInformacaoAdicional.TabIndex = 102;
+            this.comboDetalhesFiscais_SPED_CodigoInformacaoAdicional.TabIndex = 145;
             this.comboDetalhesFiscais_SPED_CodigoInformacaoAdicional.Text = "00";
             // 
             // label125
@@ -1040,7 +1040,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_SPED_CodigoGenero.Location = new System.Drawing.Point(105, 34);
             this.comboDetalhesFiscais_SPED_CodigoGenero.Name = "comboDetalhesFiscais_SPED_CodigoGenero";
             this.comboDetalhesFiscais_SPED_CodigoGenero.Size = new System.Drawing.Size(278, 21);
-            this.comboDetalhesFiscais_SPED_CodigoGenero.TabIndex = 100;
+            this.comboDetalhesFiscais_SPED_CodigoGenero.TabIndex = 144;
             this.comboDetalhesFiscais_SPED_CodigoGenero.Text = "00";
             // 
             // label124
@@ -1059,7 +1059,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_SPED_TipoItem.Location = new System.Drawing.Point(105, 11);
             this.comboDetalhesFiscais_SPED_TipoItem.Name = "comboDetalhesFiscais_SPED_TipoItem";
             this.comboDetalhesFiscais_SPED_TipoItem.Size = new System.Drawing.Size(278, 21);
-            this.comboDetalhesFiscais_SPED_TipoItem.TabIndex = 98;
+            this.comboDetalhesFiscais_SPED_TipoItem.TabIndex = 143;
             this.comboDetalhesFiscais_SPED_TipoItem.Text = "00";
             // 
             // numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosMunicipais
@@ -1068,7 +1068,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosMunicipais.Location = new System.Drawing.Point(116, 35);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosMunicipais.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosMunicipais";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosMunicipais.Size = new System.Drawing.Size(45, 20);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosMunicipais.TabIndex = 102;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosMunicipais.TabIndex = 149;
             // 
             // label119
             // 
@@ -1086,7 +1086,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosTotal.Location = new System.Drawing.Point(268, 35);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosTotal.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosTotal";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosTotal.Size = new System.Drawing.Size(45, 20);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosTotal.TabIndex = 106;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosTotal.TabIndex = 151;
             // 
             // numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosEstaduais
             // 
@@ -1094,7 +1094,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosEstaduais.Location = new System.Drawing.Point(268, 15);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosEstaduais.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosEstaduais";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosEstaduais.Size = new System.Drawing.Size(45, 20);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosEstaduais.TabIndex = 104;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosEstaduais.TabIndex = 150;
             // 
             // label121
             // 
@@ -1112,7 +1112,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosFederais.Location = new System.Drawing.Point(116, 15);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosFederais.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosFederais";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosFederais.Size = new System.Drawing.Size(45, 20);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosFederais.TabIndex = 100;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosFederais.TabIndex = 148;
             // 
             // label36
             // 
@@ -1210,7 +1210,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_OutrosCustos.Location = new System.Drawing.Point(124, 327);
             this.numericPreco_OutrosCustos.Name = "numericPreco_OutrosCustos";
             this.numericPreco_OutrosCustos.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_OutrosCustos.TabIndex = 81;
+            this.numericPreco_OutrosCustos.TabIndex = 62;
             // 
             // numericPreco_Marketing
             // 
@@ -1218,7 +1218,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_Marketing.Location = new System.Drawing.Point(124, 302);
             this.numericPreco_Marketing.Name = "numericPreco_Marketing";
             this.numericPreco_Marketing.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_Marketing.TabIndex = 80;
+            this.numericPreco_Marketing.TabIndex = 61;
             // 
             // numericPreco_Comissao
             // 
@@ -1226,7 +1226,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_Comissao.Location = new System.Drawing.Point(124, 277);
             this.numericPreco_Comissao.Name = "numericPreco_Comissao";
             this.numericPreco_Comissao.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_Comissao.TabIndex = 79;
+            this.numericPreco_Comissao.TabIndex = 60;
             // 
             // numericPreco_ICMSVenda
             // 
@@ -1234,7 +1234,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_ICMSVenda.Location = new System.Drawing.Point(124, 252);
             this.numericPreco_ICMSVenda.Name = "numericPreco_ICMSVenda";
             this.numericPreco_ICMSVenda.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_ICMSVenda.TabIndex = 78;
+            this.numericPreco_ICMSVenda.TabIndex = 59;
             // 
             // numericPreco_ImpostosFederais
             // 
@@ -1242,7 +1242,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_ImpostosFederais.Location = new System.Drawing.Point(124, 227);
             this.numericPreco_ImpostosFederais.Name = "numericPreco_ImpostosFederais";
             this.numericPreco_ImpostosFederais.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_ImpostosFederais.TabIndex = 77;
+            this.numericPreco_ImpostosFederais.TabIndex = 58;
             // 
             // numericPreco_CustoFixo
             // 
@@ -1250,7 +1250,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_CustoFixo.Location = new System.Drawing.Point(124, 202);
             this.numericPreco_CustoFixo.Name = "numericPreco_CustoFixo";
             this.numericPreco_CustoFixo.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_CustoFixo.TabIndex = 76;
+            this.numericPreco_CustoFixo.TabIndex = 57;
             // 
             // labelPreco_ValorCustoMercadoria
             // 
@@ -1278,7 +1278,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_EncFinanceiros.Location = new System.Drawing.Point(124, 160);
             this.numericPreco_EncFinanceiros.Name = "numericPreco_EncFinanceiros";
             this.numericPreco_EncFinanceiros.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_EncFinanceiros.TabIndex = 73;
+            this.numericPreco_EncFinanceiros.TabIndex = 56;
             // 
             // labelPreco_ValorEmbalagem
             // 
@@ -1296,7 +1296,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_Embalagem.Location = new System.Drawing.Point(124, 135);
             this.numericPreco_Embalagem.Name = "numericPreco_Embalagem";
             this.numericPreco_Embalagem.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_Embalagem.TabIndex = 71;
+            this.numericPreco_Embalagem.TabIndex = 55;
             // 
             // labelPreco_ValorFrete
             // 
@@ -1314,7 +1314,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_Frete.Location = new System.Drawing.Point(124, 110);
             this.numericPreco_Frete.Name = "numericPreco_Frete";
             this.numericPreco_Frete.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_Frete.TabIndex = 69;
+            this.numericPreco_Frete.TabIndex = 54;
             // 
             // labelPreco_ValorIPI
             // 
@@ -1332,7 +1332,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_IPI.Location = new System.Drawing.Point(124, 85);
             this.numericPreco_IPI.Name = "numericPreco_IPI";
             this.numericPreco_IPI.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_IPI.TabIndex = 67;
+            this.numericPreco_IPI.TabIndex = 53;
             // 
             // comboDetalhesFiscais_CEST
             // 
@@ -1340,7 +1340,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_CEST.Location = new System.Drawing.Point(187, 3);
             this.comboDetalhesFiscais_CEST.Name = "comboDetalhesFiscais_CEST";
             this.comboDetalhesFiscais_CEST.Size = new System.Drawing.Size(80, 23);
-            this.comboDetalhesFiscais_CEST.TabIndex = 26;
+            this.comboDetalhesFiscais_CEST.TabIndex = 107;
             // 
             // groupBox18
             // 
@@ -1491,6 +1491,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoMotivoIsencao.Name = "botaoMotivoIsencao";
             this.botaoMotivoIsencao.Size = new System.Drawing.Size(68, 23);
             this.botaoMotivoIsencao.TabIndex = 29;
+            this.botaoMotivoIsencao.TabStop = false;
             this.botaoMotivoIsencao.Text = "Motivo Isenção";
             this.botaoMotivoIsencao.UseVisualStyleBackColor = true;
             // 
@@ -1499,7 +1500,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textDetalhesFiscais_CodigoAnvisa.Location = new System.Drawing.Point(642, 30);
             this.textDetalhesFiscais_CodigoAnvisa.Name = "textDetalhesFiscais_CodigoAnvisa";
             this.textDetalhesFiscais_CodigoAnvisa.Size = new System.Drawing.Size(79, 23);
-            this.textDetalhesFiscais_CodigoAnvisa.TabIndex = 28;
+            this.textDetalhesFiscais_CodigoAnvisa.TabIndex = 105;
             // 
             // label89
             // 
@@ -1517,7 +1518,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_CodigoANPDescricao.Location = new System.Drawing.Point(399, 30);
             this.comboDetalhesFiscais_CodigoANPDescricao.Name = "comboDetalhesFiscais_CodigoANPDescricao";
             this.comboDetalhesFiscais_CodigoANPDescricao.Size = new System.Drawing.Size(150, 23);
-            this.comboDetalhesFiscais_CodigoANPDescricao.TabIndex = 25;
+            this.comboDetalhesFiscais_CodigoANPDescricao.TabIndex = 104;
             // 
             // label88
             // 
@@ -1535,7 +1536,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_CodigoANP_Codigo.Location = new System.Drawing.Point(319, 30);
             this.comboDetalhesFiscais_CodigoANP_Codigo.Name = "comboDetalhesFiscais_CodigoANP_Codigo";
             this.comboDetalhesFiscais_CodigoANP_Codigo.Size = new System.Drawing.Size(80, 23);
-            this.comboDetalhesFiscais_CodigoANP_Codigo.TabIndex = 23;
+            this.comboDetalhesFiscais_CodigoANP_Codigo.TabIndex = 103;
             // 
             // label87
             // 
@@ -1553,7 +1554,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_Especifico.Location = new System.Drawing.Point(97, 30);
             this.comboDetalhesFiscais_Especifico.Name = "comboDetalhesFiscais_Especifico";
             this.comboDetalhesFiscais_Especifico.Size = new System.Drawing.Size(140, 23);
-            this.comboDetalhesFiscais_Especifico.TabIndex = 21;
+            this.comboDetalhesFiscais_Especifico.TabIndex = 102;
             // 
             // label86
             // 
@@ -1570,7 +1571,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textDetalhesFiscais_InformacaoAdicional.Location = new System.Drawing.Point(527, 5);
             this.textDetalhesFiscais_InformacaoAdicional.Name = "textDetalhesFiscais_InformacaoAdicional";
             this.textDetalhesFiscais_InformacaoAdicional.Size = new System.Drawing.Size(261, 23);
-            this.textDetalhesFiscais_InformacaoAdicional.TabIndex = 19;
+            this.textDetalhesFiscais_InformacaoAdicional.TabIndex = 101;
             // 
             // botaoDetalhesFiscais_VinculoFiscal
             // 
@@ -1578,6 +1579,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoDetalhesFiscais_VinculoFiscal.Name = "botaoDetalhesFiscais_VinculoFiscal";
             this.botaoDetalhesFiscais_VinculoFiscal.Size = new System.Drawing.Size(23, 23);
             this.botaoDetalhesFiscais_VinculoFiscal.TabIndex = 18;
+            this.botaoDetalhesFiscais_VinculoFiscal.TabStop = false;
             this.botaoDetalhesFiscais_VinculoFiscal.UseVisualStyleBackColor = true;
             this.botaoDetalhesFiscais_VinculoFiscal.Click += new System.EventHandler(this.botaoDetalhesFiscais_VinculoFiscal_Click);
             // 
@@ -1597,7 +1599,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_VinculoFiscal.Location = new System.Drawing.Point(97, 5);
             this.comboDetalhesFiscais_VinculoFiscal.Name = "comboDetalhesFiscais_VinculoFiscal";
             this.comboDetalhesFiscais_VinculoFiscal.Size = new System.Drawing.Size(270, 23);
-            this.comboDetalhesFiscais_VinculoFiscal.TabIndex = 16;
+            this.comboDetalhesFiscais_VinculoFiscal.TabIndex = 100;
             // 
             // botaoDetalhesFiscais_NCM
             // 
@@ -1605,6 +1607,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoDetalhesFiscais_NCM.Name = "botaoDetalhesFiscais_NCM";
             this.botaoDetalhesFiscais_NCM.Size = new System.Drawing.Size(23, 23);
             this.botaoDetalhesFiscais_NCM.TabIndex = 25;
+            this.botaoDetalhesFiscais_NCM.TabStop = false;
             this.botaoDetalhesFiscais_NCM.UseVisualStyleBackColor = true;
             this.botaoDetalhesFiscais_NCM.Click += new System.EventHandler(this.botaoDetalhesFiscais_NCM_Click);
             // 
@@ -1624,7 +1627,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_NCM.Location = new System.Drawing.Point(48, 3);
             this.comboDetalhesFiscais_NCM.Name = "comboDetalhesFiscais_NCM";
             this.comboDetalhesFiscais_NCM.Size = new System.Drawing.Size(80, 23);
-            this.comboDetalhesFiscais_NCM.TabIndex = 23;
+            this.comboDetalhesFiscais_NCM.TabIndex = 106;
             // 
             // label91
             // 
@@ -1816,7 +1819,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_Origem.Location = new System.Drawing.Point(314, 3);
             this.comboDetalhesFiscais_Origem.Name = "comboDetalhesFiscais_Origem";
             this.comboDetalhesFiscais_Origem.Size = new System.Drawing.Size(80, 23);
-            this.comboDetalhesFiscais_Origem.TabIndex = 28;
+            this.comboDetalhesFiscais_Origem.TabIndex = 108;
             // 
             // groupBox4
             // 
@@ -1839,7 +1842,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Descricao.Location = new System.Drawing.Point(100, 15);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Descricao.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Descricao";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Descricao.Size = new System.Drawing.Size(169, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Descricao.TabIndex = 90;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Descricao.TabIndex = 113;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Descricao.Text = "00";
             // 
             // label96
@@ -1858,7 +1861,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Aliquota.Location = new System.Drawing.Point(323, 15);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Aliquota.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Aliquota";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Aliquota.Size = new System.Drawing.Size(60, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Aliquota.TabIndex = 88;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Aliquota.TabIndex = 114;
             // 
             // label95
             // 
@@ -1876,26 +1879,17 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo.Location = new System.Drawing.Point(60, 15);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo.Size = new System.Drawing.Size(40, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo.TabIndex = 25;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo.TabIndex = 112;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo.Text = "00";
-            // 
-            // comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao
-            // 
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.FormattingEnabled = true;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.Location = new System.Drawing.Point(99, 38);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao";
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.Size = new System.Drawing.Size(169, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.TabIndex = 100;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.Text = "00";
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao);
+            this.groupBox5.Controls.Add(this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao);
+            this.groupBox5.Controls.Add(this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao);
             this.groupBox5.Controls.Add(this.label99);
             this.groupBox5.Controls.Add(this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Aliquota);
             this.groupBox5.Controls.Add(this.label100);
             this.groupBox5.Controls.Add(this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo);
-            this.groupBox5.Controls.Add(this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao);
             this.groupBox5.Controls.Add(this.label97);
             this.groupBox5.Controls.Add(this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Aliquota);
             this.groupBox5.Controls.Add(this.label98);
@@ -1907,6 +1901,22 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "PIS/COFINS:";
+            // 
+            // textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao
+            // 
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.Location = new System.Drawing.Point(99, 38);
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.Name = "textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao";
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.ReadOnly = true;
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.Size = new System.Drawing.Size(169, 22);
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao.TabIndex = 122;
+            // 
+            // textDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao
+            // 
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.Location = new System.Drawing.Point(100, 15);
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.Name = "textDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao";
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.ReadOnly = true;
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.Size = new System.Drawing.Size(169, 22);
+            this.textDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.TabIndex = 121;
             // 
             // label99
             // 
@@ -1924,7 +1934,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Aliquota.Location = new System.Drawing.Point(322, 38);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Aliquota.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Aliquota";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Aliquota.Size = new System.Drawing.Size(60, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Aliquota.TabIndex = 98;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Aliquota.TabIndex = 120;
             // 
             // label100
             // 
@@ -1942,17 +1952,8 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo.Location = new System.Drawing.Point(59, 38);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo.Size = new System.Drawing.Size(40, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo.TabIndex = 96;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo.TabIndex = 118;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo.Text = "00";
-            // 
-            // comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao
-            // 
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.FormattingEnabled = true;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.Location = new System.Drawing.Point(100, 15);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao";
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.Size = new System.Drawing.Size(169, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.TabIndex = 95;
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao.Text = "00";
             // 
             // label97
             // 
@@ -1970,7 +1971,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Aliquota.Location = new System.Drawing.Point(323, 15);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Aliquota.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Aliquota";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Aliquota.Size = new System.Drawing.Size(60, 22);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Aliquota.TabIndex = 93;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Aliquota.TabIndex = 117;
             // 
             // label98
             // 
@@ -1988,8 +1989,9 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo.Location = new System.Drawing.Point(60, 15);
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo.Name = "comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo";
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo.Size = new System.Drawing.Size(40, 21);
-            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo.TabIndex = 91;
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo.TabIndex = 115;
             this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo.Text = "00";
+            this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo.SelectedIndexChanged += new System.EventHandler(this.comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo_SelectedIndexChanged);
             // 
             // groupBox3
             // 
@@ -2002,13 +2004,13 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Informações referente as Notas Fiscais de Entrada:";
             // 
-            // comboDetalhesFiscais_Beneficio
+            // comboDetalhesFiscais_BeneficioSped
             // 
-            this.comboDetalhesFiscais_Beneficio.FormattingEnabled = true;
-            this.comboDetalhesFiscais_Beneficio.Location = new System.Drawing.Point(690, 3);
-            this.comboDetalhesFiscais_Beneficio.Name = "comboDetalhesFiscais_Beneficio";
-            this.comboDetalhesFiscais_Beneficio.Size = new System.Drawing.Size(100, 23);
-            this.comboDetalhesFiscais_Beneficio.TabIndex = 34;
+            this.comboDetalhesFiscais_BeneficioSped.FormattingEnabled = true;
+            this.comboDetalhesFiscais_BeneficioSped.Location = new System.Drawing.Point(690, 3);
+            this.comboDetalhesFiscais_BeneficioSped.Name = "comboDetalhesFiscais_BeneficioSped";
+            this.comboDetalhesFiscais_BeneficioSped.Size = new System.Drawing.Size(100, 23);
+            this.comboDetalhesFiscais_BeneficioSped.TabIndex = 111;
             // 
             // botaoDetalhesFiscais_CST_CSOSN
             // 
@@ -2016,6 +2018,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoDetalhesFiscais_CST_CSOSN.Name = "botaoDetalhesFiscais_CST_CSOSN";
             this.botaoDetalhesFiscais_CST_CSOSN.Size = new System.Drawing.Size(23, 23);
             this.botaoDetalhesFiscais_CST_CSOSN.TabIndex = 33;
+            this.botaoDetalhesFiscais_CST_CSOSN.TabStop = false;
             this.botaoDetalhesFiscais_CST_CSOSN.UseVisualStyleBackColor = true;
             this.botaoDetalhesFiscais_CST_CSOSN.Click += new System.EventHandler(this.botaoDetalhesFiscais_CST_CSOSN_Click);
             // 
@@ -2025,7 +2028,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_CST_CSOSN_Descricao.Location = new System.Drawing.Point(519, 3);
             this.comboDetalhesFiscais_CST_CSOSN_Descricao.Name = "comboDetalhesFiscais_CST_CSOSN_Descricao";
             this.comboDetalhesFiscais_CST_CSOSN_Descricao.Size = new System.Drawing.Size(84, 23);
-            this.comboDetalhesFiscais_CST_CSOSN_Descricao.TabIndex = 32;
+            this.comboDetalhesFiscais_CST_CSOSN_Descricao.TabIndex = 110;
             // 
             // label93
             // 
@@ -2043,7 +2046,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboDetalhesFiscais_CST_CSOSN_Codigo.Location = new System.Drawing.Point(467, 3);
             this.comboDetalhesFiscais_CST_CSOSN_Codigo.Name = "comboDetalhesFiscais_CST_CSOSN_Codigo";
             this.comboDetalhesFiscais_CST_CSOSN_Codigo.Size = new System.Drawing.Size(50, 23);
-            this.comboDetalhesFiscais_CST_CSOSN_Codigo.TabIndex = 30;
+            this.comboDetalhesFiscais_CST_CSOSN_Codigo.TabIndex = 109;
             // 
             // label92
             // 
@@ -2068,7 +2071,7 @@ namespace SisCom.Aplicacao.Formularios
             // panel3
             // 
             this.panel3.Controls.Add(this.label94);
-            this.panel3.Controls.Add(this.comboDetalhesFiscais_Beneficio);
+            this.panel3.Controls.Add(this.comboDetalhesFiscais_BeneficioSped);
             this.panel3.Controls.Add(this.botaoDetalhesFiscais_CST_CSOSN);
             this.panel3.Controls.Add(this.comboDetalhesFiscais_CST_CSOSN_Descricao);
             this.panel3.Controls.Add(this.label93);
@@ -2121,7 +2124,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textObservacao.Multiline = true;
             this.textObservacao.Name = "textObservacao";
             this.textObservacao.Size = new System.Drawing.Size(617, 40);
-            this.textObservacao.TabIndex = 20;
+            this.textObservacao.TabIndex = 9;
             // 
             // label16
             // 
@@ -2149,16 +2152,17 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoFabricante.Name = "botaoFabricante";
             this.botaoFabricante.Size = new System.Drawing.Size(23, 23);
             this.botaoFabricante.TabIndex = 17;
+            this.botaoFabricante.TabStop = false;
             this.botaoFabricante.UseVisualStyleBackColor = true;
             this.botaoFabricante.Click += new System.EventHandler(this.botaoFabricante_Click);
             // 
-            // numericTributacao_ECFNFCeNFCeAliquota
+            // numericTributacao_ECFNFCeNFCeAliquotaICMS
             // 
-            this.numericTributacao_ECFNFCeNFCeAliquota.DecimalPlaces = 2;
-            this.numericTributacao_ECFNFCeNFCeAliquota.Location = new System.Drawing.Point(103, 41);
-            this.numericTributacao_ECFNFCeNFCeAliquota.Name = "numericTributacao_ECFNFCeNFCeAliquota";
-            this.numericTributacao_ECFNFCeNFCeAliquota.Size = new System.Drawing.Size(81, 23);
-            this.numericTributacao_ECFNFCeNFCeAliquota.TabIndex = 93;
+            this.numericTributacao_ECFNFCeNFCeAliquotaICMS.DecimalPlaces = 2;
+            this.numericTributacao_ECFNFCeNFCeAliquotaICMS.Location = new System.Drawing.Point(103, 41);
+            this.numericTributacao_ECFNFCeNFCeAliquotaICMS.Name = "numericTributacao_ECFNFCeNFCeAliquotaICMS";
+            this.numericTributacao_ECFNFCeNFCeAliquotaICMS.Size = new System.Drawing.Size(81, 23);
+            this.numericTributacao_ECFNFCeNFCeAliquotaICMS.TabIndex = 88;
             // 
             // tabControl
             // 
@@ -2250,8 +2254,8 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.groupBox2);
             this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.dateEstoque_AlteracaoPreco);
             this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.dateEstoque_UltimaEntrada);
-            this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.numericEstoque_PrecoLiquido);
-            this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.numericEstoque_PrecoBruto);
+            this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.numericEstoque_PesoLiquido);
+            this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.numericEstoque_PesoBruto);
             this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.textEstoque_Pratileira);
             this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.comboEstoque_Unidade);
             this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.numericEstoque_EstoqueMinimo);
@@ -2275,7 +2279,7 @@ namespace SisCom.Aplicacao.Formularios
             this.checkDesativado.Location = new System.Drawing.Point(5, 389);
             this.checkDesativado.Name = "checkDesativado";
             this.checkDesativado.Size = new System.Drawing.Size(84, 19);
-            this.checkDesativado.TabIndex = 99;
+            this.checkDesativado.TabIndex = 94;
             this.checkDesativado.Text = "Desativado";
             this.checkDesativado.UseVisualStyleBackColor = true;
             // 
@@ -2285,7 +2289,7 @@ namespace SisCom.Aplicacao.Formularios
             this.checkNaoControlarEstoque.Location = new System.Drawing.Point(5, 370);
             this.checkNaoControlarEstoque.Name = "checkNaoControlarEstoque";
             this.checkNaoControlarEstoque.Size = new System.Drawing.Size(146, 19);
-            this.checkNaoControlarEstoque.TabIndex = 98;
+            this.checkNaoControlarEstoque.TabIndex = 93;
             this.checkNaoControlarEstoque.Text = "Não Controlar Estoque";
             this.checkNaoControlarEstoque.UseVisualStyleBackColor = true;
             // 
@@ -2295,7 +2299,7 @@ namespace SisCom.Aplicacao.Formularios
             this.checkNaoVender.Location = new System.Drawing.Point(5, 351);
             this.checkNaoVender.Name = "checkNaoVender";
             this.checkNaoVender.Size = new System.Drawing.Size(87, 19);
-            this.checkNaoVender.TabIndex = 97;
+            this.checkNaoVender.TabIndex = 92;
             this.checkNaoVender.Text = "Não Vender";
             this.checkNaoVender.UseVisualStyleBackColor = true;
             // 
@@ -2304,7 +2308,7 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox2.Controls.Add(this.comboTributacaoECFNFCeCFOP);
             this.groupBox2.Controls.Add(this.textTributacao_ECFNFCeTipoServicoMunicipal);
             this.groupBox2.Controls.Add(this.comboTributacao_ECFNFCeTipoServico);
-            this.groupBox2.Controls.Add(this.numericTributacao_ECFNFCeNFCeAliquota);
+            this.groupBox2.Controls.Add(this.numericTributacao_ECFNFCeNFCeAliquotaICMS);
             this.groupBox2.Controls.Add(this.comboTributacao_ECFNFCeSituacao);
             this.groupBox2.Controls.Add(this.label81);
             this.groupBox2.Controls.Add(this.label80);
@@ -2326,14 +2330,14 @@ namespace SisCom.Aplicacao.Formularios
             this.comboTributacaoECFNFCeCFOP.Location = new System.Drawing.Point(103, 64);
             this.comboTributacaoECFNFCeCFOP.Name = "comboTributacaoECFNFCeCFOP";
             this.comboTributacaoECFNFCeCFOP.Size = new System.Drawing.Size(81, 23);
-            this.comboTributacaoECFNFCeCFOP.TabIndex = 97;
+            this.comboTributacaoECFNFCeCFOP.TabIndex = 89;
             // 
             // textTributacao_ECFNFCeTipoServicoMunicipal
             // 
             this.textTributacao_ECFNFCeTipoServicoMunicipal.Location = new System.Drawing.Point(103, 110);
             this.textTributacao_ECFNFCeTipoServicoMunicipal.Name = "textTributacao_ECFNFCeTipoServicoMunicipal";
             this.textTributacao_ECFNFCeTipoServicoMunicipal.Size = new System.Drawing.Size(81, 23);
-            this.textTributacao_ECFNFCeTipoServicoMunicipal.TabIndex = 96;
+            this.textTributacao_ECFNFCeTipoServicoMunicipal.TabIndex = 91;
             // 
             // comboTributacao_ECFNFCeTipoServico
             // 
@@ -2342,7 +2346,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboTributacao_ECFNFCeTipoServico.Location = new System.Drawing.Point(103, 87);
             this.comboTributacao_ECFNFCeTipoServico.Name = "comboTributacao_ECFNFCeTipoServico";
             this.comboTributacao_ECFNFCeTipoServico.Size = new System.Drawing.Size(81, 23);
-            this.comboTributacao_ECFNFCeTipoServico.TabIndex = 95;
+            this.comboTributacao_ECFNFCeTipoServico.TabIndex = 90;
             // 
             // comboTributacao_ECFNFCeSituacao
             // 
@@ -2351,7 +2355,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboTributacao_ECFNFCeSituacao.Location = new System.Drawing.Point(103, 18);
             this.comboTributacao_ECFNFCeSituacao.Name = "comboTributacao_ECFNFCeSituacao";
             this.comboTributacao_ECFNFCeSituacao.Size = new System.Drawing.Size(81, 23);
-            this.comboTributacao_ECFNFCeSituacao.TabIndex = 91;
+            this.comboTributacao_ECFNFCeSituacao.TabIndex = 87;
             // 
             // label81
             // 
@@ -2410,7 +2414,7 @@ namespace SisCom.Aplicacao.Formularios
             this.dateEstoque_AlteracaoPreco.Location = new System.Drawing.Point(114, 177);
             this.dateEstoque_AlteracaoPreco.Name = "dateEstoque_AlteracaoPreco";
             this.dateEstoque_AlteracaoPreco.Size = new System.Drawing.Size(81, 23);
-            this.dateEstoque_AlteracaoPreco.TabIndex = 95;
+            this.dateEstoque_AlteracaoPreco.TabIndex = 86;
             // 
             // dateEstoque_UltimaEntrada
             // 
@@ -2419,30 +2423,30 @@ namespace SisCom.Aplicacao.Formularios
             this.dateEstoque_UltimaEntrada.Location = new System.Drawing.Point(114, 154);
             this.dateEstoque_UltimaEntrada.Name = "dateEstoque_UltimaEntrada";
             this.dateEstoque_UltimaEntrada.Size = new System.Drawing.Size(81, 23);
-            this.dateEstoque_UltimaEntrada.TabIndex = 94;
+            this.dateEstoque_UltimaEntrada.TabIndex = 85;
             // 
-            // numericEstoque_PrecoLiquido
+            // numericEstoque_PesoLiquido
             // 
-            this.numericEstoque_PrecoLiquido.DecimalPlaces = 2;
-            this.numericEstoque_PrecoLiquido.Location = new System.Drawing.Point(114, 131);
-            this.numericEstoque_PrecoLiquido.Name = "numericEstoque_PrecoLiquido";
-            this.numericEstoque_PrecoLiquido.Size = new System.Drawing.Size(81, 23);
-            this.numericEstoque_PrecoLiquido.TabIndex = 93;
+            this.numericEstoque_PesoLiquido.DecimalPlaces = 2;
+            this.numericEstoque_PesoLiquido.Location = new System.Drawing.Point(114, 131);
+            this.numericEstoque_PesoLiquido.Name = "numericEstoque_PesoLiquido";
+            this.numericEstoque_PesoLiquido.Size = new System.Drawing.Size(81, 23);
+            this.numericEstoque_PesoLiquido.TabIndex = 84;
             // 
-            // numericEstoque_PrecoBruto
+            // numericEstoque_PesoBruto
             // 
-            this.numericEstoque_PrecoBruto.DecimalPlaces = 2;
-            this.numericEstoque_PrecoBruto.Location = new System.Drawing.Point(114, 108);
-            this.numericEstoque_PrecoBruto.Name = "numericEstoque_PrecoBruto";
-            this.numericEstoque_PrecoBruto.Size = new System.Drawing.Size(81, 23);
-            this.numericEstoque_PrecoBruto.TabIndex = 92;
+            this.numericEstoque_PesoBruto.DecimalPlaces = 2;
+            this.numericEstoque_PesoBruto.Location = new System.Drawing.Point(114, 108);
+            this.numericEstoque_PesoBruto.Name = "numericEstoque_PesoBruto";
+            this.numericEstoque_PesoBruto.Size = new System.Drawing.Size(81, 23);
+            this.numericEstoque_PesoBruto.TabIndex = 83;
             // 
             // textEstoque_Pratileira
             // 
             this.textEstoque_Pratileira.Location = new System.Drawing.Point(114, 85);
             this.textEstoque_Pratileira.Name = "textEstoque_Pratileira";
             this.textEstoque_Pratileira.Size = new System.Drawing.Size(81, 23);
-            this.textEstoque_Pratileira.TabIndex = 91;
+            this.textEstoque_Pratileira.TabIndex = 82;
             // 
             // comboEstoque_Unidade
             // 
@@ -2451,7 +2455,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboEstoque_Unidade.Location = new System.Drawing.Point(114, 62);
             this.comboEstoque_Unidade.Name = "comboEstoque_Unidade";
             this.comboEstoque_Unidade.Size = new System.Drawing.Size(81, 23);
-            this.comboEstoque_Unidade.TabIndex = 90;
+            this.comboEstoque_Unidade.TabIndex = 81;
             // 
             // numericEstoque_EstoqueMinimo
             // 
@@ -2459,7 +2463,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericEstoque_EstoqueMinimo.Location = new System.Drawing.Point(114, 39);
             this.numericEstoque_EstoqueMinimo.Name = "numericEstoque_EstoqueMinimo";
             this.numericEstoque_EstoqueMinimo.Size = new System.Drawing.Size(81, 23);
-            this.numericEstoque_EstoqueMinimo.TabIndex = 89;
+            this.numericEstoque_EstoqueMinimo.TabIndex = 80;
             // 
             // label75
             // 
@@ -2632,7 +2636,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericMargem_PrecoC.Location = new System.Drawing.Point(139, 239);
             this.numericMargem_PrecoC.Name = "numericMargem_PrecoC";
             this.numericMargem_PrecoC.Size = new System.Drawing.Size(100, 23);
-            this.numericMargem_PrecoC.TabIndex = 108;
+            this.numericMargem_PrecoC.TabIndex = 74;
             // 
             // label59
             // 
@@ -2680,7 +2684,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericMargem_PrecoB.Location = new System.Drawing.Point(139, 189);
             this.numericMargem_PrecoB.Name = "numericMargem_PrecoB";
             this.numericMargem_PrecoB.Size = new System.Drawing.Size(100, 23);
-            this.numericMargem_PrecoB.TabIndex = 103;
+            this.numericMargem_PrecoB.TabIndex = 73;
             // 
             // label55
             // 
@@ -2728,7 +2732,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericMargem_PrecoA.Location = new System.Drawing.Point(139, 139);
             this.numericMargem_PrecoA.Name = "numericMargem_PrecoA";
             this.numericMargem_PrecoA.Size = new System.Drawing.Size(100, 23);
-            this.numericMargem_PrecoA.TabIndex = 98;
+            this.numericMargem_PrecoA.TabIndex = 72;
             // 
             // label52
             // 
@@ -2776,7 +2780,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericMargem_PrecoVenda.Location = new System.Drawing.Point(139, 89);
             this.numericMargem_PrecoVenda.Name = "numericMargem_PrecoVenda";
             this.numericMargem_PrecoVenda.Size = new System.Drawing.Size(100, 23);
-            this.numericMargem_PrecoVenda.TabIndex = 93;
+            this.numericMargem_PrecoVenda.TabIndex = 71;
             // 
             // label50
             // 
@@ -2824,7 +2828,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericMargem_MargemSugerido.Location = new System.Drawing.Point(137, 39);
             this.numericMargem_MargemSugerido.Name = "numericMargem_MargemSugerido";
             this.numericMargem_MargemSugerido.Size = new System.Drawing.Size(60, 23);
-            this.numericMargem_MargemSugerido.TabIndex = 88;
+            this.numericMargem_MargemSugerido.TabIndex = 70;
             // 
             // labelMargem_PontoEquilibrio
             // 
@@ -2900,7 +2904,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_ICMSFronteira.Location = new System.Drawing.Point(124, 60);
             this.numericPreco_ICMSFronteira.Name = "numericPreco_ICMSFronteira";
             this.numericPreco_ICMSFronteira.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_ICMSFronteira.TabIndex = 65;
+            this.numericPreco_ICMSFronteira.TabIndex = 52;
             // 
             // labelPreco_ValorICMSCompra
             // 
@@ -2918,7 +2922,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_ICMSCompra.Location = new System.Drawing.Point(124, 35);
             this.numericPreco_ICMSCompra.Name = "numericPreco_ICMSCompra";
             this.numericPreco_ICMSCompra.Size = new System.Drawing.Size(60, 23);
-            this.numericPreco_ICMSCompra.TabIndex = 63;
+            this.numericPreco_ICMSCompra.TabIndex = 51;
             // 
             // numericPreco_PrecoCompra
             // 
@@ -2926,7 +2930,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_PrecoCompra.Location = new System.Drawing.Point(124, 10);
             this.numericPreco_PrecoCompra.Name = "numericPreco_PrecoCompra";
             this.numericPreco_PrecoCompra.Size = new System.Drawing.Size(130, 23);
-            this.numericPreco_PrecoCompra.TabIndex = 62;
+            this.numericPreco_PrecoCompra.TabIndex = 50;
             // 
             // label19
             // 
@@ -2998,7 +3002,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_OutrosNVE.Location = new System.Drawing.Point(301, 11);
             this.numericDetalhesFiscais_OutrosNVE.Name = "numericDetalhesFiscais_OutrosNVE";
             this.numericDetalhesFiscais_OutrosNVE.Size = new System.Drawing.Size(45, 22);
-            this.numericDetalhesFiscais_OutrosNVE.TabIndex = 108;
+            this.numericDetalhesFiscais_OutrosNVE.TabIndex = 147;
             // 
             // label128
             // 
@@ -3016,7 +3020,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_OutrosPMC.Location = new System.Drawing.Point(126, 11);
             this.numericDetalhesFiscais_OutrosPMC.Name = "numericDetalhesFiscais_OutrosPMC";
             this.numericDetalhesFiscais_OutrosPMC.Size = new System.Drawing.Size(45, 22);
-            this.numericDetalhesFiscais_OutrosPMC.TabIndex = 106;
+            this.numericDetalhesFiscais_OutrosPMC.TabIndex = 146;
             // 
             // groupBox11
             // 
@@ -3044,6 +3048,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoNFSTotalTributos.Name = "botaoNFSTotalTributos";
             this.botaoNFSTotalTributos.Size = new System.Drawing.Size(23, 23);
             this.botaoNFSTotalTributos.TabIndex = 109;
+            this.botaoNFSTotalTributos.TabStop = false;
             this.botaoNFSTotalTributos.UseVisualStyleBackColor = true;
             // 
             // numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal
@@ -3052,7 +3057,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal.Location = new System.Drawing.Point(315, 35);
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal.Name = "numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal";
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal.Size = new System.Drawing.Size(45, 20);
-            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal.TabIndex = 108;
+            this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal.TabIndex = 152;
             // 
             // label122
             // 
@@ -3078,11 +3083,11 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlDadosGerais.Controls.Add(this.label15);
             this.pnlDadosGerais.Controls.Add(this.label14);
             this.pnlDadosGerais.Controls.Add(this.comboFabricante);
-            this.pnlDadosGerais.Controls.Add(this.comboSubGrupo);
+            this.pnlDadosGerais.Controls.Add(this.comboSubGrupoMercadoria);
             this.pnlDadosGerais.Controls.Add(this.comboFornecedor);
-            this.pnlDadosGerais.Controls.Add(this.comboGrupoProduto);
+            this.pnlDadosGerais.Controls.Add(this.comboGrupoMercadoria);
             this.pnlDadosGerais.Controls.Add(this.label13);
-            this.pnlDadosGerais.Controls.Add(this.textMercadoria);
+            this.pnlDadosGerais.Controls.Add(this.textNomeMercadoria);
             this.pnlDadosGerais.Controls.Add(this.label12);
             this.pnlDadosGerais.Controls.Add(this.textCodigoNFe);
             this.pnlDadosGerais.Controls.Add(this.label11);
@@ -3100,6 +3105,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoSubGrupo.Name = "botaoSubGrupo";
             this.botaoSubGrupo.Size = new System.Drawing.Size(23, 23);
             this.botaoSubGrupo.TabIndex = 16;
+            this.botaoSubGrupo.TabStop = false;
             this.botaoSubGrupo.UseVisualStyleBackColor = true;
             this.botaoSubGrupo.Click += new System.EventHandler(this.botaoSubGrupo_Click);
             // 
@@ -3109,7 +3115,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoFornecedor.Name = "botaoFornecedor";
             this.botaoFornecedor.Size = new System.Drawing.Size(23, 23);
             this.botaoFornecedor.TabIndex = 15;
+            this.botaoFornecedor.TabStop = false;
             this.botaoFornecedor.UseVisualStyleBackColor = true;
+            this.botaoFornecedor.Click += new System.EventHandler(this.botaoFornecedor_Click);
             // 
             // botaoGrupoProduto
             // 
@@ -3117,6 +3125,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoGrupoProduto.Name = "botaoGrupoProduto";
             this.botaoGrupoProduto.Size = new System.Drawing.Size(23, 23);
             this.botaoGrupoProduto.TabIndex = 14;
+            this.botaoGrupoProduto.TabStop = false;
             this.botaoGrupoProduto.UseVisualStyleBackColor = true;
             this.botaoGrupoProduto.Click += new System.EventHandler(this.botaoGrupoProduto_Click);
             // 
@@ -3146,15 +3155,15 @@ namespace SisCom.Aplicacao.Formularios
             this.comboFabricante.Location = new System.Drawing.Point(539, 74);
             this.comboFabricante.Name = "comboFabricante";
             this.comboFabricante.Size = new System.Drawing.Size(205, 23);
-            this.comboFabricante.TabIndex = 11;
+            this.comboFabricante.TabIndex = 8;
             // 
-            // comboSubGrupo
+            // comboSubGrupoMercadoria
             // 
-            this.comboSubGrupo.FormattingEnabled = true;
-            this.comboSubGrupo.Location = new System.Drawing.Point(539, 51);
-            this.comboSubGrupo.Name = "comboSubGrupo";
-            this.comboSubGrupo.Size = new System.Drawing.Size(205, 23);
-            this.comboSubGrupo.TabIndex = 10;
+            this.comboSubGrupoMercadoria.FormattingEnabled = true;
+            this.comboSubGrupoMercadoria.Location = new System.Drawing.Point(539, 51);
+            this.comboSubGrupoMercadoria.Name = "comboSubGrupoMercadoria";
+            this.comboSubGrupoMercadoria.Size = new System.Drawing.Size(205, 23);
+            this.comboSubGrupoMercadoria.TabIndex = 6;
             // 
             // comboFornecedor
             // 
@@ -3162,15 +3171,15 @@ namespace SisCom.Aplicacao.Formularios
             this.comboFornecedor.Location = new System.Drawing.Point(151, 74);
             this.comboFornecedor.Name = "comboFornecedor";
             this.comboFornecedor.Size = new System.Drawing.Size(291, 23);
-            this.comboFornecedor.TabIndex = 9;
+            this.comboFornecedor.TabIndex = 7;
             // 
-            // comboGrupoProduto
+            // comboGrupoMercadoria
             // 
-            this.comboGrupoProduto.FormattingEnabled = true;
-            this.comboGrupoProduto.Location = new System.Drawing.Point(151, 51);
-            this.comboGrupoProduto.Name = "comboGrupoProduto";
-            this.comboGrupoProduto.Size = new System.Drawing.Size(291, 23);
-            this.comboGrupoProduto.TabIndex = 8;
+            this.comboGrupoMercadoria.FormattingEnabled = true;
+            this.comboGrupoMercadoria.Location = new System.Drawing.Point(151, 51);
+            this.comboGrupoMercadoria.Name = "comboGrupoMercadoria";
+            this.comboGrupoMercadoria.Size = new System.Drawing.Size(291, 23);
+            this.comboGrupoMercadoria.TabIndex = 5;
             // 
             // label13
             // 
@@ -3182,12 +3191,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label13.TabIndex = 7;
             this.label13.Text = "Mercadoria: ";
             // 
-            // textMercadoria
+            // textNomeMercadoria
             // 
-            this.textMercadoria.Location = new System.Drawing.Point(151, 28);
-            this.textMercadoria.Name = "textMercadoria";
-            this.textMercadoria.Size = new System.Drawing.Size(617, 23);
-            this.textMercadoria.TabIndex = 6;
+            this.textNomeMercadoria.Location = new System.Drawing.Point(151, 28);
+            this.textNomeMercadoria.Name = "textNomeMercadoria";
+            this.textNomeMercadoria.Size = new System.Drawing.Size(617, 23);
+            this.textNomeMercadoria.TabIndex = 4;
             // 
             // label12
             // 
@@ -3204,7 +3213,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textCodigoNFe.Location = new System.Drawing.Point(611, 5);
             this.textCodigoNFe.Name = "textCodigoNFe";
             this.textCodigoNFe.Size = new System.Drawing.Size(157, 23);
-            this.textCodigoNFe.TabIndex = 4;
+            this.textCodigoNFe.TabIndex = 3;
             // 
             // label11
             // 
@@ -3267,7 +3276,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoFechar
             // 
             this.botaoFechar.Image = ((System.Drawing.Image)(resources.GetObject("botaoFechar.Image")));
-            this.botaoFechar.Location = new System.Drawing.Point(477, 0);
+            this.botaoFechar.Location = new System.Drawing.Point(530, 0);
             this.botaoFechar.Name = "botaoFechar";
             this.botaoFechar.Size = new System.Drawing.Size(53, 56);
             this.botaoFechar.TabIndex = 20;
@@ -3277,7 +3286,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoNovo
             // 
             this.botaoNovo.Image = ((System.Drawing.Image)(resources.GetObject("botaoNovo.Image")));
-            this.botaoNovo.Location = new System.Drawing.Point(424, 0);
+            this.botaoNovo.Location = new System.Drawing.Point(477, 0);
             this.botaoNovo.Name = "botaoNovo";
             this.botaoNovo.Size = new System.Drawing.Size(53, 56);
             this.botaoNovo.TabIndex = 19;
@@ -3291,6 +3300,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoExcluir.Size = new System.Drawing.Size(53, 56);
             this.botaoExcluir.TabIndex = 18;
             this.botaoExcluir.UseVisualStyleBackColor = true;
+            this.botaoExcluir.Click += new System.EventHandler(this.botaoExcluir_Click);
             // 
             // botaoGeradorEtiquetas
             // 
@@ -3325,7 +3335,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(486, 56);
+            this.label7.Location = new System.Drawing.Point(539, 56);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 12);
             this.label7.TabIndex = 29;
@@ -3336,7 +3346,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(436, 56);
+            this.label6.Location = new System.Drawing.Point(489, 56);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 28;
@@ -3357,6 +3367,8 @@ namespace SisCom.Aplicacao.Formularios
             // pnlMenuBotaoBotao
             // 
             this.pnlMenuBotaoBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.pnlMenuBotaoBotao.Controls.Add(this.label39);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoGravar);
             this.pnlMenuBotaoBotao.Controls.Add(this.label7);
             this.pnlMenuBotaoBotao.Controls.Add(this.label6);
             this.pnlMenuBotaoBotao.Controls.Add(this.label5);
@@ -3375,10 +3387,31 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoClonarMercadoria);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoPosterior);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoAnterior);
-            this.pnlMenuBotaoBotao.Location = new System.Drawing.Point(250, 0);
+            this.pnlMenuBotaoBotao.Location = new System.Drawing.Point(196, 0);
             this.pnlMenuBotaoBotao.Name = "pnlMenuBotaoBotao";
-            this.pnlMenuBotaoBotao.Size = new System.Drawing.Size(531, 83);
+            this.pnlMenuBotaoBotao.Size = new System.Drawing.Size(585, 83);
             this.pnlMenuBotaoBotao.TabIndex = 2;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label39.Location = new System.Drawing.Point(434, 56);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(33, 12);
+            this.label39.TabIndex = 41;
+            this.label39.Text = "Gravar";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoGravar
+            // 
+            this.botaoGravar.Image = ((System.Drawing.Image)(resources.GetObject("botaoGravar.Image")));
+            this.botaoGravar.Location = new System.Drawing.Point(424, 0);
+            this.botaoGravar.Name = "botaoGravar";
+            this.botaoGravar.Size = new System.Drawing.Size(53, 56);
+            this.botaoGravar.TabIndex = 40;
+            this.botaoGravar.UseVisualStyleBackColor = true;
+            this.botaoGravar.Click += new System.EventHandler(this.botaoGravar_Click);
             // 
             // label2
             // 
@@ -3460,6 +3493,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboPesquisarTipoFiltro.Name = "comboPesquisarTipoFiltro";
             this.comboPesquisarTipoFiltro.Size = new System.Drawing.Size(121, 23);
             this.comboPesquisarTipoFiltro.TabIndex = 1;
+            this.comboPesquisarTipoFiltro.TabStop = false;
             // 
             // pnlPesquisar
             // 
@@ -3490,6 +3524,8 @@ namespace SisCom.Aplicacao.Formularios
             this.comboPesquisarPesquisa.Name = "comboPesquisarPesquisa";
             this.comboPesquisarPesquisa.Size = new System.Drawing.Size(450, 23);
             this.comboPesquisarPesquisa.TabIndex = 3;
+            this.comboPesquisarPesquisa.TabStop = false;
+            this.comboPesquisarPesquisa.SelectedIndexChanged += new System.EventHandler(this.comboPesquisarPesquisa_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -3505,7 +3541,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 749);
+            this.ClientSize = new System.Drawing.Size(783, 720);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.pnlDadosGerais);
@@ -3513,8 +3549,7 @@ namespace SisCom.Aplicacao.Formularios
             this.Controls.Add(this.pnlPesquisar);
             this.Name = "frmCadastroMercadorias";
             this.Text = "Cadastro de Mercadorias";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCadastrosMercadorias_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
@@ -3580,7 +3615,7 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox3.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericTributacao_ECFNFCeNFCeAliquota)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTributacao_ECFNFCeNFCeAliquotaICMS)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tbsPrecoEstoque.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -3589,8 +3624,8 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlPrecoEstoquePesoTributacao.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericEstoque_PrecoLiquido)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericEstoque_PrecoBruto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericEstoque_PesoLiquido)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericEstoque_PesoBruto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericEstoque_EstoqueMinimo)).EndInit();
             this.pnlPrecoEstoquePreco.ResumeLayout(false);
             this.pnlPrecoEstoquePreco.PerformLayout();
@@ -3636,12 +3671,10 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label labelPreco_ValorICMSVenda;
         private System.Windows.Forms.Label labelPreco_ValorImpostosFederais;
         private System.Windows.Forms.Label labelPreco_ValorCustoFixo;
-        private System.Windows.Forms.ComboBox comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao;
         private System.Windows.Forms.Label label114;
-        private System.Windows.Forms.NumericUpDown comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota;
+        private System.Windows.Forms.NumericUpDown numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota;
         private System.Windows.Forms.Label label115;
-        private System.Windows.Forms.ComboBox comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Codigo;
-        private System.Windows.Forms.ComboBox comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao;
+        private System.Windows.Forms.ComboBox comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo;
         private System.Windows.Forms.Label label116;
         private System.Windows.Forms.NumericUpDown numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota;
         private System.Windows.Forms.Label label117;
@@ -3775,19 +3808,17 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.NumericUpDown numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Aliquota;
         private System.Windows.Forms.Label label95;
         private System.Windows.Forms.ComboBox comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo;
-        private System.Windows.Forms.ComboBox comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label99;
         private System.Windows.Forms.NumericUpDown numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Aliquota;
         private System.Windows.Forms.Label label100;
         private System.Windows.Forms.ComboBox comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo;
-        private System.Windows.Forms.ComboBox comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao;
         private System.Windows.Forms.Label label97;
         private System.Windows.Forms.NumericUpDown numericDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Aliquota;
         private System.Windows.Forms.Label label98;
         private System.Windows.Forms.ComboBox comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ComboBox comboDetalhesFiscais_Beneficio;
+        private System.Windows.Forms.ComboBox comboDetalhesFiscais_BeneficioSped;
         private System.Windows.Forms.Button botaoDetalhesFiscais_CST_CSOSN;
         private System.Windows.Forms.ComboBox comboDetalhesFiscais_CST_CSOSN_Descricao;
         private System.Windows.Forms.Label label93;
@@ -3802,7 +3833,7 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button botaoFabricante;
-        private System.Windows.Forms.NumericUpDown numericTributacao_ECFNFCeNFCeAliquota;
+        private System.Windows.Forms.NumericUpDown numericTributacao_ECFNFCeNFCeAliquotaICMS;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tbsPrecoEstoque;
         private System.Windows.Forms.Panel panel1;
@@ -3826,8 +3857,8 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label label76;
         private System.Windows.Forms.DateTimePicker dateEstoque_AlteracaoPreco;
         private System.Windows.Forms.DateTimePicker dateEstoque_UltimaEntrada;
-        private System.Windows.Forms.NumericUpDown numericEstoque_PrecoLiquido;
-        private System.Windows.Forms.NumericUpDown numericEstoque_PrecoBruto;
+        private System.Windows.Forms.NumericUpDown numericEstoque_PesoLiquido;
+        private System.Windows.Forms.NumericUpDown numericEstoque_PesoBruto;
         private System.Windows.Forms.TextBox textEstoque_Pratileira;
         private System.Windows.Forms.ComboBox comboEstoque_Unidade;
         private System.Windows.Forms.NumericUpDown numericEstoque_EstoqueMinimo;
@@ -3892,11 +3923,11 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox comboFabricante;
-        private System.Windows.Forms.ComboBox comboSubGrupo;
+        private System.Windows.Forms.ComboBox comboSubGrupoMercadoria;
         private System.Windows.Forms.ComboBox comboFornecedor;
-        private System.Windows.Forms.ComboBox comboGrupoProduto;
+        private System.Windows.Forms.ComboBox comboGrupoMercadoria;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textMercadoria;
+        private System.Windows.Forms.TextBox textNomeMercadoria;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textCodigoNFe;
         private System.Windows.Forms.Label label11;
@@ -3928,5 +3959,11 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboPesquisarPesquisa;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Descricao;
+        private System.Windows.Forms.TextBox textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao;
+        private System.Windows.Forms.TextBox textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao;
+        private System.Windows.Forms.TextBox textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Button botaoGravar;
     }
 }

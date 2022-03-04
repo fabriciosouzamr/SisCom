@@ -15,11 +15,4 @@ namespace SisCom.Aplicacao.ViewModels
         public string Codigo { get; set; }
         public bool NaoVender { get; set; }
     }
-
-    public class GrupoMercadoriaComboViewModel
-    {
-        [Key]
-        public Guid Id { get; set; }
-        public string Nome { get; set; }
-    }
 }

@@ -9,6 +9,7 @@ namespace SisCom.Aplicacao.ViewModels
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string CodigoIBGE { get; set; }
+        public Guid EstadoId { get; set; }
     }
 
     public class CidadeComboViewModel

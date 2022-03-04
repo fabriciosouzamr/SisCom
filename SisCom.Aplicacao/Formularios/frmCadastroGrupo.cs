@@ -87,7 +87,7 @@ namespace SisCom.Aplicacao.Formularios
             checkNaoVender.Checked = grupo.NaoVender;
         }
 
-        private async Task Navegar_PegarTodos(Guid Id, Declaracoes.Navegar Posicao)
+        private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.Navegar Posicao)
         {
             IEnumerable<GrupoMercadoriaViewModel> Data = await grupoController.ObterTodos();
             GrupoMercadoriaViewModel ItemAnterior = null;

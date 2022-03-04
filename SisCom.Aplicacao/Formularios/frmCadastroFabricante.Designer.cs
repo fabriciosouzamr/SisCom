@@ -150,8 +150,8 @@ namespace SisCom.Aplicacao.Formularios
             this.Controls.Add(this.dataFabricante);
             this.Controls.Add(this.pnlMenuBotao);
             this.Name = "frmCadastroFabricante";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Fabricante";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCadastrosFabricante_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataFabricante)).EndInit();
             this.pnlMenuBotao.ResumeLayout(false);
             this.pnlMenuBotaoBotao.ResumeLayout(false);

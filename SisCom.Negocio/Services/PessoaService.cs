@@ -25,31 +25,55 @@ namespace SisCom.Negocio.Services
         {
             if (!RunValidation(new PessoaValidation(), Pessoa)) return;
 
-            if (_PessoaRepository.Search(f => f.CNPJ_CPF == Pessoa.CNPJ_CPF).Result.Any())
+            try
             {
-                Notify("Já existe uma pessoa com este C.P.F./C.N.P.J. informado.");
-                return;
-            }
+                var pessoa = await _PessoaRepository.Search(f => f.CNPJ_CPF == Pessoa.CNPJ_CPF);
 
-            await _PessoaRepository.Insert(Pessoa);
+                if (pessoa.Count() != 0)
+                {
+                    Notify("Já existe um fornecedor com este nome informado.");
+                    return;
+                }
+
+                await _PessoaRepository.Insert(Pessoa);
+
+                Notify("Gravação Efetuada.");
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public async Task Atualizar(Pessoa Pessoa)
+        public async Task Atualizar(Pessoa pessoa)
         {
-            if (!RunValidation(new PessoaValidation(), Pessoa)) return;
-
-            if (_PessoaRepository.Search(f => f.CNPJ_CPF == Pessoa.CNPJ_CPF && f.Id != Pessoa.Id).Result.Any())
+            try
             {
-                Notify("Já existe uma pessoa com este C.P.F./C.N.P.J. informado.");
-                return;
-            }
+                if (!RunValidation(new PessoaValidation(), pessoa)) return;
 
-            await _PessoaRepository.Update(Pessoa);
+                var exists = _PessoaRepository.Exists(f => f.CNPJ_CPF == pessoa.CNPJ_CPF && f.Id != pessoa.Id);
+
+                if (exists)
+                {
+                    Notify("Já existe uma pessoa com este C.P.F./C.N.P.J. informado.");
+                    return;
+                }
+
+                await _PessoaRepository.Update(pessoa);
+
+                Notify("Atualização Efetuada.");
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public async Task Remover(Guid id)
+        public async Task Excluir(Guid id)
         {
             await _PessoaRepository.Delete(id);
+
+            Notify("Exclusão Efetuada.");
         }
 
         public Task<IPagedList<Pessoa>> GetPagedList(FilteredPagedListParameters parameters)

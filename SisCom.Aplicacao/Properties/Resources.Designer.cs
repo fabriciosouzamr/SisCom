@@ -61,7 +61,7 @@ namespace SisCom.Aplicacao.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Data Source=.\sqlexpress;Initial Catalog=SisCom;User ID=sa;Password=832285;MultipleActiveResultSets=true;Trusted_Connection=True.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data Source=.\sqlexpress;Initial Catalog=SisCom;User ID=SisCom;Password=SisCom_123;MultipleActiveResultSets=true;Trusted_Connection=True.
         /// </summary>
         internal static string DefaultConnection {
             get {

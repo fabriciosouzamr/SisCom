@@ -4,7 +4,6 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Form1.cs" />
     <Compile Remove="Form1.Designer.cs" />
@@ -18,6 +17,8 @@
     <Compile Include="..\Combo_ComboBox.cs" Link="Compartilhado\Combo_ComboBox.cs" />
     <Compile Include="..\Data_DateTimePicker.cs" Link="Compartilhado\Data_DateTimePicker.cs" />
     <Compile Include="..\Grid_DataGridView.cs" Link="Compartilhado\Grid_DataGridView.cs" />
+    <Compile Include="..\NuvemFiscal.cs" Link="Compartilhado\NuvemFiscal.cs" />
+    <Compile Include="..\Texto_MaskedTextBox.cs" Link="Compartilhado\Texto_MaskedTextBox.cs" />
     <Compile Include="..\Texto_TextBox.cs" Link="Compartilhado\Texto_TextBox.cs" />
   </ItemGroup>
   <ItemGroup>

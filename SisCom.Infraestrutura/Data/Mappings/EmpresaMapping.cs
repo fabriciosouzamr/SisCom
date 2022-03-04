@@ -9,6 +9,8 @@ namespace SisCom.Infraestrutura.Data.Mappings
         {
             builder.HasKey(p => p.Id);
 
+            builder.OwnsOne(x => x.Endereco);
+
             builder.Property(p => p.Unidade)
                 .IsRequired()
                 .HasColumnType("varchar(100)");
@@ -33,18 +35,6 @@ namespace SisCom.Infraestrutura.Data.Mappings
 
             builder.Property(p => p.InscricaoEstadual_SubTributaria)
                 .HasColumnType("varchar(15)");
-
-            builder.Property(p => p.End_CEP)
-                .HasColumnType("varchar(8)");
-
-            builder.Property(p => p.End_Logradouro)
-                .HasColumnType("varchar(60)");
-
-            builder.Property(p => p.End_Numero)
-                .HasColumnType("varchar(10)");
-
-            builder.Property(p => p.End_Bairro)
-                .HasColumnType("varchar(50)");
 
             builder.Property(p => p.Telefone)
                 .HasColumnType("varchar(20)");

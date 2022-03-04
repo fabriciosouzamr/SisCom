@@ -1,4 +1,5 @@
-﻿using SisCom.Aplicacao.Classes;
+﻿using Funcoes.Interfaces;
+using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
@@ -16,11 +17,11 @@ namespace SisCom.Aplicacao.Controllers
         static CidadeService _CidadeService;
         private readonly MeuDbContext MeuDbContext;
 
-        public CidadeController(MeuDbContext MeuDbContext)
+        public CidadeController(MeuDbContext MeuDbContext, INotifier notifier)
         {
             this.MeuDbContext = MeuDbContext;
 
-            _CidadeService = new CidadeService(new CidadeRepository(this.MeuDbContext), null);
+            _CidadeService = new CidadeService(new CidadeRepository(this.MeuDbContext), notifier);
         }
 
         public async Task<CidadeViewModel> Adicionar(CidadeViewModel CidadeViewModel)

@@ -18,16 +18,6 @@ namespace SisCom.Infraestrutura.Data.Repository
 
         }
 
-        public override async Task<Estado> GetById(Guid id)
-        {
-            return await Db.Estados.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
-        }
-
-        public override async Task<List<Estado>> GetAll()
-        {
-            return await Db.Estados.AsNoTracking().ToListAsync();
-        }
-
         public async Task<IPagedList<Estado>> GetPagedList(FilteredPagedListParameters parameters)
         {
             var dadosFiltrados = Db.Estados

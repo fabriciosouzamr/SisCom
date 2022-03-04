@@ -1,5 +1,4 @@
 ﻿using Funcoes.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Formularios;
@@ -11,7 +10,7 @@ namespace SisCom.Aplicacao
 {
     public partial class frmMDI : FormMain
     {
-        public frmMDI(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory) : base(serviceProvider, dbCtxFactory)
+        public frmMDI(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
             InitializeComponent();
         }

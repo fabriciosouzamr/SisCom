@@ -1,4 +1,5 @@
-﻿using SisCom.Aplicacao.Classes;
+﻿using Funcoes.Interfaces;
+using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
@@ -13,38 +14,90 @@ namespace SisCom.Aplicacao.Controllers
 {
     public class PessoaController
     {
-        static PessoaService _PessoaService;
+        static PessoaService _pessoaService;
         private readonly MeuDbContext MeuDbContext;
 
-        public PessoaController(MeuDbContext MeuDbContext)
+        public PessoaController(MeuDbContext meuDbContext, INotifier notifier)
         {
-            this.MeuDbContext = MeuDbContext;
+            this.MeuDbContext = meuDbContext;
 
-            _PessoaService = new PessoaService(new PessoaRepository(MeuDbContext), null);
+            _pessoaService = new PessoaService(new PessoaRepository(meuDbContext), notifier);
         }
 
-        public PessoaViewModel Adicionar(PessoaViewModel PessoaViewModel)
+        public async Task<PessoaViewModel> Adicionar(PessoaViewModel pessoaViewModel)
         {
-            _PessoaService.Adicionar(Declaracoes.mapper.Map<Pessoa>(PessoaViewModel));
+            var pessoa = Declaracoes.mapper.Map<Pessoa>(pessoaViewModel);
 
-            return PessoaViewModel;
+            await _pessoaService.Adicionar(pessoa);
+
+            return Declaracoes.mapper.Map<PessoaViewModel>(pessoa);
+        }
+
+        public async Task<bool> Excluir(Guid Id)
+        {
+            await _pessoaService.Excluir(Id);
+
+            return true;
+        }
+
+        public async Task<PessoaViewModel> Atualizar(Guid id, PessoaViewModel pessoaViewModel)
+        {
+            await _pessoaService.Atualizar(Declaracoes.mapper.Map<Pessoa>(pessoaViewModel));
+
+            return pessoaViewModel;
         }
 
         public IEnumerable<PessoaViewModel> ObterTodos()
         {
-            return Declaracoes.mapper.Map<IEnumerable<PessoaViewModel>>(_PessoaService.GetAll());
+            return Declaracoes.mapper.Map<IEnumerable<PessoaViewModel>>(_pessoaService.GetAll());
         }
 
-        public async Task<IEnumerable<PessoaComboViewModel>> Combo()
+        public async Task<IEnumerable<PessoaViewModel>> PesquisarCNPJCPF(string CNPJCPF)
         {
-            var combo = await _PessoaService.Combo();
-            return Declaracoes.mapper.Map<IEnumerable<PessoaComboViewModel>>(combo);
+            var pessoa = await _pessoaService.Search(p => p.CNPJ_CPF == CNPJCPF);
+            return Declaracoes.mapper.Map<IEnumerable<PessoaViewModel>>(pessoa);
         }
 
-        public async Task<IEnumerable<PessoaComboViewModel>> ComboFornecedor(Expression<Func<Pessoa, object>> order = null)
+        public async Task<IEnumerable<PessoaViewModel>> PesquisarId(Guid Id)
         {
-            var combo = await _PessoaService.ComboFornecedor(order);
-            return Declaracoes.mapper.Map<IEnumerable<PessoaComboViewModel>>(combo);
+            var pessoa = await _pessoaService.Search(p => p.Id == Id);
+            return Declaracoes.mapper.Map<IEnumerable<PessoaViewModel>>(pessoa);
+        }
+
+        public async Task<IEnumerable<PessoaComboNomeViewModel>> ComboNome(Expression<Func<Pessoa, object>> order = null)
+        {
+            var combo = await _pessoaService.Combo(order);
+            return Declaracoes.mapper.Map<IEnumerable<PessoaComboNomeViewModel>>(combo);
+        }
+
+        public async Task<IEnumerable<PessoaComboRazaoViewModel>> ComboRazaoSocial(Expression<Func<Pessoa, object>> order = null)
+        {
+            var combo = await _pessoaService.Combo(order);
+            return Declaracoes.mapper.Map<IEnumerable<PessoaComboRazaoViewModel>>(combo);
+        }
+
+        public async Task<IEnumerable<PessoaComboCodigoViewModel>> ComboCodigo(Expression<Func<Pessoa, object>> order = null)
+        {
+            var combo = await _pessoaService.Combo(order);
+            return Declaracoes.mapper.Map<IEnumerable<PessoaComboCodigoViewModel>>(combo);
+        }
+
+        public async Task<IEnumerable<PessoaComboCPFCNPJViewModel>> ComboCPFCNPJ(Expression<Func<Pessoa, object>> order = null)
+        {
+            var combo = await _pessoaService.Combo(order);
+            return Declaracoes.mapper.Map<IEnumerable<PessoaComboCPFCNPJViewModel>>(combo);
+        }
+
+        public async Task<IEnumerable<PessoaComboTelefoneViewModel>> ComboTelefone(Expression<Func<Pessoa, object>> order = null)
+        {
+            var combo = await _pessoaService.ComboSearch(p => p.Telefone != null, order);
+            return Declaracoes.mapper.Map<IEnumerable<PessoaComboTelefoneViewModel>>(combo);
+        }
+
+        public async Task<IEnumerable<NomeComboViewModel>> ComboFornecedor(Expression<Func<Pessoa, object>> order = null)
+        {
+            var combo = await _pessoaService.Search(p => p.Fornecedor == true, order);
+            return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
         }
     }
 }

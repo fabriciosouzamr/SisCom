@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using RestSharp;
-using static API_Consultas.AcoesAPI;
 
 public class API_Consultas
 {
@@ -188,8 +180,6 @@ public class API_Consultas
 				client.DefaultRequestHeaders.Add("x-functions-key", "m15sD2naGyWrvp68JGD4oEOLoz91FPPznxu5wBzL11w3V6oroCjdAQ==");
 				HttpResponseMessage respToken = client.GetAsync(_uri).Result;
 				conteudo = respToken.Content.ReadAsStringAsync().Result;
-
-				Console.WriteLine(conteudo + "\n");
 
 				if (respToken.StatusCode == HttpStatusCode.OK)
 				{

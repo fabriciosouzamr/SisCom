@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SisCom.Entidade.Modelos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SisCom.Infraestrutura.Data.Mappings
 {
@@ -15,37 +10,34 @@ namespace SisCom.Infraestrutura.Data.Mappings
         {
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.End_CidadeId)
-                .IsRequired(false);
-
-            builder.Property(p => p.Nome)
-                .IsRequired()
-                .HasColumnType("varchar(100)");
+            builder.OwnsOne(x => x.Endereco);
 
             builder.Property(p => p.CNPJ_CPF)
                 .IsRequired()
                 .HasColumnType("varchar(14)");
 
+            builder.Property(p => p.Nome)
+                .IsRequired()
+                .HasColumnType("varchar(100)");
+
+            builder.Property(p => p.RazaoSocial)
+                .HasColumnType("varchar(100)");
+
+            builder.Property(p => p.Codigo)
+                .ValueGeneratedOnAdd()
+                .Metadata.SetAfterSaveBehavior(Microsoft.EntityFrameworkCore.Metadata.PropertySaveBehavior.Ignore);
+
             builder.Property(p => p.InscricaoEstadual)
                 .HasColumnType("varchar(15)");
+
+            builder.Property(p => p.RG)
+                .HasColumnType("varchar(20)");
 
             builder.Property(p => p.InscricaoMunicipal)
                 .HasColumnType("varchar(15)");
 
-            builder.Property(p => p.End_CEP)
-                .HasColumnType("varchar(8)");
-
-            builder.Property(p => p.End_Logradouro)
-                .HasColumnType("varchar(60)");
-
-            builder.Property(p => p.End_Numero)
-                .HasColumnType("varchar(10)");
-
-            builder.Property(p => p.End_Bairro)
+            builder.Property(p => p.NomeContato)
                 .HasColumnType("varchar(50)");
-
-            builder.Property(p => p.End_PontoReferencia)
-                .HasColumnType("varchar(200)");
 
             builder.Property(p => p.Telefone)
                 .HasColumnType("varchar(20)");
@@ -53,8 +45,23 @@ namespace SisCom.Infraestrutura.Data.Mappings
             builder.Property(p => p.FAX)
                 .HasColumnType("varchar(20)");
 
-            builder.Property(p => p.NomeContato)
-                .HasColumnType("varchar(50)");
+            builder.Property(p => p.EMail)
+                .HasColumnType("varchar(100)");
+
+            builder.Property(p => p.Site)
+                .HasColumnType("varchar(100)");
+
+            builder.Property(p => p.Representante)
+                .HasColumnType("varchar(100)");
+
+            builder.Property(p => p.Observacoes)
+                .HasColumnType("text");
+
+            builder.Property(p => p.Imagem)
+                .HasColumnType("image");
+
+            builder.Property(p => p.VendedorId)
+                .IsRequired(false);
 
             builder.ToTable("Pessoas");
         }

@@ -350,6 +350,8 @@ namespace SisCom.Aplicacao
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1065, 450);
             this.Controls.Add(this.pnlMenuBotao);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.IsMdiContainer = true;
             this.Name = "frmMDI";
             this.Text = "frmMDI";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
