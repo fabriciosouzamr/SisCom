@@ -59,14 +59,5 @@ namespace SisCom.Aplicacao.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Data Source=.\sqlexpress;Initial Catalog=SisCom;User ID=SisCom;Password=SisCom_123;MultipleActiveResultSets=true;Trusted_Connection=True.
-        /// </summary>
-        internal static string DefaultConnection {
-            get {
-                return ResourceManager.GetString("DefaultConnection", resourceCulture);
-            }
-        }
     }
 }

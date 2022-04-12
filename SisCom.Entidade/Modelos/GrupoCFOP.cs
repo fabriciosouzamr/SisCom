@@ -10,9 +10,5 @@ namespace SisCom.Entidade.Modelos
 
         public TipoOperacaoCFOP TipoOperacaoCFOP { get; set; }
 
-        /* EF Relation */
-
-        public Guid TipoOperacaoCFOPId { get; set; }
-
     }
 }

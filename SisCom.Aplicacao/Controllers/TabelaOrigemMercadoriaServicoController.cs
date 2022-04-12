@@ -1,10 +1,13 @@
 ﻿using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
+using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
@@ -27,9 +30,9 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<TabelaOrigemMercadoriaServicoViewModel>>(obterTodos);
         }
 
-        public async Task<IEnumerable<TabelaOrigemMercadoriaServicoViewModel>> Combo()
+        public async Task<IEnumerable<TabelaOrigemMercadoriaServicoViewModel>> Combo(Expression<Func<TabelaOrigemMercadoriaServico, object>> order = null)
         {
-            var combo = await _TabelaOrigemMercadoriaServicoService.Combo();
+            var combo = await _TabelaOrigemMercadoriaServicoService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<TabelaOrigemMercadoriaServicoViewModel>>(combo);
         }
     }

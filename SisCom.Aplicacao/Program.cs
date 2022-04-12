@@ -4,12 +4,14 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Configuration;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -20,6 +22,9 @@ namespace SisCom.Aplicacao
 
         static class Program
         {
+
+            static AppSettings appSettings;
+
             /// <summary>
             ///  The main entry point for the application.
             /// </summary>
@@ -30,11 +35,16 @@ namespace SisCom.Aplicacao
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
+                using (StreamReader file = File.OpenText(@"Configuration//appsettings.json"))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    appSettings = (AppSettings)serializer.Deserialize(file, typeof(AppSettings));
+                }
+                
                 var host = Host.CreateDefaultBuilder()
                                 .ConfigureAppConfiguration((context, builder) =>
                                 {
                                     // Add other configuration files...
-                                    builder.AddJsonFile("appsettings.json", optional: true);
                                 })
                                 .ConfigureServices((context, services) =>
                                 {
@@ -75,6 +85,7 @@ namespace SisCom.Aplicacao
                     #endregion
                     #region GrupoNaturezaReceita_CTS_PIS_COFINS
                     cfg.CreateMap<GrupoNaturezaReceita_CTS_PIS_COFINSViewModel, GrupoNaturezaReceita_CTS_PIS_COFINS>().ReverseMap();
+                    cfg.CreateMap<GrupoNaturezaReceita_CTS_PIS_COFINSViewModel, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region Mercadoria
                     cfg.CreateMap<MercadoriaViewModel, Mercadoria>().ReverseMap();
@@ -103,15 +114,15 @@ namespace SisCom.Aplicacao
                     #endregion
                     #region TabelaANP
                     cfg.CreateMap<TabelaANPViewModel, TabelaANP>().ReverseMap();
-                    cfg.CreateMap<TabelaANP, DescricaoComboViewModel>();
+                    cfg.CreateMap<TabelaANP, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region TabelaBeneficioSPED
                     cfg.CreateMap<TabelaBeneficioSPEDViewModel, TabelaBeneficioSPED>().ReverseMap();
-                    cfg.CreateMap<TabelaBeneficioSPED, DescricaoComboViewModel>();
+                    cfg.CreateMap<TabelaBeneficioSPED, CodigoComboViewModel>();
                     #endregion
                     #region TabelaCEST
                     cfg.CreateMap<TabelaCESTViewModel, TabelaCEST>().ReverseMap();
-                    cfg.CreateMap<TabelaCEST, DescricaoComboViewModel>();
+                    cfg.CreateMap<TabelaCEST, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region TabelaClasseEnquadramentoIPI
                     cfg.CreateMap<TabelaClasseEnquadramentoIPIViewModel, TabelaClasseEnquadramentoIPI>().ReverseMap();
@@ -123,7 +134,7 @@ namespace SisCom.Aplicacao
                     #endregion
                     #region TabelaCFOP
                     cfg.CreateMap<TabelaCFOPViewModel, TabelaCFOP>().ReverseMap();
-                    cfg.CreateMap<TabelaCFOP, CodigoDescricaoComboViewModel>();
+                    cfg.CreateMap<TabelaCFOP, CodigoComboViewModel>();
                     #endregion
                     #region TabelaCST_CSOSN
                     cfg.CreateMap<TabelaCST_CSOSNViewModel, TabelaCST_CSOSN>().ReverseMap();
@@ -147,10 +158,11 @@ namespace SisCom.Aplicacao
                     #endregion
                     #region TabelaOrigemMercadoriaServico
                     cfg.CreateMap<TabelaOrigemMercadoriaServicoViewModel, TabelaOrigemMercadoriaServico>().ReverseMap();
+                    cfg.CreateMap<TabelaOrigemMercadoriaServico, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region TabelaNCM
                     cfg.CreateMap<TabelaNCMViewModel, TabelaNCM>().ReverseMap();
-                    cfg.CreateMap<TabelaNCM, DescricaoComboViewModel>();
+                    cfg.CreateMap<TabelaNCM, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region TabelaSpedCodigoGenero
                     cfg.CreateMap<TabelaSpedCodigoGeneroViewModel, TabelaSpedCodigoGenero>().ReverseMap();
@@ -190,18 +202,25 @@ namespace SisCom.Aplicacao
                 Diretorios_Verificar();
 
                 var services = host.Services;
+
+                if (!DatabaseConfig.BancoDadosConectavel(services, true))
+                {
+                    CaixaMensagem.Informacao("Não foi possível conectar no banco de dados." + appSettings.ConnectionStrings.DefaultConnection);
+                }
+
+                DatabaseConfig.Configure(services, @"Configuration//Seed//");
+
                 var frmMDI = services.GetRequiredService<frmMDI>();
                 Application.Run(frmMDI);
             }
 
             private static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
             {
-                services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
                 services.AddDbContext<MeuDbContext>(options =>
                 {
-                    options.UseSqlServer(SisCom.Aplicacao.Properties.Resources.DefaultConnection);
+                    options.UseSqlServer(appSettings.ConnectionStrings.DefaultConnection);
                     options.LogTo(Console.WriteLine);
-                });
+                }); ;
                 services.ResolveDependencies();
             }
 
@@ -218,8 +237,16 @@ namespace SisCom.Aplicacao
         {
             public MeuDbContext CreateDbContext(string[] args)
             {
+                AppSettings appSettings;
+
+                using (StreamReader file = File.OpenText(@"Configuration//appsettings.json"))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    appSettings = (AppSettings)serializer.Deserialize(file, typeof(AppSettings));
+                }
+
                 var optionsBuilder = new DbContextOptionsBuilder<MeuDbContext>();
-                optionsBuilder.UseSqlServer(SisCom.Aplicacao.Properties.Resources.DefaultConnection);
+                optionsBuilder.UseSqlServer(appSettings.ConnectionStrings.DefaultConnection);
 
                 return new MeuDbContext(optionsBuilder.Options);
             }

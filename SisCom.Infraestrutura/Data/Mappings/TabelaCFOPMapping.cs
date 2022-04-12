@@ -12,7 +12,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
 
             builder.Property(p => p.Descricao)
                 .IsRequired()
-                .HasColumnType("varchar(100)");
+                .HasColumnType("varchar(400)");
 
             builder.Property(p => p.Codigo)
                 .IsRequired()

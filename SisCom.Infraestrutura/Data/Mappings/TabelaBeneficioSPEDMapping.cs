@@ -16,7 +16,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
 
             builder.Property(p => p.Codigo)
                 .IsRequired()
-                .HasColumnType("varchar(8)");
+                .HasColumnType("varchar(10)");
 
             builder.ToTable("TabelaBeneficioSPEDs");
         }

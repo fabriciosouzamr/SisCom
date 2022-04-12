@@ -184,8 +184,14 @@ namespace SisCom.Aplicacao.Formularios
                 this.MeuDbContextDispose();
             }
         }
-        private async void AdicionarPessoa()
+        private async void GravarPessoa()
         {
+            if (!Funcoes._Classes.Validacao.CPFCNPJ_Valido((TipoPessoa)pessoa.TipoPessoa, pessoa.CNPJ_CPF))
+            {
+                CaixaMensagem.Informacao("C.P.F./C.N.P.J. Inválido");
+                return;
+            }
+
             var pessoaController = new PessoaController(this.MeuDbContext(), this._notifier);
 
             if (pessoa.Id != Guid.Empty)
@@ -467,7 +473,7 @@ namespace SisCom.Aplicacao.Formularios
             pessoa.Imagem = Imagem.ImageToByteArray(pictureFoto.Image);
             pessoa.Observacoes = Funcao.StringVazioParaNulo(textObservacoes.Text);
 
-            AdicionarPessoa();
+            GravarPessoa();
         }
         private void botaoExcluir_Click(object sender, EventArgs e)
         {

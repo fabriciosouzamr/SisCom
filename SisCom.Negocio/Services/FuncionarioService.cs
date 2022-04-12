@@ -32,19 +32,51 @@ namespace SisCom.Negocio.Services
             _FuncionarioRepository?.Dispose();
         }
 
-        public async Task Adicionar(Funcionario Funcionario)
+        public async Task Adicionar(Funcionario funcionario)
         {
-            await _FuncionarioRepository.Insert(Funcionario);
+            try
+            {
+                var _pessoa = await _FuncionarioRepository.Search(f => f.Nome == funcionario.Nome);
+
+                if (_pessoa.Count() != 0)
+                {
+                    Notify("Já existe um funcionário com este nome informado.");
+                    return;
+                }
+
+                await _FuncionarioRepository.Insert(funcionario);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Atualizar(Funcionario Funcionario)
+        public async Task Atualizar(Funcionario funcionario)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var exists = _FuncionarioRepository.Exists(f => f.Nome == funcionario.Nome && f.Id != funcionario.Id);
+
+                if (exists)
+                {
+                    Notify("Já existe um funcionário com este nome informado.");
+                    return;
+                }
+
+                await _FuncionarioRepository.Update(funcionario);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Remover(Guid id)
+        public async Task Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            await _FuncionarioRepository.Delete(id);
+
+            Notify("Exclusão Efetuada.");
         }
 
         Task IFuncionarioService.Adicionar(Funcionario Funcionario)

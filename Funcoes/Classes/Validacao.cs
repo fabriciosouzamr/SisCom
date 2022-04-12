@@ -13,11 +13,11 @@ namespace Funcoes._Classes
 
 			switch(tipoPessoa)
             {
-				case TipoPessoa.Fisica:
-					ret = CPF_Valido(CPFCNPJ);
-					break;
 				case TipoPessoa.Juridica:
 					ret = CNPJ_Valido(CPFCNPJ);
+					break;
+				default:
+					ret = CPF_Valido(CPFCNPJ);
 					break;
 			}
 

@@ -12,69 +12,58 @@ using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
 {
-    public class FuncionarioController
+    public class FuncionarioController: IDisposable
     {
-        static FuncionarioService _FuncionarioService;
+        static FuncionarioService _funcionarioService;
         private readonly MeuDbContext MeuDbContext;
 
-        public FuncionarioController(MeuDbContext MeuDbContext, INotifier notifier)
+        public FuncionarioController(MeuDbContext meuDbContext, INotifier notifier)
         {
-            this.MeuDbContext = MeuDbContext;
+            this.MeuDbContext = meuDbContext;
 
-            _FuncionarioService = new FuncionarioService(new FuncionarioRepository(this.MeuDbContext), notifier);
+            _funcionarioService = new FuncionarioService(new FuncionarioRepository(meuDbContext), notifier);
         }
 
-        public async Task<FuncionarioViewModel> Adicionar(FuncionarioViewModel FuncionarioViewModel)
+        public async Task<FuncionarioViewModel> Adicionar(FuncionarioViewModel funcionarioViewModel)
         {
-            await _FuncionarioService.Adicionar(Declaracoes.mapper.Map<Funcionario>(FuncionarioViewModel));
+            var funcionario = Declaracoes.mapper.Map<Funcionario>(funcionarioViewModel);
 
-            return FuncionarioViewModel;
+            await _funcionarioService.Adicionar(funcionario);
+
+            return Declaracoes.mapper.Map<FuncionarioViewModel>(funcionario);
         }
 
-        public async Task<FuncionarioViewModel> Atualizar(FuncionarioViewModel FuncionarioViewModel)
+        public async Task<bool> Excluir(Guid Id)
         {
-            await _FuncionarioService.Atualizar(Declaracoes.mapper.Map<Funcionario>(FuncionarioViewModel));
+            await _funcionarioService.Excluir(Id);
 
-            return FuncionarioViewModel;
+            return true;
         }
 
-        public async Task Remover(Guid id)
+        public async Task<FuncionarioViewModel> Atualizar(Guid id, FuncionarioViewModel funcionarioViewModel)
         {
-            await _FuncionarioService.Remover(id);
+            await _funcionarioService.Atualizar(Declaracoes.mapper.Map<Funcionario>(funcionarioViewModel));
 
-            return;
-        }
-
-        public async Task<FuncionarioViewModel> GetById(Guid id)
-        {
-            var obter = await _FuncionarioService.GetById(id);
-            return Declaracoes.mapper.Map<FuncionarioViewModel>(obter);
-        }
-
-        public async Task<FuncionarioViewModel> GetByName(string nome)
-        {
-            var grupo = await _FuncionarioService.Search(f => f.Nome == nome);
-            return Declaracoes.mapper.Map<FuncionarioViewModel>(grupo);
+            return funcionarioViewModel;
         }
 
         public async Task<IEnumerable<FuncionarioViewModel>> ObterTodos()
         {
-            var obterTodos = await _FuncionarioService.GetAll();
+            var obterTodos = await _funcionarioService.GetAll();
             return Declaracoes.mapper.Map<IEnumerable<FuncionarioViewModel>>(obterTodos);
+
         }
 
-        public async Task<IEnumerable<FuncionarioComboViewModel>> Combo(Expression<Func<Funcionario, object>> order = null)
+        public async Task<IEnumerable<CodigoNomeComboViewModel>> Combo(Expression<Func<Funcionario, object>> order = null)
         {
-            var combo = await _FuncionarioService.Combo(order);
-            return Declaracoes.mapper.Map<IEnumerable<FuncionarioComboViewModel>>(combo);
+            var combo = await _funcionarioService.Combo(order);
+            return Declaracoes.mapper.Map<IEnumerable<CodigoNomeComboViewModel>>(combo);
         }
 
-        public async Task<IEnumerable<FuncionarioComboViewModel>> ComboCodigo(Expression<Func<Funcionario, object>> order = null)
+        public void Dispose()
         {
-            var combo = await _FuncionarioService.Combo(order);
-            var ret = Declaracoes.mapper.Map<IEnumerable<FuncionarioComboViewModel>>(combo);
-
-            return Declaracoes.mapper.Map<IEnumerable<FuncionarioComboViewModel>>(combo);
+            _funcionarioService.Dispose();
+            MeuDbContext.Dispose();
         }
     }
 }

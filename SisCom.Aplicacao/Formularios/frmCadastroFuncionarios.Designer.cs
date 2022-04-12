@@ -32,13 +32,13 @@ namespace SisCom.Aplicacao.Formularios
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCadastroFuncionarios));
             this.tabEnderecos = new System.Windows.Forms.TabControl();
             this.tabIdentificacao = new System.Windows.Forms.TabPage();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.checkAcessoFiscal = new System.Windows.Forms.CheckBox();
+            this.checkAcessoFinanceiro = new System.Windows.Forms.CheckBox();
+            this.checkDesativado = new System.Windows.Forms.CheckBox();
+            this.textSenhaFuncionario = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textCodigoFuncionario = new System.Windows.Forms.TextBox();
+            this.textNomeFuncionario = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.pnlMenuBotao = new System.Windows.Forms.Panel();
             this.pnlMenuBotaoBotao = new System.Windows.Forms.Panel();
@@ -68,13 +68,13 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // tabIdentificacao
             // 
-            this.tabIdentificacao.Controls.Add(this.checkBox3);
-            this.tabIdentificacao.Controls.Add(this.checkBox2);
-            this.tabIdentificacao.Controls.Add(this.checkBox1);
-            this.tabIdentificacao.Controls.Add(this.textBox5);
+            this.tabIdentificacao.Controls.Add(this.checkAcessoFiscal);
+            this.tabIdentificacao.Controls.Add(this.checkAcessoFinanceiro);
+            this.tabIdentificacao.Controls.Add(this.checkDesativado);
+            this.tabIdentificacao.Controls.Add(this.textSenhaFuncionario);
             this.tabIdentificacao.Controls.Add(this.label8);
-            this.tabIdentificacao.Controls.Add(this.textBox18);
-            this.tabIdentificacao.Controls.Add(this.textBox1);
+            this.tabIdentificacao.Controls.Add(this.textCodigoFuncionario);
+            this.tabIdentificacao.Controls.Add(this.textNomeFuncionario);
             this.tabIdentificacao.Controls.Add(this.label12);
             this.tabIdentificacao.Location = new System.Drawing.Point(4, 24);
             this.tabIdentificacao.Name = "tabIdentificacao";
@@ -84,43 +84,43 @@ namespace SisCom.Aplicacao.Formularios
             this.tabIdentificacao.Text = "Identificação";
             this.tabIdentificacao.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // checkAcessoFiscal
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(228, 36);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(95, 19);
-            this.checkBox3.TabIndex = 76;
-            this.checkBox3.Text = "Acesso Fiscal";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkAcessoFiscal.AutoSize = true;
+            this.checkAcessoFiscal.Location = new System.Drawing.Point(228, 36);
+            this.checkAcessoFiscal.Name = "checkAcessoFiscal";
+            this.checkAcessoFiscal.Size = new System.Drawing.Size(95, 19);
+            this.checkAcessoFiscal.TabIndex = 4;
+            this.checkAcessoFiscal.Text = "Acesso Fiscal";
+            this.checkAcessoFiscal.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // checkAcessoFinanceiro
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(327, 36);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(121, 19);
-            this.checkBox2.TabIndex = 75;
-            this.checkBox2.Text = "Acesso Financeiro";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkAcessoFinanceiro.AutoSize = true;
+            this.checkAcessoFinanceiro.Location = new System.Drawing.Point(327, 36);
+            this.checkAcessoFinanceiro.Name = "checkAcessoFinanceiro";
+            this.checkAcessoFinanceiro.Size = new System.Drawing.Size(121, 19);
+            this.checkAcessoFinanceiro.TabIndex = 5;
+            this.checkAcessoFinanceiro.Text = "Acesso Financeiro";
+            this.checkAcessoFinanceiro.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // checkDesativado
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(626, 36);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(84, 19);
-            this.checkBox1.TabIndex = 74;
-            this.checkBox1.Text = "Desativado";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkDesativado.AutoSize = true;
+            this.checkDesativado.Location = new System.Drawing.Point(626, 36);
+            this.checkDesativado.Name = "checkDesativado";
+            this.checkDesativado.Size = new System.Drawing.Size(84, 19);
+            this.checkDesativado.TabIndex = 6;
+            this.checkDesativado.Text = "Desativado";
+            this.checkDesativado.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // textSenhaFuncionario
             // 
-            this.textBox5.Location = new System.Drawing.Point(68, 34);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.PasswordChar = '*';
-            this.textBox5.Size = new System.Drawing.Size(140, 23);
-            this.textBox5.TabIndex = 73;
+            this.textSenhaFuncionario.Location = new System.Drawing.Point(68, 34);
+            this.textSenhaFuncionario.Name = "textSenhaFuncionario";
+            this.textSenhaFuncionario.PasswordChar = '*';
+            this.textSenhaFuncionario.Size = new System.Drawing.Size(140, 23);
+            this.textSenhaFuncionario.TabIndex = 3;
             // 
             // label8
             // 
@@ -131,20 +131,20 @@ namespace SisCom.Aplicacao.Formularios
             this.label8.TabIndex = 72;
             this.label8.Text = "Senha:";
             // 
-            // textBox18
+            // textCodigoFuncionario
             // 
-            this.textBox18.Location = new System.Drawing.Point(68, 7);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.ReadOnly = true;
-            this.textBox18.Size = new System.Drawing.Size(59, 23);
-            this.textBox18.TabIndex = 55;
+            this.textCodigoFuncionario.Location = new System.Drawing.Point(68, 7);
+            this.textCodigoFuncionario.Name = "textCodigoFuncionario";
+            this.textCodigoFuncionario.ReadOnly = true;
+            this.textCodigoFuncionario.Size = new System.Drawing.Size(59, 23);
+            this.textCodigoFuncionario.TabIndex = 1;
             // 
-            // textBox1
+            // textNomeFuncionario
             // 
-            this.textBox1.Location = new System.Drawing.Point(131, 7);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(579, 23);
-            this.textBox1.TabIndex = 54;
+            this.textNomeFuncionario.Location = new System.Drawing.Point(131, 7);
+            this.textNomeFuncionario.Name = "textNomeFuncionario";
+            this.textNomeFuncionario.Size = new System.Drawing.Size(579, 23);
+            this.textNomeFuncionario.TabIndex = 2;
             // 
             // label12
             // 
@@ -189,7 +189,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoAnterior.Name = "botaoAnterior";
             this.botaoAnterior.Size = new System.Drawing.Size(53, 56);
             this.botaoAnterior.TabIndex = 32;
+            this.botaoAnterior.TabStop = false;
             this.botaoAnterior.UseVisualStyleBackColor = true;
+            this.botaoAnterior.Click += new System.EventHandler(this.botaoAnterior_Click);
             // 
             // botaoPosterior
             // 
@@ -198,7 +200,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoPosterior.Name = "botaoPosterior";
             this.botaoPosterior.Size = new System.Drawing.Size(53, 56);
             this.botaoPosterior.TabIndex = 31;
+            this.botaoPosterior.TabStop = false;
             this.botaoPosterior.UseVisualStyleBackColor = true;
+            this.botaoPosterior.Click += new System.EventHandler(this.botaoPosterior_Click);
             // 
             // label7
             // 
@@ -240,6 +244,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoFechar.Name = "botaoFechar";
             this.botaoFechar.Size = new System.Drawing.Size(53, 56);
             this.botaoFechar.TabIndex = 20;
+            this.botaoFechar.TabStop = false;
             this.botaoFechar.UseVisualStyleBackColor = true;
             this.botaoFechar.Click += new System.EventHandler(this.botaoFechar_Click);
             // 
@@ -250,7 +255,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoNovo.Name = "botaoNovo";
             this.botaoNovo.Size = new System.Drawing.Size(53, 56);
             this.botaoNovo.TabIndex = 19;
+            this.botaoNovo.TabStop = false;
             this.botaoNovo.UseVisualStyleBackColor = true;
+            this.botaoNovo.Click += new System.EventHandler(this.botaoNovo_Click);
             // 
             // botaoExcluir
             // 
@@ -259,7 +266,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoExcluir.Name = "botaoExcluir";
             this.botaoExcluir.Size = new System.Drawing.Size(53, 56);
             this.botaoExcluir.TabIndex = 18;
+            this.botaoExcluir.TabStop = false;
             this.botaoExcluir.UseVisualStyleBackColor = true;
+            this.botaoExcluir.Click += new System.EventHandler(this.botaoExcluir_Click);
             // 
             // frmCadastroFuncionarios
             // 
@@ -270,6 +279,7 @@ namespace SisCom.Aplicacao.Formularios
             this.Controls.Add(this.pnlMenuBotao);
             this.Name = "frmCadastroFuncionarios";
             this.Text = "Cadastro de Funcionários";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCadastroFuncionarios_FormClosing);
             this.tabEnderecos.ResumeLayout(false);
             this.tabIdentificacao.ResumeLayout(false);
             this.tabIdentificacao.PerformLayout();
@@ -294,13 +304,13 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Button botaoExcluir;
         private System.Windows.Forms.Button botaoPosterior;
         private System.Windows.Forms.Button botaoAnterior;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textCodigoFuncionario;
+        private System.Windows.Forms.TextBox textNomeFuncionario;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textSenhaFuncionario;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkAcessoFiscal;
+        private System.Windows.Forms.CheckBox checkAcessoFinanceiro;
+        private System.Windows.Forms.CheckBox checkDesativado;
     }
 }

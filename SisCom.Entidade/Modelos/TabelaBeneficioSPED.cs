@@ -1,4 +1,5 @@
 ﻿using Funcoes._Entity;
+using System;
 
 namespace SisCom.Entidade.Modelos
 {
@@ -6,5 +7,7 @@ namespace SisCom.Entidade.Modelos
     {
         public string Codigo { get; set; }
         public string Descricao { get; set; }
+        public DateTime? DataInicial { get; set; }
+        public DateTime? DataFinal { get; set; }
     }
 }

@@ -1,0 +1,192 @@
+﻿[
+  {
+    "Id": "12B4BAD9-6DBF-4CED-9C51-02252506FCA4",
+    "Codigo": "BA",
+    "Nome": "Bahia",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816091"
+  },
+  {
+    "Id": "1694ED05-6FF5-4C4F-AA86-04446E664FBB",
+    "Codigo": "GO",
+    "Nome": "Goias",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816108"
+  },
+  {
+    "Id": "6D70DCE6-75FF-4C4B-A16B-0B80E036E30F",
+    "Codigo": "AM",
+    "Nome": "Amazonas",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816067"
+  },
+  {
+    "Id": "88213846-705A-408B-97D1-0D2BFCA2D40D",
+    "Codigo": "PE",
+    "Nome": "Pernambuco",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816141"
+  },
+  {
+    "Id": "F5902F8C-DA79-4B99-B121-1642643EF2E0",
+    "Codigo": "RO",
+    "Nome": "Rond�nia",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816162"
+  },
+  {
+    "Id": "60559BF8-AB2C-47E3-BC73-165E86E66091",
+    "Codigo": "DF",
+    "Nome": "Distrito Federal",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816100"
+  },
+  {
+    "Id": "9E620A8D-F63A-4CE8-A7DC-421601BAAC14",
+    "Codigo": "MS",
+    "Nome": "Mato Grosso do Sul",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816116"
+  },
+  {
+    "Id": "D4F6C75D-8AC3-4142-B09B-49719EA628B6",
+    "Codigo": "ES",
+    "Nome": "Espirito Santo",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816104"
+  },
+  {
+    "Id": "971C14E6-6903-4467-8794-4FCC17891694",
+    "Codigo": "AC",
+    "Nome": "Acre",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7815995"
+  },
+  {
+    "Id": "E121AFCE-F11F-4361-B046-75ECD173DCA0",
+    "Codigo": "PI",
+    "Nome": "Piau�",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816146"
+  },
+  {
+    "Id": "5B72FFE2-F24C-4F38-AF3E-76E0B629C949",
+    "Codigo": "PA",
+    "Nome": "Par�",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816131"
+  },
+  {
+    "Id": "265A5322-92C0-49BF-B7C8-77169FE7F7D8",
+    "Codigo": "SE",
+    "Nome": "Sergipe",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816175"
+  },
+  {
+    "Id": "7843F65A-DA06-45A4-9A1E-7F9A42869C3C",
+    "Codigo": "MT",
+    "Nome": "Mato Grosso",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816120"
+  },
+  {
+    "Id": "51C8BBD0-FEDE-4E2B-9855-845320A79906",
+    "Codigo": "MA",
+    "Nome": "Maranh�o",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816113"
+  },
+  {
+    "Id": "1FF917D9-A137-4F46-8112-889AA97B5A38",
+    "Codigo": "MG",
+    "Nome": "Minas Gerais",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816127"
+  },
+  {
+    "Id": "DB096A78-9151-4DD1-81D6-94D902425FE3",
+    "Codigo": "PR",
+    "Nome": "Paran�",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816138"
+  },
+  {
+    "Id": "A4E895E8-D411-4944-992C-A6871293DA1C",
+    "Codigo": "RJ",
+    "Nome": "Rio de Janeiro",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816149"
+  },
+  {
+    "Id": "EE65945D-19F7-4D25-80D9-AEA6BA22FC41",
+    "Codigo": "AP",
+    "Nome": "Amap�",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816062"
+  },
+  {
+    "Id": "6FFDEC0D-BB88-4380-B15F-B12FFF160733",
+    "Codigo": "RS",
+    "Nome": "Rio Grande do Sul",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816159"
+  },
+  {
+    "Id": "EEEBC2B4-1C83-4725-987A-CA66E09CB0A3",
+    "Codigo": "RR",
+    "Nome": "Roraima",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816166"
+  },
+  {
+    "Id": "3C0B3730-A2EC-4EC9-8F51-DF7B13C1CDEE",
+    "Codigo": "RN",
+    "Nome": "Rio Grande do Norte",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816152"
+  },
+  {
+    "Id": "3C32EA2C-9026-4CAA-B759-E02F18FD71EB",
+    "Codigo": "EX",
+    "Nome": "Exterior",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816179"
+  },
+  {
+    "Id": "932903C0-C73A-490F-B8B5-E4EF13B73C1F",
+    "Codigo": "AL",
+    "Nome": "Alagoas",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816058"
+  },
+  {
+    "Id": "227B9123-FD38-4FAA-B73E-E582B7B5FE4A",
+    "Codigo": "CE",
+    "Nome": "Cear�",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816096"
+  },
+  {
+    "Id": "DADE771B-AB82-4C3A-97A2-F6A332C736D5",
+    "Codigo": "SC",
+    "Nome": "Santa Catarina",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816169"
+  },
+  {
+    "Id": "18ABF346-AD59-47E7-8C73-F9E4D9AFA17B",
+    "Codigo": "SP",
+    "Nome": "S�o Paulo",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816172"
+  },
+  {
+    "Id": "5EF8CB03-6B3E-4B81-B9E3-FD858715A172",
+    "Codigo": "PB",
+    "Nome": "Para�ba",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "UltimaAtualizacao": "2022-03-04 19:09:33.7816135"
+  }
+
+]

@@ -139,6 +139,12 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async void AdicionarEmpresa()
         {
+            if (!Funcoes._Classes.Validacao.CNPJ_Valido(empresa.CNPJ))
+            {
+                CaixaMensagem.Informacao("C.N.P.J. Inválido");
+                return;
+            }
+
             var empresaController = new EmpresaController(this.MeuDbContext(), this._notifier);
 
             if (empresa.Id != Guid.Empty)

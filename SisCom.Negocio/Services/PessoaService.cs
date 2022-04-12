@@ -21,21 +21,24 @@ namespace SisCom.Negocio.Services
             _PessoaRepository = PessoaRepository;
         }
 
-        public async Task Adicionar(Pessoa Pessoa)
+        public async Task Adicionar(Pessoa pessoa)
         {
-            if (!RunValidation(new PessoaValidation(), Pessoa)) return;
+            if (!RunValidation(new PessoaValidation(), pessoa)) return;
 
             try
             {
-                var pessoa = await _PessoaRepository.Search(f => f.CNPJ_CPF == Pessoa.CNPJ_CPF);
-
-                if (pessoa.Count() != 0)
+                if (pessoa.TipoPessoa == Funcoes._Enum.TipoPessoaCliente.Juridica)
                 {
-                    Notify("Já existe um fornecedor com este nome informado.");
-                    return;
+                    var _pessoa = await _PessoaRepository.Search(f => f.CNPJ_CPF == pessoa.CNPJ_CPF);
+
+                    if (_pessoa.Count() != 0)
+                    {
+                        Notify("Já existe uma pessoa com este C.N.P.J. informado.");
+                        return;
+                    }
                 }
 
-                await _PessoaRepository.Insert(Pessoa);
+                await _PessoaRepository.Insert(pessoa);
 
                 Notify("Gravação Efetuada.");
             }
@@ -51,12 +54,15 @@ namespace SisCom.Negocio.Services
             {
                 if (!RunValidation(new PessoaValidation(), pessoa)) return;
 
-                var exists = _PessoaRepository.Exists(f => f.CNPJ_CPF == pessoa.CNPJ_CPF && f.Id != pessoa.Id);
-
-                if (exists)
+                if (pessoa.TipoPessoa == Funcoes._Enum.TipoPessoaCliente.Juridica)
                 {
-                    Notify("Já existe uma pessoa com este C.P.F./C.N.P.J. informado.");
-                    return;
+                    var exists = _PessoaRepository.Exists(f => f.CNPJ_CPF == pessoa.CNPJ_CPF && f.Id != pessoa.Id);
+
+                    if (exists)
+                    {
+                        Notify("Já existe uma pessoa com este C.N.P.J. informado.");
+                        return;
+                    }
                 }
 
                 await _PessoaRepository.Update(pessoa);

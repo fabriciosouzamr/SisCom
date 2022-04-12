@@ -13,13 +13,13 @@ namespace SisCom.Aplicacao.Classes
         public static MapperConfiguration configuration;
         public static Mapper mapper;
 
-        public static string Aplicacao_Nome = "Sistema Comercial";
-        public static string Aplicacao_CaminhoFoto = "\\fotos\\";
+        public const string Aplicacao_Nome = "Sistema Comercial";
+        public const string Aplicacao_CaminhoFoto = "\\fotos\\";
 
-        public static string  sistema_UsuarioLogado = "Administrador";
+        public const int CampoNome_Caracteres = 100;
+
+        public static string sistema_UsuarioLogado = "Administrador";
         public static string sistema_Loja = "Loja Teste";
-
-        public static int CampoNome_Caracteres = 100;
 
         public static object ComboBox_Carregando = 1;
         public enum Navegar

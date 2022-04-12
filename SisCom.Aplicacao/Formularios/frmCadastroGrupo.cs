@@ -1,6 +1,8 @@
-﻿using SisCom.Aplicacao.Classes;
+﻿using Funcoes.Interfaces;
+using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
+using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,12 +11,12 @@ using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
 {
-    public partial class frmCadastroGrupo : Form
+    public partial class frmCadastroGrupo : FormMain
     {
         GrupoMercadoriaController grupoController; //= new GrupoMercadoriaController();
         GrupoMercadoriaViewModel grupo; //= new GrupoMercadoriaViewModel();
 
-        public frmCadastroGrupo()
+        public frmCadastroGrupo(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
             InitializeComponent();
 

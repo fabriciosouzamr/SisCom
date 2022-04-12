@@ -34,7 +34,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             if (!Funcoes._Classes.Validacao.CNPJ_Valido(maskedCNPJ.Text))
             {
-                CaixaMensagem.Informacao("CNPJ Inválido");
+                CaixaMensagem.Informacao("C.N.P.J. Inválido");
                 return;
             }
 
@@ -49,7 +49,7 @@ namespace SisCom.Aplicacao.Formularios
                 textEnderecoNumero.Text = CNPJRetorno.numero;
                 textEnderecoComplemento.Text = CNPJRetorno.complemento;
                 textEnderecoBairro.Text = CNPJRetorno.bairro;
-                comboEnderecoUF.Text = CNPJRetorno.uf;
+                Combo_ComboBox.Selecionar(comboEnderecoUF, CNPJRetorno.uf);
 
                 await Classes.Forms.comboCidade_Carregar(this._serviceProvider,
                                                          this._dbCtxFactory,

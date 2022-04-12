@@ -30,10 +30,10 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<TabelaCESTViewModel>>(obterTodos);
         }
 
-        public async Task<IEnumerable<DescricaoComboViewModel>> Combo(Expression<Func<TabelaCEST, object>> order = null)
+        public async Task<IEnumerable<CodigoDescricaoComboViewModel>> Combo(Guid tabelaNCMId, Expression<Func<TabelaCEST, object>> order = null)
         {
-            var combo = await _TabelaCESTService.Combo(order);
-            return Declaracoes.mapper.Map<IEnumerable<DescricaoComboViewModel>>(combo);
+            var combo = await _TabelaCESTService.ComboSearch(p => p.TabelaNCMId == tabelaNCMId, order);
+            return Declaracoes.mapper.Map<IEnumerable<CodigoDescricaoComboViewModel>>(combo);
         }
     }
 }

@@ -82,6 +82,8 @@ namespace SisCom.Infraestrutura.Data.Context
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
+            Function.RegistarFuncoes(modelBuilder);
+
             base.OnModelCreating(modelBuilder);
 
             //modelBuilder.Entity<MercadoriaSimilares>()
@@ -93,149 +95,140 @@ namespace SisCom.Infraestrutura.Data.Context
             //    .WithMany(b => b.MercadoriaSimilares)
             //    .HasForeignKey(bc => bc.MercadoriaSimilarId);
 
-            #region Indices
-            modelBuilder
-                .Entity<Pessoa>()
-                .HasIndex(p => new { p.CNPJ_CPF })
-                .HasDatabaseName("idx_pessoas_CNPJ_CPF")
-                .HasFillFactor(80)
-                .IsUnique();
-            #endregion
+            //#region HasData
+            //Guid PaisId = Guid.NewGuid();
 
-            #region HasData
-            Guid PaisId = Guid.NewGuid();
+            //modelBuilder
+            //    .Entity<Pais>()
+            //    .HasData(new Pais { Nome = "Brasil", Id = PaisId, UltimaAtualizacao = DateTime.Now });
 
-            modelBuilder
-                .Entity<Pais>()
-                .HasData(new Pais { Nome = "Brasil", Id = PaisId, UltimaAtualizacao = DateTime.Now });
+            //modelBuilder
+            //    .Entity<Estado>()
+            //    .HasData(new Estado { Nome = "Acre", Codigo = "AC", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Alagoas", Codigo = "AL", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Amapá", Codigo = "AP", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Amazonas", Codigo = "AM", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Bahia", Codigo = "BA", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Ceará", Codigo = "CE", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Distrito Federal", Codigo = "DF", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Espirito Santo", Codigo = "ES", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Goias", Codigo = "GO", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Maranhão", Codigo = "MA", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Mato Grosso do Sul", Codigo = "MS", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Mato Grosso", Codigo = "MT", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Minas Gerais", Codigo = "MG", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Pará", Codigo = "PA", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Paraíba", Codigo = "PB", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Paraná", Codigo = "PR", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Pernambuco", Codigo = "PE", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Piauí", Codigo = "PI", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Rio de Janeiro", Codigo = "RJ", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Rio Grande do Norte", Codigo = "RN", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Rio Grande do Sul", Codigo = "RS", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Rondônia", Codigo = "RO", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Roraima", Codigo = "RR", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Santa Catarina", Codigo = "SC", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "São Paulo", Codigo = "SP", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Sergipe", Codigo = "SE", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
+            //             new Estado { Nome = "Exterior", Codigo = "EX", PaisId = PaisId, UltimaAtualizacao = DateTime.Now });
 
-            modelBuilder
-                .Entity<Estado>()
-                .HasData(new Estado { Nome = "Acre", Codigo = "AC", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Alagoas", Codigo = "AL", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Amapá", Codigo = "AP", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Amazonas", Codigo = "AM", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Bahia", Codigo = "BA", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Ceará", Codigo = "CE", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Distrito Federal", Codigo = "DF", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Espirito Santo", Codigo = "ES", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Goias", Codigo = "GO", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Maranhão", Codigo = "MA", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Mato Grosso do Sul", Codigo = "MS", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Mato Grosso", Codigo = "MT", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Minas Gerais", Codigo = "MG", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Pará", Codigo = "PA", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Paraíba", Codigo = "PB", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Paraná", Codigo = "PR", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Pernambuco", Codigo = "PE", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Piauí", Codigo = "PI", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Rio de Janeiro", Codigo = "RJ", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Rio Grande do Norte", Codigo = "RN", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Rio Grande do Sul", Codigo = "RS", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Rondônia", Codigo = "RO", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Roraima", Codigo = "RR", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Santa Catarina", Codigo = "SC", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "São Paulo", Codigo = "SP", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Sergipe", Codigo = "SE", PaisId = PaisId, UltimaAtualizacao = DateTime.Now },
-                         new Estado { Nome = "Exterior", Codigo = "EX", PaisId = PaisId, UltimaAtualizacao = DateTime.Now });
+            //modelBuilder
+            //    .Entity<Funcionario>()
+            //    .HasData(new Funcionario { Nome = "Administrador", Senha = "1234", AcessoFinanceiro = true, AcessoFiscal = true, Administrador = true, Desativado = true, UltimaAtualizacao = DateTime.Now });
 
-            modelBuilder
-                .Entity<Funcionario>()
-                .HasData(new Funcionario { Nome = "Administrador", Senha = "1234", AcessoFinanceiro = true, AcessoFiscal = true, Administrador = true, Desativado = true, UltimaAtualizacao = DateTime.Now });
+            //modelBuilder
+            //    .Entity<GrupoCFOP>()
+            //    .HasData(new GrupoCFOP { Nome = "1.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO ESTADO", TipoOperacaoCFOP = TipoOperacaoCFOP.EntradaDentroEstado, UltimaAtualizacao = DateTime.Now },
+            //             new GrupoCFOP { Nome = "2.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DE OUTROS ESTADOS", TipoOperacaoCFOP = TipoOperacaoCFOP.EntradaForaEstado, UltimaAtualizacao = DateTime.Now },
+            //             new GrupoCFOP { Nome = "3.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO EXTERIOR", TipoOperacaoCFOP = TipoOperacaoCFOP.EntradaExterior, UltimaAtualizacao = DateTime.Now },
+            //             new GrupoCFOP { Nome = "5.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O ESTADO", TipoOperacaoCFOP = TipoOperacaoCFOP.SaidaDentroEstado, UltimaAtualizacao = DateTime.Now },
+            //             new GrupoCFOP { Nome = "6.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA OUTROS ESTADOS", TipoOperacaoCFOP = TipoOperacaoCFOP.SaidaForaEstado, UltimaAtualizacao = DateTime.Now },
+            //             new GrupoCFOP { Nome = "7.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O EXTERIOR", TipoOperacaoCFOP = TipoOperacaoCFOP.SaidaExterior, UltimaAtualizacao = DateTime.Now });
 
-            modelBuilder
-                .Entity<GrupoCFOP>()
-                .HasData(new GrupoCFOP { Nome = "1.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO ESTADO", TipoOperacaoCFOP = TipoOperacaoCFOP.EntradaDentroEstado, UltimaAtualizacao = DateTime.Now },
-                         new GrupoCFOP { Nome = "2.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DE OUTROS ESTADOS", TipoOperacaoCFOP = TipoOperacaoCFOP.EntradaForaEstado, UltimaAtualizacao = DateTime.Now },
-                         new GrupoCFOP { Nome = "3.000 - ENTRADAS OU AQUISIÇÕES DE SERVIÇOS DO EXTERIOR", TipoOperacaoCFOP = TipoOperacaoCFOP.EntradaExterior, UltimaAtualizacao = DateTime.Now },
-                         new GrupoCFOP { Nome = "5.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O ESTADO", TipoOperacaoCFOP = TipoOperacaoCFOP.SaidaDentroEstado, UltimaAtualizacao = DateTime.Now },
-                         new GrupoCFOP { Nome = "6.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA OUTROS ESTADOS", TipoOperacaoCFOP = TipoOperacaoCFOP.SaidaForaEstado, UltimaAtualizacao = DateTime.Now },
-                         new GrupoCFOP { Nome = "7.000 - SAÍDAS OU PRESTAÇÕES DE SERVIÇOS PARA O EXTERIOR", TipoOperacaoCFOP = TipoOperacaoCFOP.SaidaExterior, UltimaAtualizacao = DateTime.Now });
+            //modelBuilder
+            //    .Entity<TabelaCST_IPI>()
+            //    .HasData(new TabelaCST_IPI { Codigo = "00", Descricao = "Entrada com Recuperação de Crédito", EntradaSaida = EntradaSaida.Entrada, DestacarIPI = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "01", Descricao = "Entrada Tributável com Alíquota Zero", EntradaSaida = EntradaSaida.Entrada, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "02", Descricao = "Entrada Isenta", EntradaSaida = EntradaSaida.Entrada, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "03", Descricao = "Entrada Não-Tributada", EntradaSaida = EntradaSaida.Entrada, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "04", Descricao = "Entrada Imune", EntradaSaida = EntradaSaida.Entrada, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "05", Descricao = "Entrada com Suspensão", EntradaSaida = EntradaSaida.Entrada, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "49", Descricao = "Outras Entradas", EntradaSaida = EntradaSaida.Entrada, DestacarIPI = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "50", Descricao = "Saída Tributada", EntradaSaida = EntradaSaida.Saida, DestacarIPI = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "51", Descricao = "Saída Tributável com Alíquota Zero", EntradaSaida = EntradaSaida.Saida, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "52", Descricao = "Saída Isenta", EntradaSaida = EntradaSaida.Saida, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "53", Descricao = "Saída Não-Tributada", EntradaSaida = EntradaSaida.Saida, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "54", Descricao = "Saída Imune", EntradaSaida = EntradaSaida.Saida, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "55", Descricao = "Saída com Suspensão", EntradaSaida = EntradaSaida.Saida, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_IPI { Codigo = "99", Descricao = "Outras Saídas", EntradaSaida = EntradaSaida.Saida, DestacarIPI = true, UltimaAtualizacao = DateTime.Now });
 
-            modelBuilder
-                .Entity<TabelaCST_IPI>()
-                .HasData(new TabelaCST_IPI { Codigo = "00", Descricao = "Entrada com Recuperação de Crédito", EntradaSaida = EntradaSaida.Entrada, DestacarIPI = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "01", Descricao = "Entrada Tributável com Alíquota Zero", EntradaSaida = EntradaSaida.Entrada, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "02", Descricao = "Entrada Isenta", EntradaSaida = EntradaSaida.Entrada, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "03", Descricao = "Entrada Não-Tributada", EntradaSaida = EntradaSaida.Entrada, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "04", Descricao = "Entrada Imune", EntradaSaida = EntradaSaida.Entrada, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "05", Descricao = "Entrada com Suspensão", EntradaSaida = EntradaSaida.Entrada, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "49", Descricao = "Outras Entradas", EntradaSaida = EntradaSaida.Entrada, DestacarIPI = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "50", Descricao = "Saída Tributada", EntradaSaida = EntradaSaida.Saida, DestacarIPI = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "51", Descricao = "Saída Tributável com Alíquota Zero", EntradaSaida = EntradaSaida.Saida, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "52", Descricao = "Saída Isenta", EntradaSaida = EntradaSaida.Saida, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "53", Descricao = "Saída Não-Tributada", EntradaSaida = EntradaSaida.Saida, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "54", Descricao = "Saída Imune", EntradaSaida = EntradaSaida.Saida, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "55", Descricao = "Saída com Suspensão", EntradaSaida = EntradaSaida.Saida, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_IPI { Codigo = "99", Descricao = "Outras Saídas", EntradaSaida = EntradaSaida.Saida, DestacarIPI = true, UltimaAtualizacao = DateTime.Now });
+            //modelBuilder
+            //    .Entity<TabelaCST_PIS_COFINS>()
+            //    .HasData(new TabelaCST_PIS_COFINS { Codigo = "01", Descricao = "Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo))", UsaNaSaida = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "02", Descricao = "Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada))", UsaNaSaida = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "03", Descricao = "Operação Tributável (base de cálculo = quantidade vendida x alíquota por unidade de produto)", UsaNaSaida = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "04", Descricao = "Operação Tributável (tributação monofásica (alíquota zero))", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "05", Descricao = "Operação Tributável por Substituição Tributária", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "06", Descricao = "Operação Tributável (alíquota zero)", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "07", Descricao = "Operação Isenta da Contribuição", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "08", Descricao = "Operação Sem Incidência da Contribuição", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "09", Descricao = "Operação com Suspensão da Contribuição", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "49", Descricao = "Outras Operações de Saída", UsaNaSaida = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "50", Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "51", Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "52", Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "53", Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não - Tributadas no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "54", Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "55", Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Não Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "56", Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não - Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "60", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "61", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita Não - Tributada no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "62", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "63", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "64", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "65", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "66", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "67", Descricao = "Crédito Presumido -Outras Operações", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "70", Descricao = "Operação de Aquisição sem Direito a Crédito", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "71", Descricao = "Operação de Aquisição com Isenção", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "72", Descricao = "Operação de Aquisição com Suspensão", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "73", Descricao = "Operação de Aquisição a Alíquota Zero", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "74", Descricao = "Operação de Aquisição sem Incidência da Contribuição", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "75", Descricao = "Operação de Aquisição por Substituição Tributária", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "98", Descricao = "Outras Operações de Entrada", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
+            //             new TabelaCST_PIS_COFINS { Codigo = "99", Descricao = "Outras Operações", UsaNaEntrada = true, UsaNaSaida = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now });
 
-            modelBuilder
-                .Entity<TabelaCST_PIS_COFINS>()
-                .HasData(new TabelaCST_PIS_COFINS { Codigo = "01", Descricao = "Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo))", UsaNaSaida = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "02", Descricao = "Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada))", UsaNaSaida = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "03", Descricao = "Operação Tributável (base de cálculo = quantidade vendida x alíquota por unidade de produto)", UsaNaSaida = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "04", Descricao = "Operação Tributável (tributação monofásica (alíquota zero))", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "05", Descricao = "Operação Tributável por Substituição Tributária", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "06", Descricao = "Operação Tributável (alíquota zero)", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "07", Descricao = "Operação Isenta da Contribuição", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "08", Descricao = "Operação Sem Incidência da Contribuição", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "09", Descricao = "Operação com Suspensão da Contribuição", UsaNaSaida = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "49", Descricao = "Outras Operações de Saída", UsaNaSaida = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "50", Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "51", Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "52", Descricao = "Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "53", Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não - Tributadas no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "54", Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "55", Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Não Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "56", Descricao = "Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não - Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "60", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "61", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita Não - Tributada no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "62", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "63", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "64", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "65", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "66", Descricao = "Crédito Presumido -Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "67", Descricao = "Crédito Presumido -Outras Operações", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "70", Descricao = "Operação de Aquisição sem Direito a Crédito", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "71", Descricao = "Operação de Aquisição com Isenção", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "72", Descricao = "Operação de Aquisição com Suspensão", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "73", Descricao = "Operação de Aquisição a Alíquota Zero", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "74", Descricao = "Operação de Aquisição sem Incidência da Contribuição", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "75", Descricao = "Operação de Aquisição por Substituição Tributária", UsaNaEntrada = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "98", Descricao = "Outras Operações de Entrada", UsaNaEntrada = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now },
-                         new TabelaCST_PIS_COFINS { Codigo = "99", Descricao = "Outras Operações", UsaNaEntrada = true, UsaNaSaida = true, DestacarPIS_COFINS = true, UltimaAtualizacao = DateTime.Now });
+            //modelBuilder
+            //    .Entity<TabelaSituacaoTributariaNFCe>()
+            //    .HasData(new TabelaSituacaoTributariaNFCe { Descricao = "Normal(% TRIBUTADO)", Codigo = "01", UltimaAtualizacao = DateTime.Now },
+            //             new TabelaSituacaoTributariaNFCe { Descricao = "Substituição", Codigo = "FF", UltimaAtualizacao = DateTime.Now },
+            //             new TabelaSituacaoTributariaNFCe { Descricao = "Isento", Codigo = "II", UltimaAtualizacao = DateTime.Now },
+            //             new TabelaSituacaoTributariaNFCe { Descricao = "Não Incidente", Codigo = "NN", UltimaAtualizacao = DateTime.Now });
 
-            modelBuilder
-                .Entity<TabelaSituacaoTributariaNFCe>()
-                .HasData(new TabelaSituacaoTributariaNFCe { Descricao = "Normal(% TRIBUTADO)", Codigo = "01", UltimaAtualizacao = DateTime.Now },
-                         new TabelaSituacaoTributariaNFCe { Descricao = "Substituição", Codigo = "FF", UltimaAtualizacao = DateTime.Now },
-                         new TabelaSituacaoTributariaNFCe { Descricao = "Isento", Codigo = "II", UltimaAtualizacao = DateTime.Now },
-                         new TabelaSituacaoTributariaNFCe { Descricao = "Não Incidente", Codigo = "NN", UltimaAtualizacao = DateTime.Now });
+            //modelBuilder
+            //    .Entity<TipoCliente>()
+            //    .HasData(new TipoCliente { Nome = "CONSUMIDOR" });
+            //modelBuilder
+            //    .Entity<TipoMercadoria>()
+            //    .HasData(new TipoMercadoria { Nome = "VEÍCULO", UltimaAtualizacao = DateTime.Now },
+            //             new TipoMercadoria { Nome = "COMBUSTÍVEL", UltimaAtualizacao = DateTime.Now },
+            //             new TipoMercadoria { Nome = "MEDICAMENTO", UltimaAtualizacao = DateTime.Now },
+            //             new TipoMercadoria { Nome = "ARMAMENTO", UltimaAtualizacao = DateTime.Now });
 
-            modelBuilder
-                .Entity<TipoCliente>()
-                .HasData(new TipoCliente { Nome = "CONSUMIDOR" });
-            modelBuilder
-                .Entity<TipoMercadoria>()
-                .HasData(new TipoMercadoria { Nome = "VEÍCULO", UltimaAtualizacao = DateTime.Now },
-                         new TipoMercadoria { Nome = "COMBUSTÍVEL", UltimaAtualizacao = DateTime.Now },
-                         new TipoMercadoria { Nome = "MEDICAMENTO", UltimaAtualizacao = DateTime.Now },
-                         new TipoMercadoria { Nome = "ARMAMENTO", UltimaAtualizacao = DateTime.Now });
-
-            modelBuilder
-                .Entity<UnidadeMedida>()
-                .HasData(new UnidadeMedida { Nome = "Unidade", Codigo = "UND", UltimaAtualizacao = DateTime.Now },
-                         new UnidadeMedida { Nome = "Caixa", Codigo = "CXA", UltimaAtualizacao = DateTime.Now },
-                         new UnidadeMedida { Nome = "Peca", Codigo = "PCA", UltimaAtualizacao = DateTime.Now },
-                         new UnidadeMedida { Nome = "Metro", Codigo = "MTR", UltimaAtualizacao = DateTime.Now },
-                         new UnidadeMedida { Nome = "Kilograma", Codigo = "KG", UltimaAtualizacao = DateTime.Now },
-                         new UnidadeMedida { Nome = "Litro ", Codigo = "LTR", UltimaAtualizacao = DateTime.Now },
-                         new UnidadeMedida { Nome = "Pacote", Codigo = "PCT", UltimaAtualizacao = DateTime.Now },
-                         new UnidadeMedida { Nome = "Saco", Codigo = "SCO", UltimaAtualizacao = DateTime.Now },
-                         new UnidadeMedida { Nome = "Frasco", Codigo = "FRC", UltimaAtualizacao = DateTime.Now },
-                         new UnidadeMedida { Nome = "Grama", Codigo = "GR", UltimaAtualizacao = DateTime.Now },
-                         new UnidadeMedida { Nome = "Fardo", Codigo = "FRD", UltimaAtualizacao = DateTime.Now });
-            #endregion
+            //modelBuilder
+            //    .Entity<UnidadeMedida>()
+            //    .HasData(new UnidadeMedida { Nome = "Unidade", Codigo = "UND", UltimaAtualizacao = DateTime.Now },
+            //             new UnidadeMedida { Nome = "Caixa", Codigo = "CXA", UltimaAtualizacao = DateTime.Now },
+            //             new UnidadeMedida { Nome = "Peca", Codigo = "PCA", UltimaAtualizacao = DateTime.Now },
+            //             new UnidadeMedida { Nome = "Metro", Codigo = "MTR", UltimaAtualizacao = DateTime.Now },
+            //             new UnidadeMedida { Nome = "Kilograma", Codigo = "KG", UltimaAtualizacao = DateTime.Now },
+            //             new UnidadeMedida { Nome = "Litro ", Codigo = "LTR", UltimaAtualizacao = DateTime.Now },
+            //             new UnidadeMedida { Nome = "Pacote", Codigo = "PCT", UltimaAtualizacao = DateTime.Now },
+            //             new UnidadeMedida { Nome = "Saco", Codigo = "SCO", UltimaAtualizacao = DateTime.Now },
+            //             new UnidadeMedida { Nome = "Frasco", Codigo = "FRC", UltimaAtualizacao = DateTime.Now },
+            //             new UnidadeMedida { Nome = "Grama", Codigo = "GR", UltimaAtualizacao = DateTime.Now },
+            //             new UnidadeMedida { Nome = "Fardo", Codigo = "FRD", UltimaAtualizacao = DateTime.Now });
+            //#endregion
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

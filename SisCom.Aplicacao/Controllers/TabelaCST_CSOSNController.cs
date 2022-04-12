@@ -30,10 +30,10 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<TabelaCST_CSOSNViewModel>>(obterTodos);
         }
 
-        public async Task<IEnumerable<DescricaoComboViewModel>> Combo(Expression<Func<TabelaCST_CSOSN, object>> order = null)
+        public async Task<IEnumerable<CodigoDescricaoComboViewModel>> Combo(Expression<Func<TabelaCST_CSOSN, object>> order = null)
         {
             var combo = await _TabelaCST_CSOSNService.Combo(order);
-            return Declaracoes.mapper.Map<IEnumerable<DescricaoComboViewModel>>(combo);
+            return Declaracoes.mapper.Map<IEnumerable<CodigoDescricaoComboViewModel>>(combo);
         }
     }
 }
