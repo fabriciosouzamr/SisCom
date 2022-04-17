@@ -57,10 +57,10 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<TabelaCodigoEnquadramentoIPIViewModel>>(obterTodos);
         }
 
-        public async Task<IEnumerable<DescricaoComboViewModel>> Combo(Expression<Func<TabelaCodigoEnquadramentoIPI, object>> order = null)
+        public async Task<IEnumerable<CodigoDescricaoComboViewModel>> Combo(Expression<Func<TabelaCodigoEnquadramentoIPI, object>> order = null)
         {
             var combo = await _TabelaCodigoEnquadramentoIPIService.Combo(order);
-            return Declaracoes.mapper.Map<IEnumerable<DescricaoComboViewModel>>(combo);
+            return Declaracoes.mapper.Map<IEnumerable<CodigoDescricaoComboViewModel>>(combo);
         }
     }
 }

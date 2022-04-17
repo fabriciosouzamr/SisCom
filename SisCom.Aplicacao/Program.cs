@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Configuration;
@@ -22,7 +23,6 @@ namespace SisCom.Aplicacao
 
         static class Program
         {
-
             static AppSettings appSettings;
 
             /// <summary>
@@ -31,6 +31,9 @@ namespace SisCom.Aplicacao
             [STAThread]
             static void Main()
             {
+                IConfigurationRoot configBuilder;
+                ILoggingBuilder loggingBuilder;
+
                 Application.SetHighDpiMode(HighDpiMode.SystemAware);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -42,6 +45,17 @@ namespace SisCom.Aplicacao
                 }
                 
                 var host = Host.CreateDefaultBuilder()
+                                .ConfigureHostConfiguration(builder =>
+                                {
+                                    builder.SetBasePath(Directory.GetCurrentDirectory());
+                                    builder.AddJsonFile("Configuration//appsettings.json");
+                                    builder.AddEnvironmentVariables();
+                                    configBuilder = builder.Build();
+
+                                    var rest = configBuilder.GetSection("ConnectionStrings")["DefaultConnection"];
+                                    JsonSerializer serializer = new JsonSerializer();
+                                    //appSettings = (AppSettings)serializer.Deserialize(rest, typeof(AppSettings));
+                                })
                                 .ConfigureAppConfiguration((context, builder) =>
                                 {
                                     // Add other configuration files...
@@ -52,7 +66,8 @@ namespace SisCom.Aplicacao
                                 })
                                 .ConfigureLogging(logging =>
                                 {
-                                    // Add other loggers...
+                                    logging.ClearProviders();
+                                    logging.AddConsole();
                                 })
                                 .Build();
 
@@ -85,7 +100,7 @@ namespace SisCom.Aplicacao
                     #endregion
                     #region GrupoNaturezaReceita_CTS_PIS_COFINS
                     cfg.CreateMap<GrupoNaturezaReceita_CTS_PIS_COFINSViewModel, GrupoNaturezaReceita_CTS_PIS_COFINS>().ReverseMap();
-                    cfg.CreateMap<GrupoNaturezaReceita_CTS_PIS_COFINSViewModel, CodigoDescricaoComboViewModel>();
+                    cfg.CreateMap<GrupoNaturezaReceita_CTS_PIS_COFINS, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region Mercadoria
                     cfg.CreateMap<MercadoriaViewModel, Mercadoria>().ReverseMap();
@@ -126,11 +141,11 @@ namespace SisCom.Aplicacao
                     #endregion
                     #region TabelaClasseEnquadramentoIPI
                     cfg.CreateMap<TabelaClasseEnquadramentoIPIViewModel, TabelaClasseEnquadramentoIPI>().ReverseMap();
-                    cfg.CreateMap<TabelaClasseEnquadramentoIPI, DescricaoComboViewModel>();
+                    cfg.CreateMap<TabelaClasseEnquadramentoIPI, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region TabelaCodigoEnquadramentoIPI
                     cfg.CreateMap<TabelaCodigoEnquadramentoIPIViewModel, TabelaCodigoEnquadramentoIPI>().ReverseMap();
-                    cfg.CreateMap<TabelaCodigoEnquadramentoIPI, CodigoNomeComboViewModel>();
+                    cfg.CreateMap<TabelaCodigoEnquadramentoIPI, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region TabelaCFOP
                     cfg.CreateMap<TabelaCFOPViewModel, TabelaCFOP>().ReverseMap();
@@ -150,7 +165,7 @@ namespace SisCom.Aplicacao
                     #endregion
                     #region TabelaModalidadeDeterminacaoBCICMS
                     cfg.CreateMap<TabelaModalidadeDeterminacaoBCICMSViewModel, TabelaModalidadeDeterminacaoBCICMS>().ReverseMap();
-                    cfg.CreateMap<VinculoFiscal, CodigoNomeComboViewModel>();
+                    cfg.CreateMap<TabelaModalidadeDeterminacaoBCICMS, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region TabelaMotivoDesoneracaoICMS
                     cfg.CreateMap<TabelaMotivoDesoneracaoICMSViewModel, TabelaMotivoDesoneracaoICMS>().ReverseMap();
@@ -166,6 +181,7 @@ namespace SisCom.Aplicacao
                     #endregion
                     #region TabelaSpedCodigoGenero
                     cfg.CreateMap<TabelaSpedCodigoGeneroViewModel, TabelaSpedCodigoGenero>().ReverseMap();
+                    cfg.CreateMap<TabelaSpedCodigoGenero, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region TabelaSituacaoTributariaNFCe
                     cfg.CreateMap<TabelaSituacaoTributariaNFCeViewModel, TabelaSituacaoTributariaNFCe>().ReverseMap();
@@ -173,7 +189,7 @@ namespace SisCom.Aplicacao
                     #endregion
                     #region TabelaSpedInformacaoAdicionalItem
                     cfg.CreateMap<TabelaSpedInformacaoAdicionalItemViewModel, TabelaSpedInformacaoAdicionalItem>().ReverseMap();
-                    cfg.CreateMap<TabelaSpedInformacaoAdicionalItem, DescricaoComboViewModel>();
+                    cfg.CreateMap<TabelaSpedInformacaoAdicionalItem, CodigoDescricaoComboViewModel>();
                     #endregion
                     #region TabelaSpedTipoItem
                     cfg.CreateMap<TabelaSpedTipoItemViewModel, TabelaSpedTipoItem>().ReverseMap();
@@ -203,15 +219,20 @@ namespace SisCom.Aplicacao
 
                 var services = host.Services;
 
+                DatabaseConfig_Configure(services);
+
                 if (!DatabaseConfig.BancoDadosConectavel(services, true))
                 {
                     CaixaMensagem.Informacao("Não foi possível conectar no banco de dados." + appSettings.ConnectionStrings.DefaultConnection);
                 }
 
-                DatabaseConfig.Configure(services, @"Configuration//Seed//");
-
                 var frmMDI = services.GetRequiredService<frmMDI>();
                 Application.Run(frmMDI);
+            }
+
+            private static async void DatabaseConfig_Configure(IServiceProvider services)
+            {
+                await DatabaseConfig.Configure(services, @"Configuration//Seed//");
             }
 
             private static void ConfigureServices(IConfiguration configuration, IServiceCollection services)

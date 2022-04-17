@@ -24,7 +24,7 @@ namespace SisCom.Aplicacao.Configuration
                 {
                     try
                     {
-                        meuDbContext.Database.EnsureCreated();
+                        //meuDbContext.Database.EnsureCreated();
                         conectavel = true;
                     }
                     catch (Exception Ex)
@@ -41,28 +41,25 @@ namespace SisCom.Aplicacao.Configuration
         {
             try
             {
-            if (string.IsNullOrEmpty(_seedPath))
-            {
-                _seedPath = String.Format(Application.ExecutablePath + "{0}Data{0}Seed{0}", Path.DirectorySeparatorChar);
-            }
-
-            CaixaMensagem.Informacao(_seedPath);
-            
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                var meuDbContext = scope.ServiceProvider.GetRequiredService<MeuDbContext>();
-
-                if (await meuDbContext.AllMigrationsApplied())
+                if (string.IsNullOrEmpty(_seedPath))
                 {
-                    await meuDbContext.EnsureSeeded(scope, _seedPath);
+                    _seedPath = String.Format(Application.ExecutablePath + "{0}Data{0}Seed{0}", Path.DirectorySeparatorChar);
                 }
-            }
+
+                using (var scope = _serviceProvider.CreateScope())
+                {
+                    var meuDbContext = scope.ServiceProvider.GetRequiredService<MeuDbContext>();
+
+                    if (await meuDbContext.AllMigrationsApplied())
+                    {
+                        await meuDbContext.EnsureSeeded(scope, _seedPath);
+                    }
+                }
             }
             catch (Exception Ex)
             {
                 CaixaMensagem.Informacao(Ex.Message);
             }
-
         }
     }
 }

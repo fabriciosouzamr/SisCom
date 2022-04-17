@@ -30,10 +30,10 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<GrupoNaturezaReceita_CTS_PIS_COFINSViewModel>>(obterTodos);
         }
 
-        public async Task<IEnumerable<CodigoComboViewModel>> Combo(Expression<Func<GrupoNaturezaReceita_CTS_PIS_COFINS, object>> order = null)
+        public async Task<IEnumerable<CodigoDescricaoComboViewModel>> Combo(Expression<Func<GrupoNaturezaReceita_CTS_PIS_COFINS, object>> order = null)
         {
             var combo = await _GrupoNaturezaReceita_CTS_PIS_COFINSService.Combo(order);
-            return Declaracoes.mapper.Map<IEnumerable<CodigoComboViewModel>>(combo);
+            return Declaracoes.mapper.Map<IEnumerable<CodigoDescricaoComboViewModel>>(combo);
         }
     }
 }

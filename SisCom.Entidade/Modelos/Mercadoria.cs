@@ -135,39 +135,39 @@ namespace SisCom.Entidade.Modelos
         public byte[]? FotoEspecificacao_Imagem { get; set; }
 
         /* EF Relation */
-        public Nullable<Guid> GrupoMercadoriaId { get; set; }
-        public Nullable<Guid> SubGrupoMercadoriaId { get; set; }
-        public Nullable<Guid> FornecedorId { get; set; }
-        public Nullable<Guid> FabricanteId { get; set; }
+        public Guid? GrupoMercadoriaId { get; set; }
+        public Guid? SubGrupoMercadoriaId { get; set; }
+        public Guid? FornecedorId { get; set; }
+        public Guid? FabricanteId { get; set; }
 
-        public Nullable<Guid> Estoque_UnidadeMedidaId { get; set; }
-        public Nullable<Guid> Estoque_TributacaoNFCe_TabelaSituacaoTributariaNFCeId { get; set; }
-        public Nullable<Guid> Estoque_TributacaoNFCe_TabelaCFOPId { get; set; }
-        public Nullable<Guid> Estoque_TributacaoNFCe_TipoServicoFiscalId { get; set; }
-        public Nullable<Guid> Fiscal_VinculoFiscalId { get; set; }
-        public Nullable<Guid> Fiscal_TipoMercadoriaId { get; set; }
-        public Nullable<Guid> Fiscal_TabelaANPId { get; set; }
-        public Nullable<Guid> Fiscal_TabelaNCMId { get; set; }
-        public Nullable<Guid> Fiscal_TabelaCESTId { get; set; }
-        public Nullable<Guid> Fiscal_TabelaOrigemMercadoriaServicoId { get; set; }
-        public Nullable<Guid> Fiscal_TabelaCST_CSOSNId { get; set; }
-        public Nullable<Guid> Fiscal_TabelaBeneficioSPEDId { get; set; }
+        public Guid? Estoque_UnidadeMedidaId { get; set; }
+        public Guid? Estoque_TributacaoNFCe_TabelaSituacaoTributariaNFCeId { get; set; }
+        public Guid? Estoque_TributacaoNFCe_TabelaCFOPId { get; set; }
+        public Guid? Estoque_TributacaoNFCe_TipoServicoFiscalId { get; set; }
+        public Guid? Fiscal_VinculoFiscalId { get; set; }
+        public Guid? Fiscal_TipoMercadoriaId { get; set; }
+        public Guid? Fiscal_TabelaANPId { get; set; }
+        public Guid? Fiscal_TabelaNCMId { get; set; }
+        public Guid? Fiscal_TabelaCESTId { get; set; }
+        public Guid? Fiscal_TabelaOrigemMercadoriaServicoId { get; set; }
+        public Guid? Fiscal_TabelaCST_CSOSNId { get; set; }
+        public Guid? Fiscal_TabelaBeneficioSPEDId { get; set; }
 
-        public Nullable<Guid> Fiscal_NFE_TabelaCST_IPIId { get; set; }
-        public Nullable<Guid> Fiscal_NFE_TabelaCST_COFINSId { get; set; }
-        public Nullable<Guid> Fiscal_NFE_TabelaCST_PISId { get; set; }
-        public Nullable<Guid> Fiscal_NFS_ICMS_TabelaModalidadeDeterminacaoBCICMSId { get; set; }
-        public Nullable<Guid> Fiscal_NFS_ICMS_TabelaMotivoDesoneracaoICMSId { get; set; }
-        public Nullable<Guid> Fiscal_NFS_ICMSST_TabelaModalidadeDeterminacaoBCICMSId { get; set; }
-        public Nullable<Guid> Fiscal_NFS_IPI_TabelaCST_IPIId { get; set; }
-        public Nullable<Guid> Fiscal_NFS_IPI_TabelaClasseEnquadramentoIPIId { get; set; }
-        public Nullable<Guid> Fiscal_NFS_IPI_TabelaCodigoEnquadramentoIPIId { get; set; }
-        public Nullable<Guid> Fiscal_NFS_PISCOFINS_PIS_TabelaCSTCOFINSId { get; set; }
-        public Nullable<Guid> Fiscal_NFS_PISCOFINS_PIS_TabelaCSTPISId { get; set; }
-        public Nullable<Guid> Fiscal_NFS_PISCOFINS_GrupoNaturezaReceitaId { get; set; }
-        public Nullable<Guid> Fiscal_NFS_PISCOFINS_TabelaNaturezaReceitaId { get; set; }
-        public Nullable<Guid> Fiscal_SPED_TabelaSpedTipoItemId { get; set; }
-        public Nullable<Guid> Fiscal_SPED_TabelaSpedCodigoGeneroId { get; set; }
-        public Nullable<Guid> Fiscal_SPED_TabelaSpedInformacaoAdicionalItemId { get; set; }
+        public Guid? Fiscal_NFE_TabelaCST_IPIId { get; set; }
+        public Guid? Fiscal_NFE_TabelaCST_COFINSId { get; set; }
+        public Guid? Fiscal_NFE_TabelaCST_PISId { get; set; }
+        public Guid? Fiscal_NFS_ICMS_TabelaModalidadeDeterminacaoBCICMSId { get; set; }
+        public Guid? Fiscal_NFS_ICMS_TabelaMotivoDesoneracaoICMSId { get; set; }
+        public Guid? Fiscal_NFS_ICMSST_TabelaModalidadeDeterminacaoBCICMSId { get; set; }
+        public Guid? Fiscal_NFS_IPI_TabelaCST_IPIId { get; set; }
+        public Guid? Fiscal_NFS_IPI_TabelaClasseEnquadramentoIPIId { get; set; }
+        public Guid? Fiscal_NFS_IPI_TabelaCodigoEnquadramentoIPIId { get; set; }
+        public Guid? Fiscal_NFS_PISCOFINS_PIS_TabelaCSTCOFINSId { get; set; }
+        public Guid? Fiscal_NFS_PISCOFINS_PIS_TabelaCSTPISId { get; set; }
+        public Guid? Fiscal_NFS_PISCOFINS_GrupoNaturezaReceitaId { get; set; }
+        public Guid? Fiscal_NFS_PISCOFINS_TabelaNaturezaReceitaId { get; set; }
+        public Guid? Fiscal_SPED_TabelaSpedTipoItemId { get; set; }
+        public Guid? Fiscal_SPED_TabelaSpedCodigoGeneroId { get; set; }
+        public Guid? Fiscal_SPED_TabelaSpedInformacaoAdicionalItemId { get; set; }
     }
 }

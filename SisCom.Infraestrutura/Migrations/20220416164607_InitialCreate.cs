@@ -59,7 +59,6 @@ namespace SisCom.Infraestrutura.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     TipoOperacaoCFOP = table.Column<int>(type: "int", nullable: false),
-                    TipoOperacaoCFOPId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -80,32 +79,6 @@ namespace SisCom.Infraestrutura.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GrupoMercadorias", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GrupoNaturezaReceita_CTS_PIS_COFINSs",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(100)", nullable: true),
-                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GrupoNaturezaReceita_CTS_PIS_COFINSs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GrupoNCM",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(100)", nullable: true),
-                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GrupoNCM", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,6 +108,19 @@ namespace SisCom.Infraestrutura.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SubGrupoNaturezaReceita_CTS_PIS_COFINSs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubGrupoNaturezaReceita_CTS_PIS_COFINSs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TabelaANPs",
                 columns: table => new
                 {
@@ -153,8 +139,10 @@ namespace SisCom.Infraestrutura.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Codigo = table.Column<string>(type: "varchar(8)", nullable: false),
+                    Codigo = table.Column<string>(type: "varchar(10)", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(500)", nullable: false),
+                    DataInicial = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DataFinal = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -274,6 +262,27 @@ namespace SisCom.Infraestrutura.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TabelaModalidadeDeterminacaoBCICMSs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TabelaNCMs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Codigo = table.Column<string>(type: "varchar(8)", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(1500)", nullable: false),
+                    PercentualAliquotaIBPTEstadual = table.Column<double>(type: "float", nullable: false, defaultValue: 0.0),
+                    PercentualAliquotaIBPTNacional = table.Column<double>(type: "float", nullable: false, defaultValue: 0.0),
+                    TributosImpostados = table.Column<double>(type: "float", nullable: false, defaultValue: 0.0),
+                    TributosFederais = table.Column<double>(type: "float", nullable: false, defaultValue: 0.0),
+                    TributosEstaduais = table.Column<double>(type: "float", nullable: false, defaultValue: 0.0),
+                    TributosMunicipais = table.Column<double>(type: "float", nullable: false, defaultValue: 0.0),
+                    TotalTributos = table.Column<double>(type: "float", nullable: false, defaultValue: 0.0),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TabelaNCMs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -406,7 +415,7 @@ namespace SisCom.Infraestrutura.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Codigo = table.Column<string>(type: "varchar(4)", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(400)", nullable: false),
                     GrupoCFOPId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -437,48 +446,6 @@ namespace SisCom.Infraestrutura.Migrations
                         name: "FK_SubGrupoMercadorias_GrupoMercadorias_GrupoMercadoriaId",
                         column: x => x.GrupoMercadoriaId,
                         principalTable: "GrupoMercadorias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TabelaNaturezaReceita_CTS_PIS_COFINSs",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Codigo = table.Column<string>(type: "char(5)", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
-                    GrupoNaturezaReceita_CTS_PIS_COFINSId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TabelaNaturezaReceita_CTS_PIS_COFINSs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TabelaNaturezaReceita_CTS_PIS_COFINSs_GrupoNaturezaReceita_CTS_PIS_COFINSs_GrupoNaturezaReceita_CTS_PIS_COFINSId",
-                        column: x => x.GrupoNaturezaReceita_CTS_PIS_COFINSId,
-                        principalTable: "GrupoNaturezaReceita_CTS_PIS_COFINSs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TabelaNCMs",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Codigo = table.Column<string>(type: "varchar(8)", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(500)", nullable: false),
-                    GrupoNCMId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TabelaNCMs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TabelaNCMs_GrupoNCM_GrupoNCMId",
-                        column: x => x.GrupoNCMId,
-                        principalTable: "GrupoNCM",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -547,13 +514,48 @@ namespace SisCom.Infraestrutura.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GrupoNaturezaReceita_CTS_PIS_COFINSs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Codigo = table.Column<string>(type: "varchar(3)", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(1000)", nullable: false),
+                    SubGrupoNaturezaReceita_CTS_PIS_COFINSId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    TabelaCST_PIS_COFINSRelacionado01Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TabelaCST_PIS_COFINSRelacionado02Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GrupoNaturezaReceita_CTS_PIS_COFINSs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GrupoNaturezaReceita_CTS_PIS_COFINSs_SubGrupoNaturezaReceita_CTS_PIS_COFINSs_SubGrupoNaturezaReceita_CTS_PIS_COFINSId",
+                        column: x => x.SubGrupoNaturezaReceita_CTS_PIS_COFINSId,
+                        principalTable: "SubGrupoNaturezaReceita_CTS_PIS_COFINSs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_GrupoNaturezaReceita_CTS_PIS_COFINSs_TabelaCST_PIS_COFINSs_TabelaCST_PIS_COFINSRelacionado01Id",
+                        column: x => x.TabelaCST_PIS_COFINSRelacionado01Id,
+                        principalTable: "TabelaCST_PIS_COFINSs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_GrupoNaturezaReceita_CTS_PIS_COFINSs_TabelaCST_PIS_COFINSs_TabelaCST_PIS_COFINSRelacionado02Id",
+                        column: x => x.TabelaCST_PIS_COFINSRelacionado02Id,
+                        principalTable: "TabelaCST_PIS_COFINSs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TabelaCESTs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Codigo = table.Column<string>(type: "varchar(7)", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(500)", nullable: false),
-                    TabelaNCMId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TabelaNCMId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -584,6 +586,27 @@ namespace SisCom.Infraestrutura.Migrations
                         name: "FK_Cidades_Estados_EstadoId",
                         column: x => x.EstadoId,
                         principalTable: "Estados",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TabelaNaturezaReceita_CTS_PIS_COFINSs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Codigo = table.Column<string>(type: "char(5)", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
+                    GrupoNaturezaReceita_CTS_PIS_COFINSId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TabelaNaturezaReceita_CTS_PIS_COFINSs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TabelaNaturezaReceita_CTS_PIS_COFINSs_GrupoNaturezaReceita_CTS_PIS_COFINSs_GrupoNaturezaReceita_CTS_PIS_COFINSId",
+                        column: x => x.GrupoNaturezaReceita_CTS_PIS_COFINSId,
+                        principalTable: "GrupoNaturezaReceita_CTS_PIS_COFINSs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1092,6 +1115,21 @@ namespace SisCom.Infraestrutura.Migrations
                 column: "MercadoriaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_GrupoNaturezaReceita_CTS_PIS_COFINSs_SubGrupoNaturezaReceita_CTS_PIS_COFINSId",
+                table: "GrupoNaturezaReceita_CTS_PIS_COFINSs",
+                column: "SubGrupoNaturezaReceita_CTS_PIS_COFINSId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GrupoNaturezaReceita_CTS_PIS_COFINSs_TabelaCST_PIS_COFINSRelacionado01Id",
+                table: "GrupoNaturezaReceita_CTS_PIS_COFINSs",
+                column: "TabelaCST_PIS_COFINSRelacionado01Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GrupoNaturezaReceita_CTS_PIS_COFINSs_TabelaCST_PIS_COFINSRelacionado02Id",
+                table: "GrupoNaturezaReceita_CTS_PIS_COFINSs",
+                column: "TabelaCST_PIS_COFINSRelacionado02Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MercadoriaFornecedores_FornecedorId",
                 table: "MercadoriaFornecedores",
                 column: "FornecedorId");
@@ -1302,11 +1340,6 @@ namespace SisCom.Infraestrutura.Migrations
                 column: "GrupoNaturezaReceita_CTS_PIS_COFINSId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TabelaNCMs_GrupoNCMId",
-                table: "TabelaNCMs",
-                column: "GrupoNCMId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TipoServicoFiscais_TabelaCNAEId",
                 table: "TipoServicoFiscais",
                 column: "TabelaCNAEId");
@@ -1361,9 +1394,6 @@ namespace SisCom.Infraestrutura.Migrations
 
             migrationBuilder.DropTable(
                 name: "TabelaCST_IPIs");
-
-            migrationBuilder.DropTable(
-                name: "TabelaCST_PIS_COFINSs");
 
             migrationBuilder.DropTable(
                 name: "TabelaModalidadeDeterminacaoBCICMSs");
@@ -1432,7 +1462,10 @@ namespace SisCom.Infraestrutura.Migrations
                 name: "Estados");
 
             migrationBuilder.DropTable(
-                name: "GrupoNCM");
+                name: "SubGrupoNaturezaReceita_CTS_PIS_COFINSs");
+
+            migrationBuilder.DropTable(
+                name: "TabelaCST_PIS_COFINSs");
 
             migrationBuilder.DropTable(
                 name: "Paises");

@@ -1129,7 +1129,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(500)");
 
-                    b.Property<Guid>("TabelaNCMId")
+                    b.Property<Guid?>("TabelaNCMId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UltimaAtualizacao")
@@ -2105,8 +2105,7 @@ namespace SisCom.Infraestrutura.Migrations
                 {
                     b.HasOne("SisCom.Entidade.Modelos.TabelaNCM", "TabelaNCM")
                         .WithMany()
-                        .HasForeignKey("TabelaNCMId")
-                        .IsRequired();
+                        .HasForeignKey("TabelaNCMId");
 
                     b.Navigation("TabelaNCM");
                 });

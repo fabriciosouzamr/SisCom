@@ -43,6 +43,7 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Similar> Similars { get; set; }
         public DbSet<SubGrupoMercadoria> SubGrupoMercadorias { get; set; }
+        public DbSet<SubGrupoNaturezaReceita_CTS_PIS_COFINS> SubGrupoNaturezaReceita_CTS_PIS_COFINSs { get; set; }
         public DbSet<TabelaANP> TabelaANPs { get; set; }
         public DbSet<TabelaBeneficioSPED> TabelaBeneficioSPEDs { get; set; }
         public DbSet<TabelaCEST> TabelaCESTs { get; set; }

@@ -30,10 +30,10 @@ namespace SisCom.Aplicacao.Controllers
             var obterTodos = await _TabelaModalidadeDeterminacaoBCICMSService.GetAll();
             return Declaracoes.mapper.Map<IEnumerable<TabelaModalidadeDeterminacaoBCICMSViewModel>>(obterTodos);
         }
-        public async Task<IEnumerable<DescricaoComboViewModel>> Combo(TipoModalidadeDeterminacaoBCICMS tipoModalidadeDeterminacaoBCICMS, Expression<Func<TabelaModalidadeDeterminacaoBCICMS, object>> order = null)
+        public async Task<IEnumerable<CodigoDescricaoComboViewModel>> Combo(TipoModalidadeDeterminacaoBCICMS tipoModalidadeDeterminacaoBCICMS, Expression<Func<TabelaModalidadeDeterminacaoBCICMS, object>> order = null)
         {
             var combo = await _TabelaModalidadeDeterminacaoBCICMSService.Search(p => p.TipoModalidadeDeterminacaoBCICMS == tipoModalidadeDeterminacaoBCICMS, order);
-            return Declaracoes.mapper.Map<IEnumerable<DescricaoComboViewModel>>(combo);
+            return Declaracoes.mapper.Map<IEnumerable<CodigoDescricaoComboViewModel>>(combo);
         }
     }
 }

@@ -10,8 +10,8 @@ using SisCom.Infraestrutura.Data.Context;
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    [Migration("20220411004340_SubGrupoNatureza")]
-    partial class SubGrupoNatureza
+    [Migration("20220416164607_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -334,18 +334,20 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Codigo")
-                        .HasColumnType("varchar(100)");
+                        .IsRequired()
+                        .HasColumnType("varchar(3)");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("varchar(100)");
+                        .IsRequired()
+                        .HasColumnType("varchar(1000)");
 
-                    b.Property<Guid>("SubGrupoNaturezaReceita_CTS_PIS_COFINSId")
+                    b.Property<Guid?>("SubGrupoNaturezaReceita_CTS_PIS_COFINSId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TabelaCST_CSOSNRelacionado01Id")
+                    b.Property<Guid>("TabelaCST_PIS_COFINSRelacionado01Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TabelaCST_CSOSNRelacionado02Id")
+                    b.Property<Guid>("TabelaCST_PIS_COFINSRelacionado02Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UltimaAtualizacao")
@@ -355,9 +357,9 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.HasIndex("SubGrupoNaturezaReceita_CTS_PIS_COFINSId");
 
-                    b.HasIndex("TabelaCST_CSOSNRelacionado01Id");
+                    b.HasIndex("TabelaCST_PIS_COFINSRelacionado01Id");
 
-                    b.HasIndex("TabelaCST_CSOSNRelacionado02Id");
+                    b.HasIndex("TabelaCST_PIS_COFINSRelacionado02Id");
 
                     b.ToTable("GrupoNaturezaReceita_CTS_PIS_COFINSs");
                 });
@@ -1129,7 +1131,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(500)");
 
-                    b.Property<Guid>("TabelaNCMId")
+                    b.Property<Guid?>("TabelaNCMId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UltimaAtualizacao")
@@ -1793,24 +1795,23 @@ namespace SisCom.Infraestrutura.Migrations
                 {
                     b.HasOne("SisCom.Entidade.Modelos.SubGrupoNaturezaReceita_CTS_PIS_COFINS", "SubGrupoNaturezaReceita_CTS_PIS_COFINS")
                         .WithMany()
-                        .HasForeignKey("SubGrupoNaturezaReceita_CTS_PIS_COFINSId")
+                        .HasForeignKey("SubGrupoNaturezaReceita_CTS_PIS_COFINSId");
+
+                    b.HasOne("SisCom.Entidade.Modelos.TabelaCST_PIS_COFINS", "TabelaCST_PIS_COFINSRelacionado01")
+                        .WithMany()
+                        .HasForeignKey("TabelaCST_PIS_COFINSRelacionado01Id")
                         .IsRequired();
 
-                    b.HasOne("SisCom.Entidade.Modelos.TabelaCST_CSOSN", "TabelaCST_CSOSNRelacionado01")
+                    b.HasOne("SisCom.Entidade.Modelos.TabelaCST_PIS_COFINS", "TabelaCST_PIS_COFINSRelacionado02")
                         .WithMany()
-                        .HasForeignKey("TabelaCST_CSOSNRelacionado01Id")
-                        .IsRequired();
-
-                    b.HasOne("SisCom.Entidade.Modelos.TabelaCST_CSOSN", "TabelaCST_CSOSNRelacionado02")
-                        .WithMany()
-                        .HasForeignKey("TabelaCST_CSOSNRelacionado02Id")
+                        .HasForeignKey("TabelaCST_PIS_COFINSRelacionado02Id")
                         .IsRequired();
 
                     b.Navigation("SubGrupoNaturezaReceita_CTS_PIS_COFINS");
 
-                    b.Navigation("TabelaCST_CSOSNRelacionado01");
+                    b.Navigation("TabelaCST_PIS_COFINSRelacionado01");
 
-                    b.Navigation("TabelaCST_CSOSNRelacionado02");
+                    b.Navigation("TabelaCST_PIS_COFINSRelacionado02");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Mercadoria", b =>
@@ -2106,8 +2107,7 @@ namespace SisCom.Infraestrutura.Migrations
                 {
                     b.HasOne("SisCom.Entidade.Modelos.TabelaNCM", "TabelaNCM")
                         .WithMany()
-                        .HasForeignKey("TabelaNCMId")
-                        .IsRequired();
+                        .HasForeignKey("TabelaNCMId");
 
                     b.Navigation("TabelaNCM");
                 });
