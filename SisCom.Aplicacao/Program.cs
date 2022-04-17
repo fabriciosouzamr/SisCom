@@ -24,7 +24,7 @@ namespace SisCom.Aplicacao
         static class Program
         {
             static AppSettings appSettings;
-
+            private static string appSettingsPath;
             /// <summary>
             ///  The main entry point for the application.
             /// </summary>
@@ -38,17 +38,19 @@ namespace SisCom.Aplicacao
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                using (StreamReader file = File.OpenText(@"Configuration//appsettings.json"))
+                appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "appsettings.json");
+
+                using (StreamReader file = File.OpenText(appSettingsPath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     appSettings = (AppSettings)serializer.Deserialize(file, typeof(AppSettings));
                 }
-                
+
                 var host = Host.CreateDefaultBuilder()
                                 .ConfigureHostConfiguration(builder =>
                                 {
                                     builder.SetBasePath(Directory.GetCurrentDirectory());
-                                    builder.AddJsonFile("Configuration//appsettings.json");
+                                    builder.AddJsonFile(appSettingsPath);
                                     builder.AddEnvironmentVariables();
                                     configBuilder = builder.Build();
 
@@ -232,7 +234,8 @@ namespace SisCom.Aplicacao
 
             private static async void DatabaseConfig_Configure(IServiceProvider services)
             {
-                await DatabaseConfig.Configure(services, @"Configuration//Seed//");
+                var seedPath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "Seed");
+                await DatabaseConfig.Configure(services, seedPath);
             }
 
             private static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
@@ -260,7 +263,8 @@ namespace SisCom.Aplicacao
             {
                 AppSettings appSettings;
 
-                using (StreamReader file = File.OpenText(@"Configuration//appsettings.json"))
+                var appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "appsettings.json");
+                using (StreamReader file = File.OpenText(appSettingsPath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     appSettings = (AppSettings)serializer.Deserialize(file, typeof(AppSettings));

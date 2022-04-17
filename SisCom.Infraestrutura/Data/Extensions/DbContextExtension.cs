@@ -18,7 +18,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
     public static class DbContextExtension
     {
         private const string seedPath = "..{0}SisCom.Infrastructure{0}Data{0}Seed{0}";
-
+            
         public static async Task<bool> AllMigrationsApplied(this DbContext context)
         {
             bool ret = false;
@@ -95,7 +95,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
 
         private static async Task SeedScripts(MeuDbContext context, string _seedPath = "")
         {
-            var directory = String.Format(_seedPath + "Scripts", Path.DirectorySeparatorChar);
+            var directory = _seedPath;
             foreach (var path in Directory.GetFiles(directory, "*.sql"))
             {
                 var sql = await File.ReadAllTextAsync(path);
@@ -108,8 +108,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
             try
             {
                 var db = context.Set<TEntity>();
-                var path = _seedPath + typeof(TEntity).Name + ".json";
-                path = String.Format(path, Path.DirectorySeparatorChar);
+                var path = Path.Combine(_seedPath, typeof(TEntity).Name + ".json");
 
                 var items = await ReadFromJson<TEntity>(path);
                 items = items.Where(u => !db.AsNoTracking().Any(m => m.Id == u.Id)).ToList();
@@ -130,8 +129,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
             try
             {
                 var db = context.Set<TEntity>();
-                var path = _seedPath + typeof(TEntity).Name + ".json";
-                path = String.Format(path, Path.DirectorySeparatorChar);
+                var path = Path.Combine(_seedPath, typeof(TEntity).Name + ".json");
 
                 var items = ReadFromJsonSync<TEntity>(path);
                 items = items.Where(u => !db.AsNoTracking().Any(m => m.Id == u.Id)).ToList();
