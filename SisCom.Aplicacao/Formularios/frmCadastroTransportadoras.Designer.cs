@@ -175,6 +175,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoConsultarCNPJ.Size = new System.Drawing.Size(53, 56);
             this.botaoConsultarCNPJ.TabIndex = 33;
             this.botaoConsultarCNPJ.UseVisualStyleBackColor = true;
+            this.botaoConsultarCNPJ.Click += new System.EventHandler(this.botaoConsultarCNPJ_Click);
             // 
             // botaoCompras
             // 

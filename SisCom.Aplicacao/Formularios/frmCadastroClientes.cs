@@ -375,11 +375,14 @@ namespace SisCom.Aplicacao.Formularios
         #region Botaos
         private void botaoConsultarCNPJ_Click(object sender, System.EventArgs e)
         {
-            if (pessoa.Id != Guid.Empty)
+            if (pessoa!= null)
             {
-                if (!CaixaMensagem.Perguntar("Existe um cadastro em edição. Deseja iniciar outro?"))
+                if (pessoa.Id != Guid.Empty)
                 {
-                    return;
+                    if (!CaixaMensagem.Perguntar("Existe um cadastro em edição. Deseja iniciar outro?"))
+                    {
+                        return;
+                    }
                 }
             }
 

@@ -26,5 +26,10 @@ namespace SisCom.Aplicacao.Formularios
         {
             Close();
         }
+
+        private void botaoConsultarCNPJ_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -33,6 +33,7 @@ namespace SisCom.Aplicacao.Configuration
             services.AddTransient<frmCadastroTransportadoras>();
             services.AddTransient<frmCadastroTipoCliente>();
             services.AddTransient<frmCadastroEmpresas>();
+            services.AddTransient<frmCadastroBuscarCNPJ>();
             #endregion
 
             #region Cidade

@@ -18,6 +18,9 @@ namespace SisCom.Aplicacao.Formularios
         ViewModels.MercadoriaViewModel mercadoria = null;
         bool carregandoDados = false;
 
+        //logo2.Formulário!TipoPrecificacao
+        string TipoPrecificacao = "TVA";
+
         enum TipoPesquisa
         {
             [Description("Código")]
@@ -851,34 +854,21 @@ namespace SisCom.Aplicacao.Formularios
                 //Preço Estoque - Preço
                 numericPreco_PrecoCompra.Value = mercadoria.Preco_PrecoCompra;
                 numericPreco_ICMSCompra.Value = mercadoria.Preco_ICMS_Compra;
-                labelPreco_ValorICMSCompra.Text = Valor.Formatar((double)mercadoria.Preco_ICMS_Compra);
                 numericPreco_ICMSFronteira.Value = mercadoria.Preco_PrecoCompra;
-                labelPreco_ValorICMSFronteira.Text = Valor.Formatar((double)numericPreco_ICMSFronteira.Value);
                 numericPreco_IPI.Value = mercadoria.Preco_IPI;
-                labelPreco_ValorIPI.Text = Valor.Formatar((double)numericPreco_IPI.Value);
                 numericPreco_Frete.Value = mercadoria.Preco_Frete;
-                labelPreco_ValorFrete.Text = Valor.Formatar((double)numericPreco_Frete.Value);
                 numericPreco_Embalagem.Value = mercadoria.Preco_Embalagem;
-                labelPreco_ValorEmbalagem.Text = Valor.Formatar((double)numericPreco_Embalagem.Value);
                 numericPreco_EncFinanceiros.Value = mercadoria.Preco_EncFinanceiro;
-                labelPreco_ValorEncFinanceiros.Text = Valor.Formatar((double)numericPreco_EncFinanceiros.Value);
-                labelPreco_ValorCustoMercadoria.Text = Valor.Formatar(0);
                 numericPreco_CustoFixo.Value = mercadoria.Preco_CustoFixo;
-                labelPreco_ValorCustoFixo.Text = Valor.Formatar(0);
                 numericPreco_ImpostosFederais.Value = mercadoria.Preco_ImpostoFederais;
-                labelPreco_ValorImpostosFederais.Text = Valor.Formatar((double)numericPreco_ImpostosFederais.Value);
                 numericPreco_ICMSVenda.Value = mercadoria.Preco_ICMS_Venda;
-                labelPreco_ValorICMSVenda.Text = Valor.Formatar((double)numericPreco_ICMSVenda.Value);
                 numericPreco_Comissao.Value = mercadoria.Preco_Comissao;
-                labelPreco_ValorComissao.Text = Valor.Formatar((double)numericPreco_Comissao.Value);
                 numericPreco_Marketing.Value = mercadoria.Preco_Marketing;
-                labelPreco_ValorMarketing.Text = Valor.Formatar((double)numericPreco_Marketing.Value);
                 numericPreco_OutrosCustos.Value = mercadoria.Preco_OutrosCustos;
-                labelPreco_ValorOutrosCustos.Text = Valor.Formatar((double)numericPreco_OutrosCustos.Value);
+                CalcularCustoMercadoria();
                 //Preço Estoque - Ponto Equilíbrio
                 labelMargem_PontoEquilibrio.Text = "0000";
                 numericMargem_MargemSugerido.Value = mercadoria.Preco_MargemSugerido;
-                labelMargem_ValorlMargemSugerido.Text = Valor.Formatar((double)numericMargem_MargemSugerido.Value);
                 labelMargem_ValorPrecoSugerido.Text = Valor.Formatar((double)0);
                 numericMargem_PrecoVenda.Value = mercadoria.Preco_PrecoVenda;
                 labelMargem_MargemVenda.Text = Valor.Formatar((double)0);
@@ -1290,6 +1280,106 @@ namespace SisCom.Aplicacao.Formularios
         private async Task NCMCarregarDependentes()
         {
             await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CEST_Carregar((Guid)comboDetalhesFiscais_NCM.SelectedValue));
+        }
+
+        private void numericPreco_ICMSCompra_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorICMSCompra.Text = Valor.Formatar((double)mercadoria.Preco_ICMS_Compra);
+            CalcularCustoMercadoria();
+        }
+
+        private void numericPreco_ICMSFronteira_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorICMSFronteira.Text = Valor.Formatar((double)numericPreco_ICMSFronteira.Value);
+            CalcularCustoMercadoria();
+        }
+
+        private void numericPreco_IPI_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorIPI.Text = Valor.Formatar((double)numericPreco_IPI.Value);
+            CalcularCustoMercadoria();
+        }
+
+        private void numericPreco_Frete_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorFrete.Text = Valor.Formatar((double)numericPreco_Frete.Value);
+            CalcularCustoMercadoria();
+        }
+
+        private void numericPreco_Embalagem_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorEmbalagem.Text = Valor.Formatar((double)numericPreco_Embalagem.Value);
+            CalcularCustoMercadoria();
+        }
+
+        private void numericPreco_EncFinanceiros_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorEncFinanceiros.Text = Valor.Formatar((double)numericPreco_EncFinanceiros.Value);
+            CalcularCustoMercadoria();
+        }
+
+        private void numericPreco_CustoFixo_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorCustoFixo.Text = Valor.Formatar((double)numericPreco_CustoFixo.Value);
+        }
+
+        private void numericPreco_ImpostosFederais_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorImpostosFederais.Text = Valor.Formatar((double)numericPreco_ImpostosFederais.Value);
+            CalcularCustoMercadoria();
+        }
+
+        private void numericPreco_ICMSVenda_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorICMSVenda.Text = Valor.Formatar((double)numericPreco_ICMSVenda.Value);
+            CalcularCustoMercadoria();
+        }
+
+        private void numericPreco_Comissao_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorComissao.Text = Valor.Formatar((double)numericPreco_Comissao.Value);
+            CalcularCustoMercadoria();
+        }
+
+        private void numericPreco_Marketing_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorMarketing.Text = Valor.Formatar((double)numericPreco_Marketing.Value);
+            CalcularCustoMercadoria();
+        }
+
+        private void numericPreco_OutrosCustos_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorOutrosCustos.Text = Valor.Formatar((double)numericPreco_OutrosCustos.Value);
+            CalcularCustoMercadoria();
+        }
+
+        private void CalcularCustoMercadoria()
+        {
+            decimal calcularCustoMercadoria = 0;
+            decimal icmsCompra = 0;
+
+            if (TipoPrecificacao == "TVA") { icmsCompra = 0; } { icmsCompra = 0 - numericPreco_ICMSCompra.Value; }
+
+            calcularCustoMercadoria = numericPreco_PrecoCompra.Value + (numericPreco_PrecoCompra.Value * ((icmsCompra+numericPreco_IPI.Value + numericPreco_Frete.Value + numericPreco_Embalagem.Value + numericPreco_EncFinanceiros.Value)/ (decimal)100))+CalcularTVA();
+
+                labelPreco_ValorCustoMercadoria.Text = Valor.Formatar((double)calcularCustoMercadoria);
+        }
+
+        private decimal CalcularTVA()
+        {
+            return 0;
+        }
+
+        private void numericMargem_MargemSugerido_ValueChanged(object sender, EventArgs e)
+        {
+            labelMargem_ValorlMargemSugerido.Text = Valor.Formatar((double)numericMargem_MargemSugerido.Value);
+        }
+
+        private void botaoNovo_Click(object sender, EventArgs e)
+        {
+            mercadoria = new ViewModels.MercadoriaViewModel();
+            mercadoria.Id = Guid.NewGuid();
+            Limpar();
         }
     }
 }

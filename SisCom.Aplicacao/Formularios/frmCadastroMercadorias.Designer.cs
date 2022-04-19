@@ -452,7 +452,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.labelPreco_ValorOutrosCustos.AutoSize = true;
             this.labelPreco_ValorOutrosCustos.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorOutrosCustos.Location = new System.Drawing.Point(191, 331);
+            this.labelPreco_ValorOutrosCustos.Location = new System.Drawing.Point(184, 331);
             this.labelPreco_ValorOutrosCustos.Name = "labelPreco_ValorOutrosCustos";
             this.labelPreco_ValorOutrosCustos.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorOutrosCustos.TabIndex = 99;
@@ -462,7 +462,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.labelPreco_ValorMarketing.AutoSize = true;
             this.labelPreco_ValorMarketing.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorMarketing.Location = new System.Drawing.Point(191, 306);
+            this.labelPreco_ValorMarketing.Location = new System.Drawing.Point(184, 306);
             this.labelPreco_ValorMarketing.Name = "labelPreco_ValorMarketing";
             this.labelPreco_ValorMarketing.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorMarketing.TabIndex = 98;
@@ -481,7 +481,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.labelPreco_ValorICMSVenda.AutoSize = true;
             this.labelPreco_ValorICMSVenda.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorICMSVenda.Location = new System.Drawing.Point(191, 256);
+            this.labelPreco_ValorICMSVenda.Location = new System.Drawing.Point(184, 256);
             this.labelPreco_ValorICMSVenda.Name = "labelPreco_ValorICMSVenda";
             this.labelPreco_ValorICMSVenda.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorICMSVenda.TabIndex = 96;
@@ -491,7 +491,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.labelPreco_ValorImpostosFederais.AutoSize = true;
             this.labelPreco_ValorImpostosFederais.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorImpostosFederais.Location = new System.Drawing.Point(191, 231);
+            this.labelPreco_ValorImpostosFederais.Location = new System.Drawing.Point(184, 231);
             this.labelPreco_ValorImpostosFederais.Name = "labelPreco_ValorImpostosFederais";
             this.labelPreco_ValorImpostosFederais.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorImpostosFederais.TabIndex = 95;
@@ -501,7 +501,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.labelPreco_ValorCustoFixo.AutoSize = true;
             this.labelPreco_ValorCustoFixo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorCustoFixo.Location = new System.Drawing.Point(191, 206);
+            this.labelPreco_ValorCustoFixo.Location = new System.Drawing.Point(184, 206);
             this.labelPreco_ValorCustoFixo.Name = "labelPreco_ValorCustoFixo";
             this.labelPreco_ValorCustoFixo.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorCustoFixo.TabIndex = 94;
@@ -577,7 +577,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.labelPreco_ValorComissao.AutoSize = true;
             this.labelPreco_ValorComissao.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorComissao.Location = new System.Drawing.Point(191, 281);
+            this.labelPreco_ValorComissao.Location = new System.Drawing.Point(184, 281);
             this.labelPreco_ValorComissao.Name = "labelPreco_ValorComissao";
             this.labelPreco_ValorComissao.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorComissao.TabIndex = 97;
@@ -1210,49 +1210,85 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericPreco_OutrosCustos.DecimalPlaces = 2;
             this.numericPreco_OutrosCustos.Location = new System.Drawing.Point(124, 327);
+            this.numericPreco_OutrosCustos.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_OutrosCustos.Name = "numericPreco_OutrosCustos";
             this.numericPreco_OutrosCustos.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_OutrosCustos.TabIndex = 62;
+            this.numericPreco_OutrosCustos.ValueChanged += new System.EventHandler(this.numericPreco_OutrosCustos_ValueChanged);
             // 
             // numericPreco_Marketing
             // 
             this.numericPreco_Marketing.DecimalPlaces = 2;
             this.numericPreco_Marketing.Location = new System.Drawing.Point(124, 302);
+            this.numericPreco_Marketing.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_Marketing.Name = "numericPreco_Marketing";
             this.numericPreco_Marketing.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_Marketing.TabIndex = 61;
+            this.numericPreco_Marketing.ValueChanged += new System.EventHandler(this.numericPreco_Marketing_ValueChanged);
             // 
             // numericPreco_Comissao
             // 
             this.numericPreco_Comissao.DecimalPlaces = 2;
             this.numericPreco_Comissao.Location = new System.Drawing.Point(124, 277);
+            this.numericPreco_Comissao.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_Comissao.Name = "numericPreco_Comissao";
             this.numericPreco_Comissao.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_Comissao.TabIndex = 60;
+            this.numericPreco_Comissao.ValueChanged += new System.EventHandler(this.numericPreco_Comissao_ValueChanged);
             // 
             // numericPreco_ICMSVenda
             // 
             this.numericPreco_ICMSVenda.DecimalPlaces = 2;
             this.numericPreco_ICMSVenda.Location = new System.Drawing.Point(124, 252);
+            this.numericPreco_ICMSVenda.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_ICMSVenda.Name = "numericPreco_ICMSVenda";
             this.numericPreco_ICMSVenda.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_ICMSVenda.TabIndex = 59;
+            this.numericPreco_ICMSVenda.ValueChanged += new System.EventHandler(this.numericPreco_ICMSVenda_ValueChanged);
             // 
             // numericPreco_ImpostosFederais
             // 
             this.numericPreco_ImpostosFederais.DecimalPlaces = 2;
             this.numericPreco_ImpostosFederais.Location = new System.Drawing.Point(124, 227);
+            this.numericPreco_ImpostosFederais.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_ImpostosFederais.Name = "numericPreco_ImpostosFederais";
             this.numericPreco_ImpostosFederais.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_ImpostosFederais.TabIndex = 58;
+            this.numericPreco_ImpostosFederais.ValueChanged += new System.EventHandler(this.numericPreco_ImpostosFederais_ValueChanged);
             // 
             // numericPreco_CustoFixo
             // 
             this.numericPreco_CustoFixo.DecimalPlaces = 2;
             this.numericPreco_CustoFixo.Location = new System.Drawing.Point(124, 202);
+            this.numericPreco_CustoFixo.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_CustoFixo.Name = "numericPreco_CustoFixo";
             this.numericPreco_CustoFixo.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_CustoFixo.TabIndex = 57;
+            this.numericPreco_CustoFixo.ValueChanged += new System.EventHandler(this.numericPreco_CustoFixo_ValueChanged);
             // 
             // labelPreco_ValorCustoMercadoria
             // 
@@ -1268,7 +1304,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.labelPreco_ValorEncFinanceiros.AutoSize = true;
             this.labelPreco_ValorEncFinanceiros.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorEncFinanceiros.Location = new System.Drawing.Point(191, 164);
+            this.labelPreco_ValorEncFinanceiros.Location = new System.Drawing.Point(184, 164);
             this.labelPreco_ValorEncFinanceiros.Name = "labelPreco_ValorEncFinanceiros";
             this.labelPreco_ValorEncFinanceiros.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorEncFinanceiros.TabIndex = 74;
@@ -1278,15 +1314,21 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericPreco_EncFinanceiros.DecimalPlaces = 2;
             this.numericPreco_EncFinanceiros.Location = new System.Drawing.Point(124, 160);
+            this.numericPreco_EncFinanceiros.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_EncFinanceiros.Name = "numericPreco_EncFinanceiros";
             this.numericPreco_EncFinanceiros.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_EncFinanceiros.TabIndex = 56;
+            this.numericPreco_EncFinanceiros.ValueChanged += new System.EventHandler(this.numericPreco_EncFinanceiros_ValueChanged);
             // 
             // labelPreco_ValorEmbalagem
             // 
             this.labelPreco_ValorEmbalagem.AutoSize = true;
             this.labelPreco_ValorEmbalagem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorEmbalagem.Location = new System.Drawing.Point(191, 139);
+            this.labelPreco_ValorEmbalagem.Location = new System.Drawing.Point(184, 139);
             this.labelPreco_ValorEmbalagem.Name = "labelPreco_ValorEmbalagem";
             this.labelPreco_ValorEmbalagem.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorEmbalagem.TabIndex = 72;
@@ -1296,15 +1338,21 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericPreco_Embalagem.DecimalPlaces = 2;
             this.numericPreco_Embalagem.Location = new System.Drawing.Point(124, 135);
+            this.numericPreco_Embalagem.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_Embalagem.Name = "numericPreco_Embalagem";
             this.numericPreco_Embalagem.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_Embalagem.TabIndex = 55;
+            this.numericPreco_Embalagem.ValueChanged += new System.EventHandler(this.numericPreco_Embalagem_ValueChanged);
             // 
             // labelPreco_ValorFrete
             // 
             this.labelPreco_ValorFrete.AutoSize = true;
             this.labelPreco_ValorFrete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorFrete.Location = new System.Drawing.Point(191, 114);
+            this.labelPreco_ValorFrete.Location = new System.Drawing.Point(184, 114);
             this.labelPreco_ValorFrete.Name = "labelPreco_ValorFrete";
             this.labelPreco_ValorFrete.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorFrete.TabIndex = 70;
@@ -1314,15 +1362,21 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericPreco_Frete.DecimalPlaces = 2;
             this.numericPreco_Frete.Location = new System.Drawing.Point(124, 110);
+            this.numericPreco_Frete.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_Frete.Name = "numericPreco_Frete";
             this.numericPreco_Frete.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_Frete.TabIndex = 54;
+            this.numericPreco_Frete.ValueChanged += new System.EventHandler(this.numericPreco_Frete_ValueChanged);
             // 
             // labelPreco_ValorIPI
             // 
             this.labelPreco_ValorIPI.AutoSize = true;
             this.labelPreco_ValorIPI.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorIPI.Location = new System.Drawing.Point(191, 89);
+            this.labelPreco_ValorIPI.Location = new System.Drawing.Point(184, 89);
             this.labelPreco_ValorIPI.Name = "labelPreco_ValorIPI";
             this.labelPreco_ValorIPI.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorIPI.TabIndex = 68;
@@ -1332,9 +1386,15 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericPreco_IPI.DecimalPlaces = 2;
             this.numericPreco_IPI.Location = new System.Drawing.Point(124, 85);
+            this.numericPreco_IPI.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_IPI.Name = "numericPreco_IPI";
             this.numericPreco_IPI.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_IPI.TabIndex = 53;
+            this.numericPreco_IPI.ValueChanged += new System.EventHandler(this.numericPreco_IPI_ValueChanged);
             // 
             // comboDetalhesFiscais_CEST
             // 
@@ -1514,11 +1574,11 @@ namespace SisCom.Aplicacao.Formularios
             this.label89.TabIndex = 27;
             this.label89.Text = "Código Anvisa:";
             // 
-            // comboDetalhesFiscais_CodigoANPDescricao
+            // comboDetalhesFiscais_CodigoANP_Descricao
             // 
             this.comboDetalhesFiscais_CodigoANP_Descricao.FormattingEnabled = true;
             this.comboDetalhesFiscais_CodigoANP_Descricao.Location = new System.Drawing.Point(399, 30);
-            this.comboDetalhesFiscais_CodigoANP_Descricao.Name = "comboDetalhesFiscais_CodigoANPDescricao";
+            this.comboDetalhesFiscais_CodigoANP_Descricao.Name = "comboDetalhesFiscais_CodigoANP_Descricao";
             this.comboDetalhesFiscais_CodigoANP_Descricao.Size = new System.Drawing.Size(150, 23);
             this.comboDetalhesFiscais_CodigoANP_Descricao.TabIndex = 104;
             // 
@@ -2100,7 +2160,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.labelPreco_ValorICMSFronteira.AutoSize = true;
             this.labelPreco_ValorICMSFronteira.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorICMSFronteira.Location = new System.Drawing.Point(191, 64);
+            this.labelPreco_ValorICMSFronteira.Location = new System.Drawing.Point(184, 64);
             this.labelPreco_ValorICMSFronteira.Name = "labelPreco_ValorICMSFronteira";
             this.labelPreco_ValorICMSFronteira.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorICMSFronteira.TabIndex = 66;
@@ -2207,9 +2267,9 @@ namespace SisCom.Aplicacao.Formularios
             this.panel1.Controls.Add(this.label84);
             this.panel1.Controls.Add(this.labelCalculoPreco);
             this.panel1.Controls.Add(this.label82);
-            this.panel1.Location = new System.Drawing.Point(276, 358);
+            this.panel1.Location = new System.Drawing.Point(287, 358);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(290, 63);
+            this.panel1.Size = new System.Drawing.Size(293, 63);
             this.panel1.TabIndex = 64;
             // 
             // labelCalculoPrecificacao
@@ -2276,9 +2336,9 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.label69);
             this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.labelEstoque_Quantidade);
             this.pnlPrecoEstoquePesoTributacao.Controls.Add(this.label68);
-            this.pnlPrecoEstoquePesoTributacao.Location = new System.Drawing.Point(572, 10);
+            this.pnlPrecoEstoquePesoTributacao.Location = new System.Drawing.Point(586, 10);
             this.pnlPrecoEstoquePesoTributacao.Name = "pnlPrecoEstoquePesoTributacao";
-            this.pnlPrecoEstoquePesoTributacao.Size = new System.Drawing.Size(200, 411);
+            this.pnlPrecoEstoquePesoTributacao.Size = new System.Drawing.Size(203, 411);
             this.pnlPrecoEstoquePesoTributacao.TabIndex = 63;
             // 
             // checkDesativado
@@ -2437,6 +2497,11 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericEstoque_PesoLiquido.DecimalPlaces = 2;
             this.numericEstoque_PesoLiquido.Location = new System.Drawing.Point(114, 131);
+            this.numericEstoque_PesoLiquido.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numericEstoque_PesoLiquido.Name = "numericEstoque_PesoLiquido";
             this.numericEstoque_PesoLiquido.Size = new System.Drawing.Size(81, 23);
             this.numericEstoque_PesoLiquido.TabIndex = 84;
@@ -2445,6 +2510,11 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericEstoque_PesoBruto.DecimalPlaces = 2;
             this.numericEstoque_PesoBruto.Location = new System.Drawing.Point(114, 108);
+            this.numericEstoque_PesoBruto.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numericEstoque_PesoBruto.Name = "numericEstoque_PesoBruto";
             this.numericEstoque_PesoBruto.Size = new System.Drawing.Size(81, 23);
             this.numericEstoque_PesoBruto.TabIndex = 83;
@@ -2469,6 +2539,11 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericEstoque_EstoqueMinimo.DecimalPlaces = 2;
             this.numericEstoque_EstoqueMinimo.Location = new System.Drawing.Point(114, 39);
+            this.numericEstoque_EstoqueMinimo.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericEstoque_EstoqueMinimo.Name = "numericEstoque_EstoqueMinimo";
             this.numericEstoque_EstoqueMinimo.Size = new System.Drawing.Size(81, 23);
             this.numericEstoque_EstoqueMinimo.TabIndex = 80;
@@ -2593,9 +2668,9 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlPrecoEstoquePreco.Controls.Add(this.numericMargem_MargemSugerido);
             this.pnlPrecoEstoquePreco.Controls.Add(this.labelMargem_PontoEquilibrio);
             this.pnlPrecoEstoquePreco.Controls.Add(this.label46);
-            this.pnlPrecoEstoquePreco.Location = new System.Drawing.Point(276, 10);
+            this.pnlPrecoEstoquePreco.Location = new System.Drawing.Point(287, 10);
             this.pnlPrecoEstoquePreco.Name = "pnlPrecoEstoquePreco";
-            this.pnlPrecoEstoquePreco.Size = new System.Drawing.Size(290, 345);
+            this.pnlPrecoEstoquePreco.Size = new System.Drawing.Size(293, 345);
             this.pnlPrecoEstoquePreco.TabIndex = 62;
             // 
             // label63
@@ -2642,6 +2717,11 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericMargem_PrecoC.DecimalPlaces = 2;
             this.numericMargem_PrecoC.Location = new System.Drawing.Point(139, 239);
+            this.numericMargem_PrecoC.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericMargem_PrecoC.Name = "numericMargem_PrecoC";
             this.numericMargem_PrecoC.Size = new System.Drawing.Size(100, 23);
             this.numericMargem_PrecoC.TabIndex = 74;
@@ -2690,6 +2770,11 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericMargem_PrecoB.DecimalPlaces = 2;
             this.numericMargem_PrecoB.Location = new System.Drawing.Point(139, 189);
+            this.numericMargem_PrecoB.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericMargem_PrecoB.Name = "numericMargem_PrecoB";
             this.numericMargem_PrecoB.Size = new System.Drawing.Size(100, 23);
             this.numericMargem_PrecoB.TabIndex = 73;
@@ -2738,6 +2823,11 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericMargem_PrecoA.DecimalPlaces = 2;
             this.numericMargem_PrecoA.Location = new System.Drawing.Point(139, 139);
+            this.numericMargem_PrecoA.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericMargem_PrecoA.Name = "numericMargem_PrecoA";
             this.numericMargem_PrecoA.Size = new System.Drawing.Size(100, 23);
             this.numericMargem_PrecoA.TabIndex = 72;
@@ -2786,6 +2876,11 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericMargem_PrecoVenda.DecimalPlaces = 2;
             this.numericMargem_PrecoVenda.Location = new System.Drawing.Point(139, 89);
+            this.numericMargem_PrecoVenda.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericMargem_PrecoVenda.Name = "numericMargem_PrecoVenda";
             this.numericMargem_PrecoVenda.Size = new System.Drawing.Size(100, 23);
             this.numericMargem_PrecoVenda.TabIndex = 71;
@@ -2834,9 +2929,15 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericMargem_MargemSugerido.DecimalPlaces = 2;
             this.numericMargem_MargemSugerido.Location = new System.Drawing.Point(137, 39);
+            this.numericMargem_MargemSugerido.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericMargem_MargemSugerido.Name = "numericMargem_MargemSugerido";
             this.numericMargem_MargemSugerido.Size = new System.Drawing.Size(60, 23);
             this.numericMargem_MargemSugerido.TabIndex = 70;
+            this.numericMargem_MargemSugerido.ValueChanged += new System.EventHandler(this.numericMargem_MargemSugerido_ValueChanged);
             // 
             // labelMargem_PontoEquilibrio
             // 
@@ -2903,22 +3004,28 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlPrecoEstoqueImpostos.Controls.Add(this.label19);
             this.pnlPrecoEstoqueImpostos.Location = new System.Drawing.Point(10, 10);
             this.pnlPrecoEstoqueImpostos.Name = "pnlPrecoEstoqueImpostos";
-            this.pnlPrecoEstoqueImpostos.Size = new System.Drawing.Size(260, 411);
+            this.pnlPrecoEstoqueImpostos.Size = new System.Drawing.Size(271, 411);
             this.pnlPrecoEstoqueImpostos.TabIndex = 61;
             // 
             // numericPreco_ICMSFronteira
             // 
             this.numericPreco_ICMSFronteira.DecimalPlaces = 2;
             this.numericPreco_ICMSFronteira.Location = new System.Drawing.Point(124, 60);
+            this.numericPreco_ICMSFronteira.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_ICMSFronteira.Name = "numericPreco_ICMSFronteira";
             this.numericPreco_ICMSFronteira.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_ICMSFronteira.TabIndex = 52;
+            this.numericPreco_ICMSFronteira.ValueChanged += new System.EventHandler(this.numericPreco_ICMSFronteira_ValueChanged);
             // 
             // labelPreco_ValorICMSCompra
             // 
             this.labelPreco_ValorICMSCompra.AutoSize = true;
             this.labelPreco_ValorICMSCompra.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPreco_ValorICMSCompra.Location = new System.Drawing.Point(191, 39);
+            this.labelPreco_ValorICMSCompra.Location = new System.Drawing.Point(184, 39);
             this.labelPreco_ValorICMSCompra.Name = "labelPreco_ValorICMSCompra";
             this.labelPreco_ValorICMSCompra.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorICMSCompra.TabIndex = 64;
@@ -2928,14 +3035,25 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.numericPreco_ICMSCompra.DecimalPlaces = 2;
             this.numericPreco_ICMSCompra.Location = new System.Drawing.Point(124, 35);
+            this.numericPreco_ICMSCompra.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_ICMSCompra.Name = "numericPreco_ICMSCompra";
             this.numericPreco_ICMSCompra.Size = new System.Drawing.Size(60, 23);
             this.numericPreco_ICMSCompra.TabIndex = 51;
+            this.numericPreco_ICMSCompra.ValueChanged += new System.EventHandler(this.numericPreco_ICMSCompra_ValueChanged);
             // 
             // numericPreco_PrecoCompra
             // 
             this.numericPreco_PrecoCompra.DecimalPlaces = 2;
             this.numericPreco_PrecoCompra.Location = new System.Drawing.Point(124, 10);
+            this.numericPreco_PrecoCompra.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPreco_PrecoCompra.Name = "numericPreco_PrecoCompra";
             this.numericPreco_PrecoCompra.Size = new System.Drawing.Size(130, 23);
             this.numericPreco_PrecoCompra.TabIndex = 50;
@@ -3299,6 +3417,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoNovo.Size = new System.Drawing.Size(53, 56);
             this.botaoNovo.TabIndex = 19;
             this.botaoNovo.UseVisualStyleBackColor = true;
+            this.botaoNovo.Click += new System.EventHandler(this.botaoNovo_Click);
             // 
             // botaoExcluir
             // 
