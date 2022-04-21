@@ -17,12 +17,10 @@ namespace Funcoes._Classes
 
             return retorno;
         }
-
         public static bool ContainsInsensitive(string source, string search)
         {
             return (new CultureInfo("pt-BR").CompareInfo).IndexOf(source, search, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace) >= 0;
         }
-
         public static string SomenteNumero(string valorInicial)
         {
             int number = 0;
@@ -40,7 +38,6 @@ namespace Funcoes._Classes
 
             return retorno;
         }
-
         public static string PrimeiraMaiuscula(String strString)
         {
 
@@ -54,7 +51,6 @@ namespace Funcoes._Classes
 
             return strResult;
         }
-
         public static string PrimeiraMaiusculaTodasPalavras(String strString)
         {
             string strResult = "";
@@ -82,6 +78,12 @@ namespace Funcoes._Classes
             }
 
             return strResult;
+        }
+        public static string Telefone_Tratar(String strString)
+        {
+            strString = strString.Replace("/", "").Replace("\\", "");
+
+            return strString;
         }
     }
 }

@@ -52,6 +52,12 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlPesquisar = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.maskedEnderecoCEP = new System.Windows.Forms.MaskedTextBox();
+            this.maskedCPFCNPJ = new System.Windows.Forms.MaskedTextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textPlacaCarreta02 = new System.Windows.Forms.TextBox();
+            this.textPlacaCarreta01 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -65,33 +71,31 @@ namespace SisCom.Aplicacao.Formularios
             this.label12 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textTelefone = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textNomeContato = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textPlaca = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textEnderecoLogradouro = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textEnderecoNumero = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.botaoGrupoProduto = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.comboEnderecoPais = new System.Windows.Forms.ComboBox();
+            this.comboEnderecoCidade = new System.Windows.Forms.ComboBox();
+            this.botaotEndrecoCEP = new System.Windows.Forms.Button();
+            this.comboEnderecoUF = new System.Windows.Forms.ComboBox();
+            this.textEnderecoBairro = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textInscricaoEstadual = new System.Windows.Forms.TextBox();
+            this.comboTipoPessoa = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textNome = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
@@ -174,6 +178,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoConsultarCNPJ.Name = "botaoConsultarCNPJ";
             this.botaoConsultarCNPJ.Size = new System.Drawing.Size(53, 56);
             this.botaoConsultarCNPJ.TabIndex = 33;
+            this.botaoConsultarCNPJ.TabStop = false;
             this.botaoConsultarCNPJ.UseVisualStyleBackColor = true;
             this.botaoConsultarCNPJ.Click += new System.EventHandler(this.botaoConsultarCNPJ_Click);
             // 
@@ -184,6 +189,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoCompras.Name = "botaoCompras";
             this.botaoCompras.Size = new System.Drawing.Size(53, 56);
             this.botaoCompras.TabIndex = 32;
+            this.botaoCompras.TabStop = false;
             this.botaoCompras.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -204,6 +210,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoImprimir.Name = "botaoImprimir";
             this.botaoImprimir.Size = new System.Drawing.Size(53, 56);
             this.botaoImprimir.TabIndex = 30;
+            this.botaoImprimir.TabStop = false;
             this.botaoImprimir.UseVisualStyleBackColor = true;
             // 
             // label7
@@ -246,6 +253,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoFechar.Name = "botaoFechar";
             this.botaoFechar.Size = new System.Drawing.Size(53, 56);
             this.botaoFechar.TabIndex = 20;
+            this.botaoFechar.TabStop = false;
             this.botaoFechar.UseVisualStyleBackColor = true;
             this.botaoFechar.Click += new System.EventHandler(this.botaoFechar_Click);
             // 
@@ -256,7 +264,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoNovo.Name = "botaoNovo";
             this.botaoNovo.Size = new System.Drawing.Size(53, 56);
             this.botaoNovo.TabIndex = 19;
+            this.botaoNovo.TabStop = false;
             this.botaoNovo.UseVisualStyleBackColor = true;
+            this.botaoNovo.Click += new System.EventHandler(this.botaoNovo_Click);
             // 
             // botaoExcluir
             // 
@@ -265,7 +275,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoExcluir.Name = "botaoExcluir";
             this.botaoExcluir.Size = new System.Drawing.Size(53, 56);
             this.botaoExcluir.TabIndex = 18;
+            this.botaoExcluir.TabStop = false;
             this.botaoExcluir.UseVisualStyleBackColor = true;
+            this.botaoExcluir.Click += new System.EventHandler(this.botaoExcluir_Click);
             // 
             // botaoPosterior
             // 
@@ -274,7 +286,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoPosterior.Name = "botaoPosterior";
             this.botaoPosterior.Size = new System.Drawing.Size(53, 56);
             this.botaoPosterior.TabIndex = 12;
+            this.botaoPosterior.TabStop = false;
             this.botaoPosterior.UseVisualStyleBackColor = true;
+            this.botaoPosterior.Click += new System.EventHandler(this.botaoPosterior_Click);
             // 
             // botaoAnterior
             // 
@@ -283,7 +297,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoAnterior.Name = "botaoAnterior";
             this.botaoAnterior.Size = new System.Drawing.Size(53, 56);
             this.botaoAnterior.TabIndex = 11;
+            this.botaoAnterior.TabStop = false;
             this.botaoAnterior.UseVisualStyleBackColor = true;
+            this.botaoAnterior.Click += new System.EventHandler(this.botaoAnterior_Click);
             // 
             // comboPesquisarPesquisa
             // 
@@ -291,7 +307,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboPesquisarPesquisa.Location = new System.Drawing.Point(73, 15);
             this.comboPesquisarPesquisa.Name = "comboPesquisarPesquisa";
             this.comboPesquisarPesquisa.Size = new System.Drawing.Size(655, 23);
-            this.comboPesquisarPesquisa.TabIndex = 3;
+            this.comboPesquisarPesquisa.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -326,40 +342,94 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.maskedEnderecoCEP);
+            this.panel3.Controls.Add(this.maskedCPFCNPJ);
+            this.panel3.Controls.Add(this.label21);
+            this.panel3.Controls.Add(this.label10);
+            this.panel3.Controls.Add(this.textPlacaCarreta02);
+            this.panel3.Controls.Add(this.textPlacaCarreta01);
             this.panel3.Controls.Add(this.groupBox2);
-            this.panel3.Controls.Add(this.textBox6);
+            this.panel3.Controls.Add(this.textTelefone);
             this.panel3.Controls.Add(this.label18);
-            this.panel3.Controls.Add(this.textBox5);
+            this.panel3.Controls.Add(this.textNomeContato);
             this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.textPlaca);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label16);
             this.panel3.Controls.Add(this.label27);
-            this.panel3.Controls.Add(this.textBox14);
+            this.panel3.Controls.Add(this.textEnderecoLogradouro);
             this.panel3.Controls.Add(this.label26);
-            this.panel3.Controls.Add(this.textBox13);
+            this.panel3.Controls.Add(this.textEnderecoNumero);
             this.panel3.Controls.Add(this.label25);
             this.panel3.Controls.Add(this.label24);
-            this.panel3.Controls.Add(this.comboBox4);
-            this.panel3.Controls.Add(this.comboBox3);
-            this.panel3.Controls.Add(this.botaoGrupoProduto);
-            this.panel3.Controls.Add(this.comboBox2);
-            this.panel3.Controls.Add(this.textBox4);
-            this.panel3.Controls.Add(this.textBox3);
+            this.panel3.Controls.Add(this.comboEnderecoPais);
+            this.panel3.Controls.Add(this.comboEnderecoCidade);
+            this.panel3.Controls.Add(this.botaotEndrecoCEP);
+            this.panel3.Controls.Add(this.comboEnderecoUF);
+            this.panel3.Controls.Add(this.textEnderecoBairro);
             this.panel3.Controls.Add(this.label15);
             this.panel3.Controls.Add(this.label14);
             this.panel3.Controls.Add(this.label34);
-            this.panel3.Controls.Add(this.textBox8);
-            this.panel3.Controls.Add(this.textBox10);
-            this.panel3.Controls.Add(this.comboBox1);
+            this.panel3.Controls.Add(this.textInscricaoEstadual);
+            this.panel3.Controls.Add(this.comboTipoPessoa);
             this.panel3.Controls.Add(this.label11);
-            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.textNome);
             this.panel3.Controls.Add(this.label13);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 130);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(773, 277);
+            this.panel3.Size = new System.Drawing.Size(773, 199);
             this.panel3.TabIndex = 16;
+            // 
+            // maskedEnderecoCEP
+            // 
+            this.maskedEnderecoCEP.Location = new System.Drawing.Point(102, 61);
+            this.maskedEnderecoCEP.Mask = "00,000-000";
+            this.maskedEnderecoCEP.Name = "maskedEnderecoCEP";
+            this.maskedEnderecoCEP.Size = new System.Drawing.Size(70, 23);
+            this.maskedEnderecoCEP.TabIndex = 6;
+            // 
+            // maskedCPFCNPJ
+            // 
+            this.maskedCPFCNPJ.Location = new System.Drawing.Point(174, 34);
+            this.maskedCPFCNPJ.Mask = "00,000,000/0000-00";
+            this.maskedCPFCNPJ.Name = "maskedCPFCNPJ";
+            this.maskedCPFCNPJ.Size = new System.Drawing.Size(152, 23);
+            this.maskedCPFCNPJ.TabIndex = 4;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(481, 119);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(94, 15);
+            this.label21.TabIndex = 81;
+            this.label21.Text = "Placa Carreta 02:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(269, 119);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(94, 15);
+            this.label10.TabIndex = 80;
+            this.label10.Text = "Placa Carreta 01:";
+            // 
+            // textPlacaCarreta02
+            // 
+            this.textPlacaCarreta02.Location = new System.Drawing.Point(587, 115);
+            this.textPlacaCarreta02.MaxLength = 9;
+            this.textPlacaCarreta02.Name = "textPlacaCarreta02";
+            this.textPlacaCarreta02.Size = new System.Drawing.Size(100, 23);
+            this.textPlacaCarreta02.TabIndex = 15;
+            // 
+            // textPlacaCarreta01
+            // 
+            this.textPlacaCarreta01.Location = new System.Drawing.Point(375, 115);
+            this.textPlacaCarreta01.MaxLength = 9;
+            this.textPlacaCarreta01.Name = "textPlacaCarreta01";
+            this.textPlacaCarreta01.Size = new System.Drawing.Size(100, 23);
+            this.textPlacaCarreta01.TabIndex = 14;
             // 
             // groupBox2
             // 
@@ -375,7 +445,7 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.comboBox5);
             this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Location = new System.Drawing.Point(10, 198);
+            this.groupBox2.Location = new System.Drawing.Point(12, 198);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(755, 73);
             this.groupBox2.TabIndex = 77;
@@ -404,6 +474,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.textBox11.Location = new System.Drawing.Point(353, 43);
             this.textBox11.Name = "textBox11";
+            this.textBox11.ReadOnly = true;
             this.textBox11.Size = new System.Drawing.Size(396, 23);
             this.textBox11.TabIndex = 74;
             // 
@@ -411,6 +482,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.textBox9.Location = new System.Drawing.Point(542, 16);
             this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(207, 23);
             this.textBox9.TabIndex = 73;
             // 
@@ -418,6 +490,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.textBox7.Location = new System.Drawing.Point(353, 16);
             this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
             this.textBox7.Size = new System.Drawing.Size(40, 23);
             this.textBox7.TabIndex = 72;
             // 
@@ -472,7 +545,6 @@ namespace SisCom.Aplicacao.Formularios
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(121, 23);
             this.comboBox5.TabIndex = 1;
-            this.comboBox5.SelectedIndexChanged += new System.EventHandler(this.comboBox5_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -483,53 +555,55 @@ namespace SisCom.Aplicacao.Formularios
             this.label8.TabIndex = 0;
             this.label8.Text = "Veículo Placa:";
             // 
-            // textBox6
+            // textTelefone
             // 
-            this.textBox6.Location = new System.Drawing.Point(102, 169);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(140, 23);
-            this.textBox6.TabIndex = 76;
+            this.textTelefone.Location = new System.Drawing.Point(102, 169);
+            this.textTelefone.MaxLength = 20;
+            this.textTelefone.Name = "textTelefone";
+            this.textTelefone.Size = new System.Drawing.Size(140, 23);
+            this.textTelefone.TabIndex = 17;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(10, 173);
+            this.label18.Location = new System.Drawing.Point(12, 173);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(54, 15);
             this.label18.TabIndex = 75;
             this.label18.Text = "Telefone:";
             // 
-            // textBox5
+            // textNomeContato
             // 
-            this.textBox5.Location = new System.Drawing.Point(102, 142);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(663, 23);
-            this.textBox5.TabIndex = 74;
+            this.textNomeContato.Location = new System.Drawing.Point(102, 142);
+            this.textNomeContato.Name = "textNomeContato";
+            this.textNomeContato.Size = new System.Drawing.Size(663, 23);
+            this.textNomeContato.TabIndex = 16;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 146);
+            this.label4.Location = new System.Drawing.Point(12, 146);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 15);
             this.label4.TabIndex = 73;
             this.label4.Text = "Contato";
             // 
-            // textBox1
+            // textPlaca
             // 
-            this.textBox1.Location = new System.Drawing.Point(102, 115);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(161, 23);
-            this.textBox1.TabIndex = 72;
+            this.textPlaca.Location = new System.Drawing.Point(102, 115);
+            this.textPlaca.MaxLength = 9;
+            this.textPlaca.Name = "textPlaca";
+            this.textPlaca.Size = new System.Drawing.Size(100, 23);
+            this.textPlaca.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 119);
+            this.label2.Location = new System.Drawing.Point(12, 119);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 15);
+            this.label2.Size = new System.Drawing.Size(38, 15);
             this.label2.TabIndex = 71;
-            this.label2.Text = "Veículo Placa:";
+            this.label2.Text = "Placa:";
             // 
             // label16
             // 
@@ -549,12 +623,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label27.TabIndex = 69;
             this.label27.Text = "Endereço: ";
             // 
-            // textBox14
+            // textEnderecoLogradouro
             // 
-            this.textBox14.Location = new System.Drawing.Point(271, 61);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(358, 23);
-            this.textBox14.TabIndex = 68;
+            this.textEnderecoLogradouro.Location = new System.Drawing.Point(271, 61);
+            this.textEnderecoLogradouro.MaxLength = 60;
+            this.textEnderecoLogradouro.Name = "textEnderecoLogradouro";
+            this.textEnderecoLogradouro.Size = new System.Drawing.Size(358, 23);
+            this.textEnderecoLogradouro.TabIndex = 7;
             // 
             // label26
             // 
@@ -565,12 +640,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label26.TabIndex = 67;
             this.label26.Text = "Número:";
             // 
-            // textBox13
+            // textEnderecoNumero
             // 
-            this.textBox13.Location = new System.Drawing.Point(695, 61);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(70, 23);
-            this.textBox13.TabIndex = 66;
+            this.textEnderecoNumero.Location = new System.Drawing.Point(695, 61);
+            this.textEnderecoNumero.MaxLength = 8;
+            this.textEnderecoNumero.Name = "textEnderecoNumero";
+            this.textEnderecoNumero.Size = new System.Drawing.Size(70, 23);
+            this.textEnderecoNumero.TabIndex = 8;
             // 
             // label25
             // 
@@ -590,56 +666,52 @@ namespace SisCom.Aplicacao.Formularios
             this.label24.TabIndex = 64;
             this.label24.Text = "Cidade:";
             // 
-            // comboBox4
+            // comboEnderecoPais
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(615, 88);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(150, 23);
-            this.comboBox4.TabIndex = 63;
+            this.comboEnderecoPais.FormattingEnabled = true;
+            this.comboEnderecoPais.Location = new System.Drawing.Point(615, 88);
+            this.comboEnderecoPais.Name = "comboEnderecoPais";
+            this.comboEnderecoPais.Size = new System.Drawing.Size(150, 23);
+            this.comboEnderecoPais.TabIndex = 12;
             // 
-            // comboBox3
+            // comboEnderecoCidade
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(392, 88);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(180, 23);
-            this.comboBox3.TabIndex = 62;
+            this.comboEnderecoCidade.FormattingEnabled = true;
+            this.comboEnderecoCidade.Location = new System.Drawing.Point(392, 88);
+            this.comboEnderecoCidade.Name = "comboEnderecoCidade";
+            this.comboEnderecoCidade.Size = new System.Drawing.Size(180, 23);
+            this.comboEnderecoCidade.TabIndex = 11;
             // 
-            // botaoGrupoProduto
+            // botaotEndrecoCEP
             // 
-            this.botaoGrupoProduto.Location = new System.Drawing.Point(174, 61);
-            this.botaoGrupoProduto.Name = "botaoGrupoProduto";
-            this.botaoGrupoProduto.Size = new System.Drawing.Size(23, 23);
-            this.botaoGrupoProduto.TabIndex = 61;
-            this.botaoGrupoProduto.UseVisualStyleBackColor = true;
+            this.botaotEndrecoCEP.Location = new System.Drawing.Point(174, 61);
+            this.botaotEndrecoCEP.Name = "botaotEndrecoCEP";
+            this.botaotEndrecoCEP.Size = new System.Drawing.Size(23, 23);
+            this.botaotEndrecoCEP.TabIndex = 61;
+            this.botaotEndrecoCEP.TabStop = false;
+            this.botaotEndrecoCEP.UseVisualStyleBackColor = true;
+            this.botaotEndrecoCEP.Click += new System.EventHandler(this.botaotEndrecoCEP_Click);
             // 
-            // comboBox2
+            // comboEnderecoUF
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(297, 88);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(40, 23);
-            this.comboBox2.TabIndex = 59;
+            this.comboEnderecoUF.FormattingEnabled = true;
+            this.comboEnderecoUF.Location = new System.Drawing.Point(297, 88);
+            this.comboEnderecoUF.Name = "comboEnderecoUF";
+            this.comboEnderecoUF.Size = new System.Drawing.Size(40, 23);
+            this.comboEnderecoUF.TabIndex = 10;
+            this.comboEnderecoUF.SelectedIndexChanged += new System.EventHandler(this.comboEnderecoUF_SelectedIndexChanged);
             // 
-            // textBox4
+            // textEnderecoBairro
             // 
-            this.textBox4.Location = new System.Drawing.Point(102, 88);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(161, 23);
-            this.textBox4.TabIndex = 58;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(102, 61);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(70, 23);
-            this.textBox3.TabIndex = 57;
+            this.textEnderecoBairro.Location = new System.Drawing.Point(102, 88);
+            this.textEnderecoBairro.Name = "textEnderecoBairro";
+            this.textEnderecoBairro.Size = new System.Drawing.Size(161, 23);
+            this.textEnderecoBairro.TabIndex = 9;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(19, 92);
+            this.label15.Location = new System.Drawing.Point(12, 92);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(41, 15);
             this.label15.TabIndex = 55;
@@ -648,7 +720,7 @@ namespace SisCom.Aplicacao.Formularios
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(19, 67);
+            this.label14.Location = new System.Drawing.Point(12, 65);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(31, 15);
             this.label14.TabIndex = 54;
@@ -663,63 +735,60 @@ namespace SisCom.Aplicacao.Formularios
             this.label34.TabIndex = 53;
             this.label34.Text = "Insc. Estadual:";
             // 
-            // textBox8
+            // textInscricaoEstadual
             // 
-            this.textBox8.Location = new System.Drawing.Point(419, 34);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(177, 23);
-            this.textBox8.TabIndex = 52;
+            this.textInscricaoEstadual.Location = new System.Drawing.Point(419, 34);
+            this.textInscricaoEstadual.MaxLength = 15;
+            this.textInscricaoEstadual.Name = "textInscricaoEstadual";
+            this.textInscricaoEstadual.Size = new System.Drawing.Size(177, 23);
+            this.textInscricaoEstadual.TabIndex = 5;
             // 
-            // textBox10
+            // comboTipoPessoa
             // 
-            this.textBox10.Location = new System.Drawing.Point(144, 34);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(182, 23);
-            this.textBox10.TabIndex = 26;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(102, 34);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(40, 23);
-            this.comboBox1.TabIndex = 25;
+            this.comboTipoPessoa.FormattingEnabled = true;
+            this.comboTipoPessoa.Location = new System.Drawing.Point(102, 34);
+            this.comboTipoPessoa.Name = "comboTipoPessoa";
+            this.comboTipoPessoa.Size = new System.Drawing.Size(70, 23);
+            this.comboTipoPessoa.TabIndex = 3;
+            this.comboTipoPessoa.SelectedIndexChanged += new System.EventHandler(this.comboTipoPessoa_SelectedIndexChanged);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(17, 38);
+            this.label11.Location = new System.Drawing.Point(12, 38);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(37, 15);
             this.label11.TabIndex = 24;
             this.label11.Text = "CNPJ:";
             // 
-            // textBox2
+            // textNome
             // 
-            this.textBox2.Location = new System.Drawing.Point(102, 7);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(663, 23);
-            this.textBox2.TabIndex = 15;
+            this.textNome.Location = new System.Drawing.Point(102, 7);
+            this.textNome.MaxLength = 100;
+            this.textNome.Name = "textNome";
+            this.textNome.Size = new System.Drawing.Size(663, 23);
+            this.textNome.TabIndex = 2;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(12, 11);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(86, 15);
+            this.label13.Size = new System.Drawing.Size(40, 15);
             this.label13.TabIndex = 14;
-            this.label13.Text = "Transportadora";
+            this.label13.Text = "Nome";
             // 
             // frmCadastroTransportadoras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(773, 407);
+            this.ClientSize = new System.Drawing.Size(773, 329);
             this.ControlBox = false;
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Name = "frmCadastroTransportadoras";
             this.Text = "Cadastro de Transportadoras";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCadastroTransportadoras_FormClosing);
             this.pnlMenuBotao.ResumeLayout(false);
             this.pnlMenuBotaoBotao.ResumeLayout(false);
             this.pnlMenuBotaoBotao.PerformLayout();
@@ -759,33 +828,31 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Panel pnlPesquisar;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textNome;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboTipoPessoa;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textInscricaoEstadual;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox textEnderecoLogradouro;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textEnderecoNumero;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Button botaoGrupoProduto;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox comboEnderecoPais;
+        private System.Windows.Forms.ComboBox comboEnderecoCidade;
+        private System.Windows.Forms.Button botaotEndrecoCEP;
+        private System.Windows.Forms.ComboBox comboEnderecoUF;
+        private System.Windows.Forms.TextBox textEnderecoBairro;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textPlaca;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textNomeContato;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textTelefone;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox comboBox5;
@@ -800,5 +867,11 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textPlacaCarreta02;
+        private System.Windows.Forms.TextBox textPlacaCarreta01;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.MaskedTextBox maskedCPFCNPJ;
+        private System.Windows.Forms.MaskedTextBox maskedEnderecoCEP;
     }
 }

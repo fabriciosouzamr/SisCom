@@ -1,5 +1,4 @@
 ﻿using Funcoes._Entity;
-using System;
 
 namespace SisCom.Entidade.Modelos
 {

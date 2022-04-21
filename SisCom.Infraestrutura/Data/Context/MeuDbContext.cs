@@ -65,6 +65,7 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<TipoCliente> TipoClientes { get; set; }
         public DbSet<TipoServicoFiscal> TipoServicoFiscais { get; set; }
         public DbSet<TipoMercadoria> TipoMercadorias { get; set; }
+        public DbSet<Transportadora> Transportadoras { get; set; }
         public DbSet<UnidadeMedida> UnidadeMedidas { get; set; }
         public DbSet<VinculoFiscal> VinculoFiscais { get; set; }
 

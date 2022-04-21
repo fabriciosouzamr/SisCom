@@ -199,6 +199,10 @@ namespace SisCom.Aplicacao
                         cfg.CreateMap<TabelaSpedTipoItemViewModel, TabelaSpedTipoItem>().ReverseMap();
                         cfg.CreateMap<TabelaSpedTipoItem, DescricaoComboViewModel>();
                         #endregion
+                        #region Transportadora
+                        cfg.CreateMap<TransportadoraViewModel, Transportadora>().ReverseMap();
+                        cfg.CreateMap<Transportadora, NomeComboViewModel>();
+                        #endregion
                         #region TipoMercadoria
                         cfg.CreateMap<TipoMercadoriaViewModel, TipoMercadoria>().ReverseMap();
                         cfg.CreateMap<TipoMercadoria, NomeComboViewModel>();

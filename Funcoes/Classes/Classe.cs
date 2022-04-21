@@ -20,7 +20,6 @@ namespace Funcoes._Classes
 
             return ret;
         }
-
         public static object SeNulo(object Valor, object Retorno)
         {
             if (Nulo(Valor))
@@ -30,7 +29,6 @@ namespace Funcoes._Classes
 
             return Valor;
         }
-
         public static bool NuloString(object Valor)
         {
             bool ret = false;
@@ -46,7 +44,6 @@ namespace Funcoes._Classes
 
             return ret;
         }
-
         public static bool NuloData(object Valor)
         {
             bool ret = false;
@@ -62,12 +59,10 @@ namespace Funcoes._Classes
 
             return ret;
         }
-
         public static string NuloParaString(object Valor)
         {
             return SeNulo(Valor, "").ToString();
         }
-
         public static string? StringVazioParaNulo(string Valor)
         {
             if (string.IsNullOrEmpty(Valor))
@@ -79,17 +74,14 @@ namespace Funcoes._Classes
                 return Valor;
             }
         }
-
         public static int NuloParaNumero(object Valor)
         {
             return Convert.ToInt32(SeNulo(Valor, 0));
         }
-
         public static double NuloParaValor(object Valor)
         {
             return Convert.ToDouble(SeNulo(Valor, 0));
         }
-
         public static DateTime NuloParaData(object Valor, Nullable<DateTime> Padrao = null)
         {
             if (NuloData(Valor))
@@ -117,7 +109,6 @@ namespace Funcoes._Classes
                 return Valor;
             }
         }
-
         public static bool NuloEntity(Entity entity)
         {
             bool ret = false;

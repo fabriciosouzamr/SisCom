@@ -164,6 +164,10 @@ namespace SisCom.Aplicacao.Configuration
             services.AddScoped<ITipoServicoFiscalRepository, TipoServicoFiscalRepository>();
             services.AddScoped<ITipoServicoFiscalService, TipoServicoFiscalService>();
             #endregion
+            #region Transportadora
+            services.AddScoped<ITransportadoraRepository, TransportadoraRepository>();
+            services.AddScoped<ITransportadoraService, TransportadoraService>();
+            #endregion
             #region VinculoFiscal
             services.AddScoped<IVinculoFiscalRepository, VinculoFiscalRepository>();
             services.AddScoped<IVinculoFiscalService, VinculoFiscalService>();

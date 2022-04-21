@@ -228,8 +228,43 @@ namespace SisCom.Aplicacao.Formularios
         {
             comboTipoCliente_Carregar();
         }
+        public async Task comboEnderecoUF_Tratar()
+        {
+            if ((comboEnderecoUF.SelectedIndex != -1) && (comboEnderecoUF.Tag != Declaracoes.ComboBox_Carregando))
+            {
+                if (Combo_ComboBox.Selecionado(comboEnderecoUF))
+                {
+                    await comboCidade_Carregar(Guid.Parse(comboEnderecoUF.SelectedValue.ToString()));
+                    await comboPais_Carregar();
+
+                    this.MeuDbContextDispose();
+                }
+            }
+        }
         #endregion
         #region Combos
+        private async Task comboCidade_Carregar(Guid EstadoId)
+        {
+            Combo_ComboBox.Formatar(comboEnderecoCidade,
+                                    "ID", "Nome",
+                                    ComboBoxStyle.DropDownList,
+                                    await (new CidadeController(this.MeuDbContext(), this._notifier)).ComboEstado(EstadoId, p => p.Nome));
+            this.MeuDbContextDispose();
+        }
+        private async Task comboPais_Carregar()
+        {
+            if (comboEnderecoUF.SelectedIndex != -1)
+            {
+                Guid PaisId = (await (new EstadoController(this.MeuDbContext(), this._notifier)).GetById((Guid)comboEnderecoUF.SelectedValue)).PaisId;
+
+                Combo_ComboBox.Formatar(comboEnderecoPais,
+                                        "ID", "Nome",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new PaisController(this.MeuDbContext(), this._notifier)).ComboId(PaisId));
+
+                comboEnderecoPais.SelectedValue = PaisId;
+            }
+        }
         private async Task comboPessoaNome_Carregar()
         {
             Combo_ComboBox.Formatar(comboPesquisarPesquisa,
@@ -270,14 +305,6 @@ namespace SisCom.Aplicacao.Formularios
                                     await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboTelefone(p => p.Telefone));
             this.MeuDbContextDispose();
         }
-        private async Task comboCidade_Carregar(Guid EstadoId)
-        {
-            Combo_ComboBox.Formatar(comboEnderecoCidade,
-                                    "ID", "Nome",
-                                    ComboBoxStyle.DropDownList,
-                                    await (new CidadeController(this.MeuDbContext(), this._notifier)).ComboEstado(EstadoId, p => p.Nome));
-            this.MeuDbContextDispose();
-        }
         private async Task comboEstado_Carregar()
         {
             Combo_ComboBox.Formatar(comboEnderecoUF,
@@ -293,20 +320,6 @@ namespace SisCom.Aplicacao.Formularios
                                     ComboBoxStyle.DropDownList,
                                     await (new FuncionarioController(this.MeuDbContext(), this._notifier)).Combo(p => p.Nome));
             this.MeuDbContextDispose();
-        }
-        private async Task comboPais_Carregar()
-        {
-            if (comboEnderecoUF.SelectedIndex != -1)
-            {
-                Guid PaisId = (await (new EstadoController(this.MeuDbContext(), this._notifier)).GetById((Guid)comboEnderecoUF.SelectedValue)).PaisId;
-
-                Combo_ComboBox.Formatar(comboEnderecoPais,
-                                        "ID", "Nome",
-                                        ComboBoxStyle.DropDownList,
-                                        await (new PaisController(this.MeuDbContext(), this._notifier)).ComboId(PaisId));
-
-                comboEnderecoPais.SelectedValue = PaisId;
-            }
         }
         private async Task comboTipoCliente_Carregar()
         {
@@ -324,14 +337,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void comboEnderecoUF_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((comboEnderecoUF.SelectedIndex != -1) && (comboEnderecoUF.Tag != Declaracoes.ComboBox_Carregando))
-            {
-                if (Combo_ComboBox.Selecionado(comboEnderecoUF))
-                {
-                    comboCidade_Carregar(Guid.Parse(comboEnderecoUF.SelectedValue.ToString()));
-                    comboPais_Carregar();
-                }
-            }
+            comboEnderecoUF_Tratar();
         }
         private void comboTipoPessoa_SelectedIndexChanged(object sender, EventArgs e)
         {

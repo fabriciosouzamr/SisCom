@@ -47,7 +47,7 @@ namespace SisCom.Aplicacao.Classes
                 if (form.formBuscarCNPJDados != null)
                 {
                     maskedCPFCNPJ.Text = form.formBuscarCNPJDados.CNPJ;
-                    textRazaoSocial.Text = form.formBuscarCNPJDados.RazaoSocial;
+                    if (textRazaoSocial != null) textRazaoSocial.Text = form.formBuscarCNPJDados.RazaoSocial;
                     textNome.Text = form.formBuscarCNPJDados.NomeFantasia;
                     maskedEnderecoCEP.Text = form.formBuscarCNPJDados.CEP;
                     textEndrecoLogradouro.Text = form.formBuscarCNPJDados.Logradouro;

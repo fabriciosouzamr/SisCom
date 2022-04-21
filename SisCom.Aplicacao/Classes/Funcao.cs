@@ -1,7 +1,11 @@
 ﻿using Funcoes._Enum;
+using Funcoes.Interfaces;
+using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
+using SisCom.Infraestrutura.Data.Context;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Classes
@@ -26,7 +30,6 @@ namespace SisCom.Aplicacao.Classes
 
             return sAux;
         }
-
         public static void comboCidade_Posicionar(ComboBox comboCidade, string Texto)
         {
             foreach (CidadeComboViewModel View in comboCidade.Items)
@@ -38,8 +41,7 @@ namespace SisCom.Aplicacao.Classes
                 }
             }
         }
-
-       public static void TipoPessoaCliente_Tratar(TipoPessoaCliente tipoPessoaCliente, 
+        public static void TipoPessoaCliente_Tratar(TipoPessoaCliente tipoPessoaCliente, 
                                                    ComboBox comboContribuinte,
                                                    TextBox textRG, 
                                                    TextBox textInscricaoEstadual)
@@ -47,25 +49,28 @@ namespace SisCom.Aplicacao.Classes
             switch(tipoPessoaCliente)
             {
                 case TipoPessoaCliente.Especial:
-                    textRG.Enabled = false;
+                    if (textRG != null) textRG.Enabled = false;
                     textInscricaoEstadual.Enabled = false;
                     break;
                 default:
-                    textRG.Enabled = true;
-                    textRG.Text = "";
+                    if (textRG != null) textRG.Enabled = true;
+                    if (textRG != null) textRG.Text = "";
                     textInscricaoEstadual.Enabled = true;
                     textInscricaoEstadual.Text = "";
                     break;
             }
-            switch(tipoPessoaCliente)
+            if (comboContribuinte != null)
             {
-                case TipoPessoaCliente.Especial:
-                case TipoPessoaCliente.Fisica:
-                    comboContribuinte.SelectedValue = TipoContribuinte.NaoContribuinte;
-                    break;
-                default:
-                    comboContribuinte.SelectedValue = TipoContribuinte.ContribuinteICMS;
-                    break;
+                switch (tipoPessoaCliente)
+                {
+                    case TipoPessoaCliente.Especial:
+                    case TipoPessoaCliente.Fisica:
+                        comboContribuinte.SelectedValue = TipoContribuinte.NaoContribuinte;
+                        break;
+                    default:
+                        comboContribuinte.SelectedValue = TipoContribuinte.ContribuinteICMS;
+                        break;
+                }
             }
         }
 

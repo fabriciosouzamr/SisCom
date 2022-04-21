@@ -30,7 +30,6 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.DataGridView_ColunaAdicionar(dataFabricante, "Nome", "Nome", TipoColuna.TextBox, 400, Declaracoes.CampoNome_Caracteres);
             GridAtualizar();
         }
-
         private async Task GridAtualizar()
         {
             FabricanteController fabricanteController = new FabricanteController(this.MeuDbContext(), this._notifier);
@@ -74,7 +73,6 @@ namespace SisCom.Aplicacao.Formularios
             this.MeuDbContextDispose();
         }
         #endregion
-
         private void dataFabricante_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (Funcoes._Classes.Texto.NuloString(dataFabricante.Rows[e.RowIndex].Cells[GridFabricante_Nome].Value) != "")
