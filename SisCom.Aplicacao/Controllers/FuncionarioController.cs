@@ -23,7 +23,6 @@ namespace SisCom.Aplicacao.Controllers
 
             _funcionarioService = new FuncionarioService(new FuncionarioRepository(meuDbContext), notifier);
         }
-
         public async Task<FuncionarioViewModel> Adicionar(FuncionarioViewModel funcionarioViewModel)
         {
             var funcionario = Declaracoes.mapper.Map<Funcionario>(funcionarioViewModel);
@@ -32,34 +31,29 @@ namespace SisCom.Aplicacao.Controllers
 
             return Declaracoes.mapper.Map<FuncionarioViewModel>(funcionario);
         }
-
         public async Task<bool> Excluir(Guid Id)
         {
             await _funcionarioService.Excluir(Id);
 
             return true;
         }
-
         public async Task<FuncionarioViewModel> Atualizar(Guid id, FuncionarioViewModel funcionarioViewModel)
         {
             await _funcionarioService.Atualizar(Declaracoes.mapper.Map<Funcionario>(funcionarioViewModel));
 
             return funcionarioViewModel;
         }
-
         public async Task<IEnumerable<FuncionarioViewModel>> ObterTodos()
         {
             var obterTodos = await _funcionarioService.GetAll();
             return Declaracoes.mapper.Map<IEnumerable<FuncionarioViewModel>>(obterTodos);
 
         }
-
         public async Task<IEnumerable<CodigoNomeComboViewModel>> Combo(Expression<Func<Funcionario, object>> order = null)
         {
             var combo = await _funcionarioService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<CodigoNomeComboViewModel>>(combo);
         }
-
         public void Dispose()
         {
             _funcionarioService.Dispose();

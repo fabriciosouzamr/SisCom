@@ -23,7 +23,6 @@ namespace SisCom.Aplicacao.Formularios
             funcionario = new ViewModels.FuncionarioViewModel();
             Navegar(Declaracoes.Navegar.Primeiro);
         }
-
         #region Funcoes
         void Limpar()
         {
@@ -33,7 +32,6 @@ namespace SisCom.Aplicacao.Formularios
             checkAcessoFiscal.Checked = false;
             checkDesativado.Checked = false;
         }
-
         bool TentarGravar()
         {
             bool tentarGravar = false;
@@ -64,7 +62,6 @@ namespace SisCom.Aplicacao.Formularios
 Sair:
             return tentarGravar;
         }
-
         private async Task GravarFuncionario()
         {
 
@@ -97,7 +94,6 @@ Sair:
 
             Limpar();
         }
-
         void CarregarDados()
         {
             if (funcionario != null)

@@ -308,6 +308,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboPesquisarPesquisa.Name = "comboPesquisarPesquisa";
             this.comboPesquisarPesquisa.Size = new System.Drawing.Size(655, 23);
             this.comboPesquisarPesquisa.TabIndex = 1;
+            this.comboPesquisarPesquisa.SelectedIndexChanged += new System.EventHandler(this.comboPesquisarPesquisa_SelectedIndexChanged);
             // 
             // groupBox1
             // 

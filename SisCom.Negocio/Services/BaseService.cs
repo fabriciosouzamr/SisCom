@@ -65,7 +65,8 @@ namespace SisCom.Negocio.Services
 
         public virtual Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null)
         {
-            return _repository.GetAll(order);
+            var getAll = _repository.GetAll(order);
+            return getAll;
         }
 
         public virtual async Task<List<TEntity>> Combo(Expression<Func<TEntity, object>> order = null)

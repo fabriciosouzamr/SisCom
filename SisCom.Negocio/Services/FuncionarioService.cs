@@ -78,35 +78,5 @@ namespace SisCom.Negocio.Services
 
             Notify("Exclusão Efetuada.");
         }
-
-        Task IFuncionarioService.Adicionar(Funcionario Funcionario)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IFuncionarioService.Atualizar(Funcionario Funcionario)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IFuncionarioService.Remover(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<Funcionario>> IFuncionarioService.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Funcionario> IFuncionarioService.GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<IPagedList<Funcionario>> IFuncionarioService.GetPagedList(FilteredPagedListParameters parameters)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

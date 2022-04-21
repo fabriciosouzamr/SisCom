@@ -16,30 +16,29 @@ namespace SisCom.Aplicacao.Formularios
     public partial class frmCadastroTransportadoras : FormMain
     {
         ViewModels.TransportadoraViewModel transportadora = null;
-
         public frmCadastroTransportadoras(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
             InitializeComponent();
             Inicializar();
-
-            transportadora = new ViewModels.TransportadoraViewModel();
-            Navegar(Declaracoes.Navegar.Primeiro);
         }
-
         #region Funcoes
         private async Task Inicializar()
         {
             Combo_ComboBox.Formatar(comboTipoPessoa, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoPessoa));
 
+            await comboTransportadoraNome_Carregar();
             await comboEstado_Carregar();
 
             Limpar();
+
+            transportadora = new ViewModels.TransportadoraViewModel();
+            await Navegar(Declaracoes.Navegar.Primeiro);
         }
         void Limpar()
         {
             TipoPessoa_Tratar();
             textNome.Text = "";
-            comboPesquisarPesquisa.DataSource = null;
+            comboPesquisarPesquisa.SelectedIndex =-1;
             comboTipoPessoa.SelectedValue = TipoPessoa.Fisica;
             textInscricaoEstadual.Text = "";
             Texto_MaskedTextBox.Limpar(maskedEnderecoCEP);
@@ -55,7 +54,6 @@ namespace SisCom.Aplicacao.Formularios
             textNomeContato.Text = "";
             textTelefone.Text = "";
         }
-
         bool TentarGravar()
         {
             bool tentarGravar = false;
@@ -86,10 +84,8 @@ namespace SisCom.Aplicacao.Formularios
         Sair:
             return tentarGravar;
         }
-
         private async Task GravarTransportadora()
         {
-
             if (transportadora.Endereco == null)
                 transportadora.Endereco = new Endereco();
 
@@ -119,6 +115,7 @@ namespace SisCom.Aplicacao.Formularios
                     transportadora = (await TransportadoraController.Adicionar(transportadora));
                 }
                 this.MeuDbContextDispose();
+                await comboTransportadoraNome_Carregar();
             }
         }
         private async void Excluir()
@@ -129,9 +126,10 @@ namespace SisCom.Aplicacao.Formularios
                 this.MeuDbContextDispose();
             }
 
+            await comboTransportadoraNome_Carregar();
+
             Limpar();
         }
-
         void CarregarDados()
         {
             if (transportadora != null)
@@ -139,8 +137,8 @@ namespace SisCom.Aplicacao.Formularios
                 Limpar();
 
                 textNome.Text = Funcao.NuloParaString(transportadora.Nome);
-                comboPesquisarPesquisa.DataSource = null;
-                comboTipoPessoa.SelectedValue = Funcao.SeNulo(transportadora.TipoPessoa, TipoPessoa.Fisica);
+                comboPesquisarPesquisa.SelectedIndex = -1;
+                comboTipoPessoa.SelectedValue = transportadora.TipoPessoa == 0 ? TipoPessoa.Fisica : transportadora.TipoPessoa;
                 maskedCPFCNPJ.Text = transportadora.CNPJ_CPF;
                 textInscricaoEstadual.Text = Funcao.NuloParaString(transportadora.InscricaoEstadual);
                 maskedEnderecoCEP.Text = Funcao.NuloParaString(transportadora.Endereco.End_CEP);
@@ -272,7 +270,10 @@ namespace SisCom.Aplicacao.Formularios
         #endregion
         private void frmCadastroTransportadoras_FormClosing(object sender, FormClosingEventArgs e)
         {
-            TentarGravar();
+            if (!TentarGravar())
+            {
+                e.Cancel = (!CaixaMensagem.Perguntar("Cadastro em edição! Deseja sair assim mesmo?"));
+            }
         }
         private void TipoPessoa_Tratar()
         {
@@ -345,6 +346,45 @@ namespace SisCom.Aplicacao.Formularios
         private void comboTipoPessoa_SelectedIndexChanged(object sender, EventArgs e)
         {
             TipoPessoa_Tratar();
+        }
+        private async Task comboTransportadoraNome_Carregar()
+        {
+            Combo_ComboBox.Formatar(comboPesquisarPesquisa,
+                                    "ID", "Nome",
+                                    ComboBoxStyle.DropDownList,
+                                    await (new TransportadoraController(this.MeuDbContext(), this._notifier)).Combo(p => p.Nome));
+            this.MeuDbContextDispose();
+        }
+        private void comboPesquisarPesquisa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((comboPesquisarPesquisa.SelectedIndex != -1) && (comboPesquisarPesquisa.Tag != Declaracoes.ComboBox_Carregando))
+            {
+                comboPesquisarPesquisa_Carregar();
+            }
+
+        }
+
+        private async Task comboPesquisarPesquisa_Carregar()
+        {
+            IEnumerable<TransportadoraViewModel> transportadoraViewModel = null;
+
+            transportadoraViewModel = await (new TransportadoraController(this.MeuDbContext(), this._notifier)).PesquisarId((Guid)comboPesquisarPesquisa.SelectedValue);
+
+            if (transportadoraViewModel != null)
+            {
+                TransportadoraViewModel transportadoraViewModeli = null;
+
+                foreach (TransportadoraViewModel item in transportadoraViewModel)
+                {
+                    transportadoraViewModeli = item;
+                    break;
+                }
+                if (transportadoraViewModeli != null)
+                {
+                    transportadora = transportadoraViewModeli;
+                    CarregarDados();
+                }
+            }
         }
     }
 }

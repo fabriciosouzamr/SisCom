@@ -11,8 +11,8 @@ namespace SisCom.Negocio.Interfaces
     {
         Task Adicionar(Funcionario Funcionario);
         Task Atualizar(Funcionario Funcionario);
-        Task Remover(Guid id);
-        Task<List<Funcionario>> GetAll();
+        Task Excluir(Guid id);
+        Task<List<Funcionario>> GetAll(Expression<Func<Funcionario, object>> order = null);
 
         Task<List<Funcionario>> Combo(Expression<Func<Funcionario, object>> order = null);
         Task<Funcionario> GetById(Guid id);
