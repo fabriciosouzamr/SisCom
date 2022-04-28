@@ -40,8 +40,6 @@ namespace SisCom.Aplicacao.Formularios
             this.label8 = new System.Windows.Forms.Label();
             this.panelMenuBotao = new System.Windows.Forms.Panel();
             this.panelMenuBotaoBotao = new System.Windows.Forms.Panel();
-            this.label38 = new System.Windows.Forms.Label();
-            this.botaoGravar = new System.Windows.Forms.Button();
             this.label33 = new System.Windows.Forms.Label();
             this.botaoPagamentos = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -223,8 +221,6 @@ namespace SisCom.Aplicacao.Formularios
             // panelMenuBotaoBotao
             // 
             this.panelMenuBotaoBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.panelMenuBotaoBotao.Controls.Add(this.label38);
-            this.panelMenuBotaoBotao.Controls.Add(this.botaoGravar);
             this.panelMenuBotaoBotao.Controls.Add(this.label33);
             this.panelMenuBotaoBotao.Controls.Add(this.botaoPagamentos);
             this.panelMenuBotaoBotao.Controls.Add(this.label3);
@@ -242,31 +238,10 @@ namespace SisCom.Aplicacao.Formularios
             this.panelMenuBotaoBotao.Controls.Add(this.botaoPosterior);
             this.panelMenuBotaoBotao.Controls.Add(this.botaoAnterior);
             this.panelMenuBotaoBotao.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelMenuBotaoBotao.Location = new System.Drawing.Point(253, 0);
+            this.panelMenuBotaoBotao.Location = new System.Drawing.Point(305, 0);
             this.panelMenuBotaoBotao.Name = "panelMenuBotaoBotao";
-            this.panelMenuBotaoBotao.Size = new System.Drawing.Size(531, 83);
+            this.panelMenuBotaoBotao.Size = new System.Drawing.Size(479, 83);
             this.panelMenuBotaoBotao.TabIndex = 2;
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label38.Location = new System.Drawing.Point(381, 56);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(33, 12);
-            this.label38.TabIndex = 39;
-            this.label38.Text = "Gravar";
-            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // botaoGravar
-            // 
-            this.botaoGravar.Image = ((System.Drawing.Image)(resources.GetObject("botaoGravar.Image")));
-            this.botaoGravar.Location = new System.Drawing.Point(371, 0);
-            this.botaoGravar.Name = "botaoGravar";
-            this.botaoGravar.Size = new System.Drawing.Size(53, 56);
-            this.botaoGravar.TabIndex = 38;
-            this.botaoGravar.UseVisualStyleBackColor = true;
-            this.botaoGravar.Click += new System.EventHandler(this.botaoGravar_Click);
             // 
             // label33
             // 
@@ -359,7 +334,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(486, 56);
+            this.label7.Location = new System.Drawing.Point(433, 56);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 12);
             this.label7.TabIndex = 29;
@@ -370,7 +345,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(436, 56);
+            this.label6.Location = new System.Drawing.Point(383, 56);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 28;
@@ -391,7 +366,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoFechar
             // 
             this.botaoFechar.Image = ((System.Drawing.Image)(resources.GetObject("botaoFechar.Image")));
-            this.botaoFechar.Location = new System.Drawing.Point(477, 0);
+            this.botaoFechar.Location = new System.Drawing.Point(424, 0);
             this.botaoFechar.Name = "botaoFechar";
             this.botaoFechar.Size = new System.Drawing.Size(53, 56);
             this.botaoFechar.TabIndex = 20;
@@ -402,7 +377,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoNovo
             // 
             this.botaoNovo.Image = ((System.Drawing.Image)(resources.GetObject("botaoNovo.Image")));
-            this.botaoNovo.Location = new System.Drawing.Point(424, 0);
+            this.botaoNovo.Location = new System.Drawing.Point(371, 0);
             this.botaoNovo.Name = "botaoNovo";
             this.botaoNovo.Size = new System.Drawing.Size(53, 56);
             this.botaoNovo.TabIndex = 19;
@@ -430,6 +405,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoPosterior.TabIndex = 12;
             this.botaoPosterior.TabStop = false;
             this.botaoPosterior.UseVisualStyleBackColor = true;
+            this.botaoPosterior.Click += new System.EventHandler(this.botaoPosterior_Click);
             // 
             // botaoAnterior
             // 
@@ -440,6 +416,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoAnterior.TabIndex = 11;
             this.botaoAnterior.TabStop = false;
             this.botaoAnterior.UseVisualStyleBackColor = true;
+            this.botaoAnterior.Click += new System.EventHandler(this.botaoAnterior_Click);
             // 
             // panel3
             // 
@@ -1047,6 +1024,7 @@ namespace SisCom.Aplicacao.Formularios
             this.MaximizeBox = false;
             this.Name = "frmCadastroClientes";
             this.Text = "Cadastro de Clientes";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCadastroClientes_FormClosing);
             this.panel2.ResumeLayout(false);
             this.panelPesquisar.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -1149,8 +1127,6 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label labelLoja;
         private System.Windows.Forms.PictureBox pictureFoto;
         private System.Windows.Forms.MaskedTextBox maskedCPFCNPJ;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Button botaoGravar;
         private System.Windows.Forms.MaskedTextBox maskedEnderecoCEP;
     }
 }

@@ -35,7 +35,7 @@ namespace SisCom.Aplicacao.Formularios
         private void cmdTransportadoras_Click(object sender, EventArgs e)
         {
             var form = this.ServiceProvider().GetRequiredService<frmCadastroTransportadoras>();
-            form.ShowDialog(this);
+            form.Show(this);
         }
 
         private void cmdConfiguracoesGerais_Click(object sender, EventArgs e)

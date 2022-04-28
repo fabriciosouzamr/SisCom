@@ -16,13 +16,16 @@ namespace SisCom.Aplicacao.Formularios
     public partial class frmCadastroTransportadoras : FormMain
     {
         ViewModels.TransportadoraViewModel transportadora = null;
+        TransportadoraController transportadoraController;
+
         public frmCadastroTransportadoras(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
+            transportadoraController = new TransportadoraController(this.MeuDbContext(), this._notifier);
             InitializeComponent();
             Inicializar();
         }
         #region Funcoes
-        private async Task Inicializar()
+        async Task Inicializar()
         {
             Combo_ComboBox.Formatar(comboTipoPessoa, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoPessoa));
 
@@ -32,7 +35,7 @@ namespace SisCom.Aplicacao.Formularios
             Limpar();
 
             transportadora = new ViewModels.TransportadoraViewModel();
-            await Navegar(Declaracoes.Navegar.Primeiro);
+            await Navegar(Declaracoes.eNavegar.Primeiro);
         }
         void Limpar()
         {
@@ -58,7 +61,11 @@ namespace SisCom.Aplicacao.Formularios
         {
             bool tentarGravar = false;
 
-            if ((transportadora.Id == Guid.Empty) && (textNome.Text.Trim() == ""))
+            if (transportadora == null)
+            {
+                tentarGravar = true;
+            }
+            else if ((transportadora.Id == Guid.Empty) && (textNome.Text.Trim() == ""))
             {
                 tentarGravar = true;
             }
@@ -84,7 +91,7 @@ namespace SisCom.Aplicacao.Formularios
         Sair:
             return tentarGravar;
         }
-        private async Task GravarTransportadora()
+        async Task GravarTransportadora()
         {
             if (transportadora.Endereco == null)
                 transportadora.Endereco = new Endereco();
@@ -103,27 +110,22 @@ namespace SisCom.Aplicacao.Formularios
             transportadora.PlacaCarreta01 = Funcao.StringVazioParaNulo(textPlacaCarreta01.Text);
             transportadora.PlacaCarreta02 = Funcao.StringVazioParaNulo(textPlacaCarreta02.Text);
             transportadora.Telefone = Funcao.StringVazioParaNulo(Funcoes._Classes.Texto.Telefone_Tratar(textTelefone.Text));
-
-            using (TransportadoraController TransportadoraController = new TransportadoraController(this.MeuDbContext(), this._notifier))
+            
+            if (transportadora.Id != Guid.Empty)
             {
-                if (transportadora.Id != Guid.Empty)
-                {
-                    await TransportadoraController.Atualizar(transportadora.Id, transportadora);
-                }
-                else
-                {
-                    transportadora = (await TransportadoraController.Adicionar(transportadora));
-                }
-                this.MeuDbContextDispose();
-                await comboTransportadoraNome_Carregar();
+                await transportadoraController.Atualizar(transportadora.Id, transportadora);
             }
+            else
+            {
+                transportadora = (await transportadoraController.Adicionar(transportadora));
+            }
+            await comboTransportadoraNome_Carregar();
         }
-        private async void Excluir()
+        async void Excluir()
         {
             using (TransportadoraController TransportadoraController = new TransportadoraController(this.MeuDbContext(), this._notifier))
             {
                 await TransportadoraController.Excluir(transportadora.Id);
-                this.MeuDbContextDispose();
             }
 
             await comboTransportadoraNome_Carregar();
@@ -132,7 +134,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         void CarregarDados()
         {
-            if (transportadora != null)
+            if (!FuncaoInterna.NuloModelView(transportadora))
             {
                 Limpar();
 
@@ -152,7 +154,7 @@ namespace SisCom.Aplicacao.Formularios
                 textTelefone.Text = Funcao.NuloParaString(transportadora.Telefone);
             }
         }
-        private async Task Navegar(Declaracoes.Navegar Posicao)
+        async Task Navegar(Declaracoes.eNavegar Posicao)
         {
             if (TentarGravar())
             {
@@ -161,97 +163,94 @@ namespace SisCom.Aplicacao.Formularios
                 CarregarDados();
             }
         }
-        private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.Navegar Posicao)
+        async Task Navegar_PegarTodos(Guid? Id, Declaracoes.eNavegar Posicao)
         {
-            using (TransportadoraController TransportadoraController = new TransportadoraController(this.MeuDbContext(), this._notifier))
+            transportadoraController = new TransportadoraController(this.MeuDbContext(), this._notifier);
+
+            IEnumerable<TransportadoraViewModel> data = await transportadoraController.ObterTodos();
+
+            TransportadoraViewModel itemAnterior = null;
+            TransportadoraViewModel itemRetorno = null;
+            bool Proximo = false;
+
+            foreach (TransportadoraViewModel item in data)
             {
-                IEnumerable<TransportadoraViewModel> Data = await TransportadoraController.ObterTodos();
-
-                TransportadoraViewModel ItemAnterior = null;
-                TransportadoraViewModel ItemRetorno = null;
-                bool Proximo = false;
-
-                foreach (TransportadoraViewModel Item in Data)
+                if (Posicao == Declaracoes.eNavegar.Primeiro)
                 {
-                    if (Posicao == Declaracoes.Navegar.Primeiro)
+                    itemRetorno = item;
+                    break;
+                }
+                else if (Proximo)
+                {
+                    itemRetorno = item;
+                    break;
+                }
+                else if (item.Id == Id)
+                {
+                    switch (Posicao)
                     {
-                        ItemRetorno = Item;
-                        break;
+                        case Declaracoes.eNavegar.Anterior:
+                            itemRetorno = itemAnterior;
+                            break;
+                        case Declaracoes.eNavegar.Atual:
+                            itemRetorno = item;
+                            break;
+                        case Declaracoes.eNavegar.Proximo:
+                            Proximo = true;
+                            break;
                     }
-                    else if (Proximo)
-                    {
-                        ItemRetorno = Item;
-                        break;
-                    }
-                    else if (Item.Id == Id)
-                    {
-                        switch (Posicao)
-                        {
-                            case Declaracoes.Navegar.Anterior:
-                                ItemRetorno = ItemAnterior;
-                                break;
-                            case Declaracoes.Navegar.Atual:
-                                ItemRetorno = Item;
-                                break;
-                            case Declaracoes.Navegar.Proximo:
-                                Proximo = true;
-                                break;
-                        }
-                    }
-
-                    ItemAnterior = Item;
                 }
 
-                if (Posicao == Declaracoes.Navegar.Ultimo)
-                {
-                    ItemRetorno = ItemAnterior;
-                }
-
-                if (ItemRetorno != null) { transportadora = ItemRetorno; }
-
-                this.MeuDbContextDispose();
+                itemAnterior = item;
             }
+
+            if (Posicao == Declaracoes.eNavegar.Ultimo)
+            {
+                itemRetorno = itemAnterior;
+            }
+
+            if (itemRetorno != null) { transportadora = itemRetorno; }
+
+            data = null;
         }
         #endregion
         #region Botoes
-        private void botaoFechar_Click(object sender, EventArgs e)
+        void botaoFechar_Click(object sender, EventArgs e)
         {
             Close();
         }
-        private void botaoAnterior_Click(object sender, EventArgs e)
+        void botaoAnterior_Click(object sender, EventArgs e)
         {
-            Navegar(transportadora.Id == Guid.Empty ? Declaracoes.Navegar.Primeiro : Declaracoes.Navegar.Anterior);
+            Navegar(transportadora.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
         }
-        private void botaoPosterior_Click(object sender, EventArgs e)
+        void botaoPosterior_Click(object sender, EventArgs e)
         {
-            Navegar(transportadora.Id == Guid.Empty ? Declaracoes.Navegar.Primeiro : Declaracoes.Navegar.Proximo);
+            Navegar(transportadora.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
         }
-        private void botaoExcluir_Click(object sender, EventArgs e)
+        void botaoExcluir_Click(object sender, EventArgs e)
         {
             Excluir();
         }
-        private void botaoNovo_Click(object sender, EventArgs e)
+        void botaoNovo_Click(object sender, EventArgs e)
         {
             transportadora = new ViewModels.TransportadoraViewModel();
             Limpar();
         }
         #endregion
         #region Combos
-        private async Task comboCidade_Carregar(Guid EstadoId)
+        async Task comboCidade_Carregar(Guid EstadoId)
         {
             Combo_ComboBox.Formatar(comboEnderecoCidade,
                                     "ID", "Nome",
                                     ComboBoxStyle.DropDownList,
                                     await (new CidadeController(this.MeuDbContext(), this._notifier)).ComboEstado(EstadoId, p => p.Nome));
-            this.MeuDbContextDispose();
         }
-        private async Task comboEstado_Carregar()
+        async Task comboEstado_Carregar()
         {
             Combo_ComboBox.Formatar(comboEnderecoUF,
                                     "ID", "Codigo",
                                     ComboBoxStyle.DropDownList,
                                     await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Nome));
-            this.MeuDbContextDispose();
         }
         private async Task comboPais_Carregar()
         {
@@ -274,6 +273,8 @@ namespace SisCom.Aplicacao.Formularios
             {
                 e.Cancel = (!CaixaMensagem.Perguntar("Cadastro em edição! Deseja sair assim mesmo?"));
             }
+
+            this.MeuDbContextDispose();
         }
         private void TipoPessoa_Tratar()
         {
@@ -338,8 +339,6 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     await comboCidade_Carregar(Guid.Parse(comboEnderecoUF.SelectedValue.ToString()));
                     await comboPais_Carregar();
-
-                    this.MeuDbContextDispose();
                 }
             }
         }
@@ -353,7 +352,6 @@ namespace SisCom.Aplicacao.Formularios
                                     "ID", "Nome",
                                     ComboBoxStyle.DropDownList,
                                     await (new TransportadoraController(this.MeuDbContext(), this._notifier)).Combo(p => p.Nome));
-            this.MeuDbContextDispose();
         }
         private void comboPesquisarPesquisa_SelectedIndexChanged(object sender, EventArgs e)
         {

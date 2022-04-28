@@ -19,6 +19,7 @@ namespace SisCom.Aplicacao.Formularios
     public partial class frmCadastroClientes : FormMain
     {
         ViewModels.PessoaViewModel pessoa = null;
+        PessoaController pessoaController;
 
         enum TipoPesquisa
         {
@@ -36,6 +37,7 @@ namespace SisCom.Aplicacao.Formularios
 
         public frmCadastroClientes(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
+            pessoaController = new PessoaController(this.MeuDbContext(), this._notifier);
             InitializeComponent();
             Inicializar();
         }
@@ -56,10 +58,12 @@ namespace SisCom.Aplicacao.Formularios
 
             labelUsuario.Text = labelUsuario.Tag + " " + Declaracoes.sistema_UsuarioLogado;
             labelLoja.Text = labelLoja.Tag + " " + Declaracoes.sistema_Loja;
+
+            pessoa = new ViewModels.PessoaViewModel();
+            await Navegar(Declaracoes.eNavegar.Primeiro);
         }
         private void Limpar()
         {
-            pessoa = new ViewModels.PessoaViewModel();
             comboPesquisarTipoFiltro.SelectedIndex = -1;
             comboPesquisarPesquisa.DataSource = null;
             comboTipoPessoa.SelectedValue = TipoPessoaCliente.Fisica;
@@ -133,7 +137,6 @@ namespace SisCom.Aplicacao.Formularios
                         {
                             Texto_MaskedTextBox.Limpar(maskedCPFCNPJ);
                             maskedCPFCNPJ.Focus();
-                            pessoa = null;
                         }
                     }
                     if (Carregar)
@@ -146,7 +149,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async void CarregarDados()
         {
-            if (pessoa != null)
+            if (!FuncaoInterna.NuloModelView(pessoa))
             {
                 comboTipoPessoa.SelectedValue = pessoa.TipoPessoa;
                 maskedCPFCNPJ.Text = pessoa.CNPJ_CPF;
@@ -158,11 +161,14 @@ namespace SisCom.Aplicacao.Formularios
                 textCodigoCliente.Text = pessoa.Codigo.ToString("00000");
                 textNome.Text = Funcao.NuloParaString(pessoa.Nome);
                 textRazaoSocial.Text = Funcao.NuloParaString(pessoa.RazaoSocial);
-                maskedEnderecoCEP.Text = Funcao.NuloParaString(pessoa.Endereco.End_CEP);
-                textEnderecoLogradouro.Text = Funcao.NuloParaString(pessoa.Endereco.End_Logradouro);
-                textEnderecoNumero.Text = Funcao.NuloParaString(pessoa.Endereco.End_Numero);
-                textEnderecoBairro.Text = Funcao.NuloParaString(pessoa.Endereco.End_Bairro);
-                textEnderecoPontoReferencia.Text = Funcao.NuloParaString(pessoa.Endereco.End_PontoReferencia);
+                if (pessoa.Endereco != null)
+                {
+                    maskedEnderecoCEP.Text = Funcao.NuloParaString(pessoa.Endereco.End_CEP);
+                    textEnderecoLogradouro.Text = Funcao.NuloParaString(pessoa.Endereco.End_Logradouro);
+                    textEnderecoNumero.Text = Funcao.NuloParaString(pessoa.Endereco.End_Numero);
+                    textEnderecoBairro.Text = Funcao.NuloParaString(pessoa.Endereco.End_Bairro);
+                    textEnderecoPontoReferencia.Text = Funcao.NuloParaString(pessoa.Endereco.End_PontoReferencia);
+                }
                 textNomeContato.Text = Funcao.NuloParaString(pessoa.NomeContato);
                 dateNascimento.Value = (DateTime)Funcao.NuloParaData(pessoa.DataNascimento, dateNascimento.MinDate);
                 if (!Funcao.Nulo(pessoa.VendedorId)) comboVendedor.SelectedValue = pessoa.VendedorId;
@@ -174,6 +180,7 @@ namespace SisCom.Aplicacao.Formularios
                 if (!Imagem.NuloImagem(pessoa.Imagem)) pictureFoto.Image = Imagem.ByteArrayToImage(pessoa.Imagem);
                 textObservacoes.Text = Funcao.NuloParaString(pessoa.Observacoes);
 
+                if (pessoa.Endereco != null)
                 if (!Funcao.Nulo(pessoa.Endereco.End_CidadeId)) Combo_ComboBox.ComboCidade_Carregar(this._serviceProvider,
                                                                                                     this._dbCtxFactory,
                                                                                                     this._notifier, 
@@ -181,18 +188,15 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                     comboEnderecoCidade,
                                                                                                     comboEnderecoUF,
                                                                                                     comboEnderecoPais);
-                this.MeuDbContextDispose();
             }
         }
-        private async void GravarPessoa()
+        private async void AdicionarPessoa()
         {
             if (!Funcoes._Classes.Validacao.CPFCNPJ_Valido((TipoPessoa)pessoa.TipoPessoa, pessoa.CNPJ_CPF))
             {
                 CaixaMensagem.Informacao("C.P.F./C.N.P.J. Inválido");
                 return;
             }
-
-            var pessoaController = new PessoaController(this.MeuDbContext(), this._notifier);
 
             if (pessoa.Id != Guid.Empty)
             {
@@ -202,19 +206,107 @@ namespace SisCom.Aplicacao.Formularios
             {
                 pessoa = (await pessoaController.Adicionar(pessoa));
             }
-
-            pessoaController = null;
-
-            this.MeuDbContextDispose();
         }
         private async void Excluir()
         {
             var pessoaController = new PessoaController(this.MeuDbContext(), this._notifier);
             await pessoaController.Excluir(pessoa.Id);
             pessoaController = null;
-            this.MeuDbContextDispose();
 
             Limpar();
+        }
+        bool TentarGravar()
+        {
+            bool tentarGravar = false;
+
+            if (pessoa == null)
+            {
+                tentarGravar = true;
+            }
+            else if ((pessoa.Id == Guid.Empty) && (textNome.Text.Trim() == ""))
+            {
+                tentarGravar = true;
+            }
+            else
+            {
+                if (textNome.Text == "")
+                {
+                    CaixaMensagem.Informacao("Informe o nome da transportadora");
+                    goto Sair;
+                }
+                if (!Validacao.CPFCNPJ_Valido((TipoPessoa)comboTipoPessoa.SelectedValue, Funcoes._Classes.Texto.SomenteNumero(maskedCPFCNPJ.Text)))
+                {
+                    CaixaMensagem.Informacao("Informe o C.P.F./C.N.P.J!");
+                    goto Sair;
+                }
+
+                GravarPessoa();
+
+                tentarGravar = true;
+            }
+
+
+        Sair:
+            return tentarGravar;
+        }
+        async Task Navegar(Declaracoes.eNavegar Posicao)
+        {
+            if (TentarGravar())
+            {
+                await Navegar_PegarTodos(pessoa.Id, Posicao);
+
+                CarregarDados();
+            }
+        }
+        async Task Navegar_PegarTodos(Guid? Id, Declaracoes.eNavegar Posicao)
+        {
+            pessoaController = new PessoaController(this.MeuDbContext(), this._notifier);
+            
+                IEnumerable<PessoaViewModel> data = await pessoaController.ObterTodos();
+
+                PessoaViewModel itemAnterior = null;
+                PessoaViewModel itemRetorno = null;
+                bool Proximo = false;
+
+                foreach (PessoaViewModel item in data)
+                {
+                    if (Posicao == Declaracoes.eNavegar.Primeiro)
+                    {
+                        itemRetorno = item;
+                        break;
+                    }
+                    else if (Proximo)
+                    {
+                        itemRetorno = item;
+                        break;
+                    }
+                    else if (item.Id == Id)
+                    {
+                        switch (Posicao)
+                        {
+                            case Declaracoes.eNavegar.Anterior:
+                                itemRetorno = itemAnterior;
+                                break;
+                            case Declaracoes.eNavegar.Atual:
+                                itemRetorno = item;
+                                break;
+                            case Declaracoes.eNavegar.Proximo:
+                                Proximo = true;
+                                break;
+                        }
+                    }
+
+                    itemAnterior = item;
+                }
+
+                if (Posicao == Declaracoes.eNavegar.Ultimo)
+                {
+                    itemRetorno = itemAnterior;
+                }
+
+                if (itemRetorno != null) { pessoa = itemRetorno; }
+
+                data = null;
         }
         private void TipoPessoa_Tratar()
         {
@@ -236,8 +328,6 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     await comboCidade_Carregar(Guid.Parse(comboEnderecoUF.SelectedValue.ToString()));
                     await comboPais_Carregar();
-
-                    this.MeuDbContextDispose();
                 }
             }
         }
@@ -249,7 +339,6 @@ namespace SisCom.Aplicacao.Formularios
                                     "ID", "Nome",
                                     ComboBoxStyle.DropDownList,
                                     await (new CidadeController(this.MeuDbContext(), this._notifier)).ComboEstado(EstadoId, p => p.Nome));
-            this.MeuDbContextDispose();
         }
         private async Task comboPais_Carregar()
         {
@@ -271,7 +360,6 @@ namespace SisCom.Aplicacao.Formularios
                                     "ID", "Nome",
                                     ComboBoxStyle.DropDownList,
                                     await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboNome(p => p.Nome));
-            this.MeuDbContextDispose();
         }
         private async Task comboPessoaRazaoSocial_Carregar()
         {
@@ -279,7 +367,6 @@ namespace SisCom.Aplicacao.Formularios
                                     "ID", "RazaoSocial",
                                     ComboBoxStyle.DropDownList,
                                     await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboRazaoSocial(p => p.RazaoSocial));
-            this.MeuDbContextDispose();
         }
         private async Task comboPessoaCodigo_Carregar()
         {
@@ -287,7 +374,6 @@ namespace SisCom.Aplicacao.Formularios
                                     "ID", "Codigo",
                                     ComboBoxStyle.DropDownList,
                                     await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Codigo));
-            this.MeuDbContextDispose();
         }
         private async Task comboPessoaCNPJCPF_Carregar()
         {
@@ -295,7 +381,6 @@ namespace SisCom.Aplicacao.Formularios
                                     "ID", "CNPJ_CPF",
                                     ComboBoxStyle.DropDownList,
                                     await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboCPFCNPJ(p => p.CNPJ_CPF));
-            this.MeuDbContextDispose();
         }
         private async Task comboPessoaTelefone_Carregar()
         {
@@ -303,7 +388,6 @@ namespace SisCom.Aplicacao.Formularios
                                     "ID", "Telefone",
                                     ComboBoxStyle.DropDownList,
                                     await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboTelefone(p => p.Telefone));
-            this.MeuDbContextDispose();
         }
         private async Task comboEstado_Carregar()
         {
@@ -311,7 +395,6 @@ namespace SisCom.Aplicacao.Formularios
                                     "ID", "Codigo",
                                     ComboBoxStyle.DropDownList,
                                     await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Nome));
-            this.MeuDbContextDispose();
         }
         private async Task comboVendedor_Carregar()
         {
@@ -319,7 +402,6 @@ namespace SisCom.Aplicacao.Formularios
                                     "Id", "Nome",
                                     ComboBoxStyle.DropDownList,
                                     await (new FuncionarioController(this.MeuDbContext(), this._notifier)).Combo(p => p.Nome));
-            this.MeuDbContextDispose();
         }
         private async Task comboTipoCliente_Carregar()
         {
@@ -327,7 +409,6 @@ namespace SisCom.Aplicacao.Formularios
                                     "ID", "Nome",
                                     ComboBoxStyle.DropDownList,
                                     await (new TipoClienteController(this.MeuDbContext(), this._notifier)).Combo(p => p.Nome));
-            this.MeuDbContextDispose();
         }
         private void comboContribuinte_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -426,9 +507,10 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoNovo_Click(object sender, EventArgs e)
         {
+            pessoa = new ViewModels.PessoaViewModel();
             Limpar();
         }
-        private void botaoGravar_Click(object sender, EventArgs e)
+        private void GravarPessoa()
         {
             if (!Validacao.CPFCNPJ_Valido((TipoPessoa)comboTipoPessoa.SelectedValue, Funcoes._Classes.Texto.SomenteNumero(maskedCPFCNPJ.Text)))
             {
@@ -482,7 +564,7 @@ namespace SisCom.Aplicacao.Formularios
             pessoa.Imagem = Imagem.ImageToByteArray(pictureFoto.Image);
             pessoa.Observacoes = Funcao.StringVazioParaNulo(textObservacoes.Text);
 
-            GravarPessoa();
+            AdicionarPessoa();
         }
         private void botaoExcluir_Click(object sender, EventArgs e)
         {
@@ -515,6 +597,26 @@ namespace SisCom.Aplicacao.Formularios
             {
                 CarregarDados_CNPJCPF_Pesquisa(true, false);
             }
+        }
+
+        private void botaoAnterior_Click(object sender, EventArgs e)
+        {
+            Navegar(pessoa.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
+        }
+
+        private void botaoPosterior_Click(object sender, EventArgs e)
+        {
+            Navegar(pessoa.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
+        }
+
+        private void frmCadastroClientes_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!TentarGravar())
+            {
+                e.Cancel = (!CaixaMensagem.Perguntar("Cadastro em edição! Deseja sair assim mesmo?"));
+            }
+
+            this.MeuDbContextDispose();
         }
     }
 }

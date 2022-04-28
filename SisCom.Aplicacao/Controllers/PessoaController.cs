@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
 {
-    public class PessoaController
+    public class PessoaController : IDisposable
     {
         static PessoaService _pessoaService;
-        private readonly MeuDbContext MeuDbContext;
+        private readonly MeuDbContext meuDbContext;
 
         public PessoaController(MeuDbContext meuDbContext, INotifier notifier)
         {
-            this.MeuDbContext = meuDbContext;
+            this.meuDbContext = meuDbContext;
 
             _pessoaService = new PessoaService(new PessoaRepository(meuDbContext), notifier);
         }
@@ -46,10 +46,11 @@ namespace SisCom.Aplicacao.Controllers
 
             return pessoaViewModel;
         }
-
-        public IEnumerable<PessoaViewModel> ObterTodos()
+        public async Task<IEnumerable<PessoaViewModel>> ObterTodos()
         {
-            return Declaracoes.mapper.Map<IEnumerable<PessoaViewModel>>(_pessoaService.GetAll());
+            var obterTodos = await _pessoaService.GetAll();
+            return Declaracoes.mapper.Map<IEnumerable<PessoaViewModel>>(obterTodos);
+
         }
 
         public async Task<IEnumerable<PessoaViewModel>> PesquisarCNPJCPF(string CNPJCPF)
@@ -98,6 +99,10 @@ namespace SisCom.Aplicacao.Controllers
         {
             var combo = await _pessoaService.Search(p => p.Fornecedor == true, order);
             return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
+        }
+        public void Dispose()
+        {
+            //this.meuDbContext.Dispose();
         }
     }
 }

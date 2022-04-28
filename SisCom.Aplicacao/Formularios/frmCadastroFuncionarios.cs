@@ -21,7 +21,7 @@ namespace SisCom.Aplicacao.Formularios
             Limpar();
 
             funcionario = new ViewModels.FuncionarioViewModel();
-            Navegar(Declaracoes.Navegar.Primeiro);
+            Navegar(Declaracoes.eNavegar.Primeiro);
         }
         #region Funcoes
         void Limpar()
@@ -108,7 +108,7 @@ Sair:
             }
         }
 
-        private async Task Navegar(Declaracoes.Navegar Posicao)
+        private async Task Navegar(Declaracoes.eNavegar Posicao)
         {
             if (TentarGravar())
             {
@@ -118,7 +118,7 @@ Sair:
             }
         }
 
-        private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.Navegar Posicao)
+        private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.eNavegar Posicao)
         {
             using (FuncionarioController funcionarioController = new FuncionarioController(this.MeuDbContext(), this._notifier))
             {
@@ -130,7 +130,7 @@ Sair:
 
                 foreach (FuncionarioViewModel Item in Data)
                 {
-                    if (Posicao == Declaracoes.Navegar.Primeiro)
+                    if (Posicao == Declaracoes.eNavegar.Primeiro)
                     {
                         ItemRetorno = Item;
                         break;
@@ -144,13 +144,13 @@ Sair:
                     {
                         switch (Posicao)
                         {
-                            case Declaracoes.Navegar.Anterior:
+                            case Declaracoes.eNavegar.Anterior:
                                 ItemRetorno = ItemAnterior;
                                 break;
-                            case Declaracoes.Navegar.Atual:
+                            case Declaracoes.eNavegar.Atual:
                                 ItemRetorno = Item;
                                 break;
-                            case Declaracoes.Navegar.Proximo:
+                            case Declaracoes.eNavegar.Proximo:
                                 Proximo = true;
                                 break;
                         }
@@ -159,7 +159,7 @@ Sair:
                     ItemAnterior = Item;
                 }
 
-                if (Posicao == Declaracoes.Navegar.Ultimo)
+                if (Posicao == Declaracoes.eNavegar.Ultimo)
                 {
                     ItemRetorno = ItemAnterior;
                 }
@@ -179,12 +179,12 @@ Sair:
 
         private void botaoAnterior_Click(object sender, EventArgs e)
         {
-            Navegar(funcionario.Id == Guid.Empty ? Declaracoes.Navegar.Primeiro : Declaracoes.Navegar.Anterior);
+            Navegar(funcionario.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
         }
 
         private void botaoPosterior_Click(object sender, EventArgs e)
         {
-            Navegar(funcionario.Id == Guid.Empty ? Declaracoes.Navegar.Primeiro : Declaracoes.Navegar.Proximo);
+            Navegar(funcionario.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
         }
 
         private void botaoExcluir_Click(object sender, EventArgs e)

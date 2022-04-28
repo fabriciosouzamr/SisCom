@@ -25,16 +25,16 @@ namespace SisCom.Infraestrutura.Data.Repository
         {
             if (order == null)
             {
-                return await DbSet.Where(predicate).ToListAsync();
+                return await DbSet.AsNoTracking().Where(predicate).ToListAsync();
             }
             else
             {
-                return await DbSet.Where(predicate).OrderBy(order ?? (e => e.Id)).ToListAsync();
+                return await DbSet.AsNoTracking().Where(predicate).OrderBy(order ?? (e => e.Id)).ToListAsync();
             }
         }
         public bool Exists(Expression<Func<TEntity, bool>> predicate)
         {
-            return DbSet.Where(predicate).Any();
+            return DbSet.AsNoTracking().Where(predicate).Any();
         }
         public virtual async Task<TEntity> GetById(Guid id, params Expression<Func<TEntity, object>>[] includes)
         {
@@ -47,38 +47,51 @@ namespace SisCom.Infraestrutura.Data.Repository
         }
         public virtual async Task<TEntity> GetById(Guid id)
         {
-            return await DbSet.FirstOrDefaultAsync(p => p.Id == id);
+            return await DbSet.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
         }
         public virtual async Task<List<TEntity>> GetAll()
         {
-            return await DbSet.ToListAsync();
+            return await DbSet.AsNoTracking().ToListAsync();
         }
         public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null)
         {
-            return await DbSet.OrderBy(order ?? (e => e.Id)).ToListAsync();
+            List<TEntity> ret = null;
+
+            try
+            {
+                if (order == null)
+                { ret = await DbSet.AsNoTracking().ToListAsync(); }
+                else
+                { ret = await DbSet.AsNoTracking().OrderBy(order ?? (e => e.Id)).ToListAsync(); }
+            }
+            catch (Exception Ex)
+            {
+            }
+
+            return ret;
         }
         public virtual async Task<List<TEntity>> Combo()
         {
-            return await DbSet.ToListAsync();
+            return await DbSet.AsNoTracking().ToListAsync();
         }
         public virtual async Task<List<TEntity>> Combo(Expression<Func<TEntity, object>> order = null)
         {
             if (order==null)
             {
-                return await DbSet.ToListAsync();
+                return await DbSet.AsNoTracking().ToListAsync();
             }
             else
             {
-                return await DbSet.OrderBy(order ?? (e => e.Id)).ToListAsync();
+                return await DbSet.AsNoTracking().OrderBy(order ?? (e => e.Id)).ToListAsync();
             }
         }
         public virtual async Task<List<TEntity>> ComboSearch(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> order = null)
         {
-            return await DbSet.Where(predicate).OrderBy(order ?? (e => e.Id)).ToListAsync();
+            return await DbSet.AsNoTracking().Where(predicate).OrderBy(order ?? (e => e.Id)).ToListAsync();
         }
         public async Task<IPagedList<TEntity>> GetPagedList(Expression<Func<TEntity, bool>> predicate, PagedListParameters parameters)
         {
-            var dadosFiltrados = DbSet.Where(predicate);
+            var dadosFiltrados = DbSet.AsNoTracking().Where(predicate);
             dadosFiltrados = dadosFiltrados.OrderBy(parameters.Sort);
 
             return await PagedList<TEntity>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
@@ -103,7 +116,7 @@ namespace SisCom.Infraestrutura.Data.Repository
         public virtual async Task Update(TEntity entity)
         {
             DbSet.Update(entity);
-            await SaveChanges();
+            await SaveChangesAsync();
         }
         public virtual async Task Delete(Guid id)
         {
@@ -113,6 +126,10 @@ namespace SisCom.Infraestrutura.Data.Repository
         public async Task<int> SaveChanges()
         {
             return Db.SaveChanges();
+        }
+        public async Task SaveChangesAsync()
+        {
+            Db.SaveChangesAsync();
         }
         public void Dispose()
         {

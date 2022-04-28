@@ -82,6 +82,10 @@ namespace Funcoes._Classes
         {
             return Convert.ToDouble(SeNulo(Valor, 0));
         }
+        public static decimal NuloParaValorD(object Valor)
+        {
+            return Convert.ToDecimal(SeNulo(Valor, 0));
+        }
         public static DateTime NuloParaData(object Valor, Nullable<DateTime> Padrao = null)
         {
             if (NuloData(Valor))

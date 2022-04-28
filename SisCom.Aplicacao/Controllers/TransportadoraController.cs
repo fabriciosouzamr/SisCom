@@ -14,14 +14,12 @@ namespace SisCom.Aplicacao.Controllers
 {
     public class TransportadoraController : IDisposable
     {
-
         static TransportadoraService _transportadoraService;
-        private readonly MeuDbContext MeuDbContext;
+        private readonly MeuDbContext meuDbContext;
 
         public TransportadoraController(MeuDbContext meuDbContext, INotifier notifier)
         {
-            this.MeuDbContext = meuDbContext;
-
+            this.meuDbContext = meuDbContext;
             _transportadoraService = new TransportadoraService(new TransportadoraRepository(meuDbContext), notifier);
         }
         public async Task<TransportadoraViewModel> Adicionar(TransportadoraViewModel transportadoraViewModel)
@@ -62,8 +60,7 @@ namespace SisCom.Aplicacao.Controllers
         }
         public void Dispose()
         {
-            _transportadoraService.Dispose();
-            MeuDbContext.Dispose();
+            //this.meuDbContext.Dispose();
         }
 
     }

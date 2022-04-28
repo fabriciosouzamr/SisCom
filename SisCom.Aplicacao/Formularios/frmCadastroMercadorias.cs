@@ -18,9 +18,6 @@ namespace SisCom.Aplicacao.Formularios
         ViewModels.MercadoriaViewModel mercadoria = null;
         bool carregandoDados = false;
 
-        //logo2.Formulário!TipoPrecificacao
-        string TipoPrecificacao = "TVA";
-
         enum TipoPesquisa
         {
             [Description("Código")]
@@ -48,7 +45,7 @@ namespace SisCom.Aplicacao.Formularios
                                         await (new GrupoMercadoriaController(meuDbContext, this._notifier)).Combo(p => p.Nome));
             }
 
-            return true; 
+            return true;
         }
         private async Task<bool> comboFornecedor_Carregar()
         {
@@ -580,11 +577,16 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoAnterior_Click(object sender, EventArgs e)
         {
-            Navegar(mercadoria.Id == Guid.Empty ? Declaracoes.Navegar.Primeiro : Declaracoes.Navegar.Anterior);
+            Navegar(mercadoria.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
         }
         private void botaoPosterior_Click(object sender, EventArgs e)
         {
-            Navegar(mercadoria.Id == Guid.Empty ? Declaracoes.Navegar.Primeiro : Declaracoes.Navegar.Proximo);
+            Navegar(mercadoria.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
+        }
+        private void botaoNovo_Click(object sender, EventArgs e)
+        {
+            mercadoria = new ViewModels.MercadoriaViewModel();
+            Limpar();
         }
         #endregion
         #region Funcoes
@@ -596,6 +598,10 @@ namespace SisCom.Aplicacao.Formularios
         {
             pnlDadosGerais.Enabled = false;
             tabControl.Enabled = false;
+
+            labelCalculoPreco.Text = Declaracoes.calculoPreco.ToString();
+            labelCalculoPrecificacao.Text = Declaracoes.tipoCalculo.ToString();
+            numericPreco_numericPreco_PrecoCompra_Calcular();
 
             try
             {
@@ -613,7 +619,7 @@ namespace SisCom.Aplicacao.Formularios
                 Limpar();
 
                 mercadoria = new ViewModels.MercadoriaViewModel();
-                Navegar(Declaracoes.Navegar.Primeiro);
+                Navegar(Declaracoes.eNavegar.Primeiro);
             }
             catch (Exception Ex)
             {
@@ -739,8 +745,6 @@ namespace SisCom.Aplicacao.Formularios
             comboTributacao_ECFNFCeTipoServico.SelectedIndex = -1;
             textTributacao_ECFNFCeTipoServicoMunicipal.Text = "";
             //Preço Estoque - Outros
-            labelCalculoPreco.Text = "0000";
-            labelCalculoPrecificacao.Text = "0000";
             checkNaoVender.Checked = false;
             checkNaoControlarEstoque.Checked = false;
             checkDesativado.Checked = false;
@@ -865,7 +869,7 @@ namespace SisCom.Aplicacao.Formularios
                 numericPreco_Comissao.Value = mercadoria.Preco_Comissao;
                 numericPreco_Marketing.Value = mercadoria.Preco_Marketing;
                 numericPreco_OutrosCustos.Value = mercadoria.Preco_OutrosCustos;
-                CalcularCustoMercadoria();
+                numericPreco_numericPreco_PrecoCompra_Calcular();
                 //Preço Estoque - Ponto Equilíbrio
                 labelMargem_PontoEquilibrio.Text = "0000";
                 numericMargem_MargemSugerido.Value = mercadoria.Preco_MargemSugerido;
@@ -897,8 +901,6 @@ namespace SisCom.Aplicacao.Formularios
                 if (!Funcao.Nulo(mercadoria.Estoque_TributacaoNFCe_TipoServicoFiscalId)) comboTributacao_ECFNFCeTipoServico.SelectedValue = mercadoria.Estoque_TributacaoNFCe_TipoServicoFiscalId;
                 textTributacao_ECFNFCeTipoServicoMunicipal.Text = mercadoria.Estoque_TributacaoNFCe_TipoServicoMunicipal;
                 //Preço Estoque - Outros
-                labelCalculoPreco.Text = Funcao.NuloParaString(mercadoria.Preco_CalculoPreco);
-                labelCalculoPrecificacao.Text = Funcao.NuloParaString(mercadoria.Preco_CalculoPrecificacao);
                 checkNaoVender.Checked = mercadoria.NaoVender;
                 checkNaoControlarEstoque.Checked = mercadoria.NaoControlarEstoque;
                 checkDesativado.Checked = !mercadoria.Ativado;
@@ -912,11 +914,11 @@ namespace SisCom.Aplicacao.Formularios
                     comboDetalhesFiscais_CodigoANP_Descricao.SelectedValue = mercadoria.Fiscal_TabelaANPId;
                 }
                 textDetalhesFiscais_CodigoAnvisa.Text = Funcao.NuloParaString(mercadoria.Fiscal_CodigoAnvisa);
-                if (!Funcao.Nulo(mercadoria.Fiscal_TabelaNCMId)) 
+                if (!Funcao.Nulo(mercadoria.Fiscal_TabelaNCMId))
                 {
                     comboDetalhesFiscais_NCM.SelectedValue = mercadoria.Fiscal_TabelaNCMId;
                     await NCMCarregarDependentes();
-                } 
+                }
                 if (!Funcao.Nulo(mercadoria.Fiscal_TabelaCESTId)) comboDetalhesFiscais_CEST.SelectedValue = mercadoria.Fiscal_TabelaCESTId;
                 if (!Funcao.Nulo(mercadoria.Fiscal_TabelaOrigemMercadoriaServicoId)) comboDetalhesFiscais_OrigemMercadoria.SelectedValue = mercadoria.Fiscal_TabelaOrigemMercadoriaServicoId;
                 if (!Funcao.Nulo(mercadoria.Fiscal_TabelaCST_CSOSNId)) comboDetalhesFiscais_CST_CSOSN_Codigo.SelectedValue = mercadoria.Fiscal_TabelaCST_CSOSNId;
@@ -1208,22 +1210,15 @@ namespace SisCom.Aplicacao.Formularios
         Sair:
             return tentarGravar;
         }
-        private async Task Navegar(Declaracoes.Navegar posicao)
+        private async Task Navegar(Declaracoes.eNavegar posicao)
         {
-            bool navegar;
-
-            if (posicao == Declaracoes.Navegar.Primeiro)
-            { navegar = true; }
-            else
-            { navegar = TentarGravar(); }
-
-            if (navegar)
+            if (TentarGravar())
             {
                 await Navegar_PegarTodos(mercadoria.Id, posicao);
                 await CarregarDados();
             }
         }
-        private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.Navegar Posicao)
+        private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.eNavegar Posicao)
         {
             using (MercadoriaController mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier))
             {
@@ -1237,7 +1232,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 foreach (MercadoriaViewModel Item in Data)
                 {
-                    if (Posicao == Declaracoes.Navegar.Primeiro)
+                    if (Posicao == Declaracoes.eNavegar.Primeiro)
                     {
                         ItemRetorno = Item;
                         break;
@@ -1251,13 +1246,13 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         switch (Posicao)
                         {
-                            case Declaracoes.Navegar.Anterior:
+                            case Declaracoes.eNavegar.Anterior:
                                 ItemRetorno = ItemAnterior;
                                 break;
-                            case Declaracoes.Navegar.Atual:
+                            case Declaracoes.eNavegar.Atual:
                                 ItemRetorno = Item;
                                 break;
-                            case Declaracoes.Navegar.Proximo:
+                            case Declaracoes.eNavegar.Proximo:
                                 Proximo = true;
                                 break;
                         }
@@ -1266,120 +1261,223 @@ namespace SisCom.Aplicacao.Formularios
                     ItemAnterior = Item;
                 }
 
-                if (Posicao == Declaracoes.Navegar.Ultimo)
+                if (Posicao == Declaracoes.eNavegar.Ultimo)
                 {
                     ItemRetorno = ItemAnterior;
                 }
 
                 if (ItemRetorno != null) { mercadoria = ItemRetorno; }
-
-                this.MeuDbContextDispose();
             }
         }
-        #endregion
         private async Task NCMCarregarDependentes()
         {
             await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CEST_Carregar((Guid)comboDetalhesFiscais_NCM.SelectedValue));
         }
-
-        private void numericPreco_ICMSCompra_ValueChanged(object sender, EventArgs e)
+        private void labelPreco_ValorCustoFixo_Calcular()
         {
-            labelPreco_ValorICMSCompra.Text = Valor.Formatar((double)mercadoria.Preco_ICMS_Compra);
-            CalcularCustoMercadoria();
+            numericPreco_numericPreco_PrecoCompra_Calcular();
         }
-
-        private void numericPreco_ICMSFronteira_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorICMSFronteira.Text = Valor.Formatar((double)numericPreco_ICMSFronteira.Value);
-            CalcularCustoMercadoria();
-        }
-
-        private void numericPreco_IPI_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorIPI.Text = Valor.Formatar((double)numericPreco_IPI.Value);
-            CalcularCustoMercadoria();
-        }
-
-        private void numericPreco_Frete_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorFrete.Text = Valor.Formatar((double)numericPreco_Frete.Value);
-            CalcularCustoMercadoria();
-        }
-
-        private void numericPreco_Embalagem_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorEmbalagem.Text = Valor.Formatar((double)numericPreco_Embalagem.Value);
-            CalcularCustoMercadoria();
-        }
-
-        private void numericPreco_EncFinanceiros_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorEncFinanceiros.Text = Valor.Formatar((double)numericPreco_EncFinanceiros.Value);
-            CalcularCustoMercadoria();
-        }
-
-        private void numericPreco_CustoFixo_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorCustoFixo.Text = Valor.Formatar((double)numericPreco_CustoFixo.Value);
-        }
-
-        private void numericPreco_ImpostosFederais_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorImpostosFederais.Text = Valor.Formatar((double)numericPreco_ImpostosFederais.Value);
-            CalcularCustoMercadoria();
-        }
-
-        private void numericPreco_ICMSVenda_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorICMSVenda.Text = Valor.Formatar((double)numericPreco_ICMSVenda.Value);
-            CalcularCustoMercadoria();
-        }
-
-        private void numericPreco_Comissao_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorComissao.Text = Valor.Formatar((double)numericPreco_Comissao.Value);
-            CalcularCustoMercadoria();
-        }
-
-        private void numericPreco_Marketing_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorMarketing.Text = Valor.Formatar((double)numericPreco_Marketing.Value);
-            CalcularCustoMercadoria();
-        }
-
-        private void numericPreco_OutrosCustos_ValueChanged(object sender, EventArgs e)
-        {
-            labelPreco_ValorOutrosCustos.Text = Valor.Formatar((double)numericPreco_OutrosCustos.Value);
-            CalcularCustoMercadoria();
-        }
-
-        private void CalcularCustoMercadoria()
-        {
-            decimal calcularCustoMercadoria = 0;
-            decimal icmsCompra = 0;
-
-            if (TipoPrecificacao == "TVA") { icmsCompra = 0; } { icmsCompra = 0 - numericPreco_ICMSCompra.Value; }
-
-            calcularCustoMercadoria = numericPreco_PrecoCompra.Value + (numericPreco_PrecoCompra.Value * ((icmsCompra+numericPreco_IPI.Value + numericPreco_Frete.Value + numericPreco_Embalagem.Value + numericPreco_EncFinanceiros.Value)/ (decimal)100))+CalcularTVA();
-
-                labelPreco_ValorCustoMercadoria.Text = Valor.Formatar((double)calcularCustoMercadoria);
-        }
-
         private decimal CalcularTVA()
         {
+            //= SeImed([o] = 0; 0; SeImed(logo2.Formulário!TipoPrecificacao = "TVA"; ((([p1] +[vIPI]) * (1 + ([o] / 100))) * 0, 17) - ([p1] * ([ICMS] / 100)); ([p1] * (([o]) / 100))))
             return 0;
         }
+        private decimal numericPreco_PrecoCompra_Valor()
+        {
+            return Funcao.NuloParaValorD(numericPreco_PrecoCompra.Value);
+        }
+        private decimal labelMargem_ValorPrecoSugerido_Calcular()
+        {
+            return Funcao.NuloParaValorD(labelMargem_ValorPrecoSugerido.Tag);
+        }
+        private void numericPreco_numericPreco_PrecoCompra_Calcular()
+        {
+            decimal PrecoVendaSugerido = 0;
+            decimal precoPontoEquilibrio = 0;
+            decimal valorCustoFixo = 0;
+            decimal valorImpostoFederal = 0;
+            decimal valorIcmsVenda = 0;
+            decimal ValorComissao = 0;
+            decimal valorMarketing = 0;
+            decimal valorOutrosCustos = 0;
+            decimal valorTva = 0;
+            decimal ValorIPI = 0;
+            decimal precoCusto = 0;
 
+            if (Declaracoes.tipoCalculo == Declaracoes.eTipoCalculo.TVA)
+            {
+                ValorIPI = (numericPreco_PrecoCompra.Value * ((numericPreco_IPI.Value) / 100));
+                valorTva = numericPreco_ICMSFronteira.Value == 0 ? 0 : (((numericPreco_PrecoCompra.Value + ValorIPI) * (1 + (numericPreco_ICMSFronteira.Value / 100))) * numericTributacao_ECFNFCeNFCeAliquotaICMS.Value) - (numericPreco_PrecoCompra.Value * (numericPreco_ICMSCompra.Value / 100));
+                precoCusto = numericPreco_PrecoCompra.Value + (numericPreco_PrecoCompra.Value * (numericPreco_IPI.Value + numericPreco_Frete.Value + numericPreco_Embalagem.Value + numericPreco_EncFinanceiros.Value) / 100) + valorTva;
+            }
+            else
+            {
+                valorTva = (numericPreco_PrecoCompra.Value * (numericPreco_ICMSFronteira.Value / 100));
+                precoCusto = numericPreco_PrecoCompra.Value + (numericPreco_PrecoCompra.Value * (((-numericPreco_ICMSCompra.Value + numericPreco_IPI.Value + numericPreco_Frete.Value + numericPreco_Embalagem.Value + numericPreco_EncFinanceiros.Value) / 100)) + valorTva);
+            }
+
+            labelPreco_ValorICMSCompra.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(numericPreco_PrecoCompra.Value, numericPreco_ICMSCompra.Value)) * -1);
+            labelPreco_ValorICMSFronteira.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(numericPreco_PrecoCompra.Value, numericPreco_ICMSFronteira.Value)));
+            labelPreco_ValorIPI.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(numericPreco_PrecoCompra.Value, numericPreco_IPI.Value)));
+            labelPreco_ValorFrete.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(numericPreco_PrecoCompra.Value, numericPreco_Frete.Value)));
+            labelPreco_ValorEmbalagem.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(numericPreco_PrecoCompra.Value, numericPreco_Embalagem.Value)));
+            labelPreco_ValorEncFinanceiros.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(numericPreco_PrecoCompra.Value, numericPreco_EncFinanceiros.Value)));
+
+            labelPreco_ValorCustoMercadoria.Tag = precoCusto;
+            labelPreco_ValorCustoMercadoria.Text = Valor.Formatar(Funcao.NuloParaValor(precoCusto));
+
+            //if (Declaracoes.calculoPreco == Declaracoes.eCalculoPreco.Venda )
+            //    {
+            //        PrecoVendaSugerido = Format(IIf((CSocial + Declaracoes.Pis + .Fields("ICMS2") + .Fields("Comissão") + .Fields("Desp Operacionais") + .Fields("Diversos")) = 0 And.Fields("Margem Lucro") = 100, 0, (precoCusto / (1 - ((CSocial + Declaracoes.Pis + .Fields("ICMS2") + .Fields("Comissão") + .Fields("Desp Operacionais") + .Fields("Diversos") + .Fields("Margem Lucro")) / 100))) / (1 - (.Fields("Desco2") / 100))), "0.00")
+
+            //    precoPontoEquilibrio = Format(.Fields("Preço de Venda Sugerido") * (1 - (.Fields("Margem Lucro") / 100)), "0.00")
+            //    }
+
+            if (Declaracoes.calculoPreco == Declaracoes.eCalculoPreco.Compra)
+            {
+                valorCustoFixo = precoCusto * (numericPreco_CustoFixo.Value / 100);
+                valorImpostoFederal = precoCusto * (numericPreco_ImpostosFederais.Value / 100);
+                valorIcmsVenda = precoCusto * (numericPreco_ICMSVenda.Value / 100);
+                ValorComissao = precoCusto * (numericPreco_Comissao.Value / 100);
+                valorMarketing = precoCusto * (numericPreco_Marketing.Value / 100);
+                valorOutrosCustos = precoCusto * (numericPreco_OutrosCustos.Value / 100);
+
+                precoPontoEquilibrio = (precoCusto + valorCustoFixo + valorImpostoFederal + valorIcmsVenda + ValorComissao + valorMarketing + valorOutrosCustos);
+                labelMargem_PontoEquilibrio.Tag = precoPontoEquilibrio;
+                labelMargem_PontoEquilibrio.Text = precoPontoEquilibrio.ToString("0.00");
+
+                PrecoVendaSugerido = precoPontoEquilibrio * (1 + (numericMargem_MargemSugerido.Value) / 100);
+                labelMargem_ValorPrecoSugerido.Tag = PrecoVendaSugerido;
+                labelMargem_ValorPrecoSugerido.Text = PrecoVendaSugerido.ToString("0.00");
+
+                labelMargem_ValorlMargemSugerido.Text = (PrecoVendaSugerido - precoPontoEquilibrio).ToString("0.00");
+            }
+
+            labelPreco_ValorCustoFixo.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(precoCusto, numericPreco_CustoFixo.Value)));
+            labelPreco_ValorImpostosFederais.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(precoCusto, numericPreco_ImpostosFederais.Value)));
+            labelPreco_ValorICMSVenda.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(precoCusto, numericPreco_ICMSVenda.Value)));
+            labelPreco_ValorComissao.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(precoCusto, numericPreco_Comissao.Value)));
+            labelPreco_ValorMarketing.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(precoCusto, numericPreco_Marketing.Value)));
+            labelPreco_ValorOutrosCustos.Text = Valor.Formatar(Funcao.NuloParaValor(Valor.Percentagem(precoCusto, numericPreco_OutrosCustos.Value)));
+
+            numericMargem_PrecoVenda_Carregar();
+            numericMargem_PrecoA_Carregar();
+            numericMargem_PrecoB_Carregar();
+            numericMargem_PrecoC_Carregar();
+        }
+        private void numericMargem_PrecoVenda_Carregar()
+        {
+            labelMargem_ValorPrecoVenda.Text = Valor.Formatar(numericMargem_PrecoVenda.Value - Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag));
+            if ((numericMargem_PrecoVenda.Value == 0) || (Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag) == 0))
+            { labelMargem_MargemVenda.Text = "0.00"; }
+            else
+            { labelMargem_MargemVenda.Text = ((numericMargem_PrecoVenda.Value / Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag) - 1) * 100).ToString("0.00"); }
+        }
+        private void numericMargem_PrecoA_Carregar()
+        {
+            labelMargem_ValorPrecoA.Text = Valor.Formatar(numericMargem_PrecoA.Value - Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag));
+            if ((numericMargem_PrecoA.Value == 0) || (Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag) == 0))
+            { labelMargem_MargemPrecoA.Text = "0.00"; }
+            else
+            { labelMargem_MargemPrecoA.Text = ((numericMargem_PrecoA.Value / Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag) - 1) * 100).ToString("0.00"); }
+        }
+        private void numericMargem_PrecoB_Carregar()
+        {
+            labelMargem_ValorPrecoB.Text = Valor.Formatar(numericMargem_PrecoB.Value - Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag));
+            if ((numericMargem_PrecoB.Value == 0) || (Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag) == 0))
+            { labelMargem_MargemPrecoB.Text = "0.00"; }
+            else
+            { labelMargem_MargemPrecoB.Text = ((numericMargem_PrecoB.Value / Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag) - 1) * 100).ToString("0.00"); }
+        }
+        private void numericMargem_PrecoC_Carregar()
+        {
+            labelMargem_ValorPrecoC.Text = Valor.Formatar(numericMargem_PrecoC.Value - Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag));
+            if ((numericMargem_PrecoC.Value == 0) || (Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag) == 0))
+            { labelMargem_MargemPrecoC.Text = "0.00"; }
+            else
+            { labelMargem_MargemPrecoC.Text = ((numericMargem_PrecoC.Value / Funcao.NuloParaValorD(labelMargem_PontoEquilibrio.Tag) - 1) * 100).ToString("0.00"); }
+        }
+        #endregion
+        private void numericPreco_ICMSCompra_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_ICMSFronteira_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_IPI_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_Frete_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_Embalagem_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_EncFinanceiros_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_CustoFixo_ValueChanged(object sender, EventArgs e)
+        {
+            labelPreco_ValorCustoFixo_Calcular();
+        }
+        private void numericPreco_ImpostosFederais_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_ICMSVenda_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_Comissao_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_Marketing_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_OutrosCustos_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
+        private void numericPreco_PrecoCompra_ValueChanged(object sender, EventArgs e)
+        {
+            numericPreco_numericPreco_PrecoCompra_Calcular();
+        }
         private void numericMargem_MargemSugerido_ValueChanged(object sender, EventArgs e)
         {
-            labelMargem_ValorlMargemSugerido.Text = Valor.Formatar((double)numericMargem_MargemSugerido.Value);
+            numericPreco_numericPreco_PrecoCompra_Calcular();
         }
-
-        private void botaoNovo_Click(object sender, EventArgs e)
+        private void numericMargem_PrecoVenda_ValueChanged(object sender, EventArgs e)
         {
-            mercadoria = new ViewModels.MercadoriaViewModel();
-            mercadoria.Id = Guid.NewGuid();
-            Limpar();
+            numericMargem_PrecoVenda_Carregar();
+        }
+        private void numericMargem_PrecoA_ValueChanged(object sender, EventArgs e)
+        {
+            numericMargem_PrecoA_Carregar();
+        }
+        private void numericMargem_PrecoB_ValueChanged(object sender, EventArgs e)
+        {
+            numericMargem_PrecoB_Carregar();
+        }
+        private void numericMargem_PrecoC_ValueChanged(object sender, EventArgs e)
+        {
+            numericMargem_PrecoC_Carregar();
+        }
+        private void frmCadastroMercadorias_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!TentarGravar())
+            {
+                e.Cancel = (!CaixaMensagem.Perguntar("Cadastro em edição! Deseja sair assim mesmo?"));
+            }
+
+            this.MeuDbContextDispose();
         }
     }
 }

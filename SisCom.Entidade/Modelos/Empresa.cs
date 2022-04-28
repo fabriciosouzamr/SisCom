@@ -9,7 +9,6 @@ namespace SisCom.Entidade.Modelos
     {
         public string CNPJ { get; set; }
         public string Unidade { get; set; }
-
         public string? NomeFantasia { get; set; }
         public string? RazaoSocial { get; set; }
         public string? InscricaoMunicipal { get; set; }

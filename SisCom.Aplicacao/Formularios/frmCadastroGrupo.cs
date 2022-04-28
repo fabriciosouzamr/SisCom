@@ -20,7 +20,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             InitializeComponent();
 
-            Navegar(Declaracoes.Navegar.Primeiro);
+            Navegar(Declaracoes.eNavegar.Primeiro);
         }
 
         private void botaoNovo_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace SisCom.Aplicacao.Formularios
                         Remover(grupo.Id);
                     }
 
-                    Navegar(Declaracoes.Navegar.Primeiro);
+                    Navegar(Declaracoes.eNavegar.Primeiro);
 
                     //GridAtualizar();
                 }
@@ -78,7 +78,7 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
-        private async Task Navegar(Declaracoes.Navegar Posicao)
+        private async Task Navegar(Declaracoes.eNavegar Posicao)
         {
             textNomeGrupo.Text = "";
             checkNaoVender.Checked = false;
@@ -89,7 +89,7 @@ namespace SisCom.Aplicacao.Formularios
             checkNaoVender.Checked = grupo.NaoVender;
         }
 
-        private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.Navegar Posicao)
+        private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.eNavegar Posicao)
         {
             IEnumerable<GrupoMercadoriaViewModel> Data = await grupoController.ObterTodos();
             GrupoMercadoriaViewModel ItemAnterior = null;
@@ -98,7 +98,7 @@ namespace SisCom.Aplicacao.Formularios
 
             foreach (GrupoMercadoriaViewModel Item in Data)
             {
-                if (Posicao == Declaracoes.Navegar.Primeiro)
+                if (Posicao == Declaracoes.eNavegar.Primeiro)
                 {
                     ItemRetorno = Item;
                     break;
@@ -112,13 +112,13 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     switch (Posicao)
                     {
-                        case Declaracoes.Navegar.Anterior:
+                        case Declaracoes.eNavegar.Anterior:
                             ItemRetorno = ItemAnterior;
                             break;
-                        case Declaracoes.Navegar.Atual:
+                        case Declaracoes.eNavegar.Atual:
                             ItemRetorno = Item;
                             break;
-                        case Declaracoes.Navegar.Proximo:
+                        case Declaracoes.eNavegar.Proximo:
                             Proximo = true;
                             break;
                     }
@@ -127,7 +127,7 @@ namespace SisCom.Aplicacao.Formularios
                 ItemAnterior = Item;
             }
 
-            if (Posicao == Declaracoes.Navegar.Ultimo)
+            if (Posicao == Declaracoes.eNavegar.Ultimo)
             {
                 ItemRetorno = ItemAnterior;
             }
@@ -137,12 +137,12 @@ namespace SisCom.Aplicacao.Formularios
 
         private void botaoAnterior_Click(object sender, EventArgs e)
         {
-            Navegar(Declaracoes.Navegar.Anterior);
+            Navegar(Declaracoes.eNavegar.Anterior);
         }
 
         private void botaoPosterior_Click(object sender, EventArgs e)
         {
-            Navegar(Declaracoes.Navegar.Proximo);
+            Navegar(Declaracoes.eNavegar.Proximo);
         }
 
         private void textNomeGrupo_Leave(object sender, EventArgs e)

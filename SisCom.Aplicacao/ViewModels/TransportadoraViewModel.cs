@@ -5,10 +5,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SisCom.Aplicacao.ViewModels
 {
-    public class TransportadoraViewModel
+    public class TransportadoraViewModel : BaseModelView
     {
-        [Key]
-        public Guid Id { get; set; }
         public string Nome { get; set; }
         public TipoPessoa TipoPessoa { get; set; }
         public string CNPJ_CPF { get; set; }

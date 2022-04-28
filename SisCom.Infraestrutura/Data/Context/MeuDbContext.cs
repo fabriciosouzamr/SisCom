@@ -24,6 +24,7 @@ namespace SisCom.Infraestrutura.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.EnableSensitiveDataLogging(true);
         }
 
         public DbSet<Almoxarifado> Almoxarifados { get; set; }

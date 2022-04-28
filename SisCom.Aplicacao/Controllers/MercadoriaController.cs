@@ -61,7 +61,6 @@ namespace SisCom.Aplicacao.Controllers
 
         public void Dispose()
         {
-            _mercadoriaService.Dispose();
             MeuDbContext.Dispose();
         }
     }

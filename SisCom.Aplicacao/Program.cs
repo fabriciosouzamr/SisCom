@@ -96,7 +96,7 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region Funcionario
                         cfg.CreateMap<FuncionarioViewModel, Funcionario>().ReverseMap();
-                        cfg.CreateMap<Funcionario, FuncionarioComboViewModel>();
+                        cfg.CreateMap<Funcionario, NomeComboViewModel>();
                         #endregion
                         #region Grupo
                         cfg.CreateMap<GrupoMercadoriaViewModel, GrupoMercadoria>().ReverseMap();
@@ -283,6 +283,7 @@ namespace SisCom.Aplicacao
 
                 var optionsBuilder = new DbContextOptionsBuilder<MeuDbContext>();
                 optionsBuilder.UseSqlServer(appSettings.ConnectionStrings.DefaultConnection);
+                optionsBuilder.EnableSensitiveDataLogging(true);
 
                 return new MeuDbContext(optionsBuilder.Options);
             }

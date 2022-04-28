@@ -49,10 +49,10 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<FuncionarioViewModel>>(obterTodos);
 
         }
-        public async Task<IEnumerable<CodigoNomeComboViewModel>> Combo(Expression<Func<Funcionario, object>> order = null)
+        public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<Funcionario, object>> order = null)
         {
             var combo = await _funcionarioService.Combo(order);
-            return Declaracoes.mapper.Map<IEnumerable<CodigoNomeComboViewModel>>(combo);
+            return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
         }
         public void Dispose()
         {

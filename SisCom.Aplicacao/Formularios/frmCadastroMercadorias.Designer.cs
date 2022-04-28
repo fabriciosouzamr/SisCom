@@ -582,7 +582,6 @@ namespace SisCom.Aplicacao.Formularios
             this.labelPreco_ValorComissao.Size = new System.Drawing.Size(63, 15);
             this.labelPreco_ValorComissao.TabIndex = 97;
             this.labelPreco_ValorComissao.Text = "R$ 100,00";
-            this.labelPreco_ValorComissao.Visible = false;
             // 
             // groupBox7
             // 
@@ -2725,6 +2724,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericMargem_PrecoC.Name = "numericMargem_PrecoC";
             this.numericMargem_PrecoC.Size = new System.Drawing.Size(100, 23);
             this.numericMargem_PrecoC.TabIndex = 74;
+            this.numericMargem_PrecoC.ValueChanged += new System.EventHandler(this.numericMargem_PrecoC_ValueChanged);
             // 
             // label59
             // 
@@ -2778,6 +2778,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericMargem_PrecoB.Name = "numericMargem_PrecoB";
             this.numericMargem_PrecoB.Size = new System.Drawing.Size(100, 23);
             this.numericMargem_PrecoB.TabIndex = 73;
+            this.numericMargem_PrecoB.ValueChanged += new System.EventHandler(this.numericMargem_PrecoB_ValueChanged);
             // 
             // label55
             // 
@@ -2831,6 +2832,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericMargem_PrecoA.Name = "numericMargem_PrecoA";
             this.numericMargem_PrecoA.Size = new System.Drawing.Size(100, 23);
             this.numericMargem_PrecoA.TabIndex = 72;
+            this.numericMargem_PrecoA.ValueChanged += new System.EventHandler(this.numericMargem_PrecoA_ValueChanged);
             // 
             // label52
             // 
@@ -2884,6 +2886,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericMargem_PrecoVenda.Name = "numericMargem_PrecoVenda";
             this.numericMargem_PrecoVenda.Size = new System.Drawing.Size(100, 23);
             this.numericMargem_PrecoVenda.TabIndex = 71;
+            this.numericMargem_PrecoVenda.ValueChanged += new System.EventHandler(this.numericMargem_PrecoVenda_ValueChanged);
             // 
             // label50
             // 
@@ -3057,6 +3060,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericPreco_PrecoCompra.Name = "numericPreco_PrecoCompra";
             this.numericPreco_PrecoCompra.Size = new System.Drawing.Size(130, 23);
             this.numericPreco_PrecoCompra.TabIndex = 50;
+            this.numericPreco_PrecoCompra.ValueChanged += new System.EventHandler(this.numericPreco_PrecoCompra_ValueChanged);
             // 
             // label19
             // 
@@ -3655,6 +3659,7 @@ namespace SisCom.Aplicacao.Formularios
             this.Controls.Add(this.pnlPesquisar);
             this.Name = "frmCadastroMercadorias";
             this.Text = "Cadastro de Mercadorias";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCadastroMercadorias_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota)).EndInit();
             this.groupBox7.ResumeLayout(false);

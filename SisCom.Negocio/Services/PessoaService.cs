@@ -39,8 +39,6 @@ namespace SisCom.Negocio.Services
                 }
 
                 await _PessoaRepository.Insert(pessoa);
-
-                Notify("Gravação Efetuada.");
             }
             catch (Exception Ex)
             {
@@ -66,8 +64,6 @@ namespace SisCom.Negocio.Services
                 }
 
                 await _PessoaRepository.Update(pessoa);
-
-                Notify("Atualização Efetuada.");
             }
             catch (Exception Ex)
             {

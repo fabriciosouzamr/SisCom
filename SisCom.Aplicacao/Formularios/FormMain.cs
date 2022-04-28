@@ -23,17 +23,16 @@ namespace SisCom.Aplicacao.Formularios
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
-
         public MeuDbContext MeuDbContext()
         {
             scope = _dbCtxFactory.CreateScope();
 
-            MeuDbContext MeuDbContext = scope.GetRequiredService();
+            MeuDbContext meuDbContext = scope.GetRequiredService();
 
-            if (MeuDbContext.Database.GetDbConnection().State == System.Data.ConnectionState.Closed)
-                MeuDbContext.Database.OpenConnection();
+            if (meuDbContext.Database.GetDbConnection().State == System.Data.ConnectionState.Closed)
+                meuDbContext.Database.OpenConnection();
 
-            return MeuDbContext;
+            return meuDbContext;
         }
 
         public void MeuDbContextDispose()

@@ -22,13 +22,29 @@ namespace SisCom.Aplicacao.Classes
         public static string sistema_Loja = "Loja Teste";
 
         public static object ComboBox_Carregando = 1;
-        public enum Navegar
+
+        public static eTipoCalculo tipoCalculo = eTipoCalculo.Padrao;
+        public static eCalculoPreco calculoPreco = eCalculoPreco.Compra;
+
+        public enum eNavegar
         {
             Primeiro,
             Anterior,
             Atual,
             Proximo,
             Ultimo
+        }
+
+        public enum eTipoCalculo
+        {
+            Padrao = 1,
+            TVA = 2
+        }
+
+        public enum eCalculoPreco
+        {
+            Compra = 1,
+            Venda =2
         }
     }
 
