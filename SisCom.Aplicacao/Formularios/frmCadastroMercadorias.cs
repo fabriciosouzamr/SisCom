@@ -614,7 +614,7 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboPesquisarTipoFiltro, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoPesquisa));
 
                 //Cabeçalho
-                await TaskAsyncAndAwaitAsync(InicializarCombos());
+                await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
 
                 Limpar();
 
@@ -629,45 +629,41 @@ namespace SisCom.Aplicacao.Formularios
             pnlDadosGerais.Enabled = true;
             tabControl.Enabled = true;
         }
-        private async Task TaskAsyncAndAwaitAsync(Task<bool> task)
-        {
-            var ret = await task;
-        }
         private async Task<bool> InicializarCombos()
         {
-            await TaskAsyncAndAwaitAsync(comboGrupoProduto_Carregar());
-            await TaskAsyncAndAwaitAsync(comboFornecedor_Carregar());
-            await TaskAsyncAndAwaitAsync(comboFabricante_Carregar());
-            await TaskAsyncAndAwaitAsync(comboUnidadeMedida_Carregar());
-            await TaskAsyncAndAwaitAsync(comboTabelaSituacaoTributariaNFCe_Carregar());
-            await TaskAsyncAndAwaitAsync(comboTributacao_ECFNFCeTipoServico_Carregar());
-            await TaskAsyncAndAwaitAsync(comboTributacaoECFNFCeCFOP_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_VinculoFiscal_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_Especifico_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CodigoANP_Codigo_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CodigoANP_Descricao_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_NCM_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CST_CSOSN_Codigo_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CST_CSOSN_Descricao_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_OrigemMercadoria_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_Beneficio_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Descricao_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_MobilidadeBase_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Desoneracao_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ModalidadeBase_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Codigo_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Descricao_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_ClasseEnquadramento_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_CodigoEnquadramento_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Codigo_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_GrupoNaturezaReceita_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_SPED_TipoItem_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_SPED_CodigoGenero_Carregar());
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_SPED_CodigoInformacaoAdicional_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboGrupoProduto_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboFornecedor_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboFabricante_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboUnidadeMedida_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboTabelaSituacaoTributariaNFCe_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboTributacao_ECFNFCeTipoServico_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboTributacaoECFNFCeCFOP_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_VinculoFiscal_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_Especifico_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CodigoANP_Codigo_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CodigoANP_Descricao_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_NCM_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CST_CSOSN_Codigo_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CST_CSOSN_Descricao_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_OrigemMercadoria_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_Beneficio_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Codigo_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_IPI_Descricao_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_MobilidadeBase_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMS_Desoneracao_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_ICMSST_ModalidadeBase_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Codigo_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_Descricao_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_ClasseEnquadramento_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_IPI_CodigoEnquadramento_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Codigo_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_GrupoNaturezaReceita_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_InfoRefNotasFiscaisSaida_COFINS_Codigo_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_SPED_TipoItem_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_SPED_CodigoGenero_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_SPED_CodigoInformacaoAdicional_Carregar());
 
             return true;
         }
@@ -1202,7 +1198,7 @@ namespace SisCom.Aplicacao.Formularios
                     goto Sair;
                 }
 
-                TaskAsyncAndAwaitAsync(GravarMercadoria());
+                Assincrono.TaskAsyncAndAwaitAsync(GravarMercadoria());
 
                 tentarGravar = true;
             }
@@ -1271,7 +1267,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async Task NCMCarregarDependentes()
         {
-            await TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CEST_Carregar((Guid)comboDetalhesFiscais_NCM.SelectedValue));
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_CEST_Carregar((Guid)comboDetalhesFiscais_NCM.SelectedValue));
         }
         private void labelPreco_ValorCustoFixo_Calcular()
         {

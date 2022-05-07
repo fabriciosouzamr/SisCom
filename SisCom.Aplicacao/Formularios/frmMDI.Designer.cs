@@ -54,7 +54,7 @@ namespace SisCom.Aplicacao
             this.button9 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.cmdCompras = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.cmdCadastro = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -87,7 +87,7 @@ namespace SisCom.Aplicacao
             this.pnlMenuBotao.Controls.Add(this.button9);
             this.pnlMenuBotao.Controls.Add(this.button4);
             this.pnlMenuBotao.Controls.Add(this.button3);
-            this.pnlMenuBotao.Controls.Add(this.button2);
+            this.pnlMenuBotao.Controls.Add(this.cmdCompras);
             this.pnlMenuBotao.Controls.Add(this.button1);
             this.pnlMenuBotao.Controls.Add(this.cmdCadastro);
             this.pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
@@ -317,14 +317,15 @@ namespace SisCom.Aplicacao
             this.button3.TabIndex = 3;
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // cmdCompras
             // 
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(156, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(78, 64);
-            this.button2.TabIndex = 2;
-            this.button2.UseVisualStyleBackColor = true;
+            this.cmdCompras.Image = ((System.Drawing.Image)(resources.GetObject("cmdCompras.Image")));
+            this.cmdCompras.Location = new System.Drawing.Point(156, 0);
+            this.cmdCompras.Name = "cmdCompras";
+            this.cmdCompras.Size = new System.Drawing.Size(78, 64);
+            this.cmdCompras.TabIndex = 2;
+            this.cmdCompras.UseVisualStyleBackColor = true;
+            this.cmdCompras.Click += new System.EventHandler(this.cmdCompras_Click);
             // 
             // button1
             // 
@@ -379,7 +380,7 @@ namespace SisCom.Aplicacao
         private System.Windows.Forms.Button cmdCadastro;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button cmdCompras;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;

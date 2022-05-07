@@ -34,6 +34,7 @@ namespace SisCom.Aplicacao.Configuration
             services.AddTransient<frmCadastroTipoCliente>();
             services.AddTransient<frmCadastroEmpresas>();
             services.AddTransient<frmCadastroBuscarCNPJ>();
+            services.AddTransient < frmComprasConsulta>();
             #endregion
 
             #region Cidade

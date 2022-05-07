@@ -87,7 +87,6 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region Estado
                         cfg.CreateMap<EstadoViewModel, Estado>().ReverseMap();
-                        cfg.CreateMap<Estado, EstadoComboViewModel>();
                         cfg.CreateMap<Estado, CodigoNomeComboViewModel>();
                         #endregion
                         #region Fabricante

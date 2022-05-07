@@ -35,5 +35,12 @@ namespace SisCom.Aplicacao
             var form = this.ServiceProvider().GetRequiredService<frmCadastro>();
             form.ShowDialog(this);
         }
+
+        private void cmdCompras_Click(object sender, EventArgs e)
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmComprasConsulta>();
+            form.ShowDialog(this);
+
+        }
     }
 }

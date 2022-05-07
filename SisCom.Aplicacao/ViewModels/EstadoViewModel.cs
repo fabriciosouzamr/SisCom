@@ -11,10 +11,4 @@ namespace SisCom.Aplicacao.ViewModels
         public string Codigo { get; set; }
         public Guid PaisId { get; set; }
     }
-    public class EstadoComboViewModel
-    {
-        [Key]
-        public Guid Id { get; set; }
-        public string Nome { get; set; }
-    }
 }

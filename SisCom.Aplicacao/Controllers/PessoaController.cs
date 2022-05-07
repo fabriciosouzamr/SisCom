@@ -95,10 +95,10 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<PessoaComboTelefoneViewModel>>(combo);
         }
 
-        public async Task<IEnumerable<NomeComboViewModel>> ComboFornecedor(Expression<Func<Pessoa, object>> order = null)
+        public async Task<IEnumerable<PessoaComboNomeViewModel>> ComboFornecedor(Expression<Func<Pessoa, object>> order = null)
         {
             var combo = await _pessoaService.Search(p => p.Fornecedor == true, order);
-            return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
+            return Declaracoes.mapper.Map<IEnumerable<PessoaComboNomeViewModel>>(combo);
         }
         public void Dispose()
         {

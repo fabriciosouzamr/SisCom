@@ -9,6 +9,7 @@
     <Import_RootNamespace>Funcoes</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Assincrono.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Classe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\ServiceScopeFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Validacao.cs" />
@@ -17,6 +18,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enum\AmbienteSistemas.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enum\CreditoDebito.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enum\EntradaSaida.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enum\NF_Modelo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enum\NF_TipoData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enum\TipoFrete.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enum\TipoPessoa.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enum\TipoPessoaCliente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\INotifier.cs" />
