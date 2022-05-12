@@ -16,5 +16,10 @@ namespace SisCom.Aplicacao.Formularios
         {
             InitializeComponent();
         }
+
+        private void botaoConsultarNotas_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

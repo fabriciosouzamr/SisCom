@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
 {
-    public partial class frmComprasConsulta : FormMain
+    public partial class frmComprasConsulta : Form
     {
         public frmComprasConsulta(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {

@@ -11,11 +11,13 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Assincrono.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Classe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Hardware.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\ServiceScopeFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Validacao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Valor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entity\Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enum\AmbienteSistemas.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enum\Arquivos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enum\CreditoDebito.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enum\EntradaSaida.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enum\NF_Modelo.cs" />

@@ -39,9 +39,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoImprimir = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.botaoExcluir = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.botaoNuvemFiscal = new System.Windows.Forms.Button();
+            this.botaoImportarNFeXML = new System.Windows.Forms.Button();
+            this.botaoEditar = new System.Windows.Forms.Button();
             this.label38 = new System.Windows.Forms.Label();
             this.botaoGravar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,123 +52,128 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoPosterior = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbsNotaFiscal = new System.Windows.Forms.TabPage();
-            this.label30 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.labelValidado = new System.Windows.Forms.Label();
+            this.checkIgnorarICMSDesonerado = new System.Windows.Forms.CheckBox();
+            this.checkAtualizarPreco = new System.Windows.Forms.CheckBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboPedido = new System.Windows.Forms.ComboBox();
+            this.comboEmpresa = new System.Windows.Forms.ComboBox();
             this.label28 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textChaveAcesso = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.numericValorNota = new System.Windows.Forms.NumericUpDown();
             this.label26 = new System.Windows.Forms.Label();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.numericOutrasDespesas = new System.Windows.Forms.NumericUpDown();
             this.label25 = new System.Windows.Forms.Label();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.numericValorFrete = new System.Windows.Forms.NumericUpDown();
             this.label24 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.numericDesconto = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericValorSeguro = new System.Windows.Forms.NumericUpDown();
             this.label22 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericICMSST = new System.Windows.Forms.NumericUpDown();
             this.label21 = new System.Windows.Forms.Label();
-            this.numericTributacao_ECFNFCeNFCeAliquotaICMS = new System.Windows.Forms.NumericUpDown();
+            this.numericTBaseICMSST = new System.Windows.Forms.NumericUpDown();
             this.label77 = new System.Windows.Forms.Label();
             this.comboTipoFrete = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.botaoNaturezaOperacao = new System.Windows.Forms.Button();
+            this.comboNaturezaOperacao = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelCidade = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.labelEstadual = new System.Windows.Forms.Label();
+            this.labelEstado = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.labelInscricaoEstadual = new System.Windows.Forms.Label();
             this.labelCNPJ = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.botaoGrupoProduto = new System.Windows.Forms.Button();
+            this.botaoFornecedor = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.comboGrupoMercadoria = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.comboFornecedor = new System.Windows.Forms.ComboBox();
+            this.textSerie = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboPagamento = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboEstoque_Unidade = new System.Windows.Forms.ComboBox();
+            this.comboModelo = new System.Windows.Forms.ComboBox();
             this.label71 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textNotaFiscal = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateDateEmissao = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.dateEstoque_UltimaEntrada = new System.Windows.Forms.DateTimePicker();
+            this.dateDataEntrada = new System.Windows.Forms.DateTimePicker();
             this.label69 = new System.Windows.Forms.Label();
             this.tbsImportacao = new System.Windows.Forms.TabPage();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
+            this.numericImportacaoCofins = new System.Windows.Forms.NumericUpDown();
             this.label60 = new System.Windows.Forms.Label();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
+            this.numericImportacaoPIS = new System.Windows.Forms.NumericUpDown();
             this.label61 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textImportacaoNumeroDrawback = new System.Windows.Forms.TextBox();
             this.label59 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textImportacaoNumeroDocumento = new System.Windows.Forms.TextBox();
             this.label58 = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboImportacaoTipoDocumento = new System.Windows.Forms.ComboBox();
             this.tbsServicosAquisicao = new System.Windows.Forms.TabPage();
-            this.numericUpDown18 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoICMSDesonaracao = new System.Windows.Forms.NumericUpDown();
+            this.label83 = new System.Windows.Forms.Label();
+            this.numericServicoAquisicaoDesconto = new System.Windows.Forms.NumericUpDown();
             this.label76 = new System.Windows.Forms.Label();
-            this.numericUpDown19 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoValorNota = new System.Windows.Forms.NumericUpDown();
             this.label78 = new System.Windows.Forms.Label();
-            this.numericUpDown15 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoValorISS = new System.Windows.Forms.NumericUpDown();
             this.label73 = new System.Windows.Forms.Label();
-            this.numericUpDown16 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoValorCofins = new System.Windows.Forms.NumericUpDown();
             this.label74 = new System.Windows.Forms.Label();
-            this.numericUpDown17 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoValorPIS = new System.Windows.Forms.NumericUpDown();
             this.label75 = new System.Windows.Forms.Label();
-            this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoCofinsRefFonte = new System.Windows.Forms.NumericUpDown();
             this.label68 = new System.Windows.Forms.Label();
-            this.numericUpDown13 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoAliquotaCofins = new System.Windows.Forms.NumericUpDown();
             this.label70 = new System.Windows.Forms.Label();
-            this.numericUpDown14 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoAliquotaPIS = new System.Windows.Forms.NumericUpDown();
             this.label72 = new System.Windows.Forms.Label();
-            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoPISRefFonte = new System.Windows.Forms.NumericUpDown();
             this.label67 = new System.Windows.Forms.Label();
-            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoBaseCofins = new System.Windows.Forms.NumericUpDown();
             this.label66 = new System.Windows.Forms.Label();
-            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
+            this.numericServicoAquisicaoBasePIS = new System.Windows.Forms.NumericUpDown();
             this.label65 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textServicoAquisicaoSubSerie = new System.Windows.Forms.TextBox();
             this.label64 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textServicoAquisicaoSerie = new System.Windows.Forms.TextBox();
             this.label63 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textServicoAquisicaoChaveAcesso = new System.Windows.Forms.TextBox();
             this.label62 = new System.Windows.Forms.Label();
             this.tbsInformacoesAdicionais = new System.Windows.Forms.TabPage();
+            this.label84 = new System.Windows.Forms.Label();
+            this.comboFinalidade = new System.Windows.Forms.ComboBox();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
+            this.labelNumero = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label52 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.label55 = new System.Windows.Forms.Label();
-            this.label56 = new System.Windows.Forms.Label();
+            this.labelValorIPI = new System.Windows.Forms.Label();
+            this.labelOutrasDespesas = new System.Windows.Forms.Label();
+            this.labelValorFCPST = new System.Windows.Forms.Label();
+            this.labelValorFrete = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
-            this.label49 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
+            this.labelItens = new System.Windows.Forms.Label();
+            this.labelICMSSubstituicao = new System.Windows.Forms.Label();
+            this.labelValorICMS = new System.Windows.Forms.Label();
+            this.labelICMSDesoneracao = new System.Windows.Forms.Label();
+            this.labelBaseCalculo = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
+            this.label100 = new System.Windows.Forms.Label();
+            this.label101 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
@@ -176,59 +181,54 @@ namespace SisCom.Aplicacao.Formularios
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.gridProducao_Composicao = new System.Windows.Forms.DataGridView();
+            this.gridMercadoria = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.gridConferencia = new System.Windows.Forms.DataGridView();
+            this.gridPagamento = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label79 = new System.Windows.Forms.Label();
-            this.label80 = new System.Windows.Forms.Label();
-            this.label81 = new System.Windows.Forms.Label();
+            this.labelTotais = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
-            this.numericUpDown20 = new System.Windows.Forms.NumericUpDown();
-            this.label83 = new System.Windows.Forms.Label();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.label84 = new System.Windows.Forms.Label();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.labelQuantidade = new System.Windows.Forms.Label();
+            this.label80 = new System.Windows.Forms.Label();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tbsNotaFiscal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericTributacao_ECFNFCeNFCeAliquotaICMS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericValorNota)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericOutrasDespesas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericValorFrete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDesconto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericValorSeguro)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericICMSST)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTBaseICMSST)).BeginInit();
             this.panel2.SuspendLayout();
             this.tbsImportacao.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericImportacaoCofins)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericImportacaoPIS)).BeginInit();
             this.tbsServicosAquisicao.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown19)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown17)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoICMSDesonaracao)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoDesconto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoValorNota)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoValorISS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoValorCofins)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoValorPIS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoCofinsRefFonte)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoAliquotaCofins)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoAliquotaPIS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoPISRefFonte)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoBaseCofins)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoBasePIS)).BeginInit();
             this.tbsInformacoesAdicionais.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridProducao_Composicao)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridMercadoria)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridConferencia)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridPagamento)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown20)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenuBotao
@@ -251,9 +251,9 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoImprimir);
             this.pnlMenuBotaoBotao.Controls.Add(this.label5);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoExcluir);
-            this.pnlMenuBotaoBotao.Controls.Add(this.button3);
-            this.pnlMenuBotaoBotao.Controls.Add(this.button2);
-            this.pnlMenuBotaoBotao.Controls.Add(this.button1);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoNuvemFiscal);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoImportarNFeXML);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoEditar);
             this.pnlMenuBotaoBotao.Controls.Add(this.label38);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoGravar);
             this.pnlMenuBotaoBotao.Controls.Add(this.label7);
@@ -338,32 +338,32 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoExcluir.TabIndex = 59;
             this.botaoExcluir.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // botaoNuvemFiscal
             // 
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(265, 0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(53, 56);
-            this.button3.TabIndex = 58;
-            this.button3.UseVisualStyleBackColor = true;
+            this.botaoNuvemFiscal.Image = ((System.Drawing.Image)(resources.GetObject("botaoNuvemFiscal.Image")));
+            this.botaoNuvemFiscal.Location = new System.Drawing.Point(265, 0);
+            this.botaoNuvemFiscal.Name = "botaoNuvemFiscal";
+            this.botaoNuvemFiscal.Size = new System.Drawing.Size(53, 56);
+            this.botaoNuvemFiscal.TabIndex = 58;
+            this.botaoNuvemFiscal.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // botaoImportarNFeXML
             // 
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(212, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(53, 56);
-            this.button2.TabIndex = 57;
-            this.button2.UseVisualStyleBackColor = true;
+            this.botaoImportarNFeXML.Image = ((System.Drawing.Image)(resources.GetObject("botaoImportarNFeXML.Image")));
+            this.botaoImportarNFeXML.Location = new System.Drawing.Point(212, 0);
+            this.botaoImportarNFeXML.Name = "botaoImportarNFeXML";
+            this.botaoImportarNFeXML.Size = new System.Drawing.Size(53, 56);
+            this.botaoImportarNFeXML.TabIndex = 57;
+            this.botaoImportarNFeXML.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // botaoEditar
             // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(106, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(53, 56);
-            this.button1.TabIndex = 56;
-            this.button1.UseVisualStyleBackColor = true;
+            this.botaoEditar.Image = ((System.Drawing.Image)(resources.GetObject("botaoEditar.Image")));
+            this.botaoEditar.Location = new System.Drawing.Point(106, 0);
+            this.botaoEditar.Name = "botaoEditar";
+            this.botaoEditar.Size = new System.Drawing.Size(53, 56);
+            this.botaoEditar.TabIndex = 56;
+            this.botaoEditar.UseVisualStyleBackColor = true;
             // 
             // label38
             // 
@@ -457,49 +457,49 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // tbsNotaFiscal
             // 
-            this.tbsNotaFiscal.Controls.Add(this.label30);
-            this.tbsNotaFiscal.Controls.Add(this.checkBox2);
-            this.tbsNotaFiscal.Controls.Add(this.checkBox1);
+            this.tbsNotaFiscal.Controls.Add(this.labelValidado);
+            this.tbsNotaFiscal.Controls.Add(this.checkIgnorarICMSDesonerado);
+            this.tbsNotaFiscal.Controls.Add(this.checkAtualizarPreco);
             this.tbsNotaFiscal.Controls.Add(this.label29);
-            this.tbsNotaFiscal.Controls.Add(this.comboBox4);
-            this.tbsNotaFiscal.Controls.Add(this.comboBox3);
+            this.tbsNotaFiscal.Controls.Add(this.comboPedido);
+            this.tbsNotaFiscal.Controls.Add(this.comboEmpresa);
             this.tbsNotaFiscal.Controls.Add(this.label28);
-            this.tbsNotaFiscal.Controls.Add(this.textBox3);
+            this.tbsNotaFiscal.Controls.Add(this.textChaveAcesso);
             this.tbsNotaFiscal.Controls.Add(this.label27);
-            this.tbsNotaFiscal.Controls.Add(this.numericUpDown6);
+            this.tbsNotaFiscal.Controls.Add(this.numericValorNota);
             this.tbsNotaFiscal.Controls.Add(this.label26);
-            this.tbsNotaFiscal.Controls.Add(this.numericUpDown5);
+            this.tbsNotaFiscal.Controls.Add(this.numericOutrasDespesas);
             this.tbsNotaFiscal.Controls.Add(this.label25);
-            this.tbsNotaFiscal.Controls.Add(this.numericUpDown4);
+            this.tbsNotaFiscal.Controls.Add(this.numericValorFrete);
             this.tbsNotaFiscal.Controls.Add(this.label24);
-            this.tbsNotaFiscal.Controls.Add(this.numericUpDown3);
+            this.tbsNotaFiscal.Controls.Add(this.numericDesconto);
             this.tbsNotaFiscal.Controls.Add(this.label23);
-            this.tbsNotaFiscal.Controls.Add(this.numericUpDown2);
+            this.tbsNotaFiscal.Controls.Add(this.numericValorSeguro);
             this.tbsNotaFiscal.Controls.Add(this.label22);
-            this.tbsNotaFiscal.Controls.Add(this.numericUpDown1);
+            this.tbsNotaFiscal.Controls.Add(this.numericICMSST);
             this.tbsNotaFiscal.Controls.Add(this.label21);
-            this.tbsNotaFiscal.Controls.Add(this.numericTributacao_ECFNFCeNFCeAliquotaICMS);
+            this.tbsNotaFiscal.Controls.Add(this.numericTBaseICMSST);
             this.tbsNotaFiscal.Controls.Add(this.label77);
             this.tbsNotaFiscal.Controls.Add(this.comboTipoFrete);
             this.tbsNotaFiscal.Controls.Add(this.label20);
-            this.tbsNotaFiscal.Controls.Add(this.button4);
-            this.tbsNotaFiscal.Controls.Add(this.comboBox2);
+            this.tbsNotaFiscal.Controls.Add(this.botaoNaturezaOperacao);
+            this.tbsNotaFiscal.Controls.Add(this.comboNaturezaOperacao);
             this.tbsNotaFiscal.Controls.Add(this.label19);
             this.tbsNotaFiscal.Controls.Add(this.panel2);
-            this.tbsNotaFiscal.Controls.Add(this.botaoGrupoProduto);
+            this.tbsNotaFiscal.Controls.Add(this.botaoFornecedor);
             this.tbsNotaFiscal.Controls.Add(this.label14);
-            this.tbsNotaFiscal.Controls.Add(this.comboGrupoMercadoria);
-            this.tbsNotaFiscal.Controls.Add(this.textBox2);
+            this.tbsNotaFiscal.Controls.Add(this.comboFornecedor);
+            this.tbsNotaFiscal.Controls.Add(this.textSerie);
             this.tbsNotaFiscal.Controls.Add(this.label11);
-            this.tbsNotaFiscal.Controls.Add(this.comboBox1);
+            this.tbsNotaFiscal.Controls.Add(this.comboPagamento);
             this.tbsNotaFiscal.Controls.Add(this.label10);
-            this.tbsNotaFiscal.Controls.Add(this.comboEstoque_Unidade);
+            this.tbsNotaFiscal.Controls.Add(this.comboModelo);
             this.tbsNotaFiscal.Controls.Add(this.label71);
-            this.tbsNotaFiscal.Controls.Add(this.textBox1);
+            this.tbsNotaFiscal.Controls.Add(this.textNotaFiscal);
             this.tbsNotaFiscal.Controls.Add(this.label9);
-            this.tbsNotaFiscal.Controls.Add(this.dateTimePicker1);
+            this.tbsNotaFiscal.Controls.Add(this.dateDateEmissao);
             this.tbsNotaFiscal.Controls.Add(this.label8);
-            this.tbsNotaFiscal.Controls.Add(this.dateEstoque_UltimaEntrada);
+            this.tbsNotaFiscal.Controls.Add(this.dateDataEntrada);
             this.tbsNotaFiscal.Controls.Add(this.label69);
             this.tbsNotaFiscal.Location = new System.Drawing.Point(4, 24);
             this.tbsNotaFiscal.Name = "tbsNotaFiscal";
@@ -509,36 +509,36 @@ namespace SisCom.Aplicacao.Formularios
             this.tbsNotaFiscal.Text = "Nota Fiscal";
             this.tbsNotaFiscal.UseVisualStyleBackColor = true;
             // 
-            // label30
+            // labelValidado
             // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label30.ForeColor = System.Drawing.Color.Red;
-            this.label30.Location = new System.Drawing.Point(886, 116);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(53, 15);
-            this.label30.TabIndex = 129;
-            this.label30.Text = "Validado";
+            this.labelValidado.AutoSize = true;
+            this.labelValidado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelValidado.ForeColor = System.Drawing.Color.Red;
+            this.labelValidado.Location = new System.Drawing.Point(886, 116);
+            this.labelValidado.Name = "labelValidado";
+            this.labelValidado.Size = new System.Drawing.Size(53, 15);
+            this.labelValidado.TabIndex = 129;
+            this.labelValidado.Text = "Validado";
             // 
-            // checkBox2
+            // checkIgnorarICMSDesonerado
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(783, 134);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(161, 19);
-            this.checkBox2.TabIndex = 128;
-            this.checkBox2.Text = "Ignorar ICMS Desonerado";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkIgnorarICMSDesonerado.AutoSize = true;
+            this.checkIgnorarICMSDesonerado.Location = new System.Drawing.Point(783, 134);
+            this.checkIgnorarICMSDesonerado.Name = "checkIgnorarICMSDesonerado";
+            this.checkIgnorarICMSDesonerado.Size = new System.Drawing.Size(161, 19);
+            this.checkIgnorarICMSDesonerado.TabIndex = 128;
+            this.checkIgnorarICMSDesonerado.Text = "Ignorar ICMS Desonerado";
+            this.checkIgnorarICMSDesonerado.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // checkAtualizarPreco
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(783, 115);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(105, 19);
-            this.checkBox1.TabIndex = 127;
-            this.checkBox1.Text = "Atualizar Preço";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkAtualizarPreco.AutoSize = true;
+            this.checkAtualizarPreco.Location = new System.Drawing.Point(783, 115);
+            this.checkAtualizarPreco.Name = "checkAtualizarPreco";
+            this.checkAtualizarPreco.Size = new System.Drawing.Size(105, 19);
+            this.checkAtualizarPreco.TabIndex = 127;
+            this.checkAtualizarPreco.Text = "Atualizar Preço";
+            this.checkAtualizarPreco.UseVisualStyleBackColor = true;
             // 
             // label29
             // 
@@ -550,23 +550,23 @@ namespace SisCom.Aplicacao.Formularios
             this.label29.TabIndex = 126;
             this.label29.Text = "Pedido:";
             // 
-            // comboBox4
+            // comboPedido
             // 
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(677, 115);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(100, 23);
-            this.comboBox4.TabIndex = 125;
+            this.comboPedido.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPedido.FormattingEnabled = true;
+            this.comboPedido.Location = new System.Drawing.Point(677, 115);
+            this.comboPedido.Name = "comboPedido";
+            this.comboPedido.Size = new System.Drawing.Size(100, 23);
+            this.comboPedido.TabIndex = 125;
             // 
-            // comboBox3
+            // comboEmpresa
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(457, 115);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(166, 23);
-            this.comboBox3.TabIndex = 124;
+            this.comboEmpresa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboEmpresa.FormattingEnabled = true;
+            this.comboEmpresa.Location = new System.Drawing.Point(457, 115);
+            this.comboEmpresa.Name = "comboEmpresa";
+            this.comboEmpresa.Size = new System.Drawing.Size(166, 23);
+            this.comboEmpresa.TabIndex = 124;
             // 
             // label28
             // 
@@ -578,12 +578,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label28.TabIndex = 123;
             this.label28.Text = "Empresa:";
             // 
-            // textBox3
+            // textChaveAcesso
             // 
-            this.textBox3.Location = new System.Drawing.Point(112, 115);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(281, 23);
-            this.textBox3.TabIndex = 122;
+            this.textChaveAcesso.Location = new System.Drawing.Point(112, 115);
+            this.textChaveAcesso.Name = "textChaveAcesso";
+            this.textChaveAcesso.Size = new System.Drawing.Size(281, 23);
+            this.textChaveAcesso.TabIndex = 122;
             // 
             // label27
             // 
@@ -595,13 +595,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label27.TabIndex = 121;
             this.label27.Text = "Chave de Acesso:";
             // 
-            // numericUpDown6
+            // numericValorNota
             // 
-            this.numericUpDown6.DecimalPlaces = 2;
-            this.numericUpDown6.Location = new System.Drawing.Point(900, 86);
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown6.TabIndex = 120;
+            this.numericValorNota.DecimalPlaces = 2;
+            this.numericValorNota.Location = new System.Drawing.Point(900, 86);
+            this.numericValorNota.Name = "numericValorNota";
+            this.numericValorNota.Size = new System.Drawing.Size(100, 23);
+            this.numericValorNota.TabIndex = 120;
             // 
             // label26
             // 
@@ -613,13 +613,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label26.TabIndex = 119;
             this.label26.Text = "Valor Nota:";
             // 
-            // numericUpDown5
+            // numericOutrasDespesas
             // 
-            this.numericUpDown5.DecimalPlaces = 2;
-            this.numericUpDown5.Location = new System.Drawing.Point(698, 86);
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown5.TabIndex = 118;
+            this.numericOutrasDespesas.DecimalPlaces = 2;
+            this.numericOutrasDespesas.Location = new System.Drawing.Point(698, 86);
+            this.numericOutrasDespesas.Name = "numericOutrasDespesas";
+            this.numericOutrasDespesas.Size = new System.Drawing.Size(100, 23);
+            this.numericOutrasDespesas.TabIndex = 118;
             // 
             // label25
             // 
@@ -631,13 +631,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label25.TabIndex = 117;
             this.label25.Text = "Outras Despesas:";
             // 
-            // numericUpDown4
+            // numericValorFrete
             // 
-            this.numericUpDown4.DecimalPlaces = 2;
-            this.numericUpDown4.Location = new System.Drawing.Point(473, 86);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown4.TabIndex = 116;
+            this.numericValorFrete.DecimalPlaces = 2;
+            this.numericValorFrete.Location = new System.Drawing.Point(473, 86);
+            this.numericValorFrete.Name = "numericValorFrete";
+            this.numericValorFrete.Size = new System.Drawing.Size(100, 23);
+            this.numericValorFrete.TabIndex = 116;
             // 
             // label24
             // 
@@ -649,13 +649,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label24.TabIndex = 115;
             this.label24.Text = "Valor Frete:";
             // 
-            // numericUpDown3
+            // numericDesconto
             // 
-            this.numericUpDown3.DecimalPlaces = 2;
-            this.numericUpDown3.Location = new System.Drawing.Point(293, 86);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown3.TabIndex = 114;
+            this.numericDesconto.DecimalPlaces = 2;
+            this.numericDesconto.Location = new System.Drawing.Point(293, 86);
+            this.numericDesconto.Name = "numericDesconto";
+            this.numericDesconto.Size = new System.Drawing.Size(100, 23);
+            this.numericDesconto.TabIndex = 114;
             // 
             // label23
             // 
@@ -667,13 +667,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label23.TabIndex = 113;
             this.label23.Text = "Desconto (R$):";
             // 
-            // numericUpDown2
+            // numericValorSeguro
             // 
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.Location = new System.Drawing.Point(91, 86);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown2.TabIndex = 112;
+            this.numericValorSeguro.DecimalPlaces = 2;
+            this.numericValorSeguro.Location = new System.Drawing.Point(91, 86);
+            this.numericValorSeguro.Name = "numericValorSeguro";
+            this.numericValorSeguro.Size = new System.Drawing.Size(100, 23);
+            this.numericValorSeguro.TabIndex = 112;
             // 
             // label22
             // 
@@ -685,13 +685,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label22.TabIndex = 111;
             this.label22.Text = "Valor Seguro:";
             // 
-            // numericUpDown1
+            // numericICMSST
             // 
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Location = new System.Drawing.Point(919, 59);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(81, 23);
-            this.numericUpDown1.TabIndex = 110;
+            this.numericICMSST.DecimalPlaces = 2;
+            this.numericICMSST.Location = new System.Drawing.Point(919, 59);
+            this.numericICMSST.Name = "numericICMSST";
+            this.numericICMSST.Size = new System.Drawing.Size(81, 23);
+            this.numericICMSST.TabIndex = 110;
             // 
             // label21
             // 
@@ -703,13 +703,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label21.TabIndex = 109;
             this.label21.Text = "ICMS ST:";
             // 
-            // numericTributacao_ECFNFCeNFCeAliquotaICMS
+            // numericTBaseICMSST
             // 
-            this.numericTributacao_ECFNFCeNFCeAliquotaICMS.DecimalPlaces = 2;
-            this.numericTributacao_ECFNFCeNFCeAliquotaICMS.Location = new System.Drawing.Point(760, 59);
-            this.numericTributacao_ECFNFCeNFCeAliquotaICMS.Name = "numericTributacao_ECFNFCeNFCeAliquotaICMS";
-            this.numericTributacao_ECFNFCeNFCeAliquotaICMS.Size = new System.Drawing.Size(81, 23);
-            this.numericTributacao_ECFNFCeNFCeAliquotaICMS.TabIndex = 108;
+            this.numericTBaseICMSST.DecimalPlaces = 2;
+            this.numericTBaseICMSST.Location = new System.Drawing.Point(760, 59);
+            this.numericTBaseICMSST.Name = "numericTBaseICMSST";
+            this.numericTBaseICMSST.Size = new System.Drawing.Size(81, 23);
+            this.numericTBaseICMSST.TabIndex = 108;
             // 
             // label77
             // 
@@ -740,22 +740,22 @@ namespace SisCom.Aplicacao.Formularios
             this.label20.TabIndex = 105;
             this.label20.Text = "Frete:";
             // 
-            // button4
+            // botaoNaturezaOperacao
             // 
-            this.button4.Location = new System.Drawing.Point(427, 59);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(23, 23);
-            this.button4.TabIndex = 104;
-            this.button4.TabStop = false;
-            this.button4.UseVisualStyleBackColor = true;
+            this.botaoNaturezaOperacao.Location = new System.Drawing.Point(427, 59);
+            this.botaoNaturezaOperacao.Name = "botaoNaturezaOperacao";
+            this.botaoNaturezaOperacao.Size = new System.Drawing.Size(23, 23);
+            this.botaoNaturezaOperacao.TabIndex = 104;
+            this.botaoNaturezaOperacao.TabStop = false;
+            this.botaoNaturezaOperacao.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // comboNaturezaOperacao
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(90, 59);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(335, 23);
-            this.comboBox2.TabIndex = 103;
+            this.comboNaturezaOperacao.FormattingEnabled = true;
+            this.comboNaturezaOperacao.Location = new System.Drawing.Point(90, 59);
+            this.comboNaturezaOperacao.Name = "comboNaturezaOperacao";
+            this.comboNaturezaOperacao.Size = new System.Drawing.Size(335, 23);
+            this.comboNaturezaOperacao.TabIndex = 103;
             // 
             // label19
             // 
@@ -771,7 +771,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.panel2.Controls.Add(this.labelCidade);
             this.panel2.Controls.Add(this.label18);
-            this.panel2.Controls.Add(this.labelEstadual);
+            this.panel2.Controls.Add(this.labelEstado);
             this.panel2.Controls.Add(this.label17);
             this.panel2.Controls.Add(this.labelInscricaoEstadual);
             this.panel2.Controls.Add(this.labelCNPJ);
@@ -801,14 +801,14 @@ namespace SisCom.Aplicacao.Formularios
             this.label18.TabIndex = 97;
             this.label18.Text = "Cidade:";
             // 
-            // labelEstadual
+            // labelEstado
             // 
-            this.labelEstadual.AutoSize = true;
-            this.labelEstadual.Location = new System.Drawing.Point(510, 4);
-            this.labelEstadual.Name = "labelEstadual";
-            this.labelEstadual.Size = new System.Drawing.Size(26, 15);
-            this.labelEstadual.TabIndex = 96;
-            this.labelEstadual.Text = "MG";
+            this.labelEstado.AutoSize = true;
+            this.labelEstado.Location = new System.Drawing.Point(510, 4);
+            this.labelEstado.Name = "labelEstado";
+            this.labelEstado.Size = new System.Drawing.Size(26, 15);
+            this.labelEstado.TabIndex = 96;
+            this.labelEstado.Text = "MG";
             // 
             // label17
             // 
@@ -858,14 +858,14 @@ namespace SisCom.Aplicacao.Formularios
             this.label15.TabIndex = 91;
             this.label15.Text = "CNPJ:";
             // 
-            // botaoGrupoProduto
+            // botaoFornecedor
             // 
-            this.botaoGrupoProduto.Location = new System.Drawing.Point(427, 32);
-            this.botaoGrupoProduto.Name = "botaoGrupoProduto";
-            this.botaoGrupoProduto.Size = new System.Drawing.Size(23, 23);
-            this.botaoGrupoProduto.TabIndex = 100;
-            this.botaoGrupoProduto.TabStop = false;
-            this.botaoGrupoProduto.UseVisualStyleBackColor = true;
+            this.botaoFornecedor.Location = new System.Drawing.Point(427, 32);
+            this.botaoFornecedor.Name = "botaoFornecedor";
+            this.botaoFornecedor.Size = new System.Drawing.Size(23, 23);
+            this.botaoFornecedor.TabIndex = 100;
+            this.botaoFornecedor.TabStop = false;
+            this.botaoFornecedor.UseVisualStyleBackColor = true;
             // 
             // label14
             // 
@@ -877,20 +877,20 @@ namespace SisCom.Aplicacao.Formularios
             this.label14.TabIndex = 99;
             this.label14.Text = "Fornecedor:";
             // 
-            // comboGrupoMercadoria
+            // comboFornecedor
             // 
-            this.comboGrupoMercadoria.FormattingEnabled = true;
-            this.comboGrupoMercadoria.Location = new System.Drawing.Point(90, 32);
-            this.comboGrupoMercadoria.Name = "comboGrupoMercadoria";
-            this.comboGrupoMercadoria.Size = new System.Drawing.Size(335, 23);
-            this.comboGrupoMercadoria.TabIndex = 98;
+            this.comboFornecedor.FormattingEnabled = true;
+            this.comboFornecedor.Location = new System.Drawing.Point(90, 32);
+            this.comboFornecedor.Name = "comboFornecedor";
+            this.comboFornecedor.Size = new System.Drawing.Size(335, 23);
+            this.comboFornecedor.TabIndex = 98;
             // 
-            // textBox2
+            // textSerie
             // 
-            this.textBox2.Location = new System.Drawing.Point(715, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(50, 23);
-            this.textBox2.TabIndex = 97;
+            this.textSerie.Location = new System.Drawing.Point(715, 5);
+            this.textSerie.Name = "textSerie";
+            this.textSerie.Size = new System.Drawing.Size(50, 23);
+            this.textSerie.TabIndex = 97;
             // 
             // label11
             // 
@@ -902,14 +902,14 @@ namespace SisCom.Aplicacao.Formularios
             this.label11.TabIndex = 96;
             this.label11.Text = "Série:";
             // 
-            // comboBox1
+            // comboPagamento
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(850, 5);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(150, 23);
-            this.comboBox1.TabIndex = 95;
+            this.comboPagamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPagamento.FormattingEnabled = true;
+            this.comboPagamento.Location = new System.Drawing.Point(850, 5);
+            this.comboPagamento.Name = "comboPagamento";
+            this.comboPagamento.Size = new System.Drawing.Size(150, 23);
+            this.comboPagamento.TabIndex = 95;
             // 
             // label10
             // 
@@ -921,14 +921,14 @@ namespace SisCom.Aplicacao.Formularios
             this.label10.TabIndex = 94;
             this.label10.Text = "Pagamento:";
             // 
-            // comboEstoque_Unidade
+            // comboModelo
             // 
-            this.comboEstoque_Unidade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboEstoque_Unidade.FormattingEnabled = true;
-            this.comboEstoque_Unidade.Location = new System.Drawing.Point(583, 5);
-            this.comboEstoque_Unidade.Name = "comboEstoque_Unidade";
-            this.comboEstoque_Unidade.Size = new System.Drawing.Size(81, 23);
-            this.comboEstoque_Unidade.TabIndex = 93;
+            this.comboModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboModelo.FormattingEnabled = true;
+            this.comboModelo.Location = new System.Drawing.Point(583, 5);
+            this.comboModelo.Name = "comboModelo";
+            this.comboModelo.Size = new System.Drawing.Size(81, 23);
+            this.comboModelo.TabIndex = 93;
             // 
             // label71
             // 
@@ -940,12 +940,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label71.TabIndex = 92;
             this.label71.Text = "Modelo:";
             // 
-            // textBox1
+            // textNotaFiscal
             // 
-            this.textBox1.Location = new System.Drawing.Point(421, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 91;
+            this.textNotaFiscal.Location = new System.Drawing.Point(421, 5);
+            this.textNotaFiscal.Name = "textNotaFiscal";
+            this.textNotaFiscal.Size = new System.Drawing.Size(100, 23);
+            this.textNotaFiscal.TabIndex = 91;
             // 
             // label9
             // 
@@ -957,14 +957,14 @@ namespace SisCom.Aplicacao.Formularios
             this.label9.TabIndex = 90;
             this.label9.Text = "Nota Fiscal:";
             // 
-            // dateTimePicker1
+            // dateDateEmissao
             // 
-            this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(262, 5);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(81, 23);
-            this.dateTimePicker1.TabIndex = 89;
+            this.dateDateEmissao.Enabled = false;
+            this.dateDateEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateDateEmissao.Location = new System.Drawing.Point(262, 5);
+            this.dateDateEmissao.Name = "dateDateEmissao";
+            this.dateDateEmissao.Size = new System.Drawing.Size(81, 23);
+            this.dateDateEmissao.TabIndex = 89;
             // 
             // label8
             // 
@@ -976,14 +976,14 @@ namespace SisCom.Aplicacao.Formularios
             this.label8.TabIndex = 88;
             this.label8.Text = "Data Emissão";
             // 
-            // dateEstoque_UltimaEntrada
+            // dateDataEntrada
             // 
-            this.dateEstoque_UltimaEntrada.Enabled = false;
-            this.dateEstoque_UltimaEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateEstoque_UltimaEntrada.Location = new System.Drawing.Point(90, 5);
-            this.dateEstoque_UltimaEntrada.Name = "dateEstoque_UltimaEntrada";
-            this.dateEstoque_UltimaEntrada.Size = new System.Drawing.Size(81, 23);
-            this.dateEstoque_UltimaEntrada.TabIndex = 87;
+            this.dateDataEntrada.Enabled = false;
+            this.dateDataEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateDataEntrada.Location = new System.Drawing.Point(90, 5);
+            this.dateDataEntrada.Name = "dateDataEntrada";
+            this.dateDataEntrada.Size = new System.Drawing.Size(81, 23);
+            this.dateDataEntrada.TabIndex = 87;
             // 
             // label69
             // 
@@ -997,16 +997,16 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // tbsImportacao
             // 
-            this.tbsImportacao.Controls.Add(this.numericUpDown7);
+            this.tbsImportacao.Controls.Add(this.numericImportacaoCofins);
             this.tbsImportacao.Controls.Add(this.label60);
-            this.tbsImportacao.Controls.Add(this.numericUpDown8);
+            this.tbsImportacao.Controls.Add(this.numericImportacaoPIS);
             this.tbsImportacao.Controls.Add(this.label61);
-            this.tbsImportacao.Controls.Add(this.textBox5);
+            this.tbsImportacao.Controls.Add(this.textImportacaoNumeroDrawback);
             this.tbsImportacao.Controls.Add(this.label59);
-            this.tbsImportacao.Controls.Add(this.textBox4);
+            this.tbsImportacao.Controls.Add(this.textImportacaoNumeroDocumento);
             this.tbsImportacao.Controls.Add(this.label58);
             this.tbsImportacao.Controls.Add(this.label57);
-            this.tbsImportacao.Controls.Add(this.comboBox5);
+            this.tbsImportacao.Controls.Add(this.comboImportacaoTipoDocumento);
             this.tbsImportacao.Location = new System.Drawing.Point(4, 24);
             this.tbsImportacao.Name = "tbsImportacao";
             this.tbsImportacao.Padding = new System.Windows.Forms.Padding(3);
@@ -1015,13 +1015,13 @@ namespace SisCom.Aplicacao.Formularios
             this.tbsImportacao.Text = "Importação";
             this.tbsImportacao.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown7
+            // numericImportacaoCofins
             // 
-            this.numericUpDown7.DecimalPlaces = 2;
-            this.numericUpDown7.Location = new System.Drawing.Point(486, 71);
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Size = new System.Drawing.Size(81, 23);
-            this.numericUpDown7.TabIndex = 114;
+            this.numericImportacaoCofins.DecimalPlaces = 2;
+            this.numericImportacaoCofins.Location = new System.Drawing.Point(486, 71);
+            this.numericImportacaoCofins.Name = "numericImportacaoCofins";
+            this.numericImportacaoCofins.Size = new System.Drawing.Size(81, 23);
+            this.numericImportacaoCofins.TabIndex = 114;
             // 
             // label60
             // 
@@ -1033,13 +1033,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label60.TabIndex = 113;
             this.label60.Text = "Cofins:";
             // 
-            // numericUpDown8
+            // numericImportacaoPIS
             // 
-            this.numericUpDown8.DecimalPlaces = 2;
-            this.numericUpDown8.Location = new System.Drawing.Point(158, 71);
-            this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Size = new System.Drawing.Size(81, 23);
-            this.numericUpDown8.TabIndex = 112;
+            this.numericImportacaoPIS.DecimalPlaces = 2;
+            this.numericImportacaoPIS.Location = new System.Drawing.Point(158, 71);
+            this.numericImportacaoPIS.Name = "numericImportacaoPIS";
+            this.numericImportacaoPIS.Size = new System.Drawing.Size(81, 23);
+            this.numericImportacaoPIS.TabIndex = 112;
             // 
             // label61
             // 
@@ -1051,12 +1051,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label61.TabIndex = 111;
             this.label61.Text = "PIS:";
             // 
-            // textBox5
+            // textImportacaoNumeroDrawback
             // 
-            this.textBox5.Location = new System.Drawing.Point(486, 40);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(150, 23);
-            this.textBox5.TabIndex = 105;
+            this.textImportacaoNumeroDrawback.Location = new System.Drawing.Point(486, 40);
+            this.textImportacaoNumeroDrawback.Name = "textImportacaoNumeroDrawback";
+            this.textImportacaoNumeroDrawback.Size = new System.Drawing.Size(150, 23);
+            this.textImportacaoNumeroDrawback.TabIndex = 105;
             // 
             // label59
             // 
@@ -1068,12 +1068,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label59.TabIndex = 104;
             this.label59.Text = "Número do Drawback:";
             // 
-            // textBox4
+            // textImportacaoNumeroDocumento
             // 
-            this.textBox4.Location = new System.Drawing.Point(158, 40);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(150, 23);
-            this.textBox4.TabIndex = 103;
+            this.textImportacaoNumeroDocumento.Location = new System.Drawing.Point(158, 40);
+            this.textImportacaoNumeroDocumento.Name = "textImportacaoNumeroDocumento";
+            this.textImportacaoNumeroDocumento.Size = new System.Drawing.Size(150, 23);
+            this.textImportacaoNumeroDocumento.TabIndex = 103;
             // 
             // label58
             // 
@@ -1095,45 +1095,45 @@ namespace SisCom.Aplicacao.Formularios
             this.label57.TabIndex = 101;
             this.label57.Text = "Tipo de Documento:";
             // 
-            // comboBox5
+            // comboImportacaoTipoDocumento
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(132, 9);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(504, 23);
-            this.comboBox5.TabIndex = 100;
+            this.comboImportacaoTipoDocumento.FormattingEnabled = true;
+            this.comboImportacaoTipoDocumento.Location = new System.Drawing.Point(132, 9);
+            this.comboImportacaoTipoDocumento.Name = "comboImportacaoTipoDocumento";
+            this.comboImportacaoTipoDocumento.Size = new System.Drawing.Size(504, 23);
+            this.comboImportacaoTipoDocumento.TabIndex = 100;
             // 
             // tbsServicosAquisicao
             // 
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown20);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoICMSDesonaracao);
             this.tbsServicosAquisicao.Controls.Add(this.label83);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown18);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoDesconto);
             this.tbsServicosAquisicao.Controls.Add(this.label76);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown19);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoValorNota);
             this.tbsServicosAquisicao.Controls.Add(this.label78);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown15);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoValorISS);
             this.tbsServicosAquisicao.Controls.Add(this.label73);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown16);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoValorCofins);
             this.tbsServicosAquisicao.Controls.Add(this.label74);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown17);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoValorPIS);
             this.tbsServicosAquisicao.Controls.Add(this.label75);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown12);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoCofinsRefFonte);
             this.tbsServicosAquisicao.Controls.Add(this.label68);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown13);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoAliquotaCofins);
             this.tbsServicosAquisicao.Controls.Add(this.label70);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown14);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoAliquotaPIS);
             this.tbsServicosAquisicao.Controls.Add(this.label72);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown11);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoPISRefFonte);
             this.tbsServicosAquisicao.Controls.Add(this.label67);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown10);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoBaseCofins);
             this.tbsServicosAquisicao.Controls.Add(this.label66);
-            this.tbsServicosAquisicao.Controls.Add(this.numericUpDown9);
+            this.tbsServicosAquisicao.Controls.Add(this.numericServicoAquisicaoBasePIS);
             this.tbsServicosAquisicao.Controls.Add(this.label65);
-            this.tbsServicosAquisicao.Controls.Add(this.textBox8);
+            this.tbsServicosAquisicao.Controls.Add(this.textServicoAquisicaoSubSerie);
             this.tbsServicosAquisicao.Controls.Add(this.label64);
-            this.tbsServicosAquisicao.Controls.Add(this.textBox7);
+            this.tbsServicosAquisicao.Controls.Add(this.textServicoAquisicaoSerie);
             this.tbsServicosAquisicao.Controls.Add(this.label63);
-            this.tbsServicosAquisicao.Controls.Add(this.textBox6);
+            this.tbsServicosAquisicao.Controls.Add(this.textServicoAquisicaoChaveAcesso);
             this.tbsServicosAquisicao.Controls.Add(this.label62);
             this.tbsServicosAquisicao.Location = new System.Drawing.Point(4, 24);
             this.tbsServicosAquisicao.Name = "tbsServicosAquisicao";
@@ -1143,13 +1143,31 @@ namespace SisCom.Aplicacao.Formularios
             this.tbsServicosAquisicao.Text = "Serviços Aquisição";
             this.tbsServicosAquisicao.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown18
+            // numericServicoAquisicaoICMSDesonaracao
             // 
-            this.numericUpDown18.DecimalPlaces = 2;
-            this.numericUpDown18.Location = new System.Drawing.Point(548, 35);
-            this.numericUpDown18.Name = "numericUpDown18";
-            this.numericUpDown18.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown18.TabIndex = 150;
+            this.numericServicoAquisicaoICMSDesonaracao.DecimalPlaces = 2;
+            this.numericServicoAquisicaoICMSDesonaracao.Location = new System.Drawing.Point(816, 8);
+            this.numericServicoAquisicaoICMSDesonaracao.Name = "numericServicoAquisicaoICMSDesonaracao";
+            this.numericServicoAquisicaoICMSDesonaracao.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoICMSDesonaracao.TabIndex = 152;
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label83.Location = new System.Drawing.Point(700, 12);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(114, 15);
+            this.label83.TabIndex = 151;
+            this.label83.Text = "ICMS Desoneração:";
+            // 
+            // numericServicoAquisicaoDesconto
+            // 
+            this.numericServicoAquisicaoDesconto.DecimalPlaces = 2;
+            this.numericServicoAquisicaoDesconto.Location = new System.Drawing.Point(548, 35);
+            this.numericServicoAquisicaoDesconto.Name = "numericServicoAquisicaoDesconto";
+            this.numericServicoAquisicaoDesconto.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoDesconto.TabIndex = 150;
             // 
             // label76
             // 
@@ -1161,13 +1179,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label76.TabIndex = 149;
             this.label76.Text = "Desconto (R$):";
             // 
-            // numericUpDown19
+            // numericServicoAquisicaoValorNota
             // 
-            this.numericUpDown19.DecimalPlaces = 2;
-            this.numericUpDown19.Location = new System.Drawing.Point(548, 8);
-            this.numericUpDown19.Name = "numericUpDown19";
-            this.numericUpDown19.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown19.TabIndex = 148;
+            this.numericServicoAquisicaoValorNota.DecimalPlaces = 2;
+            this.numericServicoAquisicaoValorNota.Location = new System.Drawing.Point(548, 8);
+            this.numericServicoAquisicaoValorNota.Name = "numericServicoAquisicaoValorNota";
+            this.numericServicoAquisicaoValorNota.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoValorNota.TabIndex = 148;
             // 
             // label78
             // 
@@ -1179,13 +1197,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label78.TabIndex = 147;
             this.label78.Text = "Valor Nota:";
             // 
-            // numericUpDown15
+            // numericServicoAquisicaoValorISS
             // 
-            this.numericUpDown15.DecimalPlaces = 2;
-            this.numericUpDown15.Location = new System.Drawing.Point(548, 116);
-            this.numericUpDown15.Name = "numericUpDown15";
-            this.numericUpDown15.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown15.TabIndex = 146;
+            this.numericServicoAquisicaoValorISS.DecimalPlaces = 2;
+            this.numericServicoAquisicaoValorISS.Location = new System.Drawing.Point(548, 116);
+            this.numericServicoAquisicaoValorISS.Name = "numericServicoAquisicaoValorISS";
+            this.numericServicoAquisicaoValorISS.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoValorISS.TabIndex = 146;
             // 
             // label73
             // 
@@ -1197,13 +1215,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label73.TabIndex = 145;
             this.label73.Text = "Valor ISS:";
             // 
-            // numericUpDown16
+            // numericServicoAquisicaoValorCofins
             // 
-            this.numericUpDown16.DecimalPlaces = 2;
-            this.numericUpDown16.Location = new System.Drawing.Point(548, 89);
-            this.numericUpDown16.Name = "numericUpDown16";
-            this.numericUpDown16.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown16.TabIndex = 144;
+            this.numericServicoAquisicaoValorCofins.DecimalPlaces = 2;
+            this.numericServicoAquisicaoValorCofins.Location = new System.Drawing.Point(548, 89);
+            this.numericServicoAquisicaoValorCofins.Name = "numericServicoAquisicaoValorCofins";
+            this.numericServicoAquisicaoValorCofins.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoValorCofins.TabIndex = 144;
             // 
             // label74
             // 
@@ -1215,13 +1233,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label74.TabIndex = 143;
             this.label74.Text = "Valor Cofins:";
             // 
-            // numericUpDown17
+            // numericServicoAquisicaoValorPIS
             // 
-            this.numericUpDown17.DecimalPlaces = 2;
-            this.numericUpDown17.Location = new System.Drawing.Point(548, 62);
-            this.numericUpDown17.Name = "numericUpDown17";
-            this.numericUpDown17.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown17.TabIndex = 142;
+            this.numericServicoAquisicaoValorPIS.DecimalPlaces = 2;
+            this.numericServicoAquisicaoValorPIS.Location = new System.Drawing.Point(548, 62);
+            this.numericServicoAquisicaoValorPIS.Name = "numericServicoAquisicaoValorPIS";
+            this.numericServicoAquisicaoValorPIS.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoValorPIS.TabIndex = 142;
             // 
             // label75
             // 
@@ -1233,13 +1251,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label75.TabIndex = 141;
             this.label75.Text = "Valor PIS:\r\n";
             // 
-            // numericUpDown12
+            // numericServicoAquisicaoCofinsRefFonte
             // 
-            this.numericUpDown12.DecimalPlaces = 2;
-            this.numericUpDown12.Location = new System.Drawing.Point(339, 116);
-            this.numericUpDown12.Name = "numericUpDown12";
-            this.numericUpDown12.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown12.TabIndex = 140;
+            this.numericServicoAquisicaoCofinsRefFonte.DecimalPlaces = 2;
+            this.numericServicoAquisicaoCofinsRefFonte.Location = new System.Drawing.Point(339, 116);
+            this.numericServicoAquisicaoCofinsRefFonte.Name = "numericServicoAquisicaoCofinsRefFonte";
+            this.numericServicoAquisicaoCofinsRefFonte.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoCofinsRefFonte.TabIndex = 140;
             // 
             // label68
             // 
@@ -1251,49 +1269,49 @@ namespace SisCom.Aplicacao.Formularios
             this.label68.TabIndex = 139;
             this.label68.Text = "Cofins Ret. Fonte:";
             // 
-            // numericUpDown13
+            // numericServicoAquisicaoAliquotaCofins
             // 
-            this.numericUpDown13.DecimalPlaces = 2;
-            this.numericUpDown13.Location = new System.Drawing.Point(339, 89);
-            this.numericUpDown13.Name = "numericUpDown13";
-            this.numericUpDown13.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown13.TabIndex = 138;
+            this.numericServicoAquisicaoAliquotaCofins.DecimalPlaces = 2;
+            this.numericServicoAquisicaoAliquotaCofins.Location = new System.Drawing.Point(339, 89);
+            this.numericServicoAquisicaoAliquotaCofins.Name = "numericServicoAquisicaoAliquotaCofins";
+            this.numericServicoAquisicaoAliquotaCofins.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoAliquotaCofins.TabIndex = 138;
             // 
             // label70
             // 
             this.label70.AutoSize = true;
             this.label70.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label70.Location = new System.Drawing.Point(264, 93);
+            this.label70.Location = new System.Drawing.Point(244, 93);
             this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(73, 15);
+            this.label70.Size = new System.Drawing.Size(93, 15);
             this.label70.TabIndex = 137;
-            this.label70.Text = "Base Cofins:";
+            this.label70.Text = "Alíquota Cofins:";
             // 
-            // numericUpDown14
+            // numericServicoAquisicaoAliquotaPIS
             // 
-            this.numericUpDown14.DecimalPlaces = 2;
-            this.numericUpDown14.Location = new System.Drawing.Point(339, 62);
-            this.numericUpDown14.Name = "numericUpDown14";
-            this.numericUpDown14.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown14.TabIndex = 136;
+            this.numericServicoAquisicaoAliquotaPIS.DecimalPlaces = 2;
+            this.numericServicoAquisicaoAliquotaPIS.Location = new System.Drawing.Point(339, 62);
+            this.numericServicoAquisicaoAliquotaPIS.Name = "numericServicoAquisicaoAliquotaPIS";
+            this.numericServicoAquisicaoAliquotaPIS.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoAliquotaPIS.TabIndex = 136;
             // 
             // label72
             // 
             this.label72.AutoSize = true;
             this.label72.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label72.Location = new System.Drawing.Point(280, 66);
+            this.label72.Location = new System.Drawing.Point(260, 66);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(57, 15);
+            this.label72.Size = new System.Drawing.Size(77, 15);
             this.label72.TabIndex = 135;
-            this.label72.Text = "Base PIS:";
+            this.label72.Text = "Alíquota PIS:";
             // 
-            // numericUpDown11
+            // numericServicoAquisicaoPISRefFonte
             // 
-            this.numericUpDown11.DecimalPlaces = 2;
-            this.numericUpDown11.Location = new System.Drawing.Point(122, 116);
-            this.numericUpDown11.Name = "numericUpDown11";
-            this.numericUpDown11.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown11.TabIndex = 134;
+            this.numericServicoAquisicaoPISRefFonte.DecimalPlaces = 2;
+            this.numericServicoAquisicaoPISRefFonte.Location = new System.Drawing.Point(122, 116);
+            this.numericServicoAquisicaoPISRefFonte.Name = "numericServicoAquisicaoPISRefFonte";
+            this.numericServicoAquisicaoPISRefFonte.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoPISRefFonte.TabIndex = 134;
             // 
             // label67
             // 
@@ -1305,13 +1323,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label67.TabIndex = 133;
             this.label67.Text = "PIS Ret. Fonte:";
             // 
-            // numericUpDown10
+            // numericServicoAquisicaoBaseCofins
             // 
-            this.numericUpDown10.DecimalPlaces = 2;
-            this.numericUpDown10.Location = new System.Drawing.Point(122, 89);
-            this.numericUpDown10.Name = "numericUpDown10";
-            this.numericUpDown10.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown10.TabIndex = 132;
+            this.numericServicoAquisicaoBaseCofins.DecimalPlaces = 2;
+            this.numericServicoAquisicaoBaseCofins.Location = new System.Drawing.Point(122, 89);
+            this.numericServicoAquisicaoBaseCofins.Name = "numericServicoAquisicaoBaseCofins";
+            this.numericServicoAquisicaoBaseCofins.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoBaseCofins.TabIndex = 132;
             // 
             // label66
             // 
@@ -1323,13 +1341,13 @@ namespace SisCom.Aplicacao.Formularios
             this.label66.TabIndex = 131;
             this.label66.Text = "Base Cofins:";
             // 
-            // numericUpDown9
+            // numericServicoAquisicaoBasePIS
             // 
-            this.numericUpDown9.DecimalPlaces = 2;
-            this.numericUpDown9.Location = new System.Drawing.Point(122, 62);
-            this.numericUpDown9.Name = "numericUpDown9";
-            this.numericUpDown9.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown9.TabIndex = 130;
+            this.numericServicoAquisicaoBasePIS.DecimalPlaces = 2;
+            this.numericServicoAquisicaoBasePIS.Location = new System.Drawing.Point(122, 62);
+            this.numericServicoAquisicaoBasePIS.Name = "numericServicoAquisicaoBasePIS";
+            this.numericServicoAquisicaoBasePIS.Size = new System.Drawing.Size(100, 23);
+            this.numericServicoAquisicaoBasePIS.TabIndex = 130;
             // 
             // label65
             // 
@@ -1341,12 +1359,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label65.TabIndex = 129;
             this.label65.Text = "Base PIS:";
             // 
-            // textBox8
+            // textServicoAquisicaoSubSerie
             // 
-            this.textBox8.Location = new System.Drawing.Point(339, 35);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 23);
-            this.textBox8.TabIndex = 128;
+            this.textServicoAquisicaoSubSerie.Location = new System.Drawing.Point(339, 35);
+            this.textServicoAquisicaoSubSerie.Name = "textServicoAquisicaoSubSerie";
+            this.textServicoAquisicaoSubSerie.Size = new System.Drawing.Size(100, 23);
+            this.textServicoAquisicaoSubSerie.TabIndex = 128;
             // 
             // label64
             // 
@@ -1358,12 +1376,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label64.TabIndex = 127;
             this.label64.Text = "Sub Série:";
             // 
-            // textBox7
+            // textServicoAquisicaoSerie
             // 
-            this.textBox7.Location = new System.Drawing.Point(122, 35);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 23);
-            this.textBox7.TabIndex = 126;
+            this.textServicoAquisicaoSerie.Location = new System.Drawing.Point(122, 35);
+            this.textServicoAquisicaoSerie.Name = "textServicoAquisicaoSerie";
+            this.textServicoAquisicaoSerie.Size = new System.Drawing.Size(100, 23);
+            this.textServicoAquisicaoSerie.TabIndex = 126;
             // 
             // label63
             // 
@@ -1375,12 +1393,12 @@ namespace SisCom.Aplicacao.Formularios
             this.label63.TabIndex = 125;
             this.label63.Text = "Série:";
             // 
-            // textBox6
+            // textServicoAquisicaoChaveAcesso
             // 
-            this.textBox6.Location = new System.Drawing.Point(122, 8);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(317, 23);
-            this.textBox6.TabIndex = 124;
+            this.textServicoAquisicaoChaveAcesso.Location = new System.Drawing.Point(122, 8);
+            this.textServicoAquisicaoChaveAcesso.Name = "textServicoAquisicaoChaveAcesso";
+            this.textServicoAquisicaoChaveAcesso.Size = new System.Drawing.Size(317, 23);
+            this.textServicoAquisicaoChaveAcesso.TabIndex = 124;
             // 
             // label62
             // 
@@ -1395,7 +1413,7 @@ namespace SisCom.Aplicacao.Formularios
             // tbsInformacoesAdicionais
             // 
             this.tbsInformacoesAdicionais.Controls.Add(this.label84);
-            this.tbsInformacoesAdicionais.Controls.Add(this.comboBox6);
+            this.tbsInformacoesAdicionais.Controls.Add(this.comboFinalidade);
             this.tbsInformacoesAdicionais.Controls.Add(this.dataGridView3);
             this.tbsInformacoesAdicionais.Location = new System.Drawing.Point(4, 24);
             this.tbsInformacoesAdicionais.Name = "tbsInformacoesAdicionais";
@@ -1405,26 +1423,53 @@ namespace SisCom.Aplicacao.Formularios
             this.tbsInformacoesAdicionais.Text = "Informações Adicionais";
             this.tbsInformacoesAdicionais.UseVisualStyleBackColor = true;
             // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label84.Location = new System.Drawing.Point(10, 13);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(65, 15);
+            this.label84.TabIndex = 101;
+            this.label84.Text = "Finalidade:";
+            // 
+            // comboFinalidade
+            // 
+            this.comboFinalidade.FormattingEnabled = true;
+            this.comboFinalidade.Location = new System.Drawing.Point(75, 9);
+            this.comboFinalidade.Name = "comboFinalidade";
+            this.comboFinalidade.Size = new System.Drawing.Size(200, 23);
+            this.comboFinalidade.TabIndex = 100;
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(294, 9);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.RowTemplate.Height = 25;
+            this.dataGridView3.Size = new System.Drawing.Size(704, 100);
+            this.dataGridView3.TabIndex = 4;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.labelNumero);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Location = new System.Drawing.Point(0, 83);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1015, 23);
             this.panel1.TabIndex = 8;
             // 
-            // label13
+            // labelNumero
             // 
-            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(944, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(69, 23);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "0";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelNumero.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelNumero.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelNumero.Location = new System.Drawing.Point(944, 0);
+            this.labelNumero.Name = "labelNumero";
+            this.labelNumero.Size = new System.Drawing.Size(69, 23);
+            this.labelNumero.TabIndex = 1;
+            this.labelNumero.Text = "0";
+            this.labelNumero.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label12
             // 
@@ -1449,7 +1494,7 @@ namespace SisCom.Aplicacao.Formularios
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.gridProducao_Composicao);
+            this.tabPage1.Controls.Add(this.gridMercadoria);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -1462,23 +1507,23 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.label52);
-            this.groupBox1.Controls.Add(this.label53);
-            this.groupBox1.Controls.Add(this.label54);
-            this.groupBox1.Controls.Add(this.label55);
-            this.groupBox1.Controls.Add(this.label56);
+            this.groupBox1.Controls.Add(this.labelValorIPI);
+            this.groupBox1.Controls.Add(this.labelOutrasDespesas);
+            this.groupBox1.Controls.Add(this.labelValorFCPST);
+            this.groupBox1.Controls.Add(this.labelValorFrete);
             this.groupBox1.Controls.Add(this.label51);
             this.groupBox1.Controls.Add(this.label50);
-            this.groupBox1.Controls.Add(this.label49);
-            this.groupBox1.Controls.Add(this.label48);
-            this.groupBox1.Controls.Add(this.label47);
-            this.groupBox1.Controls.Add(this.label46);
-            this.groupBox1.Controls.Add(this.label45);
+            this.groupBox1.Controls.Add(this.labelItens);
+            this.groupBox1.Controls.Add(this.labelICMSSubstituicao);
+            this.groupBox1.Controls.Add(this.labelValorICMS);
+            this.groupBox1.Controls.Add(this.labelICMSDesoneracao);
+            this.groupBox1.Controls.Add(this.labelBaseCalculo);
             this.groupBox1.Controls.Add(this.label44);
             this.groupBox1.Controls.Add(this.label43);
             this.groupBox1.Controls.Add(this.label39);
             this.groupBox1.Controls.Add(this.label40);
-            this.groupBox1.Controls.Add(this.label41);
-            this.groupBox1.Controls.Add(this.label42);
+            this.groupBox1.Controls.Add(this.label100);
+            this.groupBox1.Controls.Add(this.label101);
             this.groupBox1.Controls.Add(this.label37);
             this.groupBox1.Controls.Add(this.label36);
             this.groupBox1.Controls.Add(this.label35);
@@ -1502,41 +1547,41 @@ namespace SisCom.Aplicacao.Formularios
             this.label52.TabIndex = 24;
             this.label52.Text = "0";
             // 
-            // label53
+            // labelValorIPI
             // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(336, 70);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(13, 15);
-            this.label53.TabIndex = 23;
-            this.label53.Text = "0";
+            this.labelValorIPI.AutoSize = true;
+            this.labelValorIPI.Location = new System.Drawing.Point(336, 70);
+            this.labelValorIPI.Name = "labelValorIPI";
+            this.labelValorIPI.Size = new System.Drawing.Size(13, 15);
+            this.labelValorIPI.TabIndex = 23;
+            this.labelValorIPI.Text = "0";
             // 
-            // label54
+            // labelOutrasDespesas
             // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(197, 70);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(13, 15);
-            this.label54.TabIndex = 22;
-            this.label54.Text = "0";
+            this.labelOutrasDespesas.AutoSize = true;
+            this.labelOutrasDespesas.Location = new System.Drawing.Point(197, 70);
+            this.labelOutrasDespesas.Name = "labelOutrasDespesas";
+            this.labelOutrasDespesas.Size = new System.Drawing.Size(13, 15);
+            this.labelOutrasDespesas.TabIndex = 22;
+            this.labelOutrasDespesas.Text = "0";
             // 
-            // label55
+            // labelValorFCPST
             // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(497, 70);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(13, 15);
-            this.label55.TabIndex = 21;
-            this.label55.Text = "0";
+            this.labelValorFCPST.AutoSize = true;
+            this.labelValorFCPST.Location = new System.Drawing.Point(497, 70);
+            this.labelValorFCPST.Name = "labelValorFCPST";
+            this.labelValorFCPST.Size = new System.Drawing.Size(13, 15);
+            this.labelValorFCPST.TabIndex = 21;
+            this.labelValorFCPST.Text = "0";
             // 
-            // label56
+            // labelValorFrete
             // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(64, 70);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(13, 15);
-            this.label56.TabIndex = 20;
-            this.label56.Text = "0";
+            this.labelValorFrete.AutoSize = true;
+            this.labelValorFrete.Location = new System.Drawing.Point(64, 70);
+            this.labelValorFrete.Name = "labelValorFrete";
+            this.labelValorFrete.Size = new System.Drawing.Size(13, 15);
+            this.labelValorFrete.TabIndex = 20;
+            this.labelValorFrete.Text = "0";
             // 
             // label51
             // 
@@ -1557,50 +1602,50 @@ namespace SisCom.Aplicacao.Formularios
             this.label50.TabIndex = 18;
             this.label50.Text = "0";
             // 
-            // label49
+            // labelItens
             // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(622, 31);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(13, 15);
-            this.label49.TabIndex = 17;
-            this.label49.Text = "0";
+            this.labelItens.AutoSize = true;
+            this.labelItens.Location = new System.Drawing.Point(622, 31);
+            this.labelItens.Name = "labelItens";
+            this.labelItens.Size = new System.Drawing.Size(13, 15);
+            this.labelItens.TabIndex = 17;
+            this.labelItens.Text = "0";
             // 
-            // label48
+            // labelICMSSubstituicao
             // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(336, 31);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(13, 15);
-            this.label48.TabIndex = 16;
-            this.label48.Text = "0";
+            this.labelICMSSubstituicao.AutoSize = true;
+            this.labelICMSSubstituicao.Location = new System.Drawing.Point(336, 31);
+            this.labelICMSSubstituicao.Name = "labelICMSSubstituicao";
+            this.labelICMSSubstituicao.Size = new System.Drawing.Size(13, 15);
+            this.labelICMSSubstituicao.TabIndex = 16;
+            this.labelICMSSubstituicao.Text = "0";
             // 
-            // label47
+            // labelValorICMS
             // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(197, 31);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(13, 15);
-            this.label47.TabIndex = 15;
-            this.label47.Text = "0";
+            this.labelValorICMS.AutoSize = true;
+            this.labelValorICMS.Location = new System.Drawing.Point(197, 31);
+            this.labelValorICMS.Name = "labelValorICMS";
+            this.labelValorICMS.Size = new System.Drawing.Size(13, 15);
+            this.labelValorICMS.TabIndex = 15;
+            this.labelValorICMS.Text = "0";
             // 
-            // label46
+            // labelICMSDesoneracao
             // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(497, 31);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(13, 15);
-            this.label46.TabIndex = 14;
-            this.label46.Text = "0";
+            this.labelICMSDesoneracao.AutoSize = true;
+            this.labelICMSDesoneracao.Location = new System.Drawing.Point(497, 31);
+            this.labelICMSDesoneracao.Name = "labelICMSDesoneracao";
+            this.labelICMSDesoneracao.Size = new System.Drawing.Size(13, 15);
+            this.labelICMSDesoneracao.TabIndex = 14;
+            this.labelICMSDesoneracao.Text = "0";
             // 
-            // label45
+            // labelBaseCalculo
             // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(64, 31);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(13, 15);
-            this.label45.TabIndex = 13;
-            this.label45.Text = "0";
+            this.labelBaseCalculo.AutoSize = true;
+            this.labelBaseCalculo.Location = new System.Drawing.Point(64, 31);
+            this.labelBaseCalculo.Name = "labelBaseCalculo";
+            this.labelBaseCalculo.Size = new System.Drawing.Size(13, 15);
+            this.labelBaseCalculo.TabIndex = 13;
+            this.labelBaseCalculo.Text = "0";
             // 
             // label44
             // 
@@ -1642,23 +1687,23 @@ namespace SisCom.Aplicacao.Formularios
             this.label40.TabIndex = 9;
             this.label40.Text = "Valor IPI";
             // 
-            // label41
+            // label100
             // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(157, 55);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(93, 15);
-            this.label41.TabIndex = 8;
-            this.label41.Text = "Outras Despesas";
+            this.label100.AutoSize = true;
+            this.label100.Location = new System.Drawing.Point(157, 55);
+            this.label100.Name = "label100";
+            this.label100.Size = new System.Drawing.Size(93, 15);
+            this.label100.TabIndex = 8;
+            this.label100.Text = "Outras Despesas";
             // 
-            // label42
+            // label101
             // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(39, 55);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(62, 15);
-            this.label42.TabIndex = 7;
-            this.label42.Text = "Valor Frete";
+            this.label101.AutoSize = true;
+            this.label101.Location = new System.Drawing.Point(39, 55);
+            this.label101.Name = "label101";
+            this.label101.Size = new System.Drawing.Size(62, 15);
+            this.label101.TabIndex = 7;
+            this.label101.Text = "Valor Frete";
             // 
             // label37
             // 
@@ -1724,19 +1769,19 @@ namespace SisCom.Aplicacao.Formularios
             this.label31.TabIndex = 0;
             this.label31.Text = "Base de Cálculo";
             // 
-            // gridProducao_Composicao
+            // gridMercadoria
             // 
-            this.gridProducao_Composicao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridProducao_Composicao.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gridProducao_Composicao.Location = new System.Drawing.Point(3, 3);
-            this.gridProducao_Composicao.Name = "gridProducao_Composicao";
-            this.gridProducao_Composicao.RowTemplate.Height = 25;
-            this.gridProducao_Composicao.Size = new System.Drawing.Size(1001, 100);
-            this.gridProducao_Composicao.TabIndex = 3;
+            this.gridMercadoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridMercadoria.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gridMercadoria.Location = new System.Drawing.Point(3, 3);
+            this.gridMercadoria.Name = "gridMercadoria";
+            this.gridMercadoria.RowTemplate.Height = 25;
+            this.gridMercadoria.Size = new System.Drawing.Size(1001, 100);
+            this.gridMercadoria.TabIndex = 3;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.dataGridView2);
+            this.tabPage2.Controls.Add(this.gridConferencia);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -1745,31 +1790,31 @@ namespace SisCom.Aplicacao.Formularios
             this.tabPage2.Text = "Conferência";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // gridConferencia
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(1001, 192);
-            this.dataGridView2.TabIndex = 11;
+            this.gridConferencia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridConferencia.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridConferencia.Location = new System.Drawing.Point(3, 3);
+            this.gridConferencia.Name = "gridConferencia";
+            this.gridConferencia.RowTemplate.Height = 25;
+            this.gridConferencia.Size = new System.Drawing.Size(1001, 192);
+            this.gridConferencia.TabIndex = 11;
             // 
-            // dataGridView1
+            // gridPagamento
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 515);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(1006, 62);
-            this.dataGridView1.TabIndex = 10;
+            this.gridPagamento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridPagamento.Location = new System.Drawing.Point(3, 515);
+            this.gridPagamento.Name = "gridPagamento";
+            this.gridPagamento.RowTemplate.Height = 25;
+            this.gridPagamento.Size = new System.Drawing.Size(1006, 62);
+            this.gridPagamento.TabIndex = 10;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel3.Controls.Add(this.label81);
+            this.panel3.Controls.Add(this.labelTotais);
             this.panel3.Controls.Add(this.label82);
-            this.panel3.Controls.Add(this.label79);
+            this.panel3.Controls.Add(this.labelQuantidade);
             this.panel3.Controls.Add(this.label80);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 579);
@@ -1777,37 +1822,16 @@ namespace SisCom.Aplicacao.Formularios
             this.panel3.Size = new System.Drawing.Size(1014, 23);
             this.panel3.TabIndex = 12;
             // 
-            // label79
+            // labelTotais
             // 
-            this.label79.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label79.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label79.Location = new System.Drawing.Point(772, 0);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(69, 23);
-            this.label79.TabIndex = 1;
-            this.label79.Text = "0";
-            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label80
-            // 
-            this.label80.AutoSize = true;
-            this.label80.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label80.Location = new System.Drawing.Point(702, 4);
-            this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(71, 15);
-            this.label80.TabIndex = 0;
-            this.label80.Text = "Quantidade";
-            // 
-            // label81
-            // 
-            this.label81.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label81.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label81.Location = new System.Drawing.Point(195, 0);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(69, 23);
-            this.label81.TabIndex = 3;
-            this.label81.Text = "0";
-            this.label81.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTotais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelTotais.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelTotais.Location = new System.Drawing.Point(195, 0);
+            this.labelTotais.Name = "labelTotais";
+            this.labelTotais.Size = new System.Drawing.Size(69, 23);
+            this.labelTotais.TabIndex = 3;
+            this.labelTotais.Text = "0";
+            this.labelTotais.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label82
             // 
@@ -1819,50 +1843,26 @@ namespace SisCom.Aplicacao.Formularios
             this.label82.TabIndex = 2;
             this.label82.Text = "Totais";
             // 
-            // numericUpDown20
+            // labelQuantidade
             // 
-            this.numericUpDown20.DecimalPlaces = 2;
-            this.numericUpDown20.Location = new System.Drawing.Point(816, 8);
-            this.numericUpDown20.Name = "numericUpDown20";
-            this.numericUpDown20.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDown20.TabIndex = 152;
+            this.labelQuantidade.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelQuantidade.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelQuantidade.Location = new System.Drawing.Point(772, 0);
+            this.labelQuantidade.Name = "labelQuantidade";
+            this.labelQuantidade.Size = new System.Drawing.Size(69, 23);
+            this.labelQuantidade.TabIndex = 1;
+            this.labelQuantidade.Text = "0";
+            this.labelQuantidade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label83
+            // label80
             // 
-            this.label83.AutoSize = true;
-            this.label83.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label83.Location = new System.Drawing.Point(700, 12);
-            this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(114, 15);
-            this.label83.TabIndex = 151;
-            this.label83.Text = "ICMS Desoneração:";
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(294, 9);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowTemplate.Height = 25;
-            this.dataGridView3.Size = new System.Drawing.Size(704, 100);
-            this.dataGridView3.TabIndex = 4;
-            // 
-            // label84
-            // 
-            this.label84.AutoSize = true;
-            this.label84.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label84.Location = new System.Drawing.Point(10, 13);
-            this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(65, 15);
-            this.label84.TabIndex = 101;
-            this.label84.Text = "Finalidade:";
-            // 
-            // comboBox6
-            // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(75, 9);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(200, 23);
-            this.comboBox6.TabIndex = 100;
+            this.label80.AutoSize = true;
+            this.label80.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label80.Location = new System.Drawing.Point(702, 4);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(71, 15);
+            this.label80.TabIndex = 0;
+            this.label80.Text = "Quantidade";
             // 
             // frmComprasInclusao
             // 
@@ -1870,7 +1870,7 @@ namespace SisCom.Aplicacao.Formularios
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1014, 602);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.gridPagamento);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
@@ -1885,48 +1885,48 @@ namespace SisCom.Aplicacao.Formularios
             this.tabControl1.ResumeLayout(false);
             this.tbsNotaFiscal.ResumeLayout(false);
             this.tbsNotaFiscal.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericTributacao_ECFNFCeNFCeAliquotaICMS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericValorNota)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericOutrasDespesas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericValorFrete)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDesconto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericValorSeguro)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericICMSST)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTBaseICMSST)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tbsImportacao.ResumeLayout(false);
             this.tbsImportacao.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericImportacaoCofins)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericImportacaoPIS)).EndInit();
             this.tbsServicosAquisicao.ResumeLayout(false);
             this.tbsServicosAquisicao.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown18)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown19)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown17)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoICMSDesonaracao)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoDesconto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoValorNota)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoValorISS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoValorCofins)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoValorPIS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoCofinsRefFonte)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoAliquotaCofins)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoAliquotaPIS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoPISRefFonte)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoBaseCofins)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericServicoAquisicaoBasePIS)).EndInit();
             this.tbsInformacoesAdicionais.ResumeLayout(false);
             this.tbsInformacoesAdicionais.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridProducao_Composicao)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridMercadoria)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridConferencia)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridPagamento)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown20)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1941,9 +1941,9 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Button botaoNovo;
         private System.Windows.Forms.Button botaoPosterior;
         private System.Windows.Forms.Button botaoAnterior;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button botaoNuvemFiscal;
+        private System.Windows.Forms.Button botaoImportarNFeXML;
+        private System.Windows.Forms.Button botaoEditar;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Button botaoGravar;
         private System.Windows.Forms.Label label1;
@@ -1958,24 +1958,24 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.TabPage tbsImportacao;
         private System.Windows.Forms.TabPage tbsServicosAquisicao;
         private System.Windows.Forms.TabPage tbsInformacoesAdicionais;
-        private System.Windows.Forms.DateTimePicker dateEstoque_UltimaEntrada;
+        private System.Windows.Forms.DateTimePicker dateDataEntrada;
         private System.Windows.Forms.Label label69;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateDateEmissao;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textNotaFiscal;
+        private System.Windows.Forms.ComboBox comboPagamento;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboEstoque_Unidade;
+        private System.Windows.Forms.ComboBox comboModelo;
         private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textSerie;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Button botaoGrupoProduto;
+        private System.Windows.Forms.Label labelNumero;
+        private System.Windows.Forms.Button botaoFornecedor;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox comboGrupoMercadoria;
+        private System.Windows.Forms.ComboBox comboFornecedor;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
@@ -1983,40 +1983,40 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label labelInscricaoEstadual;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label labelEstadual;
+        private System.Windows.Forms.Label labelEstado;
         private System.Windows.Forms.Label labelCidade;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboNaturezaOperacao;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button botaoNaturezaOperacao;
         private System.Windows.Forms.ComboBox comboTipoFrete;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericICMSST;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.NumericUpDown numericTributacao_ECFNFCeNFCeAliquotaICMS;
+        private System.Windows.Forms.NumericUpDown numericTBaseICMSST;
         private System.Windows.Forms.Label label77;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericValorSeguro;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.NumericUpDown numericUpDown6;
+        private System.Windows.Forms.NumericUpDown numericValorNota;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.NumericUpDown numericOutrasDespesas;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.NumericUpDown numericValorFrete;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericDesconto;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textChaveAcesso;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboEmpresa;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.ComboBox comboPedido;
+        private System.Windows.Forms.CheckBox checkAtualizarPreco;
+        private System.Windows.Forms.CheckBox checkIgnorarICMSDesonerado;
+        private System.Windows.Forms.Label labelValidado;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView gridProducao_Composicao;
+        private System.Windows.Forms.DataGridView gridMercadoria;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label34;
@@ -2028,70 +2028,70 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label100;
+        private System.Windows.Forms.Label label101;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label labelItens;
+        private System.Windows.Forms.Label labelICMSSubstituicao;
+        private System.Windows.Forms.Label labelValorICMS;
+        private System.Windows.Forms.Label labelICMSDesoneracao;
+        private System.Windows.Forms.Label labelBaseCalculo;
         private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.Label label53;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Label labelValorIPI;
+        private System.Windows.Forms.Label labelOutrasDespesas;
+        private System.Windows.Forms.Label labelValorFCPST;
+        private System.Windows.Forms.Label labelValorFrete;
+        private System.Windows.Forms.DataGridView gridPagamento;
+        private System.Windows.Forms.DataGridView gridConferencia;
         private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.ComboBox comboImportacaoTipoDocumento;
+        private System.Windows.Forms.TextBox textImportacaoNumeroDrawback;
         private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textImportacaoNumeroDocumento;
         private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.NumericUpDown numericUpDown7;
+        private System.Windows.Forms.NumericUpDown numericImportacaoCofins;
         private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.NumericUpDown numericUpDown8;
+        private System.Windows.Forms.NumericUpDown numericImportacaoPIS;
         private System.Windows.Forms.Label label61;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textServicoAquisicaoChaveAcesso;
         private System.Windows.Forms.Label label62;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textServicoAquisicaoSubSerie;
         private System.Windows.Forms.Label label64;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textServicoAquisicaoSerie;
         private System.Windows.Forms.Label label63;
-        private System.Windows.Forms.NumericUpDown numericUpDown11;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoPISRefFonte;
         private System.Windows.Forms.Label label67;
-        private System.Windows.Forms.NumericUpDown numericUpDown10;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoBaseCofins;
         private System.Windows.Forms.Label label66;
-        private System.Windows.Forms.NumericUpDown numericUpDown9;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoBasePIS;
         private System.Windows.Forms.Label label65;
-        private System.Windows.Forms.NumericUpDown numericUpDown18;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoDesconto;
         private System.Windows.Forms.Label label76;
-        private System.Windows.Forms.NumericUpDown numericUpDown19;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoValorNota;
         private System.Windows.Forms.Label label78;
-        private System.Windows.Forms.NumericUpDown numericUpDown15;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoValorISS;
         private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.NumericUpDown numericUpDown16;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoValorCofins;
         private System.Windows.Forms.Label label74;
-        private System.Windows.Forms.NumericUpDown numericUpDown17;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoValorPIS;
         private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.NumericUpDown numericUpDown12;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoCofinsRefFonte;
         private System.Windows.Forms.Label label68;
-        private System.Windows.Forms.NumericUpDown numericUpDown13;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoAliquotaCofins;
         private System.Windows.Forms.Label label70;
-        private System.Windows.Forms.NumericUpDown numericUpDown14;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoAliquotaPIS;
         private System.Windows.Forms.Label label72;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.Label labelTotais;
         private System.Windows.Forms.Label label82;
-        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label labelQuantidade;
         private System.Windows.Forms.Label label80;
-        private System.Windows.Forms.NumericUpDown numericUpDown20;
+        private System.Windows.Forms.NumericUpDown numericServicoAquisicaoICMSDesonaracao;
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.Label label84;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox comboFinalidade;
         private System.Windows.Forms.DataGridView dataGridView3;
     }
 }

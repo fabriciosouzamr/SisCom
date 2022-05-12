@@ -81,6 +81,27 @@ namespace Funcoes.Classes
 				return ((RSACryptoServiceProvider)YouCertificate.PrivateKey).CspKeyContainerInfo.Removable;
 			}
 		}
+	public static string getVencimentoCertificado(string NomeCertificado, bool ValidOnly = false)
+{
+	try
+	{
+		CertificateBrowserDialog certificateBrowserDialog = new CertificateBrowserDialog();
+		X509Certificate2 certicateByString = certificateBrowserDialog.getCerticateByString(NomeCertificado, ValidOnly);
+		if (Information.IsNothing(certicateByString))
+		{
+			return "";
+		}
+		return certicateByString.GetExpirationDateString();
+	}
+	catch (Exception ex)
+	{
+		ProjectData.SetProjectError(ex);
+		Exception ex2 = ex;
+		string result = "";
+		ProjectData.ClearProjectError();
+		return result;
+	}
+}
 
 		public static string SelecionarCertificado()
 		{
