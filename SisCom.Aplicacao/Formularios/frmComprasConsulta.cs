@@ -1,6 +1,7 @@
 ﻿using Funcoes._Classes;
 using Funcoes.Enum;
 using Funcoes.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Infraestrutura.Data.Context;
 using System;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
 {
-    public partial class frmComprasConsulta : Form
+    public partial class frmComprasConsulta : FormMain
     {
         public frmComprasConsulta(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -96,7 +97,7 @@ namespace SisCom.Aplicacao.Formularios
 
         private void botaoNovo_Click(object sender, EventArgs e)
         {
-            var form = new frmComprasInclusao();
+            var form = this.ServiceProvider().GetRequiredService<frmComprasInclusao>();
             form.ShowDialog(this);
         }
     }

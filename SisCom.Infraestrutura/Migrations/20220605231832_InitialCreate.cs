@@ -22,6 +22,19 @@ namespace SisCom.Infraestrutura.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Banco",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Banco", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Fabricantes",
                 columns: table => new
                 {
@@ -32,6 +45,19 @@ namespace SisCom.Infraestrutura.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fabricantes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FormaPagamento",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FormaPagamento", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,6 +105,19 @@ namespace SisCom.Infraestrutura.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GrupoMercadorias", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NaturezaOperacoes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NaturezaOperacoes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -410,6 +449,26 @@ namespace SisCom.Infraestrutura.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ContaFinanceira",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BancoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContaFinanceira", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ContaFinanceira_Banco_BancoId",
+                        column: x => x.BancoId,
+                        principalTable: "Banco",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TabelaCFOPs",
                 columns: table => new
                 {
@@ -570,6 +629,33 @@ namespace SisCom.Infraestrutura.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UnidadeMedidaConversoes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UnidadeMedideAId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UnidadeMedidaBId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Conversor = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 0m),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UnidadeMedidaConversoes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UnidadeMedidaConversoes_UnidadeMedidas_UnidadeMedidaBId",
+                        column: x => x.UnidadeMedidaBId,
+                        principalTable: "UnidadeMedidas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UnidadeMedidaConversoes_UnidadeMedidas_UnidadeMedideAId",
+                        column: x => x.UnidadeMedideAId,
+                        principalTable: "UnidadeMedidas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cidades",
                 columns: table => new
                 {
@@ -720,6 +806,39 @@ namespace SisCom.Infraestrutura.Migrations
                         name: "FK_Pessoas_TipoClientes_TipoClienteId",
                         column: x => x.TipoClienteId,
                         principalTable: "TipoClientes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transportadoras",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
+                    TipoPessoa = table.Column<int>(type: "int", nullable: false),
+                    CNPJ_CPF = table.Column<string>(type: "varchar(14)", nullable: false),
+                    InscricaoEstadual = table.Column<string>(type: "varchar(15)", nullable: true),
+                    End_CEP = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true),
+                    End_Logradouro = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    End_Numero = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true),
+                    End_Bairro = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    End_PontoReferencia = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    End_CidadeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PlacaVeiculo = table.Column<string>(type: "varchar(9)", nullable: true),
+                    PlacaCarreta01 = table.Column<string>(type: "varchar(9)", nullable: true),
+                    PlacaCarreta02 = table.Column<string>(type: "varchar(9)", nullable: true),
+                    NomeContato = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Telefone = table.Column<string>(type: "varchar(20)", nullable: true),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transportadoras", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Transportadoras_Cidades_End_CidadeId",
+                        column: x => x.End_CidadeId,
+                        principalTable: "Cidades",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1034,6 +1153,84 @@ namespace SisCom.Infraestrutura.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NotaFiscalEntradas",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DataEntrada = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataEmissao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NotaFiscal = table.Column<string>(type: "varchar(10)", nullable: true),
+                    Modelo = table.Column<int>(type: "int", nullable: false),
+                    Serie = table.Column<string>(type: "varchar(3)", nullable: true),
+                    TipoFrete = table.Column<int>(type: "int", nullable: false),
+                    PercentualBaseICMSST = table.Column<double>(type: "float", nullable: false),
+                    ValorICMSST = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorSeguro = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorDesconto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorFrete = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorOutrasDespesas = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorNota = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CodigoChaveAcesso = table.Column<string>(type: "varchar(44)", nullable: true),
+                    Pedido = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AtualizarPreco = table.Column<bool>(type: "bit", nullable: false),
+                    IgnorarICMSDesonerado = table.Column<bool>(type: "bit", nullable: false),
+                    BaseCalculo = table.Column<double>(type: "float", nullable: false),
+                    ValorICMS = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorICMSSubstitucao = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorICMSDesoneracao = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorIPI = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorFCPST = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Volumes = table.Column<int>(type: "int", nullable: false),
+                    TotalMercadorias = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalNota = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Importacao_TipoDocumentoImportacao = table.Column<int>(type: "int", nullable: false),
+                    Importacao_NumeroDocumento = table.Column<string>(type: "varchar(20)", nullable: true),
+                    Importacao_NumeroDrawback = table.Column<string>(type: "varchar(20)", nullable: true),
+                    Importacao_ValorPIS = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Importacao_ValorCofins = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ServicosAquisicao_CodigoChaveAcesso = table.Column<string>(type: "varchar(44)", nullable: true),
+                    ServicosAquisicao_Serie = table.Column<string>(type: "varchar(3)", nullable: true),
+                    ServicosAquisicao_SubSerie = table.Column<string>(type: "varchar(3)", nullable: true),
+                    ServicosAquisicao_PercentualBasePIS = table.Column<double>(type: "float", nullable: false),
+                    ServicosAquisicao_AliquotaPIS = table.Column<double>(type: "float", nullable: false),
+                    ServicosAquisicao_ValorPIS = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ServicosAquisicao_PercentualBaseCofins = table.Column<double>(type: "float", nullable: false),
+                    ServicosAquisicao_AliquotaCofins = table.Column<double>(type: "float", nullable: false),
+                    ServicosAquisicao_ValorCofins = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ServicosAquisicao_PercentualPISRefFonte = table.Column<double>(type: "float", nullable: false),
+                    ServicosAquisicao_AliquotaCofinsRetFonte = table.Column<double>(type: "float", nullable: false),
+                    ServicosAquisicao_ValorISS = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ServicosAquisicao_ValorICMSDesoneracao = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    InformacaoAdicionais_Finalidade = table.Column<int>(type: "int", nullable: false),
+                    FornecedorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    NaturezaOperacaoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EmpresaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotaFiscalEntradas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradas_Empresas_EmpresaId",
+                        column: x => x.EmpresaId,
+                        principalTable: "Empresas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradas_NaturezaOperacoes_NaturezaOperacaoId",
+                        column: x => x.NaturezaOperacaoId,
+                        principalTable: "NaturezaOperacoes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradas_Pessoas_FornecedorId",
+                        column: x => x.FornecedorId,
+                        principalTable: "Pessoas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Estoques",
                 columns: table => new
                 {
@@ -1089,10 +1286,111 @@ namespace SisCom.Infraestrutura.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "NotaFiscalEntradaFaturas",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NotaFiscalEntradaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    NumeroDocumento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DataVencimento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DuplicataPendente = table.Column<bool>(type: "bit", nullable: false),
+                    ContaFinanceiraId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    FormaPagamentoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DataPagamento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ValorPago = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Observacao = table.Column<string>(type: "text", nullable: true),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotaFiscalEntradaFaturas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradaFaturas_ContaFinanceira_ContaFinanceiraId",
+                        column: x => x.ContaFinanceiraId,
+                        principalTable: "ContaFinanceira",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradaFaturas_FormaPagamento_FormaPagamentoId",
+                        column: x => x.FormaPagamentoId,
+                        principalTable: "FormaPagamento",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradaFaturas_NotaFiscalEntradas_NotaFiscalEntradaId",
+                        column: x => x.NotaFiscalEntradaId,
+                        principalTable: "NotaFiscalEntradas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NotaFiscalEntradaMercadorias",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MercadoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CFOPId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    NCMId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CSTId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    QuantidadeCaixas = table.Column<int>(type: "int", nullable: false),
+                    QuantidadeUnitaria = table.Column<int>(type: "int", nullable: false),
+                    PrecoPorCaixas = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PrecoUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PercentualDesconto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorDesconto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PrecoTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PercentualICMS = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PercentualIPI = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    NotaFiscalEntradaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotaFiscalEntradaMercadorias", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradaMercadorias_Mercadorias_MercadoriaId",
+                        column: x => x.MercadoriaId,
+                        principalTable: "Mercadorias",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradaMercadorias_NotaFiscalEntradas_NotaFiscalEntradaId",
+                        column: x => x.NotaFiscalEntradaId,
+                        principalTable: "NotaFiscalEntradas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradaMercadorias_TabelaCFOPs_CFOPId",
+                        column: x => x.CFOPId,
+                        principalTable: "TabelaCFOPs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradaMercadorias_TabelaCST_CSOSNs_CSTId",
+                        column: x => x.CSTId,
+                        principalTable: "TabelaCST_CSOSNs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalEntradaMercadorias_TabelaNCMs_NCMId",
+                        column: x => x.NCMId,
+                        principalTable: "TabelaNCMs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cidades_EstadoId",
                 table: "Cidades",
                 column: "EstadoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContaFinanceira_BancoId",
+                table: "ContaFinanceira",
+                column: "BancoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Empresas_End_CidadeId",
@@ -1300,6 +1598,61 @@ namespace SisCom.Infraestrutura.Migrations
                 column: "SubGrupoMercadoriaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradaFaturas_ContaFinanceiraId",
+                table: "NotaFiscalEntradaFaturas",
+                column: "ContaFinanceiraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradaFaturas_FormaPagamentoId",
+                table: "NotaFiscalEntradaFaturas",
+                column: "FormaPagamentoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradaFaturas_NotaFiscalEntradaId",
+                table: "NotaFiscalEntradaFaturas",
+                column: "NotaFiscalEntradaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradaMercadorias_CFOPId",
+                table: "NotaFiscalEntradaMercadorias",
+                column: "CFOPId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradaMercadorias_CSTId",
+                table: "NotaFiscalEntradaMercadorias",
+                column: "CSTId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradaMercadorias_MercadoriaId",
+                table: "NotaFiscalEntradaMercadorias",
+                column: "MercadoriaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradaMercadorias_NCMId",
+                table: "NotaFiscalEntradaMercadorias",
+                column: "NCMId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradaMercadorias_NotaFiscalEntradaId",
+                table: "NotaFiscalEntradaMercadorias",
+                column: "NotaFiscalEntradaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradas_EmpresaId",
+                table: "NotaFiscalEntradas",
+                column: "EmpresaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradas_FornecedorId",
+                table: "NotaFiscalEntradas",
+                column: "FornecedorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalEntradas_NaturezaOperacaoId",
+                table: "NotaFiscalEntradas",
+                column: "NaturezaOperacaoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pessoas_End_CidadeId",
                 table: "Pessoas",
                 column: "End_CidadeId");
@@ -1343,13 +1696,25 @@ namespace SisCom.Infraestrutura.Migrations
                 name: "IX_TipoServicoFiscais_TabelaCNAEId",
                 table: "TipoServicoFiscais",
                 column: "TabelaCNAEId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transportadoras_End_CidadeId",
+                table: "Transportadoras",
+                column: "End_CidadeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UnidadeMedidaConversoes_UnidadeMedidaBId",
+                table: "UnidadeMedidaConversoes",
+                column: "UnidadeMedidaBId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UnidadeMedidaConversoes_UnidadeMedideAId",
+                table: "UnidadeMedidaConversoes",
+                column: "UnidadeMedideAId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Empresas");
-
             migrationBuilder.DropTable(
                 name: "Estoques");
 
@@ -1360,16 +1725,37 @@ namespace SisCom.Infraestrutura.Migrations
                 name: "MercadoriaFornecedores");
 
             migrationBuilder.DropTable(
+                name: "NotaFiscalEntradaFaturas");
+
+            migrationBuilder.DropTable(
+                name: "NotaFiscalEntradaMercadorias");
+
+            migrationBuilder.DropTable(
                 name: "Similares");
+
+            migrationBuilder.DropTable(
+                name: "Transportadoras");
+
+            migrationBuilder.DropTable(
+                name: "UnidadeMedidaConversoes");
 
             migrationBuilder.DropTable(
                 name: "Almoxarifados");
 
             migrationBuilder.DropTable(
+                name: "ContaFinanceira");
+
+            migrationBuilder.DropTable(
+                name: "FormaPagamento");
+
+            migrationBuilder.DropTable(
                 name: "Mercadorias");
 
             migrationBuilder.DropTable(
-                name: "Pessoas");
+                name: "NotaFiscalEntradas");
+
+            migrationBuilder.DropTable(
+                name: "Banco");
 
             migrationBuilder.DropTable(
                 name: "SubGrupoMercadorias");
@@ -1432,13 +1818,13 @@ namespace SisCom.Infraestrutura.Migrations
                 name: "VinculoFiscais");
 
             migrationBuilder.DropTable(
-                name: "Cidades");
+                name: "Empresas");
 
             migrationBuilder.DropTable(
-                name: "Funcionarios");
+                name: "NaturezaOperacoes");
 
             migrationBuilder.DropTable(
-                name: "TipoClientes");
+                name: "Pessoas");
 
             migrationBuilder.DropTable(
                 name: "GrupoMercadorias");
@@ -1459,13 +1845,22 @@ namespace SisCom.Infraestrutura.Migrations
                 name: "TabelaCNAEs");
 
             migrationBuilder.DropTable(
-                name: "Estados");
+                name: "Cidades");
+
+            migrationBuilder.DropTable(
+                name: "Funcionarios");
+
+            migrationBuilder.DropTable(
+                name: "TipoClientes");
 
             migrationBuilder.DropTable(
                 name: "SubGrupoNaturezaReceita_CTS_PIS_COFINSs");
 
             migrationBuilder.DropTable(
                 name: "TabelaCST_PIS_COFINSs");
+
+            migrationBuilder.DropTable(
+                name: "Estados");
 
             migrationBuilder.DropTable(
                 name: "Paises");

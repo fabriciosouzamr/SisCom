@@ -12,6 +12,9 @@
     <EmbeddedResource Remove="Form1.resx" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Configuration\Seed\Pasta1.json" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="..\API_Consultas.cs" Link="Compartilhado\API_Consultas.cs" />
     <Compile Include="..\CaixaMensagem.cs" Link="Compartilhado\CaixaMensagem.cs" />
     <Compile Include="..\Combo_ComboBox.cs" Link="Compartilhado\Combo_ComboBox.cs" />
@@ -61,6 +64,20 @@
     <Folder Include="Compartilhado\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="DFe.Classes">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Utils">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Classes">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Utils">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Utils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <None Update="Configuration\appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -77,9 +94,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configuration\Seed\Pais.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Configuration\Seed\Pasta1.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configuration\Seed\SubGrupoNaturezaReceita_CTS_PIS_COFINS.json">
@@ -144,6 +158,9 @@
     </None>
     <None Update="Configuration\Seed\UnidadeMedida.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configuration\Seed\UnidadeMedidaConversao.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

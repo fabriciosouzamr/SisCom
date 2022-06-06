@@ -10,8 +10,8 @@ using SisCom.Infraestrutura.Data.Context;
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    [Migration("20220420010215_NomeQualquer")]
-    partial class NomeQualquer
+    [Migration("20220606014023_NaturezaOperacaoAjustes")]
+    partial class NaturezaOperacaoAjustes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,23 @@ namespace SisCom.Infraestrutura.Migrations
                     b.ToTable("Almoxarifados");
                 });
 
+            modelBuilder.Entity("SisCom.Entidade.Modelos.Banco", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Banco");
+                });
+
             modelBuilder.Entity("SisCom.Entidade.Modelos.Cidade", b =>
                 {
                     b.Property<Guid>("Id")
@@ -68,6 +85,28 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasIndex("EstadoId");
 
                     b.ToTable("Cidades");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.ContaFinanceira", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BancoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BancoId");
+
+                    b.ToTable("ContaFinanceira");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Empresa", b =>
@@ -245,6 +284,23 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Fabricantes");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.FormaPagamento", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FormaPagamento");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Funcionario", b =>
@@ -888,6 +944,317 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasIndex("MercadoriaId");
 
                     b.ToTable("MercadoriaFornecedores");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NaturezaOperacao", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Devolucao")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("EntradaSaida")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PercentualICMS")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("TabelaCFOPId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TabelaCFOPId");
+
+                    b.ToTable("NaturezaOperacoes");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalEntrada", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("AtualizarPreco")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("BaseCalculo")
+                        .HasColumnType("float");
+
+                    b.Property<string>("CodigoChaveAcesso")
+                        .HasColumnType("varchar(44)");
+
+                    b.Property<DateTime>("DataEmissao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataEntrada")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("EmpresaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("FornecedorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IgnorarICMSDesonerado")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Importacao_NumeroDocumento")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("Importacao_NumeroDrawback")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<int>("Importacao_TipoDocumentoImportacao")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Importacao_ValorCofins")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Importacao_ValorPIS")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("InformacaoAdicionais_Finalidade")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Modelo")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("NaturezaOperacaoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("NotaFiscal")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<DateTime>("Pedido")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("PercentualBaseICMSST")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Serie")
+                        .HasColumnType("varchar(3)");
+
+                    b.Property<double>("ServicosAquisicao_AliquotaCofins")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ServicosAquisicao_AliquotaCofinsRetFonte")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ServicosAquisicao_AliquotaPIS")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ServicosAquisicao_CodigoChaveAcesso")
+                        .HasColumnType("varchar(44)");
+
+                    b.Property<double>("ServicosAquisicao_PercentualBaseCofins")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ServicosAquisicao_PercentualBasePIS")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ServicosAquisicao_PercentualPISRefFonte")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ServicosAquisicao_Serie")
+                        .HasColumnType("varchar(3)");
+
+                    b.Property<string>("ServicosAquisicao_SubSerie")
+                        .HasColumnType("varchar(3)");
+
+                    b.Property<decimal>("ServicosAquisicao_ValorCofins")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ServicosAquisicao_ValorICMSDesoneracao")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ServicosAquisicao_ValorISS")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ServicosAquisicao_ValorPIS")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TipoFrete")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalMercadorias")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalNota")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("ValorDesconto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorFCPST")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorFrete")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorICMS")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorICMSDesoneracao")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorICMSST")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorICMSSubstitucao")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorIPI")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorNota")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorOutrasDespesas")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorSeguro")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Volumes")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.HasIndex("FornecedorId");
+
+                    b.HasIndex("NaturezaOperacaoId");
+
+                    b.ToTable("NotaFiscalEntradas");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalEntradaFatura", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ContaFinanceiraId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataPagamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataVencimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("DuplicataPendente")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("FormaPagamentoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("NotaFiscalEntradaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("NumeroDocumento")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Observacao")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorPago")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContaFinanceiraId");
+
+                    b.HasIndex("FormaPagamentoId");
+
+                    b.HasIndex("NotaFiscalEntradaId");
+
+                    b.ToTable("NotaFiscalEntradaFaturas");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalEntradaMercadoria", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CFOPId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CSTId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("MercadoriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("NCMId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("NotaFiscalEntradaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("PercentualDesconto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PercentualICMS")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PercentualIPI")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrecoPorCaixas")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrecoTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrecoUnitario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("QuantidadeCaixas")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeUnitaria")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("ValorDesconto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CFOPId");
+
+                    b.HasIndex("CSTId");
+
+                    b.HasIndex("MercadoriaId");
+
+                    b.HasIndex("NCMId");
+
+                    b.HasIndex("NotaFiscalEntradaId");
+
+                    b.ToTable("NotaFiscalEntradaMercadorias");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Pais", b =>
@@ -1687,6 +2054,9 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("Telefone")
                         .HasColumnType("varchar(20)");
 
+                    b.Property<int>("TipoPessoa")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
 
@@ -1715,6 +2085,35 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UnidadeMedidas");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.UnidadeMedidaConversao", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Conversor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(14,10)")
+                        .HasDefaultValue(0m);
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UnidadeMedidaAId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UnidadeMedidaBId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnidadeMedidaAId");
+
+                    b.HasIndex("UnidadeMedidaBId");
+
+                    b.ToTable("UnidadeMedidaConversoes");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.VinculoFiscal", b =>
@@ -1747,6 +2146,15 @@ namespace SisCom.Infraestrutura.Migrations
                         .IsRequired();
 
                     b.Navigation("Estado");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.ContaFinanceira", b =>
+                {
+                    b.HasOne("SisCom.Entidade.Modelos.Banco", "Banco")
+                        .WithMany()
+                        .HasForeignKey("BancoId");
+
+                    b.Navigation("Banco");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Empresa", b =>
@@ -2066,6 +2474,90 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Navigation("Mercadoria");
                 });
 
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NaturezaOperacao", b =>
+                {
+                    b.HasOne("SisCom.Entidade.Modelos.TabelaCFOP", "TabelaCFOP")
+                        .WithMany()
+                        .HasForeignKey("TabelaCFOPId");
+
+                    b.Navigation("TabelaCFOP");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalEntrada", b =>
+                {
+                    b.HasOne("SisCom.Entidade.Modelos.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EmpresaId");
+
+                    b.HasOne("SisCom.Entidade.Modelos.Pessoa", "Fornecedor")
+                        .WithMany()
+                        .HasForeignKey("FornecedorId");
+
+                    b.HasOne("SisCom.Entidade.Modelos.NaturezaOperacao", "NaturezaOperacao")
+                        .WithMany()
+                        .HasForeignKey("NaturezaOperacaoId");
+
+                    b.Navigation("Empresa");
+
+                    b.Navigation("Fornecedor");
+
+                    b.Navigation("NaturezaOperacao");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalEntradaFatura", b =>
+                {
+                    b.HasOne("SisCom.Entidade.Modelos.ContaFinanceira", "ContaFinanceira")
+                        .WithMany()
+                        .HasForeignKey("ContaFinanceiraId");
+
+                    b.HasOne("SisCom.Entidade.Modelos.FormaPagamento", "FormaPagamento")
+                        .WithMany()
+                        .HasForeignKey("FormaPagamentoId");
+
+                    b.HasOne("SisCom.Entidade.Modelos.NotaFiscalEntrada", "NotaFiscalEntrada")
+                        .WithMany()
+                        .HasForeignKey("NotaFiscalEntradaId");
+
+                    b.Navigation("ContaFinanceira");
+
+                    b.Navigation("FormaPagamento");
+
+                    b.Navigation("NotaFiscalEntrada");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalEntradaMercadoria", b =>
+                {
+                    b.HasOne("SisCom.Entidade.Modelos.TabelaCFOP", "CFOP")
+                        .WithMany()
+                        .HasForeignKey("CFOPId");
+
+                    b.HasOne("SisCom.Entidade.Modelos.TabelaCST_CSOSN", "CST")
+                        .WithMany()
+                        .HasForeignKey("CSTId");
+
+                    b.HasOne("SisCom.Entidade.Modelos.Mercadoria", "Mercadoria")
+                        .WithMany()
+                        .HasForeignKey("MercadoriaId");
+
+                    b.HasOne("SisCom.Entidade.Modelos.TabelaNCM", "NCM")
+                        .WithMany()
+                        .HasForeignKey("NCMId");
+
+                    b.HasOne("SisCom.Entidade.Modelos.NotaFiscalEntrada", "NotaFiscalEntrada")
+                        .WithMany()
+                        .HasForeignKey("NotaFiscalEntradaId");
+
+                    b.Navigation("CFOP");
+
+                    b.Navigation("CST");
+
+                    b.Navigation("Mercadoria");
+
+                    b.Navigation("NCM");
+
+                    b.Navigation("NotaFiscalEntrada");
+                });
+
             modelBuilder.Entity("SisCom.Entidade.Modelos.Pessoa", b =>
                 {
                     b.HasOne("SisCom.Entidade.Modelos.TipoCliente", "TipoCliente")
@@ -2245,6 +2737,23 @@ namespace SisCom.Infraestrutura.Migrations
                         });
 
                     b.Navigation("Endereco");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.UnidadeMedidaConversao", b =>
+                {
+                    b.HasOne("SisCom.Entidade.Modelos.UnidadeMedida", "UnidadeMedidaA")
+                        .WithMany()
+                        .HasForeignKey("UnidadeMedidaAId")
+                        .IsRequired();
+
+                    b.HasOne("SisCom.Entidade.Modelos.UnidadeMedida", "UnidadeMedidaB")
+                        .WithMany()
+                        .HasForeignKey("UnidadeMedidaBId")
+                        .IsRequired();
+
+                    b.Navigation("UnidadeMedidaA");
+
+                    b.Navigation("UnidadeMedidaB");
                 });
 #pragma warning restore 612, 618
         }

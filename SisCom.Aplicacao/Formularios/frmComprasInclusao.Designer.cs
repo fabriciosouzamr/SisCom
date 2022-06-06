@@ -346,6 +346,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoNuvemFiscal.Size = new System.Drawing.Size(53, 56);
             this.botaoNuvemFiscal.TabIndex = 58;
             this.botaoNuvemFiscal.UseVisualStyleBackColor = true;
+            this.botaoNuvemFiscal.Click += new System.EventHandler(this.botaoNuvemFiscal_Click);
             // 
             // botaoImportarNFeXML
             // 
@@ -355,6 +356,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoImportarNFeXML.Size = new System.Drawing.Size(53, 56);
             this.botaoImportarNFeXML.TabIndex = 57;
             this.botaoImportarNFeXML.UseVisualStyleBackColor = true;
+            this.botaoImportarNFeXML.Click += new System.EventHandler(this.botaoImportarNFeXML_Click);
             // 
             // botaoEditar
             // 
@@ -415,6 +417,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoFechar.Size = new System.Drawing.Size(53, 56);
             this.botaoFechar.TabIndex = 20;
             this.botaoFechar.UseVisualStyleBackColor = true;
+            this.botaoFechar.Click += new System.EventHandler(this.botaoFechar_Click);
             // 
             // botaoNovo
             // 
@@ -526,7 +529,7 @@ namespace SisCom.Aplicacao.Formularios
             this.checkIgnorarICMSDesonerado.Location = new System.Drawing.Point(783, 134);
             this.checkIgnorarICMSDesonerado.Name = "checkIgnorarICMSDesonerado";
             this.checkIgnorarICMSDesonerado.Size = new System.Drawing.Size(161, 19);
-            this.checkIgnorarICMSDesonerado.TabIndex = 128;
+            this.checkIgnorarICMSDesonerado.TabIndex = 21;
             this.checkIgnorarICMSDesonerado.Text = "Ignorar ICMS Desonerado";
             this.checkIgnorarICMSDesonerado.UseVisualStyleBackColor = true;
             // 
@@ -536,7 +539,7 @@ namespace SisCom.Aplicacao.Formularios
             this.checkAtualizarPreco.Location = new System.Drawing.Point(783, 115);
             this.checkAtualizarPreco.Name = "checkAtualizarPreco";
             this.checkAtualizarPreco.Size = new System.Drawing.Size(105, 19);
-            this.checkAtualizarPreco.TabIndex = 127;
+            this.checkAtualizarPreco.TabIndex = 20;
             this.checkAtualizarPreco.Text = "Atualizar Preço";
             this.checkAtualizarPreco.UseVisualStyleBackColor = true;
             // 
@@ -557,7 +560,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboPedido.Location = new System.Drawing.Point(677, 115);
             this.comboPedido.Name = "comboPedido";
             this.comboPedido.Size = new System.Drawing.Size(100, 23);
-            this.comboPedido.TabIndex = 125;
+            this.comboPedido.TabIndex = 19;
             // 
             // comboEmpresa
             // 
@@ -566,7 +569,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboEmpresa.Location = new System.Drawing.Point(457, 115);
             this.comboEmpresa.Name = "comboEmpresa";
             this.comboEmpresa.Size = new System.Drawing.Size(166, 23);
-            this.comboEmpresa.TabIndex = 124;
+            this.comboEmpresa.TabIndex = 18;
             // 
             // label28
             // 
@@ -583,7 +586,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textChaveAcesso.Location = new System.Drawing.Point(112, 115);
             this.textChaveAcesso.Name = "textChaveAcesso";
             this.textChaveAcesso.Size = new System.Drawing.Size(281, 23);
-            this.textChaveAcesso.TabIndex = 122;
+            this.textChaveAcesso.TabIndex = 17;
             // 
             // label27
             // 
@@ -601,7 +604,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericValorNota.Location = new System.Drawing.Point(900, 86);
             this.numericValorNota.Name = "numericValorNota";
             this.numericValorNota.Size = new System.Drawing.Size(100, 23);
-            this.numericValorNota.TabIndex = 120;
+            this.numericValorNota.TabIndex = 16;
             // 
             // label26
             // 
@@ -619,7 +622,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericOutrasDespesas.Location = new System.Drawing.Point(698, 86);
             this.numericOutrasDespesas.Name = "numericOutrasDespesas";
             this.numericOutrasDespesas.Size = new System.Drawing.Size(100, 23);
-            this.numericOutrasDespesas.TabIndex = 118;
+            this.numericOutrasDespesas.TabIndex = 15;
             // 
             // label25
             // 
@@ -637,7 +640,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericValorFrete.Location = new System.Drawing.Point(473, 86);
             this.numericValorFrete.Name = "numericValorFrete";
             this.numericValorFrete.Size = new System.Drawing.Size(100, 23);
-            this.numericValorFrete.TabIndex = 116;
+            this.numericValorFrete.TabIndex = 14;
             // 
             // label24
             // 
@@ -655,7 +658,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericDesconto.Location = new System.Drawing.Point(293, 86);
             this.numericDesconto.Name = "numericDesconto";
             this.numericDesconto.Size = new System.Drawing.Size(100, 23);
-            this.numericDesconto.TabIndex = 114;
+            this.numericDesconto.TabIndex = 13;
             // 
             // label23
             // 
@@ -673,7 +676,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericValorSeguro.Location = new System.Drawing.Point(91, 86);
             this.numericValorSeguro.Name = "numericValorSeguro";
             this.numericValorSeguro.Size = new System.Drawing.Size(100, 23);
-            this.numericValorSeguro.TabIndex = 112;
+            this.numericValorSeguro.TabIndex = 12;
             // 
             // label22
             // 
@@ -691,7 +694,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericICMSST.Location = new System.Drawing.Point(919, 59);
             this.numericICMSST.Name = "numericICMSST";
             this.numericICMSST.Size = new System.Drawing.Size(81, 23);
-            this.numericICMSST.TabIndex = 110;
+            this.numericICMSST.TabIndex = 11;
             // 
             // label21
             // 
@@ -709,7 +712,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericTBaseICMSST.Location = new System.Drawing.Point(760, 59);
             this.numericTBaseICMSST.Name = "numericTBaseICMSST";
             this.numericTBaseICMSST.Size = new System.Drawing.Size(81, 23);
-            this.numericTBaseICMSST.TabIndex = 108;
+            this.numericTBaseICMSST.TabIndex = 10;
             // 
             // label77
             // 
@@ -728,7 +731,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboTipoFrete.Location = new System.Drawing.Point(496, 59);
             this.comboTipoFrete.Name = "comboTipoFrete";
             this.comboTipoFrete.Size = new System.Drawing.Size(166, 23);
-            this.comboTipoFrete.TabIndex = 106;
+            this.comboTipoFrete.TabIndex = 9;
             // 
             // label20
             // 
@@ -755,7 +758,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboNaturezaOperacao.Location = new System.Drawing.Point(90, 59);
             this.comboNaturezaOperacao.Name = "comboNaturezaOperacao";
             this.comboNaturezaOperacao.Size = new System.Drawing.Size(335, 23);
-            this.comboNaturezaOperacao.TabIndex = 103;
+            this.comboNaturezaOperacao.TabIndex = 8;
             // 
             // label19
             // 
@@ -883,14 +886,14 @@ namespace SisCom.Aplicacao.Formularios
             this.comboFornecedor.Location = new System.Drawing.Point(90, 32);
             this.comboFornecedor.Name = "comboFornecedor";
             this.comboFornecedor.Size = new System.Drawing.Size(335, 23);
-            this.comboFornecedor.TabIndex = 98;
+            this.comboFornecedor.TabIndex = 7;
             // 
             // textSerie
             // 
             this.textSerie.Location = new System.Drawing.Point(715, 5);
             this.textSerie.Name = "textSerie";
             this.textSerie.Size = new System.Drawing.Size(50, 23);
-            this.textSerie.TabIndex = 97;
+            this.textSerie.TabIndex = 5;
             // 
             // label11
             // 
@@ -909,7 +912,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboPagamento.Location = new System.Drawing.Point(850, 5);
             this.comboPagamento.Name = "comboPagamento";
             this.comboPagamento.Size = new System.Drawing.Size(150, 23);
-            this.comboPagamento.TabIndex = 95;
+            this.comboPagamento.TabIndex = 6;
             // 
             // label10
             // 
@@ -928,7 +931,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboModelo.Location = new System.Drawing.Point(583, 5);
             this.comboModelo.Name = "comboModelo";
             this.comboModelo.Size = new System.Drawing.Size(81, 23);
-            this.comboModelo.TabIndex = 93;
+            this.comboModelo.TabIndex = 4;
             // 
             // label71
             // 
@@ -945,7 +948,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textNotaFiscal.Location = new System.Drawing.Point(421, 5);
             this.textNotaFiscal.Name = "textNotaFiscal";
             this.textNotaFiscal.Size = new System.Drawing.Size(100, 23);
-            this.textNotaFiscal.TabIndex = 91;
+            this.textNotaFiscal.TabIndex = 3;
             // 
             // label9
             // 
@@ -964,7 +967,7 @@ namespace SisCom.Aplicacao.Formularios
             this.dateDateEmissao.Location = new System.Drawing.Point(262, 5);
             this.dateDateEmissao.Name = "dateDateEmissao";
             this.dateDateEmissao.Size = new System.Drawing.Size(81, 23);
-            this.dateDateEmissao.TabIndex = 89;
+            this.dateDateEmissao.TabIndex = 2;
             // 
             // label8
             // 
@@ -983,7 +986,7 @@ namespace SisCom.Aplicacao.Formularios
             this.dateDataEntrada.Location = new System.Drawing.Point(90, 5);
             this.dateDataEntrada.Name = "dateDataEntrada";
             this.dateDataEntrada.Size = new System.Drawing.Size(81, 23);
-            this.dateDataEntrada.TabIndex = 87;
+            this.dateDataEntrada.TabIndex = 1;
             // 
             // label69
             // 
@@ -1021,7 +1024,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericImportacaoCofins.Location = new System.Drawing.Point(486, 71);
             this.numericImportacaoCofins.Name = "numericImportacaoCofins";
             this.numericImportacaoCofins.Size = new System.Drawing.Size(81, 23);
-            this.numericImportacaoCofins.TabIndex = 114;
+            this.numericImportacaoCofins.TabIndex = 104;
             // 
             // label60
             // 
@@ -1039,7 +1042,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericImportacaoPIS.Location = new System.Drawing.Point(158, 71);
             this.numericImportacaoPIS.Name = "numericImportacaoPIS";
             this.numericImportacaoPIS.Size = new System.Drawing.Size(81, 23);
-            this.numericImportacaoPIS.TabIndex = 112;
+            this.numericImportacaoPIS.TabIndex = 103;
             // 
             // label61
             // 
@@ -1056,7 +1059,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textImportacaoNumeroDrawback.Location = new System.Drawing.Point(486, 40);
             this.textImportacaoNumeroDrawback.Name = "textImportacaoNumeroDrawback";
             this.textImportacaoNumeroDrawback.Size = new System.Drawing.Size(150, 23);
-            this.textImportacaoNumeroDrawback.TabIndex = 105;
+            this.textImportacaoNumeroDrawback.TabIndex = 102;
             // 
             // label59
             // 
@@ -1073,7 +1076,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textImportacaoNumeroDocumento.Location = new System.Drawing.Point(158, 40);
             this.textImportacaoNumeroDocumento.Name = "textImportacaoNumeroDocumento";
             this.textImportacaoNumeroDocumento.Size = new System.Drawing.Size(150, 23);
-            this.textImportacaoNumeroDocumento.TabIndex = 103;
+            this.textImportacaoNumeroDocumento.TabIndex = 101;
             // 
             // label58
             // 
@@ -1149,7 +1152,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoICMSDesonaracao.Location = new System.Drawing.Point(816, 8);
             this.numericServicoAquisicaoICMSDesonaracao.Name = "numericServicoAquisicaoICMSDesonaracao";
             this.numericServicoAquisicaoICMSDesonaracao.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoICMSDesonaracao.TabIndex = 152;
+            this.numericServicoAquisicaoICMSDesonaracao.TabIndex = 202;
             // 
             // label83
             // 
@@ -1167,7 +1170,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoDesconto.Location = new System.Drawing.Point(548, 35);
             this.numericServicoAquisicaoDesconto.Name = "numericServicoAquisicaoDesconto";
             this.numericServicoAquisicaoDesconto.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoDesconto.TabIndex = 150;
+            this.numericServicoAquisicaoDesconto.TabIndex = 205;
             // 
             // label76
             // 
@@ -1185,7 +1188,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoValorNota.Location = new System.Drawing.Point(548, 8);
             this.numericServicoAquisicaoValorNota.Name = "numericServicoAquisicaoValorNota";
             this.numericServicoAquisicaoValorNota.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoValorNota.TabIndex = 148;
+            this.numericServicoAquisicaoValorNota.TabIndex = 201;
             // 
             // label78
             // 
@@ -1203,7 +1206,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoValorISS.Location = new System.Drawing.Point(548, 116);
             this.numericServicoAquisicaoValorISS.Name = "numericServicoAquisicaoValorISS";
             this.numericServicoAquisicaoValorISS.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoValorISS.TabIndex = 146;
+            this.numericServicoAquisicaoValorISS.TabIndex = 214;
             // 
             // label73
             // 
@@ -1221,7 +1224,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoValorCofins.Location = new System.Drawing.Point(548, 89);
             this.numericServicoAquisicaoValorCofins.Name = "numericServicoAquisicaoValorCofins";
             this.numericServicoAquisicaoValorCofins.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoValorCofins.TabIndex = 144;
+            this.numericServicoAquisicaoValorCofins.TabIndex = 211;
             // 
             // label74
             // 
@@ -1239,7 +1242,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoValorPIS.Location = new System.Drawing.Point(548, 62);
             this.numericServicoAquisicaoValorPIS.Name = "numericServicoAquisicaoValorPIS";
             this.numericServicoAquisicaoValorPIS.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoValorPIS.TabIndex = 142;
+            this.numericServicoAquisicaoValorPIS.TabIndex = 208;
             // 
             // label75
             // 
@@ -1257,7 +1260,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoCofinsRefFonte.Location = new System.Drawing.Point(339, 116);
             this.numericServicoAquisicaoCofinsRefFonte.Name = "numericServicoAquisicaoCofinsRefFonte";
             this.numericServicoAquisicaoCofinsRefFonte.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoCofinsRefFonte.TabIndex = 140;
+            this.numericServicoAquisicaoCofinsRefFonte.TabIndex = 213;
             // 
             // label68
             // 
@@ -1275,7 +1278,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoAliquotaCofins.Location = new System.Drawing.Point(339, 89);
             this.numericServicoAquisicaoAliquotaCofins.Name = "numericServicoAquisicaoAliquotaCofins";
             this.numericServicoAquisicaoAliquotaCofins.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoAliquotaCofins.TabIndex = 138;
+            this.numericServicoAquisicaoAliquotaCofins.TabIndex = 210;
             // 
             // label70
             // 
@@ -1293,7 +1296,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoAliquotaPIS.Location = new System.Drawing.Point(339, 62);
             this.numericServicoAquisicaoAliquotaPIS.Name = "numericServicoAquisicaoAliquotaPIS";
             this.numericServicoAquisicaoAliquotaPIS.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoAliquotaPIS.TabIndex = 136;
+            this.numericServicoAquisicaoAliquotaPIS.TabIndex = 207;
             // 
             // label72
             // 
@@ -1311,7 +1314,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoPISRefFonte.Location = new System.Drawing.Point(122, 116);
             this.numericServicoAquisicaoPISRefFonte.Name = "numericServicoAquisicaoPISRefFonte";
             this.numericServicoAquisicaoPISRefFonte.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoPISRefFonte.TabIndex = 134;
+            this.numericServicoAquisicaoPISRefFonte.TabIndex = 212;
             // 
             // label67
             // 
@@ -1329,7 +1332,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoBaseCofins.Location = new System.Drawing.Point(122, 89);
             this.numericServicoAquisicaoBaseCofins.Name = "numericServicoAquisicaoBaseCofins";
             this.numericServicoAquisicaoBaseCofins.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoBaseCofins.TabIndex = 132;
+            this.numericServicoAquisicaoBaseCofins.TabIndex = 209;
             // 
             // label66
             // 
@@ -1347,7 +1350,7 @@ namespace SisCom.Aplicacao.Formularios
             this.numericServicoAquisicaoBasePIS.Location = new System.Drawing.Point(122, 62);
             this.numericServicoAquisicaoBasePIS.Name = "numericServicoAquisicaoBasePIS";
             this.numericServicoAquisicaoBasePIS.Size = new System.Drawing.Size(100, 23);
-            this.numericServicoAquisicaoBasePIS.TabIndex = 130;
+            this.numericServicoAquisicaoBasePIS.TabIndex = 206;
             // 
             // label65
             // 
@@ -1364,7 +1367,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textServicoAquisicaoSubSerie.Location = new System.Drawing.Point(339, 35);
             this.textServicoAquisicaoSubSerie.Name = "textServicoAquisicaoSubSerie";
             this.textServicoAquisicaoSubSerie.Size = new System.Drawing.Size(100, 23);
-            this.textServicoAquisicaoSubSerie.TabIndex = 128;
+            this.textServicoAquisicaoSubSerie.TabIndex = 204;
             // 
             // label64
             // 
@@ -1381,7 +1384,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textServicoAquisicaoSerie.Location = new System.Drawing.Point(122, 35);
             this.textServicoAquisicaoSerie.Name = "textServicoAquisicaoSerie";
             this.textServicoAquisicaoSerie.Size = new System.Drawing.Size(100, 23);
-            this.textServicoAquisicaoSerie.TabIndex = 126;
+            this.textServicoAquisicaoSerie.TabIndex = 203;
             // 
             // label63
             // 
@@ -1398,7 +1401,7 @@ namespace SisCom.Aplicacao.Formularios
             this.textServicoAquisicaoChaveAcesso.Location = new System.Drawing.Point(122, 8);
             this.textServicoAquisicaoChaveAcesso.Name = "textServicoAquisicaoChaveAcesso";
             this.textServicoAquisicaoChaveAcesso.Size = new System.Drawing.Size(317, 23);
-            this.textServicoAquisicaoChaveAcesso.TabIndex = 124;
+            this.textServicoAquisicaoChaveAcesso.TabIndex = 200;
             // 
             // label62
             // 
@@ -1439,7 +1442,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboFinalidade.Location = new System.Drawing.Point(75, 9);
             this.comboFinalidade.Name = "comboFinalidade";
             this.comboFinalidade.Size = new System.Drawing.Size(200, 23);
-            this.comboFinalidade.TabIndex = 100;
+            this.comboFinalidade.TabIndex = 300;
             // 
             // dataGridView3
             // 

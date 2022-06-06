@@ -20,7 +20,6 @@ namespace SisCom.Aplicacao
 {
     namespace VStyles
     {
-
         static class Program
         {
             static AppSettings appSettings;
@@ -213,7 +212,9 @@ namespace SisCom.Aplicacao
                         #region UnidadeMedida
                         cfg.CreateMap<UnidadeMedidaViewModel, UnidadeMedida>().ReverseMap();
                         cfg.CreateMap<UnidadeMedida, NomeComboViewModel>();
-
+                        #endregion
+                        #region UnidadeMedidaConversao
+                        cfg.CreateMap<UnidadeMedidaConversaoViewModel, UnidadeMedidaConversao>().ReverseMap();
                         #endregion
                         #region VinculoFiscal
                         cfg.CreateMap<VinculoFiscalViewModel, VinculoFiscal>().ReverseMap();
@@ -241,13 +242,11 @@ namespace SisCom.Aplicacao
                     CaixaMensagem.Informacao(Ex.Message);
                 }
             }
-
             private static async void DatabaseConfig_Configure(IServiceProvider services)
             {
                 var seedPath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "Seed");
                 await DatabaseConfig.Configure(services, seedPath);
             }
-
             private static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
             {
                 services.AddDbContext<MeuDbContext>(options =>
@@ -257,7 +256,6 @@ namespace SisCom.Aplicacao
                 }); ;
                 services.ResolveDependencies();
             }
-
             private static void Diretorios_Verificar()
             {
                 if (!Directory.Exists(Declaracoes.Aplicacao_CaminhoFoto))
@@ -266,7 +264,6 @@ namespace SisCom.Aplicacao
                 }
             }
         }
-
         public class MeuDbContextFactory : IDesignTimeDbContextFactory<MeuDbContext>
         {
             public MeuDbContext CreateDbContext(string[] args)

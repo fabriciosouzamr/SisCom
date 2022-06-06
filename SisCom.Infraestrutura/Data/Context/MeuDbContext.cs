@@ -40,6 +40,7 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<GrupoNaturezaReceita_CTS_PIS_COFINS> GrupoNaturezaReceita_CTS_PIS_COFINSs { get; set; }
         public DbSet<GrupoCFOP> GrupoCFOPs { get; set; }
         public DbSet<Mercadoria> Mercadorias { get; set; }
+        public DbSet<NaturezaOperacao> NaturezaOperacoes { get; set; }
         public DbSet<Pais> Paises { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Similar> Similars { get; set; }
@@ -68,6 +69,7 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<TipoMercadoria> TipoMercadorias { get; set; }
         public DbSet<Transportadora> Transportadoras { get; set; }
         public DbSet<UnidadeMedida> UnidadeMedidas { get; set; }
+        public DbSet<UnidadeMedidaConversao> UnidadeMedidaConversoes { get; set; }
         public DbSet<VinculoFiscal> VinculoFiscais { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

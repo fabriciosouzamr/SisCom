@@ -13,6 +13,7 @@ namespace Funcoes.Interfaces
         Task<TEntity> GetById(Guid id, params Expression<Func<TEntity, object>>[] includes);
         Task<TEntity> GetById(Guid id);
         Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null);
+        Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null, params Expression<Func<TEntity, object>>[] includes);
         Task<List<TEntity>> Combo(Expression<Func<TEntity, object>> order = null);
         Task<List<TEntity>> ComboSearch(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> order = null);
         Task Update(TEntity entity);

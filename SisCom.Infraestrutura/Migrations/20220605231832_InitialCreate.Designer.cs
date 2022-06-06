@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220605231832_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -950,27 +952,13 @@ namespace SisCom.Infraestrutura.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Devolucao")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("EntradaSaida")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("PercentualICMS")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid?>("TabelaCFOPId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TabelaCFOPId");
 
                     b.ToTable("NaturezaOperacoes");
                 });
@@ -2093,23 +2081,23 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<decimal>("Conversor")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(14,10)")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UnidadeMedidaAId")
+                    b.Property<Guid?>("UnidadeMedidaBId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UnidadeMedidaBId")
+                    b.Property<Guid?>("UnidadeMedideAId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UnidadeMedidaAId");
-
                     b.HasIndex("UnidadeMedidaBId");
+
+                    b.HasIndex("UnidadeMedideAId");
 
                     b.ToTable("UnidadeMedidaConversoes");
                 });
@@ -2472,15 +2460,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Navigation("Mercadoria");
                 });
 
-            modelBuilder.Entity("SisCom.Entidade.Modelos.NaturezaOperacao", b =>
-                {
-                    b.HasOne("SisCom.Entidade.Modelos.TabelaCFOP", "TabelaCFOP")
-                        .WithMany()
-                        .HasForeignKey("TabelaCFOPId");
-
-                    b.Navigation("TabelaCFOP");
-                });
-
             modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalEntrada", b =>
                 {
                     b.HasOne("SisCom.Entidade.Modelos.Empresa", "Empresa")
@@ -2739,19 +2718,17 @@ namespace SisCom.Infraestrutura.Migrations
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.UnidadeMedidaConversao", b =>
                 {
-                    b.HasOne("SisCom.Entidade.Modelos.UnidadeMedida", "UnidadeMedidaA")
-                        .WithMany()
-                        .HasForeignKey("UnidadeMedidaAId")
-                        .IsRequired();
-
                     b.HasOne("SisCom.Entidade.Modelos.UnidadeMedida", "UnidadeMedidaB")
                         .WithMany()
-                        .HasForeignKey("UnidadeMedidaBId")
-                        .IsRequired();
+                        .HasForeignKey("UnidadeMedidaBId");
 
-                    b.Navigation("UnidadeMedidaA");
+                    b.HasOne("SisCom.Entidade.Modelos.UnidadeMedida", "UnidadeMedideA")
+                        .WithMany()
+                        .HasForeignKey("UnidadeMedideAId");
 
                     b.Navigation("UnidadeMedidaB");
+
+                    b.Navigation("UnidadeMedideA");
                 });
 #pragma warning restore 612, 618
         }

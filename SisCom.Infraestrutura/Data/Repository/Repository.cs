@@ -70,6 +70,26 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return ret;
         }
+        public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null, params Expression<Func<TEntity, object>>[] includes)
+        {
+            var ret = DbSet.AsQueryable();
+            foreach (var include in includes)
+            {
+                ret = ret.Include(include);
+            }
+
+            try
+            {
+                if (order == null)
+                { return await ret.ToListAsync(); }
+                else
+                { return await ret.OrderBy(order ?? (e => e.Id)).ToListAsync(); }
+            }
+            catch (Exception Ex)
+            {
+                return await ret.ToListAsync();
+            }
+        }
         public virtual async Task<List<TEntity>> Combo()
         {
             return await DbSet.AsNoTracking().ToListAsync();

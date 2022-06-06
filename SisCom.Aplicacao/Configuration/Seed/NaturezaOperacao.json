@@ -1,0 +1,94 @@
+[
+  {
+    "Nome": "COMPRA PARA INDUSTRIALIZAÇÃO",
+    "TabelaCFOPId": "1101",
+    "EntradaSaida": 1,
+    "PercentualICMS": 0,
+    "Devolucao" :  false
+  },
+  {
+    "Nome": "COMPRA PARA COMERCIALIZAÇÃO",
+    "TabelaCFOPId": "1102",
+    "EntradaSaida": 1,
+    "PercentualICMS": 17,
+    "Devolucao": false
+  },
+  {
+    "Nome": "DEVOLUÇÃO DE VENDA DE MERCADORIA ADQUIRIDA OU RECEBIDA DE TERCEIRO",
+    "TabelaCFOPId": "1202",
+    "EntradaSaida": 1,
+    "PercentualICMS": 0,
+    "Devolucao": true
+  },
+  {
+    "Nome": "COMPRA PARA COMERCIALIZAÇÃO",
+    "TabelaCFOPId": "2102",
+    "EntradaSaida": 1,
+    "PercentualICMS": 12,
+    "Devolucao": false
+  },
+  {
+    "Nome": "COMPRAS",
+    "TabelaCFOPId": "3102",
+    "EntradaSaida": 1,
+    "PercentualICMS": 0,
+    "Devolucao": false
+  },
+  {
+    "Nome": "VENDA DE MERCADORIA ADQUIRIDA OU RECEBIDA DE TERCEIROS",
+    "TabelaCFOPId": "5102",
+    "EntradaSaida": 2,
+    "PercentualICMS": 0,
+    "Devolucao": false
+  },
+  {
+    "Nome": "DEVOLUÇÃO DE COMPRA PARA COMERCIALIZAÇÃO",
+    "TabelaCFOPId": "5202",
+    "EntradaSaida": 2,
+    "PercentualICMS": 0,
+    "Devolucao": true
+  },
+  {
+    "Nome": "REMESSA PARA DEPÓSITO FECHADO OU ARMAZÉM GERAL",
+    "TabelaCFOPId": "5905",
+    "EntradaSaida": 2,
+    "PercentualICMS": 0,
+    "Devolucao": false
+  },
+  {
+    "Nome": "REMESSA EM BONIFICAÇÃO, DOAÇÃO OU BRINDE",
+    "TabelaCFOPId": "5910",
+    "EntradaSaida": 2,
+    "PercentualICMS": 17,
+    "Devolucao": false
+  },
+  {
+    "Nome": "VENDA DE MERCADORIA ADQUIRIDA OU RECEBIDA DE TERCEIROS",
+    "TabelaCFOPId": "6102",
+    "EntradaSaida": 2,
+    "PercentualICMS": 12,
+    "Devolucao": false
+  },
+  {
+    "Nome": "DEVOLUÇÃO DE COMPRA PARA COMERCIALIZAÇÃO",
+    "TabelaCFOPId": "6202",
+    "EntradaSaida": 2,
+    "PercentualICMS": 0,
+    "Devolucao": true
+  },
+  {
+    "Nome": "REMESSA PARA DEPÓSITO FECHADO OU ARMAZÉM GERAL",
+    "TabelaCFOPId": "6905",
+    "EntradaSaida": 2,
+    "PercentualICMS": 0,
+    "Devolucao": false
+  },
+  {
+    "Nome": "REMESSA EM BONIFICAÇÃO, DOAÇÃO OU BRINDE",
+    "TabelaCFOPId": "6910",
+    "EntradaSaida": 2,
+    "PercentualICMS": 0,
+    "Devolucao": false
+  }
+]
+

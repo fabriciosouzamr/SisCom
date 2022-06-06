@@ -84,6 +84,8 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
                 if (!context.TabelaBeneficioSPEDs.Any()) AddRangeSync<TabelaBeneficioSPED>(context, _seedPath);
                 if (!context.TabelaCST_CSOSNs.Any()) AddRangeSync<TabelaCST_CSOSN>(context, _seedPath);
                 if (!context.TabelaMotivoDesoneracaoICMSs.Any()) AddRangeSync<TabelaMotivoDesoneracaoICMS>(context, _seedPath);
+                if (!context.UnidadeMedidaConversoes.Any()) AddRangeSync<UnidadeMedidaConversao>(context, _seedPath);
+                if (!context.NaturezaOperacoes.Any()) AddRangeSync<NaturezaOperacao>(context, _seedPath);
 
                 await context.SaveChangesAsync();
             }
