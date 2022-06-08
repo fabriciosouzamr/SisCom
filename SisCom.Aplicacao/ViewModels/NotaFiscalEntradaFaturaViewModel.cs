@@ -1,11 +1,13 @@
-﻿using Funcoes._Entity;
-using SisCom.Entidade.Enum;
+﻿using SisCom.Entidade.Modelos;
 using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace SisCom.Entidade.Modelos
+namespace SisCom.Aplicacao.ViewModels
 {
-    public class NotaFiscalEntradaFatura : Entity
+    public class NotaFiscalEntradaFaturaViewModel
     {
+        [Key]
+        public Guid Id { get; set; }
         public NotaFiscalEntrada NotaFiscalEntrada { get; set; }
         public decimal NumeroDocumento { get; set; }
         public DateTime DataVencimento { get; set; }
@@ -16,10 +18,5 @@ namespace SisCom.Entidade.Modelos
         public DateTime DataPagamento { get; set; }
         public decimal ValorPago { get; set; }
         public string Observacao { get; set; }
-
-        /* EF Relation */
-        public Guid? NotaFiscalEntradaId { get; set; }
-        public Guid? ContaFinanceiraId { get; set; }
-        public Guid? FormaPagamentoId { get; set; }
     }
 }

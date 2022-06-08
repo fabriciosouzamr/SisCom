@@ -15,6 +15,8 @@ namespace SisCom.Aplicacao.Formularios
 {
     public partial class frmCadastroFornecedores : FormMain
     {
+        public bool Cadastrado = false;
+
         ViewModels.PessoaViewModel pessoa = null;
         public frmCadastroFornecedores(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
@@ -158,6 +160,8 @@ namespace SisCom.Aplicacao.Formularios
                 pessoa = (await pessoaController.Adicionar(pessoa));
             }
 
+            Cadastrado = true;
+
             pessoaController = null;
 
             this.MeuDbContextDispose();
@@ -229,7 +233,7 @@ namespace SisCom.Aplicacao.Formularios
         #region Botaos
         private void botaoConsultarCNPJ_Click(object sender, System.EventArgs e)
         {
-            if (pessoa.Id != Guid.Empty)
+            if ((pessoa != null ) && (pessoa.Id != Guid.Empty))
             {
                 if (!CaixaMensagem.Perguntar("Existe um cadastro em edição. Deseja iniciar outro?"))
                 {
@@ -315,6 +319,7 @@ namespace SisCom.Aplicacao.Formularios
             pessoa.Site = Funcao.StringVazioParaNulo(textSite.Text);
             pessoa.Representante = Funcao.StringVazioParaNulo(textRepresentante.Text);
             pessoa.Observacoes = Funcao.StringVazioParaNulo(textObservacoes.Text);
+            pessoa.Fornecedor = true;
 
             AdicionarPessoa();
         }
@@ -339,6 +344,10 @@ namespace SisCom.Aplicacao.Formularios
             {
                 CarregarDados_CNPJCPF_Pesquisa(true, false);
             }
+        }
+        private void comboTipoPessoa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TipoPessoa_Tratar();
         }
     }
 }

@@ -4,9 +4,9 @@ namespace SisCom.Aplicacao.Classes
 {
     public static class Zeus
     {
-        public static NFe.Classes.nfeProc CarregarNFE_XML()
+        public static NFe.Classes.nfeProc CarregarNFE_XML(ref string arquivoXml)
         {
-            var arquivoXml = Arquivo.CarregarArquivoXML();
+            arquivoXml = Arquivo.CarregarArquivoXML();
 
             NFe.Classes.nfeProc _nfeProc = null;
 

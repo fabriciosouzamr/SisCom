@@ -33,6 +33,8 @@ namespace SisCom.Aplicacao.Formularios
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlMenuBotao = new System.Windows.Forms.Panel();
             this.pnlMenuBotaoBotao = new System.Windows.Forms.Panel();
+            this.label38 = new System.Windows.Forms.Label();
+            this.botaoGravar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -100,8 +102,6 @@ namespace SisCom.Aplicacao.Formularios
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.label38 = new System.Windows.Forms.Label();
-            this.botaoGravar = new System.Windows.Forms.Button();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -151,6 +151,27 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlMenuBotaoBotao.Name = "pnlMenuBotaoBotao";
             this.pnlMenuBotaoBotao.Size = new System.Drawing.Size(478, 83);
             this.pnlMenuBotaoBotao.TabIndex = 2;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label38.Location = new System.Drawing.Point(328, 56);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(33, 12);
+            this.label38.TabIndex = 41;
+            this.label38.Text = "Gravar";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoGravar
+            // 
+            this.botaoGravar.Image = ((System.Drawing.Image)(resources.GetObject("botaoGravar.Image")));
+            this.botaoGravar.Location = new System.Drawing.Point(318, 0);
+            this.botaoGravar.Name = "botaoGravar";
+            this.botaoGravar.Size = new System.Drawing.Size(53, 56);
+            this.botaoGravar.TabIndex = 40;
+            this.botaoGravar.UseVisualStyleBackColor = true;
+            this.botaoGravar.Click += new System.EventHandler(this.botaoGravar_Click);
             // 
             // label3
             // 
@@ -415,6 +436,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboTipoPessoa.Name = "comboTipoPessoa";
             this.comboTipoPessoa.Size = new System.Drawing.Size(70, 23);
             this.comboTipoPessoa.TabIndex = 71;
+            this.comboTipoPessoa.SelectedIndexChanged += new System.EventHandler(this.comboTipoPessoa_SelectedIndexChanged);
             // 
             // maskedCPFCNPJ
             // 
@@ -790,27 +812,6 @@ namespace SisCom.Aplicacao.Formularios
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(745, 430);
             this.tabControl1.TabIndex = 9;
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label38.Location = new System.Drawing.Point(328, 56);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(33, 12);
-            this.label38.TabIndex = 41;
-            this.label38.Text = "Gravar";
-            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // botaoGravar
-            // 
-            this.botaoGravar.Image = ((System.Drawing.Image)(resources.GetObject("botaoGravar.Image")));
-            this.botaoGravar.Location = new System.Drawing.Point(318, 0);
-            this.botaoGravar.Name = "botaoGravar";
-            this.botaoGravar.Size = new System.Drawing.Size(53, 56);
-            this.botaoGravar.TabIndex = 40;
-            this.botaoGravar.UseVisualStyleBackColor = true;
-            this.botaoGravar.Click += new System.EventHandler(this.botaoGravar_Click);
             // 
             // frmCadastroFornecedores
             // 

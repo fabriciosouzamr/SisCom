@@ -35,32 +35,8 @@ namespace SisCom.Aplicacao.Formularios
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.botaoImportarDanfe = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textCNPJ = new System.Windows.Forms.TextBox();
-            this.textUF = new System.Windows.Forms.TextBox();
-            this.textInscricaoEstadual = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.comboFornecedor = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.comboEmpresa = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.comboNaturezaOperacao = new System.Windows.Forms.ComboBox();
-            this.label71 = new System.Windows.Forms.Label();
-            this.textNumeroSerie = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dateDateEmissao = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textNumero = new System.Windows.Forms.TextBox();
-            this.textProtocolo = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textAmbiente = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textChave = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.grdProduto = new System.Windows.Forms.DataGridView();
+            this.gridProduto = new System.Windows.Forms.DataGridView();
             this.label13 = new System.Windows.Forms.Label();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -86,14 +62,39 @@ namespace SisCom.Aplicacao.Formularios
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.textChave = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textAmbiente = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textProtocolo = new System.Windows.Forms.TextBox();
+            this.textNumero = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dateDateEmissao = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textNumeroSerie = new System.Windows.Forms.TextBox();
+            this.label71 = new System.Windows.Forms.Label();
+            this.comboNaturezaOperacao = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboEmpresa = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboFornecedor = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textInscricaoEstadual = new System.Windows.Forms.TextBox();
+            this.textUF = new System.Windows.Forms.TextBox();
+            this.textCNPJ = new System.Windows.Forms.TextBox();
+            this.botaoFornecedor = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdProduto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProduto)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -156,241 +157,9 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoImportarDanfe.UseVisualStyleBackColor = true;
             this.botaoImportarDanfe.Click += new System.EventHandler(this.botaoImportarDanfe_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.textCNPJ);
-            this.groupBox3.Controls.Add(this.textUF);
-            this.groupBox3.Controls.Add(this.textInscricaoEstadual);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.comboFornecedor);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.comboEmpresa);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.comboNaturezaOperacao);
-            this.groupBox3.Controls.Add(this.label71);
-            this.groupBox3.Controls.Add(this.textNumeroSerie);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.dateDateEmissao);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.textNumero);
-            this.groupBox3.Controls.Add(this.textProtocolo);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.textAmbiente);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.textChave);
-            this.groupBox3.Location = new System.Drawing.Point(5, 61);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(942, 107);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "NF-e";
-            // 
-            // textCNPJ
-            // 
-            this.textCNPJ.Location = new System.Drawing.Point(519, 76);
-            this.textCNPJ.Name = "textCNPJ";
-            this.textCNPJ.Size = new System.Drawing.Size(205, 23);
-            this.textCNPJ.TabIndex = 105;
-            // 
-            // textUF
-            // 
-            this.textUF.Location = new System.Drawing.Point(371, 76);
-            this.textUF.Name = "textUF";
-            this.textUF.Size = new System.Drawing.Size(35, 23);
-            this.textUF.TabIndex = 104;
-            // 
-            // textInscricaoEstadual
-            // 
-            this.textInscricaoEstadual.Location = new System.Drawing.Point(786, 76);
-            this.textInscricaoEstadual.Name = "textInscricaoEstadual";
-            this.textInscricaoEstadual.Size = new System.Drawing.Size(150, 23);
-            this.textInscricaoEstadual.TabIndex = 12;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(730, 80);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(52, 15);
-            this.label11.TabIndex = 103;
-            this.label11.Text = "Insc. Est.";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(438, 80);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(37, 15);
-            this.label10.TabIndex = 102;
-            this.label10.Text = "CNPJ:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(343, 80);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(24, 15);
-            this.label9.TabIndex = 99;
-            this.label9.Text = "UF:";
-            // 
-            // comboFornecedor
-            // 
-            this.comboFornecedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboFornecedor.FormattingEnabled = true;
-            this.comboFornecedor.Location = new System.Drawing.Point(91, 76);
-            this.comboFornecedor.Name = "comboFornecedor";
-            this.comboFornecedor.Size = new System.Drawing.Size(246, 23);
-            this.comboFornecedor.TabIndex = 9;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(10, 80);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 15);
-            this.label7.TabIndex = 98;
-            this.label7.Text = "Fornecedor:";
-            // 
-            // comboEmpresa
-            // 
-            this.comboEmpresa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboEmpresa.FormattingEnabled = true;
-            this.comboEmpresa.Location = new System.Drawing.Point(786, 47);
-            this.comboEmpresa.Name = "comboEmpresa";
-            this.comboEmpresa.Size = new System.Drawing.Size(150, 23);
-            this.comboEmpresa.TabIndex = 8;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(730, 51);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 15);
-            this.label6.TabIndex = 96;
-            this.label6.Text = "Empresa:";
-            // 
-            // comboNaturezaOperacao
-            // 
-            this.comboNaturezaOperacao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboNaturezaOperacao.FormattingEnabled = true;
-            this.comboNaturezaOperacao.Location = new System.Drawing.Point(519, 47);
-            this.comboNaturezaOperacao.Name = "comboNaturezaOperacao";
-            this.comboNaturezaOperacao.Size = new System.Drawing.Size(205, 23);
-            this.comboNaturezaOperacao.TabIndex = 7;
-            // 
-            // label71
-            // 
-            this.label71.AutoSize = true;
-            this.label71.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label71.Location = new System.Drawing.Point(438, 51);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(57, 15);
-            this.label71.TabIndex = 94;
-            this.label71.Text = "Natureza:";
-            // 
-            // textNumeroSerie
-            // 
-            this.textNumeroSerie.Location = new System.Drawing.Point(397, 47);
-            this.textNumeroSerie.Name = "textNumeroSerie";
-            this.textNumeroSerie.Size = new System.Drawing.Size(35, 23);
-            this.textNumeroSerie.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(343, 51);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 15);
-            this.label5.TabIndex = 91;
-            this.label5.Text = "Série Nº:";
-            // 
-            // dateDateEmissao
-            // 
-            this.dateDateEmissao.Enabled = false;
-            this.dateDateEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDateEmissao.Location = new System.Drawing.Point(256, 47);
-            this.dateDateEmissao.Name = "dateDateEmissao";
-            this.dateDateEmissao.Size = new System.Drawing.Size(81, 23);
-            this.dateDateEmissao.TabIndex = 5;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(177, 51);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 15);
-            this.label8.TabIndex = 90;
-            this.label8.Text = "Data Emissão";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 51);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 15);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "NF-e Nº:";
-            // 
-            // textNumero
-            // 
-            this.textNumero.Location = new System.Drawing.Point(91, 47);
-            this.textNumero.Name = "textNumero";
-            this.textNumero.Size = new System.Drawing.Size(80, 23);
-            this.textNumero.TabIndex = 4;
-            // 
-            // textProtocolo
-            // 
-            this.textProtocolo.Location = new System.Drawing.Point(519, 20);
-            this.textProtocolo.Name = "textProtocolo";
-            this.textProtocolo.Size = new System.Drawing.Size(205, 23);
-            this.textProtocolo.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(438, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Protocolo Nº:";
-            // 
-            // textAmbiente
-            // 
-            this.textAmbiente.Location = new System.Drawing.Point(730, 20);
-            this.textAmbiente.Name = "textAmbiente";
-            this.textAmbiente.ReadOnly = true;
-            this.textAmbiente.Size = new System.Drawing.Size(206, 23);
-            this.textAmbiente.TabIndex = 4;
-            this.textAmbiente.TabStop = false;
-            this.textAmbiente.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "NF-e Chave:";
-            // 
-            // textChave
-            // 
-            this.textChave.Location = new System.Drawing.Point(91, 20);
-            this.textChave.Name = "textChave";
-            this.textChave.Size = new System.Drawing.Size(341, 23);
-            this.textChave.TabIndex = 2;
-            // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.grdProduto);
+            this.groupBox4.Controls.Add(this.gridProduto);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.checkBox3);
             this.groupBox4.Controls.Add(this.checkBox2);
@@ -402,14 +171,15 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             // 
-            // grdProduto
+            // gridProduto
             // 
-            this.grdProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdProduto.Location = new System.Drawing.Point(10, 55);
-            this.grdProduto.Name = "grdProduto";
-            this.grdProduto.RowTemplate.Height = 25;
-            this.grdProduto.Size = new System.Drawing.Size(926, 234);
-            this.grdProduto.TabIndex = 9;
+            this.gridProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridProduto.Location = new System.Drawing.Point(10, 55);
+            this.gridProduto.Name = "gridProduto";
+            this.gridProduto.RowTemplate.Height = 25;
+            this.gridProduto.Size = new System.Drawing.Size(926, 234);
+            this.gridProduto.TabIndex = 9;
+            this.gridProduto.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridProduto_CellValueChanged);
             // 
             // label13
             // 
@@ -672,6 +442,249 @@ namespace SisCom.Aplicacao.Formularios
             this.label21.Text = "*Novo - Produto não identificado, caso não seja vinculado a um cadastro existente" +
     ", será cadastrado como um novo produto.";
             // 
+            // textChave
+            // 
+            this.textChave.Location = new System.Drawing.Point(91, 20);
+            this.textChave.Name = "textChave";
+            this.textChave.Size = new System.Drawing.Size(341, 23);
+            this.textChave.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 15);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "NF-e Chave:";
+            // 
+            // textAmbiente
+            // 
+            this.textAmbiente.Location = new System.Drawing.Point(730, 20);
+            this.textAmbiente.Name = "textAmbiente";
+            this.textAmbiente.ReadOnly = true;
+            this.textAmbiente.Size = new System.Drawing.Size(206, 23);
+            this.textAmbiente.TabIndex = 4;
+            this.textAmbiente.TabStop = false;
+            this.textAmbiente.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(438, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 15);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Protocolo Nº:";
+            // 
+            // textProtocolo
+            // 
+            this.textProtocolo.Location = new System.Drawing.Point(519, 20);
+            this.textProtocolo.Name = "textProtocolo";
+            this.textProtocolo.Size = new System.Drawing.Size(205, 23);
+            this.textProtocolo.TabIndex = 3;
+            // 
+            // textNumero
+            // 
+            this.textNumero.Location = new System.Drawing.Point(91, 47);
+            this.textNumero.Name = "textNumero";
+            this.textNumero.Size = new System.Drawing.Size(80, 23);
+            this.textNumero.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 15);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "NF-e Nº:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(177, 51);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 15);
+            this.label8.TabIndex = 90;
+            this.label8.Text = "Data Emissão";
+            // 
+            // dateDateEmissao
+            // 
+            this.dateDateEmissao.Enabled = false;
+            this.dateDateEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateDateEmissao.Location = new System.Drawing.Point(256, 47);
+            this.dateDateEmissao.Name = "dateDateEmissao";
+            this.dateDateEmissao.Size = new System.Drawing.Size(81, 23);
+            this.dateDateEmissao.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(343, 51);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 15);
+            this.label5.TabIndex = 91;
+            this.label5.Text = "Série Nº:";
+            // 
+            // textNumeroSerie
+            // 
+            this.textNumeroSerie.Location = new System.Drawing.Point(397, 47);
+            this.textNumeroSerie.Name = "textNumeroSerie";
+            this.textNumeroSerie.Size = new System.Drawing.Size(35, 23);
+            this.textNumeroSerie.TabIndex = 6;
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label71.Location = new System.Drawing.Point(438, 51);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(57, 15);
+            this.label71.TabIndex = 94;
+            this.label71.Text = "Natureza:";
+            // 
+            // comboNaturezaOperacao
+            // 
+            this.comboNaturezaOperacao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboNaturezaOperacao.FormattingEnabled = true;
+            this.comboNaturezaOperacao.Location = new System.Drawing.Point(519, 47);
+            this.comboNaturezaOperacao.Name = "comboNaturezaOperacao";
+            this.comboNaturezaOperacao.Size = new System.Drawing.Size(205, 23);
+            this.comboNaturezaOperacao.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(730, 51);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(55, 15);
+            this.label6.TabIndex = 96;
+            this.label6.Text = "Empresa:";
+            // 
+            // comboEmpresa
+            // 
+            this.comboEmpresa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboEmpresa.FormattingEnabled = true;
+            this.comboEmpresa.Location = new System.Drawing.Point(786, 47);
+            this.comboEmpresa.Name = "comboEmpresa";
+            this.comboEmpresa.Size = new System.Drawing.Size(150, 23);
+            this.comboEmpresa.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(10, 80);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(70, 15);
+            this.label7.TabIndex = 98;
+            this.label7.Text = "Fornecedor:";
+            // 
+            // comboFornecedor
+            // 
+            this.comboFornecedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFornecedor.FormattingEnabled = true;
+            this.comboFornecedor.Location = new System.Drawing.Point(91, 76);
+            this.comboFornecedor.Name = "comboFornecedor";
+            this.comboFornecedor.Size = new System.Drawing.Size(220, 23);
+            this.comboFornecedor.TabIndex = 9;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(343, 80);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(24, 15);
+            this.label9.TabIndex = 99;
+            this.label9.Text = "UF:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(438, 80);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 15);
+            this.label10.TabIndex = 102;
+            this.label10.Text = "CNPJ:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label11.Location = new System.Drawing.Point(730, 80);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 15);
+            this.label11.TabIndex = 103;
+            this.label11.Text = "Insc. Est.";
+            // 
+            // textInscricaoEstadual
+            // 
+            this.textInscricaoEstadual.Location = new System.Drawing.Point(786, 76);
+            this.textInscricaoEstadual.Name = "textInscricaoEstadual";
+            this.textInscricaoEstadual.Size = new System.Drawing.Size(150, 23);
+            this.textInscricaoEstadual.TabIndex = 12;
+            // 
+            // textUF
+            // 
+            this.textUF.Location = new System.Drawing.Point(371, 76);
+            this.textUF.Name = "textUF";
+            this.textUF.Size = new System.Drawing.Size(35, 23);
+            this.textUF.TabIndex = 104;
+            // 
+            // textCNPJ
+            // 
+            this.textCNPJ.Location = new System.Drawing.Point(519, 76);
+            this.textCNPJ.Name = "textCNPJ";
+            this.textCNPJ.Size = new System.Drawing.Size(205, 23);
+            this.textCNPJ.TabIndex = 105;
+            // 
+            // botaoFornecedor
+            // 
+            this.botaoFornecedor.Location = new System.Drawing.Point(314, 76);
+            this.botaoFornecedor.Name = "botaoFornecedor";
+            this.botaoFornecedor.Size = new System.Drawing.Size(23, 23);
+            this.botaoFornecedor.TabIndex = 106;
+            this.botaoFornecedor.TabStop = false;
+            this.botaoFornecedor.UseVisualStyleBackColor = true;
+            this.botaoFornecedor.Click += new System.EventHandler(this.botaoFornecedor_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.botaoFornecedor);
+            this.groupBox3.Controls.Add(this.textCNPJ);
+            this.groupBox3.Controls.Add(this.textUF);
+            this.groupBox3.Controls.Add(this.textInscricaoEstadual);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.comboFornecedor);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.comboEmpresa);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.comboNaturezaOperacao);
+            this.groupBox3.Controls.Add(this.label71);
+            this.groupBox3.Controls.Add(this.textNumeroSerie);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.dateDateEmissao);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.textNumero);
+            this.groupBox3.Controls.Add(this.textProtocolo);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.textAmbiente);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.textChave);
+            this.groupBox3.Location = new System.Drawing.Point(5, 61);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(942, 107);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "NF-e";
+            // 
             // frmFiscal_ImportarXML
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -693,17 +706,17 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdProduto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProduto)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -716,35 +729,13 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Button botaoProcurarXML;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button botaoImportarDanfe;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textChave;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textAmbiente;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textProtocolo;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textNumero;
-        private System.Windows.Forms.DateTimePicker dateDateEmissao;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textNumeroSerie;
-        private System.Windows.Forms.ComboBox comboNaturezaOperacao;
-        private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.ComboBox comboEmpresa;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboFornecedor;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textInscricaoEstadual;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.DataGridView grdProduto;
+        private System.Windows.Forms.DataGridView gridProduto;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelTotalNFe;
         private System.Windows.Forms.Label labelTotalProdutos;
@@ -765,7 +756,30 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox textChave;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textAmbiente;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textProtocolo;
+        private System.Windows.Forms.TextBox textNumero;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker dateDateEmissao;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textNumeroSerie;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.ComboBox comboNaturezaOperacao;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox comboEmpresa;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comboFornecedor;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textInscricaoEstadual;
         private System.Windows.Forms.TextBox textUF;
         private System.Windows.Forms.TextBox textCNPJ;
+        private System.Windows.Forms.Button botaoFornecedor;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }

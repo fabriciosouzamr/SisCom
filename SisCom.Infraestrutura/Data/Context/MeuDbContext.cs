@@ -41,6 +41,9 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<GrupoCFOP> GrupoCFOPs { get; set; }
         public DbSet<Mercadoria> Mercadorias { get; set; }
         public DbSet<NaturezaOperacao> NaturezaOperacoes { get; set; }
+        public DbSet<NotaFiscalEntradaFatura> NotaFiscalEntradaFaturas { get; set; }
+        public DbSet<NotaFiscalEntradaMercadoria> NotaFiscalEntradaMercadorias { get; set; }
+        public DbSet<NotaFiscalEntrada> NotaFiscalEntradas { get; set; }
         public DbSet<Pais> Paises { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Similar> Similars { get; set; }

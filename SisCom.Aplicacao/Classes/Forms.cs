@@ -4,6 +4,7 @@ using SisCom.Aplicacao.Formularios;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Infraestrutura.Data.Context;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -59,7 +60,6 @@ namespace SisCom.Aplicacao.Classes
                 }
             }
         }
-
         public static async Task formBuscarCEPCarregar(IServiceProvider serviceProvider,
                                                        IServiceScopeFactory<MeuDbContext> dbCtxFactory,
                                                        INotifier _notifier,
@@ -97,7 +97,6 @@ namespace SisCom.Aplicacao.Classes
                 formBuscarCEPCarregar_EdicaoControle(true, textLogradouro, textBairro, comboUF, comboCidade, textComplmento);
             }
         }
-
         private static void formBuscarCEPCarregar_EdicaoControle(bool Habilitar,
                                                                  TextBox textLogradouro,
                                                                  TextBox textBairro,
@@ -111,7 +110,6 @@ namespace SisCom.Aplicacao.Classes
             comboCidade.Enabled = Habilitar;
             if (textComplmento != null) textComplmento.Enabled = Habilitar;
         }
-
         private static async Task Cidade_Adicionar(MeuDbContext MeuDbContext,
                                                    INotifier _notifier,
                                                    Guid EstadoId,
@@ -124,7 +122,6 @@ namespace SisCom.Aplicacao.Classes
             cidade.EstadoId = EstadoId;
             await (new CidadeController(MeuDbContext, _notifier).Adicionar(cidade));
         }
-
         public static async Task comboCidade_Carregar(IServiceProvider serviceProvider,
                                                       IServiceScopeFactory<MeuDbContext> dbCtxFactory,
                                                       INotifier _notifier,
@@ -161,7 +158,6 @@ namespace SisCom.Aplicacao.Classes
 
             FormMain.MeuDbContextDispose();
         }
-
         private static async Task comboCidade_CarregarCombo(MeuDbContext MeuDbContext,
                                                             INotifier _notifier,
                                                             Guid EstadoId,
@@ -172,6 +168,23 @@ namespace SisCom.Aplicacao.Classes
                                     ComboBoxStyle.DropDownList,
                                     await (new CidadeController(MeuDbContext, _notifier).ComboEstado(EstadoId, p => p.Nome)));
         }
+        public static void comboFornecedor_SelecionarPorCNPJ_CPF(ComboBox comboFornecedor, string sCNPJ_CPF)
+        {
+            comboFornecedor.SelectedIndex = -1;
 
+            if (comboFornecedor.DataSource != null)
+            {
+                List<PessoaComboNomeViewModel> pessoaComboNomeViewModel = (List<PessoaComboNomeViewModel>)comboFornecedor.DataSource;
+
+                foreach (PessoaComboNomeViewModel item in pessoaComboNomeViewModel)
+                {
+                    if (Funcoes._Classes.Texto.SomenteNumero(item.CNPJ_CPF.Trim()) == Funcoes._Classes.Texto.SomenteNumero(sCNPJ_CPF.Trim()))
+                    {
+                        comboFornecedor.SelectedValue = item.Id;
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

@@ -107,6 +107,19 @@ namespace SisCom.Aplicacao
                         #region Mercadoria
                         cfg.CreateMap<MercadoriaViewModel, Mercadoria>().ReverseMap();
                         #endregion
+                        #region NaturezaOperacao
+                        cfg.CreateMap<NaturezaOperacaoViewModel, NaturezaOperacao>().ReverseMap();
+                        cfg.CreateMap<NaturezaOperacao, NomeComboViewModel>();
+                        #endregion
+                        #region NotaFiscalEntrada
+                        cfg.CreateMap<NotaFiscalEntradaViewModel, NotaFiscalEntrada>().ReverseMap();
+                        #endregion
+                        #region NotaFiscalEntradaFatura
+                        cfg.CreateMap<NotaFiscalEntradaFaturaViewModel, NotaFiscalEntradaFatura>().ReverseMap();
+                        #endregion
+                        #region NotaFiscalEntradaMercadoria
+                        cfg.CreateMap<NotaFiscalEntradaMercadoriaViewModel, NotaFiscalEntradaMercadoria>().ReverseMap();
+                        #endregion
                         #region Pais
                         cfg.CreateMap<PaisViewModel, Pais>().ReverseMap();
                         #endregion
