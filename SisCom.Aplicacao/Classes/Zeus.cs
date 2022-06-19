@@ -1,13 +1,13 @@
-﻿using NFe.Utils.NFe;
-using NFe.Servicos;
-using NFe.Utils;
-using DFe.Classes.Entidades;
+﻿using DFe.Classes.Entidades;
 using DFe.Classes.Extensoes;
+using DFe.Utils;
 using Funcoes._Enum;
 using NFe.Classes.Informacoes.Identificacao.Tipos;
-using System.Net;
-using DFe.Utils;
+using NFe.Servicos;
 using NFe.Servicos.Retorno;
+using NFe.Utils;
+using NFe.Utils.NFe;
+using System.Net;
 
 namespace SisCom.Aplicacao.Classes
 {

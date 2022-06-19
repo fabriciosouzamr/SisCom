@@ -40,6 +40,7 @@ namespace SisCom.Aplicacao
                     Application.SetCompatibleTextRenderingDefault(false);
 
                     appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "appsettings.json");
+                    Declaracoes.Externos_SisCom_Aplicacao_FW = Path.Combine(Directory.GetCurrentDirectory(), "Externos", "SisCom.Aplicacao_FW.exe");
 
                     using (StreamReader file = File.OpenText(appSettingsPath))
                     {
@@ -277,6 +278,15 @@ namespace SisCom.Aplicacao
                 {
                     Directory.CreateDirectory(Declaracoes.Aplicacao_CaminhoFoto);
                 }
+                if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas")))
+                {
+                    Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas"));
+                }
+                if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal")))
+                {
+                    Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal"));
+                }
+
             }
         }
         public class MeuDbContextFactory : IDesignTimeDbContextFactory<MeuDbContext>

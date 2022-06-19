@@ -8,7 +8,8 @@ using System.IO;
 using System.Windows.Forms;
 using NFe.Servicos.Retorno;
 using NFe.Classes.Servicos.DistribuicaoDFe;
-using ZeusZW = SisCom.Aplicacao_FW.Classes.Zeus;
+using System.Diagnostics;
+using SisCom.Aplicacao.Classes;
 
 namespace SisCom.Aplicacao.Formularios
 {
@@ -128,66 +129,75 @@ namespace SisCom.Aplicacao.Formularios
             else
             { sChave = textChaveNFe.Text; }
 
-            ZeusZW.NuvemFiscal_SerialNumber = ((EmpresaNuvemFiscalComboViewModel)comboEmpresa.SelectedItem).NuvemFiscal_SerialNumber;
-            ZeusZW.PATH_SCHEMAS = Path.Combine(Directory.GetCurrentDirectory(), "Configuration");
-            ZeusZW.PATH_SCHEMAS = "C://Fabricio//Pessoal//Projetos//SisMattos//Schemas";
+            string sysFolder = Environment.GetFolderPath(Environment.SpecialFolder.System);
+            ProcessStartInfo pInfo = new ProcessStartInfo();
+            pInfo.FileName = Declaracoes.Externos_SisCom_Aplicacao_FW;
+            pInfo.Arguments = "GO 46268326000103 1 417B2205054DEFE4";
+            Process p = Process.Start(pInfo);
+            p.WaitForInputIdle();
+            p.WaitForExit();
+            MessageBox.Show("Code continuing...");
 
-            var empresa = await (new EmpresaController(this.MeuDbContext(), this._notifier)).GetById((Guid)comboEmpresa.SelectedValue);
+            //ZeusZW.NuvemFiscal_SerialNumber = ((EmpresaNuvemFiscalComboViewModel)comboEmpresa.SelectedItem).NuvemFiscal_SerialNumber;
+            //ZeusZW.PATH_SCHEMAS = Path.Combine(Directory.GetCurrentDirectory(), "Configuration");
+            //ZeusZW.PATH_SCHEMAS = "C://Fabricio//Pessoal//Projetos//SisMattos//Schemas";
 
-            retorno = SisCom.Aplicacao.Classes.Zeus.NuvemFiscal(empresa.Endereco.End_Cidade.Estado.Codigo,
-                                         empresa.CNPJ,
-                                         sNSU,
-                                         sChave);
+            //var empresa = await (new EmpresaController(this.MeuDbContext(), this._notifier)).GetById((Guid)comboEmpresa.SelectedValue);
 
-            if ((retorno != null) && (retorno.Retorno.loteDistDFeInt != null))
-            {
-                foreach (loteDistDFeInt item in retorno.Retorno.loteDistDFeInt)
-                {
-                    if (item.NfeProc != null)
-                    {
-                        Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscal,
-                                                                      new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_ChaveAcesso,
-                                                                                                                                     Valor = item.NfeProc.NFe.infNFe.Id.Substring(3) },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_NFe,
-                                                                                                                                     Valor = item.NfeProc.NFe.infNFe.ide.cNF},
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_CNPJ_CPF,
-                                                                                                                                     Valor = String.IsNullOrEmpty(item.NfeProc.NFe.infNFe.emit.CNPJ)? item.NfeProc.NFe.infNFe.emit.CPF : item.NfeProc.NFe.infNFe.emit.CNPJ },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_Nome,
-                                                                                                                                     Valor = item.NfeProc.NFe.infNFe.emit.xNome },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_DHEmissao,
-                                                                                                                                     Valor = item.NfeProc.NFe.infNFe.ide.dhEmi,
-                                                                                                                                     Formato = Grid_DataGridView.FormatoColuna.Data },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_VlrNFe,
-                                                                                                                                     Valor = item.NfeProc.NFe.infNFe.total.ICMSTot.vNF,
-                                                                                                                                     Formato = Grid_DataGridView.FormatoColuna.Valor },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_Protocolo,
-                                                                                                                                     Valor = item.NfeProc.protNFe.infProt.nProt },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_SituacaoNFe,
-                                                                                                                                     Valor = item.NfeProc.protNFe.infProt.xMotivo }});
-                    }
-                    else if (item.ResNFe != null)
-                    {
-                        Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscal,
-                                                                      new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_ChaveAcesso,
-                                                                                                                                     Valor = item.ResNFe.chNFe },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_NFe,
-                                                                                                                                     Valor = item.ResNFe.chNFe },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_CNPJ_CPF,
-                                                                                                                                     Valor = String.IsNullOrEmpty(item.ResNFe.CNPJ)? item.ResNFe.CPF : item.ResNFe.CNPJ },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_Nome,
-                                                                                                                                     Valor = item.ResNFe.xNome },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_DHEmissao,
-                                                                                                                                     Valor = item.ResNFe.dhEmi,
-                                                                                                                                     Formato = Grid_DataGridView.FormatoColuna.Data },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_VlrNFe,
-                                                                                                                                     Valor = item.ResNFe.vNF,
-                                                                                                                                     Formato = Grid_DataGridView.FormatoColuna.Valor },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_Protocolo,
-                                                                                                                                     Valor = item.ResNFe.nProt }});
+            //retorno = SisCom.Aplicacao.Classes.Zeus.NuvemFiscal(empresa.Endereco.End_Cidade.Estado.Codigo,
+            //                             empresa.CNPJ,
+            //                             sNSU,
+            //                             sChave);
 
-                    }
-                }
-            }
+            //if ((retorno != null) && (retorno.Retorno.loteDistDFeInt != null))
+            //{
+            //    foreach (loteDistDFeInt item in retorno.Retorno.loteDistDFeInt)
+            //    {
+            //        if (item.NfeProc != null)
+            //        {
+            //            Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscal,
+            //                                                          new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_ChaveAcesso,
+            //                                                                                                                         Valor = item.NfeProc.NFe.infNFe.Id.Substring(3) },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_NFe,
+            //                                                                                                                         Valor = item.NfeProc.NFe.infNFe.ide.cNF},
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_CNPJ_CPF,
+            //                                                                                                                         Valor = String.IsNullOrEmpty(item.NfeProc.NFe.infNFe.emit.CNPJ)? item.NfeProc.NFe.infNFe.emit.CPF : item.NfeProc.NFe.infNFe.emit.CNPJ },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_Nome,
+            //                                                                                                                         Valor = item.NfeProc.NFe.infNFe.emit.xNome },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_DHEmissao,
+            //                                                                                                                         Valor = item.NfeProc.NFe.infNFe.ide.dhEmi,
+            //                                                                                                                         Formato = Grid_DataGridView.FormatoColuna.Data },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_VlrNFe,
+            //                                                                                                                         Valor = item.NfeProc.NFe.infNFe.total.ICMSTot.vNF,
+            //                                                                                                                         Formato = Grid_DataGridView.FormatoColuna.Valor },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_Protocolo,
+            //                                                                                                                         Valor = item.NfeProc.protNFe.infProt.nProt },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_SituacaoNFe,
+            //                                                                                                                         Valor = item.NfeProc.protNFe.infProt.xMotivo }});
+            //        }
+            //        else if (item.ResNFe != null)
+            //        {
+            //            Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscal,
+            //                                                          new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_ChaveAcesso,
+            //                                                                                                                         Valor = item.ResNFe.chNFe },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_NFe,
+            //                                                                                                                         Valor = item.ResNFe.chNFe },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_CNPJ_CPF,
+            //                                                                                                                         Valor = String.IsNullOrEmpty(item.ResNFe.CNPJ)? item.ResNFe.CPF : item.ResNFe.CNPJ },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_Nome,
+            //                                                                                                                         Valor = item.ResNFe.xNome },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_DHEmissao,
+            //                                                                                                                         Valor = item.ResNFe.dhEmi,
+            //                                                                                                                         Formato = Grid_DataGridView.FormatoColuna.Data },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_VlrNFe,
+            //                                                                                                                         Valor = item.ResNFe.vNF,
+            //                                                                                                                         Formato = Grid_DataGridView.FormatoColuna.Valor },
+            //                                                                                          new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_Protocolo,
+            //                                                                                                                         Valor = item.ResNFe.nProt }});
+
+            //        }
+            //    }
+            //}
         }
     }
 }

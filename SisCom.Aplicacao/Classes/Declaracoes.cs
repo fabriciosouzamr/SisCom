@@ -26,6 +26,8 @@ namespace SisCom.Aplicacao.Classes
         public static eTipoCalculo tipoCalculo = eTipoCalculo.Padrao;
         public static eCalculoPreco calculoPreco = eCalculoPreco.Compra;
 
+        public static string Externos_SisCom_Aplicacao_FW = "";
+
         public enum eNavegar
         {
             Primeiro,
