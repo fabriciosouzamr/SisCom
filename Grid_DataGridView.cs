@@ -34,7 +34,7 @@ public static class Grid_DataGridView
 
     public static void DataGridView_Formatar(DataGridView Grid)
     {
-        Grid.AllowUserToAddRows = true;
+        Grid.AllowUserToAddRows = false;
     }
 
     public static void DataGridView_DataSource(DataGridView Grid, object dataSource, bool  allowNew)

@@ -4,7 +4,9 @@ using SisCom.Entidade.Modelos;
 using SisCom.Negocio.Interfaces;
 using SisCom.Negocio.Models.Validations;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Negocio.Services
@@ -84,6 +86,13 @@ namespace SisCom.Negocio.Services
         public Task<IPagedList<Empresa>> GetPagedList(FilteredPagedListParameters parameters)
         {
             throw new NotImplementedException();
+        }
+
+        public virtual async Task<IEnumerable<Empresa>> Search(Expression<Func<Empresa, bool>> predicate, Expression<Func<Empresa, object>> order = null)
+        {
+            var empresa = await _empresaRepository.Search(predicate, order);
+
+            return empresa;
         }
     }
 }

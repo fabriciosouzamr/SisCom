@@ -36,6 +36,8 @@ namespace SisCom.Aplicacao.ViewModels
         public bool NuvemFiscal_Usar { get; set; }
         public AmbienteSistemas? NuvemFiscal_AmbienteWebService { get; set; }
         public string? NuvemFiscal_Certificado { get; set; }
+        public string? NuvemFiscal_SerialNumber { get; set; }
+
     }
 
     public class EmpresaComboViewModel
@@ -43,5 +45,20 @@ namespace SisCom.Aplicacao.ViewModels
         [Key]
         public Guid Id { get; set; }
         public string Unidade { get; set; }
+    }
+
+    public class EmpresaNuvemFiscalComboViewModel
+    {
+        [Key]
+        public Guid Id { get; set; }
+        public string Unidade { get; set; }
+        public string CNPJ { get; set; }
+        public bool NuvemFiscal_Usar { get; set; }
+        public AmbienteSistemas? NuvemFiscal_AmbienteWebService { get; set; }
+        public string? NuvemFiscal_Certificado { get; set; }
+        public string? NuvemFiscal_SerialNumber { get; set; }
+
+        public Estado Estado { get; set; }
+        public string NSU { get; set; }
     }
 }

@@ -21,7 +21,8 @@ namespace SisCom.Aplicacao.Controllers
         {
             this.MeuDbContext = meuDbContext;
 
-            _empresaService = new EmpresaService(new EmpresaRepository(this.MeuDbContext), notifier);
+            _empresaService = new EmpresaService(new EmpresaRepository(this.MeuDbContext),
+                                                 notifier);
         }
 
         public async Task<EmpresaViewModel> Adicionar(EmpresaViewModel empresaViewModel)
@@ -49,7 +50,7 @@ namespace SisCom.Aplicacao.Controllers
 
         public async Task<EmpresaViewModel> GetById(Guid id)
         {
-            var obter = await _empresaService.GetById(id);
+            var obter = await _empresaService.GetById(id, e => e.Endereco.End_Cidade, c => c.Endereco.End_Cidade.Estado);
             return Declaracoes.mapper.Map<EmpresaViewModel>(obter);
         }
 
@@ -69,6 +70,12 @@ namespace SisCom.Aplicacao.Controllers
         {
             var combo = await _empresaService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<EmpresaComboViewModel>>(combo);
+        }
+
+        public async Task<IEnumerable<EmpresaNuvemFiscalComboViewModel>> ComboNuvemFiscal(Expression<Func<Empresa, object>> order = null)
+        {
+            var combo = await _empresaService.Search(f => f.NuvemFiscal_Usar == true, order);
+            return Declaracoes.mapper.Map<IEnumerable<EmpresaNuvemFiscalComboViewModel>>(combo);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace SisCom.Aplicacao.Formularios
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.gridNotaFiscal = new System.Windows.Forms.DataGridView();
             this.label14 = new System.Windows.Forms.Label();
             this.comboTipoManifestacao = new System.Windows.Forms.ComboBox();
             this.datePeriodoInicial = new System.Windows.Forms.DateTimePicker();
@@ -49,22 +49,21 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoManifestar = new System.Windows.Forms.Button();
             this.botaoDownload = new System.Windows.Forms.Button();
             this.botaoImprimirDanfe = new System.Windows.Forms.Button();
-            this.botaoEnviarEmail = new System.Windows.Forms.Button();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboTipoNSU = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.comboTipoTLS = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscal)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView3
+            // gridNotaFiscal
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(12, 101);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowTemplate.Height = 25;
-            this.dataGridView3.Size = new System.Drawing.Size(1034, 293);
-            this.dataGridView3.TabIndex = 5;
-            this.dataGridView3.TabStop = false;
+            this.gridNotaFiscal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridNotaFiscal.Location = new System.Drawing.Point(12, 101);
+            this.gridNotaFiscal.Name = "gridNotaFiscal";
+            this.gridNotaFiscal.RowTemplate.Height = 25;
+            this.gridNotaFiscal.Size = new System.Drawing.Size(1034, 293);
+            this.gridNotaFiscal.TabIndex = 5;
+            this.gridNotaFiscal.TabStop = false;
             // 
             // label14
             // 
@@ -215,7 +214,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // botaoManifestar
             // 
-            this.botaoManifestar.Location = new System.Drawing.Point(91, 400);
+            this.botaoManifestar.Location = new System.Drawing.Point(267, 400);
             this.botaoManifestar.Name = "botaoManifestar";
             this.botaoManifestar.Size = new System.Drawing.Size(151, 40);
             this.botaoManifestar.TabIndex = 131;
@@ -225,7 +224,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // botaoDownload
             // 
-            this.botaoDownload.Location = new System.Drawing.Point(296, 400);
+            this.botaoDownload.Location = new System.Drawing.Point(472, 400);
             this.botaoDownload.Name = "botaoDownload";
             this.botaoDownload.Size = new System.Drawing.Size(151, 40);
             this.botaoDownload.TabIndex = 132;
@@ -235,7 +234,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // botaoImprimirDanfe
             // 
-            this.botaoImprimirDanfe.Location = new System.Drawing.Point(501, 400);
+            this.botaoImprimirDanfe.Location = new System.Drawing.Point(677, 400);
             this.botaoImprimirDanfe.Name = "botaoImprimirDanfe";
             this.botaoImprimirDanfe.Size = new System.Drawing.Size(151, 40);
             this.botaoImprimirDanfe.TabIndex = 133;
@@ -243,24 +242,14 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoImprimirDanfe.Text = "Imprimir Danfe";
             this.botaoImprimirDanfe.UseVisualStyleBackColor = true;
             // 
-            // botaoEnviarEmail
+            // comboTipoNSU
             // 
-            this.botaoEnviarEmail.Location = new System.Drawing.Point(706, 400);
-            this.botaoEnviarEmail.Name = "botaoEnviarEmail";
-            this.botaoEnviarEmail.Size = new System.Drawing.Size(151, 40);
-            this.botaoEnviarEmail.TabIndex = 134;
-            this.botaoEnviarEmail.TabStop = false;
-            this.botaoEnviarEmail.Text = "Enviar Email";
-            this.botaoEnviarEmail.UseVisualStyleBackColor = true;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(943, 3);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(103, 23);
-            this.comboBox3.TabIndex = 135;
-            this.comboBox3.TabStop = false;
+            this.comboTipoNSU.FormattingEnabled = true;
+            this.comboTipoNSU.Location = new System.Drawing.Point(747, 3);
+            this.comboTipoNSU.Name = "comboTipoNSU";
+            this.comboTipoNSU.Size = new System.Drawing.Size(190, 23);
+            this.comboTipoNSU.TabIndex = 135;
+            this.comboTipoNSU.TabStop = false;
             // 
             // label4
             // 
@@ -273,24 +262,23 @@ namespace SisCom.Aplicacao.Formularios
             this.label4.Text = "Último NSU: 0 | Última Consulta: | Ambiente: Produção | Vencimento Certificado: *" +
     " ATENÇÃO CERTIFICADO NÃO INFORMADO *";
             // 
-            // comboBox4
+            // comboTipoTLS
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(834, 3);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(103, 23);
-            this.comboBox4.TabIndex = 137;
-            this.comboBox4.TabStop = false;
+            this.comboTipoTLS.FormattingEnabled = true;
+            this.comboTipoTLS.Location = new System.Drawing.Point(943, 3);
+            this.comboTipoTLS.Name = "comboTipoTLS";
+            this.comboTipoTLS.Size = new System.Drawing.Size(103, 23);
+            this.comboTipoTLS.TabIndex = 137;
+            this.comboTipoTLS.TabStop = false;
             // 
             // frmFiscal_NuvemFiscal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1051, 447);
-            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.comboTipoTLS);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.botaoEnviarEmail);
+            this.Controls.Add(this.comboTipoNSU);
             this.Controls.Add(this.botaoImprimirDanfe);
             this.Controls.Add(this.botaoDownload);
             this.Controls.Add(this.botaoManifestar);
@@ -310,11 +298,11 @@ namespace SisCom.Aplicacao.Formularios
             this.Controls.Add(this.comboTipoManifestacao);
             this.Controls.Add(this.datePeriodoInicial);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.dataGridView3);
+            this.Controls.Add(this.gridNotaFiscal);
             this.MaximizeBox = false;
             this.Name = "frmFiscal_NuvemFiscal";
             this.Text = "Nuvem Fiscal - Consulte as Notas emitidas para sua Empresa";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,7 +310,7 @@ namespace SisCom.Aplicacao.Formularios
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView gridNotaFiscal;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox comboTipoManifestacao;
         private System.Windows.Forms.DateTimePicker datePeriodoInicial;
@@ -342,9 +330,8 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Button botaoManifestar;
         private System.Windows.Forms.Button botaoDownload;
         private System.Windows.Forms.Button botaoImprimirDanfe;
-        private System.Windows.Forms.Button botaoEnviarEmail;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboTipoNSU;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox comboTipoTLS;
     }
 }

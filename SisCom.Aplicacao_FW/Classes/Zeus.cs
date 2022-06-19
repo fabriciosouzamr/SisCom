@@ -1,19 +1,18 @@
-﻿using NFe.Utils.NFe;
-using NFe.Servicos;
-using NFe.Utils;
-using DFe.Classes.Entidades;
+﻿using DFe.Classes.Entidades;
 using DFe.Classes.Extensoes;
-using Funcoes._Enum;
-using NFe.Classes.Informacoes.Identificacao.Tipos;
-using System.Net;
 using DFe.Utils;
+using NFe.Classes.Informacoes.Identificacao.Tipos;
+using NFe.Servicos;
 using NFe.Servicos.Retorno;
+using NFe.Utils;
+using NFe.Utils.NFe;
+using System.Net;
 
-namespace SisCom.Aplicacao.Classes
+namespace SisCom.Aplicacao_FW.Classes
 {
     public static class Zeus
     {
-        public static AmbienteSistemas ambienteSistemas = AmbienteSistemas.Producao;
+        public static DFe.Classes.Flags.TipoAmbiente ambienteSistemas = DFe.Classes.Flags.TipoAmbiente.Producao;
         public static string NuvemFiscal_SerialNumber;
         public static string PATH_SCHEMAS;
 
@@ -27,23 +26,9 @@ namespace SisCom.Aplicacao.Classes
             oEstado = oEstado.SiglaParaEstado("GO");
 
             oConfig = ConfiguracaoServico.Instancia;
-
-            switch (ambienteSistemas)
-            {
-                case AmbienteSistemas.Producao:
-                    oConfig.tpAmb = DFe.Classes.Flags.TipoAmbiente.Producao;
-                    break;
-                case AmbienteSistemas.Homologacao:
-                    oConfig.tpAmb = DFe.Classes.Flags.TipoAmbiente.Homologacao;
-                    break;
-                default:
-                    CaixaMensagem.Informacao("Tipo de ambiente de transmissão não definido");
-                    break;
-            }
-
+            oConfig.tpAmb = ambienteSistemas;
             oConfig.tpEmis = TipoEmissao.teNormal;
             oConfig.ProtocoloDeSeguranca = ServicePointManager.SecurityProtocol;
-
             oConfig.Certificado = new ConfiguracaoCertificado();
 
             switch (tipoCertificado)
@@ -83,7 +68,7 @@ namespace SisCom.Aplicacao.Classes
             oConfig.TimeOut = 30000;
             oConfig.cUF = oEstado;
             oConfig.tpEmis = TipoEmissao.teNormal;
-            oConfig.ModeloDocumento  = DFe.Classes.Flags.ModeloDocumento.NFe;
+            oConfig.ModeloDocumento = DFe.Classes.Flags.ModeloDocumento.NFe;
             oConfig.VersaoLayout = DFe.Classes.Flags.VersaoServico.Versao400;
             oConfig.VersaoRecepcaoEventoCceCancelamento = DFe.Classes.Flags.VersaoServico.Versao400;
             oConfig.VersaoRecepcaoEventoEpec = DFe.Classes.Flags.VersaoServico.Versao400;
@@ -140,7 +125,7 @@ namespace SisCom.Aplicacao.Classes
                                                        string chnfe)
         {
             var servicoNFe = new ServicosNFe(Configuracao());
-            var retornoNFeDistDFe = servicoNFe.NfeDistDFeInteresse(EnderecoEmitente_UF, cnpj, nsu, "", chnfe);
+            var retornoNFeDistDFe = servicoNFe.NfeDistDFeInteresse(EnderecoEmitente_UF, cnpj, ultNSU: nsu, chNFE: chnfe);
 
             return retornoNFeDistDFe;
         }

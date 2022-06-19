@@ -37,8 +37,15 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
     <PackageReference Include="RestSharp" Version="107.3.0" />
     <PackageReference Include="System.Management" Version="6.0.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Aplicação de Terceiros\Fiscal\Zeus\DFe.Classes\DFe.Classes.csproj" />
+    <ProjectReference Include="..\..\Aplicação de Terceiros\Fiscal\Zeus\DFe.Utils\DFe.Utils.csproj" />
+    <ProjectReference Include="..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.Classes\NFe.Classes.csproj" />
+    <ProjectReference Include="..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.Servicos\NFe.Servicos.csproj" />
+    <ProjectReference Include="..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.Utils\NFe.Utils.csproj" />
+    <ProjectReference Include="..\SisCom.Aplicacao_FW\SisCom.Aplicacao_FW.csproj" />
     <ProjectReference Include="..\SisCom.Infraestrutura\SisCom.Infraestrutura.csproj" />
     <ProjectReference Include="..\SisCom.Negocio\SisCom.Negocio.csproj" />
   </ItemGroup>
@@ -62,20 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Compartilhado\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="DFe.Classes">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Classes.dll</HintPath>
-    </Reference>
-    <Reference Include="DFe.Utils">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="NFe.Classes">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Classes.dll</HintPath>
-    </Reference>
-    <Reference Include="NFe.Utils">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Utils.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Update="Configuration\appsettings.json">

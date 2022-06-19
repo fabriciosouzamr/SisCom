@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220613220233_AjusteCadastroEmpresa")]
+    partial class AjusteCadastroEmpresa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,9 +178,6 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<string>("NuvemFiscal_Certificado")
                         .HasColumnType("varchar(200)");
-
-                    b.Property<string>("NuvemFiscal_SerialNumber")
-                        .HasColumnType("varchar(100)");
 
                     b.Property<bool>("NuvemFiscal_Usar")
                         .HasColumnType("bit");
@@ -1021,7 +1020,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("Importacao_NumeroDrawback")
                         .HasColumnType("varchar(20)");
 
-                    b.Property<int?>("Importacao_TipoDocumentoImportacao")
+                    b.Property<int>("Importacao_TipoDocumentoImportacao")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Importacao_ValorCofins")
@@ -1046,7 +1045,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("NotaFiscal")
                         .HasColumnType("varchar(10)");
 
-                    b.Property<DateTime?>("Pedido")
+                    b.Property<DateTime>("Pedido")
                         .HasColumnType("datetime2");
 
                     b.Property<double>("PercentualBaseICMSST")

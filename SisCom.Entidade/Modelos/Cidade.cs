@@ -7,10 +7,9 @@ namespace SisCom.Entidade.Modelos
     {
         public string CodigoIBGE { get; set; }
         public string Nome { get; set; }
-
-        public Estado Estado { get; set; }
+        public Guid EstadoId { get; set; }
 
         /* EF Relation */
-        public Guid EstadoId { get; set; }
+        public Estado Estado { get; set; }
     }
 }

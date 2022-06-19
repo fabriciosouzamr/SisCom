@@ -27,7 +27,7 @@ namespace SisCom.Aplicacao.ViewModels
         public decimal ValorNota { get; set; }
         public string CodigoChaveAcesso { get; set; }
         public Empresa Empresa { get; set; }
-        public DateTime Pedido { get; set; }
+        public DateTime? Pedido { get; set; }
         public bool AtualizarPreco { get; set; }
         public bool IgnorarICMSDesonerado { get; set; }
         public double BaseCalculo { get; set; }
@@ -39,14 +39,14 @@ namespace SisCom.Aplicacao.ViewModels
         public int Volumes { get; set; }
         public decimal TotalMercadorias { get; set; }
         public decimal TotalNota { get; set; }
-        public TipoDocumentoImportacao Importacao_TipoDocumentoImportacao { get; set; }
-        public string Importacao_NumeroDocumento { get; set; }
-        public string Importacao_NumeroDrawback { get; set; }
+        public TipoDocumentoImportacao? Importacao_TipoDocumentoImportacao { get; set; }
+        public string? Importacao_NumeroDocumento { get; set; }
+        public string? Importacao_NumeroDrawback { get; set; }
         public decimal Importacao_ValorPIS { get; set; }
         public decimal Importacao_ValorCofins { get; set; }
-        public string ServicosAquisicao_CodigoChaveAcesso { get; set; }
-        public string ServicosAquisicao_Serie { get; set; }
-        public string ServicosAquisicao_SubSerie { get; set; }
+        public string? ServicosAquisicao_CodigoChaveAcesso { get; set; }
+        public string? ServicosAquisicao_Serie { get; set; }
+        public string? ServicosAquisicao_SubSerie { get; set; }
         public double ServicosAquisicao_PercentualBasePIS { get; set; }
         public double ServicosAquisicao_AliquotaPIS { get; set; }
         public decimal ServicosAquisicao_ValorPIS { get; set; }
