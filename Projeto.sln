@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entidades", "Entidades", "{6E717EE9-0A45-41B8-AB0D-27B2409A29FC}"
 EndProject
@@ -134,11 +134,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Zeus", "Zeus", "{0A966997-F
 		Aplicação de Terceiros\DLLs\Zeus\zxing.presentation.dll = Aplicação de Terceiros\DLLs\Zeus\zxing.presentation.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SisCom.Aplicacao_FW", "SisCom.Aplicacao_FW\SisCom.Aplicacao_FW.csproj", "{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7}"
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Funcoes\Funcoes.projitems*{30dce0cb-59a0-44e2-8e49-125a7baa73cd}*SharedItemsImports = 5
-		Funcoes\Funcoes.projitems*{c59933f5-5180-4525-84c6-44b21bdbaaf2}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
@@ -202,6 +200,14 @@ Global
 		{7C925B95-A8CB-40C9-A43E-07E420BBD9A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7C925B95-A8CB-40C9-A43E-07E420BBD9A0}.Release|x86.ActiveCfg = Release|Any CPU
 		{7C925B95-A8CB-40C9-A43E-07E420BBD9A0}.Release|x86.Build.0 = Release|Any CPU
+		{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7}.Debug|x86.Build.0 = Debug|Any CPU
+		{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7}.Release|x86.ActiveCfg = Release|Any CPU
+		{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -220,8 +226,13 @@ Global
 		{B288FBF4-32BB-4A27-9061-50CFDC814BB2} = {43CE6BB4-3E68-41C7-ABA7-EBAA3356203B}
 		{C80E034C-36E7-442E-85BD-445E779DA555} = {B288FBF4-32BB-4A27-9061-50CFDC814BB2}
 		{0A966997-F6C0-4DF1-A6F9-26239C0D571F} = {B288FBF4-32BB-4A27-9061-50CFDC814BB2}
+		{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7} = {3F94EF16-B2D9-4DEC-8C0F-7940B321E783}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C8C4D9F7-EF86-49A2-83AF-13FA5D4E8DBB}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Funcoes\Funcoes.projitems*{30dce0cb-59a0-44e2-8e49-125a7baa73cd}*SharedItemsImports = 5
+		Funcoes\Funcoes.projitems*{c59933f5-5180-4525-84c6-44b21bdbaaf2}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

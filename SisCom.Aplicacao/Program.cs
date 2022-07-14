@@ -40,6 +40,7 @@ namespace SisCom.Aplicacao
                     Application.SetCompatibleTextRenderingDefault(false);
 
                     appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "appsettings.json");
+                    Declaracoes.Externos_SisCom_Aplicacao_FW = Path.Combine(Directory.GetCurrentDirectory(), "Externos", "SisCom.Aplicacao_FW.exe");
 
                     using (StreamReader file = File.OpenText(appSettingsPath))
                     {
@@ -83,6 +84,8 @@ namespace SisCom.Aplicacao
                         #region Empresa
                         cfg.CreateMap<EmpresaViewModel, Empresa>().ReverseMap();
                         cfg.CreateMap<Empresa, EmpresaComboViewModel>();
+                        cfg.CreateMap<Empresa, EmpresaNuvemFiscalComboViewModel>().
+                            ForPath(Est => Est.Estado, Emp => Emp.MapFrom(src => src.Endereco.End_Cidade.Estado));
                         #endregion
                         #region Estado
                         cfg.CreateMap<EstadoViewModel, Estado>().ReverseMap();
@@ -275,6 +278,11 @@ namespace SisCom.Aplicacao
                 {
                     Directory.CreateDirectory(Declaracoes.Aplicacao_CaminhoFoto);
                 }
+                        
+                Declaracoes.Externos_Path_Schemas = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
+                Declaracoes.Externos_Path_NuvemFiscal = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
+                if (!Directory.Exists(Declaracoes.Externos_Path_Schemas)) { Directory.CreateDirectory(Declaracoes.Externos_Path_Schemas); }
+                if (!Directory.Exists(Declaracoes.Externos_Path_NuvemFiscal)) { Directory.CreateDirectory(Declaracoes.Externos_Path_NuvemFiscal); }
             }
         }
         public class MeuDbContextFactory : IDesignTimeDbContextFactory<MeuDbContext>

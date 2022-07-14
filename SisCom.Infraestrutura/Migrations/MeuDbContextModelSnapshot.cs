@@ -48,7 +48,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
@@ -95,7 +95,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
@@ -164,6 +164,9 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("NFE_VersaoEmissor")
                         .HasColumnType("varchar(20)");
 
+                    b.Property<string>("NSU")
+                        .HasColumnType("varchar(10)");
+
                     b.Property<string>("NomeFantasia")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
@@ -173,6 +176,9 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<string>("NuvemFiscal_Certificado")
                         .HasColumnType("varchar(200)");
+
+                    b.Property<string>("NuvemFiscal_SerialNumber")
+                        .HasColumnType("varchar(100)");
 
                     b.Property<bool>("NuvemFiscal_Usar")
                         .HasColumnType("bit");
@@ -291,7 +297,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
@@ -957,10 +963,12 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal>("PercentualICMS")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<Guid?>("TabelaCFOPId")
                         .HasColumnType("uniqueidentifier");
@@ -985,7 +993,9 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("bit");
 
                     b.Property<double>("BaseCalculo")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<string>("CodigoChaveAcesso")
                         .HasColumnType("varchar(44)");
@@ -1011,14 +1021,18 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("Importacao_NumeroDrawback")
                         .HasColumnType("varchar(20)");
 
-                    b.Property<int>("Importacao_TipoDocumentoImportacao")
+                    b.Property<int?>("Importacao_TipoDocumentoImportacao")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Importacao_ValorCofins")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("Importacao_ValorPIS")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<int>("InformacaoAdicionais_Finalidade")
                         .HasColumnType("int");
@@ -1032,35 +1046,49 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("NotaFiscal")
                         .HasColumnType("varchar(10)");
 
-                    b.Property<DateTime>("Pedido")
+                    b.Property<DateTime?>("Pedido")
                         .HasColumnType("datetime2");
 
                     b.Property<double>("PercentualBaseICMSST")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<string>("Serie")
                         .HasColumnType("varchar(3)");
 
                     b.Property<double>("ServicosAquisicao_AliquotaCofins")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("ServicosAquisicao_AliquotaCofinsRetFonte")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("ServicosAquisicao_AliquotaPIS")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<string>("ServicosAquisicao_CodigoChaveAcesso")
                         .HasColumnType("varchar(44)");
 
                     b.Property<double>("ServicosAquisicao_PercentualBaseCofins")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("ServicosAquisicao_PercentualBasePIS")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<double>("ServicosAquisicao_PercentualPISRefFonte")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<string>("ServicosAquisicao_Serie")
                         .HasColumnType("varchar(3)");
@@ -1069,61 +1097,95 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("varchar(3)");
 
                     b.Property<decimal>("ServicosAquisicao_ValorCofins")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ServicosAquisicao_ValorICMSDesoneracao")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ServicosAquisicao_ValorISS")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ServicosAquisicao_ValorPIS")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<int>("TipoFrete")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalMercadorias")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("TotalNota")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("ValorDesconto")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorFCPST")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorFrete")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorICMS")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorICMSDesoneracao")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorICMSST")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorICMSSubstitucao")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorIPI")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorNota")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorOutrasDespesas")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorSeguro")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<int>("Volumes")
                         .HasColumnType("int");
@@ -1164,7 +1226,9 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("NumeroDocumento")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<string>("Observacao")
                         .HasColumnType("text");
@@ -1173,10 +1237,14 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorPago")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.HasKey("Id");
 
@@ -1211,22 +1279,34 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("PercentualDesconto")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("PercentualICMS")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("PercentualIPI")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("PrecoPorCaixas")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("PrecoTotal")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<decimal>("PrecoUnitario")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<int>("QuantidadeCaixas")
                         .HasColumnType("int");
@@ -1238,7 +1318,9 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("ValorDesconto")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.HasKey("Id");
 

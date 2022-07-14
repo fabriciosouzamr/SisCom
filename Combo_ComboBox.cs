@@ -100,7 +100,7 @@ public class Combo_ComboBox
 	{
 		comboCidade.Enabled = false;
 		comboEstado.Enabled = false;
-		comboPais.Enabled = false;
+		if (comboPais != null) { comboPais.Enabled = false; }
 
 		try
         {
@@ -141,7 +141,7 @@ public class Combo_ComboBox
 		
 		comboCidade.Enabled = true;
 		comboEstado.Enabled = true;
-		comboPais.Enabled = true;
+		if (comboPais != null) { comboPais.Enabled = true; }
 
 	}
 }

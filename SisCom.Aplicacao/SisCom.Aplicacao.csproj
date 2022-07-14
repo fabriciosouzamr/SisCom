@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
@@ -37,6 +37,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
     <PackageReference Include="RestSharp" Version="107.3.0" />
     <PackageReference Include="System.Management" Version="6.0.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SisCom.Infraestrutura\SisCom.Infraestrutura.csproj" />
@@ -62,16 +63,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Compartilhado\" />
+    <Folder Include="Externos\NuvemFiscal\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DFe.Classes">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Classes.dll</HintPath>
+      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\DFe.Classes.dll</HintPath>
     </Reference>
     <Reference Include="DFe.Utils">
       <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Utils.dll</HintPath>
     </Reference>
     <Reference Include="NFe.Classes">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Classes.dll</HintPath>
+      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\NFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Servicos">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Servicos.dll</HintPath>
     </Reference>
     <Reference Include="NFe.Utils">
       <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Utils.dll</HintPath>
@@ -163,6 +168,549 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Configuration\Seed\UnidadeMedidaConversao.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\atuCadEmiDFe_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\Averb_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\cabecMsg_v1.02.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\cadEmiDFe_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\cancNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\CCe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\confRecebto_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consCad_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consCad_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consDPEC_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consNFeDest_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consReciNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consReciNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consReciNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consSitNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consSitNFe_v2.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consSitNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consSitNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consStatServ_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consStatServ_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consStatServ_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\distDFeInt_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\distDFeInt_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\downloadNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e110110_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e110111_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e110112_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e110140_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e111500_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e111501_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e111502_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e111503_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e210200_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e210210_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e210220_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e210240_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e411500_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e411501_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e411502_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e411503_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e790700_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e990900_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\e990910_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envAverb_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envCancelPProrrogNFe_v1.0.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envCCe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envConfRecebto_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envDPEC_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envEPEC_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envEventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envEvento_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envFiscoNfe_v1.0.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\enviNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\enviNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\enviNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envPProrrogNFe_v1.0.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envRemIndus_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envSuframaInternaliza_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\envSuframaVistoria_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\EPEC_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\eventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\eventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\eventoEPEC_v0.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\eventoEPEC_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\eventoRemIndus_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\inutNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\inutNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\inutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteAverb_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\LeiauteCadastroEmissorDFe_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteCancNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteCCe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConfRecebto_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConsNFeDest_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConsSitNFe_v2.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConsSitNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConsSitNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConsStatServ_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConsStatServ_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConsStatServ_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConsultaCadastro_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConsultaCadastro_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteConsultaCadastro_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteDownloadNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteDPEC_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteEPEC_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteEventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteEvento_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteInutNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteInutNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteLivroCombustivel_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteLMCAutorizacaoRetorno_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteLMCAutorizacao_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteLMCStatusServico_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteProtLivroCombustivel_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteRemIndus_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteSRE_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteSuframaInternaliza_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteSuframaVistoria_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\livroCombustivel_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\lmcComum_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\nfe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\nfe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\nfe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procAverbNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procCancNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procCCeNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procConfRecebtoNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procEPEC_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procEventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procEventoNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procEventoNFe_v99.99.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procInutNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procInutNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procRemIndus_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\resEvento_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\resEvento_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\resNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\resNFe_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retAtuCadEmiDFe_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retCancNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsCad_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsDPEC_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retconsNFeDest_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsReciNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsReciNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsReciNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsSitNFe_v2.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsSitNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsSitNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsStatServ_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsStatServ_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsStatServ_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retDistDFeInt_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retDistDFeInt_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retDownloadNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retDPEC_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvAverb_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvCancelPProrrogNFe_v1.0.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvCCe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvConfRecebto_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvEPEC_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvEventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvEvento_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvFiscoNFe_v1.0.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnviNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnviNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnviNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvRemIndus_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvSuframaInternaliza_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEnvSuframaVistoria_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retEventoEPEC_v0.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retInutNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retInutNFe_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retPProrrogNFe_v1.0.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\statusServico_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\SuframaInternaliza_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\SuframaVistoria_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\tiposBasico_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\tiposBasico_v1.03.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\tiposBasico_v1.03_OPENSSL.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\tiposBasico_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\tiposBasico_v3.10_OPENSSL.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\tiposBasico_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\tiposDistDFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\tiposDistDFe_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\xmldsig-core-schema_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">

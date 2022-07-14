@@ -34,7 +34,7 @@ public static class Grid_DataGridView
 
     public static void DataGridView_Formatar(DataGridView Grid)
     {
-        Grid.AllowUserToAddRows = true;
+        Grid.AllowUserToAddRows = false;
     }
 
     public static void DataGridView_DataSource(DataGridView Grid, object dataSource, bool  allowNew)
@@ -97,15 +97,15 @@ public static class Grid_DataGridView
         }
     }
 
-    public static void DataGridView_ColunaAdicionar(DataGridView Grid,
-                                                    string Nome,
-                                                    string Titulo,
-                                                    TipoColuna Tipo = TipoColuna.TextBox,
-                                                    int Tamanho = 100,
-                                                    int Caracteres = 0,
-                                                    object dataSource = null,
-                                                    string dataSource_Descricao = "",
-                                                    string dataSource_Valor = "")
+    public static DataGridViewColumn DataGridView_ColunaAdicionar(DataGridView Grid,
+                                                                  string Nome,
+                                                                  string Titulo,
+                                                                  TipoColuna Tipo = TipoColuna.TextBox,
+                                                                  int Tamanho = 100,
+                                                                  int Caracteres = 0,
+                                                                  object dataSource = null,
+                                                                  string dataSource_Descricao = "",
+                                                                  string dataSource_Valor = "")
     {
         DataGridViewColumn Coluna = DataGridView_ColunaCriar(Grid,
                                                              Nome,
@@ -128,6 +128,8 @@ public static class Grid_DataGridView
         { Grid.Columns[Grid.Columns.Count - 1].Width = Tamanho; }
 
         Grid.Columns[Grid.Columns.Count - 1].DataPropertyName = Nome;
+
+        return Coluna;
     }
 
     public static void DataGridView_CelularAlimentar(DataGridView grid, int linha, int coluna, object valor)

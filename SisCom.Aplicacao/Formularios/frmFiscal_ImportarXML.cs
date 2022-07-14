@@ -1,14 +1,18 @@
-﻿using Funcoes._Classes;
+﻿using DFe.Utils;
+using Funcoes._Classes;
 using Funcoes._Enum;
 using Funcoes.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using NFe.Classes;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
+using SisCom.Entidade.Enum;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,14 +35,33 @@ namespace SisCom.Aplicacao.Formularios
         const int grdProduto_Status = 12;
         const int grdProduto_VinculoFiscal = 13;
 
+        private nfeProc _nfeProc;
+
         IEnumerable<UnidadeMedidaConversaoViewModel> unidadeMedidaConversao;
 
         public frmFiscal_ImportarXML(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
             InitializeComponent();
-            InicializaAsync();
+            Inicializa();
         }
-        private async Task InicializaAsync()
+
+        async Task Inicializa()
+        {
+            await Assincrono.TaskAsyncAndAwaitAsync(InicializaAsync());
+        }
+
+        public nfeProc nfeProc
+        {   get
+            {
+                return _nfeProc;
+            }
+            set
+            {
+                _nfeProc = value;
+            }
+        }
+
+        private async Task<bool> InicializaAsync()
         {
             DataTable produto = new DataTable();
             produto.Columns.Add("ID", typeof(Guid));
@@ -56,7 +79,6 @@ namespace SisCom.Aplicacao.Formularios
                 }
             }
 
-            //Detalhe de Estoque
             Grid_DataGridView.DataGridView_Formatar(gridProduto);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Descrição");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Unidade");
@@ -87,6 +109,10 @@ namespace SisCom.Aplicacao.Formularios
                                     await (new EmpresaController(this.MeuDbContext(), this._notifier)).Combo(p => p.Unidade));
             await CarregarComboFornecedor();
 
+            if (_nfeProc != null)
+                Carregar();
+
+            return true;
         }
         private async Task CarregarComboFornecedor()
         {
@@ -97,28 +123,41 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoProcurarXML_Click(object sender, EventArgs e)
         {
+            CarregarXML();
+        }
+
+        void CarregarXML()
+        {
             string sXMLArquivo = "";
-            var nfeProc = Zeus.CarregarNFE_XML(ref sXMLArquivo);
-            decimal volumes = 0;
-            decimal valores = 0;
+
+            _nfeProc = Zeus.CarregarNFE_XML(ref sXMLArquivo);
 
             textLocalXML.Text = sXMLArquivo;
 
-            if (nfeProc.NFe != null)
+            if (_nfeProc != null)
+                Carregar();
+        }
+
+        void Carregar()
+        { 
+            decimal volumes = 0;
+            decimal valores = 0;
+
+            if (_nfeProc.NFe != null)
             {
-                textAmbiente.Text = ((AmbienteSistemas)(int)nfeProc.NFe.infNFe.ide.tpAmb).GetDescription();
-                textChave.Text = nfeProc.NFe.infNFe.Id.Substring(3);
-                textNumero.Text = nfeProc.NFe.infNFe.ide.cNF;
-                textNumeroSerie.Text = nfeProc.NFe.infNFe.ide.serie.ToString();
-                dateDateEmissao.Value = nfeProc.NFe.infNFe.ide.dhEmi.DateTime;
-                if (nfeProc.NFe.infNFe.emit.enderEmit != null) textUF.Text = nfeProc.NFe.infNFe.emit.enderEmit.UF.ToString();
-                textCNPJ.Text = nfeProc.NFe.infNFe.emit.CNPJ;
-                textInscricaoEstadual.Text = nfeProc.NFe.infNFe.emit.IE;
-                Forms.comboFornecedor_SelecionarPorCNPJ_CPF(comboFornecedor, nfeProc.NFe.infNFe.emit.CNPJ);
+                textAmbiente.Text = ((AmbienteSistemas)(int)_nfeProc.NFe.infNFe.ide.tpAmb).GetDescription();
+                textChave.Text = _nfeProc.NFe.infNFe.Id.Substring(3);
+                textNumero.Text = _nfeProc.NFe.infNFe.ide.cNF;
+                textNumeroSerie.Text = _nfeProc.NFe.infNFe.ide.serie.ToString();
+                dateDateEmissao.Value = _nfeProc.NFe.infNFe.ide.dhEmi.DateTime;
+                if (_nfeProc.NFe.infNFe.emit.enderEmit != null) textUF.Text = _nfeProc.NFe.infNFe.emit.enderEmit.UF.ToString();
+                textCNPJ.Text = _nfeProc.NFe.infNFe.emit.CNPJ;
+                textInscricaoEstadual.Text = _nfeProc.NFe.infNFe.emit.IE;
+                Forms.comboFornecedor_SelecionarPorCNPJ_CPF(comboFornecedor, _nfeProc.NFe.infNFe.emit.CNPJ);
 
                 Grid_DataGridView.DataGridView_LinhaLimpar(gridProduto);
 
-                nfeProc.NFe.infNFe.det.ForEach(d =>
+                _nfeProc.NFe.infNFe.det.ForEach(d =>
                 {
                     volumes = volumes + d.prod.qCom;
                     valores = valores + d.prod.vProd;
@@ -144,29 +183,39 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                                  Valor = d.prod.cProd,
                                                                                                                                  Formato = Grid_DataGridView.FormatoColuna.Texto },
                                                                                                   new Grid_DataGridView.Coluna { Indice = grdProduto_QtdeCaixa,
-                                                                                                                                 Valor = Math.Round(d.prod.qCom * (decimal)0.016667, 2),
+                                                                                                                                 Valor = d.prod.uCom == "SC" ? d.prod.qCom : Math.Round(d.prod.qCom * (decimal)0.016667, 2),
                                                                                                                                  Formato = Grid_DataGridView.FormatoColuna.Texto }});
                 });
 
-                if (nfeProc.NFe.infNFe.det != null)
+                if (_nfeProc.NFe.infNFe.det != null)
                 {
-                    labelItens.Text = "Itens: " + nfeProc.NFe.infNFe.det.Count.ToString();
+                    labelItens.Text = "Itens: " + _nfeProc.NFe.infNFe.det.Count.ToString();
                     labelVolumes.Text = "Volumes: " + volumes.ToString();
                     labelTotalProdutos.Text = "Total Produtos: " + valores.ToString();
                 }
 
-                labelTotalNFe.Text = "Total NF-e: " + nfeProc.NFe.infNFe.total.ICMSTot.vNF.ToString();
+                labelTotalNFe.Text = "Total NF-e: " + _nfeProc.NFe.infNFe.total.ICMSTot.vNF.ToString();
 
-                if (nfeProc.protNFe != null)
+                if (_nfeProc.protNFe != null)
                 {
-                    textProtocolo.Text = nfeProc.protNFe.infProt.nProt;
+                    textProtocolo.Text = _nfeProc.protNFe.infProt.nProt;
                 }
             }
         }
         private void botaoImportarDanfe_Click(object sender, EventArgs e)
         {
             using (frmFiscal_NuvemFiscal form = this.ServiceProvider().GetRequiredService<frmFiscal_NuvemFiscal>())
+            {
                 form.ShowDialog(this);
+
+                if (!String.IsNullOrEmpty(form.sXML))
+                {
+                    _nfeProc = FuncoesXml.XmlStringParaClasse<nfeProc>(form.sXML);
+
+                    if (_nfeProc != null)
+                        Carregar();
+                }
+            }
         }
         private void botaoOk_Click(object sender, EventArgs e)
         {
@@ -210,43 +259,96 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("É preciso pelo menos um produto na nota fiscal");
                 return;
             }
+            for (int i = 0; i < gridProduto.Rows.Count; i++)
+            {
+                var row = gridProduto.Rows[i];
+
+                if (row.Cells[grdProduto_CodigoSistema].Value == null)
+                {
+                    CaixaMensagem.Informacao("Selecione o produto interno ref. ao produto " + row.Cells[grdProduto_Descricao].Value.ToString());
+                    return;
+                }
+            }
 
             Gravar();
-
-            CaixaMensagem.Informacao("Nota gravada");
         }
 
         async Task Gravar()
         {
-            NotaFiscalEntradaViewModel notaFiscalEntradaViewModel = new NotaFiscalEntradaViewModel();
-
-            using (NotaFiscalEntradaController notaFiscalEntradaController = new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier))
+            try
             {
-                notaFiscalEntradaViewModel.Id = Guid.NewGuid();
+                NotaFiscalEntradaViewModel notaFiscalEntradaViewModel = new NotaFiscalEntradaViewModel();
 
-                await notaFiscalEntradaController.Adicionar(notaFiscalEntradaViewModel);
-            }
-
-            using (NotaFiscalEntradaMercadoriaController notaFiscalEntradaMercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier))
-            {
-                foreach(DataRow row in gridProduto.Rows)
+                using (NotaFiscalEntradaController notaFiscalEntradaController = new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier))
                 {
-                    NotaFiscalEntradaMercadoriaViewModel notaFiscalEntradaMercadoriaViewModel = new NotaFiscalEntradaMercadoriaViewModel();
+                    if (await notaFiscalEntradaController.PesquisarChaveExiste(textChave.Text))
+                    {
+                        CaixaMensagem.Informacao("Nota fiscal já cadastrada");
+                    }
+                    else
+                    {
+                        notaFiscalEntradaViewModel.Id = Guid.NewGuid();
+                        notaFiscalEntradaViewModel.DataEntrada = DateTime.Now;
+                        notaFiscalEntradaViewModel.DataEmissao = dateDateEmissao.Value;
+                        notaFiscalEntradaViewModel.NotaFiscal = textNumero.Text;
+                        notaFiscalEntradaViewModel.Modelo = Funcoes.Enum.NF_Modelo.NotaFiscalEletronica;
+                        notaFiscalEntradaViewModel.Serie = textNumeroSerie.Text;
+                        notaFiscalEntradaViewModel.FornecedorId = (Guid)comboFornecedor.SelectedValue;
+                        notaFiscalEntradaViewModel.NaturezaOperacaoId = (Guid)comboNaturezaOperacao.SelectedValue;
+                        notaFiscalEntradaViewModel.EmpresaId = (Guid)comboEmpresa.SelectedValue;
+                        notaFiscalEntradaViewModel.TipoFrete = TipoFrete.SemOcorrenciaTransporte;
+                        notaFiscalEntradaViewModel.PercentualBaseICMSST = (double)_nfeProc.NFe.infNFe.total.ICMSTot.vBCST;
+                        notaFiscalEntradaViewModel.ValorICMSST = _nfeProc.NFe.infNFe.total.ICMSTot.vICMS;
+                        notaFiscalEntradaViewModel.ValorSeguro = _nfeProc.NFe.infNFe.total.ICMSTot.vSeg;
+                        notaFiscalEntradaViewModel.ValorDesconto = _nfeProc.NFe.infNFe.total.ICMSTot.vDesc;
+                        notaFiscalEntradaViewModel.ValorFrete = _nfeProc.NFe.infNFe.total.ICMSTot.vFrete;
+                        notaFiscalEntradaViewModel.ValorOutrasDespesas = _nfeProc.NFe.infNFe.total.ICMSTot.vOutro;
+                        notaFiscalEntradaViewModel.ValorNota = _nfeProc.NFe.infNFe.total.ICMSTot.vNF;
+                        notaFiscalEntradaViewModel.CodigoChaveAcesso = textChave.Text;
+                        notaFiscalEntradaViewModel.BaseCalculo = (double)_nfeProc.NFe.infNFe.total.ICMSTot.vBC;
+                        notaFiscalEntradaViewModel.ValorICMS = _nfeProc.NFe.infNFe.total.ICMSTot.vICMS;
+                        notaFiscalEntradaViewModel.ValorICMSSubstitucao = _nfeProc.NFe.infNFe.total.ICMSTot.vST;
+                        notaFiscalEntradaViewModel.ValorICMSDesoneracao = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vICMSDeson);
+                        notaFiscalEntradaViewModel.ValorIPI = _nfeProc.NFe.infNFe.total.ICMSTot.vIPI;
+                        notaFiscalEntradaViewModel.ValorFCPST = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vFCPST);
+                        notaFiscalEntradaViewModel.Volumes = (int)_nfeProc.NFe.infNFe.total.ICMSTot.vIPI;
+                        notaFiscalEntradaViewModel.TotalMercadorias = _nfeProc.NFe.infNFe.total.ICMSTot.vProd;
+                        notaFiscalEntradaViewModel.TotalNota = _nfeProc.NFe.infNFe.total.ICMSTot.vNF;
+                        notaFiscalEntradaViewModel.Importacao_TipoDocumentoImportacao = TipoDocumentoImportacao.DeclaracaoImportacao;
+                        notaFiscalEntradaViewModel.InformacaoAdicionais_Finalidade = NF_Finalidade.Normal;
 
-                    notaFiscalEntradaMercadoriaViewModel.QuantidadeCaixas = Convert.ToInt32(row[grdProduto_Quantidade]);
-                    notaFiscalEntradaMercadoriaViewModel.QuantidadeUnitaria = Convert.ToInt32(row[grdProduto_Quantidade]);
-                    notaFiscalEntradaMercadoriaViewModel.PrecoPorCaixas = Convert.ToDecimal(row[grdProduto_Quantidade]);
-                    notaFiscalEntradaMercadoriaViewModel.PrecoUnitario = Convert.ToDecimal(row[grdProduto_Preco]);
-                    notaFiscalEntradaMercadoriaViewModel.PercentualDesconto = 0;
-                    notaFiscalEntradaMercadoriaViewModel.ValorDesconto = 0;
-                    notaFiscalEntradaMercadoriaViewModel.PrecoTotal = Convert.ToDecimal(row[grdProduto_Total]);
-                    notaFiscalEntradaMercadoriaViewModel.PercentualICMS = 0;
-                    notaFiscalEntradaMercadoriaViewModel.PercentualIPI = 0;
-                    notaFiscalEntradaMercadoriaViewModel.NotaFiscalEntradaId = notaFiscalEntradaViewModel.Id;
-                    notaFiscalEntradaMercadoriaViewModel.MercadoriaId = Guid.Parse(row[grdProduto_CodigoSistema].ToString());
+                        await notaFiscalEntradaController.Adicionar(notaFiscalEntradaViewModel);
 
-                    await notaFiscalEntradaMercadoriaController.Adicionar(notaFiscalEntradaMercadoriaViewModel);
+                        using (NotaFiscalEntradaMercadoriaController notaFiscalEntradaMercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier))
+                        {
+                            for (int i = 0; i < gridProduto.Rows.Count; i++)
+                            {
+                                var row = gridProduto.Rows[i];
+
+                                NotaFiscalEntradaMercadoriaViewModel notaFiscalEntradaMercadoriaViewModel = new NotaFiscalEntradaMercadoriaViewModel();
+                                notaFiscalEntradaMercadoriaViewModel.QuantidadeCaixas = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
+                                notaFiscalEntradaMercadoriaViewModel.QuantidadeUnitaria = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
+                                notaFiscalEntradaMercadoriaViewModel.PrecoPorCaixas = Convert.ToDecimal(row.Cells[grdProduto_Quantidade].Value);
+                                notaFiscalEntradaMercadoriaViewModel.PrecoUnitario = Convert.ToDecimal(row.Cells[grdProduto_Preco].Value);
+                                notaFiscalEntradaMercadoriaViewModel.PercentualDesconto = 0;
+                                notaFiscalEntradaMercadoriaViewModel.ValorDesconto = 0;
+                                notaFiscalEntradaMercadoriaViewModel.PrecoTotal = Convert.ToDecimal(row.Cells[grdProduto_Total].Value);
+                                notaFiscalEntradaMercadoriaViewModel.PercentualICMS = 0;
+                                notaFiscalEntradaMercadoriaViewModel.PercentualIPI = 0;
+                                notaFiscalEntradaMercadoriaViewModel.NotaFiscalEntradaId = notaFiscalEntradaViewModel.Id;
+                                notaFiscalEntradaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[grdProduto_CodigoSistema].Value.ToString());
+
+                                await notaFiscalEntradaMercadoriaController.Adicionar(notaFiscalEntradaMercadoriaViewModel);
+                            }
+                        }
+
+                        CaixaMensagem.Informacao("Nota gravada");
+                    }
                 }
+            }
+            catch (Exception Ex)
+            {
+                CaixaMensagem.Informacao(Ex.Message);
             }
         }
         private void botaoSair_Click(object sender, EventArgs e)
@@ -264,13 +366,27 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
-        private void GridProduto_SelecionarProduto(int iLinha, string valor)
+        private void GridProduto_SelecionarProduto(int iLinha, int Coluna, string valor)
         {
             try
             {
-                if (Funcao.NuloParaString(gridProduto.Rows[iLinha].Cells[grdProduto_CodigoFornecedor].Value) != valor)
+                if ((Coluna == grdProduto_CodigoSistema) &&
+                    (Funcao.NuloParaString(gridProduto.Rows[iLinha].Cells[grdProduto_CodigoFornecedor].Value) != valor))
                 {
                     gridProduto.Rows[iLinha].Cells[grdProduto_DescricaoSistema].Value = Guid.Parse(valor);
+                    gridProduto.Rows[iLinha].Cells[grdProduto_RefSistema].Value = Guid.Parse(valor);
+                }
+                if ((Coluna == grdProduto_DescricaoSistema) &&
+                    (Funcao.NuloParaString(gridProduto.Rows[iLinha].Cells[grdProduto_DescricaoSistema].Value) != valor))
+                {
+                    gridProduto.Rows[iLinha].Cells[grdProduto_RefSistema].Value = Guid.Parse(valor);
+                    gridProduto.Rows[iLinha].Cells[grdProduto_CodigoSistema].Value = Guid.Parse(valor);
+                }
+                if ((Coluna == grdProduto_RefSistema) &&
+                    (Funcao.NuloParaString(gridProduto.Rows[iLinha].Cells[grdProduto_RefSistema].Value) != valor))
+                {
+                    gridProduto.Rows[iLinha].Cells[grdProduto_DescricaoSistema].Value = Guid.Parse(valor);
+                    gridProduto.Rows[iLinha].Cells[grdProduto_CodigoSistema].Value = Guid.Parse(valor);
                 }
             }
             catch (Exception)
@@ -282,9 +398,11 @@ namespace SisCom.Aplicacao.Formularios
         {
             try
             {
-                if (e.ColumnIndex == grdProduto_CodigoSistema)
+                if ((e.ColumnIndex == grdProduto_CodigoSistema) || 
+                    (e.ColumnIndex == grdProduto_DescricaoSistema) || 
+                    (e.ColumnIndex == grdProduto_RefSistema))
                 {
-                    GridProduto_SelecionarProduto(e.RowIndex, gridProduto.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+                    GridProduto_SelecionarProduto(e.RowIndex, e.ColumnIndex, gridProduto.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
                 }
             }
             catch (Exception)

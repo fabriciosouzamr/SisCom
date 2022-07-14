@@ -1,5 +1,7 @@
-﻿using Funcoes.Interfaces;
+﻿using DFe.Utils;
+using Funcoes.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using NFe.Classes;
 using SisCom.Aplicacao.Classes;
 using SisCom.Infraestrutura.Data.Context;
 using System;
@@ -22,8 +24,22 @@ namespace SisCom.Aplicacao.Formularios
 
         private void botaoNuvemFiscal_Click(object sender, System.EventArgs e)
         {
-            var form = this.ServiceProvider().GetRequiredService<frmFiscal_NuvemFiscal>();
-            form.ShowDialog(this);
+            string sXML = "";
+
+            using (frmFiscal_NuvemFiscal form = this.ServiceProvider().GetRequiredService<frmFiscal_NuvemFiscal>())
+            {
+                form.ShowDialog(this);
+                sXML = form.sXML;
+            }
+
+            if (!String.IsNullOrEmpty(sXML))
+            {
+                using (frmFiscal_ImportarXML form = this.ServiceProvider().GetRequiredService<frmFiscal_ImportarXML>())
+                {
+                    form.nfeProc = FuncoesXml.XmlStringParaClasse<nfeProc>(sXML);
+                    form.ShowDialog(this);
+                }
+            }
         }
 
         private void botaoFechar_Click(object sender, System.EventArgs e)

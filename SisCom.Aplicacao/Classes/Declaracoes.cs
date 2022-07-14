@@ -26,6 +26,10 @@ namespace SisCom.Aplicacao.Classes
         public static eTipoCalculo tipoCalculo = eTipoCalculo.Padrao;
         public static eCalculoPreco calculoPreco = eCalculoPreco.Compra;
 
+        public static string Externos_SisCom_Aplicacao_FW = "";
+        public static string Externos_Path_Schemas = "";
+        public static string Externos_Path_NuvemFiscal = "";
+
         public enum eNavegar
         {
             Primeiro,
@@ -44,7 +48,7 @@ namespace SisCom.Aplicacao.Classes
         public enum eCalculoPreco
         {
             Compra = 1,
-            Venda =2
+            Venda = 2
         }
     }
 

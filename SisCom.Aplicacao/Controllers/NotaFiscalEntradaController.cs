@@ -7,6 +7,7 @@ using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -52,6 +53,16 @@ namespace SisCom.Aplicacao.Controllers
         {
             var pessoa = await _NotaFiscalEntradaService.Search(p => p.Id == Id);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalEntradaViewModel>>(pessoa);
+        }
+        public async Task<IEnumerable<NotaFiscalEntradaViewModel>> PesquisarChave(String Chave)
+        {
+            var pessoa = await _NotaFiscalEntradaService.Search(p => p.CodigoChaveAcesso == Chave.ToString());
+            return Declaracoes.mapper.Map<IEnumerable<NotaFiscalEntradaViewModel>>(pessoa);
+        }
+        public async Task<bool> PesquisarChaveExiste(String Chave)
+        {
+            var pessoa = await PesquisarChave(Chave.ToString());
+            return (pessoa.Count() != 0);
         }
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<NotaFiscalEntrada, object>> order = null)
         {
