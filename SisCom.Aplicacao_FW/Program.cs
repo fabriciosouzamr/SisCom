@@ -1,13 +1,16 @@
 ﻿using DFe.Classes.Entidades;
 using DFe.Classes.Extensoes;
 using DFe.Utils;
+using Newtonsoft.Json;
 using NFe.Classes.Informacoes.Identificacao.Tipos;
+using NFe.Classes.Servicos.DistribuicaoDFe;
 using NFe.Servicos;
 using NFe.Servicos.Retorno;
 using NFe.Utils;
 using System;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SisCom.Aplicacao_FW

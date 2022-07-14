@@ -78,6 +78,9 @@
     <Reference Include="NFe.Servicos">
       <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Servicos.dll</HintPath>
     </Reference>
+    <Reference Include="NFe.Servicos">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Servicos.dll</HintPath>
+    </Reference>
     <Reference Include="NFe.Utils">
       <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Utils.dll</HintPath>
     </Reference>

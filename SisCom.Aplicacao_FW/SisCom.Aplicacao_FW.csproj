@@ -90,6 +90,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.Servicos\NFe.Servicos.csproj">
+      <Project>{ccfdb136-3ee3-4aed-aa69-26abbcb553c6}</Project>
+      <Name>NFe.Servicos</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
