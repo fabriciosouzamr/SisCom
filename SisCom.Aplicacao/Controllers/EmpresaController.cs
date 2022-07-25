@@ -48,6 +48,17 @@ namespace SisCom.Aplicacao.Controllers
             return empresaViewModel;
         }
 
+        public async Task<EmpresaViewModel> AtualizarNSU(Guid id, string sNSU)
+        {
+            var empresa = await GetById(id);
+
+            empresa.NSU = sNSU;
+
+            await _empresaService.Atualizar(Declaracoes.mapper.Map<Empresa>(empresa));
+
+            return empresa;
+        }
+
         public async Task<EmpresaViewModel> GetById(Guid id)
         {
             var obter = await _empresaService.GetById(id, e => e.Endereco.End_Cidade, c => c.Endereco.End_Cidade.Estado);
@@ -74,7 +85,7 @@ namespace SisCom.Aplicacao.Controllers
 
         public async Task<IEnumerable<EmpresaNuvemFiscalComboViewModel>> ComboNuvemFiscal(Expression<Func<Empresa, object>> order = null)
         {
-            var combo = await _empresaService.Search(f => f.NuvemFiscal_Usar == true, order);
+            var combo = await _empresaService.GetAll(order, f => f.NuvemFiscal_Usar == true, i => i.Endereco.End_Cidade.Estado);
             return Declaracoes.mapper.Map<IEnumerable<EmpresaNuvemFiscalComboViewModel>>(combo);
         }
     }

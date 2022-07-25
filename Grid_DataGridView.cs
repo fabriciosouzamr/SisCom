@@ -11,7 +11,9 @@ public static class Grid_DataGridView
         TextBox = 1,
         ComboBox = 2,
         CheckBox = 3,
-        Button = 4
+        Button = 4,
+        Imagem = 5,
+        Link = 6
     }
 
     public enum FormatoColuna
@@ -90,6 +92,16 @@ public static class Grid_DataGridView
                     DataGridViewCheckBoxColumn Coluna = new DataGridViewCheckBoxColumn();
                     return Coluna;
                 }
+            case TipoColuna.Imagem:
+                {
+                    DataGridViewImageColumn Coluna = new DataGridViewImageColumn();
+                    return Coluna;
+                }
+            case TipoColuna.Link:
+                {
+                    DataGridViewLinkColumn Coluna = new DataGridViewLinkColumn();
+                    return Coluna;
+                }
             default:
                 {
                     return new DataGridViewColumn();
@@ -142,7 +154,7 @@ public static class Grid_DataGridView
         grid.Rows.Clear();
     }
 
-    public static void DataGridView_LinhaAdicionar(DataGridView grid, Coluna[] valores)
+    public static DataGridViewRow DataGridView_LinhaAdicionar(DataGridView grid, Coluna[] valores)
     {
         int linha = grid.Rows.Add();
 
@@ -179,6 +191,8 @@ public static class Grid_DataGridView
                 DataGridView_CelularAlimentar(grid, linha, coluna.Indice, valor);
             }
         }
+
+        return grid.Rows[linha];
     }
 
     public static void DataGridView_Carregar(DataGridView Grid, IRepository<Entity> Repository)

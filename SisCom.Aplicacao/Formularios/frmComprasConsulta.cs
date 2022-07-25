@@ -100,5 +100,15 @@ namespace SisCom.Aplicacao.Formularios
             var form = this.ServiceProvider().GetRequiredService<frmComprasInclusao>();
             form.ShowDialog(this);
         }
+
+        private void botaoAplicarFiltros_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botaoLimparFiltros_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

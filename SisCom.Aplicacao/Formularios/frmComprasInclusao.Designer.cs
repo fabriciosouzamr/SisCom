@@ -962,7 +962,6 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // dateDateEmissao
             // 
-            this.dateDateEmissao.Enabled = false;
             this.dateDateEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateDateEmissao.Location = new System.Drawing.Point(262, 5);
             this.dateDateEmissao.Name = "dateDateEmissao";
@@ -981,7 +980,6 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // dateDataEntrada
             // 
-            this.dateDataEntrada.Enabled = false;
             this.dateDataEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateDataEntrada.Location = new System.Drawing.Point(90, 5);
             this.dateDataEntrada.Name = "dateDataEntrada";

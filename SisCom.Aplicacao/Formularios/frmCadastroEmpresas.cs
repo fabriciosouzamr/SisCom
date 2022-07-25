@@ -17,6 +17,7 @@ namespace SisCom.Aplicacao.Formularios
     {
         ViewModels.EmpresaViewModel empresa = null;
         bool editado = false;
+        string serialNumber = "";
 
         public frmCadastroEmpresas(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
@@ -278,7 +279,11 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoSelecionarCertificado_Click(object sender, EventArgs e)
         {
-            textNuvemFiscalCertificado.Text = NuvemFiscal.SelecionarCertificado();
+            string completo = "";
+
+            NuvemFiscal.SelecionarCertificado(ref serialNumber, ref completo);
+
+            textNuvemFiscalCertificado.Text = completo;
         }
         private void botaoGravar_Click(object sender, EventArgs e)
         {
@@ -330,6 +335,7 @@ namespace SisCom.Aplicacao.Formularios
             empresa.MDFe_Serie = Funcao.StringVazioParaNulo(textMDFeSerie.Text);
             if (Combo_ComboBox.Selecionado(comboMDFeAmbiente)) { empresa.MDFe_Ambiente = (AmbienteSistemas)comboMDFeAmbiente.SelectedValue; } else { empresa.MDFe_Ambiente = null; }
             if (Combo_ComboBox.Selecionado(comboMDFeTipoEmissor)) { empresa.MDFe_TipoEmirssor = (TipoEmissor)comboMDFeTipoEmissor.SelectedValue; } else { empresa.MDFe_TipoEmirssor = null; }
+            empresa.NuvemFiscal_SerialNumber = serialNumber;
             empresa.NuvemFiscal_Certificado = Funcao.StringVazioParaNulo(textNuvemFiscalCertificado.Text);
             empresa.NuvemFiscal_Usar = checkUtilizarNuvemFiscal.Checked;
             if (Combo_ComboBox.Selecionado(comboNuvemFiscalAmbienteWebService)) { empresa.NuvemFiscal_AmbienteWebService = (AmbienteSistemas)comboNuvemFiscalAmbienteWebService.SelectedValue; } else { empresa.NuvemFiscal_AmbienteWebService = null; }

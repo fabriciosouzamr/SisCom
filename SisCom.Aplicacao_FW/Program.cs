@@ -4,6 +4,7 @@ using DFe.Utils;
 using Newtonsoft.Json;
 using NFe.Classes.Informacoes.Identificacao.Tipos;
 using NFe.Classes.Servicos.DistribuicaoDFe;
+using NFe.Classes.Servicos.Tipos;
 using NFe.Servicos;
 using NFe.Servicos.Retorno;
 using NFe.Utils;
@@ -38,86 +39,99 @@ namespace SisCom.Aplicacao_FW
 
         }
 
+        static string _Operacao = "";
         static string _EnderecoEmitente_UF = "";
         static string _cnpj = "";
         static string _nsu = "";
         static string _chnfe = "";
+        static string _chaveacesso = "";
         static string _NuvemFiscal_SerialNumber = "";
         static string _PATH_SCHEMAS = "";
         static string _PATH_NUVEMFISCAL = "";
+        static string _nFeTipoEvento = "";
 
         [STAThread]
         static void Main(string[] args)
         {
+            //nuvemfiscal GO 26616809000136 1 1E7F6E6A89ADD10D
+            //manifestar 31220702623061000130550010000004721385764234 02623061000130 210200 417B2205054DEFE4
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            MessageBox.Show("Aqui");
+            _PATH_SCHEMAS = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
+            _PATH_NUVEMFISCAL = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
 
             try
             {
-                _EnderecoEmitente_UF = args[0];
-                _cnpj = args[1];
-                if ((!String.IsNullOrEmpty(args[2])) && (args[2] != "''")) { _nsu = args[2]; }
-                _NuvemFiscal_SerialNumber = args[3];
-                _PATH_SCHEMAS = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
-                _PATH_NUVEMFISCAL = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
+                _Operacao = args[0];
+
+                switch (_Operacao)
+                {
+                    case "manifestar":
+                        _chaveacesso = args[1];
+                        _cnpj = args[2];
+                        _nFeTipoEvento = args[3];
+                        _NuvemFiscal_SerialNumber = args[4];
+
+                        Manifestar(_chaveacesso, _cnpj, (NFeTipoEvento)Convert.ToInt64(_nFeTipoEvento));
+
+                        break;
+                    case "nuvemfiscal":
+                        _EnderecoEmitente_UF = args[1];
+                        _cnpj = args[2];
+                        if ((!String.IsNullOrEmpty(args[3])) && (args[3] != "''")) { _nsu = args[3]; }
+                        _NuvemFiscal_SerialNumber = args[4];
+
+                        System.IO.DirectoryInfo di = new DirectoryInfo(_PATH_NUVEMFISCAL);
+
+                        NuvemFiscal(_EnderecoEmitente_UF, _cnpj, _nsu, _chnfe);
+
+                        break;
+                }
             }
             catch (Exception Ex)
             {
                 MessageBox.Show(Ex.Message);
             }
-
-            System.IO.DirectoryInfo di = new DirectoryInfo(_PATH_NUVEMFISCAL);
-
-            foreach (FileInfo file in di.GetFiles())
-            {
-                file.Delete();
-            }
-
-            NuvemFiscal(_EnderecoEmitente_UF, _cnpj, _nsu, _chnfe);
         }
 
-        public static RetornoNfeDistDFeInt NuvemFiscal(string EnderecoEmitente_UF,
-                                                       string cnpj,
-                                                       string nsu,
-                                                       string chnfe)
+        public static void NuvemFiscal(string EnderecoEmitente_UF,
+                                       string cnpj,
+                                       string nsu,
+                                       string chnfe)
         {
-            var servicoNFe = new ServicosNFe(Configuracao());
-            var retornoNFeDistDFe = servicoNFe.NfeDistDFeInteresse("0", cnpj, nsu, "0", chnfe);
+            try
+            {
+                var servicoNFe = new ServicosNFe(Configuracao());
+                var retornoNFeDistDFe = servicoNFe.NfeDistDFeInteresse("0", cnpj, nsu, "0", chnfe);
 
-            //if ((retornoNFeDistDFe != null) && (retornoNFeDistDFe.Retorno.loteDistDFeInt != null))
-            //{
-            //    foreach (loteDistDFeInt item in retornoNFeDistDFe.Retorno.loteDistDFeInt)
-            //    {
-            //        if (item.NfeProc != null)
-            //        {
-            //            item.NfeProc.SalvarArquivoXml(Path.Combine(_PATH_NUVEMFISCAL, "NF-e_", item.NfeProc.NFe.infNFe.Id.Substring(3), ".xml"));
-            //        }
-            //        else if (item.ResNFe != null)
-            //        {
-            //            cResNF _cResNF = new cResNF();
-            //            _cResNF.chNFe = item.ResNFe.chNFe;
-            //            _cResNF.CNPJ = item.ResNFe.CNPJ;
-            //            _cResNF.CPF = item.ResNFe.CPF;
-            //            _cResNF.xNome = item.ResNFe.xNome;
-            //            _cResNF.IE = item.ResNFe.IE;
-            //            _cResNF.dhEmi = item.ResNFe.dhEmi;
-            //            _cResNF.tpNF = item.ResNFe.tpNF;
-            //            _cResNF.vNF = item.ResNFe.vNF;
-            //            _cResNF.digVal = item.ResNFe.digVal;
-            //            _cResNF.dhRecbto = item.ResNFe.dhRecbto;
-            //            _cResNF.nProt = item.ResNFe.nProt;
-            //            _cResNF.cSitNFe = item.ResNFe.cSitNFe;
+                Console.Write(retornoNFeDistDFe.RetornoStr);
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
+            }
+        }
 
-            //            var jsonString = JsonConvert.SerializeObject(_cResNF);
-
-            //            StreamWriter valor = new StreamWriter(Path.Combine(_PATH_NUVEMFISCAL, "ResNFe_", item.ResNFe.chNFe, ".json"), true, Encoding.ASCII);
-            //        }
-            //    }
-            //}
-
-            return retornoNFeDistDFe;
+        public static void Manifestar(string chaveacesso, 
+                                      string cnpj, 
+                                      NFeTipoEvento nFeTipoEvento)
+        {
+            try
+            {
+                var servicoNFe = new ServicosNFe(Configuracao());
+                var retornoNFeDistDFe = servicoNFe.RecepcaoEventoManifestacaoDestinatario(int.Parse("1"),
+                                                                                          int.Parse("1"),
+                                                                                          chaveacesso,
+                                                                                          nFeTipoEvento,
+                                                                                          cnpj);
+                Console.Write(retornoNFeDistDFe.RetornoStr);
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
+            }
         }
 
         private static ConfiguracaoServico Configuracao()

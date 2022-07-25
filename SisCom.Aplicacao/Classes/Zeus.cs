@@ -3,110 +3,125 @@ using DFe.Classes.Extensoes;
 using DFe.Utils;
 using Funcoes._Enum;
 using NFe.Classes.Informacoes.Identificacao.Tipos;
+using NFe.Classes.Servicos.Tipos;
 using NFe.Servicos;
 using NFe.Servicos.Retorno;
 using NFe.Utils;
 using NFe.Utils.NFe;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Net;
+using System.Xml.Serialization;
 
 namespace SisCom.Aplicacao.Classes
 {
+    // using System.Xml.Serialization;
+    // XmlSerializer serializer = new XmlSerializer(typeof(RetEnvEvento));
+    // using (StringReader reader = new StringReader(xml))
+    // {
+    //    var test = (RetEnvEvento)serializer.Deserialize(reader);
+    // }
+
+    [XmlRoot(ElementName = "infEvento")]
+    public class InfEvento
+    {
+
+        [XmlElement(ElementName = "tpAmb")]
+        public int TpAmb { get; set; }
+
+        [XmlElement(ElementName = "verAplic")]
+        public string VerAplic { get; set; }
+
+        [XmlElement(ElementName = "cOrgao")]
+        public int COrgao { get; set; }
+
+        [XmlElement(ElementName = "cStat")]
+        public int CStat { get; set; }
+
+        [XmlElement(ElementName = "xMotivo")]
+        public string XMotivo { get; set; }
+
+        [XmlElement(ElementName = "chNFe")]
+        public double ChNFe { get; set; }
+
+        [XmlElement(ElementName = "tpEvento")]
+        public int TpEvento { get; set; }
+
+        [XmlElement(ElementName = "xEvento")]
+        public string XEvento { get; set; }
+
+        [XmlElement(ElementName = "nSeqEvento")]
+        public int NSeqEvento { get; set; }
+
+        [XmlElement(ElementName = "dhRegEvento")]
+        public DateTime DhRegEvento { get; set; }
+    }
+
+    [XmlRoot(ElementName = "retEvento")]
+    public class RetEvento
+    {
+
+        [XmlElement(ElementName = "infEvento")]
+        public InfEvento InfEvento { get; set; }
+
+        [XmlAttribute(AttributeName = "versao")]
+        public double Versao { get; set; }
+
+        [XmlText]
+        public string Text { get; set; }
+    }
+
+    [XmlRoot(ElementName = "retEnvEvento")]
+    public class RetEnvEvento
+    {
+
+        [XmlElement(ElementName = "idLote")]
+        public int IdLote { get; set; }
+
+        [XmlElement(ElementName = "tpAmb")]
+        public int TpAmb { get; set; }
+
+        [XmlElement(ElementName = "verAplic")]
+        public string VerAplic { get; set; }
+
+        [XmlElement(ElementName = "cOrgao")]
+        public int COrgao { get; set; }
+
+        [XmlElement(ElementName = "cStat")]
+        public int CStat { get; set; }
+
+        [XmlElement(ElementName = "xMotivo")]
+        public string XMotivo { get; set; }
+
+        [XmlElement(ElementName = "retEvento")]
+        public RetEvento RetEvento { get; set; }
+    }
+
+    public class retDistDFeInt
+    {
+
+        public int tpAmb { get; set; }
+
+        public string verAplic { get; set; }
+
+        public int cStat { get; set; }
+
+        public string xMotivo { get; set; }
+
+        public string dhResp { get; set; }
+
+        public int ultNSU { get; set; }
+
+        public int maxNSU { get; set; }
+    }
+
     public static class Zeus
     {
         public static AmbienteSistemas ambienteSistemas = AmbienteSistemas.Producao;
-        public static string NuvemFiscal_SerialNumber;
         public static string PATH_SCHEMAS;
-
-        private static ConfiguracaoServico Configuracao()
-        {
-            ConfiguracaoServico oConfig = new ConfiguracaoServico();
-            System.Security.Cryptography.X509Certificates.X509Certificate2 oCert;
-            Estado oEstado = new Estado();
-            TipoCertificado tipoCertificado = TipoCertificado.A1Repositorio;
-
-            oEstado = oEstado.SiglaParaEstado("GO");
-
-            oConfig = ConfiguracaoServico.Instancia;
-
-            switch (ambienteSistemas)
-            {
-                case AmbienteSistemas.Producao:
-                    oConfig.tpAmb = DFe.Classes.Flags.TipoAmbiente.Producao;
-                    break;
-                case AmbienteSistemas.Homologacao:
-                    oConfig.tpAmb = DFe.Classes.Flags.TipoAmbiente.Homologacao;
-                    break;
-                default:
-                    CaixaMensagem.Informacao("Tipo de ambiente de transmissão não definido");
-                    break;
-            }
-
-            oConfig.tpEmis = TipoEmissao.teNormal;
-            oConfig.ProtocoloDeSeguranca = ServicePointManager.SecurityProtocol;
-
-            oConfig.Certificado = new ConfiguracaoCertificado();
-
-            switch (tipoCertificado)
-            {
-                case TipoCertificado.A1Arquivo:
-                    oConfig.Certificado.TipoCertificado = TipoCertificado.A1Arquivo;
-                    oConfig.Certificado.Arquivo = ""; // sESTACAO_TRABALHO_DS_CERTIFICADO_DIGITAL_PATH_ARQUIVO;
-                    oConfig.Certificado.Senha = ""; // sESTACAO_TRABALHO_DS_CERTIFICADO_DIGITAL_SENHA;
-                    break;
-                case TipoCertificado.A1ByteArray:
-                    oCert = CertificadoDigitalUtils.ListareObterDoRepositorio();
-                    oConfig.Certificado.TipoCertificado = TipoCertificado.A1ByteArray;
-                    oConfig.Certificado.ArrayBytesArquivo = oCert.GetRawCertData();
-                    oConfig.Certificado.Serial = oCert.GetSerialNumberString();
-                    break;
-                case TipoCertificado.A1Repositorio:
-                    oConfig.Certificado.TipoCertificado = TipoCertificado.A1Repositorio;
-                    if (string.IsNullOrEmpty(NuvemFiscal_SerialNumber))
-                    {
-                        oCert = CertificadoDigitalUtils.ListareObterDoRepositorio();
-                        oConfig.Certificado.Serial = oCert.SerialNumber;
-                    }
-                    else
-                    {
-                        oConfig.Certificado.Serial = NuvemFiscal_SerialNumber;
-                    }
-                    break;
-                case TipoCertificado.A3:
-                    oConfig.Certificado.TipoCertificado = TipoCertificado.A3;
-                    break;
-            }
-
-            oConfig.Certificado.CacheId = "58A13AD9C6A41D4B";
-            oConfig.Certificado.ManterDadosEmCache = false;
-            oConfig.Certificado.SignatureMethodSignedXml = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
-            oConfig.Certificado.DigestMethodReference = "http://www.w3.org/2000/09/xmldsig#sha1";
-            oConfig.TimeOut = 30000;
-            oConfig.cUF = oEstado;
-            oConfig.tpEmis = TipoEmissao.teNormal;
-            oConfig.ModeloDocumento  = DFe.Classes.Flags.ModeloDocumento.NFe;
-            oConfig.VersaoLayout = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoRecepcaoEventoCceCancelamento = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoRecepcaoEventoEpec = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoRecepcaoEventoManifestacaoDestinatario = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNfeRecepcao = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNfeRetRecepcao = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNfeConsultaCadastro = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNfeInutilizacao = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNfeConsultaProtocolo = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNfeStatusServico = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNFeAutorizacao = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNFeRetAutorizacao = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNFeDistribuicaoDFe = DFe.Classes.Flags.VersaoServico.Versao100;
-            oConfig.VersaoNfeConsultaDest = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNfeDownloadNF = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.VersaoNfceAministracaoCSC = DFe.Classes.Flags.VersaoServico.Versao400;
-            oConfig.ProtocoloDeSeguranca = SecurityProtocolType.Tls12;
-            oConfig.DiretorioSchemas = PATH_SCHEMAS;
-            oConfig.SalvarXmlServicos = false;
-            //oConfig.DiretorioSalvarXml = FNC_Diretorio_Temporario()
-
-            return oConfig;
-        }
 
         public static NFe.Classes.nfeProc CarregarNFE_XML(ref string arquivoXml)
         {
@@ -134,15 +149,60 @@ namespace SisCom.Aplicacao.Classes
             return _nfeProc;
         }
 
-        public static RetornoNfeDistDFeInt NuvemFiscal(string EnderecoEmitente_UF,
-                                                       string cnpj,
-                                                       string nsu,
-                                                       string chnfe)
+        public static RetEnvEvento Manifestar(string chaveacesso, string cnpj, string nFeTipoEvento, string empresa_serialnumber)
         {
-            var servicoNFe = new ServicosNFe(Configuracao());
-            var retornoNFeDistDFe = servicoNFe.NfeDistDFeInteresse(EnderecoEmitente_UF, cnpj, nsu, "", chnfe);
+            List<string> retorno;
 
-            return retornoNFeDistDFe;
+            retorno = Processo.Executar(Declaracoes.Externos_SisCom_Aplicacao_FW, "manifestar " + chaveacesso + " " + cnpj + " " + nFeTipoEvento + " " + empresa_serialnumber);
+
+            if ((retorno != null) && (retorno.Count > 0))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(RetEnvEvento));
+
+                using (StringReader reader = new StringReader(XML_RetirarVersao(retorno[0].ToString())))
+                {
+                    var retEnvEvento = (RetEnvEvento)serializer.Deserialize(reader);
+                    return retEnvEvento;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static retDistDFeInt NuvemFiscal(string empresa_uf, string empresa_cnpj, string nsu, string empresa_serialnumber)
+        {
+            List<string> retorno;
+
+            retorno = Processo.Executar(Declaracoes.Externos_SisCom_Aplicacao_FW, "nuvemfiscal " + empresa_uf +  " " + empresa_cnpj + " " + nsu + " " + empresa_serialnumber);
+
+            if ((retorno != null) && (retorno.Count > 0))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(retDistDFeInt));
+                                                                                  
+                using (StringReader reader = new StringReader(XML_RetirarVersao(retorno[0].ToString()).Replace("<retDistDFeInt >", "<retDistDFeInt>")))
+                {
+                    var retEnvEvento = (retDistDFeInt)serializer.Deserialize(reader);
+                    return retEnvEvento;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static string XML_RetirarVersao(string sXML)
+        {
+            string ret = sXML;
+
+            if (sXML.IndexOf("versao=") != 0)
+            {
+                sXML = sXML.Replace(sXML.Substring(sXML.IndexOf("versao="), sXML.IndexOf("/nfe") - sXML.IndexOf("versao=") + ("/nfe").Length + 1), "");
+            }
+
+            return sXML;
         }
     }
 }

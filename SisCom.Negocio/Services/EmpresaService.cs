@@ -36,8 +36,6 @@ namespace SisCom.Negocio.Services
                 }
 
                 await _empresaRepository.Insert(Empresa);
-
-                Notify("Empresa incluída.");
             }
             catch (Exception Ex)
             {
@@ -62,8 +60,6 @@ namespace SisCom.Negocio.Services
                 }
 
                 await _empresaRepository.Update(Empresa);
-
-                Notify("Empresa atualizada.");
             }
             catch (Exception Ex)
             {

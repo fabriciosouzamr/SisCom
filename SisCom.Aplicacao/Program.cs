@@ -40,7 +40,7 @@ namespace SisCom.Aplicacao
                     Application.SetCompatibleTextRenderingDefault(false);
 
                     appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "appsettings.json");
-                    Declaracoes.Externos_SisCom_Aplicacao_FW = Path.Combine(Directory.GetCurrentDirectory(), "Externos", "SisCom.Aplicacao_FW.exe");
+                    Declaracoes.Externos_SisCom_Aplicacao_FW = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\SisCom.Aplicacao_FW\\", "SisCom.Aplicacao_FW.exe");
 
                     using (StreamReader file = File.OpenText(appSettingsPath))
                     {
@@ -278,9 +278,11 @@ namespace SisCom.Aplicacao
                 {
                     Directory.CreateDirectory(Declaracoes.Aplicacao_CaminhoFoto);
                 }
-                        
+
+                Declaracoes.Aplicacao_CaminhoDiretorioTemporaria = Path.Combine(Directory.GetCurrentDirectory(), "temp");
                 Declaracoes.Externos_Path_Schemas = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
                 Declaracoes.Externos_Path_NuvemFiscal = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
+                if (!Directory.Exists(Declaracoes.Aplicacao_CaminhoDiretorioTemporaria)) { Directory.CreateDirectory(Declaracoes.Aplicacao_CaminhoDiretorioTemporaria); }
                 if (!Directory.Exists(Declaracoes.Externos_Path_Schemas)) { Directory.CreateDirectory(Declaracoes.Externos_Path_Schemas); }
                 if (!Directory.Exists(Declaracoes.Externos_Path_NuvemFiscal)) { Directory.CreateDirectory(Declaracoes.Externos_Path_NuvemFiscal); }
             }

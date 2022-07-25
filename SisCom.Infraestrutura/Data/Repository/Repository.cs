@@ -21,7 +21,8 @@ namespace SisCom.Infraestrutura.Data.Repository
             Db = db;
             DbSet = db.Set<TEntity>();
         }
-        public async Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> order = null)
+        public async Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate, 
+                                                       Expression<Func<TEntity, object>> order = null)
         {
             if (order == null)
             {
@@ -38,7 +39,7 @@ namespace SisCom.Infraestrutura.Data.Repository
         }
         public virtual async Task<TEntity> GetById(Guid id, params Expression<Func<TEntity, object>>[] includes)
         {
-            var includedData = DbSet.AsQueryable();
+            var includedData = DbSet.AsNoTracking().AsQueryable();
             foreach (var include in includes)
             {
                 includedData = includedData.Include(include);
@@ -55,22 +56,17 @@ namespace SisCom.Infraestrutura.Data.Repository
         }
         public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null)
         {
-            List<TEntity> ret = null;
-
-            try
-            {
-                if (order == null)
-                { ret = await DbSet.AsNoTracking().ToListAsync(); }
-                else
-                { ret = await DbSet.AsNoTracking().OrderBy(order ?? (e => e.Id)).ToListAsync(); }
-            }
-            catch (Exception Ex)
-            {
-            }
-
-            return ret;
+            return await GetAll(order, null, null);
         }
-        public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null, params Expression<Func<TEntity, object>>[] includes)
+
+        public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null,
+                                                        params Expression<Func<TEntity, object>>[] includes)
+        {
+            return await GetAll(order, null, includes);
+        }
+        public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, object>> order = null,
+                                                        Expression<Func<TEntity, bool>> predicate = null,
+                                                        params Expression<Func<TEntity, object>>[] includes)
         {
             var ret = DbSet.AsQueryable();
             foreach (var include in includes)
@@ -80,10 +76,20 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             try
             {
-                if (order == null)
-                { return await ret.ToListAsync(); }
+                if (predicate == null)
+                {
+                    if (order == null)
+                    { return await ret.ToListAsync(); }
+                    else
+                    { return await ret.OrderBy(order ?? (e => e.Id)).ToListAsync(); }
+                }
                 else
-                { return await ret.OrderBy(order ?? (e => e.Id)).ToListAsync(); }
+                {
+                    if (order == null)
+                    { return await ret.Where(predicate).ToListAsync(); }
+                    else
+                    { return await ret.Where(predicate).OrderBy(order ?? (e => e.Id)).ToListAsync(); }
+                }
             }
             catch (Exception Ex)
             {

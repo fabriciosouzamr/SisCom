@@ -103,7 +103,7 @@ namespace Funcoes.Classes
 	}
 }
 
-		public static string SelecionarCertificado()
+		public static void SelecionarCertificado(ref string serialNumber, ref string completo)
 		{
 			try
 			{
@@ -111,9 +111,9 @@ namespace Funcoes.Classes
 				DialogResult dialogResult = certificateBrowserDialog.ShowDialog();
 				if (dialogResult == DialogResult.OK)
 				{
-					return certificateBrowserDialog.SelectedCertificate.Subject;
+					completo = certificateBrowserDialog.SelectedCertificate.Subject;
+					serialNumber = certificateBrowserDialog.SelectedCertificate.SerialNumber;
 				}
-				return "";
 			}
 			catch (Exception ex)
 			{

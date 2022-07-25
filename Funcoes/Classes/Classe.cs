@@ -128,5 +128,10 @@ namespace Funcoes._Classes
 
             return ret;
         }
+
+        public static DateTime StringParaData(string data, bool SemHora = false)
+        {
+            if (SemHora) { return new DateTime(Convert.ToDateTime(data).Year, Convert.ToDateTime(data).Month, Convert.ToDateTime(data).Day) ; } else { return Convert.ToDateTime(data); }
+        }
     }
 } 

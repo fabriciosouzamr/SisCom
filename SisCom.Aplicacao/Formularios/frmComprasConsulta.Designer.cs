@@ -181,6 +181,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoLimparFiltros.Size = new System.Drawing.Size(100, 45);
             this.botaoLimparFiltros.TabIndex = 97;
             this.botaoLimparFiltros.UseVisualStyleBackColor = true;
+            this.botaoLimparFiltros.Click += new System.EventHandler(this.botaoLimparFiltros_Click);
             // 
             // botaoAplicarFiltros
             // 
@@ -190,6 +191,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoAplicarFiltros.Size = new System.Drawing.Size(100, 45);
             this.botaoAplicarFiltros.TabIndex = 96;
             this.botaoAplicarFiltros.UseVisualStyleBackColor = true;
+            this.botaoAplicarFiltros.Click += new System.EventHandler(this.botaoAplicarFiltros_Click);
             // 
             // label8
             // 

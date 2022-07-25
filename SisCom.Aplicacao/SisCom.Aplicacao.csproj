@@ -66,6 +66,9 @@
     <Folder Include="Externos\NuvemFiscal\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="DanfeSharp">
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\DanfeSharp\bin\Release\DanfeSharp.dll</HintPath>
+    </Reference>
     <Reference Include="DFe.Classes">
       <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\DFe.Classes.dll</HintPath>
     </Reference>
@@ -714,6 +717,60 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\SisCom.Aplicacao_FW.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\DFe.Classes.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\DFe.Utils.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\DFe.Wsdl.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\DFe.Wsdl.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\Newtonsoft.Json.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\NFe.Classes.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\NFe.Servicos.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\NFe.Servicos.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\NFe.Utils.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\NFe.Wsdl.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\NFe.Wsdl.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\NFe.Wsdl.XmlSerializers.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\SisCom.Aplicacao_FW.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\SisCom.Aplicacao_FW.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\SisCom.Aplicacao_FW.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\SisCom.Aplicacao_FW.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\System.Web.Services.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">

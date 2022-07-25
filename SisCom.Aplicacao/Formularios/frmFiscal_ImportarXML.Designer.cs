@@ -512,7 +512,6 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // dateDateEmissao
             // 
-            this.dateDateEmissao.Enabled = false;
             this.dateDateEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateDateEmissao.Location = new System.Drawing.Point(256, 47);
             this.dateDateEmissao.Name = "dateDateEmissao";

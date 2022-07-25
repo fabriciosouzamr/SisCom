@@ -52,6 +52,7 @@ namespace SisCom.Aplicacao.Formularios
             this.comboTipoNSU = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.comboTipoTLS = new System.Windows.Forms.ComboBox();
+            this.cmdSelecionarTodos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscal)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +62,7 @@ namespace SisCom.Aplicacao.Formularios
             this.gridNotaFiscal.Location = new System.Drawing.Point(12, 101);
             this.gridNotaFiscal.Name = "gridNotaFiscal";
             this.gridNotaFiscal.RowTemplate.Height = 25;
-            this.gridNotaFiscal.Size = new System.Drawing.Size(1034, 293);
+            this.gridNotaFiscal.Size = new System.Drawing.Size(1287, 293);
             this.gridNotaFiscal.TabIndex = 5;
             this.gridNotaFiscal.TabStop = false;
             this.gridNotaFiscal.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscal_CellClick);
@@ -86,7 +87,6 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // datePeriodoInicial
             // 
-            this.datePeriodoInicial.Enabled = false;
             this.datePeriodoInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.datePeriodoInicial.Location = new System.Drawing.Point(629, 26);
             this.datePeriodoInicial.Name = "datePeriodoInicial";
@@ -158,7 +158,6 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // datePeriodoFinal
             // 
-            this.datePeriodoFinal.Enabled = false;
             this.datePeriodoFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.datePeriodoFinal.Location = new System.Drawing.Point(747, 26);
             this.datePeriodoFinal.Name = "datePeriodoFinal";
@@ -201,6 +200,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoFiltrarNotas.TabStop = false;
             this.botaoFiltrarNotas.Text = "Filtrar Notas";
             this.botaoFiltrarNotas.UseVisualStyleBackColor = true;
+            this.botaoFiltrarNotas.Click += new System.EventHandler(this.botaoFiltrarNotas_Click);
             // 
             // botaoConsultarNotas
             // 
@@ -215,33 +215,36 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // botaoManifestar
             // 
-            this.botaoManifestar.Location = new System.Drawing.Point(267, 400);
+            this.botaoManifestar.Location = new System.Drawing.Point(376, 400);
             this.botaoManifestar.Name = "botaoManifestar";
             this.botaoManifestar.Size = new System.Drawing.Size(151, 40);
             this.botaoManifestar.TabIndex = 131;
             this.botaoManifestar.TabStop = false;
             this.botaoManifestar.Text = "Manifestar";
             this.botaoManifestar.UseVisualStyleBackColor = true;
+            this.botaoManifestar.Click += new System.EventHandler(this.botaoManifestar_Click);
             // 
             // botaoDownload
             // 
-            this.botaoDownload.Location = new System.Drawing.Point(472, 400);
+            this.botaoDownload.Location = new System.Drawing.Point(581, 400);
             this.botaoDownload.Name = "botaoDownload";
             this.botaoDownload.Size = new System.Drawing.Size(151, 40);
             this.botaoDownload.TabIndex = 132;
             this.botaoDownload.TabStop = false;
             this.botaoDownload.Text = "Download";
             this.botaoDownload.UseVisualStyleBackColor = true;
+            this.botaoDownload.Click += new System.EventHandler(this.botaoDownload_Click);
             // 
             // botaoImprimirDanfe
             // 
-            this.botaoImprimirDanfe.Location = new System.Drawing.Point(677, 400);
+            this.botaoImprimirDanfe.Location = new System.Drawing.Point(786, 400);
             this.botaoImprimirDanfe.Name = "botaoImprimirDanfe";
             this.botaoImprimirDanfe.Size = new System.Drawing.Size(151, 40);
             this.botaoImprimirDanfe.TabIndex = 133;
             this.botaoImprimirDanfe.TabStop = false;
             this.botaoImprimirDanfe.Text = "Imprimir Danfe";
             this.botaoImprimirDanfe.UseVisualStyleBackColor = true;
+            this.botaoImprimirDanfe.Click += new System.EventHandler(this.botaoImprimirDanfe_Click);
             // 
             // comboTipoNSU
             // 
@@ -271,12 +274,25 @@ namespace SisCom.Aplicacao.Formularios
             this.comboTipoTLS.Size = new System.Drawing.Size(103, 23);
             this.comboTipoTLS.TabIndex = 137;
             this.comboTipoTLS.TabStop = false;
+            this.comboTipoTLS.Visible = false;
+            // 
+            // cmdSelecionarTodos
+            // 
+            this.cmdSelecionarTodos.Location = new System.Drawing.Point(12, 394);
+            this.cmdSelecionarTodos.Name = "cmdSelecionarTodos";
+            this.cmdSelecionarTodos.Size = new System.Drawing.Size(105, 22);
+            this.cmdSelecionarTodos.TabIndex = 138;
+            this.cmdSelecionarTodos.TabStop = false;
+            this.cmdSelecionarTodos.Text = "Selecionar todos";
+            this.cmdSelecionarTodos.UseVisualStyleBackColor = true;
+            this.cmdSelecionarTodos.Click += new System.EventHandler(this.cmdSelecionarTodos_Click);
             // 
             // frmFiscal_NuvemFiscal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1051, 447);
+            this.ClientSize = new System.Drawing.Size(1307, 447);
+            this.Controls.Add(this.cmdSelecionarTodos);
             this.Controls.Add(this.comboTipoTLS);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboTipoNSU);
@@ -303,6 +319,7 @@ namespace SisCom.Aplicacao.Formularios
             this.MaximizeBox = false;
             this.Name = "frmFiscal_NuvemFiscal";
             this.Text = "Nuvem Fiscal - Consulte as Notas emitidas para sua Empresa";
+            this.Load += new System.EventHandler(this.frmFiscal_NuvemFiscal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -334,5 +351,6 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.ComboBox comboTipoNSU;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboTipoTLS;
+        private System.Windows.Forms.Button cmdSelecionarTodos;
     }
 }

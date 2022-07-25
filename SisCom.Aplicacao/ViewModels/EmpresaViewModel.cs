@@ -37,7 +37,7 @@ namespace SisCom.Aplicacao.ViewModels
         public AmbienteSistemas? NuvemFiscal_AmbienteWebService { get; set; }
         public string? NuvemFiscal_Certificado { get; set; }
         public string? NuvemFiscal_SerialNumber { get; set; }
-
+        public string NSU { get; set; }
     }
 
     public class EmpresaComboViewModel

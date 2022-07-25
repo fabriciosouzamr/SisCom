@@ -4,6 +4,7 @@ using Funcoes.Notifications;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -15,6 +16,7 @@ namespace SisCom.Aplicacao.Classes
 
         public const string Aplicacao_Nome = "Sistema Comercial";
         public const string Aplicacao_CaminhoFoto = "\\fotos\\";
+        public static string Aplicacao_CaminhoDiretorioTemporaria = "\\temp\\";
 
         public const int CampoNome_Caracteres = 100;
 
@@ -50,6 +52,28 @@ namespace SisCom.Aplicacao.Classes
             Compra = 1,
             Venda = 2
         }
+
+        public enum TipoManifestar
+        {
+            [Description("Confirmacao da Operacao")]
+            TeMdConfirmacaoDaOperacao = 210200,
+            [Description("Ciencia da Operacao")]
+            TeMdCienciaDaOperacao = 210210,
+            [Description("Desconhecimento da Operacao")]
+            TeMdDesconhecimentoDaOperacao = 210220,
+            [Description("Operacao nao Realizada")]
+            TeMdOperacaoNaoRealizada = 210240
+        }
+    }
+
+    public class NotaFiscalManifestar
+    {
+        public string NFe { set; get; }
+        public string Serie { set; get; }
+        public DateTime Emissao { set; get; }
+        public double Valor { set; get; }
+        public string ChaveAcesso { get; set; }
+        public string CNPJ { get; set; }
     }
 
     public static class Texto

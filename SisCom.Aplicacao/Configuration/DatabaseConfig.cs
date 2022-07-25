@@ -41,7 +41,6 @@ namespace SisCom.Aplicacao.Configuration
         {
             try
             {
-                CaixaMensagem.Informacao("Configurando banco de dados. Aguarde...") ;
                 if (string.IsNullOrEmpty(_seedPath))
                 {
                     _seedPath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "Seed");
@@ -54,7 +53,6 @@ namespace SisCom.Aplicacao.Configuration
                     if (await meuDbContext.AllMigrationsApplied())
                     {
                         await meuDbContext.EnsureSeeded(scope, _seedPath);
-                        CaixaMensagem.Informacao("Banco de dados configurado.") ;                        
                     }
                 }
             }
