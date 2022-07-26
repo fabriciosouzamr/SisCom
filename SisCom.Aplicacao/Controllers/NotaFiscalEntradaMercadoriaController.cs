@@ -44,7 +44,11 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<NotaFiscalEntradaMercadoriaViewModel>> ObterTodos()
         {
-            var obterTodos = await _NotaFiscalEntradaMercadoriaService.GetAll();
+            var obterTodos = await _NotaFiscalEntradaMercadoriaService.GetAll(null, null, i => i.NotaFiscalEntrada,
+                                                                                          i => i.CFOP,
+                                                                                          f => f.NotaFiscalEntrada.Fornecedor,
+                                                                                          fe => fe.NotaFiscalEntrada.Fornecedor.Endereco.End_Cidade.Estado,
+                                                                                          e => e.NotaFiscalEntrada.Empresa); ; ;
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalEntradaMercadoriaViewModel>>(obterTodos);
 
         }

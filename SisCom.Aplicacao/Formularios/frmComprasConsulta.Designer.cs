@@ -60,11 +60,11 @@ namespace SisCom.Aplicacao.Formularios
             this.textFiltro_NotaFiscal = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textFiltro_ChaveAcesso = new System.Windows.Forms.TextBox();
-            this.gridComprasConsulta = new System.Windows.Forms.DataGridView();
+            this.gridNotaFiscalEntrada = new System.Windows.Forms.DataGridView();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.pnlDadosGerais.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridComprasConsulta)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalEntrada)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenuBotao
@@ -374,22 +374,23 @@ namespace SisCom.Aplicacao.Formularios
             this.textFiltro_ChaveAcesso.Size = new System.Drawing.Size(265, 23);
             this.textFiltro_ChaveAcesso.TabIndex = 2;
             // 
-            // gridComprasConsulta
+            // gridNotaFiscalEntrada
             // 
-            this.gridComprasConsulta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridComprasConsulta.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gridComprasConsulta.Location = new System.Drawing.Point(0, 204);
-            this.gridComprasConsulta.Name = "gridComprasConsulta";
-            this.gridComprasConsulta.RowTemplate.Height = 25;
-            this.gridComprasConsulta.Size = new System.Drawing.Size(866, 422);
-            this.gridComprasConsulta.TabIndex = 9;
+            this.gridNotaFiscalEntrada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridNotaFiscalEntrada.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gridNotaFiscalEntrada.Location = new System.Drawing.Point(0, 204);
+            this.gridNotaFiscalEntrada.Name = "gridNotaFiscalEntrada";
+            this.gridNotaFiscalEntrada.RowTemplate.Height = 25;
+            this.gridNotaFiscalEntrada.Size = new System.Drawing.Size(866, 422);
+            this.gridNotaFiscalEntrada.TabIndex = 9;
+            this.gridNotaFiscalEntrada.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscalEntrada_CellDoubleClick);
             // 
             // frmComprasConsulta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(866, 626);
-            this.Controls.Add(this.gridComprasConsulta);
+            this.Controls.Add(this.gridNotaFiscalEntrada);
             this.Controls.Add(this.pnlDadosGerais);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pnlMenuBotao);
@@ -403,7 +404,7 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlMenuBotaoBotao.PerformLayout();
             this.pnlDadosGerais.ResumeLayout(false);
             this.pnlDadosGerais.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridComprasConsulta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalEntrada)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -441,6 +442,6 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.ComboBox comboFiltro_CFOP;
         private System.Windows.Forms.Button botaoLimparFiltros;
         private System.Windows.Forms.Button botaoAplicarFiltros;
-        private System.Windows.Forms.DataGridView gridComprasConsulta;
+        private System.Windows.Forms.DataGridView gridNotaFiscalEntrada;
     }
 }

@@ -34,10 +34,14 @@ namespace SisCom.Aplicacao.Formularios
         const int grdProduto_Grupo = 11;
         const int grdProduto_Status = 12;
         const int grdProduto_VinculoFiscal = 13;
+        const int grdProduto_Item = 14;
 
         private nfeProc _nfeProc;
 
         IEnumerable<UnidadeMedidaConversaoViewModel> unidadeMedidaConversao;
+        IEnumerable<TabelaCFOPViewModel> CFOP;
+        IEnumerable<TabelaNCMViewModel> NCM;
+        IEnumerable<TabelaCST_CSOSNViewModel> CST_CSOSN;
 
         public frmFiscal_ImportarXML(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
@@ -94,6 +98,7 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Grupo", Grid_DataGridView.TipoColuna.ComboBox);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Status");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Vínculo Fiscal", Grid_DataGridView.TipoColuna.ComboBox);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Item", Grid_DataGridView.TipoColuna.TextBox, 0);
 
             using (UnidadeMedidaConversaoController unidadeMedidaConversaoController = new UnidadeMedidaConversaoController(this.MeuDbContext(), this._notifier))
             {
@@ -107,6 +112,11 @@ namespace SisCom.Aplicacao.Formularios
                                     "ID", "Unidade",
                                     ComboBoxStyle.DropDownList,
                                     await (new EmpresaController(this.MeuDbContext(), this._notifier)).Combo(p => p.Unidade));
+
+            CFOP = await(new TabelaCFOPController(this.MeuDbContext(), this._notifier)).ObterTodos();
+            NCM = await (new TabelaNCMController(this.MeuDbContext(), this._notifier)).ObterTodos();
+            CST_CSOSN = await (new TabelaCST_CSOSNController(this.MeuDbContext(), this._notifier)).ObterTodos();
+
             await CarregarComboFornecedor();
 
             if (_nfeProc != null)
@@ -184,7 +194,9 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                                  Formato = Grid_DataGridView.FormatoColuna.Texto },
                                                                                                   new Grid_DataGridView.Coluna { Indice = grdProduto_QtdeCaixa,
                                                                                                                                  Valor = d.prod.uCom == "SC" ? d.prod.qCom : Math.Round(d.prod.qCom * (decimal)0.016667, 2),
-                                                                                                                                 Formato = Grid_DataGridView.FormatoColuna.Texto }});
+                                                                                                                                 Formato = Grid_DataGridView.FormatoColuna.Texto },
+                                                                                                  new Grid_DataGridView.Coluna { Indice = grdProduto_Item,
+                                                                                                                                 Valor = d.nItem } });
                 });
 
                 if (_nfeProc.NFe.infNFe.det != null)
@@ -306,8 +318,8 @@ namespace SisCom.Aplicacao.Formularios
                         notaFiscalEntradaViewModel.ValorNota = _nfeProc.NFe.infNFe.total.ICMSTot.vNF;
                         notaFiscalEntradaViewModel.CodigoChaveAcesso = textChave.Text;
                         notaFiscalEntradaViewModel.BaseCalculo = (double)_nfeProc.NFe.infNFe.total.ICMSTot.vBC;
-                        notaFiscalEntradaViewModel.ValorICMS = _nfeProc.NFe.infNFe.total.ICMSTot.vICMS;
-                        notaFiscalEntradaViewModel.ValorICMSSubstitucao = _nfeProc.NFe.infNFe.total.ICMSTot.vST;
+                        notaFiscalEntradaViewModel.ValorICMS = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vICMS);
+                        notaFiscalEntradaViewModel.ValorICMSSubstitucao = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vST);
                         notaFiscalEntradaViewModel.ValorICMSDesoneracao = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vICMSDeson);
                         notaFiscalEntradaViewModel.ValorIPI = _nfeProc.NFe.infNFe.total.ICMSTot.vIPI;
                         notaFiscalEntradaViewModel.ValorFCPST = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vFCPST);
@@ -316,6 +328,9 @@ namespace SisCom.Aplicacao.Formularios
                         notaFiscalEntradaViewModel.TotalNota = _nfeProc.NFe.infNFe.total.ICMSTot.vNF;
                         notaFiscalEntradaViewModel.Importacao_TipoDocumentoImportacao = TipoDocumentoImportacao.DeclaracaoImportacao;
                         notaFiscalEntradaViewModel.InformacaoAdicionais_Finalidade = NF_Finalidade.Normal;
+                        notaFiscalEntradaViewModel.ValorFCPST = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vFCPST);
+                        notaFiscalEntradaViewModel.Importacao_ValorPIS = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vPIS);
+                        notaFiscalEntradaViewModel.Importacao_ValorCofins = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vCOFINS);
 
                         await notaFiscalEntradaController.Adicionar(notaFiscalEntradaViewModel);
 
@@ -324,6 +339,16 @@ namespace SisCom.Aplicacao.Formularios
                             for (int i = 0; i < gridProduto.Rows.Count; i++)
                             {
                                 var row = gridProduto.Rows[i];
+                                NFe.Classes.Informacoes.Detalhe.det prod = null;
+
+                                foreach (NFe.Classes.Informacoes.Detalhe.det item in _nfeProc.NFe.infNFe.det)
+                                {
+                                    if (item.nItem == Convert.ToInt16(row.Cells[grdProduto_Item].Value))
+                                    {
+                                        prod = item;
+                                        break;
+                                    }
+                                }
 
                                 NotaFiscalEntradaMercadoriaViewModel notaFiscalEntradaMercadoriaViewModel = new NotaFiscalEntradaMercadoriaViewModel();
                                 notaFiscalEntradaMercadoriaViewModel.QuantidadeCaixas = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
@@ -331,12 +356,30 @@ namespace SisCom.Aplicacao.Formularios
                                 notaFiscalEntradaMercadoriaViewModel.PrecoPorCaixas = Convert.ToDecimal(row.Cells[grdProduto_Quantidade].Value);
                                 notaFiscalEntradaMercadoriaViewModel.PrecoUnitario = Convert.ToDecimal(row.Cells[grdProduto_Preco].Value);
                                 notaFiscalEntradaMercadoriaViewModel.PercentualDesconto = 0;
-                                notaFiscalEntradaMercadoriaViewModel.ValorDesconto = 0;
+                                notaFiscalEntradaMercadoriaViewModel.ValorDesconto = Funcao.NuloParaValorD(prod.prod.vDesc);
                                 notaFiscalEntradaMercadoriaViewModel.PrecoTotal = Convert.ToDecimal(row.Cells[grdProduto_Total].Value);
-                                notaFiscalEntradaMercadoriaViewModel.PercentualICMS = 0;
-                                notaFiscalEntradaMercadoriaViewModel.PercentualIPI = 0;
+                                notaFiscalEntradaMercadoriaViewModel.PercentualICMS = Funcao.NuloParaValorD(Zeus.NFe_Produto_DadosICMS(prod).vICMS);
+                                notaFiscalEntradaMercadoriaViewModel.PercentualIPI = Funcao.NuloParaValorD(Zeus.NFE_Produto_DadosIPI(prod).vIPI);
                                 notaFiscalEntradaMercadoriaViewModel.NotaFiscalEntradaId = notaFiscalEntradaViewModel.Id;
                                 notaFiscalEntradaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[grdProduto_CodigoSistema].Value.ToString());
+                                foreach (var item in CFOP)
+                                    if (item.Codigo == prod.prod.CFOP.ToString())
+                                    {
+                                        notaFiscalEntradaMercadoriaViewModel.CFOPId = item.Id;
+                                        break;
+                                    }
+                                foreach (var item in NCM)
+                                    if (item.Codigo.Trim() == prod.prod.NCM.Trim())
+                                    {
+                                        notaFiscalEntradaMercadoriaViewModel.NCMId = item.Id;
+                                        break;
+                                    }
+                                foreach (var item in CST_CSOSN)
+                                    if (item.Codigo == Zeus.NFE_Produto_DadosCOFINS(prod).CST.ToString().Replace("cofins", ""))
+                                    {
+                                        notaFiscalEntradaMercadoriaViewModel.CSTId = item.Id;
+                                        break;
+                                    }
 
                                 await notaFiscalEntradaMercadoriaController.Adicionar(notaFiscalEntradaMercadoriaViewModel);
                             }
@@ -365,7 +408,6 @@ namespace SisCom.Aplicacao.Formularios
                 { CarregarComboFornecedor(); }
             }
         }
-
         private void GridProduto_SelecionarProduto(int iLinha, int Coluna, string valor)
         {
             try
@@ -393,7 +435,6 @@ namespace SisCom.Aplicacao.Formularios
             {
             }
         }
-
         private void gridProduto_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try

@@ -69,6 +69,8 @@ namespace SisCom.Infraestrutura.Data.Repository
                                                         params Expression<Func<TEntity, object>>[] includes)
         {
             var ret = DbSet.AsQueryable();
+
+            if (includes != null)
             foreach (var include in includes)
             {
                 ret = ret.Include(include);

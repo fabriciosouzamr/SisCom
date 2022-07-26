@@ -8,6 +8,8 @@ using NFe.Servicos;
 using NFe.Servicos.Retorno;
 using NFe.Utils;
 using NFe.Utils.NFe;
+using NFe.Utils.Tributacao.Estadual;
+using NFe.Utils.Tributacao.Federal;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -203,6 +205,29 @@ namespace SisCom.Aplicacao.Classes
             }
 
             return sXML;
+        }
+
+        public static ICMSGeral NFe_Produto_DadosICMS(NFe.Classes.Informacoes.Detalhe.det oProduto)
+        {
+            ICMSGeral oICMSGeral = new ICMSGeral(oProduto.imposto.ICMS.TipoICMS);
+            return oICMSGeral;
+        }
+
+        public static COFINSGeral NFE_Produto_DadosCOFINS(NFe.Classes.Informacoes.Detalhe.det oProduto)
+        {
+            COFINSGeral oCOFINSGeral = new COFINSGeral(oProduto.imposto.COFINS.TipoCOFINS);
+            return oCOFINSGeral;
+        }
+
+        public static PISGeral NFE_Produto_DadosPIS(NFe.Classes.Informacoes.Detalhe.det oProduto)
+        {
+            PISGeral oPISGeral = new PISGeral(oProduto.imposto.PIS.TipoPIS);
+            return oPISGeral;
+        }
+        public static IPIGeral NFE_Produto_DadosIPI(NFe.Classes.Informacoes.Detalhe.det oProduto)
+        {
+            IPIGeral oIPIGeral = new IPIGeral(oProduto.imposto.IPI.TipoIPI);
+            return oIPIGeral;
         }
     }
 }

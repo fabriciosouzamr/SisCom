@@ -120,7 +120,7 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "...", Grid_DataGridView.TipoColuna.CheckBox);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Importar", Grid_DataGridView.TipoColuna.Button);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Manifestar", Grid_DataGridView.TipoColuna.Button);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Contéudo", Tamanho: 0);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Conteudo", Tamanho: 0);
         }
 
         private void botaoConsultarNotas_Click(object sender, EventArgs e)
