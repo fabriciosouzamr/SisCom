@@ -1,4 +1,5 @@
-﻿using Funcoes._Entity;
+﻿using Funcoes._Classes;
+using Funcoes._Entity;
 using Funcoes.Interfaces;
 using System;
 using System.Globalization;
@@ -13,7 +14,9 @@ public static class Grid_DataGridView
         CheckBox = 3,
         Button = 4,
         Imagem = 5,
-        Link = 6
+        Link = 6,
+        Valor = 7,
+        Numero = 8
     }
 
     public enum FormatoColuna
@@ -34,9 +37,10 @@ public static class Grid_DataGridView
         public FormatoColuna Formato;
     }
 
-    public static void DataGridView_Formatar(DataGridView Grid)
+    public static void DataGridView_Formatar(DataGridView Grid,
+                                             bool AllowUserToAddRows = false)
     {
-        Grid.AllowUserToAddRows = false;
+        Grid.AllowUserToAddRows = AllowUserToAddRows;
     }
 
     public static void DataGridView_DataSource(DataGridView Grid, object dataSource, bool  allowNew)
@@ -49,6 +53,32 @@ public static class Grid_DataGridView
         Grid.DataSource = binding;
 
         dataSource = null;
+    }
+
+    public static decimal DataGridView_CalcularColunaValor(DataGridView Grid,
+                                                          int IndiceColuna)
+    {
+        decimal Valor = 0;
+
+        foreach (DataGridViewRow row in Grid.Rows)
+        {
+            Valor = Valor + Funcao.NuloParaValorD(row.Cells[IndiceColuna].Value);
+        }
+
+        return Valor;
+    }
+
+    public static double DataGridView_CalcularColuna(DataGridView Grid,
+                                                     int IndiceColuna)
+    {
+        double Valor = 0;
+
+        foreach (DataGridViewRow row in Grid.Rows)
+        {
+            Valor = Valor + Funcao.NuloParaValor(row.Cells[IndiceColuna].Value);
+        }
+
+        return Valor;
     }
 
     private static DataGridViewColumn DataGridView_ColunaCriar(DataGridView Grid,
@@ -64,6 +94,8 @@ public static class Grid_DataGridView
         switch (Tipo)
         {
             case TipoColuna.TextBox:
+            case TipoColuna.Valor:
+            case TipoColuna.Numero:
                 {
                     DataGridViewTextBoxColumn Coluna = new DataGridViewTextBoxColumn();
 
@@ -117,7 +149,8 @@ public static class Grid_DataGridView
                                                                   int Caracteres = 0,
                                                                   object dataSource = null,
                                                                   string dataSource_Descricao = "",
-                                                                  string dataSource_Valor = "")
+                                                                  string dataSource_Valor = "",
+                                                                  bool readOnly = false)
     {
         DataGridViewColumn Coluna = DataGridView_ColunaCriar(Grid,
                                                              Nome,
@@ -131,6 +164,21 @@ public static class Grid_DataGridView
 
         Coluna.Name = Nome;
         Coluna.HeaderText = Titulo;
+        Coluna.ReadOnly = readOnly;
+
+        switch (Tipo)
+        {
+            case TipoColuna.Valor:
+                Coluna.DefaultCellStyle.Format = "c2";
+                Coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                Coluna.ValueType = typeof(decimal);
+                break;
+            case TipoColuna.Numero:
+                Coluna.DefaultCellStyle.Format = "N2";
+                Coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                Coluna.ValueType = typeof(int);
+                break;
+        }
 
         Grid.Columns.Add(Coluna);
 
@@ -198,5 +246,19 @@ public static class Grid_DataGridView
     public static void DataGridView_Carregar(DataGridView Grid, IRepository<Entity> Repository)
     {
         Grid.DataSource = Repository.GetAll();
+    }
+
+    public static void DataGridView_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+        {
+            e.Handled = true;
+        }
+
+        if (e.KeyChar == '.'
+            && (sender as TextBox).Text.IndexOf('.') > -1)
+        {
+            e.Handled = true;
+        }
     }
 }

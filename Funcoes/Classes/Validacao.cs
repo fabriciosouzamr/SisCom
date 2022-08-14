@@ -23,7 +23,6 @@ namespace Funcoes._Classes
 
 			return ret;
         }
-
 		public static bool CNPJ_Valido(string cnpj)
 		{
 			int[] multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -115,12 +114,27 @@ namespace Funcoes._Classes
 				resto = 11 - resto;
 			return pis.EndsWith(resto.ToString());
 		}
-
 		public static bool CEP_Valido(string cep)
         {
 			string _cep = Texto.SomenteNumero(cep);
 
 			return (_cep.Length == 8);
         }
+		public static bool Hora_Valido(string hora)
+		{
+            try
+            {
+				if (hora.Trim().Length != 5)
+					return false;
+
+				DateTime.Parse(DateTime.Now.Date.ToString("dd/MM/yyyy") + " " + hora);
+
+				return true;
+			}
+			catch (Exception)
+            {
+				return false;
+            }
+		}
     }
 }

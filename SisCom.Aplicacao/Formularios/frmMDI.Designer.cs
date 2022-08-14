@@ -52,7 +52,7 @@ namespace SisCom.Aplicacao
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.cmdVendas = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.cmdCompras = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -85,7 +85,7 @@ namespace SisCom.Aplicacao
             this.pnlMenuBotao.Controls.Add(this.button7);
             this.pnlMenuBotao.Controls.Add(this.button8);
             this.pnlMenuBotao.Controls.Add(this.button9);
-            this.pnlMenuBotao.Controls.Add(this.button4);
+            this.pnlMenuBotao.Controls.Add(this.cmdVendas);
             this.pnlMenuBotao.Controls.Add(this.button3);
             this.pnlMenuBotao.Controls.Add(this.cmdCompras);
             this.pnlMenuBotao.Controls.Add(this.button1);
@@ -299,14 +299,15 @@ namespace SisCom.Aplicacao
             this.button9.TabIndex = 5;
             this.button9.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // cmdVendas
             // 
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(312, 0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(78, 64);
-            this.button4.TabIndex = 4;
-            this.button4.UseVisualStyleBackColor = true;
+            this.cmdVendas.Image = ((System.Drawing.Image)(resources.GetObject("cmdVendas.Image")));
+            this.cmdVendas.Location = new System.Drawing.Point(312, 0);
+            this.cmdVendas.Name = "cmdVendas";
+            this.cmdVendas.Size = new System.Drawing.Size(78, 64);
+            this.cmdVendas.TabIndex = 4;
+            this.cmdVendas.UseVisualStyleBackColor = true;
+            this.cmdVendas.Click += new System.EventHandler(this.cmdVendas_Click);
             // 
             // button3
             // 
@@ -378,7 +379,7 @@ namespace SisCom.Aplicacao
 
         private System.Windows.Forms.Panel pnlMenuBotao;
         private System.Windows.Forms.Button cmdCadastro;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button cmdVendas;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button cmdCompras;
         private System.Windows.Forms.Button button1;

@@ -193,6 +193,10 @@ namespace SisCom.Aplicacao
                         cfg.CreateMap<TabelaOrigemMercadoriaServicoViewModel, TabelaOrigemMercadoriaServico>().ReverseMap();
                         cfg.CreateMap<TabelaOrigemMercadoriaServico, CodigoDescricaoComboViewModel>();
                         #endregion
+                        #region TabelaOrigemVenda
+                        cfg.CreateMap<TabelaOrigemVendaViewModel, TabelaOrigemVenda>().ReverseMap();
+                        cfg.CreateMap<TabelaOrigemVenda, DescricaoComboViewModel>();
+                        #endregion
                         #region TabelaNCM
                         cfg.CreateMap<TabelaNCMViewModel, TabelaNCM>().ReverseMap();
                         cfg.CreateMap<TabelaNCM, CodigoDescricaoComboViewModel>();
@@ -231,6 +235,12 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region UnidadeMedidaConversao
                         cfg.CreateMap<UnidadeMedidaConversaoViewModel, UnidadeMedidaConversao>().ReverseMap();
+                        #endregion
+                        #region Venda
+                        cfg.CreateMap<VendaViewModel, Venda>().ReverseMap();
+                        #endregion
+                        #region VendaMercadoria
+                        cfg.CreateMap<VendaMercadoriaViewModel, VendaMercadoria>().ReverseMap();
                         #endregion
                         #region VinculoFiscal
                         cfg.CreateMap<VinculoFiscalViewModel, VinculoFiscal>().ReverseMap();

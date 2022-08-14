@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
 {
-    public class UnidadeMedidaController
+    public class UnidadeMedidaController : IDisposable
     {
         static UnidadeMedidaService _UnidadeMedidaService;
         private readonly MeuDbContext MeuDbContext;
@@ -23,17 +23,19 @@ namespace SisCom.Aplicacao.Controllers
 
             _UnidadeMedidaService = new UnidadeMedidaService(new UnidadeMedidaRepository(this.MeuDbContext), notifier);
         }
-
         public async Task<IEnumerable<UnidadeMedidaViewModel>> ObterTodos()
         {
             var obterTodos = await _UnidadeMedidaService.GetAll();
             return Declaracoes.mapper.Map<IEnumerable<UnidadeMedidaViewModel>>(obterTodos);
         }
-
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<UnidadeMedida, object>> order = null)
         {
             var combo = await _UnidadeMedidaService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
+        }
+        public void Dispose()
+        {
+            MeuDbContext.Dispose();
         }
     }
 }

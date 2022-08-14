@@ -362,6 +362,7 @@ namespace SisCom.Aplicacao.Formularios
                                 notaFiscalEntradaMercadoriaViewModel.PercentualIPI = Funcao.NuloParaValorD(Zeus.NFE_Produto_DadosIPI(prod).vIPI);
                                 notaFiscalEntradaMercadoriaViewModel.NotaFiscalEntradaId = notaFiscalEntradaViewModel.Id;
                                 notaFiscalEntradaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[grdProduto_CodigoSistema].Value.ToString());
+                                
                                 foreach (var item in CFOP)
                                     if (item.Codigo == prod.prod.CFOP.ToString())
                                     {

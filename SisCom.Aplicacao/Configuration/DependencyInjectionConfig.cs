@@ -37,8 +37,12 @@ namespace SisCom.Aplicacao.Configuration
             services.AddTransient<frmComprasConsulta>();
             services.AddTransient<frmComprasInclusao>();
             services.AddTransient<frmFiscal_ImportarXML>();
+            services.AddTransient<frmFiscal_NotaFiscal>();
             services.AddTransient<frmFiscal_NuvemFiscal>();
             services.AddTransient<frmFiscal_NuvemFiscal_Manifestar>();
+            services.AddTransient<frmVendasConsulta>();
+            services.AddTransient<frmVendasInclusao>();
+            services.AddTransient<frmFiscal_Transmitir>();
             #endregion
 
             #region Cidade
@@ -176,6 +180,10 @@ namespace SisCom.Aplicacao.Configuration
             #region VinculoFiscal
             services.AddScoped<IVinculoFiscalRepository, VinculoFiscalRepository>();
             services.AddScoped<IVinculoFiscalService, VinculoFiscalService>();
+            #endregion
+            #region Venda
+            services.AddScoped<IVendaRepository, VendaRepository>();
+            services.AddScoped<IVendaService, VendaService>();
             #endregion
             //            services.AddScoped<IUserRepository, UserRepository>();
             //            services.AddScoped<IUserManualRepository, UserManualRepository>();

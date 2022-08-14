@@ -76,6 +76,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
                 if (!context.TabelaCESTs.Any()) AddRangeSync<TabelaCEST>(context, _seedPath);
                 if (!context.TabelaModalidadeDeterminacaoBCICMSs.Any()) AddRangeSync<TabelaModalidadeDeterminacaoBCICMS>(context, _seedPath);
                 if (!context.TabelaOrigemMercadoriaServicos.Any()) AddRangeSync<TabelaOrigemMercadoriaServico>(context, _seedPath);
+                if (!context.TabelaOrigemVendas.Any()) AddRangeSync<TabelaOrigemVenda>(context, _seedPath);
                 if (!context.TabelaSituacaoTributariaNFCes.Any()) AddRangeSync<TabelaSituacaoTributariaNFCe>(context, _seedPath);
                 if (!context.TabelaSpedCodigoGeneros.Any()) AddRangeSync<TabelaSpedCodigoGenero>(context, _seedPath);
                 if (!context.TabelaSpedInformacaoAdicionalItems.Any()) AddRangeSync<TabelaSpedInformacaoAdicionalItem>(context, _seedPath);

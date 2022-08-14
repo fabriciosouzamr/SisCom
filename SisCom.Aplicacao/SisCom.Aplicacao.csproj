@@ -152,6 +152,9 @@
     <None Update="Configuration\Seed\TabelaOrigemMercadoriaServico.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Configuration\Seed\TabelaOrigemVenda.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Configuration\Seed\TabelaSituacaoTributariaNFCe.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

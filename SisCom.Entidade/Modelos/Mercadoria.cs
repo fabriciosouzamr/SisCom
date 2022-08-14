@@ -139,7 +139,6 @@ namespace SisCom.Entidade.Modelos
         public Guid? SubGrupoMercadoriaId { get; set; }
         public Guid? FornecedorId { get; set; }
         public Guid? FabricanteId { get; set; }
-
         public Guid? Estoque_UnidadeMedidaId { get; set; }
         public Guid? Estoque_TributacaoNFCe_TabelaSituacaoTributariaNFCeId { get; set; }
         public Guid? Estoque_TributacaoNFCe_TabelaCFOPId { get; set; }
@@ -152,7 +151,6 @@ namespace SisCom.Entidade.Modelos
         public Guid? Fiscal_TabelaOrigemMercadoriaServicoId { get; set; }
         public Guid? Fiscal_TabelaCST_CSOSNId { get; set; }
         public Guid? Fiscal_TabelaBeneficioSPEDId { get; set; }
-
         public Guid? Fiscal_NFE_TabelaCST_IPIId { get; set; }
         public Guid? Fiscal_NFE_TabelaCST_COFINSId { get; set; }
         public Guid? Fiscal_NFE_TabelaCST_PISId { get; set; }

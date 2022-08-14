@@ -40,6 +40,7 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<GrupoNaturezaReceita_CTS_PIS_COFINS> GrupoNaturezaReceita_CTS_PIS_COFINSs { get; set; }
         public DbSet<GrupoCFOP> GrupoCFOPs { get; set; }
         public DbSet<Mercadoria> Mercadorias { get; set; }
+        public DbSet<Motorista> Motoristas { get; set; }
         public DbSet<NaturezaOperacao> NaturezaOperacoes { get; set; }
         public DbSet<NotaFiscalEntradaFatura> NotaFiscalEntradaFaturas { get; set; }
         public DbSet<NotaFiscalEntradaMercadoria> NotaFiscalEntradaMercadorias { get; set; }
@@ -63,6 +64,7 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<TabelaMotivoDesoneracaoICMS> TabelaMotivoDesoneracaoICMSs { get; set; }
         public DbSet<TabelaNaturezaReceita_CTS_PIS_COFINS> TabelaNaturezaReceita_CTS_PIS_COFINSs { get; set; }
         public DbSet<TabelaOrigemMercadoriaServico> TabelaOrigemMercadoriaServicos { get; set; }
+        public DbSet<TabelaOrigemVenda> TabelaOrigemVendas { get; set; }
         public DbSet<TabelaSituacaoTributariaNFCe> TabelaSituacaoTributariaNFCes { get; set; }
         public DbSet<TabelaSpedCodigoGenero> TabelaSpedCodigoGeneros { get; set; }
         public  DbSet<TabelaSpedInformacaoAdicionalItem> TabelaSpedInformacaoAdicionalItems { get; set; }
@@ -73,6 +75,9 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<Transportadora> Transportadoras { get; set; }
         public DbSet<UnidadeMedida> UnidadeMedidas { get; set; }
         public DbSet<UnidadeMedidaConversao> UnidadeMedidaConversoes { get; set; }
+        public DbSet<VeiculoPlaca> VeiculoPlacas { get; set; }
+        public DbSet<Venda> Vendas { get; set; }
+        public DbSet<VendaMercadoria> VendaMercadorias { get; set; }
         public DbSet<VinculoFiscal> VinculoFiscais { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
