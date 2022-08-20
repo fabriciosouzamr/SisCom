@@ -12,6 +12,7 @@
     <EmbeddedResource Remove="Form1.resx" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Configuration\Seed\NotaFiscalFinalidade.json" />
     <None Remove="Configuration\Seed\Pasta1.json" />
   </ItemGroup>
   <ItemGroup>
@@ -23,6 +24,11 @@
     <Compile Include="..\NuvemFiscal.cs" Link="Compartilhado\NuvemFiscal.cs" />
     <Compile Include="..\Texto_MaskedTextBox.cs" Link="Compartilhado\Texto_MaskedTextBox.cs" />
     <Compile Include="..\Texto_TextBox.cs" Link="Compartilhado\Texto_TextBox.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration\Seed\NotaFiscalFinalidade.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Core" Version="1.22.0" />

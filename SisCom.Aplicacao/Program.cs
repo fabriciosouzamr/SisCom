@@ -120,6 +120,10 @@ namespace SisCom.Aplicacao
                         #region NotaFiscalEntradaFatura
                         cfg.CreateMap<NotaFiscalEntradaFaturaViewModel, NotaFiscalEntradaFatura>().ReverseMap();
                         #endregion
+                        #region NotaFiscalEntradaFinalidade
+                        cfg.CreateMap<NotaFiscalFinalidadeViewModel, NotaFiscalFinalidade>().ReverseMap();
+                        cfg.CreateMap<NotaFiscalFinalidade, NomeComboViewModel>();
+                        #endregion
                         #region NotaFiscalEntradaMercadoria
                         cfg.CreateMap<NotaFiscalEntradaMercadoriaViewModel, NotaFiscalEntradaMercadoria>().ReverseMap();
                         #endregion

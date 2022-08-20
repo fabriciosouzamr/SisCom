@@ -62,6 +62,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
                 if (!context.Estados.Any()) AddRangeSync<Estado>(context, _seedPath);
                 if (!context.Funcionarios.Any()) AddRangeSync<Funcionario>(context, _seedPath);
                 if (!context.GrupoCFOPs.Any()) AddRangeSync<GrupoCFOP>(context, _seedPath);
+                if (!context.NotaFiscalFinalidades.Any()) AddRangeSync<NotaFiscalFinalidade>(context, _seedPath);
                 if (!context.SubGrupoNaturezaReceita_CTS_PIS_COFINSs.Any()) AddRangeSync<SubGrupoNaturezaReceita_CTS_PIS_COFINS>(context, _seedPath);
                 if (!context.TipoClientes.Any()) AddRangeSync<TipoCliente>(context, _seedPath);
                 if (!context.TipoMercadorias.Any()) AddRangeSync<TipoMercadoria>(context, _seedPath);

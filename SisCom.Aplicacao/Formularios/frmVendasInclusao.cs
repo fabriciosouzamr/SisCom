@@ -144,7 +144,6 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
-
         #region Combos
         private async Task<bool> comboFornecedor_Carregar()
         {
