@@ -51,10 +51,14 @@ namespace SisCom.Aplicacao.Controllers
             var obterTodos = await _vendaMercadoriaService.GetAll();
             return Declaracoes.mapper.Map<IEnumerable<VendaMercadoriaViewModel>>(obterTodos);
         }
-
         public async Task<IEnumerable<VendaMercadoriaViewModel>> PesquisarId(Guid Id)
         {
             var vendaMercadoria = await _vendaMercadoriaService.Search(p => p.Id == Id);
+            return Declaracoes.mapper.Map<IEnumerable<VendaMercadoriaViewModel>>(vendaMercadoria);
+        }
+        public async Task<IEnumerable<VendaMercadoriaViewModel>> PesquisarVendaId(Guid Id)
+        {
+            var vendaMercadoria = await _vendaMercadoriaService.GetAll(o => o.Mercadoria.Codigo, p => p.VendaId == Id, i => i.Mercadoria);
             return Declaracoes.mapper.Map<IEnumerable<VendaMercadoriaViewModel>>(vendaMercadoria);
         }
 

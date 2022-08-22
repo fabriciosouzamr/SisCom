@@ -57,6 +57,9 @@
             this.botaoPosterior = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbsRemetente = new System.Windows.Forms.TabPage();
+            this.comboTransportadoraUF = new System.Windows.Forms.ComboBox();
+            this.maskedTransportadoraCPFCNPJ = new System.Windows.Forms.MaskedTextBox();
+            this.maskedRemetenteCPFCNPJ = new System.Windows.Forms.MaskedTextBox();
             this.label65 = new System.Windows.Forms.Label();
             this.numericVolumeTransportadosNumero = new System.Windows.Forms.NumericUpDown();
             this.label64 = new System.Windows.Forms.Label();
@@ -75,11 +78,9 @@
             this.label57 = new System.Windows.Forms.Label();
             this.textTransportadoraRNTC = new System.Windows.Forms.TextBox();
             this.label56 = new System.Windows.Forms.Label();
-            this.textTransportadoraUF = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
             this.textTransportadoraPlaca = new System.Windows.Forms.TextBox();
             this.label54 = new System.Windows.Forms.Label();
-            this.textTransportadoraCPFCNPJ = new System.Windows.Forms.TextBox();
             this.comboTransportadoraFreteConta = new System.Windows.Forms.ComboBox();
             this.label53 = new System.Windows.Forms.Label();
             this.botaoCadastrar = new System.Windows.Forms.Button();
@@ -92,7 +93,7 @@
             this.label49 = new System.Windows.Forms.Label();
             this.numericPercentualDesconto = new System.Windows.Forms.NumericUpDown();
             this.label50 = new System.Windows.Forms.Label();
-            this.numericValorDespesas = new System.Windows.Forms.NumericUpDown();
+            this.numericValorOutrasDespesas = new System.Windows.Forms.NumericUpDown();
             this.label47 = new System.Windows.Forms.Label();
             this.numericValorSeguro = new System.Windows.Forms.NumericUpDown();
             this.label46 = new System.Windows.Forms.Label();
@@ -102,7 +103,7 @@
             this.textRemetenteEMail = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
-            this.textFones = new System.Windows.Forms.TextBox();
+            this.textRemetenteFones = new System.Windows.Forms.TextBox();
             this.comboRemetentePais = new System.Windows.Forms.ComboBox();
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
@@ -119,14 +120,13 @@
             this.textRemetenteNumero = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.textRemetenteCNPJ = new System.Windows.Forms.TextBox();
             this.textRemetenteIE = new System.Windows.Forms.TextBox();
             this.botaoRemetente = new System.Windows.Forms.Button();
             this.comboRemetente = new System.Windows.Forms.ComboBox();
             this.label31 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.botaoCadastrarNatureza = new System.Windows.Forms.Button();
-            this.label28 = new System.Windows.Forms.Label();
+            this.labelNumeroNotaFiscalSaida = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.checkStatusInutilizada = new System.Windows.Forms.CheckBox();
@@ -174,43 +174,43 @@
             this.tbsMercadorias = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel17 = new System.Windows.Forms.Panel();
-            this.label90 = new System.Windows.Forms.Label();
+            this.labelMercadoriaTotalNota = new System.Windows.Forms.Label();
             this.label91 = new System.Windows.Forms.Label();
             this.panel16 = new System.Windows.Forms.Panel();
-            this.label88 = new System.Windows.Forms.Label();
+            this.labelMercadoriaValorICMSDesoneracao = new System.Windows.Forms.Label();
             this.label89 = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
-            this.label86 = new System.Windows.Forms.Label();
+            this.labelMercadoriaValorIPI = new System.Windows.Forms.Label();
             this.label87 = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
-            this.label84 = new System.Windows.Forms.Label();
+            this.labelMercadoriaOutrasDespesas = new System.Windows.Forms.Label();
             this.label85 = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
-            this.label82 = new System.Windows.Forms.Label();
+            this.labelMercadoriaValorSeguro = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.label72 = new System.Windows.Forms.Label();
+            this.labelMercadoriaValorFrete = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.label71 = new System.Windows.Forms.Label();
+            this.labelMercadoriaTotalMercadoria = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.label70 = new System.Windows.Forms.Label();
+            this.labelMercadoriaVolume = new System.Windows.Forms.Label();
             this.label79 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.label69 = new System.Windows.Forms.Label();
+            this.labelMercadoriaItens = new System.Windows.Forms.Label();
             this.label78 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.label67 = new System.Windows.Forms.Label();
+            this.labelMercadoriaICMSSubstituicao = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.label68 = new System.Windows.Forms.Label();
+            this.labelMercadoriaBaseSubstituicao = new System.Windows.Forms.Label();
             this.label76 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.label74 = new System.Windows.Forms.Label();
+            this.labelMercadoriaValorICMS = new System.Windows.Forms.Label();
             this.label75 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.label73 = new System.Windows.Forms.Label();
+            this.labelMercadoriaBaseCalculo = new System.Windows.Forms.Label();
             this.label66 = new System.Windows.Forms.Label();
             this.gridMercadoria = new System.Windows.Forms.DataGridView();
             this.tbsObservacoes = new System.Windows.Forms.TabPage();
@@ -313,14 +313,20 @@
             this.gridAutorizarXML = new System.Windows.Forms.DataGridView();
             this.label133 = new System.Windows.Forms.Label();
             this.panel32 = new System.Windows.Forms.Panel();
-            this.label140 = new System.Windows.Forms.Label();
+            this.labelTotal = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
-            this.label139 = new System.Windows.Forms.Label();
+            this.labelSubTotal = new System.Windows.Forms.Label();
             this.label138 = new System.Windows.Forms.Label();
-            this.label137 = new System.Windows.Forms.Label();
+            this.labelDataNotaFiscalSaida = new System.Windows.Forms.Label();
             this.label136 = new System.Windows.Forms.Label();
-            this.label135 = new System.Windows.Forms.Label();
+            this.lvlNumeroNotaFiscalSaida = new System.Windows.Forms.Label();
             this.label134 = new System.Windows.Forms.Label();
+            this.panelPesquisar = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboPesquisarPesquisa = new System.Windows.Forms.ComboBox();
+            this.label142 = new System.Windows.Forms.Label();
+            this.comboPesquisarTipoFiltro = new System.Windows.Forms.ComboBox();
+            this.label143 = new System.Windows.Forms.Label();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -333,7 +339,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericAliquotaSimplesNacional)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorDesconto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPercentualDesconto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericValorDespesas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericValorOutrasDespesas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorSeguro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorFrete)).BeginInit();
             this.panel3.SuspendLayout();
@@ -381,6 +387,8 @@
             this.panel31.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridAutorizarXML)).BeginInit();
             this.panel32.SuspendLayout();
+            this.panelPesquisar.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMenuBotao
@@ -444,6 +452,7 @@
             this.botaoExportarOutrasNFe.Size = new System.Drawing.Size(53, 56);
             this.botaoExportarOutrasNFe.TabIndex = 74;
             this.botaoExportarOutrasNFe.UseVisualStyleBackColor = true;
+            this.botaoExportarOutrasNFe.Click += new System.EventHandler(this.botaoExportarOutrasNFe_Click);
             // 
             // label8
             // 
@@ -497,6 +506,7 @@
             this.botaoImportarXMLLote.Size = new System.Drawing.Size(53, 56);
             this.botaoImportarXMLLote.TabIndex = 68;
             this.botaoImportarXMLLote.UseVisualStyleBackColor = true;
+            this.botaoImportarXMLLote.Click += new System.EventHandler(this.botaoImportarXMLLote_Click);
             // 
             // botaoImprimirEtiquetas
             // 
@@ -515,6 +525,7 @@
             this.botaoImportarXMLNFe.Size = new System.Drawing.Size(53, 56);
             this.botaoImportarXMLNFe.TabIndex = 66;
             this.botaoImportarXMLNFe.UseVisualStyleBackColor = true;
+            this.botaoImportarXMLNFe.Click += new System.EventHandler(this.botaoImportarXMLNFe_Click);
             // 
             // botaoClonarNFe
             // 
@@ -533,6 +544,7 @@
             this.botaoImprimir.Size = new System.Drawing.Size(53, 56);
             this.botaoImprimir.TabIndex = 64;
             this.botaoImprimir.UseVisualStyleBackColor = true;
+            this.botaoImprimir.Click += new System.EventHandler(this.botaoImprimir_Click);
             // 
             // label2
             // 
@@ -575,6 +587,7 @@
             this.botaoExcluir.Size = new System.Drawing.Size(53, 56);
             this.botaoExcluir.TabIndex = 59;
             this.botaoExcluir.UseVisualStyleBackColor = true;
+            this.botaoExcluir.Click += new System.EventHandler(this.botaoExcluir_Click);
             // 
             // botaoEditar
             // 
@@ -584,6 +597,7 @@
             this.botaoEditar.Size = new System.Drawing.Size(53, 56);
             this.botaoEditar.TabIndex = 56;
             this.botaoEditar.UseVisualStyleBackColor = true;
+            this.botaoEditar.Click += new System.EventHandler(this.botaoEditar_Click);
             // 
             // label38
             // 
@@ -646,6 +660,7 @@
             this.botaoNovo.Size = new System.Drawing.Size(53, 56);
             this.botaoNovo.TabIndex = 19;
             this.botaoNovo.UseVisualStyleBackColor = true;
+            this.botaoNovo.Click += new System.EventHandler(this.botaoNovo_Click);
             // 
             // botaoAnterior
             // 
@@ -655,6 +670,7 @@
             this.botaoAnterior.Size = new System.Drawing.Size(53, 56);
             this.botaoAnterior.TabIndex = 42;
             this.botaoAnterior.UseVisualStyleBackColor = true;
+            this.botaoAnterior.Click += new System.EventHandler(this.botaoAnterior_Click);
             // 
             // botaoPosterior
             // 
@@ -664,6 +680,7 @@
             this.botaoPosterior.Size = new System.Drawing.Size(53, 56);
             this.botaoPosterior.TabIndex = 43;
             this.botaoPosterior.UseVisualStyleBackColor = true;
+            this.botaoPosterior.Click += new System.EventHandler(this.botaoPosterior_Click);
             // 
             // tabControl1
             // 
@@ -674,7 +691,7 @@
             this.tabControl1.Controls.Add(this.tbsNFe);
             this.tabControl1.Controls.Add(this.tbsLocalEntregaRetirada);
             this.tabControl1.Controls.Add(this.tbsAutorizarXML);
-            this.tabControl1.Location = new System.Drawing.Point(0, 83);
+            this.tabControl1.Location = new System.Drawing.Point(0, 124);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -683,6 +700,9 @@
             // 
             // tbsRemetente
             // 
+            this.tbsRemetente.Controls.Add(this.comboTransportadoraUF);
+            this.tbsRemetente.Controls.Add(this.maskedTransportadoraCPFCNPJ);
+            this.tbsRemetente.Controls.Add(this.maskedRemetenteCPFCNPJ);
             this.tbsRemetente.Controls.Add(this.label65);
             this.tbsRemetente.Controls.Add(this.numericVolumeTransportadosNumero);
             this.tbsRemetente.Controls.Add(this.label64);
@@ -701,11 +721,9 @@
             this.tbsRemetente.Controls.Add(this.label57);
             this.tbsRemetente.Controls.Add(this.textTransportadoraRNTC);
             this.tbsRemetente.Controls.Add(this.label56);
-            this.tbsRemetente.Controls.Add(this.textTransportadoraUF);
             this.tbsRemetente.Controls.Add(this.label55);
             this.tbsRemetente.Controls.Add(this.textTransportadoraPlaca);
             this.tbsRemetente.Controls.Add(this.label54);
-            this.tbsRemetente.Controls.Add(this.textTransportadoraCPFCNPJ);
             this.tbsRemetente.Controls.Add(this.comboTransportadoraFreteConta);
             this.tbsRemetente.Controls.Add(this.label53);
             this.tbsRemetente.Controls.Add(this.botaoCadastrar);
@@ -718,7 +736,7 @@
             this.tbsRemetente.Controls.Add(this.label49);
             this.tbsRemetente.Controls.Add(this.numericPercentualDesconto);
             this.tbsRemetente.Controls.Add(this.label50);
-            this.tbsRemetente.Controls.Add(this.numericValorDespesas);
+            this.tbsRemetente.Controls.Add(this.numericValorOutrasDespesas);
             this.tbsRemetente.Controls.Add(this.label47);
             this.tbsRemetente.Controls.Add(this.numericValorSeguro);
             this.tbsRemetente.Controls.Add(this.label46);
@@ -728,7 +746,7 @@
             this.tbsRemetente.Controls.Add(this.textRemetenteEMail);
             this.tbsRemetente.Controls.Add(this.label43);
             this.tbsRemetente.Controls.Add(this.label42);
-            this.tbsRemetente.Controls.Add(this.textFones);
+            this.tbsRemetente.Controls.Add(this.textRemetenteFones);
             this.tbsRemetente.Controls.Add(this.comboRemetentePais);
             this.tbsRemetente.Controls.Add(this.label41);
             this.tbsRemetente.Controls.Add(this.label40);
@@ -745,14 +763,13 @@
             this.tbsRemetente.Controls.Add(this.textRemetenteNumero);
             this.tbsRemetente.Controls.Add(this.label33);
             this.tbsRemetente.Controls.Add(this.label32);
-            this.tbsRemetente.Controls.Add(this.textRemetenteCNPJ);
             this.tbsRemetente.Controls.Add(this.textRemetenteIE);
             this.tbsRemetente.Controls.Add(this.botaoRemetente);
             this.tbsRemetente.Controls.Add(this.comboRemetente);
             this.tbsRemetente.Controls.Add(this.label31);
             this.tbsRemetente.Controls.Add(this.label29);
             this.tbsRemetente.Controls.Add(this.botaoCadastrarNatureza);
-            this.tbsRemetente.Controls.Add(this.label28);
+            this.tbsRemetente.Controls.Add(this.labelNumeroNotaFiscalSaida);
             this.tbsRemetente.Controls.Add(this.label27);
             this.tbsRemetente.Controls.Add(this.panel3);
             this.tbsRemetente.Controls.Add(this.label24);
@@ -782,6 +799,31 @@
             this.tbsRemetente.TabIndex = 0;
             this.tbsRemetente.Text = "Remetente";
             this.tbsRemetente.UseVisualStyleBackColor = true;
+            // 
+            // comboTransportadoraUF
+            // 
+            this.comboTransportadoraUF.FormattingEnabled = true;
+            this.comboTransportadoraUF.Location = new System.Drawing.Point(808, 325);
+            this.comboTransportadoraUF.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboTransportadoraUF.Name = "comboTransportadoraUF";
+            this.comboTransportadoraUF.Size = new System.Drawing.Size(42, 23);
+            this.comboTransportadoraUF.TabIndex = 159;
+            // 
+            // maskedTransportadoraCPFCNPJ
+            // 
+            this.maskedTransportadoraCPFCNPJ.Location = new System.Drawing.Point(505, 325);
+            this.maskedTransportadoraCPFCNPJ.Mask = "00,000,000/0000-00";
+            this.maskedTransportadoraCPFCNPJ.Name = "maskedTransportadoraCPFCNPJ";
+            this.maskedTransportadoraCPFCNPJ.Size = new System.Drawing.Size(123, 23);
+            this.maskedTransportadoraCPFCNPJ.TabIndex = 158;
+            // 
+            // maskedRemetenteCPFCNPJ
+            // 
+            this.maskedRemetenteCPFCNPJ.Location = new System.Drawing.Point(849, 100);
+            this.maskedRemetenteCPFCNPJ.Mask = "00,000,000/0000-00";
+            this.maskedRemetenteCPFCNPJ.Name = "maskedRemetenteCPFCNPJ";
+            this.maskedRemetenteCPFCNPJ.Size = new System.Drawing.Size(123, 23);
+            this.maskedRemetenteCPFCNPJ.TabIndex = 157;
             // 
             // label65
             // 
@@ -899,7 +941,7 @@
             // 
             // numericTransportadoraNumeroCarga
             // 
-            this.numericTransportadoraNumeroCarga.Location = new System.Drawing.Point(1075, 322);
+            this.numericTransportadoraNumeroCarga.Location = new System.Drawing.Point(1075, 325);
             this.numericTransportadoraNumeroCarga.Name = "numericTransportadoraNumeroCarga";
             this.numericTransportadoraNumeroCarga.Size = new System.Drawing.Size(68, 23);
             this.numericTransportadoraNumeroCarga.TabIndex = 142;
@@ -940,14 +982,6 @@
             this.label56.TabIndex = 139;
             this.label56.Text = "UF";
             // 
-            // textTransportadoraUF
-            // 
-            this.textTransportadoraUF.Location = new System.Drawing.Point(808, 325);
-            this.textTransportadoraUF.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textTransportadoraUF.Name = "textTransportadoraUF";
-            this.textTransportadoraUF.Size = new System.Drawing.Size(36, 23);
-            this.textTransportadoraUF.TabIndex = 138;
-            // 
             // label55
             // 
             this.label55.AutoSize = true;
@@ -973,14 +1007,6 @@
             this.label54.Size = new System.Drawing.Size(82, 15);
             this.label54.TabIndex = 135;
             this.label54.Text = "C.P.F./C.N.P.J.";
-            // 
-            // textTransportadoraCPFCNPJ
-            // 
-            this.textTransportadoraCPFCNPJ.Location = new System.Drawing.Point(505, 325);
-            this.textTransportadoraCPFCNPJ.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textTransportadoraCPFCNPJ.Name = "textTransportadoraCPFCNPJ";
-            this.textTransportadoraCPFCNPJ.Size = new System.Drawing.Size(123, 23);
-            this.textTransportadoraCPFCNPJ.TabIndex = 134;
             // 
             // comboTransportadoraFreteConta
             // 
@@ -1061,6 +1087,11 @@
             // 
             this.numericValorDesconto.DecimalPlaces = 2;
             this.numericValorDesconto.Location = new System.Drawing.Point(676, 250);
+            this.numericValorDesconto.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericValorDesconto.Name = "numericValorDesconto";
             this.numericValorDesconto.Size = new System.Drawing.Size(100, 23);
             this.numericValorDesconto.TabIndex = 124;
@@ -1093,13 +1124,18 @@
             this.label50.TabIndex = 123;
             this.label50.Text = "Desconto (%):";
             // 
-            // numericValorDespesas
+            // numericValorOutrasDespesas
             // 
-            this.numericValorDespesas.DecimalPlaces = 2;
-            this.numericValorDespesas.Location = new System.Drawing.Point(1044, 224);
-            this.numericValorDespesas.Name = "numericValorDespesas";
-            this.numericValorDespesas.Size = new System.Drawing.Size(100, 23);
-            this.numericValorDespesas.TabIndex = 120;
+            this.numericValorOutrasDespesas.DecimalPlaces = 2;
+            this.numericValorOutrasDespesas.Location = new System.Drawing.Point(1044, 224);
+            this.numericValorOutrasDespesas.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericValorOutrasDespesas.Name = "numericValorOutrasDespesas";
+            this.numericValorOutrasDespesas.Size = new System.Drawing.Size(100, 23);
+            this.numericValorOutrasDespesas.TabIndex = 120;
             // 
             // label47
             // 
@@ -1115,6 +1151,11 @@
             // 
             this.numericValorSeguro.DecimalPlaces = 2;
             this.numericValorSeguro.Location = new System.Drawing.Point(676, 224);
+            this.numericValorSeguro.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericValorSeguro.Name = "numericValorSeguro";
             this.numericValorSeguro.Size = new System.Drawing.Size(100, 23);
             this.numericValorSeguro.TabIndex = 118;
@@ -1133,6 +1174,11 @@
             // 
             this.numericValorFrete.DecimalPlaces = 2;
             this.numericValorFrete.Location = new System.Drawing.Point(366, 224);
+            this.numericValorFrete.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericValorFrete.Name = "numericValorFrete";
             this.numericValorFrete.Size = new System.Drawing.Size(100, 23);
             this.numericValorFrete.TabIndex = 116;
@@ -1183,16 +1229,17 @@
             this.label42.TabIndex = 51;
             this.label42.Text = "Fones:";
             // 
-            // textFones
+            // textRemetenteFones
             // 
-            this.textFones.Location = new System.Drawing.Point(325, 175);
-            this.textFones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textFones.Name = "textFones";
-            this.textFones.Size = new System.Drawing.Size(263, 23);
-            this.textFones.TabIndex = 50;
+            this.textRemetenteFones.Location = new System.Drawing.Point(325, 175);
+            this.textRemetenteFones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textRemetenteFones.Name = "textRemetenteFones";
+            this.textRemetenteFones.Size = new System.Drawing.Size(263, 23);
+            this.textRemetenteFones.TabIndex = 50;
             // 
             // comboRemetentePais
             // 
+            this.comboRemetentePais.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboRemetentePais.FormattingEnabled = true;
             this.comboRemetentePais.Location = new System.Drawing.Point(1065, 149);
             this.comboRemetentePais.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1245,6 +1292,7 @@
             // 
             // comboRemetenteCidade
             // 
+            this.comboRemetenteCidade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboRemetenteCidade.FormattingEnabled = true;
             this.comboRemetenteCidade.Location = new System.Drawing.Point(430, 149);
             this.comboRemetenteCidade.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1332,14 +1380,6 @@
             this.label32.TabIndex = 34;
             this.label32.Text = "*I.E.:";
             // 
-            // textRemetenteCNPJ
-            // 
-            this.textRemetenteCNPJ.Location = new System.Drawing.Point(849, 100);
-            this.textRemetenteCNPJ.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textRemetenteCNPJ.Name = "textRemetenteCNPJ";
-            this.textRemetenteCNPJ.Size = new System.Drawing.Size(123, 23);
-            this.textRemetenteCNPJ.TabIndex = 33;
-            // 
             // textRemetenteIE
             // 
             this.textRemetenteIE.Location = new System.Drawing.Point(1012, 100);
@@ -1395,16 +1435,16 @@
             this.botaoCadastrarNatureza.Text = "Cadastrar Natureza";
             this.botaoCadastrarNatureza.UseVisualStyleBackColor = true;
             // 
-            // label28
+            // labelNumeroNotaFiscalSaida
             // 
-            this.label28.BackColor = System.Drawing.Color.White;
-            this.label28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label28.Location = new System.Drawing.Point(1048, 26);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(96, 19);
-            this.label28.TabIndex = 26;
-            this.label28.Text = "1";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelNumeroNotaFiscalSaida.BackColor = System.Drawing.Color.White;
+            this.labelNumeroNotaFiscalSaida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelNumeroNotaFiscalSaida.Location = new System.Drawing.Point(1048, 26);
+            this.labelNumeroNotaFiscalSaida.Name = "labelNumeroNotaFiscalSaida";
+            this.labelNumeroNotaFiscalSaida.Size = new System.Drawing.Size(96, 19);
+            this.labelNumeroNotaFiscalSaida.TabIndex = 26;
+            this.labelNumeroNotaFiscalSaida.Text = "1";
+            this.labelNumeroNotaFiscalSaida.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label27
             // 
@@ -1512,6 +1552,7 @@
             this.textSerie.Name = "textSerie";
             this.textSerie.Size = new System.Drawing.Size(44, 23);
             this.textSerie.TabIndex = 23;
+            this.textSerie.TextChanged += new System.EventHandler(this.textSerie_TextChanged);
             // 
             // label24
             // 
@@ -1573,6 +1614,7 @@
             this.comboFinalidade.Name = "comboFinalidade";
             this.comboFinalidade.Size = new System.Drawing.Size(86, 23);
             this.comboFinalidade.TabIndex = 17;
+            this.comboFinalidade.SelectedIndexChanged += new System.EventHandler(this.comboFinalidade_SelectedIndexChanged);
             // 
             // label21
             // 
@@ -1585,6 +1627,7 @@
             // 
             // comboNaturezaOperacao
             // 
+            this.comboNaturezaOperacao.DropDownWidth = 500;
             this.comboNaturezaOperacao.FormattingEnabled = true;
             this.comboNaturezaOperacao.Location = new System.Drawing.Point(340, 25);
             this.comboNaturezaOperacao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1766,6 +1809,7 @@
             // 
             // comboOrigem
             // 
+            this.comboOrigem.DropDownWidth = 300;
             this.comboOrigem.FormattingEnabled = true;
             this.comboOrigem.Location = new System.Drawing.Point(57, 66);
             this.comboOrigem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1880,7 +1924,7 @@
             // 
             // panel17
             // 
-            this.panel17.Controls.Add(this.label90);
+            this.panel17.Controls.Add(this.labelMercadoriaTotalNota);
             this.panel17.Controls.Add(this.label91);
             this.panel17.Location = new System.Drawing.Point(882, 53);
             this.panel17.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1888,14 +1932,14 @@
             this.panel17.Size = new System.Drawing.Size(163, 54);
             this.panel17.TabIndex = 20;
             // 
-            // label90
+            // labelMercadoriaTotalNota
             // 
-            this.label90.Location = new System.Drawing.Point(31, 27);
-            this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(105, 15);
-            this.label90.TabIndex = 9;
-            this.label90.Text = "0,00";
-            this.label90.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaTotalNota.Location = new System.Drawing.Point(31, 27);
+            this.labelMercadoriaTotalNota.Name = "labelMercadoriaTotalNota";
+            this.labelMercadoriaTotalNota.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaTotalNota.TabIndex = 9;
+            this.labelMercadoriaTotalNota.Text = "0,00";
+            this.labelMercadoriaTotalNota.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label91
             // 
@@ -1908,7 +1952,7 @@
             // 
             // panel16
             // 
-            this.panel16.Controls.Add(this.label88);
+            this.panel16.Controls.Add(this.labelMercadoriaValorICMSDesoneracao);
             this.panel16.Controls.Add(this.label89);
             this.panel16.Location = new System.Drawing.Point(588, 53);
             this.panel16.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1916,14 +1960,14 @@
             this.panel16.Size = new System.Drawing.Size(295, 54);
             this.panel16.TabIndex = 19;
             // 
-            // label88
+            // labelMercadoriaValorICMSDesoneracao
             // 
-            this.label88.Location = new System.Drawing.Point(72, 27);
-            this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(150, 15);
-            this.label88.TabIndex = 9;
-            this.label88.Text = "0,00";
-            this.label88.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaValorICMSDesoneracao.Location = new System.Drawing.Point(72, 27);
+            this.labelMercadoriaValorICMSDesoneracao.Name = "labelMercadoriaValorICMSDesoneracao";
+            this.labelMercadoriaValorICMSDesoneracao.Size = new System.Drawing.Size(150, 15);
+            this.labelMercadoriaValorICMSDesoneracao.TabIndex = 9;
+            this.labelMercadoriaValorICMSDesoneracao.Text = "0,00";
+            this.labelMercadoriaValorICMSDesoneracao.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label89
             // 
@@ -1936,7 +1980,7 @@
             // 
             // panel15
             // 
-            this.panel15.Controls.Add(this.label86);
+            this.panel15.Controls.Add(this.labelMercadoriaValorIPI);
             this.panel15.Controls.Add(this.label87);
             this.panel15.Location = new System.Drawing.Point(441, 53);
             this.panel15.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1944,14 +1988,14 @@
             this.panel15.Size = new System.Drawing.Size(148, 54);
             this.panel15.TabIndex = 18;
             // 
-            // label86
+            // labelMercadoriaValorIPI
             // 
-            this.label86.Location = new System.Drawing.Point(18, 27);
-            this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(105, 15);
-            this.label86.TabIndex = 9;
-            this.label86.Text = "0,00";
-            this.label86.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaValorIPI.Location = new System.Drawing.Point(18, 27);
+            this.labelMercadoriaValorIPI.Name = "labelMercadoriaValorIPI";
+            this.labelMercadoriaValorIPI.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaValorIPI.TabIndex = 9;
+            this.labelMercadoriaValorIPI.Text = "0,00";
+            this.labelMercadoriaValorIPI.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label87
             // 
@@ -1964,7 +2008,7 @@
             // 
             // panel14
             // 
-            this.panel14.Controls.Add(this.label84);
+            this.panel14.Controls.Add(this.labelMercadoriaOutrasDespesas);
             this.panel14.Controls.Add(this.label85);
             this.panel14.Location = new System.Drawing.Point(294, 53);
             this.panel14.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1972,14 +2016,14 @@
             this.panel14.Size = new System.Drawing.Size(148, 54);
             this.panel14.TabIndex = 17;
             // 
-            // label84
+            // labelMercadoriaOutrasDespesas
             // 
-            this.label84.Location = new System.Drawing.Point(18, 27);
-            this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(105, 15);
-            this.label84.TabIndex = 9;
-            this.label84.Text = "0,00";
-            this.label84.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaOutrasDespesas.Location = new System.Drawing.Point(18, 27);
+            this.labelMercadoriaOutrasDespesas.Name = "labelMercadoriaOutrasDespesas";
+            this.labelMercadoriaOutrasDespesas.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaOutrasDespesas.TabIndex = 9;
+            this.labelMercadoriaOutrasDespesas.Text = "0,00";
+            this.labelMercadoriaOutrasDespesas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label85
             // 
@@ -1992,7 +2036,7 @@
             // 
             // panel13
             // 
-            this.panel13.Controls.Add(this.label82);
+            this.panel13.Controls.Add(this.labelMercadoriaValorSeguro);
             this.panel13.Controls.Add(this.label83);
             this.panel13.Location = new System.Drawing.Point(147, 53);
             this.panel13.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2000,14 +2044,14 @@
             this.panel13.Size = new System.Drawing.Size(148, 54);
             this.panel13.TabIndex = 16;
             // 
-            // label82
+            // labelMercadoriaValorSeguro
             // 
-            this.label82.Location = new System.Drawing.Point(18, 27);
-            this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(105, 15);
-            this.label82.TabIndex = 9;
-            this.label82.Text = "0,00";
-            this.label82.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaValorSeguro.Location = new System.Drawing.Point(18, 27);
+            this.labelMercadoriaValorSeguro.Name = "labelMercadoriaValorSeguro";
+            this.labelMercadoriaValorSeguro.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaValorSeguro.TabIndex = 9;
+            this.labelMercadoriaValorSeguro.Text = "0,00";
+            this.labelMercadoriaValorSeguro.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label83
             // 
@@ -2020,7 +2064,7 @@
             // 
             // panel12
             // 
-            this.panel12.Controls.Add(this.label72);
+            this.panel12.Controls.Add(this.labelMercadoriaValorFrete);
             this.panel12.Controls.Add(this.label81);
             this.panel12.Location = new System.Drawing.Point(0, 53);
             this.panel12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2028,14 +2072,14 @@
             this.panel12.Size = new System.Drawing.Size(148, 54);
             this.panel12.TabIndex = 15;
             // 
-            // label72
+            // labelMercadoriaValorFrete
             // 
-            this.label72.Location = new System.Drawing.Point(18, 27);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(105, 15);
-            this.label72.TabIndex = 9;
-            this.label72.Text = "0,00";
-            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaValorFrete.Location = new System.Drawing.Point(18, 27);
+            this.labelMercadoriaValorFrete.Name = "labelMercadoriaValorFrete";
+            this.labelMercadoriaValorFrete.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaValorFrete.TabIndex = 9;
+            this.labelMercadoriaValorFrete.Text = "0,00";
+            this.labelMercadoriaValorFrete.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label81
             // 
@@ -2048,7 +2092,7 @@
             // 
             // panel11
             // 
-            this.panel11.Controls.Add(this.label71);
+            this.panel11.Controls.Add(this.labelMercadoriaTotalMercadoria);
             this.panel11.Controls.Add(this.label80);
             this.panel11.Location = new System.Drawing.Point(882, 0);
             this.panel11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2056,14 +2100,14 @@
             this.panel11.Size = new System.Drawing.Size(163, 54);
             this.panel11.TabIndex = 14;
             // 
-            // label71
+            // labelMercadoriaTotalMercadoria
             // 
-            this.label71.Location = new System.Drawing.Point(31, 27);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(105, 15);
-            this.label71.TabIndex = 9;
-            this.label71.Text = "0,00";
-            this.label71.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaTotalMercadoria.Location = new System.Drawing.Point(31, 27);
+            this.labelMercadoriaTotalMercadoria.Name = "labelMercadoriaTotalMercadoria";
+            this.labelMercadoriaTotalMercadoria.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaTotalMercadoria.TabIndex = 9;
+            this.labelMercadoriaTotalMercadoria.Text = "0,00";
+            this.labelMercadoriaTotalMercadoria.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label80
             // 
@@ -2076,7 +2120,7 @@
             // 
             // panel10
             // 
-            this.panel10.Controls.Add(this.label70);
+            this.panel10.Controls.Add(this.labelMercadoriaVolume);
             this.panel10.Controls.Add(this.label79);
             this.panel10.Location = new System.Drawing.Point(735, 0);
             this.panel10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2084,14 +2128,14 @@
             this.panel10.Size = new System.Drawing.Size(148, 54);
             this.panel10.TabIndex = 13;
             // 
-            // label70
+            // labelMercadoriaVolume
             // 
-            this.label70.Location = new System.Drawing.Point(18, 27);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(105, 15);
-            this.label70.TabIndex = 9;
-            this.label70.Text = "0";
-            this.label70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaVolume.Location = new System.Drawing.Point(18, 27);
+            this.labelMercadoriaVolume.Name = "labelMercadoriaVolume";
+            this.labelMercadoriaVolume.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaVolume.TabIndex = 9;
+            this.labelMercadoriaVolume.Text = "0";
+            this.labelMercadoriaVolume.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label79
             // 
@@ -2104,7 +2148,7 @@
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.label69);
+            this.panel9.Controls.Add(this.labelMercadoriaItens);
             this.panel9.Controls.Add(this.label78);
             this.panel9.Location = new System.Drawing.Point(588, 0);
             this.panel9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2112,14 +2156,14 @@
             this.panel9.Size = new System.Drawing.Size(148, 54);
             this.panel9.TabIndex = 12;
             // 
-            // label69
+            // labelMercadoriaItens
             // 
-            this.label69.Location = new System.Drawing.Point(18, 27);
-            this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(105, 15);
-            this.label69.TabIndex = 9;
-            this.label69.Text = "0";
-            this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaItens.Location = new System.Drawing.Point(18, 27);
+            this.labelMercadoriaItens.Name = "labelMercadoriaItens";
+            this.labelMercadoriaItens.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaItens.TabIndex = 9;
+            this.labelMercadoriaItens.Text = "0";
+            this.labelMercadoriaItens.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label78
             // 
@@ -2132,7 +2176,7 @@
             // 
             // panel8
             // 
-            this.panel8.Controls.Add(this.label67);
+            this.panel8.Controls.Add(this.labelMercadoriaICMSSubstituicao);
             this.panel8.Controls.Add(this.label77);
             this.panel8.Location = new System.Drawing.Point(441, 0);
             this.panel8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2140,14 +2184,14 @@
             this.panel8.Size = new System.Drawing.Size(148, 54);
             this.panel8.TabIndex = 11;
             // 
-            // label67
+            // labelMercadoriaICMSSubstituicao
             // 
-            this.label67.Location = new System.Drawing.Point(18, 27);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(105, 15);
-            this.label67.TabIndex = 9;
-            this.label67.Text = "0,00";
-            this.label67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaICMSSubstituicao.Location = new System.Drawing.Point(18, 27);
+            this.labelMercadoriaICMSSubstituicao.Name = "labelMercadoriaICMSSubstituicao";
+            this.labelMercadoriaICMSSubstituicao.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaICMSSubstituicao.TabIndex = 9;
+            this.labelMercadoriaICMSSubstituicao.Text = "0,00";
+            this.labelMercadoriaICMSSubstituicao.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label77
             // 
@@ -2160,7 +2204,7 @@
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.label68);
+            this.panel7.Controls.Add(this.labelMercadoriaBaseSubstituicao);
             this.panel7.Controls.Add(this.label76);
             this.panel7.Location = new System.Drawing.Point(294, 0);
             this.panel7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2168,14 +2212,14 @@
             this.panel7.Size = new System.Drawing.Size(148, 54);
             this.panel7.TabIndex = 10;
             // 
-            // label68
+            // labelMercadoriaBaseSubstituicao
             // 
-            this.label68.Location = new System.Drawing.Point(18, 27);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(105, 15);
-            this.label68.TabIndex = 9;
-            this.label68.Text = "0,00";
-            this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaBaseSubstituicao.Location = new System.Drawing.Point(18, 27);
+            this.labelMercadoriaBaseSubstituicao.Name = "labelMercadoriaBaseSubstituicao";
+            this.labelMercadoriaBaseSubstituicao.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaBaseSubstituicao.TabIndex = 9;
+            this.labelMercadoriaBaseSubstituicao.Text = "0,00";
+            this.labelMercadoriaBaseSubstituicao.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label76
             // 
@@ -2188,7 +2232,7 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.label74);
+            this.panel6.Controls.Add(this.labelMercadoriaValorICMS);
             this.panel6.Controls.Add(this.label75);
             this.panel6.Location = new System.Drawing.Point(147, 0);
             this.panel6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2196,14 +2240,14 @@
             this.panel6.Size = new System.Drawing.Size(148, 54);
             this.panel6.TabIndex = 9;
             // 
-            // label74
+            // labelMercadoriaValorICMS
             // 
-            this.label74.Location = new System.Drawing.Point(18, 27);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(105, 15);
-            this.label74.TabIndex = 9;
-            this.label74.Text = "0,00";
-            this.label74.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaValorICMS.Location = new System.Drawing.Point(18, 27);
+            this.labelMercadoriaValorICMS.Name = "labelMercadoriaValorICMS";
+            this.labelMercadoriaValorICMS.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaValorICMS.TabIndex = 9;
+            this.labelMercadoriaValorICMS.Text = "0,00";
+            this.labelMercadoriaValorICMS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label75
             // 
@@ -2216,7 +2260,7 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.label73);
+            this.panel5.Controls.Add(this.labelMercadoriaBaseCalculo);
             this.panel5.Controls.Add(this.label66);
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2224,14 +2268,14 @@
             this.panel5.Size = new System.Drawing.Size(148, 54);
             this.panel5.TabIndex = 8;
             // 
-            // label73
+            // labelMercadoriaBaseCalculo
             // 
-            this.label73.Location = new System.Drawing.Point(18, 27);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(105, 15);
-            this.label73.TabIndex = 9;
-            this.label73.Text = "0,00";
-            this.label73.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelMercadoriaBaseCalculo.Location = new System.Drawing.Point(18, 27);
+            this.labelMercadoriaBaseCalculo.Name = "labelMercadoriaBaseCalculo";
+            this.labelMercadoriaBaseCalculo.Size = new System.Drawing.Size(105, 15);
+            this.labelMercadoriaBaseCalculo.TabIndex = 9;
+            this.labelMercadoriaBaseCalculo.Text = "0,00";
+            this.labelMercadoriaBaseCalculo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label66
             // 
@@ -2252,6 +2296,9 @@
             this.gridMercadoria.RowTemplate.Height = 25;
             this.gridMercadoria.Size = new System.Drawing.Size(1147, 242);
             this.gridMercadoria.TabIndex = 16;
+            this.gridMercadoria.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMercadoria_CellClick);
+            this.gridMercadoria.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMercadoria_CellValueChanged);
+            this.gridMercadoria.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gridMercadoria_DataError);
             // 
             // tbsObservacoes
             // 
@@ -2640,6 +2687,7 @@
             this.textInfoNFeNFeSerie.Name = "textInfoNFeNFeSerie";
             this.textInfoNFeNFeSerie.Size = new System.Drawing.Size(219, 23);
             this.textInfoNFeNFeSerie.TabIndex = 42;
+            this.textInfoNFeNFeSerie.TextChanged += new System.EventHandler(this.textInfoNFeNFeSerie_TextChanged);
             // 
             // panel27
             // 
@@ -2834,6 +2882,7 @@
             this.comboInfoNFeFidelidade.Name = "comboInfoNFeFidelidade";
             this.comboInfoNFeFidelidade.Size = new System.Drawing.Size(213, 23);
             this.comboInfoNFeFidelidade.TabIndex = 45;
+            this.comboInfoNFeFidelidade.SelectedIndexChanged += new System.EventHandler(this.comboInfoNFeFidelidade_SelectedIndexChanged);
             // 
             // label107
             // 
@@ -3273,28 +3322,28 @@
             // panel32
             // 
             this.panel32.BackColor = System.Drawing.Color.White;
-            this.panel32.Controls.Add(this.label140);
+            this.panel32.Controls.Add(this.labelTotal);
             this.panel32.Controls.Add(this.label141);
-            this.panel32.Controls.Add(this.label139);
+            this.panel32.Controls.Add(this.labelSubTotal);
             this.panel32.Controls.Add(this.label138);
-            this.panel32.Controls.Add(this.label137);
+            this.panel32.Controls.Add(this.labelDataNotaFiscalSaida);
             this.panel32.Controls.Add(this.label136);
-            this.panel32.Controls.Add(this.label135);
+            this.panel32.Controls.Add(this.lvlNumeroNotaFiscalSaida);
             this.panel32.Controls.Add(this.label134);
-            this.panel32.Location = new System.Drawing.Point(0, 530);
+            this.panel32.Location = new System.Drawing.Point(0, 570);
             this.panel32.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel32.Name = "panel32";
             this.panel32.Size = new System.Drawing.Size(1161, 26);
             this.panel32.TabIndex = 16;
             // 
-            // label140
+            // labelTotal
             // 
-            this.label140.AutoSize = true;
-            this.label140.Location = new System.Drawing.Point(1012, 5);
-            this.label140.Name = "label140";
-            this.label140.Size = new System.Drawing.Size(28, 15);
-            this.label140.TabIndex = 7;
-            this.label140.Text = "0,00";
+            this.labelTotal.AutoSize = true;
+            this.labelTotal.Location = new System.Drawing.Point(1012, 5);
+            this.labelTotal.Name = "labelTotal";
+            this.labelTotal.Size = new System.Drawing.Size(28, 15);
+            this.labelTotal.TabIndex = 7;
+            this.labelTotal.Text = "0,00";
             // 
             // label141
             // 
@@ -3305,14 +3354,14 @@
             this.label141.TabIndex = 6;
             this.label141.Text = "TOTAL (R$)";
             // 
-            // label139
+            // labelSubTotal
             // 
-            this.label139.AutoSize = true;
-            this.label139.Location = new System.Drawing.Point(762, 5);
-            this.label139.Name = "label139";
-            this.label139.Size = new System.Drawing.Size(28, 15);
-            this.label139.TabIndex = 5;
-            this.label139.Text = "0,00";
+            this.labelSubTotal.AutoSize = true;
+            this.labelSubTotal.Location = new System.Drawing.Point(762, 5);
+            this.labelSubTotal.Name = "labelSubTotal";
+            this.labelSubTotal.Size = new System.Drawing.Size(28, 15);
+            this.labelSubTotal.TabIndex = 5;
+            this.labelSubTotal.Text = "0,00";
             // 
             // label138
             // 
@@ -3323,14 +3372,14 @@
             this.label138.TabIndex = 4;
             this.label138.Text = "SUB-TOTAL (R$)";
             // 
-            // label137
+            // labelDataNotaFiscalSaida
             // 
-            this.label137.AutoSize = true;
-            this.label137.Location = new System.Drawing.Point(398, 5);
-            this.label137.Name = "label137";
-            this.label137.Size = new System.Drawing.Size(110, 15);
-            this.label137.TabIndex = 3;
-            this.label137.Text = "99/99/9999 99:99:99";
+            this.labelDataNotaFiscalSaida.AutoSize = true;
+            this.labelDataNotaFiscalSaida.Location = new System.Drawing.Point(398, 5);
+            this.labelDataNotaFiscalSaida.Name = "labelDataNotaFiscalSaida";
+            this.labelDataNotaFiscalSaida.Size = new System.Drawing.Size(110, 15);
+            this.labelDataNotaFiscalSaida.TabIndex = 3;
+            this.labelDataNotaFiscalSaida.Text = "99/99/9999 99:99:99";
             // 
             // label136
             // 
@@ -3341,14 +3390,14 @@
             this.label136.TabIndex = 2;
             this.label136.Text = "Data\r\n";
             // 
-            // label135
+            // lvlNumeroNotaFiscalSaida
             // 
-            this.label135.AutoSize = true;
-            this.label135.Location = new System.Drawing.Point(92, 5);
-            this.label135.Name = "label135";
-            this.label135.Size = new System.Drawing.Size(43, 15);
-            this.label135.TabIndex = 1;
-            this.label135.Text = "000001";
+            this.lvlNumeroNotaFiscalSaida.AutoSize = true;
+            this.lvlNumeroNotaFiscalSaida.Location = new System.Drawing.Point(92, 5);
+            this.lvlNumeroNotaFiscalSaida.Name = "lvlNumeroNotaFiscalSaida";
+            this.lvlNumeroNotaFiscalSaida.Size = new System.Drawing.Size(43, 15);
+            this.lvlNumeroNotaFiscalSaida.TabIndex = 1;
+            this.lvlNumeroNotaFiscalSaida.Text = "000001";
             // 
             // label134
             // 
@@ -3359,11 +3408,72 @@
             this.label134.TabIndex = 0;
             this.label134.Text = "NF-e Nº";
             // 
+            // panelPesquisar
+            // 
+            this.panelPesquisar.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panelPesquisar.Controls.Add(this.groupBox2);
+            this.panelPesquisar.Location = new System.Drawing.Point(0, 83);
+            this.panelPesquisar.Name = "panelPesquisar";
+            this.panelPesquisar.Size = new System.Drawing.Size(1162, 40);
+            this.panelPesquisar.TabIndex = 17;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.comboPesquisarPesquisa);
+            this.groupBox2.Controls.Add(this.label142);
+            this.groupBox2.Controls.Add(this.comboPesquisarTipoFiltro);
+            this.groupBox2.Controls.Add(this.label143);
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(734, 40);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Pesquisar Registros: ";
+            // 
+            // comboPesquisarPesquisa
+            // 
+            this.comboPesquisarPesquisa.FormattingEnabled = true;
+            this.comboPesquisarPesquisa.Location = new System.Drawing.Point(338, 15);
+            this.comboPesquisarPesquisa.Name = "comboPesquisarPesquisa";
+            this.comboPesquisarPesquisa.Size = new System.Drawing.Size(390, 23);
+            this.comboPesquisarPesquisa.TabIndex = 3;
+            this.comboPesquisarPesquisa.TabStop = false;
+            // 
+            // label142
+            // 
+            this.label142.AutoSize = true;
+            this.label142.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label142.Location = new System.Drawing.Point(275, 20);
+            this.label142.Name = "label142";
+            this.label142.Size = new System.Drawing.Size(57, 15);
+            this.label142.TabIndex = 2;
+            this.label142.Text = "Pesquisa:";
+            // 
+            // comboPesquisarTipoFiltro
+            // 
+            this.comboPesquisarTipoFiltro.FormattingEnabled = true;
+            this.comboPesquisarTipoFiltro.Location = new System.Drawing.Point(115, 15);
+            this.comboPesquisarTipoFiltro.Name = "comboPesquisarTipoFiltro";
+            this.comboPesquisarTipoFiltro.Size = new System.Drawing.Size(150, 23);
+            this.comboPesquisarTipoFiltro.TabIndex = 1;
+            this.comboPesquisarTipoFiltro.TabStop = false;
+            // 
+            // label143
+            // 
+            this.label143.AutoSize = true;
+            this.label143.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label143.Location = new System.Drawing.Point(10, 20);
+            this.label143.Name = "label143";
+            this.label143.Size = new System.Drawing.Size(101, 15);
+            this.label143.TabIndex = 0;
+            this.label143.Text = "Tipo de Pesquisa:";
+            // 
             // frmFiscal_NotaFiscal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1162, 557);
+            this.ClientSize = new System.Drawing.Size(1162, 598);
+            this.Controls.Add(this.panelPesquisar);
             this.Controls.Add(this.panel32);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.pnlMenuBotao);
@@ -3384,7 +3494,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericAliquotaSimplesNacional)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorDesconto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPercentualDesconto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericValorDespesas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericValorOutrasDespesas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorSeguro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorFrete)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -3467,6 +3577,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridAutorizarXML)).EndInit();
             this.panel32.ResumeLayout(false);
             this.panel32.PerformLayout();
+            this.panelPesquisar.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3551,13 +3664,12 @@
         private System.Windows.Forms.CheckBox checkStatusInutilizada;
         private System.Windows.Forms.CheckBox checkStatusFinalizada;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label labelNumeroNotaFiscalSaida;
         private System.Windows.Forms.Button botaoCadastrarNatureza;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.ComboBox comboRemetente;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Button botaoRemetente;
-        private System.Windows.Forms.TextBox textRemetenteCNPJ;
         private System.Windows.Forms.TextBox textRemetenteIE;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label33;
@@ -3576,7 +3688,7 @@
         private System.Windows.Forms.ComboBox comboRemetentePais;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.TextBox textFones;
+        private System.Windows.Forms.TextBox textRemetenteFones;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.TextBox textRemetenteEMail;
         private System.Windows.Forms.Label label44;
@@ -3584,7 +3696,7 @@
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.NumericUpDown numericValorSeguro;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.NumericUpDown numericValorDespesas;
+        private System.Windows.Forms.NumericUpDown numericValorOutrasDespesas;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.NumericUpDown numericAliquotaSimplesNacional;
         private System.Windows.Forms.Label label48;
@@ -3599,10 +3711,8 @@
         private System.Windows.Forms.ComboBox comboTransportadoraFreteConta;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.TextBox textTransportadoraCPFCNPJ;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.TextBox textTransportadoraPlaca;
-        private System.Windows.Forms.TextBox textTransportadoraUF;
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.TextBox textTransportadoraRNTC;
@@ -3624,43 +3734,43 @@
         private System.Windows.Forms.DataGridView gridMercadoria;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label labelMercadoriaValorICMS;
         private System.Windows.Forms.Label label75;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Label labelMercadoriaBaseCalculo;
         private System.Windows.Forms.Label label66;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label labelMercadoriaBaseSubstituicao;
         private System.Windows.Forms.Label label76;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label labelMercadoriaICMSSubstituicao;
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Label labelMercadoriaItens;
         private System.Windows.Forms.Label label78;
         private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label labelMercadoriaVolume;
         private System.Windows.Forms.Label label79;
         private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label labelMercadoriaTotalMercadoria;
         private System.Windows.Forms.Label label80;
         private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label labelMercadoriaValorFrete;
         private System.Windows.Forms.Label label81;
         private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.Label labelMercadoriaValorSeguro;
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Label labelMercadoriaOutrasDespesas;
         private System.Windows.Forms.Label label85;
         private System.Windows.Forms.Panel panel16;
-        private System.Windows.Forms.Label label88;
+        private System.Windows.Forms.Label labelMercadoriaValorICMSDesoneracao;
         private System.Windows.Forms.Label label89;
         private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.Label labelMercadoriaValorIPI;
         private System.Windows.Forms.Label label87;
         private System.Windows.Forms.Panel panel17;
-        private System.Windows.Forms.Label label90;
+        private System.Windows.Forms.Label labelMercadoriaTotalNota;
         private System.Windows.Forms.Label label91;
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.Label label92;
@@ -3758,12 +3868,21 @@
         private System.Windows.Forms.DataGridView gridAutorizarXML;
         private System.Windows.Forms.Panel panel32;
         private System.Windows.Forms.Label label134;
-        private System.Windows.Forms.Label label135;
-        private System.Windows.Forms.Label label137;
+        private System.Windows.Forms.Label lvlNumeroNotaFiscalSaida;
+        private System.Windows.Forms.Label labelDataNotaFiscalSaida;
         private System.Windows.Forms.Label label136;
         private System.Windows.Forms.Label label138;
-        private System.Windows.Forms.Label label140;
+        private System.Windows.Forms.Label labelTotal;
         private System.Windows.Forms.Label label141;
-        private System.Windows.Forms.Label label139;
+        private System.Windows.Forms.Label labelSubTotal;
+        private System.Windows.Forms.Panel panelPesquisar;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox comboPesquisarPesquisa;
+        private System.Windows.Forms.Label label142;
+        private System.Windows.Forms.ComboBox comboPesquisarTipoFiltro;
+        private System.Windows.Forms.Label label143;
+        private System.Windows.Forms.MaskedTextBox maskedRemetenteCPFCNPJ;
+        private System.Windows.Forms.MaskedTextBox maskedTransportadoraCPFCNPJ;
+        private System.Windows.Forms.ComboBox comboTransportadoraUF;
     }
 }

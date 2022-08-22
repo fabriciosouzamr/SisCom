@@ -1,11 +1,15 @@
-﻿using Funcoes._Entity;
+﻿using Funcoes.Enum;
 using SisCom.Entidade.Enum;
+using SisCom.Entidade.Modelos;
 using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace SisCom.Entidade.Modelos
+namespace SisCom.Aplicacao.ViewModels
 {
-    public class NotaFiscalSaida : Entity
-    {
+	public class NotaFiscalSaidaViewModel
+	{
+		[Key]
+		public Guid Id { get; set; }
 		public Empresa Empresa { get; set; }
 		public NaturezaOperacao NaturezaOperacao { get; set; }
 		public NotaFiscalFinalidade NotaFiscalFinalidade { get; set; }
@@ -64,7 +68,6 @@ namespace SisCom.Entidade.Modelos
 		public Guid? TabelaOrigemVendaId { get; set; }
 		public Guid? TransportadoraId { get; set; }
 		public Guid? Transportadora_UFId { get; set; }
-		public Guid? RegimeTributarioId { get; set; }
 		public Guid? InformacoesComplementaresInteresseContribuinte_UFId { get; set; }
 	}
 }

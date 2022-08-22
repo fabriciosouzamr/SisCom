@@ -1,10 +1,13 @@
-﻿using Funcoes._Entity;
+﻿using SisCom.Entidade.Modelos;
 using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace SisCom.Entidade.Modelos
+namespace SisCom.Aplicacao.ViewModels
 {
-    public class NotaFiscalSaidaMercadoria : Entity
+    public class NotaFiscalSaidaMercadoriaViewModel
     {
+        [Key]
+        public Guid Id { get; set; }
         public NotaFiscalSaida NotaFiscalSaida { get; set; }
         public Mercadoria Mercadoria { get; set; }
         public TabelaNCM TabelaNCM { get; set; }

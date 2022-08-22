@@ -16,7 +16,8 @@ public static class Grid_DataGridView
         Imagem = 5,
         Link = 6,
         Valor = 7,
-        Numero = 8
+        Numero = 8,
+        Percentual = 9
     }
 
     public enum FormatoColuna
@@ -96,6 +97,7 @@ public static class Grid_DataGridView
             case TipoColuna.TextBox:
             case TipoColuna.Valor:
             case TipoColuna.Numero:
+            case TipoColuna.Percentual:
                 {
                     DataGridViewTextBoxColumn Coluna = new DataGridViewTextBoxColumn();
 
@@ -174,6 +176,7 @@ public static class Grid_DataGridView
                 Coluna.ValueType = typeof(decimal);
                 break;
             case TipoColuna.Numero:
+            case TipoColuna.Percentual:
                 Coluna.DefaultCellStyle.Format = "N2";
                 Coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 Coluna.ValueType = typeof(int);

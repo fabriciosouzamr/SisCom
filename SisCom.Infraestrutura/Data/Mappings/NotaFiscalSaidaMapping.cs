@@ -30,7 +30,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
             builder.Property(p => p.ObservacaoDocumento).IsRequired().HasColumnType("varchar(8000)");
             builder.Property(p => p.InformacoesAdicionaisInteresseFisco).IsRequired().HasColumnType("varchar(8000)");
             builder.Property(p => p.InformacoesComplementaresInteresseContribuinte_Obsersacao).IsRequired().HasColumnType("varchar(8000)");
-            builder.Property(p => p.ChaveNFe).IsRequired().HasColumnType("varchar(44)");
+            builder.Property(p => p.CodigoChaveAcesso).IsRequired().HasColumnType("varchar(44)");
             builder.Property(p => p.Protocolo).IsRequired().HasColumnType("varchar(40)");
             
             builder.ToTable("NotaFiscalSaidas");

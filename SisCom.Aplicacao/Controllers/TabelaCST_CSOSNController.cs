@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
 {
-    public class TabelaCST_CSOSNController
+    public class TabelaCST_CSOSNController : IDisposable
     {
         static TabelaCST_CSOSNService _TabelaCST_CSOSNService;
         private readonly MeuDbContext MeuDbContext;
@@ -34,6 +34,10 @@ namespace SisCom.Aplicacao.Controllers
         {
             var combo = await _TabelaCST_CSOSNService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<CodigoDescricaoComboViewModel>>(combo);
+        }
+        public void Dispose()
+        {
+            MeuDbContext.Dispose();
         }
     }
 }

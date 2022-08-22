@@ -75,6 +75,31 @@ namespace SisCom.Aplicacao.Classes
         public string ChaveAcesso { get; set; }
         public string CNPJ { get; set; }
     }
+    public class NotaFiscalMercadoriaDetalhamentoImposto
+    {
+        public decimal Preco { set; get; }
+        public decimal ValorBaseCalculo { set; get; }
+        public decimal AliquotaICMS { set; get; }
+        public decimal ValorICMS { set; get; }
+        public decimal AliquotaReducao { set; get; }
+        public decimal ValorBaseSubstituicaoTributaria { set; get; }
+        public decimal ValorSubstituicaoTributaria { set; get; }
+        public decimal ValorAdicional { set; get; }
+        public decimal AliquotaAdicional { set; get; }
+        public Guid? CSTIPI { set; get; }
+        public decimal ValorBaseIPI { set; get; }
+        public decimal AliquotaIPI { set; get; }
+        public decimal ValorIPI { set; get; }
+        public Guid? CSTPIS { set; get; }
+        public decimal AliquotaPIS { set; get; }
+        public Guid? CSTCOFINS { set; get; }
+        public decimal AliquotaCOFINS { set; get; }
+        public decimal BaseCalculoFCP { set; get; }
+        public decimal AliquotaFCP { set; get; }
+        public decimal ValorFCP { set; get; }
+        public string NumeroPedidoCompra { set; get; }
+        public string ItemPedidoCompra { set; get; }
+    }
 
     public static class Texto
     {

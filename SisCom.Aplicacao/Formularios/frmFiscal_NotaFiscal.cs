@@ -1,4 +1,5 @@
 ﻿using Funcoes._Classes;
+using Funcoes._Enum;
 using Funcoes.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using SisCom.Aplicacao.Classes;
@@ -16,8 +17,27 @@ using System.Windows.Forms;
 namespace SisCom.Aplicacao.Formularios
 {
     public partial class frmFiscal_NotaFiscal : FormMain
-    {          
+    {
+        ViewModels.NotaFiscalSaidaViewModel notafiscalsaida = null;
         public Guid VendaId;
+
+        const int gridMercadoria_CodigoSistema = 0;
+        const int gridMercadoria_RefSistema = 1;
+        const int gridMercadoria_Mercadoria = 2;
+        const int gridMercadoria_Descricao = 3;
+        const int gridMercadoria_NCM = 4;
+        const int gridMercadoria_CST_CSOSN = 5;
+        const int gridMercadoria_CFOP = 6;
+        const int gridMercadoria_Medida = 7;
+        const int gridMercadoria_Quantidade = 8;
+        const int gridMercadoria_Preco = 9;
+        const int gridMercadoria_Total = 10;
+        const int gridMercadoria_ICMS = 11;
+        const int gridMercadoria_IPI = 12;
+        const int gridMercadoria_Frete = 13;
+        const int gridMercadoria_BTN_Impostos = 14;
+        const int gridMercadoria_BTN_Excluir = 15;
+        const int gridMercadoria_Impostos = 16;
 
         enum RegimeTributario
         {
@@ -28,7 +48,6 @@ namespace SisCom.Aplicacao.Formularios
             [Description("NORMAL")]
             NORMAL = 3
         }
-
         enum TransportadoraFreteConta
         {
             [Description("0-Contratação do Frete por conta do Remetente(CIF)")]
@@ -44,13 +63,20 @@ namespace SisCom.Aplicacao.Formularios
             [Description("9-Sem Ocorrência de Transporte")]
             SemOcorrenciaTransporte = 9
         }
-
+        enum NFModelo
+        {
+            [Description("SIMPLES NACIONAL")]
+            SIMPLES_NACIONAL = 1,
+            [Description("SIMPLES NACIONAL - EXCESSO DE SUBLIMITE DE RECEITA BRUTA")]
+            SIMPLES_NACIONAL_EXCESSO_SUBLIMITE_RECEITA_BRUTA = 2,
+            [Description("NORMAL")]
+            NORMAL = 3
+        }
         public frmFiscal_NotaFiscal(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
             InitializeComponent();
             Inicializa();
         }
-
         async Task Inicializa()
         {
             //Pesquisar
@@ -59,18 +85,25 @@ namespace SisCom.Aplicacao.Formularios
             Combo_ComboBox.Formatar(comboInfoNFeIndicaPresenca, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_IndicaPresenca));
             Combo_ComboBox.Formatar(comboInfoNFeOperacao, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Operacao));
             Combo_ComboBox.Formatar(comboInfoNFeTipoEmissao, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_TipoEmissao));
+            Combo_ComboBox.Formatar(comboInfoNFeNFeModelo, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Modelo));
 
             await Assincrono.TaskAsyncAndAwaitAsync(Inicializar());
             await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
+            await Assincrono.TaskAsyncAndAwaitAsync(CarregarVenda());
         }
-
         private async Task<bool> Inicializar()
         {
             try
             {
+                Texto_MaskedTextBox.FormatarTipoPessoa(TipoPessoaCliente.Juridica, maskedRemetenteCPFCNPJ);
+                Texto_MaskedTextBox.FormatarTipoPessoa(TipoPessoaCliente.Juridica, maskedTransportadoraCPFCNPJ);
+
                 Limpar();
 
                 List<NomeComboViewModel> unidadeMedida;
+                List<CodigoComboViewModel> tabelaCFOP;
+                List<CodigoDescricaoComboViewModel> tabelaNCM;
+                List<CodigoDescricaoComboViewModel> tabelaCST_CSOSN;
 
                 DataTable produto = new DataTable();
                 produto.Columns.Add("ID", typeof(Guid));
@@ -89,24 +122,40 @@ namespace SisCom.Aplicacao.Formularios
                 }
                 using (UnidadeMedidaController unidadeMedidaController = new UnidadeMedidaController(this.MeuDbContext(), this._notifier))
                 {
-                    unidadeMedida = (List<NomeComboViewModel>)await unidadeMedidaController.Combo();
+                    unidadeMedida = (List<NomeComboViewModel>)await unidadeMedidaController.Combo(o => o.Nome);
+                }
+                using (TabelaCFOPController tabelaCFOPController = new TabelaCFOPController(this.MeuDbContext(), this._notifier))
+                {
+                    tabelaCFOP = (List<CodigoComboViewModel>)await tabelaCFOPController.Combo(o => o.Codigo);
+                }
+                using (TabelaNCMController tabelaNCMController = new TabelaNCMController(this.MeuDbContext(), this._notifier))
+                {
+                    tabelaNCM = (List<CodigoDescricaoComboViewModel>)await tabelaNCMController.Combo(o => o.Codigo);
+                }
+                using (TabelaCST_CSOSNController tabelaCST_CSOSNController = new TabelaCST_CSOSNController(this.MeuDbContext(), this._notifier))
+                {
+                    tabelaCST_CSOSN = (List<CodigoDescricaoComboViewModel>)await tabelaCST_CSOSNController.Combo(o => o.Codigo);
                 }
 
-                ////Detalhe de Estoque
-                //Grid_DataGridView.DataGridView_Formatar(gridProdutos, true);
-                //Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "ID");
-                //Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "ID");
-                //Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "ID");
-                //Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "Medida", "Medida", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, unidadeMedida, "Nome", "ID");
-                //Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "Quantidade", "Quantidade", Grid_DataGridView.TipoColuna.Numero);
-                //Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "Preço", "Preço", Grid_DataGridView.TipoColuna.Valor);
-                //Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "Total", "Total", Grid_DataGridView.TipoColuna.Valor, readOnly: true);
-                //Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "Excluir", "Excluir", Grid_DataGridView.TipoColuna.Button);
-
-                ////Cabeçalho
-                //await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
-
-                //if (comboOrigemVenda.Items.Count == 1) { comboOrigemVenda.SelectedIndex = -1; }
+                //Detalhe de Estoque
+                Grid_DataGridView.DataGridView_Formatar(gridMercadoria, true);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "Id");
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "Id");
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "", "Mercadoria", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "Id");
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "", "Descrição");
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "", "NCM", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaNCM, "Codigo", "ID");
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "", "CST/CSOSN", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaCST_CSOSN, "Codigo", "ID");
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "", "CFOP", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaCFOP, "Codigo", "ID");
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Medida", "Medida", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, unidadeMedida, "Nome", "ID");
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Quantidade", "Quantidade", Grid_DataGridView.TipoColuna.Numero, 80);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Preço", "Preço", Grid_DataGridView.TipoColuna.Valor, 80);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Total", "Total", Grid_DataGridView.TipoColuna.Valor, 80, readOnly: true);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "ICMS", "ICMS", Grid_DataGridView.TipoColuna.Percentual, 80);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "IPI", "IPI", Grid_DataGridView.TipoColuna.Percentual, 80);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Frete", "Frete", Grid_DataGridView.TipoColuna.Percentual, 80);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Grid_DataGridView.TipoColuna.Button, 80);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Excluir", "Excluir", Grid_DataGridView.TipoColuna.Button, 80);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Tamanho: 0);
 
                 //venda = new ViewModels.VendaViewModel();
                 //venda.Id = Guid.Empty;
@@ -123,34 +172,88 @@ namespace SisCom.Aplicacao.Formularios
         {
             datePeriodoInicial.Value = DateTime.Now.Date;
             textHora.Text = DateTime.Now.ToString("HH:mm");
-            //comboClienteCodigo.SelectedIndex = -1;
-            //comboClienteNome.SelectedIndex = -1;
-            //comboFornecedor.SelectedIndex = -1;
-            //comboEmpresa.SelectedIndex = -1;
-            //numericValorFrete.Value = 0;
-            //textObservacao.Text = "";
 
-            //comboTransportadora.SelectedIndex = -1;
-            //comboMotorista.SelectedIndex = -1;
-            //comboPlaca1.SelectedIndex = -1;
-            //comboPlaca2.SelectedIndex = -1;
-            //comboPlaca3.SelectedIndex = -1;
+            comboNaturezaOperacao.SelectedIndex = -1;
 
-            //comboOutrosDados_EnderecoEntrega.SelectedIndex = -1;
-            //comboOutrosDados_Motorista.SelectedIndex = -1;
-            //comboOutrosDados_Indicador.SelectedIndex = -1;
-            //numericOutrosDados_KM.Value = 0;
-            //numericOutrosDados_KMDias.Value = 0;
+            comboRegimeTributario.SelectedValue = RegimeTributario.NORMAL;
+            comboInfoNFeIndicaPresenca.SelectedValue = NF_IndicaPresenca.OperacaoPresencial;
+            comboInfoNFeOperacao.SelectedValue = NF_Operacao.Normal;
+            comboInfoNFeTipoEmissao.SelectedValue = NF_TipoEmissao.Normal;
+            comboInfoNFeNFeModelo.SelectedValue = NF_Modelo.NotaFiscalEletronica;
+            textModelo.Text = comboInfoNFeNFeModelo.Text;
 
-            //textNFCe_Numero.Text = "";
-            //textNFCe_Protocolo.Text = "";
-            //textNFCe_Serie.Text = "";
-            //textNFCe_ChaveNFCe.Text = "";
-            //dateNFCe_Emissao.Value = DateTime.Now.Date;
-            //comboNFCe_TipoEmissao.SelectedIndex = -1;
+            checkStatusCancelado.Checked = false;
+            checkStatusFinalizada.Checked = false;
+            checkStatusDenegada.Checked = false;
+            checkStatusInutilizada.Checked = false;
 
+            comboRemetente.SelectedIndex = -1;
+            Texto_MaskedTextBox.Limpar(maskedRemetenteCPFCNPJ);
+            textRemetenteIE.Text = "";
+            textRemetenteEndereco.Text = "";
+            textRemetenteNumero.Text = "";
+            comboRemetenteUF.SelectedIndex = -1;
+            comboRemetenteCidade.SelectedIndex = -1;
+            textRemetenteBairro.Text = "";
+            textRemetenteCEP.Text = "";
+            comboRemetentePais.SelectedIndex = -1;
+            textRemetenteFones.Text = "";
+            textRemetenteEMail.Text = "";
+            numericValorFrete.Value = 0;
+            numericValorSeguro.Value = 0;
+            numericValorOutrasDespesas.Value = 0;
             numericPercentualDesconto.Value = 0;
             numericValorDesconto.Value = 0;
+            numericAliquotaSimplesNacional.Value = 0;
+            comboTransportadora.SelectedIndex = -1;
+            comboTransportadoraFreteConta.SelectedIndex = -1;
+            Texto_MaskedTextBox.Limpar(maskedTransportadoraCPFCNPJ);
+            textTransportadoraPlaca.Text = "";
+            comboTransportadoraUF.SelectedIndex = -1;
+            textTransportadoraRNTC.Text = "";
+            numericTransportadoraNumeroCarga.Value = 0;
+            comboRegimeTributario.SelectedIndex = -1;
+            numericVolumeTransportadosQuantidade.Value = 0;
+            textVolumeTransportadosEspecie.Text = "";
+            textVolumeTransportadosMarca.Text = "";
+            numericVolumeTransportadosNumero.Value = 0;
+            numericVolumeTransportadosPesoBruto.Value = 0;
+            numericVolumeTransportadosPesoLiquido.Value = 0;
+
+            gridMercadoria.Rows.Clear();
+            labelMercadoriaBaseCalculo.Text = "0.00";
+            labelMercadoriaValorICMS.Text = "0.00";
+            labelMercadoriaBaseSubstituicao.Text = "0.00";
+            labelMercadoriaItens.Text = "0.00";
+            labelMercadoriaVolume.Text = "0.00";
+            labelMercadoriaTotalMercadoria.Text = "0.00";
+            labelMercadoriaValorFrete.Text = "0.00";
+            labelMercadoriaValorSeguro.Text = "0.00";
+            labelMercadoriaOutrasDespesas.Text = "0.00";
+            labelMercadoriaValorIPI.Text = "0.00";
+            labelMercadoriaValorICMSDesoneracao.Text = "0.00";
+            labelMercadoriaTotalNota.Text = "0.00";
+
+            gridObservacao.Rows.Clear();
+            richInformacoesComplementaresInteresseContribuinte.Text = "";
+            richInformacoesAdicionaisInteresseFisco.Text = "";
+            comboInformacoesComplementaresUF.SelectedIndex = -1;
+            textInformacoesComplementaresLocal.Text = "";
+
+            comboObservacaoTipoPagamento.SelectedIndex = -1;
+            gridObservacao.Rows.Clear();
+
+            textInfoNFeChaveNFe.Text = "";
+            textInfoNFeProtocolo.Text = "";
+            textInfoNFeNFeSerie.Text = "";
+            textInfoNFeNFeSubSerie.Text = "";
+
+            gridAutorizarXML.Rows.Clear();
+
+            labelDataNotaFiscalSaida.Text = "00000";
+            labelDataNotaFiscalSaida.Text = "";
+            labelSubTotal.Text = "0.00";
+            labelTotal.Text = "0.00";
         }
         private async Task<bool> InicializarCombos()
         {
@@ -162,6 +265,7 @@ namespace SisCom.Aplicacao.Formularios
             await Assincrono.TaskAsyncAndAwaitAsync(comboNaturezaOperacao_Carregar());
             await Assincrono.TaskAsyncAndAwaitAsync(comboEstado_Carregar());
             await Assincrono.TaskAsyncAndAwaitAsync(comboTransportadora_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboInfoNFeOrigem_Carregar());
 
             comboInfoNFeFidelidade.DataSource = comboFinalidade.DataSource;
             comboInfoNFeFidelidade.ValueMember = comboFinalidade.ValueMember;
@@ -171,11 +275,6 @@ namespace SisCom.Aplicacao.Formularios
             return true;
         }
         #region Combos
-        //private System.Windows.Forms.ComboBox comboInfoNFeIndicaPresenca;
-        //private System.Windows.Forms.ComboBox comboInfoNFeNFeModelo;
-        //private System.Windows.Forms.ComboBox comboInfoNFeOperacao;
-        //private System.Windows.Forms.ComboBox comboInfoNFeOrigem;
-        //private System.Windows.Forms.ComboBox comboInfoNFeTipoEmissao;
         //private System.Windows.Forms.ComboBox comboInformacoesComplementaresUF;
         //private System.Windows.Forms.ComboBox comboLocalEntregaRetiradaBairro;
         //private System.Windows.Forms.ComboBox comboLocalEntregaRetiradaChaveNFe;
@@ -183,8 +282,6 @@ namespace SisCom.Aplicacao.Formularios
         //private System.Windows.Forms.ComboBox comboLocalEntregaRetiradaPais;
         //private System.Windows.Forms.ComboBox comboLocalEntregaRetiradaUF;
         //private System.Windows.Forms.ComboBox comboObservacaoTipoPagamento
-        //private System.Windows.Forms.ComboBox comboTransportadora;
-        //private System.Windows.Forms.ComboBox comboTransportadoraFreteConta;
 
         private async Task<bool> comboEmpresa_Carregar()
         {
@@ -268,6 +365,10 @@ namespace SisCom.Aplicacao.Formularios
                                         await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Nome));
             }
 
+            comboTransportadoraUF.ValueMember = comboRemetenteUF.ValueMember;
+            comboTransportadoraUF.DisplayMember = comboRemetenteUF.DisplayMember;
+            comboTransportadoraUF.DataSource = comboRemetenteUF.DataSource;
+
             return true;
         }
         private async Task<bool> comboCidade_Carregar(Guid EstadoId)
@@ -294,13 +395,28 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
+        private async Task<bool> comboInfoNFeOrigem_Carregar()
+        {
+            using (MeuDbContext meuDbContext = this.MeuDbContext())
+            {
+                Combo_ComboBox.Formatar(comboInfoNFeOrigem,
+                                        "ID", "Descricao",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new TabelaOrigemVendaController(this.MeuDbContext(), this._notifier)).Combo());
+            }
+
+            return true;
+        }
         #endregion
         private void botaoFechar_Click(object sender, EventArgs e)
         {
+            TentarGravar();
             Close();
         }
         private void botaoGravar_Click(object sender, EventArgs e)
         {
+            GravarMercadoria();
+
             var form = this.ServiceProvider().GetRequiredService<frmFiscal_Transmitir>();
             form.ShowDialog(this);
         }
@@ -331,6 +447,466 @@ namespace SisCom.Aplicacao.Formularios
                                         await (new PaisController(this.MeuDbContext(), this._notifier)).ComboId(PaisId));
 
                 comboRemetentePais.SelectedValue = PaisId;
+            }
+        }
+        private async Task<bool> CarregarVenda()
+        {
+            int linha = -1;
+
+            if (VendaId != Guid.Empty)
+            {
+                using (VendaController vendaController = new VendaController(this.MeuDbContext(), this._notifier))
+                {
+                    IEnumerable<VendaViewModel> ret = await vendaController.PesquisarId(VendaId);
+
+                    foreach (VendaViewModel vendaViewModel in ret)
+                    {
+                        dateDataEmissao.Value = vendaViewModel.DataVenda;
+                        if (!Funcao.Nulo(vendaViewModel.ClienteId)) comboRemetente.SelectedValue = vendaViewModel.ClienteId;
+                        if (!Funcao.Nulo(vendaViewModel.EmpresaId)) comboEmpresa.SelectedValue = vendaViewModel.EmpresaId;
+                        if (!Funcao.Nulo(vendaViewModel.TabelaOrigemVendaId)) comboInfoNFeOrigem.SelectedValue = vendaViewModel.TabelaOrigemVendaId;
+                        numericValorFrete.Value = vendaViewModel.ValorFrete;
+                        numericValorDesconto.Value = vendaViewModel.ValorDesconto;
+                        if (!Funcao.Nulo(vendaViewModel.TransportadoraId)) comboTransportadora.SelectedValue = vendaViewModel.TransportadoraId;
+                        if ((!Funcao.Nulo(vendaViewModel.VeiculoPlaca01)) && (!Funcao.Nulo(vendaViewModel.VeiculoPlaca01.NumeroPlaca))) textTransportadoraPlaca.Text = vendaViewModel.VeiculoPlaca01.NumeroPlaca;
+                        if (!Funcao.Nulo(vendaViewModel.TabelaOrigemVendaId)) textLocalEntregaRetiradaEndereco.Text = vendaViewModel.EnderecoEntrega;
+                    }
+                }
+
+                using (VendaMercadoriaController vendaMercadoriaController = new VendaMercadoriaController(this.MeuDbContext(), this._notifier))
+                {
+                    IEnumerable<VendaMercadoriaViewModel> ret = await vendaMercadoriaController.PesquisarVendaId(VendaId);
+
+                    foreach (VendaMercadoriaViewModel vendaMercadoriaViewModel in ret)
+                    {
+                        linha = Grid_DataGridView.DataGridView_LinhaAdicionar(gridMercadoria,
+                                                                              new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = gridMercadoria_CodigoSistema,
+                                                                                                                                             Valor = vendaMercadoriaViewModel.Mercadoria.Id },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_RefSistema,
+                                                                                                                                             Valor = vendaMercadoriaViewModel.Mercadoria.Id },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_Mercadoria,
+                                                                                                                                             Valor = vendaMercadoriaViewModel.Mercadoria.Id },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_Descricao,
+                                                                                                                                             Valor = vendaMercadoriaViewModel.Mercadoria.Nome },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_Quantidade,
+                                                                                                                                             Valor = vendaMercadoriaViewModel.Quantidade },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_Preco,
+                                                                                                                                             Valor = vendaMercadoriaViewModel.Preco },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_Total,
+                                                                                                                                             Valor = vendaMercadoriaViewModel.Total }}).Index;                    }
+                }
+            }
+
+            return true;
+        }
+        private void gridMercadoria_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+        }
+        private bool ValidarDados()
+        {
+            if (!Combo_ComboBox.Selecionado(comboNaturezaOperacao))
+            {
+                CaixaMensagem.Informacao("Selecione a natureza de operação");
+                return false;
+            }
+            if (!Combo_ComboBox.Selecionado(comboFinalidade))
+            {
+                CaixaMensagem.Informacao("Selecione a finalidade");
+                return false;
+            }
+            if (!Funcao.NuloData(dateDataEmissao.Value))
+            {
+                CaixaMensagem.Informacao("Informa uma data de emissão válida");
+                return false;
+            }
+            if (!Funcao.NuloData(dateDataSaida.Value))
+            {
+                CaixaMensagem.Informacao("Informa uma data de saída válida");
+                return false;
+            }
+            if (textSerie.Text.Trim() == "")
+            {
+                CaixaMensagem.Informacao("Informa uma série válida");
+                return false;
+            }
+            if (textModelo.Text.Trim() == "")
+            {
+                CaixaMensagem.Informacao("Informa um modelo válido");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void comboInfoNFeFidelidade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                comboFinalidade.SelectedValue = comboInfoNFeFidelidade.SelectedValue;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboFinalidade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                comboInfoNFeFidelidade.SelectedValue = comboFinalidade.SelectedValue;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textSerie_TextChanged(object sender, EventArgs e)
+        {
+            textInfoNFeNFeSerie.Text = textSerie.Text;
+        }
+        private void textInfoNFeNFeSerie_TextChanged(object sender, EventArgs e)
+        {
+            textInfoNFeNFeSerie.Text = textSerie.Text;
+        }
+        private void botaoExcluir_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void botaoNovo_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void botaoEditar_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void botaoImprimir_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void botaoExportarOutrasNFe_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void botaoImportarXMLNFe_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void botaoImportarXMLLote_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void botaoAnterior_Click(object sender, EventArgs e)
+        {
+            Navegar(notafiscalsaida.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
+        }
+        private void botaoPosterior_Click(object sender, EventArgs e)
+        {
+            Navegar(notafiscalsaida.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
+        }
+        private async Task Navegar(Declaracoes.eNavegar posicao)
+        {
+            if (TentarGravar())
+            {
+                await Navegar_PegarTodos(notafiscalsaida.Id, posicao);
+                await CarregarVenda();
+            }
+        }
+        private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.eNavegar Posicao)
+        {
+            using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+            {
+                IEnumerable<NotaFiscalSaidaViewModel> Data = null;
+
+                Data = await notaFiscalSaidaController.ObterTodos();
+
+                NotaFiscalSaidaViewModel ItemAnterior = null;
+                NotaFiscalSaidaViewModel ItemRetorno = null;
+                bool Proximo = false;
+
+                foreach (NotaFiscalSaidaViewModel Item in Data)
+                {
+                    if (Posicao == Declaracoes.eNavegar.Primeiro)
+                    {
+                        ItemRetorno = Item;
+                        break;
+                    }
+                    else if (Proximo)
+                    {
+                        ItemRetorno = Item;
+                        break;
+                    }
+                    else if (Item.Id == Id)
+                    {
+                        switch (Posicao)
+                        {
+                            case Declaracoes.eNavegar.Anterior:
+                                ItemRetorno = ItemAnterior;
+                                break;
+                            case Declaracoes.eNavegar.Atual:
+                                ItemRetorno = Item;
+                                break;
+                            case Declaracoes.eNavegar.Proximo:
+                                Proximo = true;
+                                break;
+                        }
+                    }
+
+                    ItemAnterior = Item;
+                }
+
+                if (Posicao == Declaracoes.eNavegar.Ultimo)
+                {
+                    ItemRetorno = ItemAnterior;
+                }
+
+                if (ItemRetorno != null) { notafiscalsaida = ItemRetorno; }
+            }
+        }
+        bool TentarGravar()
+        {
+            bool tentarGravar = false;
+
+            if (notafiscalsaida == null) { goto Sair; }
+
+            if ((notafiscalsaida.Id == Guid.Empty) && (!Combo_ComboBox.Selecionado(comboNaturezaOperacao)))
+            {
+                tentarGravar = true;
+            }
+            else
+            {
+                if (!Combo_ComboBox.Selecionado(comboNaturezaOperacao))
+                {
+                    CaixaMensagem.Informacao("Informe a natureza de operação");
+                    goto Sair;
+                }
+
+                Assincrono.TaskAsyncAndAwaitAsync(GravarMercadoria());
+
+                tentarGravar = true;
+            }
+
+        Sair:
+            return tentarGravar;
+        }
+        NF_Status Status()
+        {
+            if (checkStatusCancelado.Checked) { return NF_Status.Cancelado; }
+            else if (checkStatusDenegada.Checked) { return NF_Status.Denegada; }
+            else if (checkStatusFinalizada.Checked) { return NF_Status.Finalizada; }
+            else if (checkStatusInutilizada.Checked) { return NF_Status.Inutilizada; }
+            else { return NF_Status.Aberta; }
+        }
+        private async Task<bool> GravarMercadoria()
+        {
+            if (notafiscalsaida == null)
+                notafiscalsaida = new ViewModels.NotaFiscalSaidaViewModel();
+
+            await AdicionarNotaFiscalSaida();
+
+            return true;
+        }
+        private async Task AdicionarNotaFiscalSaida()
+        {
+            var notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier);
+            var notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier);
+
+            notafiscalsaida.EmpresaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEmpresa);
+            notafiscalsaida.NaturezaOperacaoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboNaturezaOperacao);
+            notafiscalsaida.NotaFiscalFinalidadeId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboFinalidade);
+            notafiscalsaida.NumeroNotaFiscalSaida = labelNumeroNotaFiscalSaida.Text;
+            notafiscalsaida.DataEmissao = dateDataEmissao.Value;
+            notafiscalsaida.DataSaida = dateDataSaida.Value;
+            notafiscalsaida.HoraEmissao = textHora.Text;
+            notafiscalsaida.Modelo = textModelo.Text;
+            notafiscalsaida.Serie = textInfoNFeNFeSubSerie.Text;
+            notafiscalsaida.SubSerie = textInfoNFeNFeSubSerie.Text;
+            notafiscalsaida.Status = Status();
+            notafiscalsaida.ClienteId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboRemetente);
+            notafiscalsaida.CNPJ_CPF = maskedRemetenteCPFCNPJ.Text;
+            notafiscalsaida.IE = textRemetenteIE.Text;
+            notafiscalsaida.Endereco = new Entidade.Modelos.Endereco();
+            notafiscalsaida.Endereco.End_CEP = textRemetenteCEP.Text;
+            notafiscalsaida.Endereco.End_Logradouro = textRemetenteEndereco.Text;
+            notafiscalsaida.Endereco.End_Numero = textRemetenteNumero.Text;
+            notafiscalsaida.Endereco.End_Bairro = textRemetenteBairro.Text;
+            notafiscalsaida.Endereco.End_CidadeId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboRemetenteCidade);
+            notafiscalsaida.Telefone = textRemetenteFones.Text;
+            notafiscalsaida.EMail = textLocalEntregaRetiradaEMail.Text;
+            notafiscalsaida.ValorFrete = numericValorFrete.Value;
+            notafiscalsaida.ValorSeguro = numericValorSeguro.Value;
+            notafiscalsaida.OutrasDespesas = numericValorOutrasDespesas.Value;
+            notafiscalsaida.ValorDesconto = numericValorDesconto.Value;
+            notafiscalsaida.PercentualDesconto = numericPercentualDesconto.Value;
+            notafiscalsaida.PercentuaAliquotaSimplesNacional = numericAliquotaSimplesNacional.Value;
+            notafiscalsaida.TransportadoraId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboTransportadora);
+            if (Combo_ComboBox.Selecionado(comboTransportadoraFreteConta)) notafiscalsaida.Transportadora_FreteConta = (TipoFrete)comboTransportadoraFreteConta.SelectedValue;
+            notafiscalsaida.Transportadora_CNPJ_CPF = Funcoes._Classes.Texto.SomenteNumero(maskedTransportadoraCPFCNPJ.Text);
+            notafiscalsaida.Transportadora_Placa = textTransportadoraPlaca.Text;
+            notafiscalsaida.Transportadora_UFId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboTransportadoraUF);
+            notafiscalsaida.Transportadora_RNTRC = textTransportadoraRNTC.Text;
+            notafiscalsaida.Transportadora_NumeroCarga = Funcao.NuloParaNumero(numericTransportadoraNumeroCarga.Value);
+            notafiscalsaida.VolumeTransportados_Quantidade = Funcao.NuloParaNumero(numericVolumeTransportadosQuantidade.Value);
+            notafiscalsaida.VolumeTransportados_Especie = textVolumeTransportadosEspecie.Text;
+            notafiscalsaida.VolumeTransportados_Marca = textVolumeTransportadosMarca.Text;
+            notafiscalsaida.VolumeTransportados_Numero = Funcao.NuloParaNumero(numericVolumeTransportadosNumero.Value);
+            notafiscalsaida.VolumeTransportados_PesoBruto = Funcao.NuloParaNumero(numericVolumeTransportadosPesoBruto.Value);
+            notafiscalsaida.VolumeTransportados_PesoLiquido = Funcao.NuloParaNumero(numericVolumeTransportadosPesoLiquido.Value);
+            if (Combo_ComboBox.Selecionado(comboRegimeTributario)) { notafiscalsaida.RegimeTributario = (Entidade.Enum.RegimeTributario)comboRegimeTributario.SelectedValue; }
+            notafiscalsaida.ObservacaoDocumento = "";
+            notafiscalsaida.InformacoesAdicionaisInteresseFisco = richInformacoesAdicionaisInteresseFisco.Text;
+            notafiscalsaida.InformacoesComplementaresInteresseContribuinte_Obsersacao = richInformacoesComplementaresInteresseContribuinte.Text;
+            notafiscalsaida.InformacoesComplementaresInteresseContribuinte_UFId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboInformacoesComplementaresUF);
+            notafiscalsaida.InformacoesComplementaresInteresseContribuinte_Local = textInformacoesComplementaresLocal.Text;
+            notafiscalsaida.CodigoChaveAcesso = textInfoNFeChaveNFe.Text;
+            notafiscalsaida.Protocolo = textInfoNFeProtocolo.Text;
+            notafiscalsaida.IndicaPresenca = (NF_IndicaPresenca)comboInfoNFeIndicaPresenca.SelectedValue;
+            notafiscalsaida.TipoEmissao = (NF_TipoEmissao)comboInfoNFeTipoEmissao.SelectedValue;
+            notafiscalsaida.Operacao = (NF_Operacao)comboInfoNFeOperacao.SelectedValue;
+            notafiscalsaida.EmailDestinoXML = textEmailDestinoXML.Text;
+
+            if (notafiscalsaida.Id != Guid.Empty)
+            {
+                await notaFiscalSaidaController.Atualizar(notafiscalsaida.Id, notafiscalsaida);
+            }
+            else
+            {
+                notafiscalsaida = (await notaFiscalSaidaController.Adicionar(notafiscalsaida));
+            }
+
+            NotaFiscalMercadoriaDetalhamentoImposto notaFiscalMercadoriaDetalhamentoImposto;
+
+            foreach (DataGridViewRow row in gridMercadoria.Rows)
+            {
+                NotaFiscalSaidaMercadoriaViewModel notaFiscalSaidaMercadoriaViewModel = new NotaFiscalSaidaMercadoriaViewModel();
+
+                notaFiscalSaidaMercadoriaViewModel.NotaFiscalSaidaId = notafiscalsaida.Id;
+                notaFiscalSaidaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[gridMercadoria_CodigoSistema].Value.ToString());
+                notaFiscalSaidaMercadoriaViewModel.TabelaNCMId = (Guid)row.Cells[gridMercadoria_NCM].Value;
+                notaFiscalSaidaMercadoriaViewModel.TabelaCST_CSOSNId = (Guid)row.Cells[gridMercadoria_CST_CSOSN].Value;
+                notaFiscalSaidaMercadoriaViewModel.TabelaCFOPId = (Guid)row.Cells[gridMercadoria_CFOP].Value;
+                notaFiscalSaidaMercadoriaViewModel.UnidadeMedidaId = (Guid)row.Cells[gridMercadoria_Medida].Value;
+                notaFiscalSaidaMercadoriaViewModel.Descricao = row.Cells[gridMercadoria_Descricao].Value.ToString();
+                notaFiscalSaidaMercadoriaViewModel.Quantidade = (float)Funcao.NuloParaValorD(row.Cells[gridMercadoria_Quantidade].Value);
+                notaFiscalSaidaMercadoriaViewModel.PrecoUnitario = (float)Funcao.NuloParaValorD(row.Cells[gridMercadoria_Preco].Value);
+                notaFiscalSaidaMercadoriaViewModel.PrecoTotal = (float)Funcao.NuloParaValorD(row.Cells[gridMercadoria_Total].Value);
+                notaFiscalSaidaMercadoriaViewModel.PercentualICMS = (float)Funcao.NuloParaValorD(row.Cells[gridMercadoria_ICMS].Value);
+                notaFiscalSaidaMercadoriaViewModel.PercentualIPI = (float)Funcao.NuloParaValorD(row.Cells[gridMercadoria_IPI].Value);
+                notaFiscalSaidaMercadoriaViewModel.PercentualFrete = (float)Funcao.NuloParaValorD(row.Cells[gridMercadoria_Frete].Value);
+
+                if (row.Cells[gridMercadoria_Impostos].Value != null)
+                {
+                    notaFiscalMercadoriaDetalhamentoImposto = (NotaFiscalMercadoriaDetalhamentoImposto)row.Cells[gridMercadoria_Impostos].Value;
+                    notaFiscalSaidaMercadoriaViewModel.ValorBaseCalculo = notaFiscalMercadoriaDetalhamentoImposto.ValorBaseCalculo;
+                    notaFiscalSaidaMercadoriaViewModel.AliquotaICMS = notaFiscalMercadoriaDetalhamentoImposto.AliquotaICMS;
+                    notaFiscalSaidaMercadoriaViewModel.ValorICMS = notaFiscalMercadoriaDetalhamentoImposto.ValorICMS;
+                    notaFiscalSaidaMercadoriaViewModel.AliquotaReducao = notaFiscalMercadoriaDetalhamentoImposto.AliquotaReducao;
+                    notaFiscalSaidaMercadoriaViewModel.ValorBaseSubstituicaoTributaria = notaFiscalMercadoriaDetalhamentoImposto.ValorBaseSubstituicaoTributaria;
+                    notaFiscalSaidaMercadoriaViewModel.ValorSubstituicaoTributaria = notaFiscalMercadoriaDetalhamentoImposto.ValorSubstituicaoTributaria;
+                    notaFiscalSaidaMercadoriaViewModel.ValorAdicional = notaFiscalMercadoriaDetalhamentoImposto.ValorAdicional;
+                    notaFiscalSaidaMercadoriaViewModel.AliquotaAdicional = notaFiscalMercadoriaDetalhamentoImposto.AliquotaAdicional;
+                    notaFiscalSaidaMercadoriaViewModel.TabelaCST_IPIId = notaFiscalMercadoriaDetalhamentoImposto.CSTCOFINS;
+                    notaFiscalSaidaMercadoriaViewModel.ValorBaseIPI = notaFiscalMercadoriaDetalhamentoImposto.ValorBaseIPI;
+                    notaFiscalSaidaMercadoriaViewModel.AliquotaIPI = notaFiscalMercadoriaDetalhamentoImposto.AliquotaIPI;
+                    notaFiscalSaidaMercadoriaViewModel.ValorIPI = notaFiscalMercadoriaDetalhamentoImposto.ValorIPI;
+                    notaFiscalSaidaMercadoriaViewModel.AliquotaPIS = notaFiscalMercadoriaDetalhamentoImposto.AliquotaPIS;
+                    notaFiscalSaidaMercadoriaViewModel.AliquotaCOFINS = notaFiscalMercadoriaDetalhamentoImposto.AliquotaCOFINS;
+                    notaFiscalSaidaMercadoriaViewModel.BaseCalculoFCP = notaFiscalMercadoriaDetalhamentoImposto.BaseCalculoFCP;
+                    notaFiscalSaidaMercadoriaViewModel.AliquotaFCP = notaFiscalMercadoriaDetalhamentoImposto.AliquotaFCP;
+                    notaFiscalSaidaMercadoriaViewModel.ValorFCP = notaFiscalMercadoriaDetalhamentoImposto.ValorFCP;
+                    notaFiscalSaidaMercadoriaViewModel.NumeroPedidoCompra = notaFiscalMercadoriaDetalhamentoImposto.NumeroPedidoCompra;
+                    notaFiscalSaidaMercadoriaViewModel.ItemPedidoCompra = notaFiscalMercadoriaDetalhamentoImposto.ItemPedidoCompra;
+                    notaFiscalSaidaMercadoriaViewModel.TabelaCST_PIS_COFINS_PISId = notaFiscalMercadoriaDetalhamentoImposto.CSTPIS ;
+                    notaFiscalSaidaMercadoriaViewModel.TabelaCST_PIS_COFINS_PISCOFINSId = notaFiscalMercadoriaDetalhamentoImposto.CSTCOFINS;
+                }
+
+                await notaFiscalSaidaMercadoriaController.Adicionar(notaFiscalSaidaMercadoriaViewModel);
+            }
+
+            notafiscalsaida = null;
+
+            this.MeuDbContextDispose();
+        }
+        private async void Excluir()
+        {
+            /*var mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier);
+            await mercadoriaController.Excluir(mercadoria.Id);
+            mercadoriaController = null;
+            this.MeuDbContextDispose();*/
+
+            Limpar();
+        }
+
+        private void frmFiscal_NotaFiscal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!TentarGravar())
+            {
+                e.Cancel = (!CaixaMensagem.Perguntar("Cadastro em edição! Deseja sair assim mesmo?"));
+            }
+
+            this.MeuDbContextDispose();
+        }
+        private void GridProduto_SelecionarProduto(int iLinha, int Coluna, string valor)
+        {
+            try
+            {
+                if (Coluna == gridMercadoria_CodigoSistema)
+                {
+                    gridMercadoria.Rows[iLinha].Cells[gridMercadoria_Descricao].Value = Guid.Parse(valor);
+                    gridMercadoria.Rows[iLinha].Cells[gridMercadoria_RefSistema].Value = Guid.Parse(valor);
+                }
+                if (Coluna == gridMercadoria_Descricao)
+                {
+                    gridMercadoria.Rows[iLinha].Cells[gridMercadoria_RefSistema].Value = Guid.Parse(valor);
+                    gridMercadoria.Rows[iLinha].Cells[gridMercadoria_CodigoSistema].Value = Guid.Parse(valor);
+                }
+                if (Coluna == gridMercadoria_RefSistema)
+                {
+                    gridMercadoria.Rows[iLinha].Cells[gridMercadoria_Descricao].Value = Guid.Parse(valor);
+                    gridMercadoria.Rows[iLinha].Cells[gridMercadoria_CodigoSistema].Value = Guid.Parse(valor);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private void gridMercadoria_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if ((e.ColumnIndex == gridMercadoria_CodigoSistema) ||
+                    (e.ColumnIndex == gridMercadoria_Descricao) ||
+                    (e.ColumnIndex == gridMercadoria_RefSistema))
+                {
+                    GridProduto_SelecionarProduto(e.RowIndex, e.ColumnIndex, gridMercadoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+                }
+                else if ((e.ColumnIndex == gridMercadoria_Quantidade) ||
+                         (e.ColumnIndex == gridMercadoria_Preco))
+                {
+                    gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value = Funcao.NuloParaNumero(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Quantidade].Value) *
+                                                                                        Funcao.NuloParaNumero(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Preco].Value);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private void gridMercadoria_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if ((e.ColumnIndex == gridMercadoria_BTN_Impostos) && (e.RowIndex > -1))
+            {
+                using (frmFiscal_NotaFiscal_Impostos form = ServiceProvider().GetRequiredService<frmFiscal_NotaFiscal_Impostos>())
+                {
+                    if (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Impostos].Value != null)
+                    form.notaFiscalMercadoriaDetalhamentoImposto = (NotaFiscalMercadoriaDetalhamentoImposto)gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Impostos].Value;
+                    form.Produto = gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Descricao].Value.ToString();
+                    try { form.ValorTotal = Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value); }
+                    catch (Exception) { }
+                    form.FormatarAsync();
+                    form.ShowDialog(this);
+                    gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Impostos].Value = form.notaFiscalMercadoriaDetalhamentoImposto;
+                }
             }
         }
     }

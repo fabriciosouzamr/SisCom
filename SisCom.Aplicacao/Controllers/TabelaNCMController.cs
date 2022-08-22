@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
 {
-    public class TabelaNCMController
+    public class TabelaNCMController : IDisposable
     {
         static TabelaNCMService _TabelaNCMService;
         private readonly MeuDbContext MeuDbContext;
@@ -34,6 +34,10 @@ namespace SisCom.Aplicacao.Controllers
         {
             var combo = await _TabelaNCMService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<CodigoDescricaoComboViewModel>>(combo);
+        }
+        public void Dispose()
+        {
+            MeuDbContext.Dispose();
         }
     }
 }

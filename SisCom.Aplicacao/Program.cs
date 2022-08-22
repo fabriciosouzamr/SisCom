@@ -142,17 +142,16 @@ namespace SisCom.Aplicacao
                         cfg.CreateMap<SubGrupoMercadoriaViewModel, SubGrupoMercadoria>().ReverseMap();
                         cfg.CreateMap<SubGrupoMercadoria, SubGrupoMercadoriaComboViewModel>();
                         #endregion
-                        #region TipoCliente
-                        cfg.CreateMap<TipoClienteViewModel, TipoCliente>().ReverseMap();
-                        cfg.CreateMap<TipoCliente, TipoClienteComboViewModel>();
+                        #region NotaFiscalSaida
+                        cfg.CreateMap<NotaFiscalSaidaViewModel, NotaFiscalSaida>().ReverseMap();
                         #endregion
-                        #region UnidadeMedida
-                        cfg.CreateMap<UnidadeMedidaViewModel, UnidadeMedida>().ReverseMap();
+                        #region NotaFiscalSaidaMercadoria
+                        cfg.CreateMap<NotaFiscalSaidaMercadoriaViewModel, NotaFiscalSaidaMercadoria>().ReverseMap();
                         #endregion
                         #region TabelaANP
                         cfg.CreateMap<TabelaANPViewModel, TabelaANP>().ReverseMap();
                         cfg.CreateMap<TabelaANP, CodigoDescricaoComboViewModel>();
-                        #endregion
+                        #endregion-
                         #region TabelaBeneficioSPED
                         cfg.CreateMap<TabelaBeneficioSPEDViewModel, TabelaBeneficioSPED>().ReverseMap();
                         cfg.CreateMap<TabelaBeneficioSPED, CodigoComboViewModel>();
@@ -232,6 +231,10 @@ namespace SisCom.Aplicacao
                         #region TipoServicoFiscal
                         cfg.CreateMap<TipoServicoFiscalViewModel, TipoServicoFiscal>().ReverseMap();
                         cfg.CreateMap<UnidadeMedida, NomeComboViewModel>();
+                        #endregion
+                        #region TipoCliente
+                        cfg.CreateMap<TipoClienteViewModel, TipoCliente>().ReverseMap();
+                        cfg.CreateMap<TipoCliente, TipoClienteComboViewModel>();
                         #endregion
                         #region UnidadeMedida
                         cfg.CreateMap<UnidadeMedidaViewModel, UnidadeMedida>().ReverseMap();

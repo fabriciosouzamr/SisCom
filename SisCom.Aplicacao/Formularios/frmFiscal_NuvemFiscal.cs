@@ -58,7 +58,6 @@ namespace SisCom.Aplicacao.Formularios
             [Description("Operação não Realizada")]
             OperacaoRealizada = 7
         }
-
         enum DataPesquisa
         {
             [Description("Data Pesquisa")]
@@ -66,7 +65,6 @@ namespace SisCom.Aplicacao.Formularios
             [Description("Data Emissão")]
             DataEmissao = 1
         }
-
         enum TipoNSU
         {
             [Description("A partir do último NSU")]
@@ -74,7 +72,6 @@ namespace SisCom.Aplicacao.Formularios
             [Description("Último 3 meses")]
             Ultimo3Meses = 1
         }
-
         enum TLS
         {
             [Description("TLS 1.1")]
@@ -90,7 +87,6 @@ namespace SisCom.Aplicacao.Formularios
             InitializeComponent();
             Inicializar();
         }
-
         async void Inicializar()
         {
             Combo_ComboBox.Formatar(comboTipoManifestacao, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoManifestacao));

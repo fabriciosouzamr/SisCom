@@ -46,6 +46,8 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<NotaFiscalEntradaMercadoria> NotaFiscalEntradaMercadorias { get; set; }
         public DbSet<NotaFiscalEntrada> NotaFiscalEntradas { get; set; }
         public DbSet<NotaFiscalFinalidade> NotaFiscalFinalidades { get; set; }
+        public DbSet<NotaFiscalSaida> NotaFiscalSaidas { get; set; }
+        public DbSet<NotaFiscalSaidaMercadoria> NotaFiscalSaidaMercadorias { get; set; }
         public DbSet<Pais> Paises { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Similar> Similars { get; set; }

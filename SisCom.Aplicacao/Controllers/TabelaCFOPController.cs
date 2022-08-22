@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
 {
-    public class TabelaCFOPController
+    public class TabelaCFOPController : IDisposable
     {
         static TabelaCFOPService _TabelaCFOPService;
         private readonly MeuDbContext MeuDbContext;
@@ -34,6 +34,10 @@ namespace SisCom.Aplicacao.Controllers
         {
             var combo = await _TabelaCFOPService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<CodigoComboViewModel>>(combo);
+        }
+        public void Dispose()
+        {
+            MeuDbContext.Dispose();
         }
     }
 }
