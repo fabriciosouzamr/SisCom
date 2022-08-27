@@ -415,7 +415,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoGravar_Click(object sender, EventArgs e)
         {
-            GravarMercadoria();
+            //GravarMercadoria();
 
             var form = this.ServiceProvider().GetRequiredService<frmFiscal_Transmitir>();
             form.ShowDialog(this);
@@ -493,7 +493,7 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_Preco,
                                                                                                                                              Valor = vendaMercadoriaViewModel.Preco },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_Total,
-                                                                                                                                             Valor = vendaMercadoriaViewModel.Total }}).Index;                    }
+                                                                                                                                             Valor = vendaMercadoriaViewModel.Total }}).Index; }
                 }
             }
 

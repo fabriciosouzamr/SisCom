@@ -13,10 +13,9 @@ namespace SisCom.Negocio.Interfaces
         Task Atualizar(NotaFiscalSaida NotaFiscalSaida);
         Task Excluir(Guid id);
         Task<List<NotaFiscalSaida>> GetAll(Expression<Func<NotaFiscalSaida, object>> order = null);
-
+        Task<List<NotaFiscalSaida>> GetAll(Expression<Func<NotaFiscalSaida, object>> order = null, Expression<Func<NotaFiscalSaida, bool>> predicate = null, params Expression<Func<NotaFiscalSaida, object>>[] includes);
         Task<List<NotaFiscalSaida>> Combo(Expression<Func<NotaFiscalSaida, object>> order = null);
         Task<NotaFiscalSaida> GetById(Guid id);
-
         Task<IPagedList<NotaFiscalSaida>> GetPagedList(FilteredPagedListParameters parameters);
     }
 }

@@ -542,5 +542,12 @@ namespace SisCom.Aplicacao.Formularios
             form.VendaId = venda.Id;
             form.ShowDialog(this);
         }
+
+        private void botaoNovo_Click(object sender, EventArgs e)
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmFiscal_NotaFiscal>();
+            form.VendaId = venda.Id;
+            form.ShowDialog(this);
+        }
     }
 }

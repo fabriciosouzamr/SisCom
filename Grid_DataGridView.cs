@@ -152,7 +152,7 @@ public static class Grid_DataGridView
                                                                   object dataSource = null,
                                                                   string dataSource_Descricao = "",
                                                                   string dataSource_Valor = "",
-                                                                  bool readOnly = false)
+                                                                  bool readOnly = true)
     {
         DataGridViewColumn Coluna = DataGridView_ColunaCriar(Grid,
                                                              Nome,

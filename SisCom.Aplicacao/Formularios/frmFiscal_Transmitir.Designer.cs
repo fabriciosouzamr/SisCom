@@ -48,7 +48,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelStatusServico = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.gridNotaFiscalSaida = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -66,7 +66,7 @@
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalSaida)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -79,7 +79,7 @@
             this.pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
             this.pnlMenuBotao.Name = "pnlMenuBotao";
-            this.pnlMenuBotao.Size = new System.Drawing.Size(802, 83);
+            this.pnlMenuBotao.Size = new System.Drawing.Size(1062, 83);
             this.pnlMenuBotao.TabIndex = 14;
             // 
             // pnlMenuBotaoBotao
@@ -99,7 +99,7 @@
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoImprimirNota);
             this.pnlMenuBotaoBotao.Controls.Add(this.label7);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoFechar);
-            this.pnlMenuBotaoBotao.Location = new System.Drawing.Point(248, 0);
+            this.pnlMenuBotaoBotao.Location = new System.Drawing.Point(505, 0);
             this.pnlMenuBotaoBotao.Name = "pnlMenuBotaoBotao";
             this.pnlMenuBotaoBotao.Size = new System.Drawing.Size(552, 83);
             this.pnlMenuBotaoBotao.TabIndex = 2;
@@ -243,7 +243,7 @@
             // 
             this.panel2.Controls.Add(this.panelStatusServico);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Location = new System.Drawing.Point(616, 83);
+            this.panel2.Location = new System.Drawing.Point(873, 83);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(184, 26);
             this.panel2.TabIndex = 16;
@@ -266,14 +266,14 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Status do Serviço:";
             // 
-            // dataGridView1
+            // gridNotaFiscalSaida
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 223);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(800, 343);
-            this.dataGridView1.TabIndex = 17;
+            this.gridNotaFiscalSaida.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridNotaFiscalSaida.Location = new System.Drawing.Point(0, 223);
+            this.gridNotaFiscalSaida.Name = "gridNotaFiscalSaida";
+            this.gridNotaFiscalSaida.RowTemplate.Height = 25;
+            this.gridNotaFiscalSaida.Size = new System.Drawing.Size(1057, 343);
+            this.gridNotaFiscalSaida.TabIndex = 17;
             // 
             // label6
             // 
@@ -306,13 +306,13 @@
             this.panel3.Controls.Add(this.label5);
             this.panel3.Location = new System.Drawing.Point(0, 113);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(800, 104);
+            this.panel3.Size = new System.Drawing.Size(1057, 104);
             this.panel3.TabIndex = 18;
             // 
             // botaoLimparFiltros
             // 
             this.botaoLimparFiltros.Image = ((System.Drawing.Image)(resources.GetObject("botaoLimparFiltros.Image")));
-            this.botaoLimparFiltros.Location = new System.Drawing.Point(695, 54);
+            this.botaoLimparFiltros.Location = new System.Drawing.Point(954, 54);
             this.botaoLimparFiltros.Name = "botaoLimparFiltros";
             this.botaoLimparFiltros.Size = new System.Drawing.Size(100, 45);
             this.botaoLimparFiltros.TabIndex = 99;
@@ -322,7 +322,7 @@
             // botaoAplicarFiltros
             // 
             this.botaoAplicarFiltros.Image = ((System.Drawing.Image)(resources.GetObject("botaoAplicarFiltros.Image")));
-            this.botaoAplicarFiltros.Location = new System.Drawing.Point(695, 5);
+            this.botaoAplicarFiltros.Location = new System.Drawing.Point(954, 5);
             this.botaoAplicarFiltros.Name = "botaoAplicarFiltros";
             this.botaoAplicarFiltros.Size = new System.Drawing.Size(100, 45);
             this.botaoAplicarFiltros.TabIndex = 98;
@@ -386,7 +386,7 @@
             this.panel4.Controls.Add(this.label11);
             this.panel4.Location = new System.Drawing.Point(0, 574);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(800, 25);
+            this.panel4.Size = new System.Drawing.Size(1057, 25);
             this.panel4.TabIndex = 19;
             // 
             // labelNumeroVenda
@@ -411,10 +411,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 600);
+            this.ClientSize = new System.Drawing.Size(1062, 600);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.gridNotaFiscalSaida);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlMenuBotao);
@@ -426,7 +426,7 @@
             this.pnlMenuBotaoBotao.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalSaida)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -458,7 +458,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panelStatusServico;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView gridNotaFiscalSaida;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;

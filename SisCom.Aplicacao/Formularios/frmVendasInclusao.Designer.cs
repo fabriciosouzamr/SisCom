@@ -383,6 +383,7 @@
             this.botaoNovo.Size = new System.Drawing.Size(53, 56);
             this.botaoNovo.TabIndex = 19;
             this.botaoNovo.UseVisualStyleBackColor = true;
+            this.botaoNovo.Click += new System.EventHandler(this.botaoNovo_Click);
             // 
             // textObservacao
             // 

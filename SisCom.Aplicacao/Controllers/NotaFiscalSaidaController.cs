@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Entity;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -46,6 +47,14 @@ namespace SisCom.Aplicacao.Controllers
         public async Task<IEnumerable<NotaFiscalSaidaViewModel>> ObterTodos()
         {
             var obterTodos = await _NotaFiscalSaidaService.GetAll(null, null, i => i.NumeroNotaFiscalSaida);
+            return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(obterTodos);
+
+        }
+        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> Pesquisar(Expression<Func<NotaFiscalSaida, object>> order = null, 
+                                                                           Expression<Func<NotaFiscalSaida, bool>> predicate = null, 
+                                                                           params Expression<Func<NotaFiscalSaida, object>>[] includes)
+        {
+            var obterTodos = await _NotaFiscalSaidaService.GetAll(order, predicate, includes);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(obterTodos);
 
         }
