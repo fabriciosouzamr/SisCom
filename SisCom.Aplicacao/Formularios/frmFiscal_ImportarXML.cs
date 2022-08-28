@@ -98,7 +98,7 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Grupo", Grid_DataGridView.TipoColuna.ComboBox);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Status");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Vínculo Fiscal", Grid_DataGridView.TipoColuna.ComboBox);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Item", Grid_DataGridView.TipoColuna.TextBox, 0);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Item", Grid_DataGridView.TipoColuna.Texto, 0);
 
             using (UnidadeMedidaConversaoController unidadeMedidaConversaoController = new UnidadeMedidaConversaoController(this.MeuDbContext(), this._notifier))
             {

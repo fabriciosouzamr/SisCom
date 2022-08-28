@@ -52,7 +52,7 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","Modelo");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","Empresa");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","Valor");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "", "Id", Grid_DataGridView.TipoColuna.TextBox, 0);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "", "Id", Grid_DataGridView.TipoColuna.Texto, 0);
 
             LimparFiltros();
         }

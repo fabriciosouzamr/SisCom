@@ -39,6 +39,10 @@ namespace SisCom.Aplicacao.Formularios
         const int gridMercadoria_BTN_Excluir = 15;
         const int gridMercadoria_Impostos = 16;
 
+        const int gridCobrancaNota_TipoPagamento = 0;
+        const int gridCobrancaNota_Vencimento = 1;
+        const int gridCobrancaNota_Valor = 2;
+
         enum RegimeTributario
         {
             [Description("SIMPLES NACIONAL")]
@@ -72,6 +76,21 @@ namespace SisCom.Aplicacao.Formularios
             [Description("NORMAL")]
             NORMAL = 3
         }
+
+        enum TipoPagamento
+        {
+            [Description("A VISTA")]
+            A_VISTA = 1,
+            [Description("A PRAZO")]
+            A_PRAZO = 2,
+            [Description("OUTROS")]
+            OUTROS = 3
+        }
+
+        Guid dadolocal_Cliente_EstadoId;
+
+        IEnumerable<MercadoriaImpostoEstadoViewModel> mercadoriaImpostoEstado;
+
         public frmFiscal_NotaFiscal(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
             InitializeComponent();
@@ -86,6 +105,7 @@ namespace SisCom.Aplicacao.Formularios
             Combo_ComboBox.Formatar(comboInfoNFeOperacao, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Operacao));
             Combo_ComboBox.Formatar(comboInfoNFeTipoEmissao, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_TipoEmissao));
             Combo_ComboBox.Formatar(comboInfoNFeNFeModelo, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Modelo));
+            Combo_ComboBox.Formatar(comboCobrancaNotaTipoPagamento, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoPagamento));
 
             await Assincrono.TaskAsyncAndAwaitAsync(Inicializar());
             await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
@@ -137,7 +157,7 @@ namespace SisCom.Aplicacao.Formularios
                     tabelaCST_CSOSN = (List<CodigoDescricaoComboViewModel>)await tabelaCST_CSOSNController.Combo(o => o.Codigo);
                 }
 
-                //Detalhe de Estoque
+                //Detalhe de Mercadoria
                 Grid_DataGridView.DataGridView_Formatar(gridMercadoria, true);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "Id");
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "Id");
@@ -156,6 +176,19 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Grid_DataGridView.TipoColuna.Button, 80);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Excluir", "Excluir", Grid_DataGridView.TipoColuna.Button, 80);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Tamanho: 0);
+
+                //Cobrança da Nota
+                List<NomeComboViewModel> formaPagamento;
+
+                using (FormaPagamentoController formaPagamentoController = new FormaPagamentoController(this.MeuDbContext(), this._notifier))
+                {
+                    formaPagamento = (List<NomeComboViewModel>)await formaPagamentoController.Combo(o => o.Nome);
+                }
+
+                Grid_DataGridView.DataGridView_Formatar(gridCobrancaNota, true);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridCobrancaNota, "Pagamento", "MedidaPagamento", Grid_DataGridView.TipoColuna.ComboBox, 200, 0, formaPagamento, "Nome", "ID", false);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridCobrancaNota, "Vencimento", "Vencimento", Grid_DataGridView.TipoColuna.Data, 100, 0, readOnly: false);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridCobrancaNota, "Valor", "Valor", Grid_DataGridView.TipoColuna.Valor, 100, 0, readOnly: false);
 
                 //venda = new ViewModels.VendaViewModel();
                 //venda.Id = Guid.Empty;
@@ -240,7 +273,7 @@ namespace SisCom.Aplicacao.Formularios
             comboInformacoesComplementaresUF.SelectedIndex = -1;
             textInformacoesComplementaresLocal.Text = "";
 
-            comboObservacaoTipoPagamento.SelectedIndex = -1;
+            comboCobrancaNotaTipoPagamento.SelectedIndex = -1;
             gridObservacao.Rows.Clear();
 
             textInfoNFeChaveNFe.Text = "";
@@ -880,6 +913,13 @@ namespace SisCom.Aplicacao.Formularios
                     (e.ColumnIndex == gridMercadoria_RefSistema))
                 {
                     GridProduto_SelecionarProduto(e.RowIndex, e.ColumnIndex, gridMercadoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+
+                    if (mercadoriaImpostoEstado != null)
+                    foreach(MercadoriaImpostoEstadoViewModel impostoestado in mercadoriaImpostoEstado)
+                    {
+                        if (impostoestado.Mercadoria.Id == (Guid)gridMercadoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
+                        gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value = impostoestado.PercentualICMS_Destino;
+                    }
                 }
                 else if ((e.ColumnIndex == gridMercadoria_Quantidade) ||
                          (e.ColumnIndex == gridMercadoria_Preco))
@@ -907,6 +947,56 @@ namespace SisCom.Aplicacao.Formularios
                     form.ShowDialog(this);
                     gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Impostos].Value = form.notaFiscalMercadoriaDetalhamentoImposto;
                 }
+            }
+        }
+
+        private void gridCobrancaNota_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            labelCobrancaNotaTotal.Text = labelCobrancaNotaTotal.Tag.ToString() + " " + Grid_DataGridView.DataGridView_CalcularColunaValor(gridCobrancaNota, gridCobrancaNota_Valor).ToString("c");
+            labelCobrancaNotaQuantidade.Text = labelCobrancaNotaQuantidade.Tag.ToString() + " " + Grid_DataGridView.DataGridView_QuantidadeLinha(gridCobrancaNota, gridCobrancaNota_TipoPagamento).ToString();
+        }
+
+        private void gridCobrancaNota_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            labelCobrancaNotaQuantidade.Text = labelCobrancaNotaQuantidade.Tag.ToString() + " " + Grid_DataGridView.DataGridView_QuantidadeLinha(gridCobrancaNota, gridCobrancaNota_TipoPagamento).ToString();
+        }
+
+        private void comboRemetente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Combo_ComboBox.Selecionado(comboRemetente))
+            {
+                CarregarDadosClientes();
+            }
+        }
+
+        private async Task CarregarDadosClientes()
+        {
+            using (PessoaController pessoaController = new PessoaController(this.MeuDbContext(), this._notifier))
+            {
+                IEnumerable<PessoaViewModel> ret = await pessoaController.PesquisarId((Guid)comboRemetente.SelectedValue);
+
+                foreach (PessoaViewModel pessoaViewModel in ret)
+                {
+                    dadolocal_Cliente_EstadoId = pessoaViewModel.Endereco.End_Cidade.Estado.Id;
+                }
+            }
+
+            if (dadolocal_Cliente_EstadoId != Guid.Empty)
+            {
+                using (MercadoriaImpostoEstadoController mercadoriaImpostoEstadoController = new MercadoriaImpostoEstadoController(this.MeuDbContext(), this._notifier))
+                {
+                    mercadoriaImpostoEstado = await mercadoriaImpostoEstadoController.ObterPorEstadosId(Declaracoes.dados_Empresa_EstadoId, 
+                                                                                                        dadolocal_Cliente_EstadoId);
+                }
+            }
+        }
+
+        private void botaoCadastroObservacoes_Click(object sender, EventArgs e)
+        {
+            using (frmCadastroObservacao form = ServiceProvider().GetRequiredService<frmCadastroObservacao>())
+            {
+                form.StartPosition = FormStartPosition.CenterParent;
+                form.ShowDialog(this);
             }
         }
     }

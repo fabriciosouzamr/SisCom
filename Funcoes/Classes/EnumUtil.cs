@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Reflection;
-using System.Text;
+using System.Linq;
+using System.Collections;
 
 namespace Funcoes._Classes
 {
@@ -27,6 +28,18 @@ namespace Funcoes._Classes
             }
 
             return description;
+        }
+
+        public static IList ToDataTable(Type myEnum = null)
+        {
+            return System.Enum.GetValues(myEnum)
+                              .Cast<System.Enum>()
+                              .Select(value => new {
+                                        (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                                        value
+                                    })
+                              .OrderBy(item => item.value)
+                              .ToList();
         }
     }
 }

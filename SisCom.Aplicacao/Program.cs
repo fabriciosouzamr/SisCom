@@ -20,6 +20,7 @@ namespace SisCom.Aplicacao
 {
     namespace VStyles
     {
+
         static class Program
         {
             static AppSettings appSettings;
@@ -49,7 +50,7 @@ namespace SisCom.Aplicacao
                     }
 
                     var host = Host.CreateDefaultBuilder()
-                                    .ConfigureHostConfiguration(builder =>
+                                   .ConfigureHostConfiguration(builder =>
                                     {
                                         builder.SetBasePath(Directory.GetCurrentDirectory());
                                         builder.AddJsonFile(appSettingsPath);
@@ -59,11 +60,11 @@ namespace SisCom.Aplicacao
                                         var rest = configBuilder.GetSection("ConnectionStrings")["DefaultConnection"];
                                         JsonSerializer serializer = new JsonSerializer();
                                     //appSettings = (AppSettings)serializer.Deserialize(rest, typeof(AppSettings));
-                                })
+                                    })
                                     .ConfigureAppConfiguration((context, builder) =>
                                     {
                                     // Add other configuration files...
-                                })
+                                    })
                                     .ConfigureServices((context, services) =>
                                     {
                                         ConfigureServices(context.Configuration, services);
@@ -95,6 +96,10 @@ namespace SisCom.Aplicacao
                         cfg.CreateMap<FabricanteViewModel, Fabricante>().ReverseMap();
                         cfg.CreateMap<Fabricante, NomeComboViewModel>();
                         #endregion
+                        #region FormaPagamento
+                        cfg.CreateMap<FormaPagamentoViewModel, FormaPagamento>().ReverseMap();
+                        cfg.CreateMap<FormaPagamento, NomeComboViewModel>();
+                        #endregion
                         #region Funcionario
                         cfg.CreateMap<FuncionarioViewModel, Funcionario>().ReverseMap();
                         cfg.CreateMap<Funcionario, NomeComboViewModel>();
@@ -109,6 +114,9 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region Mercadoria
                         cfg.CreateMap<MercadoriaViewModel, Mercadoria>().ReverseMap();
+                        #endregion
+                        #region MercadoriaImpostoEstado
+                        cfg.CreateMap<MercadoriaImpostoEstadoViewModel, MercadoriaImpostoEstado>().ReverseMap();
                         #endregion
                         #region NaturezaOperacao
                         cfg.CreateMap<NaturezaOperacaoViewModel, NaturezaOperacao>().ReverseMap();
@@ -126,6 +134,9 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region NotaFiscalEntradaMercadoria
                         cfg.CreateMap<NotaFiscalEntradaMercadoriaViewModel, NotaFiscalEntradaMercadoria>().ReverseMap();
+                        #endregion
+                        #region Observacao
+                        cfg.CreateMap<ObservacaoViewModel, Observacao>().ReverseMap();
                         #endregion
                         #region Pais
                         cfg.CreateMap<PaisViewModel, Pais>().ReverseMap();
@@ -266,6 +277,8 @@ namespace SisCom.Aplicacao
                     {
                         CaixaMensagem.Informacao("Não foi possível conectar no banco de dados." + appSettings.ConnectionStrings.DefaultConnection);
                     }
+
+                    FuncaoInterna.dados_Empresa_Carregar();
 
                     var frmMDI = services.GetRequiredService<frmMDI>();
                     Application.Run(frmMDI);

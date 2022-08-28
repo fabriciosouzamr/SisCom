@@ -1,11 +1,14 @@
-﻿using Funcoes._Entity;
+﻿using SisCom.Entidade.Modelos;
 using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace SisCom.Entidade.Modelos
+namespace SisCom.Aplicacao.ViewModels
 {
-    public class FormaPagamento : Entity
+    public class FormaPagamentoViewModel
     {
-        public TipoPagamento TipoPagamento  { get; set; }
+        [Key]
+        public Guid Id { get; set; }
+        public TipoPagamento TipoPagamento { get; set; }
         public string Nome { get; set; }
         public bool Ativo { get; set; }
         public bool UsaNoPagamento { get; set; }

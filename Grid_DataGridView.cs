@@ -9,7 +9,7 @@ public static class Grid_DataGridView
 {
     public enum TipoColuna
     {
-        TextBox = 1,
+        Texto = 1,
         ComboBox = 2,
         CheckBox = 3,
         Button = 4,
@@ -17,7 +17,8 @@ public static class Grid_DataGridView
         Link = 6,
         Valor = 7,
         Numero = 8,
-        Percentual = 9
+        Percentual = 9,
+        Data = 10
     }
 
     public enum FormatoColuna
@@ -39,9 +40,11 @@ public static class Grid_DataGridView
     }
 
     public static void DataGridView_Formatar(DataGridView Grid,
-                                             bool AllowUserToAddRows = false)
+                                             bool AllowUserToAddRows = false,
+                                             bool AllowUserToDeleteRows = false)
     {
         Grid.AllowUserToAddRows = AllowUserToAddRows;
+        Grid.AllowUserToDeleteRows = AllowUserToDeleteRows;
     }
 
     public static void DataGridView_DataSource(DataGridView Grid, object dataSource, bool  allowNew)
@@ -81,22 +84,39 @@ public static class Grid_DataGridView
 
         return Valor;
     }
+    public static int DataGridView_QuantidadeLinha(DataGridView Grid,
+                                                  int IndiceColuna)
+    {
+        int iQuantidade = 0;
+
+        foreach (DataGridViewRow row in Grid.Rows)
+        {
+            if (row.Cells[IndiceColuna].Value != null)
+            {
+                iQuantidade++;
+            }
+        }
+
+        return iQuantidade;
+    }
 
     private static DataGridViewColumn DataGridView_ColunaCriar(DataGridView Grid,
                                                                string Nome,
                                                                string Titulo,
-                                                               TipoColuna Tipo = TipoColuna.TextBox,
+                                                               TipoColuna Tipo = TipoColuna.Texto,
                                                                int Tamanho = 100,
                                                                int Caracteres = 0,
                                                                object dataSource = null,
                                                                string dataSource_Descricao = "",
                                                                string dataSource_Valor = "")
+
     {
         switch (Tipo)
         {
-            case TipoColuna.TextBox:
+            case TipoColuna.Texto:
             case TipoColuna.Valor:
             case TipoColuna.Numero:
+            case TipoColuna.Data:
             case TipoColuna.Percentual:
                 {
                     DataGridViewTextBoxColumn Coluna = new DataGridViewTextBoxColumn();
@@ -146,13 +166,14 @@ public static class Grid_DataGridView
     public static DataGridViewColumn DataGridView_ColunaAdicionar(DataGridView Grid,
                                                                   string Nome,
                                                                   string Titulo,
-                                                                  TipoColuna Tipo = TipoColuna.TextBox,
+                                                                  TipoColuna Tipo = TipoColuna.Texto,
                                                                   int Tamanho = 100,
                                                                   int Caracteres = 0,
                                                                   object dataSource = null,
                                                                   string dataSource_Descricao = "",
                                                                   string dataSource_Valor = "",
-                                                                  bool readOnly = true)
+                                                                  bool readOnly = true,
+                                                                  bool wordWrap = false)
     {
         DataGridViewColumn Coluna = DataGridView_ColunaCriar(Grid,
                                                              Nome,
@@ -180,6 +201,12 @@ public static class Grid_DataGridView
                 Coluna.DefaultCellStyle.Format = "N2";
                 Coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 Coluna.ValueType = typeof(int);
+                break;
+            case TipoColuna.Data:
+                Coluna.ValueType = typeof(DateTime);
+                break;
+            case TipoColuna.Texto:
+                if (wordWrap) Coluna.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 break;
         }
 

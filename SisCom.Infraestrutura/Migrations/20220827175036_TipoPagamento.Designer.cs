@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220827175036_TipoPagamento")]
+    partial class TipoPagamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -934,43 +936,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.ToTable("Mercadorias");
                 });
 
-            modelBuilder.Entity("SisCom.Entidade.Modelos.MercadoriaComposicao", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MercadoriaComponenteId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MercadoriaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("PercentualPerdaQuebra")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
-
-                    b.Property<double>("Quantidade")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
-
-                    b.Property<int>("Sequencia")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UltimaAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MercadoriaComponenteId");
-
-                    b.HasIndex("MercadoriaId");
-
-                    b.ToTable("MercadoriaComposicaos");
-                });
-
             modelBuilder.Entity("SisCom.Entidade.Modelos.MercadoriaFornecedor", b =>
                 {
                     b.Property<Guid>("Id")
@@ -988,9 +953,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("QuantidadePorCaixa")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
@@ -1002,45 +965,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasIndex("MercadoriaId");
 
                     b.ToTable("MercadoriaFornecedores");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.MercadoriaImpostoEstado", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("EstadoDestinoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("EstadoOrigemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("MercadoriaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("PercentualICMS_Destino")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(0m);
-
-                    b.Property<decimal>("PercentualICMS_Interno")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(0m);
-
-                    b.Property<DateTime>("UltimaAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EstadoDestinoId");
-
-                    b.HasIndex("EstadoOrigemId");
-
-                    b.HasIndex("MercadoriaId");
-
-                    b.ToTable("MercadoriaImpostoEstados");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Motorista", b =>
@@ -1886,35 +1810,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasIndex("NotaFiscalSaidaId");
 
                     b.ToTable("NotaFiscalSaidaPagamentos");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.Observacao", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Codigo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("varchar(MAX)");
-
-                    b.Property<int>("TipoObservacao")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UltimaAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Observacaos");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Pais", b =>
@@ -3325,23 +3220,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Navigation("SubGrupoMercadoria");
                 });
 
-            modelBuilder.Entity("SisCom.Entidade.Modelos.MercadoriaComposicao", b =>
-                {
-                    b.HasOne("SisCom.Entidade.Modelos.Mercadoria", "MercadoriaComponente")
-                        .WithMany()
-                        .HasForeignKey("MercadoriaComponenteId")
-                        .IsRequired();
-
-                    b.HasOne("SisCom.Entidade.Modelos.Mercadoria", "Mercadoria")
-                        .WithMany()
-                        .HasForeignKey("MercadoriaId")
-                        .IsRequired();
-
-                    b.Navigation("Mercadoria");
-
-                    b.Navigation("MercadoriaComponente");
-                });
-
             modelBuilder.Entity("SisCom.Entidade.Modelos.MercadoriaFornecedor", b =>
                 {
                     b.HasOne("SisCom.Entidade.Modelos.Pessoa", "Fornecedor")
@@ -3355,27 +3233,6 @@ namespace SisCom.Infraestrutura.Migrations
                         .IsRequired();
 
                     b.Navigation("Fornecedor");
-
-                    b.Navigation("Mercadoria");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.MercadoriaImpostoEstado", b =>
-                {
-                    b.HasOne("SisCom.Entidade.Modelos.Estado", "EstadoDestino")
-                        .WithMany()
-                        .HasForeignKey("EstadoDestinoId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.Estado", "EstadoOrigem")
-                        .WithMany()
-                        .HasForeignKey("EstadoOrigemId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.Mercadoria", "Mercadoria")
-                        .WithMany()
-                        .HasForeignKey("MercadoriaId");
-
-                    b.Navigation("EstadoDestino");
-
-                    b.Navigation("EstadoOrigem");
 
                     b.Navigation("Mercadoria");
                 });

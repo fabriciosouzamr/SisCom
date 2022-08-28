@@ -58,8 +58,10 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
                 }
 
                 await SeedScripts(context, _seedPath);
+                if (!context.TipoPagamentos.Any()) AddRangeSync<TipoPagamento>(context, _seedPath);
                 if (!context.Paises.Any()) AddRangeSync<Pais>(context, _seedPath);
                 if (!context.Estados.Any()) AddRangeSync<Estado>(context, _seedPath);
+                if (!context.FormaPagamentos.Any()) AddRangeSync<FormaPagamento>(context, _seedPath);
                 if (!context.Funcionarios.Any()) AddRangeSync<Funcionario>(context, _seedPath);
                 if (!context.GrupoCFOPs.Any()) AddRangeSync<GrupoCFOP>(context, _seedPath);
                 if (!context.NotaFiscalFinalidades.Any()) AddRangeSync<NotaFiscalFinalidade>(context, _seedPath);

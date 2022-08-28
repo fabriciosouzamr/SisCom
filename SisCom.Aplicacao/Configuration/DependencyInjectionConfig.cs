@@ -30,6 +30,7 @@ namespace SisCom.Aplicacao.Configuration
             services.AddTransient<frmCadastroMercadoriasCST>();
             services.AddTransient<frmCadastroClientes>();
             services.AddTransient<frmCadastroFuncionarios>();
+            services.AddTransient<frmCadastroObservacao>();
             services.AddTransient<frmCadastroTransportadoras>();
             services.AddTransient<frmCadastroTipoCliente>();
             services.AddTransient<frmCadastroEmpresas>();

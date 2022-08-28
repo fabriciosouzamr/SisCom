@@ -32,6 +32,9 @@ namespace SisCom.Aplicacao.Classes
         public static string Externos_Path_Schemas = "";
         public static string Externos_Path_NuvemFiscal = "";
 
+        public static Guid dados_Empresa_Id;
+        public static Guid dados_Empresa_EstadoId;
+
         public enum eNavegar
         {
             Primeiro,

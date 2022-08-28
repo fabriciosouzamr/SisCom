@@ -37,7 +37,7 @@ namespace SisCom.Aplicacao
             Combo_ComboBox.Formatar(comboTipoManifestacao, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoManifestar));
 
             Grid_DataGridView.DataGridView_Formatar(gridNotaFiscal);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "", Grid_DataGridView.TipoColuna.TextBox, 30);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "", Grid_DataGridView.TipoColuna.Texto, 30);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "NF-e");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Serie");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "D/H Emissão");

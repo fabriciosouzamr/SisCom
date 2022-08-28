@@ -26,8 +26,8 @@ namespace SisCom.Aplicacao.Formularios
         private async void Inicializar()
         {
             Grid_DataGridView.DataGridView_Formatar(dataFabricante);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(dataFabricante, "ID", "ID", TipoColuna.TextBox, 0);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(dataFabricante, "Nome", "Nome", TipoColuna.TextBox, 400, Declaracoes.CampoNome_Caracteres);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(dataFabricante, "ID", "ID", TipoColuna.Texto, 0);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(dataFabricante, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres);
             GridAtualizar();
         }
         private async Task GridAtualizar()

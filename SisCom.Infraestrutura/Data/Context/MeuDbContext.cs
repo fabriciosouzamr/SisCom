@@ -16,30 +16,30 @@ namespace SisCom.Infraestrutura.Data.Context
         public MeuDbContext(DbContextOptions<MeuDbContext> options) : base(options)
         {
         }
-
         public MeuDbContext(string connectionString)
         {
             _connectionString = connectionString;
         }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging(true);
         }
-
         public DbSet<Almoxarifado> Almoxarifados { get; set; }
-
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<TabelaCNAE> TabelaCNAEs { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Estado> Estados { get; set; }
         public DbSet<Estoque> Estoques { get; set; }
         public DbSet<Fabricante> Fabricantes { get; set; }
+        public DbSet<FormaPagamento> FormaPagamentos { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<GrupoMercadoria> GrupoMercadorias { get; set; }
         public DbSet<GrupoNaturezaReceita_CTS_PIS_COFINS> GrupoNaturezaReceita_CTS_PIS_COFINSs { get; set; }
         public DbSet<GrupoCFOP> GrupoCFOPs { get; set; }
         public DbSet<Mercadoria> Mercadorias { get; set; }
+        public DbSet<MercadoriaComposicao> MercadoriaComposicaos { get; set; }
+        public DbSet<MercadoriaImpostoEstado> MercadoriaImpostoEstados { get; set; }
+        public DbSet<MercadoriaFornecedor> MercadoriaFornecedores { get; set; }
         public DbSet<Motorista> Motoristas { get; set; }
         public DbSet<NaturezaOperacao> NaturezaOperacoes { get; set; }
         public DbSet<NotaFiscalEntradaFatura> NotaFiscalEntradaFaturas { get; set; }
@@ -48,6 +48,8 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<NotaFiscalFinalidade> NotaFiscalFinalidades { get; set; }
         public DbSet<NotaFiscalSaida> NotaFiscalSaidas { get; set; }
         public DbSet<NotaFiscalSaidaMercadoria> NotaFiscalSaidaMercadorias { get; set; }
+        public DbSet<NotaFiscalSaidaPagamento> NotaFiscalSaidaPagamentos { get; set; }
+        public DbSet<Observacao> Observacaos { get; set; }
         public DbSet<Pais> Paises { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Similar> Similars { get; set; }
@@ -70,11 +72,12 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<TabelaOrigemVenda> TabelaOrigemVendas { get; set; }
         public DbSet<TabelaSituacaoTributariaNFCe> TabelaSituacaoTributariaNFCes { get; set; }
         public DbSet<TabelaSpedCodigoGenero> TabelaSpedCodigoGeneros { get; set; }
-        public  DbSet<TabelaSpedInformacaoAdicionalItem> TabelaSpedInformacaoAdicionalItems { get; set; }
+        public DbSet<TabelaSpedInformacaoAdicionalItem> TabelaSpedInformacaoAdicionalItems { get; set; }
         public DbSet<TabelaSpedTipoItem> TabelaSpedTipoItems { get; set; }
         public DbSet<TipoCliente> TipoClientes { get; set; }
         public DbSet<TipoServicoFiscal> TipoServicoFiscais { get; set; }
         public DbSet<TipoMercadoria> TipoMercadorias { get; set; }
+        public DbSet<TipoPagamento> TipoPagamentos { get; set; }
         public DbSet<Transportadora> Transportadoras { get; set; }
         public DbSet<UnidadeMedida> UnidadeMedidas { get; set; }
         public DbSet<UnidadeMedidaConversao> UnidadeMedidaConversoes { get; set; }

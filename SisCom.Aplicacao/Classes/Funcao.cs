@@ -107,5 +107,11 @@ namespace SisCom.Aplicacao.Classes
 
             return ret;
         }
+
+        public static void dados_Empresa_Carregar()
+        {
+            Declaracoes.dados_Empresa_Id = Guid.Parse("4BF355E6-49FC-4CA4-CEF6-08DA480E47B4");
+            Declaracoes.dados_Empresa_EstadoId = Guid.Parse("A4E895E8-D411-4944-992C-A6871293DA1C");
+        }
     }
 }

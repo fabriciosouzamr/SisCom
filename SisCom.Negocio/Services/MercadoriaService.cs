@@ -10,17 +10,17 @@ namespace SisCom.Negocio.Services
 {
     public class MercadoriaService : BaseService<Mercadoria>, IMercadoriaService
     {
-        private readonly IMercadoriaRepository mMercadoriaRepository;
+        private readonly IMercadoriaRepository mercadoriaRepository;
 
         public MercadoriaService(IMercadoriaRepository MercadoriaRepository,
                                  INotifier notificador) : base(notificador, MercadoriaRepository)
         {
-            mMercadoriaRepository = MercadoriaRepository;
+            mercadoriaRepository = MercadoriaRepository;
         }
 
         public Task<IPagedList<Mercadoria>> GetPagedList(FilteredPagedListParameters parameters)
         {
-            return mMercadoriaRepository.GetPagedList(f =>
+            return mercadoriaRepository.GetPagedList(f =>
             (
                 parameters.Search == null || f.Nome.Contains(parameters.Search)
             ), parameters);
@@ -32,7 +32,7 @@ namespace SisCom.Negocio.Services
 
             try
             {
-                var _pessoa = await mMercadoriaRepository.Search(f => f.Nome == mercadoria.Nome);
+                var _pessoa = await mercadoriaRepository.Search(f => f.Nome == mercadoria.Nome);
 
                 if (_pessoa.Count() != 0)
                 {
@@ -40,7 +40,7 @@ namespace SisCom.Negocio.Services
                     return;
                 }
 
-                await mMercadoriaRepository.Insert(mercadoria);
+                await mercadoriaRepository.Insert(mercadoria);
             }
             catch (Exception Ex)
             {
@@ -54,7 +54,7 @@ namespace SisCom.Negocio.Services
             {
                 //if (!RunValidation(new PessoaValidation(), pessoa)) return;
 
-                var exists = mMercadoriaRepository.Exists(f => f.Nome == mercadoria.Nome && f.Id != mercadoria.Id);
+                var exists = mercadoriaRepository.Exists(f => f.Nome == mercadoria.Nome && f.Id != mercadoria.Id);
 
                 if (exists)
                 {
@@ -62,7 +62,7 @@ namespace SisCom.Negocio.Services
                     return;
                 }
 
-                await mMercadoriaRepository.Update(mercadoria);
+                await mercadoriaRepository.Update(mercadoria);
             }
             catch (Exception Ex)
             {
@@ -72,14 +72,14 @@ namespace SisCom.Negocio.Services
 
         public async Task Excluir(Guid id)
         {
-            await mMercadoriaRepository.Delete(id);
+            await mercadoriaRepository.Delete(id);
 
             Notify("Exclusão Efetuada.");
         }
 
         public override void Dispose()
         {
-            mMercadoriaRepository?.Dispose();
+            mercadoriaRepository?.Dispose();
         }
     }
 }

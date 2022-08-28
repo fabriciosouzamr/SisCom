@@ -1,0 +1,38 @@
+[
+    {
+        "Id": "2484CD77-15C7-4E33-B6D2-E3B4165ECB5B",
+        "TipoPagamentoId": "2484CD77-15C7-4E33-B6D2-E3B4165ECB5B",
+        "Nome": "CHEQUE A VISTA",
+        "Ativo": "True",
+        "UsaNaVenda": "True",
+        "UsaNoPagamento": "True",
+        "UltimaAtualizacao":"2022-04-02T12:13:08.5703749"
+    },
+    {
+        "Id": "3C1D9BE0-767F-4156-8ECB-A001B6242180",
+        "TipoPagamentoId": "2484CD77-15C7-4E33-B6D2-E3B4165ECB5B",
+        "Nome": "CHEQUE PRÉ-DATADO",
+        "Ativo": "True",
+        "UsaNaVenda": "True",
+        "UsaNoPagamento": "True",
+        "UltimaAtualizacao":"2022-04-02T12:13:08.5703749"
+    },
+    {
+        "Id": "49635128-638E-41BA-A958-CCA9072E1960",
+        "TipoPagamentoId": "49635128-638E-41BA-A958-CCA9072E1960",
+        "Nome": "DUPLICATA EM BANCO",
+        "Ativo": "True",
+        "UsaNaVenda": "True",
+        "UsaNoPagamento": "True",
+        "UltimaAtualizacao":"2022-04-02T12:13:08.5703749"
+    },
+    {
+        "Id": "E1C27AE3-F7E1-4DB8-804E-1A226AD21FAC",
+        "TipoPagamentoId": "49635128-638E-41BA-A958-CCA9072E1960",
+        "Nome": "DUPLICATA EM CARTEIRA",
+        "Ativo": "True",
+        "UsaNaVenda": "True",
+        "UsaNoPagamento": "True",
+        "UltimaAtualizacao":"2022-04-02T12:13:08.5703749"
+    }
+]

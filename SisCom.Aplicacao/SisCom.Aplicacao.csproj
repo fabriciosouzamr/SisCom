@@ -101,6 +101,9 @@
     <None Update="Configuration\Seed\Estado.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Configuration\Seed\FormaPagamento.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Configuration\Seed\Funcionario.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -178,6 +181,9 @@
     </None>
     <None Update="Configuration\Seed\TipoMercadoria.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configuration\Seed\TipoPagamento.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Configuration\Seed\UnidadeMedida.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
