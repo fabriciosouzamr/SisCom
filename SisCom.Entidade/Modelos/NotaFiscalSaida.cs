@@ -9,7 +9,7 @@ namespace SisCom.Entidade.Modelos
 		public Empresa Empresa { get; set; }
 		public NaturezaOperacao NaturezaOperacao { get; set; }
 		public NotaFiscalFinalidade NotaFiscalFinalidade { get; set; }
-		public string NumeroNotaFiscalSaida { get; set; }
+		public string NotaFiscal { get; set; }
 		public DateTime DataEmissao { get; set; }
 		public DateTime DataSaida { get; set; }
 		public string HoraEmissao { get; set; }

@@ -61,7 +61,7 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     linha = Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscalSaida,
                                                                           new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_NumeroNotaFiscal,
-                                                                                                                                          Valor = item.NumeroNotaFiscalSaida },
+                                                                                                                                          Valor = item.NotaFiscal },
                                                                                                            new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Destinatario,
                                                                                                                                           Valor = item.Cliente.Nome },
                                                                                                            new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_DataEmissao,

@@ -2365,6 +2365,7 @@
             this.botaoAtualizarInfoComplementoObservacao.TabIndex = 20;
             this.botaoAtualizarInfoComplementoObservacao.Text = "Atualizar Informações Complementares com as Observações";
             this.botaoAtualizarInfoComplementoObservacao.UseVisualStyleBackColor = true;
+            this.botaoAtualizarInfoComplementoObservacao.Click += new System.EventHandler(this.botaoAtualizarInfoComplementoObservacao_Click);
             // 
             // botaoCadastroObservacoes
             // 
@@ -2412,6 +2413,7 @@
             this.gridObservacao.RowTemplate.Height = 25;
             this.gridObservacao.Size = new System.Drawing.Size(834, 211);
             this.gridObservacao.TabIndex = 17;
+            this.gridObservacao.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridObservacao_CellValueChanged);
             // 
             // panel18
             // 
@@ -2709,6 +2711,7 @@
             this.comboInfoNFeOrigem.Name = "comboInfoNFeOrigem";
             this.comboInfoNFeOrigem.Size = new System.Drawing.Size(583, 28);
             this.comboInfoNFeOrigem.TabIndex = 51;
+            this.comboInfoNFeOrigem.SelectedIndexChanged += new System.EventHandler(this.comboInfoNFeOrigem_SelectedIndexChanged);
             // 
             // label113
             // 

@@ -22,7 +22,7 @@ namespace SisCom.Negocio.Services
         {
             return _NotaFiscalSaidaRepository.GetPagedList(f =>
             (
-                parameters.Search == null || f.NumeroNotaFiscalSaida.Contains(parameters.Search)
+                parameters.Search == null || f.NotaFiscal.Contains(parameters.Search)
             ), parameters);
         }
 

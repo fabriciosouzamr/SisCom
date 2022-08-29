@@ -45,7 +45,15 @@ namespace SisCom.Aplicacao.Formularios
 
                 foreach (var item in ret)
                 {
-                    
+                    Grid_DataGridView.DataGridView_LinhaAdicionar(gridObservacao,
+                                                                  new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = gridObservacao_ID,
+                                                                                                                                 Valor = item.Id },
+                                                                                                  new Grid_DataGridView.Coluna { Indice = gridObservacao_Codigo,
+                                                                                                                                 Valor = item.Codigo.ToString() },
+                                                                                                  new Grid_DataGridView.Coluna { Indice = gridObservacao_Descricao,
+                                                                                                                                 Valor = item.Descricao },
+                                                                                                  new Grid_DataGridView.Coluna { Indice = gridObservacao_Tipo,
+                                                                                                                                 Valor = item.TipoObservacao }});
                 }
             }
         }
@@ -98,7 +106,8 @@ namespace SisCom.Aplicacao.Formularios
                     }
                     else
                     {
-                        await observacaoController.Atualizar(Guid.Parse(row.Cells[gridObservacao_ID].Value.ToString()), observacao);
+                        observacao.Id = Guid.Parse(row.Cells[gridObservacao_ID].Value.ToString());
+                        await observacaoController.Atualizar(observacao.Id, observacao);
                     }
                 }
             }
@@ -117,16 +126,16 @@ namespace SisCom.Aplicacao.Formularios
 
             foreach (DataGridViewRow row in gridObservacao.Rows)
             {
-                if ((row.Cells[gridObservacao_Descricao].Value.ToString() == "") || (row.Cells[gridObservacao_Tipo].Value.ToString() == ""))
+                if ((Texto.NuloString(row.Cells[gridObservacao_Descricao].Value) == "") || (Texto.NuloString(row.Cells[gridObservacao_Tipo].Value) == ""))
                 {
                     CaixaMensagem.Informacao("Informe a descrição de todas as observações");
-                    Valido = true;
+                    Valido = false;
                     break;
                 }
                 if ((row.Cells[gridObservacao_Tipo].Value.ToString() == ""))
                 {
                     CaixaMensagem.Informacao("Selecione o tipo de todas as observações");
-                    Valido = true;
+                    Valido = false;
                     break;
                 }
             }

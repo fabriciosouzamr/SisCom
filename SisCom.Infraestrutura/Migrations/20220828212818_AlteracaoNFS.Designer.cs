@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220828212818_AlteracaoNFS")]
+    partial class AlteracaoNFS
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1856,34 +1858,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.ToTable("NotaFiscalSaidaMercadorias");
                 });
 
-            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaObservacao", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("varchar(max)");
-
-                    b.Property<Guid?>("NotaFiscalSaidaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ObservacaoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("UltimaAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NotaFiscalSaidaId");
-
-                    b.HasIndex("ObservacaoId");
-
-                    b.ToTable("NotaFiscalSaidaObservacaos");
-                });
-
             modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaPagamento", b =>
                 {
                     b.Property<Guid>("Id")
@@ -3644,21 +3618,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Navigation("TabelaNCM");
 
                     b.Navigation("UnidadeMedida");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaObservacao", b =>
-                {
-                    b.HasOne("SisCom.Entidade.Modelos.NotaFiscalSaida", "NotaFiscalSaida")
-                        .WithMany()
-                        .HasForeignKey("NotaFiscalSaidaId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.Observacao", "Observacao")
-                        .WithMany()
-                        .HasForeignKey("ObservacaoId");
-
-                    b.Navigation("NotaFiscalSaida");
-
-                    b.Navigation("Observacao");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaPagamento", b =>

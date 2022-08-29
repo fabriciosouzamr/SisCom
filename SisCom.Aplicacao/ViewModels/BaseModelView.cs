@@ -30,4 +30,9 @@ namespace SisCom.Aplicacao.ViewModels
     {
         public string Descricao { get; set; }
     }
+    public class NF_ComboViewModel : BaseModelView
+    {
+        public string NotaFiscal { get; set; }
+        public string CodigoChaveAcesso { get; set; }
+    }
 }

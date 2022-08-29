@@ -1445,7 +1445,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<Guid?>("NotaFiscalFinalidadeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("NumeroNotaFiscalSaida")
+                    b.Property<string>("NotaFiscal")
                         .IsRequired()
                         .HasColumnType("varchar(10)");
 

@@ -15,48 +15,47 @@ namespace SisCom.Aplicacao.Controllers
 {
     public class NotaFiscalEntradaController : IDisposable
     {
-        static NotaFiscalEntradaService _NotaFiscalEntradaService;
+        static NotaFiscalEntradaService _notaFiscalEntradaService;
         private readonly MeuDbContext meuDbContext;
-
         public NotaFiscalEntradaController(MeuDbContext meuDbContext, INotifier notifier)
         {
             this.meuDbContext = meuDbContext;
-            _NotaFiscalEntradaService = new NotaFiscalEntradaService(new NotaFiscalEntradaRepository(meuDbContext), notifier);
+            _notaFiscalEntradaService = new NotaFiscalEntradaService(new NotaFiscalEntradaRepository(meuDbContext), notifier);
         }
         public async Task<NotaFiscalEntradaViewModel> Adicionar(NotaFiscalEntradaViewModel NotaFiscalEntradaViewModel)
         {
             var NotaFiscalEntrada = Declaracoes.mapper.Map<NotaFiscalEntrada>(NotaFiscalEntradaViewModel);
 
-            await _NotaFiscalEntradaService.Adicionar(NotaFiscalEntrada);
+            await _notaFiscalEntradaService.Adicionar(NotaFiscalEntrada);
 
             return Declaracoes.mapper.Map<NotaFiscalEntradaViewModel>(NotaFiscalEntrada);
         }
         public async Task<bool> Excluir(Guid Id)
         {
-            await _NotaFiscalEntradaService.Excluir(Id);
+            await _notaFiscalEntradaService.Excluir(Id);
 
             return true;
         }
         public async Task<NotaFiscalEntradaViewModel> Atualizar(Guid id, NotaFiscalEntradaViewModel NotaFiscalEntradaViewModel)
         {
-            await _NotaFiscalEntradaService.Atualizar(Declaracoes.mapper.Map<NotaFiscalEntrada>(NotaFiscalEntradaViewModel));
+            await _notaFiscalEntradaService.Atualizar(Declaracoes.mapper.Map<NotaFiscalEntrada>(NotaFiscalEntradaViewModel));
 
             return NotaFiscalEntradaViewModel;
         }
         public async Task<IEnumerable<NotaFiscalEntradaViewModel>> ObterTodos()
         {
-            var obterTodos = await _NotaFiscalEntradaService.GetAll(null, null, i => i.NotaFiscal);
+            var obterTodos = await _notaFiscalEntradaService.GetAll(null, null, i => i.NotaFiscal);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalEntradaViewModel>>(obterTodos);
 
         }
         public async Task<IEnumerable<NotaFiscalEntradaViewModel>> PesquisarId(Guid Id)
         {
-            var pessoa = await _NotaFiscalEntradaService.Search(p => p.Id == Id);
+            var pessoa = await _notaFiscalEntradaService.Search(p => p.Id == Id);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalEntradaViewModel>>(pessoa);
         }
         public async Task<IEnumerable<NotaFiscalEntradaViewModel>> PesquisarChave(String Chave)
         {
-            var pessoa = await _NotaFiscalEntradaService.Search(p => p.CodigoChaveAcesso == Chave.ToString());
+            var pessoa = await _notaFiscalEntradaService.Search(p => p.CodigoChaveAcesso == Chave.ToString());
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalEntradaViewModel>>(pessoa);
         }
         public async Task<bool> PesquisarChaveExiste(String Chave)
@@ -66,10 +65,14 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<NotaFiscalEntrada, object>> order = null)
         {
-            var combo = await _NotaFiscalEntradaService.Combo(order);
+            var combo = await _notaFiscalEntradaService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
         }
-
+        public async Task<IEnumerable<NF_ComboViewModel>> ComboChave(Expression<Func<NotaFiscalEntrada, object>> order = null)
+        {
+            var combo = await _notaFiscalEntradaService.Combo(order);
+            return Declaracoes.mapper.Map<IEnumerable<NF_ComboViewModel>>(combo);
+        }
         public void Dispose()
         {
             meuDbContext.Dispose();

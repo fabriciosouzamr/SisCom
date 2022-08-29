@@ -108,7 +108,8 @@ public static class Grid_DataGridView
                                                                int Caracteres = 0,
                                                                object dataSource = null,
                                                                string dataSource_Descricao = "",
-                                                               string dataSource_Valor = "")
+                                                               string dataSource_Valor = "",
+                                                               int dropDownWidth = 0)
 
     {
         switch (Tipo)
@@ -134,6 +135,7 @@ public static class Grid_DataGridView
                     Coluna.DataSource = dataSource;
                     Coluna.DisplayMember = dataSource_Descricao;
                     Coluna.ValueMember = dataSource_Valor;
+                    if (dropDownWidth != 0) Coluna.DropDownWidth = dropDownWidth;
                     return Coluna;
                 }
             case TipoColuna.Button:
@@ -173,7 +175,8 @@ public static class Grid_DataGridView
                                                                   string dataSource_Descricao = "",
                                                                   string dataSource_Valor = "",
                                                                   bool readOnly = true,
-                                                                  bool wordWrap = false)
+                                                                  bool wordWrap = false,
+                                                                  int dropDownWidth = 0)
     {
         DataGridViewColumn Coluna = DataGridView_ColunaCriar(Grid,
                                                              Nome,
@@ -183,7 +186,8 @@ public static class Grid_DataGridView
                                                              Caracteres,
                                                              dataSource,
                                                              dataSource_Descricao,
-                                                             dataSource_Valor);
+                                                             dataSource_Valor, 
+                                                             dropDownWidth);
 
         Coluna.Name = Nome;
         Coluna.HeaderText = Titulo;

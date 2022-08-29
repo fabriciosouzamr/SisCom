@@ -124,6 +124,7 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region NotaFiscalEntrada
                         cfg.CreateMap<NotaFiscalEntradaViewModel, NotaFiscalEntrada>().ReverseMap();
+                        cfg.CreateMap<NotaFiscalEntrada, NF_ComboViewModel>();
                         #endregion
                         #region NotaFiscalEntradaFatura
                         cfg.CreateMap<NotaFiscalEntradaFaturaViewModel, NotaFiscalEntradaFatura>().ReverseMap();
@@ -137,6 +138,7 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region Observacao
                         cfg.CreateMap<ObservacaoViewModel, Observacao>().ReverseMap();
+                        cfg.CreateMap<Observacao, CodigoDescricaoComboViewModel>();
                         #endregion
                         #region Pais
                         cfg.CreateMap<PaisViewModel, Pais>().ReverseMap();
@@ -155,6 +157,7 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region NotaFiscalSaida
                         cfg.CreateMap<NotaFiscalSaidaViewModel, NotaFiscalSaida>().ReverseMap();
+                        cfg.CreateMap<NotaFiscalSaida, NF_ComboViewModel>();
                         #endregion
                         #region NotaFiscalSaidaMercadoria
                         cfg.CreateMap<NotaFiscalSaidaMercadoriaViewModel, NotaFiscalSaidaMercadoria>().ReverseMap();

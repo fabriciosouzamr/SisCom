@@ -12,7 +12,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
 
             builder.OwnsOne(x => x.Endereco);
 
-            builder.Property(p => p.NumeroNotaFiscalSaida).IsRequired().HasColumnType("varchar(10)");
+            builder.Property(p => p.NotaFiscal).IsRequired().HasColumnType("varchar(10)");
             builder.Property(p => p.HoraEmissao).IsRequired().HasColumnType("varchar(5)");
             builder.Property(p => p.Modelo).IsRequired().HasColumnType("varchar(2)");
             builder.Property(p => p.Serie).IsRequired().HasColumnType("varchar(3)");

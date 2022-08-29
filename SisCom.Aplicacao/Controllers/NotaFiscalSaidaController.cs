@@ -46,7 +46,7 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<NotaFiscalSaidaViewModel>> ObterTodos()
         {
-            var obterTodos = await _NotaFiscalSaidaService.GetAll(null, null, i => i.NumeroNotaFiscalSaida);
+            var obterTodos = await _NotaFiscalSaidaService.GetAll(null, null, i => i.NotaFiscal);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(obterTodos);
 
         }
@@ -78,7 +78,11 @@ namespace SisCom.Aplicacao.Controllers
             var combo = await _NotaFiscalSaidaService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
         }
-
+        public async Task<IEnumerable<NF_ComboViewModel>> ComboChave(Expression<Func<NotaFiscalSaida, object>> order = null)
+        {
+            var combo = await _NotaFiscalSaidaService.Combo(order);
+            return Declaracoes.mapper.Map<IEnumerable<NF_ComboViewModel>>(combo);
+        }
         public void Dispose()
         {
             meuDbContext.Dispose();

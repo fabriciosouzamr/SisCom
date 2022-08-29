@@ -43,6 +43,14 @@ namespace SisCom.Aplicacao.Formularios
         const int gridCobrancaNota_Vencimento = 1;
         const int gridCobrancaNota_Valor = 2;
 
+        const int gridObservacao_ID = 0;
+        const int gridObservacao_Codigo = 1;
+        const int gridObservacao_Descricao = 2;
+
+        const int gridInfoNFe_ID = 0;
+        const int gridInfoNFe_NFe_NFCe  = 1;
+        const int gridInfoNFe_ChaveNFe_NFCe = 2;
+
         enum RegimeTributario
         {
             [Description("SIMPLES NACIONAL")]
@@ -76,7 +84,6 @@ namespace SisCom.Aplicacao.Formularios
             [Description("NORMAL")]
             NORMAL = 3
         }
-
         enum TipoPagamento
         {
             [Description("A VISTA")]
@@ -85,6 +92,15 @@ namespace SisCom.Aplicacao.Formularios
             A_PRAZO = 2,
             [Description("OUTROS")]
             OUTROS = 3
+        }
+        enum TipoNotaReferenciada
+        {
+            [Description("Cliente")]
+            Cliente = 1,
+            [Description("Fornecedor")]
+            Fornecedor = 2,
+            [Description("NFC-e")]
+            NFCe = 3
         }
 
         Guid dadolocal_Cliente_EstadoId;
@@ -106,6 +122,9 @@ namespace SisCom.Aplicacao.Formularios
             Combo_ComboBox.Formatar(comboInfoNFeTipoEmissao, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_TipoEmissao));
             Combo_ComboBox.Formatar(comboInfoNFeNFeModelo, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Modelo));
             Combo_ComboBox.Formatar(comboCobrancaNotaTipoPagamento, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoPagamento));
+            Combo_ComboBox.Formatar(comboInfoNFeOrigem, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoNotaReferenciada));
+
+            comboInfoNFeOrigem.SelectedIndex = -1;
 
             await Assincrono.TaskAsyncAndAwaitAsync(Inicializar());
             await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
@@ -189,6 +208,35 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridCobrancaNota, "Pagamento", "MedidaPagamento", Grid_DataGridView.TipoColuna.ComboBox, 200, 0, formaPagamento, "Nome", "ID", false);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridCobrancaNota, "Vencimento", "Vencimento", Grid_DataGridView.TipoColuna.Data, 100, 0, readOnly: false);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridCobrancaNota, "Valor", "Valor", Grid_DataGridView.TipoColuna.Valor, 100, 0, readOnly: false);
+
+                //Obsrevação
+                List<CodigoDescricaoComboViewModel> observacao;
+
+                using (ObservacaoController observacaoController = new ObservacaoController(this.MeuDbContext(), this._notifier))
+                {
+                    observacao = (List<CodigoDescricaoComboViewModel>)await observacaoController.Combo(o => o.Descricao);
+                }
+
+                Grid_DataGridView.DataGridView_Formatar(gridObservacao, true);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "ID", "ID", Tamanho: 0);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "Código", "Código", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, dataSource: observacao, 
+                                                                                                                                                  dataSource_Descricao: "Descricao",
+                                                                                                                                                  dataSource_Valor: "ID",
+                                                                                                                                                  dropDownWidth: 400,
+                                                                                                                                                  readOnly: false);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "Descrição", "Descrição", Grid_DataGridView.TipoColuna.Texto, 400, 0, readOnly: false);
+
+                //NF-e
+                Grid_DataGridView.DataGridView_Formatar(gridInfoNFe, true);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridInfoNFe, "ID", "ID", Tamanho: 0);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridInfoNFe, "NF-e/NFC-e Nº", "NF-e/NFC-e Nº", Tamanho: 100, Tipo: Grid_DataGridView.TipoColuna.ComboBox, 
+                                                                                                                            dataSource_Descricao: "NotaFiscal",
+                                                                                                                            dataSource_Valor: "ID", 
+                                                                                                                            readOnly: false);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridInfoNFe, "Chave NF-e/NFC-e", "Chave NF-e/NFC-e", Tamanho: 500, Tipo: Grid_DataGridView.TipoColuna.ComboBox,
+                                                                                                                                  dataSource_Descricao: "CodigoChaveAcesso",
+                                                                                                                                  dataSource_Valor: "ID", 
+                                                                                                                                  readOnly: false);
 
                 //venda = new ViewModels.VendaViewModel();
                 //venda.Id = Guid.Empty;
@@ -298,7 +346,6 @@ namespace SisCom.Aplicacao.Formularios
             await Assincrono.TaskAsyncAndAwaitAsync(comboNaturezaOperacao_Carregar());
             await Assincrono.TaskAsyncAndAwaitAsync(comboEstado_Carregar());
             await Assincrono.TaskAsyncAndAwaitAsync(comboTransportadora_Carregar());
-            await Assincrono.TaskAsyncAndAwaitAsync(comboInfoNFeOrigem_Carregar());
 
             comboInfoNFeFidelidade.DataSource = comboFinalidade.DataSource;
             comboInfoNFeFidelidade.ValueMember = comboFinalidade.ValueMember;
@@ -428,18 +475,6 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
-        private async Task<bool> comboInfoNFeOrigem_Carregar()
-        {
-            using (MeuDbContext meuDbContext = this.MeuDbContext())
-            {
-                Combo_ComboBox.Formatar(comboInfoNFeOrigem,
-                                        "ID", "Descricao",
-                                        ComboBoxStyle.DropDownList,
-                                        await (new TabelaOrigemVendaController(this.MeuDbContext(), this._notifier)).Combo());
-            }
-
-            return true;
-        }
         #endregion
         private void botaoFechar_Click(object sender, EventArgs e)
         {
@@ -497,7 +532,6 @@ namespace SisCom.Aplicacao.Formularios
                         dateDataEmissao.Value = vendaViewModel.DataVenda;
                         if (!Funcao.Nulo(vendaViewModel.ClienteId)) comboRemetente.SelectedValue = vendaViewModel.ClienteId;
                         if (!Funcao.Nulo(vendaViewModel.EmpresaId)) comboEmpresa.SelectedValue = vendaViewModel.EmpresaId;
-                        if (!Funcao.Nulo(vendaViewModel.TabelaOrigemVendaId)) comboInfoNFeOrigem.SelectedValue = vendaViewModel.TabelaOrigemVendaId;
                         numericValorFrete.Value = vendaViewModel.ValorFrete;
                         numericValorDesconto.Value = vendaViewModel.ValorDesconto;
                         if (!Funcao.Nulo(vendaViewModel.TransportadoraId)) comboTransportadora.SelectedValue = vendaViewModel.TransportadoraId;
@@ -744,11 +778,14 @@ namespace SisCom.Aplicacao.Formularios
         {
             var notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier);
             var notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier);
+            var notaFiscalSaidaObservacaoController = new NotaFiscalSaidaObservacaoController(this.MeuDbContext(), this._notifier);
+            var notaFiscalSaidaPagamentoController = new NotaFiscalSaidaPagamentoController(this.MeuDbContext(), this._notifier);
+            var notaFiscalSaidaReferenciaController = new NotaFiscalSaidaReferenciaController(this.MeuDbContext(), this._notifier);
 
             notafiscalsaida.EmpresaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEmpresa);
             notafiscalsaida.NaturezaOperacaoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboNaturezaOperacao);
             notafiscalsaida.NotaFiscalFinalidadeId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboFinalidade);
-            notafiscalsaida.NumeroNotaFiscalSaida = labelNumeroNotaFiscalSaida.Text;
+            notafiscalsaida.NotaFiscal = labelNumeroNotaFiscalSaida.Text;
             notafiscalsaida.DataEmissao = dateDataEmissao.Value;
             notafiscalsaida.DataSaida = dateDataSaida.Value;
             notafiscalsaida.HoraEmissao = textHora.Text;
@@ -857,6 +894,42 @@ namespace SisCom.Aplicacao.Formularios
                 await notaFiscalSaidaMercadoriaController.Adicionar(notaFiscalSaidaMercadoriaViewModel);
             }
 
+            foreach (DataGridViewRow row in gridObservacao.Rows)
+            {
+                NotaFiscalSaidaObservacaoViewModel notaFiscalSaidaObservacaoViewModel = new NotaFiscalSaidaObservacaoViewModel();
+
+                notaFiscalSaidaObservacaoViewModel.NotaFiscalSaidaId = notafiscalsaida.Id;
+                notaFiscalSaidaObservacaoViewModel.Descricao = row.Cells[gridObservacao_Descricao].Value.ToString();
+                if (row.Cells[gridObservacao_ID].Value != null) notaFiscalSaidaObservacaoViewModel.ObservacaoId = Guid.Parse(row.Cells[gridObservacao_ID].Value.ToString());
+
+                await notaFiscalSaidaObservacaoController.Adicionar(notaFiscalSaidaObservacaoViewModel);
+            }
+
+            foreach (DataGridViewRow row in gridCobrancaNota.Rows)
+            {
+                NotaFiscalSaidaPagamentoViewModel NotaFiscalSaidaPagamentoViewModel = new NotaFiscalSaidaPagamentoViewModel();
+
+                NotaFiscalSaidaPagamentoViewModel.NotaFiscalSaidaId = notafiscalsaida.Id;
+                NotaFiscalSaidaPagamentoViewModel.DataVecimento = Convert.ToDateTime(row.Cells[gridCobrancaNota_Vencimento].Value);
+                NotaFiscalSaidaPagamentoViewModel.Valor = Convert.ToDecimal(row.Cells[gridCobrancaNota_Valor].Value);
+                NotaFiscalSaidaPagamentoViewModel.FormaPagamentoId = (Guid)row.Cells[gridCobrancaNota_TipoPagamento].Value;
+
+                await notaFiscalSaidaPagamentoController.Adicionar(NotaFiscalSaidaPagamentoViewModel);
+            }
+
+            foreach (DataGridViewRow row in gridCobrancaNota.Rows)
+            {
+                NotaFiscalSaidaReferenciaViewModel NotaFiscalSaidaReferenciaViewModel = new NotaFiscalSaidaReferenciaViewModel();
+
+                NotaFiscalSaidaReferenciaViewModel.NotaFiscal = row.Cells[gridInfoNFe_NFe_NFCe].Value.ToString();
+                NotaFiscalSaidaReferenciaViewModel.CodigoChaveAcesso = row.Cells[gridInfoNFe_ChaveNFe_NFCe].Value.ToString();
+                NotaFiscalSaidaReferenciaViewModel.NotaFiscalSaidaId = notafiscalsaida.Id;
+
+                await notaFiscalSaidaReferenciaController.Adicionar(NotaFiscalSaidaReferenciaViewModel);
+            }
+
+            notaFiscalSaidaController.Dispose();
+            notaFiscalSaidaMercadoriaController.Dispose();
             notafiscalsaida = null;
 
             this.MeuDbContextDispose();
@@ -997,6 +1070,66 @@ namespace SisCom.Aplicacao.Formularios
             {
                 form.StartPosition = FormStartPosition.CenterParent;
                 form.ShowDialog(this);
+            }
+        }
+
+        private void gridObservacao_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == gridObservacao_Codigo)
+            {
+                gridObservacao.Rows[e.RowIndex].Cells[gridObservacao_Descricao].Value = gridObservacao.Rows[e.RowIndex].Cells[gridObservacao_Codigo].EditedFormattedValue;
+            }
+        }
+
+        private void botaoAtualizarInfoComplementoObservacao_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in gridObservacao.Rows)
+            {
+                if (richInformacoesComplementaresInteresseContribuinte.Text.Trim() != "")
+                    richInformacoesComplementaresInteresseContribuinte.Text = richInformacoesComplementaresInteresseContribuinte.Text + Environment.NewLine;
+
+                richInformacoesComplementaresInteresseContribuinte.Text = richInformacoesComplementaresInteresseContribuinte.Text + row.Cells[gridObservacao_Descricao].Value;
+            }
+        }
+
+        private void comboInfoNFeOrigem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboInfoNFeOrigem_Tratar();
+        }
+
+        async void comboInfoNFeOrigem_Tratar()
+        {
+            if (comboInfoNFeOrigem.SelectedIndex != -1)
+            {
+                try
+                {
+                    List<NF_ComboViewModel> comboViewModel = new List<NF_ComboViewModel>();
+
+                    switch ((TipoNotaReferenciada)comboInfoNFeOrigem.SelectedValue)
+                    {
+                        case TipoNotaReferenciada.Cliente:
+                            using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                            {
+                                comboViewModel = (List<NF_ComboViewModel>)await notaFiscalSaidaController.ComboChave(o => o.CodigoChaveAcesso);
+                            }
+                            break;
+                        case TipoNotaReferenciada.Fornecedor:
+                            using (NotaFiscalEntradaController notaFiscalEntradaController = new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier))
+                            {
+                                comboViewModel = (List<NF_ComboViewModel>)await notaFiscalEntradaController.Combo(o => o.CodigoChaveAcesso);
+                            }
+                            break;
+                        case TipoNotaReferenciada.NFCe:
+                            return;
+                            break;
+                    }
+
+                    ((DataGridViewComboBoxColumn)gridInfoNFe.Columns[gridInfoNFe_NFe_NFCe]).DataSource = comboViewModel;
+                    ((DataGridViewComboBoxColumn)gridInfoNFe.Columns[gridInfoNFe_ChaveNFe_NFCe]).DataSource = comboViewModel;
+                }
+                catch (Exception)
+                {
+                }
             }
         }
     }
