@@ -154,7 +154,7 @@ namespace SisCom.Aplicacao.Formularios
                 comboTipoPessoa.SelectedValue = pessoa.TipoPessoa;
                 maskedCPFCNPJ.Text = pessoa.CNPJ_CPF;
                 textRG.Text = Funcao.NuloParaString(pessoa.RG);
-                dateCadastro.Value = pessoa.DatCadastro;
+                if (!Funcao.NuloData(pessoa.DatCadastro)) dateCadastro.Value = pessoa.DatCadastro;
                 if (!Funcao.Nulo(pessoa.TipoContribuinte)) comboTipoContribuinte.SelectedValue = pessoa.TipoContribuinte;
                 textInscricaoEstadual.Text = Funcao.NuloParaString(pessoa.InscricaoEstadual);
                 textInscricaoMunicipal.Text = Funcao.NuloParaString(pessoa.InscricaoMunicipal);
@@ -197,6 +197,8 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("C.P.F./C.N.P.J. Inválido");
                 return;
             }
+
+            pessoaController = new PessoaController(this.MeuDbContext(), this._notifier);
 
             if (pessoa.Id != Guid.Empty)
             {

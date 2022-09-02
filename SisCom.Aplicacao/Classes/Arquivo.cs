@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -97,6 +98,32 @@ namespace SisCom.Aplicacao.Classes
         public static string ArquivoTemporario(string sArquivo)
         {
             return DiretorioMontarCaminhoArquivo(Declaracoes.Aplicacao_CaminhoDiretorioTemporaria, sArquivo);
+        }
+        public static string Diretorio_Tratar(string sPath)
+        {
+            if (Strings.Right(sPath.Trim(), 1) != @"\")
+                return sPath.Trim() + @"\";
+            else
+                return sPath.Trim();
+        }
+        public static string DiretorioSistema_RemoverPath(string sArquivo)
+        {
+            if (Strings.Trim(sArquivo) == "" | sArquivo == null)
+                return sArquivo;
+            else if (Strings.Mid(sArquivo, 1, Strings.Len(Declaracoes.Aplicacao_PathRepositorioArquivo)) == Declaracoes.Aplicacao_PathRepositorioArquivo)
+                return Strings.Mid(sArquivo, Strings.Len(Diretorio_Tratar(Declaracoes.Aplicacao_PathRepositorioArquivo)) + 1);
+            else
+                return sArquivo;
+        }
+
+        public static string DiretorioSistema_AdicionarPath(string sArquivo)
+        {
+            if (Strings.Trim(sArquivo) == "" | Declaracoes.Aplicacao_PathRepositorioArquivo == "")
+                return "";
+            else if (Strings.Mid(sArquivo, Strings.Len(Declaracoes.Aplicacao_PathRepositorioArquivo)) == Declaracoes.Aplicacao_PathRepositorioArquivo)
+                return sArquivo;
+            else
+                return Diretorio_Tratar(Declaracoes.Aplicacao_PathRepositorioArquivo) + sArquivo;
         }
     }
 }

@@ -41,14 +41,14 @@
             this.botaoImprimirEtiquetas = new System.Windows.Forms.Button();
             this.botaoImportarXMLNFe = new System.Windows.Forms.Button();
             this.botaoClonarNFe = new System.Windows.Forms.Button();
-            this.botaoImprimir = new System.Windows.Forms.Button();
+            this.botaoExportarNFe = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.botaoExcluir = new System.Windows.Forms.Button();
             this.botaoEditar = new System.Windows.Forms.Button();
             this.label38 = new System.Windows.Forms.Label();
-            this.botaoGravar = new System.Windows.Forms.Button();
+            this.botaoTransmitir = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.botaoFechar = new System.Windows.Forms.Button();
@@ -415,14 +415,14 @@
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoImprimirEtiquetas);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoImportarXMLNFe);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoClonarNFe);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoImprimir);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoExportarNFe);
             this.pnlMenuBotaoBotao.Controls.Add(this.label2);
             this.pnlMenuBotaoBotao.Controls.Add(this.label1);
             this.pnlMenuBotaoBotao.Controls.Add(this.label5);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoExcluir);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoEditar);
             this.pnlMenuBotaoBotao.Controls.Add(this.label38);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoGravar);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoTransmitir);
             this.pnlMenuBotaoBotao.Controls.Add(this.label7);
             this.pnlMenuBotaoBotao.Controls.Add(this.label6);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoFechar);
@@ -543,16 +543,16 @@
             this.botaoClonarNFe.TabIndex = 65;
             this.botaoClonarNFe.UseVisualStyleBackColor = true;
             // 
-            // botaoImprimir
+            // botaoExportarNFe
             // 
-            this.botaoImprimir.Image = ((System.Drawing.Image)(resources.GetObject("botaoImprimir.Image")));
-            this.botaoImprimir.Location = new System.Drawing.Point(592, 0);
-            this.botaoImprimir.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.botaoImprimir.Name = "botaoImprimir";
-            this.botaoImprimir.Size = new System.Drawing.Size(61, 75);
-            this.botaoImprimir.TabIndex = 64;
-            this.botaoImprimir.UseVisualStyleBackColor = true;
-            this.botaoImprimir.Click += new System.EventHandler(this.botaoImprimir_Click);
+            this.botaoExportarNFe.Image = ((System.Drawing.Image)(resources.GetObject("botaoExportarNFe.Image")));
+            this.botaoExportarNFe.Location = new System.Drawing.Point(592, 0);
+            this.botaoExportarNFe.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.botaoExportarNFe.Name = "botaoExportarNFe";
+            this.botaoExportarNFe.Size = new System.Drawing.Size(61, 75);
+            this.botaoExportarNFe.TabIndex = 64;
+            this.botaoExportarNFe.UseVisualStyleBackColor = true;
+            this.botaoExportarNFe.Click += new System.EventHandler(this.botaoExportarNFe_Click);
             // 
             // label2
             // 
@@ -620,16 +620,16 @@
             this.label38.Text = "Transmitir";
             this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // botaoGravar
+            // botaoTransmitir
             // 
-            this.botaoGravar.Image = ((System.Drawing.Image)(resources.GetObject("botaoGravar.Image")));
-            this.botaoGravar.Location = new System.Drawing.Point(531, 0);
-            this.botaoGravar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.botaoGravar.Name = "botaoGravar";
-            this.botaoGravar.Size = new System.Drawing.Size(61, 75);
-            this.botaoGravar.TabIndex = 54;
-            this.botaoGravar.UseVisualStyleBackColor = true;
-            this.botaoGravar.Click += new System.EventHandler(this.botaoGravar_Click);
+            this.botaoTransmitir.Image = ((System.Drawing.Image)(resources.GetObject("botaoTransmitir.Image")));
+            this.botaoTransmitir.Location = new System.Drawing.Point(531, 0);
+            this.botaoTransmitir.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.botaoTransmitir.Name = "botaoTransmitir";
+            this.botaoTransmitir.Size = new System.Drawing.Size(61, 75);
+            this.botaoTransmitir.TabIndex = 54;
+            this.botaoTransmitir.UseVisualStyleBackColor = true;
+            this.botaoTransmitir.Click += new System.EventHandler(this.botaoTransmitir_Click);
             // 
             // label7
             // 
@@ -3537,14 +3537,14 @@
         private System.Windows.Forms.Button botaoImprimirEtiquetas;
         private System.Windows.Forms.Button botaoImportarXMLNFe;
         private System.Windows.Forms.Button botaoClonarNFe;
-        private System.Windows.Forms.Button botaoImprimir;
+        private System.Windows.Forms.Button botaoExportarNFe;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button botaoExcluir;
         private System.Windows.Forms.Button botaoEditar;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Button botaoGravar;
+        private System.Windows.Forms.Button botaoTransmitir;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button botaoFechar;

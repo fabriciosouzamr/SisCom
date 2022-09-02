@@ -84,6 +84,12 @@
     <Reference Include="NFe.Classes">
       <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\NFe.Classes.dll</HintPath>
     </Reference>
+    <Reference Include="NFe.Danfe.Base">
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.Danfe.Base\bin\Release\NFe.Danfe.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Danfe.Nativo">
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.Danfe.Nativo\bin\Release\NFe.Danfe.Nativo.dll</HintPath>
+    </Reference>
     <Reference Include="NFe.Servicos">
       <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Servicos.dll</HintPath>
     </Reference>

@@ -48,7 +48,7 @@ namespace SisCom.Aplicacao.Formularios
         const int gridObservacao_Descricao = 2;
 
         const int gridInfoNFe_ID = 0;
-        const int gridInfoNFe_NFe_NFCe  = 1;
+        const int gridInfoNFe_NFe_NFCe = 1;
         const int gridInfoNFe_ChaveNFe_NFCe = 2;
 
         enum RegimeTributario
@@ -219,7 +219,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 Grid_DataGridView.DataGridView_Formatar(gridObservacao, true);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "ID", "ID", Tamanho: 0);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "Código", "Código", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, dataSource: observacao, 
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "Código", "Código", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, dataSource: observacao,
                                                                                                                                                   dataSource_Descricao: "Descricao",
                                                                                                                                                   dataSource_Valor: "ID",
                                                                                                                                                   dropDownWidth: 400,
@@ -229,13 +229,13 @@ namespace SisCom.Aplicacao.Formularios
                 //NF-e
                 Grid_DataGridView.DataGridView_Formatar(gridInfoNFe, true);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridInfoNFe, "ID", "ID", Tamanho: 0);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridInfoNFe, "NF-e/NFC-e Nº", "NF-e/NFC-e Nº", Tamanho: 100, Tipo: Grid_DataGridView.TipoColuna.ComboBox, 
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridInfoNFe, "NF-e/NFC-e Nº", "NF-e/NFC-e Nº", Tamanho: 100, Tipo: Grid_DataGridView.TipoColuna.ComboBox,
                                                                                                                             dataSource_Descricao: "NotaFiscal",
-                                                                                                                            dataSource_Valor: "ID", 
+                                                                                                                            dataSource_Valor: "ID",
                                                                                                                             readOnly: false);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridInfoNFe, "Chave NF-e/NFC-e", "Chave NF-e/NFC-e", Tamanho: 500, Tipo: Grid_DataGridView.TipoColuna.ComboBox,
                                                                                                                                   dataSource_Descricao: "CodigoChaveAcesso",
-                                                                                                                                  dataSource_Valor: "ID", 
+                                                                                                                                  dataSource_Valor: "ID",
                                                                                                                                   readOnly: false);
 
                 //venda = new ViewModels.VendaViewModel();
@@ -481,13 +481,6 @@ namespace SisCom.Aplicacao.Formularios
             TentarGravar();
             Close();
         }
-        private void botaoGravar_Click(object sender, EventArgs e)
-        {
-            //GravarMercadoria();
-
-            var form = this.ServiceProvider().GetRequiredService<frmFiscal_Transmitir>();
-            form.ShowDialog(this);
-        }
         private void comboRemetenteUF_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((comboRemetenteUF.SelectedIndex != -1) && (comboRemetenteUF.Tag != Declaracoes.ComboBox_Carregando))
@@ -560,9 +553,12 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_Preco,
                                                                                                                                              Valor = vendaMercadoriaViewModel.Preco },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_Total,
-                                                                                                                                             Valor = vendaMercadoriaViewModel.Total }}).Index; }
+                                                                                                                                             Valor = vendaMercadoriaViewModel.Total }}).Index;
+                    }
                 }
             }
+
+            CalcularMercadoriaImpostos();
 
             return true;
         }
@@ -645,10 +641,6 @@ namespace SisCom.Aplicacao.Formularios
 
         }
         private void botaoEditar_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void botaoImprimir_Click(object sender, EventArgs e)
         {
 
         }
@@ -887,7 +879,7 @@ namespace SisCom.Aplicacao.Formularios
                     notaFiscalSaidaMercadoriaViewModel.ValorFCP = notaFiscalMercadoriaDetalhamentoImposto.ValorFCP;
                     notaFiscalSaidaMercadoriaViewModel.NumeroPedidoCompra = notaFiscalMercadoriaDetalhamentoImposto.NumeroPedidoCompra;
                     notaFiscalSaidaMercadoriaViewModel.ItemPedidoCompra = notaFiscalMercadoriaDetalhamentoImposto.ItemPedidoCompra;
-                    notaFiscalSaidaMercadoriaViewModel.TabelaCST_PIS_COFINS_PISId = notaFiscalMercadoriaDetalhamentoImposto.CSTPIS ;
+                    notaFiscalSaidaMercadoriaViewModel.TabelaCST_PIS_COFINS_PISId = notaFiscalMercadoriaDetalhamentoImposto.CSTPIS;
                     notaFiscalSaidaMercadoriaViewModel.TabelaCST_PIS_COFINS_PISCOFINSId = notaFiscalMercadoriaDetalhamentoImposto.CSTCOFINS;
                 }
 
@@ -988,11 +980,11 @@ namespace SisCom.Aplicacao.Formularios
                     GridProduto_SelecionarProduto(e.RowIndex, e.ColumnIndex, gridMercadoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
 
                     if (mercadoriaImpostoEstado != null)
-                    foreach(MercadoriaImpostoEstadoViewModel impostoestado in mercadoriaImpostoEstado)
-                    {
-                        if (impostoestado.Mercadoria.Id == (Guid)gridMercadoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
-                        gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value = impostoestado.PercentualICMS_Destino;
-                    }
+                        foreach (MercadoriaImpostoEstadoViewModel impostoestado in mercadoriaImpostoEstado)
+                        {
+                            if (impostoestado.Mercadoria.Id == (Guid)gridMercadoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
+                                gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value = impostoestado.PercentualICMS_Destino;
+                        }
                 }
                 else if ((e.ColumnIndex == gridMercadoria_Quantidade) ||
                          (e.ColumnIndex == gridMercadoria_Preco))
@@ -1012,7 +1004,7 @@ namespace SisCom.Aplicacao.Formularios
                 using (frmFiscal_NotaFiscal_Impostos form = ServiceProvider().GetRequiredService<frmFiscal_NotaFiscal_Impostos>())
                 {
                     if (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Impostos].Value != null)
-                    form.notaFiscalMercadoriaDetalhamentoImposto = (NotaFiscalMercadoriaDetalhamentoImposto)gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Impostos].Value;
+                        form.notaFiscalMercadoriaDetalhamentoImposto = (NotaFiscalMercadoriaDetalhamentoImposto)gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Impostos].Value;
                     form.Produto = gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Descricao].Value.ToString();
                     try { form.ValorTotal = Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value); }
                     catch (Exception) { }
@@ -1021,6 +1013,55 @@ namespace SisCom.Aplicacao.Formularios
                     gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Impostos].Value = form.notaFiscalMercadoriaDetalhamentoImposto;
                 }
             }
+
+            CalcularMercadoriaImpostos();
+        }
+
+        private void CalcularMercadoriaImpostos()
+        {
+            labelMercadoriaVolume.Tag = 0;
+            labelMercadoriaValorFrete.Tag = 0;
+            labelMercadoriaValorSeguro.Tag = 0;
+            labelMercadoriaOutrasDespesas.Tag = 0;
+            labelMercadoriaValorICMSDesoneracao.Tag = 0;
+            labelMercadoriaBaseCalculo.Tag = 0;
+            labelMercadoriaValorICMS.Tag = 0;
+            labelMercadoriaBaseSubstituicao.Tag = 0;
+            labelMercadoriaICMSSubstituicao.Tag = 0;
+
+            labelMercadoriaItens.Tag = gridMercadoria.Rows.Count.ToString();
+            labelMercadoriaTotalMercadoria.Tag = Grid_DataGridView.DataGridView_CalcularColunaValor(gridMercadoria, gridMercadoria_Total);
+            labelMercadoriaValorIPI.Tag = Grid_DataGridView.DataGridView_CalcularColunaValor(gridMercadoria, gridMercadoria_IPI);
+            labelMercadoriaTotalNota.Tag = Grid_DataGridView.DataGridView_CalcularColunaValor(gridMercadoria, gridMercadoria_Total);
+
+            foreach (DataGridViewRow row in gridMercadoria.Rows)
+            {
+                if (row.Cells[gridMercadoria_Impostos].Value != null)
+                {
+                    NotaFiscalMercadoriaDetalhamentoImposto notaFiscalMercadoriaDetalhamentoImposto;
+
+                    notaFiscalMercadoriaDetalhamentoImposto = (NotaFiscalMercadoriaDetalhamentoImposto)row.Cells[gridMercadoria_Impostos].Value;
+                    labelMercadoriaBaseCalculo.Tag = Convert.ToDecimal(labelMercadoriaBaseCalculo.Tag) + notaFiscalMercadoriaDetalhamentoImposto.ValorBaseCalculo;
+                    labelMercadoriaValorICMS.Tag = Convert.ToDecimal(labelMercadoriaBaseCalculo.Tag) + notaFiscalMercadoriaDetalhamentoImposto.ValorICMS;
+                    labelMercadoriaBaseSubstituicao.Tag = Convert.ToDecimal(labelMercadoriaBaseCalculo.Tag) + notaFiscalMercadoriaDetalhamentoImposto.ValorBaseSubstituicaoTributaria;
+                    labelMercadoriaICMSSubstituicao.Tag = Convert.ToDecimal(labelMercadoriaICMSSubstituicao.Tag) + notaFiscalMercadoriaDetalhamentoImposto.ValorSubstituicaoTributaria;
+                }
+            }
+
+            labelMercadoriaBaseCalculo.Text = Convert.ToDecimal(labelMercadoriaBaseCalculo.Tag).ToString("0.00");
+            labelMercadoriaValorICMS.Text = Convert.ToDecimal(labelMercadoriaValorICMS.Tag).ToString("c");
+            labelMercadoriaBaseSubstituicao.Text = Convert.ToDecimal(labelMercadoriaBaseSubstituicao.Tag).ToString("0.00");
+            labelMercadoriaICMSSubstituicao.Text = Convert.ToDecimal(labelMercadoriaICMSSubstituicao.Tag).ToString("c");
+            labelMercadoriaItens.Text = labelMercadoriaItens.Tag.ToString();
+            labelMercadoriaVolume.Text = labelMercadoriaVolume.Tag.ToString();
+            labelMercadoriaValorFrete.Text = Convert.ToDecimal(labelMercadoriaValorFrete.Tag).ToString("c");
+            labelMercadoriaValorSeguro.Text = Convert.ToDecimal(labelMercadoriaValorSeguro.Tag).ToString("c");
+            labelMercadoriaOutrasDespesas.Text = Convert.ToDecimal(labelMercadoriaOutrasDespesas.Tag).ToString("c");
+            labelMercadoriaValorICMSDesoneracao.Text = Convert.ToDecimal(labelMercadoriaValorICMSDesoneracao.Tag).ToString("c");
+
+            labelMercadoriaTotalMercadoria.Text = Convert.ToDecimal(labelMercadoriaTotalMercadoria.Tag).ToString("c");
+            labelMercadoriaValorIPI.Text = Convert.ToDecimal(labelMercadoriaValorIPI.Tag).ToString("c");
+            labelMercadoriaTotalNota.Text = Convert.ToDecimal(labelMercadoriaTotalNota.Tag).ToString("c");
         }
 
         private void gridCobrancaNota_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -1058,7 +1099,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 using (MercadoriaImpostoEstadoController mercadoriaImpostoEstadoController = new MercadoriaImpostoEstadoController(this.MeuDbContext(), this._notifier))
                 {
-                    mercadoriaImpostoEstado = await mercadoriaImpostoEstadoController.ObterPorEstadosId(Declaracoes.dados_Empresa_EstadoId, 
+                    mercadoriaImpostoEstado = await mercadoriaImpostoEstadoController.ObterPorEstadosId(Declaracoes.dados_Empresa_EstadoId,
                                                                                                         dadolocal_Cliente_EstadoId);
                 }
             }
@@ -1131,6 +1172,17 @@ namespace SisCom.Aplicacao.Formularios
                 {
                 }
             }
+        }
+
+        private void botaoExportarNFe_Click(object sender, EventArgs e)
+        {
+            GravarMercadoria();
+        }
+
+        private void botaoTransmitir_Click(object sender, EventArgs e)
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmFiscal_Transmitir>();
+            form.ShowDialog(this);
         }
     }
 }

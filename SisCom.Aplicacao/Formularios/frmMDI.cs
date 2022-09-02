@@ -36,10 +36,14 @@ namespace SisCom.Aplicacao
             var form = this.ServiceProvider().GetRequiredService<frmComprasConsulta>();
             form.ShowDialog(this);
         }
-
         private void cmdVendas_Click(object sender, EventArgs e)
         {
             var form = this.ServiceProvider().GetRequiredService<frmVendasConsulta>();
+            form.ShowDialog(this);
+        }
+        private void botaoNota_Click(object sender, EventArgs e)
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmFiscal_NotaFiscal>();
             form.ShowDialog(this);
         }
     }
