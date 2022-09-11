@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaSpedInformacaoAdicionalItem>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaSpedInformacaoAdicionalItem tabelaSpedInformacaoAdicionalItem)
+        {
+            DbSet.Update(tabelaSpedInformacaoAdicionalItem);
+            await SaveChanges();
+        }
     }
 }

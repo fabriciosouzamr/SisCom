@@ -61,7 +61,10 @@ namespace SisCom.Aplicacao.Controllers
 
         public async Task<IEnumerable<PessoaViewModel>> PesquisarId(Guid Id)
         {
-            var pessoa = await _pessoaService.Search(p => p.Id == Id);
+            var pessoa = await _pessoaService.GetAll(null, p => p.Id == Id, i => i.Endereco, 
+                                                                            i => i.Endereco.End_Cidade, 
+                                                                            i => i.Endereco.End_Cidade.Estado,
+                                                                            i => i.Endereco.End_Cidade.Estado.Pais);
             return Declaracoes.mapper.Map<IEnumerable<PessoaViewModel>>(pessoa);
         }
 

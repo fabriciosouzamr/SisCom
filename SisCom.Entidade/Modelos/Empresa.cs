@@ -14,10 +14,12 @@ namespace SisCom.Entidade.Modelos
         public string? InscricaoMunicipal { get; set; }
         public string? InscricaoEstadual { get; set; }
         public string? InscricaoEstadual_SubTributaria { get; set; }
+        public string? CodigoCNAEPrincipal { get; set; }
         public Endereco? Endereco { get; set; }
         public string? Telefone { get; set; }
         public string? EMail { get; set; }
         public RegimeTributario? RegimeTributario { get; set; }
+        public NF_TipoContribuinteICMS? TipoContribuinteICMS { get; set; }
         public double CreditoSimplesNacional { get; set; }
         public bool Ativo { get; set; }
         public DateTime? DataDesativacao { get; set; }
@@ -36,5 +38,6 @@ namespace SisCom.Entidade.Modelos
         public string? NuvemFiscal_Certificado { get; set; }
         public string? NuvemFiscal_SerialNumber { get; set; }
         public string NSU { get; set; }
+        public string? Controle { get; set; }
     }
 }

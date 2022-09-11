@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaCST_CSOSN>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaCST_CSOSN tabelaCST_CSOSN)
+        {
+            DbSet.Update(tabelaCST_CSOSN);
+            await SaveChanges();
+        }
     }
 }

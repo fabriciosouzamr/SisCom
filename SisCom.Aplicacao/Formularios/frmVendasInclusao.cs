@@ -185,7 +185,7 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboVendedor,
                                         "ID", "Nome",
                                         ComboBoxStyle.DropDownList,
-                                        await (new FuncionarioController(meuDbContext, this._notifier)).Combo(p => p.Nome));
+                                        await (new FuncionarioController(meuDbContext, this._notifier)).ComboVendedor(p => p.Nome));
             }
 
             return true;

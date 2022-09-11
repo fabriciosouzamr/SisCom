@@ -32,5 +32,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<Estado>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(Estado estado)
+        {
+            DbSet.Update(estado);
+            await SaveChanges();
+        }
     }
 }

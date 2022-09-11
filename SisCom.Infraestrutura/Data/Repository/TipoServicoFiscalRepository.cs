@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TipoServicoFiscal>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TipoServicoFiscal tipoServicoFiscal)
+        {
+            DbSet.Update(tipoServicoFiscal);
+            await SaveChanges();
+        }
     }
 }

@@ -37,7 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.cmdProcessarNotas = new System.Windows.Forms.Button();
+            this.botaoTransmitirNotas = new System.Windows.Forms.Button();
             this.botaoImprimir = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,6 +51,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.panelStatusPendente = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -64,14 +66,16 @@
             this.labelNumeroVenda = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateDataEntrada = new System.Windows.Forms.DateTimePicker();
+            this.comboStatusVenda = new System.Windows.Forms.ComboBox();
+            this.dateDataVendaInicial = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateDataVendaFinal = new System.Windows.Forms.DateTimePicker();
             this.label10 = new System.Windows.Forms.Label();
             this.botaoAplicarFiltros = new System.Windows.Forms.Button();
             this.botaoLimparFiltros = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.botaoDesmarcarTodos = new System.Windows.Forms.Button();
+            this.botaoMarcarTodos = new System.Windows.Forms.Button();
             this.gridNotaFiscalSaida = new System.Windows.Forms.DataGridView();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
@@ -102,7 +106,7 @@
             this.pnlMenuBotaoBotao.Controls.Add(this.label3);
             this.pnlMenuBotaoBotao.Controls.Add(this.button4);
             this.pnlMenuBotaoBotao.Controls.Add(this.button3);
-            this.pnlMenuBotaoBotao.Controls.Add(this.cmdProcessarNotas);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoTransmitirNotas);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoImprimir);
             this.pnlMenuBotaoBotao.Controls.Add(this.label2);
             this.pnlMenuBotaoBotao.Controls.Add(this.label1);
@@ -122,9 +126,9 @@
             this.label30.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label30.Location = new System.Drawing.Point(128, 75);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(57, 30);
+            this.label30.Size = new System.Drawing.Size(59, 30);
             this.label30.TabIndex = 72;
-            this.label30.Text = "Processar\r\nNotas";
+            this.label30.Text = "Transmitir\r\nNotas";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label13
@@ -178,14 +182,15 @@
             this.button3.TabIndex = 67;
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // cmdProcessarNotas
+            // botaoTransmitirNotas
             // 
-            this.cmdProcessarNotas.Location = new System.Drawing.Point(125, 0);
-            this.cmdProcessarNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cmdProcessarNotas.Name = "cmdProcessarNotas";
-            this.cmdProcessarNotas.Size = new System.Drawing.Size(61, 75);
-            this.cmdProcessarNotas.TabIndex = 65;
-            this.cmdProcessarNotas.UseVisualStyleBackColor = true;
+            this.botaoTransmitirNotas.Location = new System.Drawing.Point(125, 0);
+            this.botaoTransmitirNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.botaoTransmitirNotas.Name = "botaoTransmitirNotas";
+            this.botaoTransmitirNotas.Size = new System.Drawing.Size(61, 75);
+            this.botaoTransmitirNotas.TabIndex = 65;
+            this.botaoTransmitirNotas.UseVisualStyleBackColor = true;
+            this.botaoTransmitirNotas.Click += new System.EventHandler(this.botaoTransmitirNotas_Click);
             // 
             // botaoImprimir
             // 
@@ -308,6 +313,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label18);
+            this.panel4.Controls.Add(this.panelStatusPendente);
             this.panel4.Controls.Add(this.label16);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Controls.Add(this.label15);
@@ -325,6 +332,23 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1208, 33);
             this.panel4.TabIndex = 19;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(540, 6);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(70, 20);
+            this.label18.TabIndex = 32;
+            this.label18.Text = "Pendente";
+            // 
+            // panelStatusPendente
+            // 
+            this.panelStatusPendente.BackColor = System.Drawing.Color.Silver;
+            this.panelStatusPendente.Location = new System.Drawing.Point(517, 8);
+            this.panelStatusPendente.Name = "panelStatusPendente";
+            this.panelStatusPendente.Size = new System.Drawing.Size(17, 17);
+            this.panelStatusPendente.TabIndex = 31;
             // 
             // label16
             // 
@@ -438,23 +462,24 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Status da Venda";
             // 
-            // comboBox1
+            // comboStatusVenda
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 29);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(228, 28);
-            this.comboBox1.TabIndex = 1;
+            this.comboStatusVenda.FormattingEnabled = true;
+            this.comboStatusVenda.Location = new System.Drawing.Point(6, 29);
+            this.comboStatusVenda.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboStatusVenda.Name = "comboStatusVenda";
+            this.comboStatusVenda.Size = new System.Drawing.Size(228, 28);
+            this.comboStatusVenda.TabIndex = 1;
+            this.comboStatusVenda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboStatusVenda_KeyDown);
             // 
-            // dateDataEntrada
+            // dateDataVendaInicial
             // 
-            this.dateDataEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDataEntrada.Location = new System.Drawing.Point(241, 29);
-            this.dateDataEntrada.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dateDataEntrada.Name = "dateDataEntrada";
-            this.dateDataEntrada.Size = new System.Drawing.Size(92, 27);
-            this.dateDataEntrada.TabIndex = 2;
+            this.dateDataVendaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateDataVendaInicial.Location = new System.Drawing.Point(241, 29);
+            this.dateDataVendaInicial.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dateDataVendaInicial.Name = "dateDataVendaInicial";
+            this.dateDataVendaInicial.Size = new System.Drawing.Size(92, 27);
+            this.dateDataVendaInicial.TabIndex = 2;
             // 
             // label9
             // 
@@ -465,14 +490,14 @@
             this.label9.TabIndex = 3;
             this.label9.Text = "Período de Criação";
             // 
-            // dateTimePicker1
+            // dateDataVendaFinal
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(353, 29);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(92, 27);
-            this.dateTimePicker1.TabIndex = 4;
+            this.dateDataVendaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateDataVendaFinal.Location = new System.Drawing.Point(353, 29);
+            this.dateDataVendaFinal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dateDataVendaFinal.Name = "dateDataVendaFinal";
+            this.dateDataVendaFinal.Size = new System.Drawing.Size(92, 27);
+            this.dateDataVendaFinal.TabIndex = 4;
             // 
             // label10
             // 
@@ -493,6 +518,7 @@
             this.botaoAplicarFiltros.TabIndex = 98;
             this.botaoAplicarFiltros.TabStop = false;
             this.botaoAplicarFiltros.UseVisualStyleBackColor = true;
+            this.botaoAplicarFiltros.Click += new System.EventHandler(this.botaoAplicarFiltros_Click);
             // 
             // botaoLimparFiltros
             // 
@@ -504,23 +530,46 @@
             this.botaoLimparFiltros.TabIndex = 99;
             this.botaoLimparFiltros.TabStop = false;
             this.botaoLimparFiltros.UseVisualStyleBackColor = true;
+            this.botaoLimparFiltros.Click += new System.EventHandler(this.botaoLimparFiltros_Click);
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Silver;
+            this.panel3.Controls.Add(this.botaoDesmarcarTodos);
+            this.panel3.Controls.Add(this.botaoMarcarTodos);
             this.panel3.Controls.Add(this.botaoLimparFiltros);
             this.panel3.Controls.Add(this.botaoAplicarFiltros);
             this.panel3.Controls.Add(this.label10);
-            this.panel3.Controls.Add(this.dateTimePicker1);
+            this.panel3.Controls.Add(this.dateDataVendaFinal);
             this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.dateDataEntrada);
-            this.panel3.Controls.Add(this.comboBox1);
+            this.panel3.Controls.Add(this.dateDataVendaInicial);
+            this.panel3.Controls.Add(this.comboStatusVenda);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Location = new System.Drawing.Point(0, 151);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1208, 139);
             this.panel3.TabIndex = 18;
+            // 
+            // botaoDesmarcarTodos
+            // 
+            this.botaoDesmarcarTodos.Location = new System.Drawing.Point(122, 105);
+            this.botaoDesmarcarTodos.Name = "botaoDesmarcarTodos";
+            this.botaoDesmarcarTodos.Size = new System.Drawing.Size(135, 27);
+            this.botaoDesmarcarTodos.TabIndex = 101;
+            this.botaoDesmarcarTodos.Text = "Desmarcar Todos";
+            this.botaoDesmarcarTodos.UseVisualStyleBackColor = true;
+            this.botaoDesmarcarTodos.Click += new System.EventHandler(this.botaoDesmarcarTodos_Click);
+            // 
+            // botaoMarcarTodos
+            // 
+            this.botaoMarcarTodos.Location = new System.Drawing.Point(6, 105);
+            this.botaoMarcarTodos.Name = "botaoMarcarTodos";
+            this.botaoMarcarTodos.Size = new System.Drawing.Size(110, 27);
+            this.botaoMarcarTodos.TabIndex = 100;
+            this.botaoMarcarTodos.Text = "Marcar Todos";
+            this.botaoMarcarTodos.UseVisualStyleBackColor = true;
+            this.botaoMarcarTodos.Click += new System.EventHandler(this.botaoMarcarTodos_Click);
             // 
             // gridNotaFiscalSaida
             // 
@@ -533,6 +582,7 @@
             this.gridNotaFiscalSaida.Size = new System.Drawing.Size(1208, 457);
             this.gridNotaFiscalSaida.TabIndex = 17;
             this.gridNotaFiscalSaida.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscalSaida_CellClick);
+            this.gridNotaFiscalSaida.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscalSaida_CellDoubleClick);
             // 
             // frmFiscal_Transmitir
             // 
@@ -575,7 +625,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button cmdProcessarNotas;
+        private System.Windows.Forms.Button botaoTransmitirNotas;
         private System.Windows.Forms.Button botaoImprimir;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -594,10 +644,10 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DateTimePicker dateDataEntrada;
+        private System.Windows.Forms.ComboBox comboStatusVenda;
+        private System.Windows.Forms.DateTimePicker dateDataVendaInicial;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateDataVendaFinal;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button botaoAplicarFiltros;
         private System.Windows.Forms.Button botaoLimparFiltros;
@@ -611,5 +661,9 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Panel panelStatusPendente;
+        private System.Windows.Forms.Button botaoMarcarTodos;
+        private System.Windows.Forms.Button botaoDesmarcarTodos;
     }
 }

@@ -145,7 +145,11 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("C.N.P.J. Inválido");
                 return;
             }
-
+            if (!Combo_ComboBox.Selecionado(comboRegimeTributario))
+            {
+                CaixaMensagem.Informacao("Selecione o regime tributário");
+                return;
+            }
             var empresaController = new EmpresaController(this.MeuDbContext(), this._notifier);
 
             if (empresa.Id != Guid.Empty)
@@ -155,6 +159,16 @@ namespace SisCom.Aplicacao.Formularios
             else
             {
                 empresa = (await empresaController.Adicionar(empresa));
+            }
+
+            if (empresa.Id == Declaracoes.dados_Empresa_Id)
+            {
+                Declaracoes.dados_Empresa_EstadoId = empresa.Endereco.End_Cidade.EstadoId;
+                Declaracoes.dados_Empresa_CodigoEstado = empresa.Endereco.End_Cidade.Estado.Codigo;
+                Declaracoes.dados_Empresa_SerialNumber = empresa.NuvemFiscal_SerialNumber;
+                Declaracoes.dados_Empresa_CNPJ = empresa.CNPJ;
+                if (empresa.RegimeTributario != null)
+                Declaracoes.dados_Empresa_RegimeTributario = (RegimeTributario)empresa.RegimeTributario;
             }
 
             empresaController = null;

@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Entity;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -30,9 +31,9 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<TabelaCST_CSOSNViewModel>>(obterTodos);
         }
 
-        public async Task<IEnumerable<CodigoDescricaoComboViewModel>> Combo(Expression<Func<TabelaCST_CSOSN, object>> order = null)
+        public async Task<IEnumerable<CodigoDescricaoComboViewModel>> Combo(Expression<Func<TabelaCST_CSOSN, object>> order = null, Expression<Func<TabelaCST_CSOSN, bool>> predicate = null)
         {
-            var combo = await _TabelaCST_CSOSNService.Combo(order);
+            var combo = await _TabelaCST_CSOSNService.ComboSearch(predicate, order);
             return Declaracoes.mapper.Map<IEnumerable<CodigoDescricaoComboViewModel>>(combo);
         }
         public void Dispose()

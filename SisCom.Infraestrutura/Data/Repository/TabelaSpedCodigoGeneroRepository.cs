@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaSpedCodigoGenero>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaSpedCodigoGenero tabelaSpedCodigoGenero)
+        {
+            DbSet.Update(tabelaSpedCodigoGenero);
+            await SaveChanges();
+        }
     }
 }

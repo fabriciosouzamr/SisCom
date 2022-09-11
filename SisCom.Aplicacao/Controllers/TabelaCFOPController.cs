@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Enum;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -29,10 +30,26 @@ namespace SisCom.Aplicacao.Controllers
             var obterTodos = await _TabelaCFOPService.GetAll();
             return Declaracoes.mapper.Map<IEnumerable<TabelaCFOPViewModel>>(obterTodos);
         }
-
-        public async Task<IEnumerable<CodigoComboViewModel>> Combo(Expression<Func<TabelaCFOP, object>> order = null)
+        public async Task<IEnumerable<CodigoComboViewModel>> Combo(EntradaSaida entradaSaida, Expression<Func<TabelaCFOP, object>> order = null)
         {
-            var combo = await _TabelaCFOPService.Combo(order);
+            if (entradaSaida == EntradaSaida.Entrada)
+            { 
+                var combo = await _TabelaCFOPService.GetAll(order, w => ( w.GrupoCFOP.TipoOperacaoCFOP == Entidade.Enum.TipoOperacaoCFOP.EntradaDentroEstado ||
+                                                                          w.GrupoCFOP.TipoOperacaoCFOP == Entidade.Enum.TipoOperacaoCFOP.EntradaForaEstado ||
+                                                                          w.GrupoCFOP.TipoOperacaoCFOP == Entidade.Enum.TipoOperacaoCFOP.EntradaExterior), i => i.GrupoCFOP);
+                return Declaracoes.mapper.Map<IEnumerable<CodigoComboViewModel>>(combo);
+            }
+            else
+            { 
+                var combo = await _TabelaCFOPService.GetAll(order, w => (w.GrupoCFOP.TipoOperacaoCFOP == Entidade.Enum.TipoOperacaoCFOP.SaidaDentroEstado ||
+                                                                         w.GrupoCFOP.TipoOperacaoCFOP == Entidade.Enum.TipoOperacaoCFOP.SaidaForaEstado ||
+                                                                         w.GrupoCFOP.TipoOperacaoCFOP == Entidade.Enum.TipoOperacaoCFOP.SaidaExterior), i => i.GrupoCFOP);
+                return Declaracoes.mapper.Map<IEnumerable<CodigoComboViewModel>>(combo);
+            }
+        }
+        public async Task<IEnumerable<CodigoComboViewModel>> Combo(Entidade.Enum.TipoOperacaoCFOP tipoOperacao, Expression<Func<TabelaCFOP, object>> order = null)
+        {
+            var combo = await _TabelaCFOPService.GetAll(order, w => w.GrupoCFOP.TipoOperacaoCFOP == tipoOperacao, i => i.GrupoCFOP);
             return Declaracoes.mapper.Map<IEnumerable<CodigoComboViewModel>>(combo);
         }
         public void Dispose()

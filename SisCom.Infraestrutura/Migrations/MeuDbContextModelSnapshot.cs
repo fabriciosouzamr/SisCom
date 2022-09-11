@@ -120,6 +120,12 @@ namespace SisCom.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(14)");
 
+                    b.Property<string>("CodigoCNAEPrincipal")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Controle")
+                        .HasColumnType("varchar(1000)");
+
                     b.Property<double>("CreditoSimplesNacional")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("float")
@@ -175,7 +181,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NuvemFiscal_Certificado")
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("varchar(8000)");
 
                     b.Property<string>("NuvemFiscal_SerialNumber")
                         .HasColumnType("varchar(100)");
@@ -199,6 +205,9 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("Telefone")
                         .HasColumnType("varchar(20)");
 
+                    b.Property<int?>("TipoContribuinteICMS")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
 
@@ -220,6 +229,9 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasColumnType("char(2)");
+
+                    b.Property<string>("CodigoIBGE")
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -303,6 +315,9 @@ namespace SisCom.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("NomeInterno")
+                        .HasColumnType("varchar(100)");
+
                     b.Property<Guid?>("TipoPagamentoId")
                         .HasColumnType("uniqueidentifier");
 
@@ -340,6 +355,9 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<bool>("Desativado")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("EmpresaAcessoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
@@ -351,7 +369,12 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("UltimoAcesso")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("EmpresaAcessoId");
 
                     b.ToTable("Funcionarios");
                 });
@@ -1477,6 +1500,14 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<Guid?>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Cliente_EMail")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("Cliente_Telefone")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
                     b.Property<string>("CodigoChaveAcesso")
                         .IsRequired()
                         .HasColumnType("varchar(44)");
@@ -1484,12 +1515,14 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<DateTime>("DataEmissao")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("DataRetornoSefaz")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DataSaida")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EMail")
-                        .IsRequired()
-                        .HasColumnType("varchar(200)");
+                    b.Property<DateTime?>("DataTransmissao")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EmailDestinoXML")
                         .IsRequired()
@@ -1569,6 +1602,14 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<Guid?>("RegimeTributarioId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("RetornoSefaz")
+                        .IsRequired()
+                        .HasColumnType("varchar(8000)");
+
+                    b.Property<string>("RetornoSefazCodigo")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
                     b.Property<string>("Serie")
                         .IsRequired()
                         .HasColumnType("varchar(3)");
@@ -1583,12 +1624,11 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<Guid?>("TabelaOrigemVendaId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("varchar(20)");
-
                     b.Property<int>("TipoEmissao")
                         .HasColumnType("int");
+
+                    b.Property<bool>("TransmitirCliente")
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("TransportadoraId")
                         .HasColumnType("uniqueidentifier");
@@ -1739,35 +1779,30 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("NumeroPedidoCompra")
                         .HasColumnType("varchar(100)");
 
-                    b.Property<float>("PercentualFrete")
+                    b.Property<decimal>("PercentualICMS")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0f);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<float>("PercentualICMS")
+                    b.Property<decimal>("PercentualIPI")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0f);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<float>("PercentualIPI")
+                    b.Property<decimal>("PrecoTotal")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0f);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<float>("PrecoTotal")
+                    b.Property<decimal>("PrecoUnitario")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0f);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<float>("PrecoUnitario")
+                    b.Property<decimal>("Quantidade")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0f);
-
-                    b.Property<float>("Quantidade")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0f);
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<Guid?>("TabelaCFOPId")
                         .HasColumnType("uniqueidentifier");
@@ -1776,6 +1811,9 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TabelaCST_IPIId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("TabelaCST_PIS_COFINS_COFINSId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TabelaCST_PIS_COFINS_PISCOFINSId")
@@ -1818,6 +1856,11 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
+                    b.Property<decimal>("ValorFrete")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
+
                     b.Property<decimal>("ValorICMS")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("decimal(18,2)")
@@ -1845,7 +1888,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.HasIndex("TabelaCST_IPIId");
 
-                    b.HasIndex("TabelaCST_PIS_COFINS_PISCOFINSId");
+                    b.HasIndex("TabelaCST_PIS_COFINS_COFINSId");
 
                     b.HasIndex("TabelaCST_PIS_COFINS_PISId");
 
@@ -1914,6 +1957,62 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasIndex("NotaFiscalSaidaId");
 
                     b.ToTable("NotaFiscalSaidaPagamentos");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaReferencia", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CodigoChaveAcesso")
+                        .IsRequired()
+                        .HasColumnType("varchar(44)");
+
+                    b.Property<string>("NotaFiscal")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<Guid?>("NotaFiscalSaidaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NotaFiscalSaidaId");
+
+                    b.ToTable("NotaFiscalSaidaReferencias");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaSerie", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Serie")
+                        .IsRequired()
+                        .HasColumnType("varchar(3)");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UltimaNotaFiscal")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(10)")
+                        .HasDefaultValue("0");
+
+                    b.Property<Guid?>("UltimaNotaFiscalSaidaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UltimaNotaFiscalSaidaId");
+
+                    b.ToTable("NotaFiscalSaidaSeries");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Observacao", b =>
@@ -2340,6 +2439,9 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("varchar(500)");
 
                     b.Property<bool>("DestacarPIS_COFINS")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Percentual")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("UltimaAtualizacao")
@@ -3065,6 +3167,11 @@ namespace SisCom.Infraestrutura.Migrations
                                 .HasColumnType("uniqueidentifier")
                                 .HasColumnName("End_CidadeId");
 
+                            b1.Property<string>("End_Complemento")
+                                .HasMaxLength(200)
+                                .HasColumnType("varchar(200)")
+                                .HasColumnName("End_PontoReferencia");
+
                             b1.Property<string>("End_Logradouro")
                                 .HasMaxLength(60)
                                 .HasColumnType("varchar(60)")
@@ -3078,7 +3185,7 @@ namespace SisCom.Infraestrutura.Migrations
                             b1.Property<string>("End_PontoReferencia")
                                 .HasMaxLength(200)
                                 .HasColumnType("varchar(200)")
-                                .HasColumnName("End_PontoReferencia");
+                                .HasColumnName("End_Complemento");
 
                             b1.HasKey("EmpresaId");
 
@@ -3133,6 +3240,15 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasForeignKey("TipoPagamentoId");
 
                     b.Navigation("TipoPagamento");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.Funcionario", b =>
+                {
+                    b.HasOne("SisCom.Entidade.Modelos.Empresa", "EmpresaAcesso")
+                        .WithMany()
+                        .HasForeignKey("EmpresaAcessoId");
+
+                    b.Navigation("EmpresaAcesso");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.GrupoNaturezaReceita_CTS_PIS_COFINS", b =>
@@ -3522,7 +3638,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .WithMany()
                         .HasForeignKey("Transportadora_UFId");
 
-                    b.OwnsOne("SisCom.Entidade.Modelos.Endereco", "Endereco", b1 =>
+                    b.OwnsOne("SisCom.Entidade.Modelos.Endereco", "Cliente_Endereco", b1 =>
                         {
                             b1.Property<Guid>("NotaFiscalSaidaId")
                                 .HasColumnType("uniqueidentifier");
@@ -3541,6 +3657,11 @@ namespace SisCom.Infraestrutura.Migrations
                                 .HasColumnType("uniqueidentifier")
                                 .HasColumnName("End_CidadeId");
 
+                            b1.Property<string>("End_Complemento")
+                                .HasMaxLength(200)
+                                .HasColumnType("nvarchar(200)")
+                                .HasColumnName("End_PontoReferencia");
+
                             b1.Property<string>("End_Logradouro")
                                 .HasMaxLength(60)
                                 .HasColumnType("nvarchar(60)")
@@ -3554,7 +3675,7 @@ namespace SisCom.Infraestrutura.Migrations
                             b1.Property<string>("End_PontoReferencia")
                                 .HasMaxLength(200)
                                 .HasColumnType("nvarchar(200)")
-                                .HasColumnName("End_PontoReferencia");
+                                .HasColumnName("End_Complemento");
 
                             b1.HasKey("NotaFiscalSaidaId");
 
@@ -3574,9 +3695,9 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Navigation("Cliente");
 
-                    b.Navigation("Empresa");
+                    b.Navigation("Cliente_Endereco");
 
-                    b.Navigation("Endereco");
+                    b.Navigation("Empresa");
 
                     b.Navigation("InformacoesComplementaresInteresseContribuinte_UF");
 
@@ -3596,7 +3717,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasForeignKey("MercadoriaId");
 
                     b.HasOne("SisCom.Entidade.Modelos.NotaFiscalSaida", "NotaFiscalSaida")
-                        .WithMany()
+                        .WithMany("NotaFiscalSaidaMercadoria")
                         .HasForeignKey("NotaFiscalSaidaId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCFOP", "TabelaCFOP")
@@ -3611,9 +3732,9 @@ namespace SisCom.Infraestrutura.Migrations
                         .WithMany()
                         .HasForeignKey("TabelaCST_IPIId");
 
-                    b.HasOne("SisCom.Entidade.Modelos.TabelaCST_PIS_COFINS", "TabelaCST_PIS_COFINS_PISCOFINS")
+                    b.HasOne("SisCom.Entidade.Modelos.TabelaCST_PIS_COFINS", "TabelaCST_PIS_COFINS_COFINS")
                         .WithMany()
-                        .HasForeignKey("TabelaCST_PIS_COFINS_PISCOFINSId");
+                        .HasForeignKey("TabelaCST_PIS_COFINS_COFINSId");
 
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCST_PIS_COFINS", "TabelaCST_PIS_COFINS_PIS")
                         .WithMany()
@@ -3637,9 +3758,9 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Navigation("TabelaCST_IPI");
 
-                    b.Navigation("TabelaCST_PIS_COFINS_PIS");
+                    b.Navigation("TabelaCST_PIS_COFINS_COFINS");
 
-                    b.Navigation("TabelaCST_PIS_COFINS_PISCOFINS");
+                    b.Navigation("TabelaCST_PIS_COFINS_PIS");
 
                     b.Navigation("TabelaNCM");
 
@@ -3649,7 +3770,7 @@ namespace SisCom.Infraestrutura.Migrations
             modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaObservacao", b =>
                 {
                     b.HasOne("SisCom.Entidade.Modelos.NotaFiscalSaida", "NotaFiscalSaida")
-                        .WithMany()
+                        .WithMany("NotaFiscalSaidaObservacao")
                         .HasForeignKey("NotaFiscalSaidaId");
 
                     b.HasOne("SisCom.Entidade.Modelos.Observacao", "Observacao")
@@ -3668,12 +3789,30 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasForeignKey("FormaPagamentoId");
 
                     b.HasOne("SisCom.Entidade.Modelos.NotaFiscalSaida", "NotaFiscalSaida")
-                        .WithMany()
+                        .WithMany("NotaFiscalSaidaPagamento")
                         .HasForeignKey("NotaFiscalSaidaId");
 
                     b.Navigation("FormaPagamento");
 
                     b.Navigation("NotaFiscalSaida");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaReferencia", b =>
+                {
+                    b.HasOne("SisCom.Entidade.Modelos.NotaFiscalSaida", "NotaFiscalSaida")
+                        .WithMany("NotaFiscalSaidaReferencia")
+                        .HasForeignKey("NotaFiscalSaidaId");
+
+                    b.Navigation("NotaFiscalSaida");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaSerie", b =>
+                {
+                    b.HasOne("SisCom.Entidade.Modelos.NotaFiscalSaida", "UltimaNotaFiscalSaida")
+                        .WithMany()
+                        .HasForeignKey("UltimaNotaFiscalSaidaId");
+
+                    b.Navigation("UltimaNotaFiscalSaida");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Pessoa", b =>
@@ -3705,6 +3844,11 @@ namespace SisCom.Infraestrutura.Migrations
                                 .HasColumnType("uniqueidentifier")
                                 .HasColumnName("End_CidadeId");
 
+                            b1.Property<string>("End_Complemento")
+                                .HasMaxLength(200)
+                                .HasColumnType("nvarchar(200)")
+                                .HasColumnName("End_PontoReferencia");
+
                             b1.Property<string>("End_Logradouro")
                                 .HasMaxLength(60)
                                 .HasColumnType("nvarchar(60)")
@@ -3718,7 +3862,7 @@ namespace SisCom.Infraestrutura.Migrations
                             b1.Property<string>("End_PontoReferencia")
                                 .HasMaxLength(200)
                                 .HasColumnType("nvarchar(200)")
-                                .HasColumnName("End_PontoReferencia");
+                                .HasColumnName("End_Complemento");
 
                             b1.HasKey("PessoaId");
 
@@ -3823,6 +3967,11 @@ namespace SisCom.Infraestrutura.Migrations
                                 .HasColumnType("uniqueidentifier")
                                 .HasColumnName("End_CidadeId");
 
+                            b1.Property<string>("End_Complemento")
+                                .HasMaxLength(200)
+                                .HasColumnType("nvarchar(200)")
+                                .HasColumnName("End_PontoReferencia");
+
                             b1.Property<string>("End_Logradouro")
                                 .HasMaxLength(60)
                                 .HasColumnType("nvarchar(60)")
@@ -3836,7 +3985,7 @@ namespace SisCom.Infraestrutura.Migrations
                             b1.Property<string>("End_PontoReferencia")
                                 .HasMaxLength(200)
                                 .HasColumnType("nvarchar(200)")
-                                .HasColumnName("End_PontoReferencia");
+                                .HasColumnName("End_Complemento");
 
                             b1.HasKey("TransportadoraId");
 
@@ -3959,6 +4108,17 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Navigation("UnidadeMedida");
 
                     b.Navigation("Venda");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaida", b =>
+                {
+                    b.Navigation("NotaFiscalSaidaMercadoria");
+
+                    b.Navigation("NotaFiscalSaidaObservacao");
+
+                    b.Navigation("NotaFiscalSaidaPagamento");
+
+                    b.Navigation("NotaFiscalSaidaReferencia");
                 });
 #pragma warning restore 612, 618
         }

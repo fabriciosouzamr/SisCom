@@ -13,6 +13,7 @@ namespace SisCom.Aplicacao.ViewModels
         public bool Ativo { get; set; }
         public bool UsaNoPagamento { get; set; }
         public bool UsaNaVenda { get; set; }
+        public string NomeInterno { get; set; }
 
         /* EF Relation */
         public Guid? TipoPagamentoId { get; set; }

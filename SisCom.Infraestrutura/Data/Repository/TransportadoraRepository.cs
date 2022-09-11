@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<Transportadora>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(Transportadora transportadora)
+        {
+            DbSet.Update(transportadora);
+            await SaveChanges();
+        }
     }
 }

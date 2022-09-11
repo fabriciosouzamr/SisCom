@@ -1,6 +1,7 @@
 ﻿using Funcoes._Entity;
 using SisCom.Entidade.Enum;
 using System;
+using System.Collections.Generic;
 
 namespace SisCom.Entidade.Modelos
 {
@@ -12,7 +13,8 @@ namespace SisCom.Entidade.Modelos
 		public string NotaFiscal { get; set; }
 		public DateTime DataEmissao { get; set; }
 		public DateTime DataSaida { get; set; }
-		public string HoraEmissao { get; set; }
+        public DateTime? DataTransmissao { get; set; }
+        public string HoraEmissao { get; set; }
 		public string Modelo { get; set; }
 		public string Serie { get; set; }
 		public string SubSerie { get; set; }
@@ -20,9 +22,9 @@ namespace SisCom.Entidade.Modelos
 		public Pessoa Cliente { get; set; }
 		public string CNPJ_CPF { get; set; }
 		public string IE { get; set; }
-		public Endereco? Endereco { get; set; }
-		public string? Telefone { get; set; }
-		public string? EMail { get; set; }
+		public Endereco? Cliente_Endereco { get; set; }
+		public string? Cliente_Telefone { get; set; }
+		public string? Cliente_EMail { get; set; }
 		public decimal ValorFrete { get; set; }
 		public decimal ValorSeguro { get; set; }
 		public decimal OutrasDespesas { get; set; }
@@ -54,9 +56,17 @@ namespace SisCom.Entidade.Modelos
 		public NF_TipoEmissao TipoEmissao { get; set; }
 		public NF_Operacao Operacao { get; set; }
 		public string EmailDestinoXML { get; set; }
+		public bool TransmitirCliente { get; set; }
+        public string RetornoSefaz { get; set; }
+        public string RetornoSefazCodigo { get; set; }
+        public DateTime DataRetornoSefaz { get; set; }
+        public virtual List<NotaFiscalSaidaMercadoria> NotaFiscalSaidaMercadoria { get; set; }
+        public virtual List<NotaFiscalSaidaPagamento> NotaFiscalSaidaPagamento { get; set; }
+        public virtual List<NotaFiscalSaidaReferencia> NotaFiscalSaidaReferencia { get; set; }
+        public virtual List<NotaFiscalSaidaObservacao> NotaFiscalSaidaObservacao { get; set; }
 
-		/* EF Relation */
-		public Guid? EmpresaId { get; set; }
+        /* EF Relation */
+        public Guid? EmpresaId { get; set; }
 		public Guid? NaturezaOperacaoId { get; set; }
 		public Guid? NotaFiscalFinalidadeId { get; set; }
 		public Guid? ClienteId { get; set; }
@@ -66,5 +76,6 @@ namespace SisCom.Entidade.Modelos
 		public Guid? Transportadora_UFId { get; set; }
 		public Guid? RegimeTributarioId { get; set; }
 		public Guid? InformacoesComplementaresInteresseContribuinte_UFId { get; set; }
-	}
+
+    }
 }

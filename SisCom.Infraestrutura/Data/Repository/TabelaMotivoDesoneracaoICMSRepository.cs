@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaMotivoDesoneracaoICMS>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaMotivoDesoneracaoICMS tabelaMotivoDesoneracaoICMS)
+        {
+            DbSet.Update(tabelaMotivoDesoneracaoICMS);
+            await SaveChanges();
+        }
     }
 }

@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaCST_IPI>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaCST_IPI tabelaCST_IPI)
+        {
+            DbSet.Update(tabelaCST_IPI);
+            await SaveChanges();
+        }
     }
 }

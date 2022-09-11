@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<VinculoFiscal>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(VinculoFiscal vinculoFiscal)
+        {
+            DbSet.Update(vinculoFiscal);
+            await SaveChanges();
+        }
     }
 }

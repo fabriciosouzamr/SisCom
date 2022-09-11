@@ -87,7 +87,7 @@
             this.comboTransportadora = new System.Windows.Forms.ComboBox();
             this.label52 = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
-            this.numericAliquotaSimplesNacional = new System.Windows.Forms.NumericUpDown();
+            this.numericPercentualAliquotaSimplesNacional = new System.Windows.Forms.NumericUpDown();
             this.label48 = new System.Windows.Forms.Label();
             this.numericValorDesconto = new System.Windows.Forms.NumericUpDown();
             this.label49 = new System.Windows.Forms.Label();
@@ -336,7 +336,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericVolumeTransportadosPesoBruto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericVolumeTransportadosQuantidade)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericTransportadoraNumeroCarga)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericAliquotaSimplesNacional)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPercentualAliquotaSimplesNacional)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorDesconto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPercentualDesconto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorOutrasDespesas)).BeginInit();
@@ -744,7 +744,7 @@
             this.tbsRemetente.Controls.Add(this.comboTransportadora);
             this.tbsRemetente.Controls.Add(this.label52);
             this.tbsRemetente.Controls.Add(this.label51);
-            this.tbsRemetente.Controls.Add(this.numericAliquotaSimplesNacional);
+            this.tbsRemetente.Controls.Add(this.numericPercentualAliquotaSimplesNacional);
             this.tbsRemetente.Controls.Add(this.label48);
             this.tbsRemetente.Controls.Add(this.numericValorDesconto);
             this.tbsRemetente.Controls.Add(this.label49);
@@ -807,7 +807,7 @@
             this.tbsRemetente.Controls.Add(this.groupBox1);
             this.tbsRemetente.Location = new System.Drawing.Point(4, 29);
             this.tbsRemetente.Name = "tbsRemetente";
-            this.tbsRemetente.Padding = new System.Windows.Forms.Padding(3);
+            this.tbsRemetente.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbsRemetente.Size = new System.Drawing.Size(1319, 562);
             this.tbsRemetente.TabIndex = 0;
             this.tbsRemetente.Text = "Remetente";
@@ -894,6 +894,11 @@
             this.numericVolumeTransportadosPesoLiquido.DecimalPlaces = 2;
             this.numericVolumeTransportadosPesoLiquido.Location = new System.Drawing.Point(1096, 527);
             this.numericVolumeTransportadosPesoLiquido.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.numericVolumeTransportadosPesoLiquido.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericVolumeTransportadosPesoLiquido.Name = "numericVolumeTransportadosPesoLiquido";
             this.numericVolumeTransportadosPesoLiquido.Size = new System.Drawing.Size(114, 27);
             this.numericVolumeTransportadosPesoLiquido.TabIndex = 149;
@@ -913,6 +918,11 @@
             this.numericVolumeTransportadosPesoBruto.DecimalPlaces = 2;
             this.numericVolumeTransportadosPesoBruto.Location = new System.Drawing.Point(767, 527);
             this.numericVolumeTransportadosPesoBruto.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.numericVolumeTransportadosPesoBruto.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericVolumeTransportadosPesoBruto.Name = "numericVolumeTransportadosPesoBruto";
             this.numericVolumeTransportadosPesoBruto.Size = new System.Drawing.Size(114, 27);
             this.numericVolumeTransportadosPesoBruto.TabIndex = 147;
@@ -1077,14 +1087,14 @@
             this.label51.TabIndex = 128;
             this.label51.Text = "Transportadora";
             // 
-            // numericAliquotaSimplesNacional
+            // numericPercentualAliquotaSimplesNacional
             // 
-            this.numericAliquotaSimplesNacional.DecimalPlaces = 2;
-            this.numericAliquotaSimplesNacional.Location = new System.Drawing.Point(1193, 333);
-            this.numericAliquotaSimplesNacional.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.numericAliquotaSimplesNacional.Name = "numericAliquotaSimplesNacional";
-            this.numericAliquotaSimplesNacional.Size = new System.Drawing.Size(114, 27);
-            this.numericAliquotaSimplesNacional.TabIndex = 126;
+            this.numericPercentualAliquotaSimplesNacional.DecimalPlaces = 2;
+            this.numericPercentualAliquotaSimplesNacional.Location = new System.Drawing.Point(1193, 333);
+            this.numericPercentualAliquotaSimplesNacional.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.numericPercentualAliquotaSimplesNacional.Name = "numericPercentualAliquotaSimplesNacional";
+            this.numericPercentualAliquotaSimplesNacional.Size = new System.Drawing.Size(114, 27);
+            this.numericPercentualAliquotaSimplesNacional.TabIndex = 126;
             // 
             // label48
             // 
@@ -1884,7 +1894,7 @@
             this.tbsMercadorias.Controls.Add(this.gridMercadoria);
             this.tbsMercadorias.Location = new System.Drawing.Point(4, 29);
             this.tbsMercadorias.Name = "tbsMercadorias";
-            this.tbsMercadorias.Padding = new System.Windows.Forms.Padding(3);
+            this.tbsMercadorias.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbsMercadorias.Size = new System.Drawing.Size(1319, 562);
             this.tbsMercadorias.TabIndex = 1;
             this.tbsMercadorias.Text = "Mercadorias";
@@ -2292,7 +2302,7 @@
             this.tbsObservacoes.Controls.Add(this.panel18);
             this.tbsObservacoes.Location = new System.Drawing.Point(4, 29);
             this.tbsObservacoes.Name = "tbsObservacoes";
-            this.tbsObservacoes.Padding = new System.Windows.Forms.Padding(3);
+            this.tbsObservacoes.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbsObservacoes.Size = new System.Drawing.Size(1319, 562);
             this.tbsObservacoes.TabIndex = 2;
             this.tbsObservacoes.Text = "Observações";
@@ -2440,7 +2450,7 @@
             this.tbsCobrancaNota.Controls.Add(this.panel20);
             this.tbsCobrancaNota.Location = new System.Drawing.Point(4, 29);
             this.tbsCobrancaNota.Name = "tbsCobrancaNota";
-            this.tbsCobrancaNota.Padding = new System.Windows.Forms.Padding(3);
+            this.tbsCobrancaNota.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbsCobrancaNota.Size = new System.Drawing.Size(1319, 562);
             this.tbsCobrancaNota.TabIndex = 3;
             this.tbsCobrancaNota.Text = "Cobrança da Nota";
@@ -2583,7 +2593,7 @@
             this.tbsNFe.Controls.Add(this.label104);
             this.tbsNFe.Location = new System.Drawing.Point(4, 29);
             this.tbsNFe.Name = "tbsNFe";
-            this.tbsNFe.Padding = new System.Windows.Forms.Padding(3);
+            this.tbsNFe.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbsNFe.Size = new System.Drawing.Size(1319, 562);
             this.tbsNFe.TabIndex = 4;
             this.tbsNFe.Text = "NF-e";
@@ -2903,7 +2913,7 @@
             this.tbsLocalEntregaRetirada.Controls.Add(this.label116);
             this.tbsLocalEntregaRetirada.Location = new System.Drawing.Point(4, 29);
             this.tbsLocalEntregaRetirada.Name = "tbsLocalEntregaRetirada";
-            this.tbsLocalEntregaRetirada.Padding = new System.Windows.Forms.Padding(3);
+            this.tbsLocalEntregaRetirada.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbsLocalEntregaRetirada.Size = new System.Drawing.Size(1319, 562);
             this.tbsLocalEntregaRetirada.TabIndex = 5;
             this.tbsLocalEntregaRetirada.Text = "Local de Entrega/Retirada";
@@ -3219,7 +3229,7 @@
             this.tbsAutorizarXML.Controls.Add(this.label133);
             this.tbsAutorizarXML.Location = new System.Drawing.Point(4, 29);
             this.tbsAutorizarXML.Name = "tbsAutorizarXML";
-            this.tbsAutorizarXML.Padding = new System.Windows.Forms.Padding(3);
+            this.tbsAutorizarXML.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbsAutorizarXML.Size = new System.Drawing.Size(1319, 562);
             this.tbsAutorizarXML.TabIndex = 6;
             this.tbsAutorizarXML.Text = "Autorizar XML";
@@ -3433,7 +3443,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericVolumeTransportadosPesoBruto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericVolumeTransportadosQuantidade)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericTransportadoraNumeroCarga)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericAliquotaSimplesNacional)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPercentualAliquotaSimplesNacional)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorDesconto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPercentualDesconto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericValorOutrasDespesas)).EndInit();
@@ -3640,7 +3650,7 @@
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.NumericUpDown numericValorOutrasDespesas;
         private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.NumericUpDown numericAliquotaSimplesNacional;
+        private System.Windows.Forms.NumericUpDown numericPercentualAliquotaSimplesNacional;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.NumericUpDown numericValorDesconto;
         private System.Windows.Forms.Label label49;

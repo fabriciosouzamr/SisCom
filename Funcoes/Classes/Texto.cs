@@ -26,13 +26,11 @@ namespace Funcoes._Classes
             int number = 0;
             string retorno  = "";
 
-            string[] digits = Regex.Split(valorInicial, @"\D+");
-
-            foreach (string value in digits)
+            for (int i = 0; i < valorInicial.Length; i++)
             {
-                if (int.TryParse(value, out number))
+                if (int.TryParse(valorInicial[i].ToString(), out number))
                 {
-                    retorno += value;
+                    retorno += valorInicial[i];
                 }
             }
 

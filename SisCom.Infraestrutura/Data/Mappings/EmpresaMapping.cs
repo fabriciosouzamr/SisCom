@@ -55,11 +55,14 @@ namespace SisCom.Infraestrutura.Data.Mappings
                 .HasColumnType("varchar(200)");
 
             builder.Property(p => p.NuvemFiscal_Certificado)
-                .HasColumnType("varchar(200)");
+                .HasColumnType("varchar(8000)");
 
             builder.Property(p => p.NSU)
                 .HasColumnType("varchar(10)");
-            
+
+            builder.Property(p => p.Controle)
+                .HasColumnType("varchar(1000)");
+
             builder.ToTable("Empresas");
         }
     }

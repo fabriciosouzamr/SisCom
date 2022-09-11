@@ -1,18 +1,18 @@
 ﻿using DFe.Classes.Entidades;
 using DFe.Classes.Extensoes;
 using DFe.Utils;
-using Newtonsoft.Json;
+using NFe.Classes;
 using NFe.Classes.Informacoes.Identificacao.Tipos;
-using NFe.Classes.Servicos.DistribuicaoDFe;
 using NFe.Classes.Servicos.Tipos;
 using NFe.Servicos;
-using NFe.Servicos.Retorno;
 using NFe.Utils;
+using NFe.Utils.NFe;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
 using System.Windows.Forms;
+using NFeZeus = NFe.Classes.NFe;
 
 namespace SisCom.Aplicacao_FW
 {
@@ -46,6 +46,7 @@ namespace SisCom.Aplicacao_FW
         static string _chnfe = "";
         static string _chaveacesso = "";
         static string _NuvemFiscal_SerialNumber = "";
+        static string _XML = "";
         static string _PATH_SCHEMAS = "";
         static string _PATH_NUVEMFISCAL = "";
         static string _nFeTipoEvento = "";
@@ -54,14 +55,15 @@ namespace SisCom.Aplicacao_FW
         static void Main(string[] args)
         {
             //nuvemfiscal GO 26616809000136 1 1E7F6E6A89ADD10D
-            //manifestar 31220702623061000130550010000004721385764234 02623061000130 210200 417B2205054DEFE4
+            //manifestar GO 31220702623061000130550010000004721385764234 02623061000130 210200 417B2205054DEFE4
+            //protocolar GO xml 417B2205054DEFE4
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             _PATH_SCHEMAS = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
             _PATH_NUVEMFISCAL = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
-
+            
             try
             {
                 _Operacao = args[0];
@@ -69,10 +71,11 @@ namespace SisCom.Aplicacao_FW
                 switch (_Operacao)
                 {
                     case "manifestar":
-                        _chaveacesso = args[1];
-                        _cnpj = args[2];
-                        _nFeTipoEvento = args[3];
-                        _NuvemFiscal_SerialNumber = args[4];
+                        _EnderecoEmitente_UF = args[1];
+                        _chaveacesso = args[2];
+                        _cnpj = args[3];
+                        _nFeTipoEvento = args[4];
+                        _NuvemFiscal_SerialNumber = args[5];
 
                         Manifestar(_chaveacesso, _cnpj, (NFeTipoEvento)Convert.ToInt64(_nFeTipoEvento));
 
@@ -87,6 +90,12 @@ namespace SisCom.Aplicacao_FW
 
                         NuvemFiscal(_EnderecoEmitente_UF, _cnpj, _nsu, _chnfe);
 
+                        break;
+                    case "protocolar":
+                        _EnderecoEmitente_UF = args[1];
+                        _XML = args[2];
+                        _NuvemFiscal_SerialNumber = args[3];
+                        Protocolar();
                         break;
                 }
             }
@@ -134,6 +143,83 @@ namespace SisCom.Aplicacao_FW
             }
         }
 
+        public static void Protocolar()
+        {
+            try
+            {
+                var servicoNFe = new ServicosNFe(Configuracao());
+                var oNFe = new NFe.Classes.NFe().CarregarDeArquivoXml(_XML.Replace("'", ""));
+                var nFeAutorizacao = servicoNFe.NFeAutorizacao(Convert.ToInt32("1"), IndicadorSincronizacao.Assincrono, new List<NFeZeus>(new NFeZeus[] { oNFe }), true);
+                string mensagem = "Sem protocolo";
+                string cStat = "00";
+                string protocolo = "00";
+                string retorno = nFeAutorizacao.RetornoStr;
+
+                if (nFeAutorizacao.Retorno != null)
+                {
+                    NFe.Servicos.ServicosNFe oNFe_Servico;
+                    NFe.Servicos.Retorno.RetornoNfeConsultaProtocolo oNFe_Servico_Retorno;
+                    NFe.Classes.nfeProc oNFe_Proc;
+
+                    var sNFe_Chave = oNFe.infNFe.Id.Substring(3);
+
+                    for (var iCont = 1; iCont <= 5; iCont++)
+                    {
+                        try
+                        {
+                            oNFe_Servico_Retorno = servicoNFe.NfeConsultaProtocolo(sNFe_Chave);
+
+                            oNFe_Proc = new nfeProc();
+                            oNFe_Proc.NFe = oNFe;
+                            oNFe_Proc.protNFe = new NFe.Classes.Protocolo.protNFe();
+                            oNFe_Proc.protNFe = oNFe_Servico_Retorno.Retorno.protNFe;
+                            oNFe_Proc.versao = oNFe_Servico_Retorno.Retorno.versao;
+
+
+                            if (oNFe_Servico_Retorno.Retorno.cStat == 217 /* Rejeicao_NFeNaoConstaBaseDadosSEFAZ */ )
+                            {
+                                cStat = oNFe_Servico_Retorno.Retorno.cStat.ToString();
+                                mensagem = "NFe Não Consta na Base Dados do SEFAZ";
+                                break;
+                            }
+                            else if (iCont == 5)
+                            {
+                                cStat = oNFe_Servico_Retorno.Retorno.cStat.ToString();
+
+                                mensagem = oNFe_Servico_Retorno.Retorno.xMotivo;
+                            }
+                            else
+                            {
+                                if (oNFe_Proc.protNFe != null)
+                                {
+                                    protocolo = oNFe_Proc.protNFe.infProt.nProt;
+                                    var sNFe_Arquivo = _PATH_NUVEMFISCAL + sNFe_Chave + "-procNfe.xml";
+
+                                    FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, sNFe_Arquivo);
+                                }
+
+                                break;
+                            }
+
+                            iCont++;
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+                }
+
+                retorno = retorno.Replace("</retEnviNFe>",
+                                          "<Protocolo><cStat>" + cStat + "</cStat><xMotivo>" + mensagem + "</xMotivo><nProtocolo>" + protocolo  + "</nProtocolo></Protocolo></retEnviNFe>");
+
+                Console.Write(retorno);
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
+            }
+        }
+
         private static ConfiguracaoServico Configuracao()
         {
             ConfiguracaoServico oConfig = new ConfiguracaoServico();
@@ -141,7 +227,7 @@ namespace SisCom.Aplicacao_FW
             Estado oEstado = new Estado();
             TipoCertificado tipoCertificado = TipoCertificado.A1Repositorio;
 
-            oEstado = oEstado.SiglaParaEstado("GO");
+            oEstado = oEstado.SiglaParaEstado(_EnderecoEmitente_UF);
 
             oConfig = ConfiguracaoServico.Instancia;
             oConfig.tpAmb = DFe.Classes.Flags.TipoAmbiente.Producao;

@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaCodigoEnquadramentoIPI>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaCodigoEnquadramentoIPI tabelaCodigoEnquadramentoIPI)
+        {
+            DbSet.Update(tabelaCodigoEnquadramentoIPI);
+            await SaveChanges();
+        }
     }
 }

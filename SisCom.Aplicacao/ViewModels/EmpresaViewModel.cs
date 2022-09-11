@@ -16,6 +16,7 @@ namespace SisCom.Aplicacao.ViewModels
         public string? InscricaoMunicipal { get; set; }
         public string? InscricaoEstadual { get; set; }
         public string? InscricaoEstadual_SubTributaria { get; set; }
+        public string? CodigoCNAEPrincipal { get; set; }
         public Endereco? Endereco { get; set; }
         public string? Telefone { get; set; }
         public string? EMail { get; set; }
@@ -38,6 +39,7 @@ namespace SisCom.Aplicacao.ViewModels
         public string? NuvemFiscal_Certificado { get; set; }
         public string? NuvemFiscal_SerialNumber { get; set; }
         public string NSU { get; set; }
+        public string? Controle { get; set; }
     }
 
     public class EmpresaComboViewModel
@@ -45,6 +47,7 @@ namespace SisCom.Aplicacao.ViewModels
         [Key]
         public Guid Id { get; set; }
         public string Unidade { get; set; }
+        public string RazaoSocial { get; set; }
     }
 
     public class EmpresaNuvemFiscalComboViewModel

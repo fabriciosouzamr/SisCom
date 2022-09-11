@@ -54,7 +54,46 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<NotaFiscalSaidaMercadoriaViewModel>> PesquisarId(Guid Id)
         {
-            var pessoa = await _NotaFiscalSaidaMercadoriaService.Search(p => p.Id == Id);
+            var pessoa = await _NotaFiscalSaidaMercadoriaService.GetAll(null, p => p.NotaFiscalSaidaId == Id, i => i.Mercadoria,
+                                                                                                              i => i.Mercadoria.GrupoMercadoria,
+                                                                                                              i => i.Mercadoria.Fiscal_NFS_PISCOFINS_GrupoNaturezaReceita,
+                                                                                                              i => i.Mercadoria.Fabricante,
+                                                                                                              i => i.Mercadoria.Fornecedor,
+                                                                                                              i => i.Mercadoria.SubGrupoMercadoria,
+                                                                                                              i => i.Mercadoria.Fiscal_TabelaANP,
+                                                                                                              i => i.Mercadoria.Fiscal_TabelaBeneficioSPED,
+                                                                                                              i => i.Mercadoria.Fiscal_TabelaCEST,
+                                                                                                              i => i.Mercadoria.Estoque_TributacaoNFCe_TabelaCFOP,
+                                                                                                              i => i.Mercadoria.Fiscal_NFS_IPI_TabelaClasseEnquadramentoIPI,
+                                                                                                              i => i.Mercadoria.Fiscal_NFS_IPI_TabelaCodigoEnquadramentoIPI,
+                                                                                                              i => i.Mercadoria.Fiscal_TabelaCST_CSOSN,
+                                                                                                              i => i.Mercadoria.Fiscal_NFE_TabelaCST_IPI,
+                                                                                                              i => i.Mercadoria.Fiscal_NFS_IPI_TabelaCST_IPI,
+                                                                                                              i => i.Mercadoria.Fiscal_NFE_TabelaCST_COFINS ,
+                                                                                                              i => i.Mercadoria.Fiscal_NFE_TabelaCST_PIS,
+                                                                                                              i => i.Mercadoria.Fiscal_NFS_PISCOFINS_PIS_TabelaCSTCOFINS,
+                                                                                                              i => i.Mercadoria.Fiscal_NFS_PISCOFINS_PIS_TabelaCSTPIS,
+                                                                                                              i => i.Mercadoria.Fiscal_NFS_ICMS_TabelaModalidadeDeterminacaoBCICMS,
+                                                                                                              i => i.Mercadoria.Fiscal_NFS_ICMSST_TabelaModalidadeDeterminacaoBCICMS,
+                                                                                                              i => i.Mercadoria.Fiscal_NFS_ICMS_TabelaMotivoDesoneracaoICMS,
+                                                                                                              i => i.Mercadoria.Fiscal_NFS_PISCOFINS_TabelaNaturezaReceita,
+                                                                                                              i => i.Mercadoria.Fiscal_TabelaNCM,
+                                                                                                              i => i.Mercadoria.Fiscal_TabelaOrigemMercadoriaServico,
+                                                                                                              i => i.Mercadoria.Estoque_TributacaoNFCe_TabelaSituacaoTributariaNFCe,
+                                                                                                              i => i.Mercadoria.Fiscal_SPED_TabelaSpedCodigoGenero,
+                                                                                                              i => i.Mercadoria.Fiscal_SPED_TabelaSpedInformacaoAdicionalItem,
+                                                                                                              i => i.Mercadoria.Fiscal_SPED_TabelaSpedTipoItem,
+                                                                                                              i => i.Mercadoria.Fiscal_TipoMercadoria,
+                                                                                                              i => i.Mercadoria.Estoque_TributacaoNFCe_TipoServicoFiscal,
+                                                                                                              i => i.Mercadoria.Estoque_UnidadeMedidaMedida ,
+                                                                                                              i => i.Mercadoria.Fiscal_VinculoFiscal,
+                                                                                                              i => i.TabelaCFOP,
+                                                                                                              i => i.TabelaCST_CSOSN,
+                                                                                                              i => i.TabelaCST_IPI,
+                                                                                                              i => i.TabelaCST_PIS_COFINS_COFINS,
+                                                                                                              i => i.TabelaCST_PIS_COFINS_PIS,
+                                                                                                              i => i.TabelaNCM,
+                                                                                                              i => i.UnidadeMedida);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaMercadoriaViewModel>>(pessoa);
         }
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<NotaFiscalSaidaMercadoria, object>> order = null)

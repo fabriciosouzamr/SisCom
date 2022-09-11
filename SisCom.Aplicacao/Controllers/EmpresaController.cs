@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
 {
-    public class EmpresaController
+    public class EmpresaController : IDisposable
     {
         static EmpresaService _empresaService;
         private readonly MeuDbContext MeuDbContext;
@@ -87,6 +87,11 @@ namespace SisCom.Aplicacao.Controllers
         {
             var combo = await _empresaService.GetAll(order, f => f.NuvemFiscal_Usar == true, i => i.Endereco.End_Cidade.Estado);
             return Declaracoes.mapper.Map<IEnumerable<EmpresaNuvemFiscalComboViewModel>>(combo);
+        }
+        public void Dispose()
+        {
+            _empresaService.Dispose();
+            MeuDbContext.Dispose();
         }
     }
 }

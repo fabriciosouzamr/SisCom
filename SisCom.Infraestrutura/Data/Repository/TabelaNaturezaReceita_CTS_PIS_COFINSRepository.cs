@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaNaturezaReceita_CTS_PIS_COFINS>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaNaturezaReceita_CTS_PIS_COFINS tabelaNaturezaReceita_CTS_PIS_COFINS)
+        {
+            DbSet.Update(tabelaNaturezaReceita_CTS_PIS_COFINS);
+            await SaveChanges();
+        }
     }
 }

@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<Funcionario>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(Funcionario funcionario)
+        {
+            DbSet.Update(funcionario);
+            await SaveChanges();
+        }
     }
 }

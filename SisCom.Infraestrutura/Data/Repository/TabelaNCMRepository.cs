@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaNCM>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaNCM tabelaNCM)
+        {
+            DbSet.Update(tabelaNCM);
+            await SaveChanges();
+        }
     }
 }

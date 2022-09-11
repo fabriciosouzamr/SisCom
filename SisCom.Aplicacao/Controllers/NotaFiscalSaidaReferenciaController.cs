@@ -4,6 +4,7 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
+using SisCom.Negocio.Interfaces;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,12 @@ namespace SisCom.Aplicacao.Controllers
             await _NotaFiscalSaidaReferenciaService.Adicionar(NotaFiscalSaidaReferencia);
 
             return Declaracoes.mapper.Map<NotaFiscalSaidaReferenciaViewModel>(NotaFiscalSaidaReferencia);
+        }
+        public async Task<NotaFiscalSaidaReferenciaViewModel> Atualizar(Guid id, NotaFiscalSaidaReferenciaViewModel NotaFiscalSaidaReferenciaViewModel)
+        {
+            await _NotaFiscalSaidaReferenciaService.Atualizar(Declaracoes.mapper.Map<NotaFiscalSaidaReferencia>(NotaFiscalSaidaReferenciaViewModel));
+
+            return NotaFiscalSaidaReferenciaViewModel;
         }
         public void Dispose()
         {

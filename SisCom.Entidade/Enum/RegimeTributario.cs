@@ -4,11 +4,13 @@ namespace SisCom.Entidade.Enum
 {
     public enum RegimeTributario
     {
-        [Description("NORMAL")]
-        Normal = 1,
         [Description("SIMPLES NACIONAL")]
-        SimplesNacional = 2,
+        SimplesNacional = 1,
         [Description("SIMPLES NACIONAL - EXCESSO DE SUBLIMITE DE RECEITA BRUTA")]
-        SimplesNacional_ExcessoSublimiteReceitaBruta = 3
+        SimplesNacional_ExcessoSublimiteReceitaBruta = 2,
+        [Description("REGIME NORMAL")]
+        RegimeNormal = 3,
+        [Description("SIMPLES NACIONAL - MICROEMPREENDEDOR INDIVIDUAL (MEI)")]
+        SimplesNacional_MicroempreendedorIndividual_MEI = 4
     }
 }

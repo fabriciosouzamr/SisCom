@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaModalidadeDeterminacaoBCICMS>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaModalidadeDeterminacaoBCICMS tabelaModalidadeDeterminacaoBCICMS)
+        {
+            DbSet.Update(tabelaModalidadeDeterminacaoBCICMS);
+            await SaveChanges();
+        }
     }
 }

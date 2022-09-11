@@ -1,4 +1,5 @@
 ﻿using Funcoes._Entity;
+using System;
 
 namespace SisCom.Entidade.Modelos
 {
@@ -10,5 +11,7 @@ namespace SisCom.Entidade.Modelos
         public bool AcessoFiscal { get; set; }
         public bool Administrador { get; set; }
         public bool Desativado { get; set; }
+        public Empresa? EmpresaAcesso { get; set; }
+        public DateTime UltimoAcesso { get; set; }
     }
 }

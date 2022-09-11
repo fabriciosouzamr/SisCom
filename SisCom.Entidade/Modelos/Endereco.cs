@@ -15,6 +15,8 @@ namespace SisCom.Entidade.Modelos
         [Column("End_Bairro"), StringLength(60)]
         public string End_Bairro { get; set; }
         [Column("End_PontoReferencia"), StringLength(200)]
+        public string End_Complemento { get; set; }
+        [Column("End_Complemento"), StringLength(200)]
         public string End_PontoReferencia { get; set; }
         [Column("End_CidadeId")]
         public Nullable<Guid> End_CidadeId { get; set; }

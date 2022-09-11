@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Entity;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -8,6 +9,7 @@ using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
@@ -43,16 +45,46 @@ namespace SisCom.Aplicacao.Controllers
 
             return funcionarioViewModel;
         }
-        public async Task<IEnumerable<FuncionarioViewModel>> ObterTodos()
+        public async Task<IEnumerable<FuncionarioViewModel>> ObterTodos(Expression<Func<Funcionario, bool>> predicate)
         {
-            var obterTodos = await _funcionarioService.GetAll();
+            var obterTodos = await _funcionarioService.GetAll(o => o.Nome, predicate);
             return Declaracoes.mapper.Map<IEnumerable<FuncionarioViewModel>>(obterTodos);
 
         }
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<Funcionario, object>> order = null)
         {
-            var combo = await _funcionarioService.Combo(order);
+            var combo = await _funcionarioService.ComboSearch(w => !w.Administrador, order);
             return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
+        }
+        public async Task<IEnumerable<NomeComboViewModel>> ComboVendedor(Expression<Func<Funcionario, object>> order = null)
+        {
+            var combo = await _funcionarioService.ComboSearch(w => !w.Administrador, order);
+            return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
+        }
+        public async Task<IEnumerable<NomeComboViewModel>> ComboUsuario(Expression<Func<Funcionario, object>> order = null)
+        {
+            var combo = await _funcionarioService.ComboSearch(w => (((w.Administrador) || (w.EmpresaAcesso != null)) && (!w.Desativado)), order);
+            return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
+        }
+        public async Task<bool> ValidarSenha(Guid funcionarioId, string senha)
+        {
+            var funcionario = await _funcionarioService.GetById(funcionarioId);
+            bool valido = false;
+
+            if (funcionario != null)
+            {
+                if (funcionario.Senha.Trim() == senha.Trim())
+                {
+                    if ((funcionario.Administrador) || (funcionario.EmpresaAcesso != null))
+                    {
+                        Declaracoes.dados_funcionario = Declaracoes.mapper.Map<FuncionarioViewModel>(funcionario);
+
+                        return true;
+                    }
+                }
+            }
+
+            return valido;
         }
         public void Dispose()
         {

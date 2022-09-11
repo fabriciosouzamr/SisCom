@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaBeneficioSPED>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaBeneficioSPED tabelaBeneficioSPED)
+        {
+            DbSet.Update(tabelaBeneficioSPED);
+            await SaveChanges();
+        }
     }
 }

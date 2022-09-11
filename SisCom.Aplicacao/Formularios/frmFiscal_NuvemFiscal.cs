@@ -145,10 +145,7 @@ namespace SisCom.Aplicacao.Formularios
                 sNSU = ((EmpresaNuvemFiscalComboViewModel)comboEmpresa.SelectedItem).NSU;
                 sNSU = string.IsNullOrEmpty(sNSU) ? "1" : sNSU;
 
-                var retorno = Zeus.NuvemFiscal(((EmpresaNuvemFiscalComboViewModel)comboEmpresa.SelectedItem).Estado.Codigo,
-                                               ((EmpresaNuvemFiscalComboViewModel)comboEmpresa.SelectedItem).CNPJ,
-                                               sNSU,
-                                               ((EmpresaNuvemFiscalComboViewModel)comboEmpresa.SelectedItem).NuvemFiscal_SerialNumber);
+                var retorno = Zeus.NuvemFiscal(sNSU);
 
                 await (new EmpresaController(this.MeuDbContext(), this._notifier)).AtualizarNSU((Guid)comboEmpresa.SelectedValue, retorno.ultNSU.ToString());
 
@@ -168,7 +165,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 gridNotaFiscal.Rows.Clear();
 
-                string[] diretorios = Directory.GetFiles(Declaracoes.Externos_Path_NuvemFiscal, "*.xml");
+                string[] diretorios = Directory.GetFiles(Declaracoes.externos_Path_NuvemFiscal, "*.xml");
 
                 foreach (string arquivo in diretorios)
                 {

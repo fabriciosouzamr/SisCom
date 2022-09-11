@@ -50,6 +50,7 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<NotaFiscalSaidaMercadoria> NotaFiscalSaidaMercadorias { get; set; }
         public DbSet<NotaFiscalSaidaObservacao> NotaFiscalSaidaObservacaos { get; set; }
         public DbSet<NotaFiscalSaidaPagamento> NotaFiscalSaidaPagamentos { get; set; }
+        public DbSet<NotaFiscalSaidaSerie> NotaFiscalSaidaSeries { get; set; }
         public DbSet<NotaFiscalSaidaReferencia> NotaFiscalSaidaReferencias { get; set; }
         public DbSet<Observacao> Observacaos { get; set; }
         public DbSet<Pais> Paises { get; set; }

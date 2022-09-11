@@ -20,6 +20,7 @@ namespace SisCom.Aplicacao.Configuration
 
             #region Fromularios
             services.AddSingleton<frmMDI>();
+            services.AddTransient<frmLogin>();
             services.AddTransient<frmCadastro>();
             services.AddTransient<frmCadastroGrupo>();
             services.AddTransient<frmCadastroFabricante>();

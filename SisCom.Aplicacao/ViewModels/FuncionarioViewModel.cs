@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SisCom.Entidade.Modelos;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SisCom.Aplicacao.ViewModels
@@ -11,5 +12,7 @@ namespace SisCom.Aplicacao.ViewModels
         public bool AcessoFiscal { get; set; }
         public bool Administrador { get; set; }
         public bool Desativado { get; set; }
+        public Empresa? EmpresaAcesso { get; set; }
+        public DateTime UltimoAcesso { get; set; }
     }
 }

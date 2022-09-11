@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<FormaPagamento>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(FormaPagamento formaPagamento)
+        {
+            DbSet.Update(formaPagamento);
+            await SaveChanges();
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Funcoes.Interfaces;
 using Funcoes.Notifications;
+using SisCom.Aplicacao.ViewModels;
+using SisCom.Entidade.Enum;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -22,10 +24,9 @@ namespace SisCom.Aplicacao.Classes
 
         public static string Estacao_CD_OPT_NFCe_DETALHE_VENDA_NORMAL = "";
         public static string Estacao_TRABALHO_CD_OPT_NFCe_DETALHE_VENDA_CONTIGENCIA = "";
-        public static string Estacao_CD_EMPRESA_UF = "";
         public static string Estacao_TRABALHO_DS_CERTIFICADO_DIGITAL_PATH_ARQUIVO = "";
         public static string Estacao_TRABALHO_DS_CERTIFICADO_DIGITAL_SENHA = "";
-        public static string Estacao_TRABALHO_DS_DOCUMENTOFISCAL_PATH_SCHEMAS = "";
+        public static DFe.Utils.TipoCertificado Estacao_TRABALHO_ID_OPT_CERTIFICADO_DIGITAL_TIPO = DFe.Utils.TipoCertificado.A1Repositorio;
 
         public const int CampoNome_Caracteres = 100;
 
@@ -37,12 +38,18 @@ namespace SisCom.Aplicacao.Classes
         public static eTipoCalculo tipoCalculo = eTipoCalculo.Padrao;
         public static eCalculoPreco calculoPreco = eCalculoPreco.Compra;
 
-        public static string Externos_SisCom_Aplicacao_FW = "";
-        public static string Externos_Path_Schemas = "";
-        public static string Externos_Path_NuvemFiscal = "";
+        public static string externos_SisCom_Aplicacao_FW = "";
+        public static string externos_Path_Schemas = "";
+        public static string externos_Path_NuvemFiscal = "";
 
         public static Guid dados_Empresa_Id;
         public static Guid dados_Empresa_EstadoId;
+        public static string dados_Empresa_CodigoEstado;
+        public static string dados_Empresa_SerialNumber;
+        public static string dados_Empresa_CNPJ;
+        public static RegimeTributario dados_Empresa_RegimeTributario = RegimeTributario.SimplesNacional;
+        public static FuncionarioViewModel dados_funcionario;
+        public static bool login_Valido = false;
 
         public enum eNavegar
         {

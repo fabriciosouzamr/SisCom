@@ -4,8 +4,8 @@ namespace SisCom.Entidade.Enum
 {
     public enum NF_Status
     {
-        [Description("Aberta")]
-        Aberta = 1,
+        [Description("Pendente")]
+        Pendente = 1,
         [Description("Cancelado")]
         Cancelado = 2,
         [Description("Finalizada")]
@@ -13,6 +13,8 @@ namespace SisCom.Entidade.Enum
         [Description("Denegada")]
         Denegada = 4,
         [Description("Inutilizada")]
-        Inutilizada = 5
+        Inutilizada = 5,
+        [Description("Transmitida")]
+        Transmitida = 6
     }
 }

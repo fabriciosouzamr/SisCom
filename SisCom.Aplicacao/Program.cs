@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Configuration;
+using SisCom.Aplicacao.Formularios;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
@@ -41,7 +42,7 @@ namespace SisCom.Aplicacao
                     Application.SetCompatibleTextRenderingDefault(false);
 
                     appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "appsettings.json");
-                    Declaracoes.Externos_SisCom_Aplicacao_FW = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\SisCom.Aplicacao_FW\\", "SisCom.Aplicacao_FW.exe");
+                    Declaracoes.externos_SisCom_Aplicacao_FW = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\SisCom.Aplicacao_FW\\", "SisCom.Aplicacao_FW.exe");
 
                     using (StreamReader file = File.OpenText(appSettingsPath))
                     {
@@ -136,6 +137,25 @@ namespace SisCom.Aplicacao
                         #region NotaFiscalEntradaMercadoria
                         cfg.CreateMap<NotaFiscalEntradaMercadoriaViewModel, NotaFiscalEntradaMercadoria>().ReverseMap();
                         #endregion
+                        #region NotaFiscalSaida
+                        cfg.CreateMap<NotaFiscalSaidaViewModel, NotaFiscalSaida>().ReverseMap();
+                        cfg.CreateMap<NotaFiscalSaida, NF_ComboViewModel>();
+                        #endregion
+                        #region NotaFiscalSaidaMercadoria
+                        cfg.CreateMap<NotaFiscalSaidaMercadoriaViewModel, NotaFiscalSaidaMercadoria>().ReverseMap();
+                        #endregion
+                        #region NotaFiscalSaidaObservacao
+                        cfg.CreateMap<NotaFiscalSaidaObservacaoViewModel, NotaFiscalSaidaObservacao>().ReverseMap();
+                        #endregion
+                        #region NotaFiscalSaidaPagamento
+                        cfg.CreateMap<NotaFiscalSaidaPagamentoViewModel, NotaFiscalSaidaPagamento>().ReverseMap();
+                        #endregion
+                        #region NotaFiscalSaidaReferencia
+                        cfg.CreateMap<NotaFiscalSaidaReferenciaViewModel, NotaFiscalSaidaReferencia>().ReverseMap();
+                        #endregion
+                        #region NotaFiscalSaidaSerie
+                        cfg.CreateMap<NotaFiscalSaidaSerieViewModel, NotaFiscalSaidaSerie>().ReverseMap();
+                        #endregion
                         #region Observacao
                         cfg.CreateMap<ObservacaoViewModel, Observacao>().ReverseMap();
                         cfg.CreateMap<Observacao, CodigoDescricaoComboViewModel>();
@@ -154,13 +174,6 @@ namespace SisCom.Aplicacao
                         #region SubGrupo
                         cfg.CreateMap<SubGrupoMercadoriaViewModel, SubGrupoMercadoria>().ReverseMap();
                         cfg.CreateMap<SubGrupoMercadoria, SubGrupoMercadoriaComboViewModel>();
-                        #endregion
-                        #region NotaFiscalSaida
-                        cfg.CreateMap<NotaFiscalSaidaViewModel, NotaFiscalSaida>().ReverseMap();
-                        cfg.CreateMap<NotaFiscalSaida, NF_ComboViewModel>();
-                        #endregion
-                        #region NotaFiscalSaidaMercadoria
-                        cfg.CreateMap<NotaFiscalSaidaMercadoriaViewModel, NotaFiscalSaidaMercadoria>().ReverseMap();
                         #endregion
                         #region TabelaANP
                         cfg.CreateMap<TabelaANPViewModel, TabelaANP>().ReverseMap();
@@ -281,10 +294,14 @@ namespace SisCom.Aplicacao
                         CaixaMensagem.Informacao("Não foi possível conectar no banco de dados." + appSettings.ConnectionStrings.DefaultConnection);
                     }
 
-                    FuncaoInterna.dados_Empresa_Carregar();
+                    var frmLogin = services.GetRequiredService<frmLogin>();
+                    Application.Run(frmLogin);
 
-                    var frmMDI = services.GetRequiredService<frmMDI>();
-                    Application.Run(frmMDI);
+                    if (Declaracoes.login_Valido)
+                    {
+                        var frmMDI = services.GetRequiredService<frmMDI>();
+                        Application.Run(frmMDI);
+                    }
                 }
                 catch (Exception Ex)
                 {
@@ -313,11 +330,11 @@ namespace SisCom.Aplicacao
                 }
 
                 Declaracoes.Aplicacao_CaminhoDiretorioTemporaria = Path.Combine(Directory.GetCurrentDirectory(), "temp");
-                Declaracoes.Externos_Path_Schemas = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
-                Declaracoes.Externos_Path_NuvemFiscal = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
+                Declaracoes.externos_Path_Schemas = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
+                Declaracoes.externos_Path_NuvemFiscal = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
                 if (!Directory.Exists(Declaracoes.Aplicacao_CaminhoDiretorioTemporaria)) { Directory.CreateDirectory(Declaracoes.Aplicacao_CaminhoDiretorioTemporaria); }
-                if (!Directory.Exists(Declaracoes.Externos_Path_Schemas)) { Directory.CreateDirectory(Declaracoes.Externos_Path_Schemas); }
-                if (!Directory.Exists(Declaracoes.Externos_Path_NuvemFiscal)) { Directory.CreateDirectory(Declaracoes.Externos_Path_NuvemFiscal); }
+                if (!Directory.Exists(Declaracoes.externos_Path_Schemas)) { Directory.CreateDirectory(Declaracoes.externos_Path_Schemas); }
+                if (!Directory.Exists(Declaracoes.externos_Path_NuvemFiscal)) { Directory.CreateDirectory(Declaracoes.externos_Path_NuvemFiscal); }
             }
         }
         public class MeuDbContextFactory : IDesignTimeDbContextFactory<MeuDbContext>

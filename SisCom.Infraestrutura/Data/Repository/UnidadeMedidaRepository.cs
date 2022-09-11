@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<UnidadeMedida>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(UnidadeMedida unidadeMedida)
+        {
+            DbSet.Update(unidadeMedida);
+            await SaveChanges();
+        }
     }
 }

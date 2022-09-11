@@ -122,7 +122,12 @@ Sair:
         {
             using (FuncionarioController funcionarioController = new FuncionarioController(this.MeuDbContext(), this._notifier))
             {
-                IEnumerable<FuncionarioViewModel> Data = await funcionarioController.ObterTodos();
+                IEnumerable<FuncionarioViewModel> Data;
+
+                if (Declaracoes.dados_funcionario.Administrador)
+                { Data = await funcionarioController.ObterTodos(null); }
+                else
+                { Data = await funcionarioController.ObterTodos(w => (!w.Administrador)); }
 
                 FuncionarioViewModel ItemAnterior = null;
                 FuncionarioViewModel ItemRetorno = null;

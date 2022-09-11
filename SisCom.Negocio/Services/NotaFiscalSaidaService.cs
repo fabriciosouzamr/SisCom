@@ -57,7 +57,7 @@ namespace SisCom.Negocio.Services
         {
             try
             {
-                var _NotaFiscalSaida = await _NotaFiscalSaidaRepository.Search(f => f.CodigoChaveAcesso == NotaFiscalSaida.CodigoChaveAcesso);
+                var _NotaFiscalSaida = await _NotaFiscalSaidaRepository.Search(f => (f.EmpresaId == NotaFiscalSaida.EmpresaId && f.NotaFiscal == NotaFiscalSaida.NotaFiscal) && (f.Id != NotaFiscalSaida.Id));
 
                 if (_NotaFiscalSaida.Count() != 0)
                 {

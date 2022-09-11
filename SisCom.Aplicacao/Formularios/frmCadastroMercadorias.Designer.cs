@@ -3441,6 +3441,7 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoGeradorEtiquetas.Size = new System.Drawing.Size(53, 56);
             this.botaoGeradorEtiquetas.TabIndex = 17;
             this.botaoGeradorEtiquetas.UseVisualStyleBackColor = true;
+            this.botaoGeradorEtiquetas.Click += new System.EventHandler(this.botaoGeradorEtiquetas_Click);
             // 
             // label4
             // 

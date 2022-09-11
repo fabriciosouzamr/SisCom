@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TipoCliente>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TipoCliente tipoCliente)
+        {
+            DbSet.Update(tipoCliente);
+            await SaveChanges();
+        }
     }
 }

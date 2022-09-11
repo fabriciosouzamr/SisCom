@@ -68,7 +68,7 @@ namespace SisCom.Infraestrutura.Data.Repository
                                                         Expression<Func<TEntity, bool>> predicate = null,
                                                         params Expression<Func<TEntity, object>>[] includes)
         {
-            var ret = DbSet.AsQueryable();
+            var ret = DbSet.AsNoTracking().AsQueryable();
 
             if (includes != null)
             foreach (var include in includes)
@@ -115,7 +115,10 @@ namespace SisCom.Infraestrutura.Data.Repository
         }
         public virtual async Task<List<TEntity>> ComboSearch(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> order = null)
         {
-            return await DbSet.AsNoTracking().Where(predicate).OrderBy(order ?? (e => e.Id)).ToListAsync();
+            if (predicate == null)
+            { return await DbSet.AsNoTracking().OrderBy(order ?? (e => e.Id)).ToListAsync(); }
+            else
+            { return await DbSet.AsNoTracking().Where(predicate).OrderBy(order ?? (e => e.Id)).ToListAsync(); }
         }
         public async Task<IPagedList<TEntity>> GetPagedList(Expression<Func<TEntity, bool>> predicate, PagedListParameters parameters)
         {

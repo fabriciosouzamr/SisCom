@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<NotaFiscalFinalidade>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(NotaFiscalFinalidade notaFiscalFinalidade)
+        {
+            DbSet.Update(notaFiscalFinalidade);
+            await SaveChanges();
+        }
     }
 }

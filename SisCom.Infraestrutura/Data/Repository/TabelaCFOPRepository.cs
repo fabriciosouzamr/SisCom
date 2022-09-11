@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaCFOP>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaCFOP tabelaCFOP)
+        {
+            DbSet.Update(tabelaCFOP);
+            await SaveChanges();
+        }
     }
 }

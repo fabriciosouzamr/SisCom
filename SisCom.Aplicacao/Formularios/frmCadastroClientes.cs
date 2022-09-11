@@ -403,7 +403,7 @@ namespace SisCom.Aplicacao.Formularios
             Combo_ComboBox.Formatar(comboVendedor,
                                     "Id", "Nome",
                                     ComboBoxStyle.DropDownList,
-                                    await (new FuncionarioController(this.MeuDbContext(), this._notifier)).Combo(p => p.Nome));
+                                    await (new FuncionarioController(this.MeuDbContext(), this._notifier)).ComboVendedor(p => p.Nome));
         }
         private async Task comboTipoCliente_Carregar()
         {

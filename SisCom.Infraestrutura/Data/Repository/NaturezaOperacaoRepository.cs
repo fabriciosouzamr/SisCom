@@ -39,5 +39,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<NaturezaOperacao>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(NaturezaOperacao naturezaOperacao)
+        {
+            DbSet.Update(naturezaOperacao);
+            await SaveChanges();
+        }
     }
 }

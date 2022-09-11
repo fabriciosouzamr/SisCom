@@ -114,7 +114,7 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboTributacaoECFNFCeCFOP,
                                         "ID", "Codigo",
                                         ComboBoxStyle.DropDownList,
-                                        await (new TabelaCFOPController(meuDbContext, this._notifier)).Combo(p => p.Codigo));
+                                        await (new TabelaCFOPController(meuDbContext, this._notifier)).Combo(entradaSaida: Funcoes._Enum.EntradaSaida.Saida, p => p.Codigo));
             }
 
             return true;
@@ -1027,6 +1027,11 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Informe o nome da mercadoria!");
                 return false;
             }
+            if (!Combo_ComboBox.Selecionado(comboDetalhesFiscais_OrigemMercadoria))
+            {
+                CaixaMensagem.Informacao("Selecione a origem da mercadoria!");
+                return false;
+            }
 
             if (mercadoria == null)
                 mercadoria = new ViewModels.MercadoriaViewModel();
@@ -1155,26 +1160,24 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async Task Adicionarmercadoria()
         {
-            var mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier);
-
-            if (mercadoria.Id != Guid.Empty)
+            using (var mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier))
             {
-                await mercadoriaController.Atualizar(mercadoria.Id, mercadoria);
-            }
-            else
-            {
-                mercadoria = (await mercadoriaController.Adicionar(mercadoria));
+                if (mercadoria.Id != Guid.Empty)
+                {
+                    await mercadoriaController.Atualizar(mercadoria.Id, mercadoria);
+                }
+                else
+                {
+                    mercadoria = (await mercadoriaController.Adicionar(mercadoria));
+                }
             }
 
-            mercadoriaController = null;
-
-            this.MeuDbContextDispose();
+            //this.MeuDbContextDispose();
         }
         private async void Excluir()
         {
             var mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier);
             await mercadoriaController.Excluir(mercadoria.Id);
-            mercadoriaController = null;
             this.MeuDbContextDispose();
 
             Limpar();
@@ -1474,6 +1477,11 @@ namespace SisCom.Aplicacao.Formularios
             }
 
             this.MeuDbContextDispose();
+        }
+
+        private void botaoGeradorEtiquetas_Click(object sender, EventArgs e)
+        {
+            TentarGravar();
         }
     }
 }

@@ -39,5 +39,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<MercadoriaImpostoEstado>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(MercadoriaImpostoEstado mercadoriaImpostoEstado)
+        {
+            DbSet.Update(mercadoriaImpostoEstado);
+            await SaveChanges();
+        }
     }
 }

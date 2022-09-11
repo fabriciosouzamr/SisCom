@@ -63,7 +63,7 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboFiltro_CFOP,
                                         "ID", "Codigo",
                                         ComboBoxStyle.DropDownList,
-                                        await (new TabelaCFOPController(meuDbContext, this._notifier)).Combo(p => p.Codigo));
+                                        await (new TabelaCFOPController(meuDbContext, this._notifier)).Combo(entradaSaida: Funcoes._Enum.EntradaSaida.Entrada, p => p.Codigo));
             }
 
             return true;

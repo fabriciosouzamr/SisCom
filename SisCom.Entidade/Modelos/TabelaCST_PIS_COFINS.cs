@@ -9,5 +9,6 @@ namespace SisCom.Entidade.Modelos
         public bool DestacarPIS_COFINS { get; set; }
         public bool UsaNaEntrada { get; set; }
         public bool UsaNaSaida { get; set; }
+        public bool Percentual { get; set; }
     }
 }

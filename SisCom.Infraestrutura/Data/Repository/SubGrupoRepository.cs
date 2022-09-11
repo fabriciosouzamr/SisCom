@@ -43,5 +43,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<SubGrupoMercadoria>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(SubGrupoMercadoria subGrupoMercadoria)
+        {
+            DbSet.Update(subGrupoMercadoria);
+            await SaveChanges();
+        }
     }
 }

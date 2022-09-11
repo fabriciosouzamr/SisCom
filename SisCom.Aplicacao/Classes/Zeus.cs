@@ -30,7 +30,6 @@ namespace SisCom.Aplicacao.Classes
     [XmlRoot(ElementName = "infEvento")]
     public class InfEvento
     {
-
         [XmlElement(ElementName = "tpAmb")]
         public int TpAmb { get; set; }
 
@@ -120,6 +119,59 @@ namespace SisCom.Aplicacao.Classes
         public int maxNSU { get; set; }
     }
 
+    [XmlRoot(ElementName = "Protocolo")]
+    public class Protocolo
+    {
+        [XmlElement(ElementName = "cStat")]
+        public int CStat { get; set; }
+
+        [XmlElement(ElementName = "xMotivo")]
+        public string XMotivo { get; set; }
+
+        [XmlElement(ElementName = "nProtocolo")]
+        public string NProtocolo { get; set; }
+    }
+
+    [XmlRoot(ElementName = "infRec")]
+    public class infRec
+    {
+        [XmlElement(ElementName = "tMed")]
+        public int tMed { get; set; }
+
+        [XmlElement(ElementName = "nRec")]
+        public string NRec { get; set; }
+    }
+
+    [XmlRoot(ElementName = "retEnviNFe")]
+    public class retEnviNFe
+    {
+        [XmlElement(ElementName = "tpAmb")]
+        public int TpAmb { get; set; }
+
+        [XmlElement(ElementName = "verAplic")]
+        public string VerAplic { get; set; }
+        [XmlElement(ElementName = "cStat")]
+        public int CStat { get; set; }
+
+        [XmlElement(ElementName = "xMotivo")]
+        public string XMotivo { get; set; }
+        [XmlElement(ElementName = "cUF")]
+        public int cUF { get; set; }
+
+        [XmlElement(ElementName = "dhRegEvento")]
+        public DateTime dhRegEvento { get; set; }
+
+        [XmlElement(ElementName = "infRec")]
+        public RetEvento infRec { get; set; }
+        [XmlElement(ElementName = "nRec")]
+        public int nRec { get; set; }
+        [XmlElement(ElementName = "tMed")]
+        public int tMed { get; set; }
+
+        [XmlElement(ElementName = "Protocolo")]
+        public Protocolo Protocolo { get; set; }
+    }
+
     public static class Zeus
     {
         public static AmbienteSistemas ambienteSistemas = AmbienteSistemas.Producao;
@@ -151,11 +203,15 @@ namespace SisCom.Aplicacao.Classes
             return _nfeProc;
         }
 
-        public static RetEnvEvento Manifestar(string chaveacesso, string cnpj, string nFeTipoEvento, string empresa_serialnumber)
+        public static RetEnvEvento Manifestar(string chaveacesso, string nFeTipoEvento)
         {
             List<string> retorno;
 
-            retorno = Processo.Executar(Declaracoes.Externos_SisCom_Aplicacao_FW, "manifestar " + chaveacesso + " " + cnpj + " " + nFeTipoEvento + " " + empresa_serialnumber);
+            retorno = Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "manifestar " + Declaracoes.dados_Empresa_CodigoEstado + " " + 
+                                                                                                  chaveacesso + " " + 
+                                                                                                  Declaracoes.dados_Empresa_CNPJ + " " + 
+                                                                                                  nFeTipoEvento + " " + 
+                                                                                                  Declaracoes.dados_Empresa_SerialNumber);
 
             if ((retorno != null) && (retorno.Count > 0))
             {
@@ -173,11 +229,38 @@ namespace SisCom.Aplicacao.Classes
             }
         }
 
-        public static retDistDFeInt NuvemFiscal(string empresa_uf, string empresa_cnpj, string nsu, string empresa_serialnumber)
+        public static retEnviNFe Protocolar(string xml)
         {
             List<string> retorno;
 
-            retorno = Processo.Executar(Declaracoes.Externos_SisCom_Aplicacao_FW, "nuvemfiscal " + empresa_uf +  " " + empresa_cnpj + " " + nsu + " " + empresa_serialnumber);
+            retorno = Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "protocolar " + Declaracoes.dados_Empresa_CodigoEstado + " " + 
+                                                                                                  "'" + xml + "' " +
+                                                                                                  Declaracoes.dados_Empresa_SerialNumber);
+
+            if ((retorno != null) && (retorno.Count > 0))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(retEnviNFe));
+
+                using (StringReader reader = new StringReader(XML_RetirarVersao(retorno[0].ToString())))
+                {
+                    var retEnviNFe = (retEnviNFe)serializer.Deserialize(reader);
+                    return retEnviNFe;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static retDistDFeInt NuvemFiscal(string nsu)
+        {
+            List<string> retorno;
+
+            retorno = Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "nuvemfiscal " + Declaracoes.dados_Empresa_CodigoEstado +  " " + 
+                                                                                                   Declaracoes.dados_Empresa_CNPJ + " " + 
+                                                                                                   nsu + " " + 
+                                                                                                   Declaracoes.dados_Empresa_SerialNumber);
 
             if ((retorno != null) && (retorno.Count > 0))
             {

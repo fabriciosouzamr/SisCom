@@ -184,7 +184,6 @@
             this.MaximizeBox = false;
             this.Name = "frmFiscal_NuvemFiscal_Manifestar";
             this.Text = "Nuvem Fiscal - Consulte as Notas emitidas para sua Empresa - Manifestar";
-            this.Load += new System.EventHandler(this.frmFiscal_NuvemFiscal_Manifestar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

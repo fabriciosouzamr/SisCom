@@ -46,7 +46,14 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<NotaFiscalSaidaViewModel>> ObterTodos()
         {
-            var obterTodos = await _NotaFiscalSaidaService.GetAll(null, null, i => i.NotaFiscal);
+            var obterTodos = await _NotaFiscalSaidaService.GetAll(null, null, i => i.NotaFiscalFinalidade,
+                                                                              i => i.Cliente,
+                                                                              i => i.Cliente.Endereco,
+                                                                              i => i.Cliente.Endereco.End_Cidade,
+                                                                              i => i.Cliente.Endereco.End_Cidade.Estado,
+                                                                              i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
+                                                                              i => i.Cliente_Endereco.End_Cidade, 
+                                                                              i => i.Cliente_Endereco.End_Cidade.Estado);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(obterTodos);
 
         }
@@ -60,8 +67,34 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarId(Guid Id)
         {
-            var pessoa = await _NotaFiscalSaidaService.Search(p => p.Id == Id);
-            return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(pessoa);
+            var nota = await _NotaFiscalSaidaService.Search(p => p.Id == Id);
+            return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(nota);
+        }
+        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarCompletoId(Guid Id)
+        {
+            var nota = await _NotaFiscalSaidaService.GetAll(null, p => p.Id == Id, i => i.NaturezaOperacao,
+                                                                                   i => i.Empresa,
+                                                                                   i => i.Empresa.Endereco,
+                                                                                   i => i.Empresa.Endereco.End_Cidade,
+                                                                                   i => i.Empresa.Endereco.End_Cidade.Estado,
+                                                                                   i => i.Empresa.Endereco.End_Cidade.Estado.Pais,
+                                                                                   i => i.Cliente,
+                                                                                   i => i.Cliente.Endereco,
+                                                                                   i => i.Cliente.Endereco.End_Cidade,
+                                                                                   i => i.Cliente.Endereco.End_Cidade.Estado,
+                                                                                   i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
+                                                                                   i => i.Cliente_Endereco.End_Cidade.Estado,
+                                                                                   i => i.Cliente_Endereco.End_Cidade.Estado.Pais,
+                                                                                   i => i.Transportadora,
+                                                                                   i => i.Transportadora.Endereco,
+                                                                                   i => i.Transportadora.Endereco.End_Cidade,
+                                                                                   i => i.Transportadora.Endereco.End_Cidade.Estado,
+                                                                                   i => i.Transportadora.Endereco.End_Cidade.Estado.Pais,
+                                                                                   i => i.NotaFiscalSaidaMercadoria, 
+                                                                                   i => i.NotaFiscalSaidaPagamento, 
+                                                                                   i => i.NotaFiscalSaidaReferencia, 
+                                                                                   i => i.NotaFiscalSaidaObservacao);
+            return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(nota);
         }
         public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarChave(String Chave)
         {
@@ -80,7 +113,7 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<NF_ComboViewModel>> ComboChave(Expression<Func<NotaFiscalSaida, object>> order = null)
         {
-            var combo = await _NotaFiscalSaidaService.Combo(order);
+            var combo = await _NotaFiscalSaidaService.ComboSearch(w => w.CodigoChaveAcesso != "", order) ;
             return Declaracoes.mapper.Map<IEnumerable<NF_ComboViewModel>>(combo);
         }
         public void Dispose()

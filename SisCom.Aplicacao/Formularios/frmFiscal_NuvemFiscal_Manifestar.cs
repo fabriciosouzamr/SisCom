@@ -71,11 +71,6 @@ namespace SisCom.Aplicacao
                     .Cells[grdNotaFiscal_Color].Style.BackColor = imgAguardandoManifestacao.BackColor;
             }
         }
-
-        private void frmFiscal_NuvemFiscal_Manifestar_Load(object sender, EventArgs e)
-        {
-        }
-
         private void botaoManifestar_Click(object sender, EventArgs e)
         {
             if (!Combo_ComboBox.Selecionado(comboTipoManifestacao))
@@ -87,9 +82,7 @@ namespace SisCom.Aplicacao
             foreach (DataGridViewRow row in gridNotaFiscal.Rows)
             {
                 var retorno = Zeus.Manifestar(row.Cells[grdNotaFiscal_ChaveAcesso].Value.ToString(), 
-                                              row.Cells[grdNotaFiscal_CNPJ].Value.ToString(),
-                                              ((int)(TipoManifestar)comboTipoManifestacao.SelectedValue).ToString(),
-                                              NuvemFiscal_SerialNumber);
+                                              ((int)(TipoManifestar)comboTipoManifestacao.SelectedValue).ToString());
                 if (retorno.RetEvento.InfEvento.CStat == 128)
                 {
                     row.Cells[grdNotaFiscal_Color].Style.BackColor = imgManifestadaSucesso.BackColor;

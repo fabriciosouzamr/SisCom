@@ -24,5 +24,11 @@ namespace SisCom.Infraestrutura.Data.Repository
         {
             return await Db.Empresas.AsNoTracking().ToListAsync();
         }
+
+        public override async Task Update(Empresa empresa)
+        {
+            DbSet.Update(empresa);
+            await SaveChanges();
+        }
     }
 }

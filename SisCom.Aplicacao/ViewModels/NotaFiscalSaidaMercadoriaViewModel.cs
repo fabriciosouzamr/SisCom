@@ -15,12 +15,12 @@ namespace SisCom.Aplicacao.ViewModels
         public TabelaCFOP TabelaCFOP { get; set; }
         public UnidadeMedida UnidadeMedida { get; set; }
         public string Descricao { get; set; }
-        public float Quantidade { get; set; }
-        public float PrecoUnitario { get; set; }
-        public float PrecoTotal { get; set; }
-        public float PercentualICMS { get; set; }
-        public float PercentualIPI { get; set; }
-        public float PercentualFrete { get; set; }
+        public decimal Quantidade { get; set; }
+        public decimal PrecoUnitario { get; set; }
+        public decimal PrecoTotal { get; set; }
+        public decimal PercentualICMS { get; set; }
+        public decimal PercentualIPI { get; set; }
+        public decimal ValorFrete { get; set; }
 
         public decimal ValorBaseCalculo { set; get; }
         public decimal AliquotaICMS { set; get; }
@@ -36,7 +36,7 @@ namespace SisCom.Aplicacao.ViewModels
         public decimal ValorIPI { set; get; }
         public TabelaCST_PIS_COFINS TabelaCST_PIS_COFINS_PIS { set; get; }
         public decimal AliquotaPIS { set; get; }
-        public TabelaCST_PIS_COFINS TabelaCST_PIS_COFINS_PISCOFINS { set; get; }
+        public TabelaCST_PIS_COFINS TabelaCST_PIS_COFINS_COFINS { set; get; }
         public decimal AliquotaCOFINS { set; get; }
         public decimal BaseCalculoFCP { set; get; }
         public decimal AliquotaFCP { set; get; }

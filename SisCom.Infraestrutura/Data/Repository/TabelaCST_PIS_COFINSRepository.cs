@@ -42,5 +42,11 @@ namespace SisCom.Infraestrutura.Data.Repository
 
             return await PagedList<TabelaCST_PIS_COFINS>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
+
+        public override async Task Update(TabelaCST_PIS_COFINS tabelaCST_PIS_COFINS)
+        {
+            DbSet.Update(tabelaCST_PIS_COFINS);
+            await SaveChanges();
+        }
     }
 }

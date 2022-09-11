@@ -4,6 +4,7 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
+using SisCom.Negocio.Interfaces;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,17 @@ namespace SisCom.Aplicacao.Controllers
             await _NotaFiscalSaidaPagamentoService.Adicionar(NotaFiscalSaidaPagamento);
 
             return Declaracoes.mapper.Map<NotaFiscalSaidaPagamentoViewModel>(NotaFiscalSaidaPagamento);
+        }
+        public async Task<NotaFiscalSaidaPagamentoViewModel> Atualizar(Guid id, NotaFiscalSaidaPagamentoViewModel NotaFiscalSaidaPagamentoViewModel)
+        {
+            await _NotaFiscalSaidaPagamentoService.Atualizar(Declaracoes.mapper.Map<NotaFiscalSaidaPagamento>(NotaFiscalSaidaPagamentoViewModel));
+
+            return NotaFiscalSaidaPagamentoViewModel;
+        }
+        public async Task<IEnumerable<NotaFiscalSaidaPagamentoViewModel>> PesquisarId(Guid Id)
+        {
+            var pagamento = await _NotaFiscalSaidaPagamentoService.GetAll(null, p => p.NotaFiscalSaidaId == Id);
+            return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaPagamentoViewModel>>(pagamento);
         }
         public void Dispose()
         {
