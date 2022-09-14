@@ -255,6 +255,44 @@ namespace SisCom.Aplicacao.Classes
             return oConfig;
         }
 
+        public static string Certificado_DataExpiracao()
+        {
+            System.Security.Cryptography.X509Certificates.X509Certificate2 oCert;
+            DFe.Utils.TipoCertificado iESTACAO_TRABALHO_ID_OPT_CERTIFICADO_DIGITAL_TIPO = TipoCertificado.A1Repositorio;
+            string data = "";
+
+            switch (iESTACAO_TRABALHO_ID_OPT_CERTIFICADO_DIGITAL_TIPO)
+            {
+                case TipoCertificado.A1Arquivo:
+                    break;
+                case TipoCertificado.A1ByteArray:
+                    oCert = CertificadoDigitalUtils.ListareObterDoRepositorio();
+                    data = oCert.GetExpirationDateString();
+                    break;
+                case TipoCertificado.A1Repositorio:
+                    if (string.IsNullOrEmpty(Declaracoes.dados_Empresa_SerialNumber))
+                    {
+                        oCert = CertificadoDigitalUtils.ListareObterDoRepositorio();
+                        data = oCert.GetExpirationDateString();
+                    }
+                    else
+                    {
+                        var configuracaoCertificado = new ConfiguracaoCertificado();
+
+                        configuracaoCertificado.TipoCertificado = TipoCertificado.A1Repositorio;
+                        configuracaoCertificado.Serial = Declaracoes.dados_Empresa_SerialNumber;
+
+                        oCert = DFe.Utils.Assinatura.CertificadoDigital.ObterCertificado(configuracaoCertificado);
+                        data = oCert.GetExpirationDateString();
+                    }
+                    break;
+                case TipoCertificado.A3:
+                    break;
+            }
+
+            return data;
+        }
+
         private static enOpcoes_NFe_StatusProcessamento Fiscal_NFe_StatusProcessamento(string scStat)
         {
             enOpcoes_NFe_StatusProcessamento eRet = enOpcoes_NFe_StatusProcessamento.LoteNaoLocalizado;
@@ -800,7 +838,8 @@ namespace SisCom.Aplicacao.Classes
             if (bExibirMensagem)
                 CaixaMensagem.Informacao(sDS_HISTORICO);
         }
-        public static bool FNC_Fiscal_DocumentoFiscal_Transmitir_Validar(NotaFiscalSaidaViewModel notaFiscalSaidaViewModel, List<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoriaViewModels)
+        public static bool FNC_Fiscal_DocumentoFiscal_Transmitir_Validar(NotaFiscalSaidaViewModel notaFiscalSaidaViewModel, 
+                                                                         List<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoriaViewModels)
         {
             DataTable oData;
             string sSqlText;
@@ -1107,15 +1146,15 @@ namespace SisCom.Aplicacao.Classes
             return estado;
         }
         private static NFe.Classes.NFe Fiscal_DocumentoFiscal_Gerar(ref NotaFiscalSaidaViewModel notaFiscalSaidaViewModel,
-                                                                    ref IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoriaViewModels,
-                                                                    ref IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamentoViewModels,
-                                                                    ref IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferenciaViewModels,
-                                                                    ref NotaFiscalSaidaSerieViewModel notaFiscalSaidaSerieViewModel,
-                                                                    NFe.Utils.ConfiguracaoServico oConfig,
-                                                                    ref string sCD_NFCe_DetalheVendaNormal, 
-                                                                    ref string sCD_NFCe_DetalheVendaContigencia, 
-                                                                    ref string sCD_NFCe_Token_ID, 
-                                                                    ref string sCD_NFCe_Token_CSC)
+                                                                   ref IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoriaViewModels,
+                                                                   ref IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamentoViewModels,
+                                                                   ref IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferenciaViewModels,
+                                                                   ref NotaFiscalSaidaSerieViewModel notaFiscalSaidaSerieViewModel,
+                                                                   NFe.Utils.ConfiguracaoServico oConfig,
+                                                                   ref string sCD_NFCe_DetalheVendaNormal, 
+                                                                   ref string sCD_NFCe_DetalheVendaContigencia, 
+                                                                   ref string sCD_NFCe_Token_ID, 
+                                                                   ref string sCD_NFCe_Token_CSC)
         {
             NFe.Classes.NFe oNFe;
             NFe.Classes.Informacoes.Detalhe.det oNFE_Det;
@@ -1771,6 +1810,75 @@ namespace SisCom.Aplicacao.Classes
         Sair:
             return bOk;
         }
+
+        public static bool Fiscal_DocumentoFiscal_Visualizar(ModeloDocumento eModeloDocumento,
+                                                             ref NotaFiscalSaidaViewModel notaFiscalSaidaViewModel,
+                                                             ref IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoriaViewModels,
+                                                             ref IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamentoViewModels,
+                                                             ref IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferenciaViewModels,
+                                                             ref NotaFiscalSaidaSerieViewModel notaFiscalSaidaSerieViewModel,
+                                                             ref string sDS_PATH_XML,
+                                                             bool imprimirCancelado = false)
+        {
+            NFe.Classes.NFe oNFe;
+            NFe.Servicos.ServicosNFe oNFe_Servico;
+            NFe.Servicos.Retorno.RetornoNFeAutorizacao oNFe_Servico_RetornoNFeAutorizacao;
+            NFe.Classes.nfeProc oNFe_Proc;
+            NFe.Utils.ConfiguracaoServico oConfig;
+            string sCD_NFCe_DetalheVendaNormal = "";
+            string sCD_NFCe_DetalheVendaContigencia = "";
+            string sCD_NFCe_Token_ID = "";
+            string sCD_NFCe_Token_CSC = "";
+            bool bOk = false;
+
+            try
+            {
+                oConfig = Fiscal_Configuracao(eModeloDocumento);
+                if (oConfig == null)
+                    goto Sair;
+
+                Fiscal_Historico(0, 0, "Início de transmissão");
+
+                oNFe = Fiscal_DocumentoFiscal_Gerar(ref notaFiscalSaidaViewModel,
+                                                    ref notaFiscalSaidaMercadoriaViewModels,
+                                                    ref notaFiscalSaidaPagamentoViewModels,
+                                                    ref notaFiscalSaidaReferenciaViewModels,
+                                                    ref notaFiscalSaidaSerieViewModel,
+                                                    oConfig,
+                                                    ref sCD_NFCe_DetalheVendaNormal,
+                                                    ref sCD_NFCe_DetalheVendaContigencia,
+                                                    ref sCD_NFCe_Token_ID,
+                                                    ref sCD_NFCe_Token_CSC);
+
+                if (oNFe != null)
+                {
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.CodigoChaveAcesso))
+                    {
+                        oNFe_Proc = Fiscal_DocumentoFiscal_AssociarProtocolo(oConfig, oNFe, notaFiscalSaidaViewModel.CodigoChaveAcesso);
+                        oNFe = oNFe_Proc.NFe;
+                    }
+
+                    GerarDanfe(oNFe.ObterXmlString(), imprimirCancelado, true);
+                }
+                else
+                    goto Sair;
+            }
+            catch (Exception ex)
+            {
+                oConfig = null/* TODO Change to default(_) if this is not a reference type */;
+                oNFe = null/* TODO Change to default(_) if this is not a reference type */;
+                oNFe_Servico = null/* TODO Change to default(_) if this is not a reference type */;
+                oNFe_Servico_RetornoNFeAutorizacao = null/* TODO Change to default(_) if this is not a reference type */;
+
+                CaixaMensagem.Informacao(ex.Message);
+
+                goto Sair;
+            }
+
+        Sair:
+            return bOk;
+        }
+
         private static Csticms CSTDBParaZeus(string CD_CST)
         {
             switch (CD_CST)

@@ -93,6 +93,7 @@ namespace SisCom.Aplicacao.Formularios
             checkDesativado.Checked = false;
             checkUsarFoto.Checked = false;
             pictureFoto.Image = null;
+            textEMail.Text = "";
             textObservacoes.Text = "";
         }
         private async void CarregarDados_CNPJCPF_Pesquisa(bool CarregarPorCNPJ, bool CarregarPorPesquisa)
@@ -178,6 +179,7 @@ namespace SisCom.Aplicacao.Formularios
                 checkDesativado.Checked = pessoa.Desativado;
                 checkUsarFoto.Checked = pessoa.UsarFoto;
                 if (!Imagem.NuloImagem(pessoa.Imagem)) pictureFoto.Image = Imagem.ByteArrayToImage(pessoa.Imagem);
+                textEMail.Text = Funcao.NuloParaString(pessoa.EMail);
                 textObservacoes.Text = Funcao.NuloParaString(pessoa.Observacoes);
 
                 if (pessoa.Endereco != null)
@@ -564,6 +566,7 @@ namespace SisCom.Aplicacao.Formularios
             pessoa.Desativado = checkDesativado.Checked;
             pessoa.UsarFoto = checkUsarFoto.Checked;
             pessoa.Imagem = Imagem.ImageToByteArray(pictureFoto.Image);
+            pessoa.EMail = Funcao.StringVazioParaNulo(textEMail.Text);
             pessoa.Observacoes = Funcao.StringVazioParaNulo(textObservacoes.Text);
 
             AdicionarPessoa();

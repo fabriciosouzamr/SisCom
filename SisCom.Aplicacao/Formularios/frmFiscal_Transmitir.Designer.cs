@@ -77,6 +77,7 @@
             this.botaoDesmarcarTodos = new System.Windows.Forms.Button();
             this.botaoMarcarTodos = new System.Windows.Forms.Button();
             this.gridNotaFiscalSaida = new System.Windows.Forms.DataGridView();
+            this.labelValidade = new System.Windows.Forms.Label();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -240,6 +241,7 @@
             this.botaoImprimirNota.Size = new System.Drawing.Size(61, 75);
             this.botaoImprimirNota.TabIndex = 56;
             this.botaoImprimirNota.UseVisualStyleBackColor = true;
+            this.botaoImprimirNota.Click += new System.EventHandler(this.botaoImprimirNota_Click);
             // 
             // label7
             // 
@@ -584,11 +586,22 @@
             this.gridNotaFiscalSaida.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscalSaida_CellClick);
             this.gridNotaFiscalSaida.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscalSaida_CellDoubleClick);
             // 
+            // labelValidade
+            // 
+            this.labelValidade.AutoSize = true;
+            this.labelValidade.Location = new System.Drawing.Point(406, 118);
+            this.labelValidade.Name = "labelValidade";
+            this.labelValidade.Size = new System.Drawing.Size(169, 20);
+            this.labelValidade.TabIndex = 102;
+            this.labelValidade.Tag = "Validade do Certificado:";
+            this.labelValidade.Text = "Validade do Certificado:";
+            // 
             // frmFiscal_Transmitir
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1214, 800);
+            this.Controls.Add(this.labelValidade);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.gridNotaFiscalSaida);
@@ -612,6 +625,7 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalSaida)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -665,5 +679,6 @@
         private System.Windows.Forms.Panel panelStatusPendente;
         private System.Windows.Forms.Button botaoMarcarTodos;
         private System.Windows.Forms.Button botaoDesmarcarTodos;
+        private System.Windows.Forms.Label labelValidade;
     }
 }

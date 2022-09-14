@@ -6,16 +6,13 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
-using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
-using SisCom.Infraestrutura.Migrations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.LinkLabel;
 
 namespace SisCom.Aplicacao.Formularios
 {
@@ -110,7 +107,7 @@ namespace SisCom.Aplicacao.Formularios
             NFCe = 3
         }
 
-        Guid dadolocal_Cliente_EstadoId;
+        Guid dadolocal_Cliente_EstadoId = Guid.Empty;
 
         IEnumerable<MercadoriaImpostoEstadoViewModel> mercadoriaImpostoEstado;
 
@@ -1215,17 +1212,17 @@ namespace SisCom.Aplicacao.Formularios
             {
                 if (Coluna == gridMercadoria_CodigoSistema)
                 {
-                    gridMercadoria.Rows[iLinha].Cells[gridMercadoria_Descricao].Value = Guid.Parse(valor);
+                    gridMercadoria.Rows[iLinha].Cells[gridMercadoria_Mercadoria].Value = Guid.Parse(valor);
                     gridMercadoria.Rows[iLinha].Cells[gridMercadoria_RefSistema].Value = Guid.Parse(valor);
                 }
-                if (Coluna == gridMercadoria_Descricao)
+                if (Coluna == gridMercadoria_Mercadoria)
                 {
                     gridMercadoria.Rows[iLinha].Cells[gridMercadoria_RefSistema].Value = Guid.Parse(valor);
                     gridMercadoria.Rows[iLinha].Cells[gridMercadoria_CodigoSistema].Value = Guid.Parse(valor);
                 }
                 if (Coluna == gridMercadoria_RefSistema)
                 {
-                    gridMercadoria.Rows[iLinha].Cells[gridMercadoria_Descricao].Value = Guid.Parse(valor);
+                    gridMercadoria.Rows[iLinha].Cells[gridMercadoria_Mercadoria].Value = Guid.Parse(valor);
                     gridMercadoria.Rows[iLinha].Cells[gridMercadoria_CodigoSistema].Value = Guid.Parse(valor);
                 }
             }
@@ -1238,7 +1235,7 @@ namespace SisCom.Aplicacao.Formularios
             try
             {
                 if ((e.ColumnIndex == gridMercadoria_CodigoSistema) ||
-                    (e.ColumnIndex == gridMercadoria_Descricao) ||
+                    (e.ColumnIndex == gridMercadoria_Mercadoria) ||
                     (e.ColumnIndex == gridMercadoria_RefSistema))
                 {
                     GridProduto_SelecionarProduto(e.RowIndex, e.ColumnIndex, gridMercadoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
@@ -1249,8 +1246,22 @@ namespace SisCom.Aplicacao.Formularios
                             if (impostoestado.Mercadoria.Id == (Guid)gridMercadoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
                                 gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value = impostoestado.PercentualICMS_Destino;
                         }
-
-                    //MercadoriaTratar(e.RowIndex);
+                    if (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_CFOP ].Value == null)
+                    {
+                        if ((dadolocal_Cliente_EstadoId == Guid.Empty) || (dadolocal_Cliente_EstadoId == Declaracoes.dados_Empresa_EstadoId))
+                        {
+                            gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_CFOP].Value = Guid.Parse("D69AFCEF-0222-42BD-9FA9-8580A9AF15CB");
+                        }
+                        else
+                        {
+                            gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_CFOP].Value = Guid.Parse("2967E25F-965D-4D5F-8CD5-BB850EF9CF8D");
+                        }
+                    }
+                    if ((gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Descricao].Value == null) &&
+                        (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Mercadoria].Value != null))
+                    {
+                        gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Descricao].Value = gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Mercadoria].EditedFormattedValue;
+                    }
                 }
                 else if ((e.ColumnIndex == gridMercadoria_Quantidade) ||
                          (e.ColumnIndex == gridMercadoria_Preco))
@@ -1282,7 +1293,6 @@ namespace SisCom.Aplicacao.Formularios
 
             CalcularMercadoriaImpostos();
         }
-
         private void CalcularMercadoriaPeso()
         {
             numericVolumeTransportadosPesoBruto.Value = Grid_DataGridView.DataGridView_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade) *
@@ -1290,7 +1300,6 @@ namespace SisCom.Aplicacao.Formularios
             numericVolumeTransportadosPesoLiquido.Value = Grid_DataGridView.DataGridView_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade) *
                                                           Grid_DataGridView.DataGridView_CalcularColunaValor(gridMercadoria, gridMercadoria_PesoLiquido);
         }
-
         private void CalcularMercadoriaImpostos()
         {
             labelMercadoriaVolume.Tag = 0;
@@ -1337,18 +1346,15 @@ namespace SisCom.Aplicacao.Formularios
             labelMercadoriaValorIPI.Text = Convert.ToDecimal(labelMercadoriaValorIPI.Tag).ToString("c");
             labelMercadoriaTotalNota.Text = Convert.ToDecimal(labelMercadoriaTotalNota.Tag).ToString("c");
         }
-
         private void gridCobrancaNota_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             labelCobrancaNotaTotal.Text = labelCobrancaNotaTotal.Tag.ToString() + " " + Grid_DataGridView.DataGridView_CalcularColunaValor(gridCobrancaNota, gridCobrancaNota_Valor).ToString("c");
             labelCobrancaNotaQuantidade.Text = labelCobrancaNotaQuantidade.Tag.ToString() + " " + Grid_DataGridView.DataGridView_QuantidadeLinha(gridCobrancaNota, gridCobrancaNota_TipoPagamento).ToString();
         }
-
         private void gridCobrancaNota_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             labelCobrancaNotaQuantidade.Text = labelCobrancaNotaQuantidade.Tag.ToString() + " " + Grid_DataGridView.DataGridView_QuantidadeLinha(gridCobrancaNota, gridCobrancaNota_TipoPagamento).ToString();
         }
-
         private void comboRemetente_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Combo_ComboBox.Selecionado(comboRemetente))
@@ -1356,7 +1362,6 @@ namespace SisCom.Aplicacao.Formularios
                 CarregarDadosClientes();
             }
         }
-
         private async Task CarregarDadosClientes()
         {
             using (PessoaController pessoaController = new PessoaController(this.MeuDbContext(), this._notifier))
@@ -1384,7 +1389,6 @@ namespace SisCom.Aplicacao.Formularios
                 }
             }
         }
-
         private void botaoCadastroObservacoes_Click(object sender, EventArgs e)
         {
             using (frmCadastroObservacao form = ServiceProvider().GetRequiredService<frmCadastroObservacao>())
@@ -1393,7 +1397,6 @@ namespace SisCom.Aplicacao.Formularios
                 form.ShowDialog(this);
             }
         }
-
         private void gridObservacao_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == gridObservacao_Codigo)
@@ -1401,7 +1404,6 @@ namespace SisCom.Aplicacao.Formularios
                 gridObservacao.Rows[e.RowIndex].Cells[gridObservacao_Descricao].Value = gridObservacao.Rows[e.RowIndex].Cells[gridObservacao_Codigo].EditedFormattedValue;
             }
         }
-
         private void botaoAtualizarInfoComplementoObservacao_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in gridObservacao.Rows)
@@ -1412,12 +1414,10 @@ namespace SisCom.Aplicacao.Formularios
                 richInformacoesComplementaresInteresseContribuinte.Text = richInformacoesComplementaresInteresseContribuinte.Text + row.Cells[gridObservacao_Descricao].Value;
             }
         }
-
         private void comboInfoNFeOrigem_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboInfoNFeOrigem_Tratar();
         }
-
         async void comboInfoNFeOrigem_Tratar()
         {
             if (comboInfoNFeOrigem.SelectedIndex != -1)
@@ -1453,12 +1453,10 @@ namespace SisCom.Aplicacao.Formularios
                 }
             }
         }
-
         private void botaoExportarNFe_Click(object sender, EventArgs e)
         {
             GravarMercadoria();
         }
-
         private void botaoTransmitir_Click(object sender, EventArgs e)
         {
             var form = this.ServiceProvider().GetRequiredService<frmFiscal_Transmitir>();

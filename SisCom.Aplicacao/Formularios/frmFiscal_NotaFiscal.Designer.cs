@@ -807,7 +807,7 @@
             this.tbsRemetente.Controls.Add(this.groupBox1);
             this.tbsRemetente.Location = new System.Drawing.Point(4, 29);
             this.tbsRemetente.Name = "tbsRemetente";
-            this.tbsRemetente.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tbsRemetente.Padding = new System.Windows.Forms.Padding(3);
             this.tbsRemetente.Size = new System.Drawing.Size(1319, 562);
             this.tbsRemetente.TabIndex = 0;
             this.tbsRemetente.Text = "Remetente";
@@ -1894,7 +1894,7 @@
             this.tbsMercadorias.Controls.Add(this.gridMercadoria);
             this.tbsMercadorias.Location = new System.Drawing.Point(4, 29);
             this.tbsMercadorias.Name = "tbsMercadorias";
-            this.tbsMercadorias.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tbsMercadorias.Padding = new System.Windows.Forms.Padding(3);
             this.tbsMercadorias.Size = new System.Drawing.Size(1319, 562);
             this.tbsMercadorias.TabIndex = 1;
             this.tbsMercadorias.Text = "Mercadorias";
@@ -2302,7 +2302,7 @@
             this.tbsObservacoes.Controls.Add(this.panel18);
             this.tbsObservacoes.Location = new System.Drawing.Point(4, 29);
             this.tbsObservacoes.Name = "tbsObservacoes";
-            this.tbsObservacoes.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tbsObservacoes.Padding = new System.Windows.Forms.Padding(3);
             this.tbsObservacoes.Size = new System.Drawing.Size(1319, 562);
             this.tbsObservacoes.TabIndex = 2;
             this.tbsObservacoes.Text = "Observações";
@@ -2450,7 +2450,7 @@
             this.tbsCobrancaNota.Controls.Add(this.panel20);
             this.tbsCobrancaNota.Location = new System.Drawing.Point(4, 29);
             this.tbsCobrancaNota.Name = "tbsCobrancaNota";
-            this.tbsCobrancaNota.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tbsCobrancaNota.Padding = new System.Windows.Forms.Padding(3);
             this.tbsCobrancaNota.Size = new System.Drawing.Size(1319, 562);
             this.tbsCobrancaNota.TabIndex = 3;
             this.tbsCobrancaNota.Text = "Cobrança da Nota";
@@ -2593,7 +2593,7 @@
             this.tbsNFe.Controls.Add(this.label104);
             this.tbsNFe.Location = new System.Drawing.Point(4, 29);
             this.tbsNFe.Name = "tbsNFe";
-            this.tbsNFe.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tbsNFe.Padding = new System.Windows.Forms.Padding(3);
             this.tbsNFe.Size = new System.Drawing.Size(1319, 562);
             this.tbsNFe.TabIndex = 4;
             this.tbsNFe.Text = "NF-e";
@@ -2913,7 +2913,7 @@
             this.tbsLocalEntregaRetirada.Controls.Add(this.label116);
             this.tbsLocalEntregaRetirada.Location = new System.Drawing.Point(4, 29);
             this.tbsLocalEntregaRetirada.Name = "tbsLocalEntregaRetirada";
-            this.tbsLocalEntregaRetirada.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tbsLocalEntregaRetirada.Padding = new System.Windows.Forms.Padding(3);
             this.tbsLocalEntregaRetirada.Size = new System.Drawing.Size(1319, 562);
             this.tbsLocalEntregaRetirada.TabIndex = 5;
             this.tbsLocalEntregaRetirada.Text = "Local de Entrega/Retirada";
@@ -3229,7 +3229,7 @@
             this.tbsAutorizarXML.Controls.Add(this.label133);
             this.tbsAutorizarXML.Location = new System.Drawing.Point(4, 29);
             this.tbsAutorizarXML.Name = "tbsAutorizarXML";
-            this.tbsAutorizarXML.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tbsAutorizarXML.Padding = new System.Windows.Forms.Padding(3);
             this.tbsAutorizarXML.Size = new System.Drawing.Size(1319, 562);
             this.tbsAutorizarXML.TabIndex = 6;
             this.tbsAutorizarXML.Text = "Autorizar XML";

@@ -1,14 +1,9 @@
 ﻿using Funcoes.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
-using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
-using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
@@ -31,11 +26,9 @@ namespace SisCom.Aplicacao.Formularios
                                     ComboBoxStyle.DropDownList,
                                     await (new EmpresaController(this.MeuDbContext(), this._notifier)).Combo(p => p.RazaoSocial));
 
-            if (comboEmpresa.Items.Count == 1)
-            {
-                comboEmpresa.SelectedIndex = 0;
-                comboEmpresa.Visible = false;
-            }
+            if (comboEmpresa.Items.Count > 0) comboEmpresa.SelectedIndex = 0;
+            comboEmpresa.Visible = false;
+            labelEmpresa.Visible = false;
         }
         async void ValidarUsuario(Guid funcionario, string senha)
         {
@@ -47,19 +40,25 @@ namespace SisCom.Aplicacao.Formularios
 
             if (valido)
             {
-                using (EmpresaController empresaController = new EmpresaController(this.MeuDbContext(), this._notifier))
+                if  (Combo_ComboBox.Selecionado(comboEmpresa))
                 {
-                    var empresa = (await empresaController.GetById((Guid)comboEmpresa.SelectedValue));
-
-                    if (empresa != null)
+                    using (EmpresaController empresaController = new EmpresaController(this.MeuDbContext(), this._notifier))
                     {
-                        Declaracoes.dados_Empresa_CodigoEstado = empresa.Endereco.End_Cidade.Estado.Codigo;
-                        Declaracoes.dados_Empresa_Id = empresa.Id;
-                        Declaracoes.dados_Empresa_EstadoId = empresa.Endereco.End_Cidade.Estado.Id;
-                        Declaracoes.dados_Empresa_SerialNumber = empresa.NuvemFiscal_SerialNumber;
-                        Declaracoes.dados_Empresa_CNPJ = empresa.CNPJ;
-                        if (empresa.RegimeTributario != null)
-                            Declaracoes.dados_Empresa_RegimeTributario = (RegimeTributario)empresa.RegimeTributario;
+                        var empresa = (await empresaController.GetById((Guid)comboEmpresa.SelectedValue));
+
+                        if (empresa != null)
+                        {
+                            if ((empresa.Endereco != null) && (empresa.Endereco.End_Cidade != null))
+                            {
+                                Declaracoes.dados_Empresa_CodigoEstado = empresa.Endereco.End_Cidade.Estado.Codigo;
+                                Declaracoes.dados_Empresa_EstadoId = empresa.Endereco.End_Cidade.Estado.Id;
+                            }
+                            Declaracoes.dados_Empresa_Id = empresa.Id;
+                            Declaracoes.dados_Empresa_SerialNumber = empresa.NuvemFiscal_SerialNumber;
+                            Declaracoes.dados_Empresa_CNPJ = empresa.CNPJ;
+                            if (empresa.RegimeTributario != null)
+                                Declaracoes.dados_Empresa_RegimeTributario = (RegimeTributario)empresa.RegimeTributario;
+                        }
                     }
                 }
 
@@ -78,8 +77,8 @@ namespace SisCom.Aplicacao.Formularios
 
         private void frmLogin_Resize(object sender, EventArgs e)
         {
-            pnlLogin.Left = (int)(this.Width * 0.1);
-            pnlLogin.Top = (int)((this.Height - pnlLogin.Height) * 0.8);
+            pnlLogin.Left = (this.Width - pnlLogin.Width) / 2;
+            pnlLogin.Top = (this.Height - pnlLogin.Height) / 2;
         }
 
         private void cmdEntrar_Click(object sender, EventArgs e)
@@ -92,11 +91,6 @@ namespace SisCom.Aplicacao.Formularios
             if (textSenha.Text.Trim() == "")
             {
                 CaixaMensagem.Informacao("Informe a senha");
-                return;
-            }
-            if (!Combo_ComboBox.Selecionado(comboEmpresa))
-            {
-                CaixaMensagem.Informacao("Selecione a empresa");
                 return;
             }
 

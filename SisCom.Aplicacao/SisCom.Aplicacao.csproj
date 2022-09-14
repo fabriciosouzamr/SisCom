@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DanfeSharp">
-      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\DanfeSharp\bin\Release\DanfeSharp.dll</HintPath>
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\DanfeSharp\bin\Debug\DanfeSharp.dll</HintPath>
     </Reference>
     <Reference Include="DFe.Classes">
       <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\DFe.Classes.dll</HintPath>

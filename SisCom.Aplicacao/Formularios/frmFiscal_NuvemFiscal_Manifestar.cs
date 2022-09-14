@@ -41,7 +41,7 @@ namespace SisCom.Aplicacao
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "NF-e");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Serie");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "D/H Emissão");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Vlr. NF-e");
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Vlr. NF-e", Tipo: Grid_DataGridView.TipoColuna.Valor);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "ManifestacaoAtual");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "PedidoManifestacao");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "RetornoSefaz");

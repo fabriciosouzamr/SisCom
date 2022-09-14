@@ -299,8 +299,16 @@ namespace SisCom.Aplicacao
 
                     if (Declaracoes.login_Valido)
                     {
-                        var frmMDI = services.GetRequiredService<frmMDI>();
-                        Application.Run(frmMDI);
+                        if (Declaracoes.dados_Empresa_Id == Guid.Empty)
+                        {
+                            var frmCadastroEmpresas = services.GetRequiredService<frmCadastroEmpresas>();
+                            Application.Run(frmCadastroEmpresas);
+                        }
+                        else
+                        {
+                            var frmMDI = services.GetRequiredService<frmMDI>();
+                            Application.Run(frmMDI);
+                        }
                     }
                 }
                 catch (Exception Ex)

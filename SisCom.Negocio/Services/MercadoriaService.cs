@@ -32,13 +32,13 @@ namespace SisCom.Negocio.Services
 
             try
             {
-                var _pessoa = await mercadoriaRepository.Search(f => f.Nome == mercadoria.Nome);
+                /*var _pessoa = await mercadoriaRepository.Search(f => f.Nome == mercadoria.Nome);
 
                 if (_pessoa.Count() != 0)
                 {
                     Notify("Já existe uma mercadoria com esse nome informado.");
                     return;
-                }
+                }*/
 
                 await mercadoriaRepository.Insert(mercadoria);
             }
@@ -54,13 +54,13 @@ namespace SisCom.Negocio.Services
             {
                 //if (!RunValidation(new PessoaValidation(), pessoa)) return;
 
-                var exists = mercadoriaRepository.Exists(f => f.Nome == mercadoria.Nome && f.Id != mercadoria.Id);
+                /*var exists = mercadoriaRepository.Exists(f => f.Nome == mercadoria.Nome && f.Id != mercadoria.Id);
 
                 if (exists)
                 {
                     Notify("Já existe uma mercadoria com esse nome informado.");
                     return;
-                }
+                }*/
 
                 await mercadoriaRepository.Update(mercadoria);
             }

@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using static SisCom.Aplicacao.Classes.Declaracoes;
 
 namespace SisCom.Aplicacao.Formularios
@@ -109,13 +110,18 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "IE");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Razão Social");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "D/H Emissão");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Vlr. NF-e");
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Vlr. NF-e", Tipo: Grid_DataGridView.TipoColuna.Valor);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Situação NF-e");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Manifestação");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "...", Grid_DataGridView.TipoColuna.CheckBox);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "...", Grid_DataGridView.TipoColuna.CheckBox, readOnly: false);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Importar", Grid_DataGridView.TipoColuna.Button);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Manifestar", Grid_DataGridView.TipoColuna.Button);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Conteudo", Tamanho: 0);
+
+            datePeriodoInicial.Value = DateTime.Now.Date;
+            datePeriodoFinal.Value = DateTime.Now.Date;
+            comboEmpresa.SelectedIndex = 0;
+            comboTipoNSU.SelectedValue = TipoNSU.APartirUltimoNSU;
         }
 
         private void botaoConsultarNotas_Click(object sender, EventArgs e)
@@ -159,13 +165,14 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
-        void Consultar_Carregar()
+        bool Consultar_Carregar(string sXMLValidar = "", bool validar = false)
         {
             try
             {
                 gridNotaFiscal.Rows.Clear();
 
                 string[] diretorios = Directory.GetFiles(Declaracoes.externos_Path_NuvemFiscal, "*.xml");
+                bool achou = false;
 
                 foreach (string arquivo in diretorios)
                 {
@@ -219,15 +226,27 @@ namespace SisCom.Aplicacao.Formularios
                     else if (conteudo.StartsWith("<nfeProc"))
                     {
                         var resEventoConteudo = FuncoesXml.XmlStringParaClasse<nfeProc>(conteudo);
-                        chNFe = resEventoConteudo.protNFe.infProt.chNFe;
-                        cNFe = resEventoConteudo.NFe.infNFe.ide.cNF;
-                        cSerie = resEventoConteudo.NFe.infNFe.ide.serie.ToString();
-                        if (resEventoConteudo.NFe.infNFe.emit.CNPJ == null) { CNPJ_CPF = resEventoConteudo.NFe.infNFe.emit.CPF; } else { CNPJ_CPF = resEventoConteudo.NFe.infNFe.emit.CNPJ; }
-                        if (resEventoConteudo.NFe.infNFe.emit.IE != null) IE = resEventoConteudo.NFe.infNFe.emit.IE.ToString();
-                        Nome = resEventoConteudo.NFe.infNFe.emit.xNome;
-                        DHEmissao = resEventoConteudo.NFe.infNFe.ide.dEmi;
-                        VlrNFe = resEventoConteudo.NFe.infNFe.total.ICMSTot.vNF;
-                        SituacaoNFe = resEventoConteudo.protNFe.infProt.xMotivo;
+
+                        if ((sXMLValidar.Trim() == "") || (sXMLValidar.Trim() == resEventoConteudo.protNFe.infProt.chNFe.Trim()))
+                        {
+                            achou = (sXMLValidar.Trim() != "");
+
+                            if ((achou) && (validar))
+                            {
+                                CaixaMensagem.Informacao("NF-e já importada");
+                                break;
+                            }
+
+                            chNFe = resEventoConteudo.protNFe.infProt.chNFe;
+                            cNFe = resEventoConteudo.NFe.infNFe.ide.nNF.ToString();
+                            cSerie = resEventoConteudo.NFe.infNFe.ide.serie.ToString();
+                            if (resEventoConteudo.NFe.infNFe.emit.CNPJ == null) { CNPJ_CPF = resEventoConteudo.NFe.infNFe.emit.CPF; } else { CNPJ_CPF = resEventoConteudo.NFe.infNFe.emit.CNPJ; }
+                            if (resEventoConteudo.NFe.infNFe.emit.IE != null) IE = resEventoConteudo.NFe.infNFe.emit.IE.ToString();
+                            Nome = resEventoConteudo.NFe.infNFe.emit.xNome;
+                            DHEmissao = resEventoConteudo.NFe.infNFe.ide.dEmi;
+                            VlrNFe = resEventoConteudo.NFe.infNFe.total.ICMSTot.vNF;
+                            SituacaoNFe = resEventoConteudo.protNFe.infProt.xMotivo;
+                        }
                     }
 
                     if (chNFe != String.Empty)
@@ -266,6 +285,8 @@ namespace SisCom.Aplicacao.Formularios
                             if (SituacaoMaifestacao != String.Empty) gridNotaFiscal.Rows[linha].Cells[grdNotaFiscal_StatusManifestacao].Value = SituacaoMaifestacao;
                             if (conteudo != String.Empty) gridNotaFiscal.Rows[linha].Cells[grdNotaFiscal_Conteudo].Value = conteudo;
                         }
+
+                        if (achou) { break; }
                     }
                 }
 
@@ -291,10 +312,13 @@ namespace SisCom.Aplicacao.Formularios
                         }
                     }
                 }
+
+                return achou;
             }
             catch (Exception Ex)
             {
                 CaixaMensagem.Informacao(Ex.Message);
+                return false;
             }
         }
 
@@ -305,26 +329,26 @@ namespace SisCom.Aplicacao.Formularios
                 sXML = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_Conteudo].Value.ToString();
                 Close();
             }
-            if ((e.ColumnIndex == grdNotaFiscal_Manifestar) && (e.RowIndex > 0))
+            if ((e.ColumnIndex == grdNotaFiscal_Manifestar) && (e.RowIndex > -1))
             {
-                if (StatusSemManifestar == gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_StatusManifestacao].Value.ToString())
-                {
+//                if (StatusSemManifestar == gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_StatusManifestacao].Value.ToString())
+                //{
                     notasFiscalManifestar = new List<NotaFiscalManifestar>();
                     notasFiscalManifestar.Add(new NotaFiscalManifestar
                     {
                         Emissao = Convert.ToDateTime(gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_DHEmissao].Value),
                         Valor = Convert.ToDouble(gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_VlrNFe].Value),
-                        NFe = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_VlrNFe].Value.ToString(),
-                        Serie = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_VlrNFe].Value.ToString(),
+                        NFe = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_NFe].Value.ToString(),
+                        Serie = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_Serie].Value.ToString(),
                         ChaveAcesso = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_ChaveAcesso].Value.ToString(),
                         CNPJ = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_CNPJ_CPF].Value.ToString()
                     });
                     Manifestar();
-                }
-                else
-                {
-                    CaixaMensagem.Informacao("NF-e já manifestada");
-                }
+                //}
+                //else
+                //{
+                    //CaixaMensagem.Informacao("NF-e já manifestada");
+                //}
             }
         }
 
@@ -380,8 +404,8 @@ namespace SisCom.Aplicacao.Formularios
                         {
                             Emissao = Convert.ToDateTime(row.Cells[grdNotaFiscal_DHEmissao].Value),
                             Valor = Convert.ToDouble(row.Cells[grdNotaFiscal_VlrNFe].Value),
-                            NFe = row.Cells[grdNotaFiscal_VlrNFe].Value.ToString(),
-                            Serie = row.Cells[grdNotaFiscal_VlrNFe].Value.ToString(),
+                            NFe = row.Cells[grdNotaFiscal_NFe].Value.ToString(),
+                            Serie = row.Cells[grdNotaFiscal_Serie].Value.ToString(),
                             ChaveAcesso = row.Cells[grdNotaFiscal_ChaveAcesso].Value.ToString(),
                             CNPJ = row.Cells[grdNotaFiscal_CNPJ_CPF].Value.ToString()
                         });
@@ -409,23 +433,9 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
-        private void cmdSelecionarTodos_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in gridNotaFiscal.Rows)
-            {
-                row.Cells[grdNotaFiscal_Chk].Value = true;
-            }
-        }
-
-        private void frmFiscal_NuvemFiscal_Load(object sender, EventArgs e)
-        {
-            datePeriodoInicial.Value = datePeriodoInicial.MinDate;
-            datePeriodoFinal.Value = datePeriodoFinal.MaxDate;
-        }
-
         private void botaoFiltrarNotas_Click(object sender, EventArgs e)
         {
-            Consultar_Carregar();
+            Consultar_Carregar("");
 
             if ((Combo_ComboBox.Selecionado(comboTipoManifestacao)) ||
                 (textChaveNFe.Text.Trim() != "") ||
@@ -467,6 +477,49 @@ namespace SisCom.Aplicacao.Formularios
             else
             {
                 CaixaMensagem.Informacao("É preciso informar alguma informação para o filtro");
+            }
+        }
+
+        private void botaoMarcarTodos_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in gridNotaFiscal.Rows)
+            {
+                if (row.Cells[grdNotaFiscal_ChaveAcesso].Value != null)
+                    row.Cells[grdNotaFiscal_Chk].Value = true;
+            }
+        }
+
+        private void botaoDesmarcarTodos_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in gridNotaFiscal.Rows)
+            {
+                row.Cells[grdNotaFiscal_Chk].Value = false;
+            }
+        }
+
+        private void botaoImportarXML_Click(object sender, EventArgs e)
+        {
+            string xml = "";
+            var nfe = Zeus.CarregarNFE_XML(ref xml);
+
+            if (nfe != null)
+            {
+                if (nfe.protNFe == null)
+                {
+                    CaixaMensagem.Informacao("NF-e não tranmitida");
+                }
+                else
+                {
+                    if (!Consultar_Carregar(nfe.protNFe.infProt.chNFe, true))
+                    {
+                        nfe.SalvarArquivoXml(Path.Combine(externos_Path_NuvemFiscal, nfe.protNFe.infProt.chNFe + "-procNFe.xml"));
+                        Consultar_Carregar(nfe.protNFe.infProt.chNFe);
+                    }
+                }
+            }
+            else
+            {
+                CaixaMensagem.Informacao("Arquivo inválido ou não informado");
             }
         }
     }

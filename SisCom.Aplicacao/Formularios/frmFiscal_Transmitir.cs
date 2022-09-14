@@ -32,6 +32,8 @@ namespace SisCom.Aplicacao.Formularios
         {
             InitializeComponent();
             Inicializar();
+
+            labelValidade.Text = labelValidade.Text + " " + Fiscal.Certificado_DataExpiracao();
         }
         private void botaoFechar_Click(object sender, EventArgs e)
         {
@@ -46,7 +48,7 @@ namespace SisCom.Aplicacao.Formularios
                 //Detalhe de Estoque
                 Grid_DataGridView.DataGridView_Formatar(gridNotaFiscalSaida, true);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "ID", "ID", Tamanho: 0);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "...", Grid_DataGridView.TipoColuna.CheckBox);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "...", Grid_DataGridView.TipoColuna.CheckBox, Tamanho: 30, readOnly: false);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "", Tamanho: 30);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Número", Tamanho: 50);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Destinatário", Tamanho: 300);
@@ -231,6 +233,51 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
+        async void Visualizar(Guid id)
+        {
+            NotaFiscalSaidaSerieViewModel notaFiscalSaidaSerieViewModel = new NotaFiscalSaidaSerieViewModel();
+            NotaFiscalSaidaViewModel notaFiscalSaidaViewModel = new NotaFiscalSaidaViewModel();
+            IEnumerable<NotaFiscalSaidaViewModel> notaFiscalSaidaViewModels;
+            IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoria;
+            IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamento = new List<NotaFiscalSaidaPagamentoViewModel>();
+            IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferencia = new List<NotaFiscalSaidaReferenciaViewModel>();
+            string sDS_PATH_XML = "";
+            bool bImpressaoNCFe = false;
+
+            using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+            {
+                notaFiscalSaidaViewModels = await notaFiscalSaidaController.PesquisarCompletoId(id);
+                notaFiscalSaidaViewModel = notaFiscalSaidaViewModels.FirstOrDefault();
+            }
+            using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
+            {
+                notaFiscalSaidaMercadoria = await notaFiscalSaidaMercadoriaController.PesquisarId(notaFiscalSaidaViewModel.Id);
+            }
+            using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
+            {
+                var notaFiscalSaidaSerieViewModels = await notaFiscalSaidaSerieController.PesquisarSerie(notaFiscalSaidaViewModel.Serie);
+                notaFiscalSaidaSerieViewModel = notaFiscalSaidaSerieViewModels.FirstOrDefault();
+            }
+
+            notaFiscalSaidaViewModel.TransmitirEnderecoCliente = (notaFiscalSaidaViewModel.Cliente_Endereco != null);
+
+            foreach (NotaFiscalSaidaViewModel item in notaFiscalSaidaViewModels)
+            {
+                notaFiscalSaidaViewModel = item;
+                notaFiscalSaidaPagamento = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaPagamentoViewModel>>(item.NotaFiscalSaidaPagamento);
+                notaFiscalSaidaReferencia = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaReferenciaViewModel>>(item.NotaFiscalSaidaReferencia);
+
+                Fiscal.Fiscal_DocumentoFiscal_Visualizar(ModeloDocumento.NFe,
+                                                         ref notaFiscalSaidaViewModel,
+                                                         ref notaFiscalSaidaMercadoria,
+                                                         ref notaFiscalSaidaPagamento,
+                                                         ref notaFiscalSaidaReferencia,
+                                                         ref notaFiscalSaidaSerieViewModel,
+                                                         ref sDS_PATH_XML,
+                                                         false);
+            }
+        }
+
         private void gridNotaFiscalSaida_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if ((e.ColumnIndex == gridNotaFiscalSaida_RetornoSefaz) && (e.RowIndex > -1))
@@ -305,6 +352,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             foreach (DataGridViewRow row in gridNotaFiscalSaida.Rows)
             {
+                if (row.Cells[gridNotaFiscalSaida_Id].Value != null)
                 row.Cells[gridNotaFiscalSaida_Chk].Value = true;
             }
         }
@@ -314,6 +362,18 @@ namespace SisCom.Aplicacao.Formularios
             foreach (DataGridViewRow row in gridNotaFiscalSaida.Rows)
             {
                 row.Cells[gridNotaFiscalSaida_Chk].Value = false;
+            }
+        }
+
+        private void botaoImprimirNota_Click(object sender, EventArgs e)
+        {
+            if (gridNotaFiscalSaida.CurrentRow != null)
+            {
+                Visualizar((Guid)gridNotaFiscalSaida.CurrentRow.Cells[gridNotaFiscalSaida_Id].Value);
+            }
+            else
+            {
+                CaixaMensagem.Informacao("Selecione a nota a ser impressa");
             }
         }
     }

@@ -128,8 +128,8 @@ namespace SisCom.Aplicacao.Formularios
         private void LimparFiltros()
         {
             comboFiltroTipoData.SelectedValue = NF_TipoData.Emissao;
-            dateFiltro_DataInicial.Value = dateFiltro_DataInicial.MinDate;
-            dateFiltro_DataFinal.Value = dateFiltro_DataFinal.MaxDate;
+            dateFiltro_DataInicial.Value = DateTime.Now.Date;
+            dateFiltro_DataFinal.Value = DateTime.Now.Date;
             textFiltro_NotaFiscal.Text = "";
             comboFiltro_Fornecedor.SelectedIndex = -1;
             comboFiltro_Empresa.SelectedIndex = -1;
