@@ -18,7 +18,7 @@ namespace SisCom.Entidade.Modelos
 		public string Modelo { get; set; }
 		public string Serie { get; set; }
 		public string SubSerie { get; set; }
-		public NF_Status Status { get; set; }
+        public NF_Status Status { get; set; }
 		public Pessoa Cliente { get; set; }
 		public string CNPJ_CPF { get; set; }
 		public string IE { get; set; }
@@ -32,7 +32,8 @@ namespace SisCom.Entidade.Modelos
 		public decimal PercentualDesconto { get; set; }
 		public decimal PercentuaAliquotaSimplesNacional { get; set; }
 		public Transportadora Transportadora { get; set; }
-		public TipoFrete Transportadora_FreteConta { get; set; }
+        public Funcionario Vendedor { get; set; }
+        public TipoFrete Transportadora_FreteConta { get; set; }
 		public string Transportadora_CNPJ_CPF { get; set; }
 		public string Transportadora_Placa { get; set; }
 		public Estado Transportadora_UF { get; set; }

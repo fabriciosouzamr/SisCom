@@ -10,6 +10,7 @@ using SisCom.Aplicacao.Classes;
 using System.Collections.Generic;
 using SisCom.Aplicacao.ViewModels;
 using System.Data;
+using System.Linq;
 
 namespace SisCom.Aplicacao.Formularios
 {
@@ -27,6 +28,8 @@ namespace SisCom.Aplicacao.Formularios
 
         ViewModels.VendaViewModel venda = null;
         bool carregandoDados = false;
+        public Guid vendaId;
+        bool processando;
 
         public frmVendasInclusao(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -43,6 +46,8 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void Limpar()
         {
+            vendaId = Guid.Empty;
+            venda = null;
             dateDataEntrada.Value = DateTime.Now.Date;
             textHora.Text = DateTime.Now.ToString("HH:mm");
             comboClienteCodigo.SelectedIndex = -1;
@@ -82,6 +87,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 dateDataEntrada.Value = venda.DataVenda;
                 if (!Funcao.Nulo(venda.ClienteId)) comboClienteCodigo.SelectedValue = venda.ClienteId;
+                if (!Funcao.Nulo(venda.ClienteId)) comboClienteNome.SelectedValue = venda.ClienteId;
                 if (!Funcao.Nulo(venda.EmpresaId)) comboEmpresa.SelectedValue = venda.EmpresaId;
                 if (!Funcao.Nulo(venda.TabelaOrigemVendaId)) comboOrigemVenda.SelectedValue = venda.TabelaOrigemVendaId;
                 if (!Funcao.Nulo(venda.VendedorId)) comboVendedor.SelectedValue = venda.VendedorId;
@@ -167,8 +173,21 @@ namespace SisCom.Aplicacao.Formularios
                 if (comboOrigemVenda.Items.Count == 1) { comboOrigemVenda.SelectedIndex = -1; }
 
                 venda = new ViewModels.VendaViewModel();
-                venda.Id = Guid.Empty;
-                Navegar(Declaracoes.eNavegar.Primeiro);
+
+                if (vendaId == Guid.Empty)
+                {
+                    venda.Id = Guid.Empty;
+                    Navegar(Declaracoes.eNavegar.Primeiro);
+                }
+                else
+                {
+                    using (VendaController vendaController = new VendaController(this.MeuDbContext(), this._notifier))
+                    {
+                        venda = (await vendaController.PesquisarId(vendaId)).FirstOrDefault();
+                    }
+
+                    CarregarDados();
+                }
             }
             catch (Exception Ex)
             {
@@ -423,7 +442,7 @@ namespace SisCom.Aplicacao.Formularios
                     vendaMercadoriaViewModel.Quantidade = Funcao.NuloParaValorD(row.Cells[gridProdutos_Quantidade].Value);
                     vendaMercadoriaViewModel.Total = Funcao.NuloParaValorD(row.Cells[gridProdutos_Total].Value);
 
-                    if (row.Cells[gridProdutos_CodigoSistema].Value == null)
+                    if (row.Cells[gridProdutos_Id].Value == null)
                     {
                         vendaMercadoriaController.Adicionar(vendaMercadoriaViewModel);
                     }
@@ -458,13 +477,21 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void comboClienteCodigo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((Combo_ComboBox.Selecionado(comboClienteCodigo)) && (comboClienteNome.Items.Count != 0))
+            if ((Combo_ComboBox.Selecionado(comboClienteCodigo)) && (comboClienteNome.Items.Count != 0) && (!processando))
+            {
+                processando = true;
                 comboClienteNome.SelectedIndex = comboClienteCodigo.SelectedIndex;
+                processando = false;
+            }
         }
         private void comboClienteNome_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((Combo_ComboBox.Selecionado(comboClienteNome)) && (comboClienteCodigo.Items.Count != 0))
+            if ((Combo_ComboBox.Selecionado(comboClienteNome)) && (comboClienteCodigo.Items.Count != 0) && (!processando))
+            {
+                processando = true;
                 comboClienteCodigo.SelectedIndex = comboClienteNome.SelectedIndex;
+                processando = false;
+            }
         }
         private void GridProduto_SelecionarProduto(int iLinha, int Coluna, string valor)
         {
@@ -580,9 +607,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoNovo_Click(object sender, EventArgs e)
         {
-            var form = this.ServiceProvider().GetRequiredService<frmFiscal_NotaFiscal>();
-            form.VendaId = venda.Id;
-            form.ShowDialog(this);
+            Limpar();
         }
         private void botaoAnterior_Click(object sender, EventArgs e)
         {

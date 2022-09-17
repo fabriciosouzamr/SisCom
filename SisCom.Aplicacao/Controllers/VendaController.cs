@@ -48,13 +48,22 @@ namespace SisCom.Aplicacao.Controllers
 
         public async Task<IEnumerable<VendaViewModel>> ObterTodos()
         {
-            var obterTodos = await _vendaService.GetAll();
+            var obterTodos = await _vendaService.GetAll(null, null, i => i.Cliente,
+                                                                    i => i.Cliente.Endereco,
+                                                                    i => i.Cliente.Endereco.End_Cidade,
+                                                                    i => i.Cliente.Endereco.End_Cidade.Estado,
+                                                                    i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
+                                                                    i => i.Vendedor);
             return Declaracoes.mapper.Map<IEnumerable<VendaViewModel>>(obterTodos);
         }
 
         public async Task<IEnumerable<VendaViewModel>> PesquisarId(Guid Id)
         {
-            var venda = await _vendaService.Search(p => p.Id == Id);
+            var venda = await _vendaService.GetAll(null, p => p.Id == Id, i => i.Cliente,
+                                                                          i => i.Cliente.Endereco.End_Cidade,
+                                                                          i => i.Cliente.Endereco.End_Cidade.Estado,
+                                                                          i => i.Transportadora,
+                                                                          i => i.Transportadora.Endereco.End_Cidade);
             return Declaracoes.mapper.Map<IEnumerable<VendaViewModel>>(venda);
         }
 

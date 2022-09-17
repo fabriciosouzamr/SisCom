@@ -34,10 +34,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.comboFiltro_Vendedor = new System.Windows.Forms.ComboBox();
             this.pnlDadosGerais = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textFiltro_NumeroDAV = new System.Windows.Forms.TextBox();
             this.textFiltro_NFe = new System.Windows.Forms.TextBox();
             this.textFiltro_NFCe = new System.Windows.Forms.TextBox();
             this.dateFiltro_DataFinal = new System.Windows.Forms.DateTimePicker();
@@ -68,12 +66,12 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.gridNotaFiscalEntrada = new System.Windows.Forms.DataGridView();
+            this.gridVenda = new System.Windows.Forms.DataGridView();
             this.pnlDadosGerais.SuspendLayout();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalEntrada)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVenda)).BeginInit();
             this.SuspendLayout();
             // 
             // botaoLimparFiltros
@@ -122,10 +120,8 @@
             // pnlDadosGerais
             // 
             this.pnlDadosGerais.BackColor = System.Drawing.Color.Silver;
-            this.pnlDadosGerais.Controls.Add(this.label8);
             this.pnlDadosGerais.Controls.Add(this.label4);
             this.pnlDadosGerais.Controls.Add(this.label1);
-            this.pnlDadosGerais.Controls.Add(this.textFiltro_NumeroDAV);
             this.pnlDadosGerais.Controls.Add(this.textFiltro_NFe);
             this.pnlDadosGerais.Controls.Add(this.textFiltro_NFCe);
             this.pnlDadosGerais.Controls.Add(this.botaoLimparFiltros);
@@ -148,16 +144,6 @@
             this.pnlDadosGerais.Size = new System.Drawing.Size(989, 136);
             this.pnlDadosGerais.TabIndex = 12;
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(603, 12);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(102, 20);
-            this.label8.TabIndex = 103;
-            this.label8.Text = "Número DAV";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -178,14 +164,6 @@
             this.label1.TabIndex = 101;
             this.label1.Text = "NFC-e";
             // 
-            // textFiltro_NumeroDaw
-            // 
-            this.textFiltro_NumeroDAV.Location = new System.Drawing.Point(603, 32);
-            this.textFiltro_NumeroDAV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textFiltro_NumeroDAV.Name = "textFiltro_NumeroDaw";
-            this.textFiltro_NumeroDAV.Size = new System.Drawing.Size(114, 27);
-            this.textFiltro_NumeroDAV.TabIndex = 5;
-            // 
             // textFiltro_NFe
             // 
             this.textFiltro_NFe.Location = new System.Drawing.Point(480, 32);
@@ -204,7 +182,6 @@
             // 
             // dateFiltro_DataFinal
             // 
-            this.dateFiltro_DataFinal.Enabled = false;
             this.dateFiltro_DataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateFiltro_DataFinal.Location = new System.Drawing.Point(122, 32);
             this.dateFiltro_DataFinal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -224,7 +201,6 @@
             // 
             // dateFiltro_DataInicial
             // 
-            this.dateFiltro_DataInicial.Enabled = false;
             this.dateFiltro_DataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateFiltro_DataInicial.Location = new System.Drawing.Point(11, 32);
             this.dateFiltro_DataInicial.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -393,7 +369,7 @@
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.gridNotaFiscalEntrada);
+            this.panel1.Controls.Add(this.gridVenda);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 275);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -506,17 +482,18 @@
             this.label9.TabIndex = 15;
             this.label9.Text = "A";
             // 
-            // gridNotaFiscalEntrada
+            // gridNotaFiscSaida
             // 
-            this.gridNotaFiscalEntrada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridNotaFiscalEntrada.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gridNotaFiscalEntrada.Location = new System.Drawing.Point(0, 0);
-            this.gridNotaFiscalEntrada.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridNotaFiscalEntrada.Name = "gridNotaFiscalEntrada";
-            this.gridNotaFiscalEntrada.RowHeadersWidth = 51;
-            this.gridNotaFiscalEntrada.RowTemplate.Height = 25;
-            this.gridNotaFiscalEntrada.Size = new System.Drawing.Size(990, 519);
-            this.gridNotaFiscalEntrada.TabIndex = 14;
+            this.gridVenda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridVenda.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gridVenda.Location = new System.Drawing.Point(0, 0);
+            this.gridVenda.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridVenda.Name = "gridNotaFiscSaida";
+            this.gridVenda.RowHeadersWidth = 51;
+            this.gridVenda.RowTemplate.Height = 25;
+            this.gridVenda.Size = new System.Drawing.Size(990, 519);
+            this.gridVenda.TabIndex = 14;
+            this.gridVenda.DoubleClick += new System.EventHandler(this.gridVenda_DoubleClick);
             // 
             // frmVendasConsulta
             // 
@@ -538,7 +515,7 @@
             this.pnlMenuBotaoBotao.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalEntrada)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVenda)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -567,14 +544,12 @@
         private System.Windows.Forms.Button botaoFechar;
         private System.Windows.Forms.Button botaoNovo;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textFiltro_NumeroDAV;
         private System.Windows.Forms.TextBox textFiltro_NFe;
         private System.Windows.Forms.TextBox textFiltro_NFCe;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView gridNotaFiscalEntrada;
+        private System.Windows.Forms.DataGridView gridVenda;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;

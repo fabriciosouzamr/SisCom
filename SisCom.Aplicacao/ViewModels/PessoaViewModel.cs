@@ -47,6 +47,7 @@ namespace SisCom.Aplicacao.ViewModels
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string CNPJ_CPF { get; set; }
+        public TipoPessoaCliente TipoPessoa { get; set; }
     }
 
     public class PessoaComboRazaoViewModel
@@ -55,6 +56,7 @@ namespace SisCom.Aplicacao.ViewModels
         public Guid Id { get; set; }
         public string RazaoSocial { get; set; }
         public string CNPJ_CPF { get; set; }
+        public TipoPessoaCliente TipoPessoa { get; set; }
     }
 
     public class PessoaComboCodigoViewModel
@@ -63,6 +65,7 @@ namespace SisCom.Aplicacao.ViewModels
         public Guid Id { get; set; }
         public string Codigo { get; set; }
         public string CNPJ_CPF { get; set; }
+        public TipoPessoaCliente TipoPessoa { get; set; }
     }
 
     public class PessoaComboCPFCNPJViewModel
@@ -70,6 +73,7 @@ namespace SisCom.Aplicacao.ViewModels
         [Key]
         public Guid Id { get; set; }
         public string CNPJ_CPF { get; set; }
+        public TipoPessoaCliente TipoPessoa { get; set; }
     }
 
     public class PessoaComboTelefoneViewModel
@@ -77,5 +81,6 @@ namespace SisCom.Aplicacao.ViewModels
         [Key]
         public Guid Id { get; set; }
         public string Telefone { get; set; }
+        public TipoPessoaCliente TipoPessoa { get; set; }
     }
 }

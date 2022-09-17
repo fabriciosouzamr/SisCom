@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220917190516_NumeroPedido")]
+    partial class NumeroPedido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1570,6 +1572,9 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<Guid?>("NotaFiscalFinalidadeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("NumeroPedido")
+                        .HasColumnType("varchar(100)");
+
                     b.Property<string>("ObservacaoDocumento")
                         .IsRequired()
                         .HasColumnType("varchar(8000)");
@@ -2996,9 +3001,6 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<Guid?>("MotoristaId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("NumeroPedido")
-                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Observacao")
                         .IsRequired()

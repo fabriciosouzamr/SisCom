@@ -494,13 +494,13 @@ namespace SisCom.Aplicacao.Formularios
             TentarGravar();
             Close();
         }
-        private void comboRemetenteUF_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboRemetenteUF_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((comboRemetenteUF.SelectedIndex != -1) && (comboRemetenteUF.Tag != Declaracoes.ComboBox_Carregando))
             {
                 if (Combo_ComboBox.Selecionado(comboRemetenteUF))
                 {
-                    comboRemetenteUF_Tratar();
+                    await Assincrono.TaskAsyncAndAwaitAsync(comboRemetenteUF_Tratar());
                 }
             }
         }
@@ -539,11 +539,38 @@ namespace SisCom.Aplicacao.Formularios
                     foreach (VendaViewModel vendaViewModel in ret)
                     {
                         dateDataEmissao.Value = vendaViewModel.DataVenda;
-                        if (!Funcao.Nulo(vendaViewModel.ClienteId)) comboRemetente.SelectedValue = vendaViewModel.ClienteId;
+                        if (!Funcao.Nulo(vendaViewModel.ClienteId))
+                        {
+                            comboRemetente.SelectedValue = vendaViewModel.ClienteId;
+                            Texto_MaskedTextBox.FormatarTipoPessoa(vendaViewModel.Cliente.TipoPessoa, maskedRemetenteCPFCNPJ);
+                            if (!String.IsNullOrEmpty(vendaViewModel.Cliente.CNPJ_CPF)) { maskedRemetenteCPFCNPJ.Text = vendaViewModel.Cliente.CNPJ_CPF;  }
+                            if ((vendaViewModel.Cliente.Endereco.End_Cidade != null))
+                            {
+                                dadolocal_Cliente_EstadoId = vendaViewModel.Cliente.Endereco.End_Cidade.EstadoId;
+                                if (!Funcao.Nulo(vendaViewModel.Cliente.Endereco.End_Cidade.EstadoId))
+                                { 
+                                    comboRemetenteUF.SelectedValue = vendaViewModel.Cliente.Endereco.End_Cidade.EstadoId;
+                                    await Assincrono.TaskAsyncAndAwaitAsync(comboRemetenteUF_Tratar());
+                                }
+                                if (!Funcao.Nulo(vendaViewModel.Cliente.Endereco.End_CidadeId)) comboRemetenteCidade.SelectedValue = vendaViewModel.Cliente.Endereco.End_CidadeId;
+                            }
+                            textRemetenteEndereco.Text = Funcao.NuloParaString(vendaViewModel.Cliente.Endereco.End_Logradouro);
+                            textRemetenteNumero.Text = Funcao.NuloParaString(vendaViewModel.Cliente.Endereco.End_Numero);
+                            textRemetenteBairro.Text = Funcao.NuloParaString(vendaViewModel.Cliente.Endereco.End_Bairro);
+                            textRemetenteCEP.Text = Funcao.NuloParaString(vendaViewModel.Cliente.Endereco.End_CEP);
+                            textRemetenteFones.Text = Funcao.NuloParaString(vendaViewModel.Cliente.Telefone);
+                            textRemetenteEMail.Text = Funcao.NuloParaString(vendaViewModel.Cliente.EMail);
+                        }
                         if (!Funcao.Nulo(vendaViewModel.EmpresaId)) comboEmpresa.SelectedValue = vendaViewModel.EmpresaId;
                         numericValorFrete.Value = vendaViewModel.ValorFrete;
                         numericValorDesconto.Value = vendaViewModel.ValorDesconto;
-                        if (!Funcao.Nulo(vendaViewModel.TransportadoraId)) comboTransportadora.SelectedValue = vendaViewModel.TransportadoraId;
+                        if (!Funcao.Nulo(vendaViewModel.TransportadoraId))
+                        {
+                            Texto_MaskedTextBox.FormatarTipoPessoa((TipoPessoaCliente)vendaViewModel.Transportadora.TipoPessoa, maskedRemetenteCPFCNPJ);
+                            if (!String.IsNullOrEmpty(vendaViewModel.Cliente.CNPJ_CPF)) { maskedRemetenteCPFCNPJ.Text = vendaViewModel.Cliente.CNPJ_CPF; }
+                            comboTransportadora.SelectedValue = vendaViewModel.TransportadoraId;
+                        }
+
                         if ((!Funcao.Nulo(vendaViewModel.VeiculoPlaca01)) && (!Funcao.Nulo(vendaViewModel.VeiculoPlaca01.NumeroPlaca))) textTransportadoraPlaca.Text = vendaViewModel.VeiculoPlaca01.NumeroPlaca;
                         if (!Funcao.Nulo(vendaViewModel.TabelaOrigemVendaId)) textLocalEntregaRetiradaEndereco.Text = vendaViewModel.EnderecoEntrega;
                     }
@@ -1371,6 +1398,8 @@ namespace SisCom.Aplicacao.Formularios
                 foreach (PessoaViewModel pessoaViewModel in ret)
                 {
                     dadolocal_Cliente_EstadoId = pessoaViewModel.Endereco.End_Cidade.EstadoId;
+                    Texto_MaskedTextBox.FormatarTipoPessoa(pessoaViewModel.TipoPessoa, maskedRemetenteCPFCNPJ);
+                    if (!String.IsNullOrEmpty(pessoaViewModel.CNPJ_CPF)) { maskedRemetenteCPFCNPJ.Text = pessoaViewModel.CNPJ_CPF; }
                     textRemetenteEndereco.Text = Funcao.NuloParaString(pessoaViewModel.Endereco.End_Logradouro);
                     textRemetenteNumero.Text = Funcao.NuloParaString(pessoaViewModel.Endereco.End_Numero);
                     textRemetenteBairro.Text = Funcao.NuloParaString(pessoaViewModel.Endereco.End_Bairro);

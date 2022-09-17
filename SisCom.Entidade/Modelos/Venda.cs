@@ -21,9 +21,10 @@ namespace SisCom.Entidade.Modelos
 		public VeiculoPlaca VeiculoPlaca03 { get; set; }
 		public string EnderecoEntrega { get; set; }
 		public bool PosuiEntrega { get; set; }
+        public string NumeroPedido { get; set; }
 
-		/* EF Relation */
-		public Guid? ClienteId { get; set; }
+        /* EF Relation */
+        public Guid? ClienteId { get; set; }
 		public Guid? VendedorId { get; set; }
 		public Guid? EmpresaId { get; set; }
 		public Guid? TabelaOrigemVendaId { get; set; }
