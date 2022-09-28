@@ -306,6 +306,7 @@
             this.botaoExcluir.Size = new System.Drawing.Size(61, 75);
             this.botaoExcluir.TabIndex = 59;
             this.botaoExcluir.UseVisualStyleBackColor = true;
+            this.botaoExcluir.Click += new System.EventHandler(this.botaoExcluir_Click);
             // 
             // botaoEditar
             // 
@@ -316,6 +317,7 @@
             this.botaoEditar.Size = new System.Drawing.Size(61, 75);
             this.botaoEditar.TabIndex = 56;
             this.botaoEditar.UseVisualStyleBackColor = true;
+            this.botaoEditar.Click += new System.EventHandler(this.botaoEditar_Click);
             // 
             // label38
             // 

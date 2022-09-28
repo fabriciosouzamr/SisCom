@@ -62,6 +62,7 @@ namespace SisCom.Aplicacao.Formularios
         private void botaoNovo_Click(object sender, EventArgs e)
         {
             var form = this.ServiceProvider().GetRequiredService<frmVendasInclusao>();
+            form.novo = true;
             form.ShowDialog(this);
         }
 
@@ -83,14 +84,16 @@ namespace SisCom.Aplicacao.Formularios
             string nFCe;
 
             var vendaController = new VendaController(this.MeuDbContext(), this._notifier);
-            var vendas = await vendaController.ObterTodos();
+            var vendas = await vendaController.ObterTodos(o => o.Codigo);
+
+            Grid_DataGridView.DataGridView_LinhaLimpar(gridVenda);
 
             foreach (var venda in vendas)
             {
                 valido = true;
 
-                if ((valido) && (!Funcao.NuloData(dateFiltro_DataInicial.Value))) { valido = venda.DataVenda >= dateFiltro_DataInicial.Value; }
-                if ((valido) && (!Funcao.NuloData(dateFiltro_DataInicial.Value))) { valido = venda.DataVenda <= dateFiltro_DataFinal.Value; }
+                if ((valido) && (!Funcao.NuloData(dateFiltro_DataInicial.Value))) { valido = venda.DataVenda.Date >= dateFiltro_DataInicial.Value; }
+                if ((valido) && (!Funcao.NuloData(dateFiltro_DataInicial.Value))) { valido = venda.DataVenda.Date <= dateFiltro_DataFinal.Value; }
                 if ((valido) && (!String.IsNullOrEmpty(textFiltro_Pedido.Text)) && (!String.IsNullOrEmpty(venda.NumeroPedido))) { valido = venda.NumeroPedido == textFiltro_Pedido.Text; }
                 //if ((valido) && (!String.IsNullOrEmpty(textFiltro_NFCe.Text)) ) { valido = venda.NotaFiscal == textFiltro_NFCe.Text && ((NF_Modelo)Convert.ToInt16(venda.Modelo) != NF_Modelo.CupomFiscalEletronica); }
                 //if ((valido) && (!String.IsNullOrEmpty(textFiltro_NFe.Text))) { valido = venda.NotaFiscal == textFiltro_NFe.Text && ((NF_Modelo)Convert.ToInt16(venda.Modelo) != NF_Modelo.NotaFiscalEletronica); }

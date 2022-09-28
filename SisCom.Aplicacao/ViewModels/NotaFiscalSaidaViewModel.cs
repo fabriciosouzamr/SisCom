@@ -50,25 +50,27 @@ namespace SisCom.Aplicacao.ViewModels
 		public float VolumeTransportados_PesoBruto { get; set; }
 		public float VolumeTransportados_PesoLiquido { get; set; }
 		public RegimeTributario RegimeTributario { get; set; }
-		public string ObservacaoDocumento { get; set; }
-		public string InformacoesAdicionaisInteresseFisco { get; set; }
-		public string InformacoesComplementaresInteresseContribuinte_Obsersacao { get; set; }
-		public Estado InformacoesComplementaresInteresseContribuinte_UF { get; set; }
-		public string InformacoesComplementaresInteresseContribuinte_Local { get; set; }
-		public string CodigoChaveAcesso { get; set; }
-		public string Protocolo { get; set; }
-		public NF_IndicaPresenca IndicaPresenca { get; set; }
-		public NF_TipoEmissao TipoEmissao { get; set; }
-		public NF_Operacao Operacao { get; set; }
-		public string EmailDestinoXML { get; set; }
+        public string? ObservacaoDocumento { get; set; }
+        public string? InformacoesAdicionaisInteresseFisco { get; set; }
+        public string? InformacoesComplementaresInteresseContribuinte_Obsersacao { get; set; }
+        public Estado? InformacoesComplementaresInteresseContribuinte_UF { get; set; }
+        public string? InformacoesComplementaresInteresseContribuinte_Local { get; set; }
+        public string? CodigoChaveAcesso { get; set; }
+        public string? Protocolo { get; set; }
+        public NF_IndicaPresenca IndicaPresenca { get; set; }
+        public NF_TipoEmissao TipoEmissao { get; set; }
+        public NF_Operacao Operacao { get; set; }
+        public string? EmailDestinoXML { get; set; }
+        public bool TransmitirCliente { get; set; }
         public bool TransmitirEnderecoCliente { get; set; }
-		public string RetornoSefaz { get; set; }
-        public string RetornoSefazCodigo { get; set; }
-        public DateTime DataRetornoSefaz { get; set; }
+        public string? RetornoSefaz { get; set; }
+        public string? RetornoSefazCodigo { get; set; }
+        public DateTime? DataRetornoSefaz { get; set; }
         public virtual List<NotaFiscalSaidaMercadoria> NotaFiscalSaidaMercadoria { get; set; }
         public virtual List<NotaFiscalSaidaPagamento> NotaFiscalSaidaPagamento { get; set; }
         public virtual List<NotaFiscalSaidaReferencia> NotaFiscalSaidaReferencia { get; set; }
         public virtual List<NotaFiscalSaidaObservacao> NotaFiscalSaidaObservacao { get; set; }
+        public Venda Venda { get; set; }
 
         /* EF Relation */
         public Guid? EmpresaId { get; set; }
@@ -80,5 +82,6 @@ namespace SisCom.Aplicacao.ViewModels
 		public Guid? TransportadoraId { get; set; }
 		public Guid? Transportadora_UFId { get; set; }
 		public Guid? InformacoesComplementaresInteresseContribuinte_UFId { get; set; }
+        public Guid? VendaId { get; set; }
     }
 }

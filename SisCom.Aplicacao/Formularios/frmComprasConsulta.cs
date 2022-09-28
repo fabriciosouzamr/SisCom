@@ -128,7 +128,7 @@ namespace SisCom.Aplicacao.Formularios
         private void LimparFiltros()
         {
             comboFiltroTipoData.SelectedValue = NF_TipoData.Emissao;
-            dateFiltro_DataInicial.Value = DateTime.Now.Date;
+            dateFiltro_DataInicial.Value = DateTime.Now.Date.AddDays(1 - DateTime.Now.Date.Day);
             dateFiltro_DataFinal.Value = DateTime.Now.Date;
             textFiltro_NotaFiscal.Text = "";
             comboFiltro_Fornecedor.SelectedIndex = -1;
@@ -146,14 +146,16 @@ namespace SisCom.Aplicacao.Formularios
             var notaFiscalentradamercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier);
             var notaFiscalentradamercadorias = await notaFiscalentradamercadoriaController.ObterTodos();
 
+            Grid_DataGridView.DataGridView_LinhaLimpar(gridNotaFiscalEntrada);
+
             foreach (var notaFiscalentradamercadoria in notaFiscalentradamercadorias)
             {
                 valido = true;
 
-                if (valido) valido = (((int)comboFiltroTipoData.SelectedValue == NF_TipoData.Emissao.GetHashCode()) && (notaFiscalentradamercadoria.NotaFiscalEntrada.DataEmissao >= dateFiltro_DataInicial.Value) ||
-                                      ((int)comboFiltroTipoData.SelectedValue == NF_TipoData.Entrada.GetHashCode()) && (notaFiscalentradamercadoria.NotaFiscalEntrada.DataEntrada >= dateFiltro_DataInicial.Value));
-                if (valido) valido = (((int)comboFiltroTipoData.SelectedValue == NF_TipoData.Emissao.GetHashCode()) && (notaFiscalentradamercadoria.NotaFiscalEntrada.DataEmissao <= dateFiltro_DataFinal.Value) ||
-                                      ((int)comboFiltroTipoData.SelectedValue == NF_TipoData.Entrada.GetHashCode()) && (notaFiscalentradamercadoria.NotaFiscalEntrada.DataEntrada <= dateFiltro_DataFinal.Value));
+                if (valido) valido = (((int)comboFiltroTipoData.SelectedValue == NF_TipoData.Emissao.GetHashCode()) && (notaFiscalentradamercadoria.NotaFiscalEntrada.DataEmissao.Date >= dateFiltro_DataInicial.Value) ||
+                                      ((int)comboFiltroTipoData.SelectedValue == NF_TipoData.Entrada.GetHashCode()) && (notaFiscalentradamercadoria.NotaFiscalEntrada.DataEntrada.Date >= dateFiltro_DataInicial.Value));
+                if (valido) valido = (((int)comboFiltroTipoData.SelectedValue == NF_TipoData.Emissao.GetHashCode()) && (notaFiscalentradamercadoria.NotaFiscalEntrada.DataEmissao.Date <= dateFiltro_DataFinal.Value) ||
+                                      ((int)comboFiltroTipoData.SelectedValue == NF_TipoData.Entrada.GetHashCode()) && (notaFiscalentradamercadoria.NotaFiscalEntrada.DataEntrada.Date <= dateFiltro_DataFinal.Value));
                 if ((valido) && (textFiltro_NotaFiscal.Text.Trim() != "")) valido = (notaFiscalentradamercadoria.NotaFiscalEntrada.NotaFiscal == textFiltro_NotaFiscal.Text);
                 if ((valido) && (comboFiltro_Fornecedor.SelectedIndex != -1)) valido = (notaFiscalentradamercadoria.NotaFiscalEntrada.FornecedorId == (Guid)comboFiltro_Fornecedor.SelectedValue);
                 if ((valido) && (comboFiltro_Empresa.SelectedIndex != -1)) valido = (notaFiscalentradamercadoria.NotaFiscalEntrada.EmpresaId == (Guid)comboFiltro_Empresa.SelectedValue);

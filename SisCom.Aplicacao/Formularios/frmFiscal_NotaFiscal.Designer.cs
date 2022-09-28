@@ -57,6 +57,9 @@
             this.botaoPosterior = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbsRemetente = new System.Windows.Forms.TabPage();
+            this.textNumeroNotaFiscalSaida = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.comboCFOP = new System.Windows.Forms.ComboBox();
             this.comboTransportadoraUF = new System.Windows.Forms.ComboBox();
             this.maskedTransportadoraCPFCNPJ = new System.Windows.Forms.MaskedTextBox();
             this.maskedRemetenteCPFCNPJ = new System.Windows.Forms.MaskedTextBox();
@@ -126,7 +129,6 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.botaoCadastrarNatureza = new System.Windows.Forms.Button();
-            this.labelNumeroNotaFiscalSaida = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.checkStatusInutilizada = new System.Windows.Forms.CheckBox();
@@ -160,7 +162,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.gridNotaFiscalEntrada = new System.Windows.Forms.DataGridView();
+            this.gridVenda = new System.Windows.Forms.DataGridView();
             this.label14 = new System.Windows.Forms.Label();
             this.comboOrigem = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -346,7 +348,7 @@
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalEntrada)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVenda)).BeginInit();
             this.tbsMercadorias.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel17.SuspendLayout();
@@ -521,6 +523,7 @@
             this.botaoImprimirEtiquetas.Size = new System.Drawing.Size(61, 75);
             this.botaoImprimirEtiquetas.TabIndex = 67;
             this.botaoImprimirEtiquetas.UseVisualStyleBackColor = true;
+            this.botaoImprimirEtiquetas.Click += new System.EventHandler(this.botaoImprimirEtiquetas_Click);
             // 
             // botaoImportarXMLNFe
             // 
@@ -542,6 +545,7 @@
             this.botaoClonarNFe.Size = new System.Drawing.Size(61, 75);
             this.botaoClonarNFe.TabIndex = 65;
             this.botaoClonarNFe.UseVisualStyleBackColor = true;
+            this.botaoClonarNFe.Click += new System.EventHandler(this.botaoClonarNFe_Click);
             // 
             // botaoExportarNFe
             // 
@@ -714,6 +718,9 @@
             // 
             // tbsRemetente
             // 
+            this.tbsRemetente.Controls.Add(this.textNumeroNotaFiscalSaida);
+            this.tbsRemetente.Controls.Add(this.label28);
+            this.tbsRemetente.Controls.Add(this.comboCFOP);
             this.tbsRemetente.Controls.Add(this.comboTransportadoraUF);
             this.tbsRemetente.Controls.Add(this.maskedTransportadoraCPFCNPJ);
             this.tbsRemetente.Controls.Add(this.maskedRemetenteCPFCNPJ);
@@ -783,7 +790,6 @@
             this.tbsRemetente.Controls.Add(this.label31);
             this.tbsRemetente.Controls.Add(this.label29);
             this.tbsRemetente.Controls.Add(this.botaoCadastrarNatureza);
-            this.tbsRemetente.Controls.Add(this.labelNumeroNotaFiscalSaida);
             this.tbsRemetente.Controls.Add(this.label27);
             this.tbsRemetente.Controls.Add(this.panel3);
             this.tbsRemetente.Controls.Add(this.label24);
@@ -812,6 +818,32 @@
             this.tbsRemetente.TabIndex = 0;
             this.tbsRemetente.Text = "Remetente";
             this.tbsRemetente.UseVisualStyleBackColor = true;
+            // 
+            // textNumeroNotaFiscalSaida
+            // 
+            this.textNumeroNotaFiscalSaida.Location = new System.Drawing.Point(1198, 32);
+            this.textNumeroNotaFiscalSaida.Name = "textNumeroNotaFiscalSaida";
+            this.textNumeroNotaFiscalSaida.Size = new System.Drawing.Size(109, 27);
+            this.textNumeroNotaFiscalSaida.TabIndex = 163;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(808, 67);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(44, 20);
+            this.label28.TabIndex = 162;
+            this.label28.Text = "CFOP";
+            // 
+            // comboCFOP
+            // 
+            this.comboCFOP.DropDownWidth = 200;
+            this.comboCFOP.FormattingEnabled = true;
+            this.comboCFOP.Location = new System.Drawing.Point(858, 63);
+            this.comboCFOP.Name = "comboCFOP";
+            this.comboCFOP.Size = new System.Drawing.Size(98, 28);
+            this.comboCFOP.TabIndex = 161;
+            this.comboCFOP.SelectedIndexChanged += new System.EventHandler(this.comboCFOP_SelectedIndexChanged);
             // 
             // comboTransportadoraUF
             // 
@@ -1451,17 +1483,6 @@
             this.botaoCadastrarNatureza.Text = "Cadastrar Natureza";
             this.botaoCadastrarNatureza.UseVisualStyleBackColor = true;
             // 
-            // labelNumeroNotaFiscalSaida
-            // 
-            this.labelNumeroNotaFiscalSaida.BackColor = System.Drawing.Color.White;
-            this.labelNumeroNotaFiscalSaida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelNumeroNotaFiscalSaida.Location = new System.Drawing.Point(1198, 35);
-            this.labelNumeroNotaFiscalSaida.Name = "labelNumeroNotaFiscalSaida";
-            this.labelNumeroNotaFiscalSaida.Size = new System.Drawing.Size(109, 25);
-            this.labelNumeroNotaFiscalSaida.TabIndex = 26;
-            this.labelNumeroNotaFiscalSaida.Text = "1";
-            this.labelNumeroNotaFiscalSaida.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label27
             // 
             this.label27.AutoSize = true;
@@ -1759,7 +1780,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.gridNotaFiscalEntrada);
+            this.groupBox1.Controls.Add(this.gridVenda);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.comboOrigem);
             this.groupBox1.Controls.Add(this.label13);
@@ -1788,16 +1809,16 @@
             this.label15.Text = "*Para devolução de NFe de Compra não podem ser alterados/adicionados registros.";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // gridNotaFiscalEntrada
+            // gridVenda
             // 
-            this.gridNotaFiscalEntrada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridNotaFiscalEntrada.Location = new System.Drawing.Point(7, 140);
-            this.gridNotaFiscalEntrada.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridNotaFiscalEntrada.Name = "gridNotaFiscalEntrada";
-            this.gridNotaFiscalEntrada.RowHeadersWidth = 51;
-            this.gridNotaFiscalEntrada.RowTemplate.Height = 25;
-            this.gridNotaFiscalEntrada.Size = new System.Drawing.Size(297, 237);
-            this.gridNotaFiscalEntrada.TabIndex = 15;
+            this.gridVenda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridVenda.Location = new System.Drawing.Point(7, 140);
+            this.gridVenda.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridVenda.Name = "gridVenda";
+            this.gridVenda.RowHeadersWidth = 51;
+            this.gridVenda.RowTemplate.Height = 25;
+            this.gridVenda.Size = new System.Drawing.Size(297, 237);
+            this.gridVenda.TabIndex = 15;
             // 
             // label14
             // 
@@ -3457,7 +3478,7 @@
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalEntrada)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVenda)).EndInit();
             this.tbsMercadorias.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel17.ResumeLayout(false);
@@ -3583,7 +3604,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboOrigem;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.DataGridView gridNotaFiscalEntrada;
+        private System.Windows.Forms.DataGridView gridVenda;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox comboEmpresa;
         private System.Windows.Forms.Label label16;
@@ -3616,7 +3637,6 @@
         private System.Windows.Forms.CheckBox checkStatusInutilizada;
         private System.Windows.Forms.CheckBox checkStatusFinalizada;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label labelNumeroNotaFiscalSaida;
         private System.Windows.Forms.Button botaoCadastrarNatureza;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.ComboBox comboRemetente;
@@ -3836,5 +3856,8 @@
         private System.Windows.Forms.MaskedTextBox maskedRemetenteCPFCNPJ;
         private System.Windows.Forms.MaskedTextBox maskedTransportadoraCPFCNPJ;
         private System.Windows.Forms.ComboBox comboTransportadoraUF;
+        private System.Windows.Forms.ComboBox comboCFOP;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox textNumeroNotaFiscalSaida;
     }
 }

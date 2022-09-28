@@ -75,8 +75,6 @@ namespace SisCom.Negocio.Services
         public async Task Excluir(Guid id)
         {
             await vendaMercadoriaRepository.Delete(id);
-
-            Notify("Exclusão Efetuada.");
         }
 
         public override void Dispose()

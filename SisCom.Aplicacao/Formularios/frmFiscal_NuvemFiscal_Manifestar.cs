@@ -51,7 +51,9 @@ namespace SisCom.Aplicacao
 
         public void Carregar()
         {
-            if (gridNotaFiscal.Columns.Count == 0) { Inicializar();  }
+            if (gridNotaFiscal.Columns.Count == 0) { Inicializar(); }
+
+            Grid_DataGridView.DataGridView_LinhaLimpar(gridNotaFiscal);
 
             foreach (NotaFiscalManifestar notaFiscalManifestar in NotasFiscalManifestar)
             {

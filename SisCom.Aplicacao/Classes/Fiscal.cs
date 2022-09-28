@@ -1199,7 +1199,7 @@ namespace SisCom.Aplicacao.Classes
                         return null;
                     }
                 }
-                if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.NotaFiscal))
+                if (String.IsNullOrEmpty(notaFiscalSaidaViewModel.NotaFiscal))
                 {
                     Fiscal_Historico(0, 0 /* iSQ_DOCUMENTOFISCAL */, "Criação do XML do documento fiscal");
 
@@ -1269,8 +1269,7 @@ namespace SisCom.Aplicacao.Classes
                     oNFe.infNFe.emit.IM = notaFiscalSaidaViewModel.Empresa.InscricaoMunicipal.Trim();
                     oNFe.infNFe.emit.CNAE = Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.InscricaoMunicipal).Trim();
                 }
-/*                else
-                    oNFe.infNFe.emit.IM = "ISENTO";*/
+
                 oNFe.infNFe.emit.IEST = null;
                 switch (notaFiscalSaidaViewModel.RegimeTributario)
                 {
@@ -1345,6 +1344,7 @@ namespace SisCom.Aplicacao.Classes
                     oNFe.infNFe.dest.enderDest.nro = notaFiscalSaidaViewModel.Cliente_Endereco.End_Numero;
                     oNFe.infNFe.dest.enderDest.xCpl = notaFiscalSaidaViewModel.Cliente_Endereco.End_Complemento;
                     oNFe.infNFe.dest.enderDest.xBairro = notaFiscalSaidaViewModel.Cliente_Endereco.End_Bairro;
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.CodigoIBGE))
                     oNFe.infNFe.dest.enderDest.cMun = Convert.ToInt32(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.CodigoIBGE);
                     oNFe.infNFe.dest.enderDest.xMun = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Nome;
                     oNFe.infNFe.dest.enderDest.UF = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Codigo;
@@ -1397,7 +1397,6 @@ namespace SisCom.Aplicacao.Classes
                 else
                 {
                     oNFe.infNFe.transp = new NFe.Classes.Informacoes.Transporte.transp();
-
                     oNFe.infNFe.transp.modFrete = (ModalidadeFrete)notaFiscalSaidaViewModel.Transportadora_FreteConta.GetHashCode();
 
                     if (oNFe.infNFe.transp.modFrete != ModalidadeFrete.mfSemFrete)
@@ -1581,10 +1580,10 @@ namespace SisCom.Aplicacao.Classes
                     foreach (NotaFiscalSaidaReferenciaViewModel notaFiscalSaidaReferenciaViewModel in notaFiscalSaidaReferenciaViewModels)
                     {
                         oNFref = new NFref();
-
+                        
                         if (notaFiscalSaidaViewModel.NotaFiscalFinalidadeId == Guid.Parse("93844C9B-2ECD-4DDE-B8C1-7623E9072C03"))
                         {
-                            oNFref.refNFe = notaFiscalSaidaViewModel.CodigoChaveAcesso;
+                            oNFref.refNFe = notaFiscalSaidaReferenciaViewModel.CodigoChaveAcesso;
 
                             if (sDS_INFORMACOES_ADICIONAIS.Trim() != "") sDS_INFORMACOES_ADICIONAIS = sDS_INFORMACOES_ADICIONAIS + ". ";
                             sDS_INFORMACOES_ADICIONAIS = sDS_INFORMACOES_ADICIONAIS + "DEVOLUCAO REF: ";
@@ -1654,6 +1653,9 @@ namespace SisCom.Aplicacao.Classes
                     }
                 }
                 */
+
+                notaFiscalSaidaViewModel.CodigoChaveAcesso = oNFe.infNFe.Id.Substring(3);
+
                 oNFe.Valida(oConfig);
 
                 notaFiscalSaidaViewModel.Status = NF_Status.Transmitida;
@@ -1662,7 +1664,7 @@ namespace SisCom.Aplicacao.Classes
             catch (Exception ex)
             {
                 if (ex.InnerException == null)
-                    CaixaMensagem.Informacao(ex.Message);
+                    CaixaMensagem.Informacao(ex.Message + ". " + Funcao.NuloParaString(ex.StackTrace));
                 else
                     CaixaMensagem.Informacao(ex.Message + "." + ex.InnerException.Message);
                 return null/* TODO Change to default(_) if this is not a reference type */;
@@ -1755,14 +1757,14 @@ namespace SisCom.Aplicacao.Classes
 
                 if (oNFe != null)
                 {
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.CodigoChaveAcesso))
-                    {
-                        oNFe_Proc = Fiscal_DocumentoFiscal_AssociarProtocolo(oConfig, oNFe, notaFiscalSaidaViewModel.CodigoChaveAcesso);
-                        oNFe = oNFe_Proc.NFe;
+                    //if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.CodigoChaveAcesso))
+                    //{
+                    //    oNFe_Proc = Fiscal_DocumentoFiscal_AssociarProtocolo(oConfig, oNFe, notaFiscalSaidaViewModel.CodigoChaveAcesso);
+                    //    oNFe = oNFe_Proc.NFe;
 
-                        if (oNFe_Proc.protNFe != null)
-                            bVerificarProtocolo = true;
-                    }
+                    //    if (oNFe_Proc.protNFe != null)
+                    //        bVerificarProtocolo = true;
+                    //}
 
                     string xml = Declaracoes.Aplicacao_CaminhoDiretorioTemporaria + "\\transmitir.xml";
                     oNFe.SalvarArquivoXml(xml);

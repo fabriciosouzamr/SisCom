@@ -77,7 +77,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 IEnumerable<NotaFiscalSaidaViewModel> ret;
 
-                gridNotaFiscalSaida.Rows.Clear();
+                Grid_DataGridView.DataGridView_LinhaLimpar(gridNotaFiscalSaida);
 
                 if ((statusId != null) || (dataInicial != null) || (dataFinal != null))
                 {
@@ -147,10 +147,10 @@ namespace SisCom.Aplicacao.Formularios
             {
                 case gridNotaFiscalSaida_BTN_Transmitir:
                     {
-                        if (((NF_Status)gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Status].Value == NF_Status.Pendente) ||
-                            ((NF_Status)gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Status].Value == NF_Status.Finalizada))
+                        if (((NF_Status)Convert.ToInt16(gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_ID_Status].Value) == NF_Status.Pendente) ||
+                            ((NF_Status)Convert.ToInt16(gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_ID_Status].Value) == NF_Status.Finalizada))
                         {
-                            Transmitir(Guid.Parse(gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Id].Value.ToString()));
+                            Transmitir(e.RowIndex, Guid.Parse(gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Id].Value.ToString()));
                         }
                         else
                         {
@@ -164,7 +164,7 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
-        async void Transmitir(Guid id)
+        async void Transmitir(int iLinha, Guid id)
         {
             NotaFiscalSaidaSerieViewModel notaFiscalSaidaSerieViewModel = new NotaFiscalSaidaSerieViewModel();
             NotaFiscalSaidaViewModel notaFiscalSaidaViewModel = new NotaFiscalSaidaViewModel();
@@ -207,6 +207,11 @@ namespace SisCom.Aplicacao.Formularios
                                                          ref sDS_PATH_XML,
                                                          ref bImpressaoNCFe,
                                                          false);
+            }
+
+            if (iLinha > -1)
+            {
+                gridNotaFiscalSaida.Rows[iLinha].Cells[gridNotaFiscalSaida_RetornoSefaz].Value = notaFiscalSaidaViewModel.RetornoSefaz;
             }
 
             using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
@@ -334,10 +339,10 @@ namespace SisCom.Aplicacao.Formularios
             {
                 if ((row.Cells[gridNotaFiscalSaida_Chk].Value != null) && ((bool)row.Cells[gridNotaFiscalSaida_Chk].Value))
                 {
-                    if (((NF_Status)row.Cells[gridNotaFiscalSaida_Status].Value == NF_Status.Pendente) ||
-                        ((NF_Status)row.Cells[gridNotaFiscalSaida_Status].Value == NF_Status.Finalizada))
+                    if (((NF_Status)Convert.ToInt16(row.Cells[gridNotaFiscalSaida_ID_Status].Value) == NF_Status.Pendente) ||
+                        ((NF_Status)Convert.ToInt16(row.Cells[gridNotaFiscalSaida_ID_Status].Value) == NF_Status.Finalizada))
                     {
-                        Transmitir((Guid)row.Cells[gridNotaFiscalSaida_Id].Value);
+                        Transmitir(row.Index, (Guid)row.Cells[gridNotaFiscalSaida_Id].Value);
                     }
                 }
             }

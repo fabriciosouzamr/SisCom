@@ -45,6 +45,7 @@ public static class Grid_DataGridView
     {
         Grid.AllowUserToAddRows = AllowUserToAddRows;
         Grid.AllowUserToDeleteRows = AllowUserToDeleteRows;
+        Grid.Rows.Clear();
     }
 
     public static void DataGridView_DataSource(DataGridView Grid, object dataSource, bool  allowNew)
@@ -234,6 +235,19 @@ public static class Grid_DataGridView
     public static void DataGridView_LinhaLimpar(DataGridView grid)
     {
         grid.Rows.Clear();
+    }
+
+    public static int DataGridView_Linhas(DataGridView grid, int coluna)
+    {
+        int iCont = 0;
+
+        foreach (DataGridViewRow row in grid.Rows)
+        {
+            if (row.Cells[coluna].Value != null)
+                iCont++;
+        }
+
+        return iCont;
     }
 
     public static DataGridViewRow DataGridView_LinhaAdicionar(DataGridView grid, Coluna[] valores)

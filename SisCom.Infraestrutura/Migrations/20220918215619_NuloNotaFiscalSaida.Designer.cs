@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220918215619_NuloNotaFiscalSaida")]
+    partial class NuloNotaFiscalSaida
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1494,18 +1496,22 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CNPJ_CPF")
+                        .IsRequired()
                         .HasColumnType("varchar(14)");
 
                     b.Property<Guid?>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cliente_EMail")
+                        .IsRequired()
                         .HasColumnType("varchar(200)");
 
                     b.Property<string>("Cliente_Telefone")
+                        .IsRequired()
                         .HasColumnType("varchar(20)");
 
                     b.Property<string>("CodigoChaveAcesso")
+                        .IsRequired()
                         .HasColumnType("varchar(44)");
 
                     b.Property<DateTime>("DataEmissao")
@@ -1521,45 +1527,53 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmailDestinoXML")
+                        .IsRequired()
                         .HasColumnType("varchar(200)");
 
                     b.Property<Guid?>("EmpresaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("HoraEmissao")
+                        .IsRequired()
                         .HasColumnType("varchar(5)");
 
                     b.Property<string>("IE")
+                        .IsRequired()
                         .HasColumnType("varchar(20)");
 
                     b.Property<int>("IndicaPresenca")
                         .HasColumnType("int");
 
                     b.Property<string>("InformacoesAdicionaisInteresseFisco")
+                        .IsRequired()
                         .HasColumnType("varchar(8000)");
 
                     b.Property<string>("InformacoesComplementaresInteresseContribuinte_Local")
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("InformacoesComplementaresInteresseContribuinte_Obsersacao")
+                        .IsRequired()
                         .HasColumnType("varchar(8000)");
 
                     b.Property<Guid?>("InformacoesComplementaresInteresseContribuinte_UFId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Modelo")
+                        .IsRequired()
                         .HasColumnType("varchar(2)");
 
                     b.Property<Guid?>("NaturezaOperacaoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NotaFiscal")
+                        .IsRequired()
                         .HasColumnType("varchar(10)");
 
                     b.Property<Guid?>("NotaFiscalFinalidadeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ObservacaoDocumento")
+                        .IsRequired()
                         .HasColumnType("varchar(8000)");
 
                     b.Property<int>("Operacao")
@@ -1581,6 +1595,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasDefaultValue(0m);
 
                     b.Property<string>("Protocolo")
+                        .IsRequired()
                         .HasColumnType("varchar(40)");
 
                     b.Property<int>("RegimeTributario")
@@ -1590,18 +1605,22 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("RetornoSefaz")
+                        .IsRequired()
                         .HasColumnType("varchar(8000)");
 
                     b.Property<string>("RetornoSefazCodigo")
+                        .IsRequired()
                         .HasColumnType("varchar(10)");
 
                     b.Property<string>("Serie")
+                        .IsRequired()
                         .HasColumnType("varchar(3)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("SubSerie")
+                        .IsRequired()
                         .HasColumnType("varchar(3)");
 
                     b.Property<Guid?>("TabelaOrigemVendaId")
@@ -1620,6 +1639,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Transportadora_CNPJ_CPF")
+                        .IsRequired()
                         .HasColumnType("varchar(14)");
 
                     b.Property<int>("Transportadora_FreteConta")
@@ -1629,9 +1649,11 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Transportadora_Placa")
+                        .IsRequired()
                         .HasColumnType("varchar(10)");
 
                     b.Property<string>("Transportadora_RNTRC")
+                        .IsRequired()
                         .HasColumnType("varchar(10)");
 
                     b.Property<Guid?>("Transportadora_UFId")
@@ -1662,9 +1684,11 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("VolumeTransportados_Especie")
+                        .IsRequired()
                         .HasColumnType("varchar(200)");
 
                     b.Property<string>("VolumeTransportados_Marca")
+                        .IsRequired()
                         .HasColumnType("varchar(200)");
 
                     b.Property<int>("VolumeTransportados_Numero")
@@ -2975,11 +2999,6 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<Guid?>("ClienteId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Codigo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DataVenda")
                         .HasColumnType("datetime2");

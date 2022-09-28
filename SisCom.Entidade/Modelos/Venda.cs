@@ -5,9 +5,10 @@ namespace SisCom.Entidade.Modelos
 {
 	public class Venda : Entity
 	{
-		public DateTime DataVenda { get; set; }
+        public int Codigo { get; set; }
+        public DateTime DataVenda { get; set; }
 		public Pessoa Cliente { get; set; }
-		public Funcionario Vendedor { get; set; }
+		public virtual Funcionario Vendedor { get; set; }
 		public Empresa Empresa { get; set; }
 		public TabelaOrigemVenda TabelaOrigemVenda { get; set; }
 		public decimal ValorFrete { get; set; }

@@ -1,27 +1,27 @@
 [
   {
-    "Nome": "COMPRA PARA INDUSTRIALIZAÇÃO",
+    "Nome": "COMPRA PARA INDUSTRIALIZAï¿½ï¿½O",
     "TabelaCFOPId": "3C4D0DFA-3B50-41F0-904C-A919EF018EF0",
     "EntradaSaida": 1,
     "PercentualICMS": 0,
-    "Devolucao" :  false
+    "Devolucao": false
   },
   {
-    "Nome": "COMPRA PARA COMERCIALIZAÇÃO",
+    "Nome": "COMPRA PARA COMERCIALIZAï¿½ï¿½O",
     "TabelaCFOPId": "904AA484-D99F-4741-8E61-D4F4B380D671",
     "EntradaSaida": 1,
     "PercentualICMS": 17,
     "Devolucao": false
   },
   {
-    "Nome": "DEVOLUÇÃO DE VENDA DE MERCADORIA ADQUIRIDA OU RECEBIDA DE TERCEIRO",
+    "Nome": "DEVOLUï¿½ï¿½O DE VENDA DE MERCADORIA ADQUIRIDA OU RECEBIDA DE TERCEIRO",
     "TabelaCFOPId": "E528E861-375C-4713-A616-AC16AA29B20E",
     "EntradaSaida": 1,
     "PercentualICMS": 0,
     "Devolucao": true
   },
   {
-    "Nome": "COMPRA PARA COMERCIALIZAÇÃO",
+    "Nome": "COMPRA PARA COMERCIALIZAï¿½ï¿½O",
     "TabelaCFOPId": "8995CC9C-AE5C-4EAF-B0B0-735EAFA049B4",
     "EntradaSaida": 1,
     "PercentualICMS": 12,
@@ -42,21 +42,21 @@
     "Devolucao": false
   },
   {
-    "Nome": "DEVOLUÇÃO DE COMPRA PARA COMERCIALIZAÇÃO",
+    "Nome": "DEVOLUï¿½ï¿½O DE COMPRA PARA COMERCIALIZAï¿½ï¿½O",
     "TabelaCFOPId": "AFD0892E-9667-4169-B7EA-5689BC6D3BF1",
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": true
   },
   {
-    "Nome": "REMESSA PARA DEPÓSITO FECHADO OU ARMAZÉM GERAL",
+    "Nome": "REMESSA PARA DEPï¿½SITO FECHADO OU ARMAZï¿½M GERAL",
     "TabelaCFOPId": "81AC5185-0064-4695-93D6-0E9D3B6A5B8C",
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": false
   },
   {
-    "Nome": "REMESSA EM BONIFICAÇÃO, DOAÇÃO OU BRINDE",
+    "Nome": "REMESSA EM BONIFICAï¿½ï¿½O, DOAï¿½ï¿½O OU BRINDE",
     "TabelaCFOPId": "E6BBA066-9E62-47B1-AAD0-04887D8D765A",
     "EntradaSaida": 2,
     "PercentualICMS": 17,
@@ -70,21 +70,21 @@
     "Devolucao": false
   },
   {
-    "Nome": "DEVOLUÇÃO DE COMPRA PARA COMERCIALIZAÇÃO",
+    "Nome": "DEVOLUï¿½ï¿½O DE COMPRA PARA COMERCIALIZAï¿½ï¿½O",
     "TabelaCFOPId": "A02B74B8-F8DC-491C-9445-F1270B347886",
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": true
   },
   {
-    "Nome": "REMESSA PARA DEPÓSITO FECHADO OU ARMAZÉM GERAL",
+    "Nome": "REMESSA PARA DEPï¿½SITO FECHADO OU ARMAZï¿½M GERAL",
     "TabelaCFOPId": "AD323588-3AFC-4DD5-952B-A95145D96DB4",
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": false
   },
   {
-    "Nome": "REMESSA EM BONIFICAÇÃO, DOAÇÃO OU BRINDE",
+    "Nome": "REMESSA EM BONIFICAï¿½ï¿½O, DOAï¿½ï¿½O OU BRINDE",
     "TabelaCFOPId": "CC3819A8-A1B9-43E4-A847-35A2CDE02A3C",
     "EntradaSaida": 2,
     "PercentualICMS": 0,

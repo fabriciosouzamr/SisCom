@@ -169,7 +169,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             try
             {
-                gridNotaFiscal.Rows.Clear();
+                Grid_DataGridView.DataGridView_LinhaLimpar(gridNotaFiscal);
 
                 string[] diretorios = Directory.GetFiles(Declaracoes.externos_Path_NuvemFiscal, "*.xml");
                 bool achou = false;

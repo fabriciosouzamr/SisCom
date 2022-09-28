@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Entity;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -7,6 +8,7 @@ using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
@@ -42,13 +44,12 @@ namespace SisCom.Aplicacao.Controllers
         public async Task<VendaViewModel> Atualizar(Guid id, VendaViewModel VendaViewModal)
         {
             await _vendaService.Atualizar(Declaracoes.mapper.Map<Venda>(VendaViewModal));
-
             return VendaViewModal;
         }
 
-        public async Task<IEnumerable<VendaViewModel>> ObterTodos()
+        public async Task<IEnumerable<VendaViewModel>> ObterTodos(Expression<Func<Venda, object>> order = null)
         {
-            var obterTodos = await _vendaService.GetAll(null, null, i => i.Cliente,
+            var obterTodos = await _vendaService.GetAll(order, null, i => i.Cliente,
                                                                     i => i.Cliente.Endereco,
                                                                     i => i.Cliente.Endereco.End_Cidade,
                                                                     i => i.Cliente.Endereco.End_Cidade.Estado,

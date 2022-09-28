@@ -149,11 +149,12 @@ namespace SisCom.Aplicacao_FW
             {
                 var servicoNFe = new ServicosNFe(Configuracao());
                 var oNFe = new NFe.Classes.NFe().CarregarDeArquivoXml(_XML.Replace("'", ""));
-                var nFeAutorizacao = servicoNFe.NFeAutorizacao(Convert.ToInt32("1"), IndicadorSincronizacao.Assincrono, new List<NFeZeus>(new NFeZeus[] { oNFe }), true);
+                var nFeAutorizacao = servicoNFe.NFeAutorizacao(Convert.ToInt32("1"), IndicadorSincronizacao.Sincrono, new List<NFeZeus>(new NFeZeus[] { oNFe }), true);
                 string mensagem = "Sem protocolo";
                 string cStat = "00";
                 string protocolo = "00";
                 string retorno = nFeAutorizacao.RetornoStr;
+                bool consularprotocolo = false;
 
                 if (nFeAutorizacao.Retorno != null)
                 {
@@ -163,48 +164,85 @@ namespace SisCom.Aplicacao_FW
 
                     var sNFe_Chave = oNFe.infNFe.Id.Substring(3);
 
-                    for (var iCont = 1; iCont <= 5; iCont++)
+                    if (nFeAutorizacao.Retorno.protNFe != null)
                     {
-                        try
+                        oNFe_Proc = new nfeProc();
+                        oNFe_Proc.NFe = oNFe;
+                        oNFe_Proc.protNFe = new NFe.Classes.Protocolo.protNFe();
+                        oNFe_Proc.protNFe = nFeAutorizacao.Retorno.protNFe;
+                        oNFe_Proc.versao = nFeAutorizacao.Retorno.versao;
+
+                        if (nFeAutorizacao.Retorno.protNFe.infProt.cStat == 217 /* Rejeicao_NFeNaoConstaBaseDadosSEFAZ */ )
                         {
-                            oNFe_Servico_Retorno = servicoNFe.NfeConsultaProtocolo(sNFe_Chave);
-
-                            oNFe_Proc = new nfeProc();
-                            oNFe_Proc.NFe = oNFe;
-                            oNFe_Proc.protNFe = new NFe.Classes.Protocolo.protNFe();
-                            oNFe_Proc.protNFe = oNFe_Servico_Retorno.Retorno.protNFe;
-                            oNFe_Proc.versao = oNFe_Servico_Retorno.Retorno.versao;
-
-
-                            if (oNFe_Servico_Retorno.Retorno.cStat == 217 /* Rejeicao_NFeNaoConstaBaseDadosSEFAZ */ )
+                            cStat = nFeAutorizacao.Retorno.protNFe.infProt.cStat.ToString();
+                            mensagem = "NFe Não Consta na Base Dados do SEFAZ";
+                        }
+                        else if (nFeAutorizacao.Retorno.protNFe.infProt.xMotivo.IndexOf("Rejeicao:") > -1)
+                        {
+                            cStat = nFeAutorizacao.Retorno.protNFe.infProt.cStat.ToString();
+                            mensagem = nFeAutorizacao.Retorno.protNFe.infProt.xMotivo;
+                        }
+                        else
+                        {
+                            if (oNFe_Proc.protNFe != null)
                             {
-                                cStat = oNFe_Servico_Retorno.Retorno.cStat.ToString();
-                                mensagem = "NFe Não Consta na Base Dados do SEFAZ";
-                                break;
+                                protocolo = oNFe_Proc.protNFe.infProt.nProt;
+                                var sNFe_Arquivo = _PATH_NUVEMFISCAL + sNFe_Chave + "-procNfe.xml";
+
+                                FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, sNFe_Arquivo);
                             }
-                            else if (iCont == 5)
-                            {
-                                cStat = oNFe_Servico_Retorno.Retorno.cStat.ToString();
+                        }
+                    }
+                    else
+                    {
+                        consularprotocolo = true;
+                    }
 
-                                mensagem = oNFe_Servico_Retorno.Retorno.xMotivo;
-                            }
-                            else
+                    if (consularprotocolo)
+                    {
+                        for (var iCont = 1; iCont <= 5; iCont++)
+                        {
+                            try
                             {
-                                if (oNFe_Proc.protNFe != null)
+                                oNFe_Servico_Retorno = servicoNFe.NfeConsultaProtocolo(sNFe_Chave);
+
+                                oNFe_Proc = new nfeProc();
+                                oNFe_Proc.NFe = oNFe;
+                                oNFe_Proc.protNFe = new NFe.Classes.Protocolo.protNFe();
+                                oNFe_Proc.protNFe = oNFe_Servico_Retorno.Retorno.protNFe;
+                                oNFe_Proc.versao = oNFe_Servico_Retorno.Retorno.versao;
+
+
+                                if (oNFe_Servico_Retorno.Retorno.cStat == 217 /* Rejeicao_NFeNaoConstaBaseDadosSEFAZ */ )
                                 {
-                                    protocolo = oNFe_Proc.protNFe.infProt.nProt;
-                                    var sNFe_Arquivo = _PATH_NUVEMFISCAL + sNFe_Chave + "-procNfe.xml";
+                                    cStat = oNFe_Servico_Retorno.Retorno.cStat.ToString();
+                                    mensagem = "NFe Não Consta na Base Dados do SEFAZ";
+                                    break;
+                                }
+                                else if (iCont == 5)
+                                {
+                                    cStat = oNFe_Servico_Retorno.Retorno.cStat.ToString();
 
-                                    FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, sNFe_Arquivo);
+                                    mensagem = oNFe_Servico_Retorno.Retorno.xMotivo;
+                                }
+                                else
+                                {
+                                    if (oNFe_Proc.protNFe != null)
+                                    {
+                                        protocolo = oNFe_Proc.protNFe.infProt.nProt;
+                                        var sNFe_Arquivo = _PATH_NUVEMFISCAL + sNFe_Chave + "-procNfe.xml";
+
+                                        FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, sNFe_Arquivo);
+                                    }
+
+                                    break;
                                 }
 
-                                break;
+                                iCont++;
                             }
-
-                            iCont++;
-                        }
-                        catch (Exception)
-                        {
+                            catch (Exception)
+                            {
+                            }
                         }
                     }
                 }

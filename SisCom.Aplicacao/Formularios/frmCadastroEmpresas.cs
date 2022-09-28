@@ -4,10 +4,12 @@ using Funcoes.Classes;
 using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
+using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -133,6 +135,18 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                      comboEnderecoCidade,
                                                                                                      comboEnderecoUF,
                                                                                                      null);
+
+                if (textNFESerie.Text.Trim() != "")
+                {
+                    using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
+                    {
+                        var notaFiscalSaidaSerie = (await notaFiscalSaidaSerieController.PesquisarSerie(textNFESerie.Text)).FirstOrDefault();
+
+                        if (notaFiscalSaidaSerie != null)
+                        { textNFEUltimaNotaFiscal.Text = notaFiscalSaidaSerie.UltimaNotaFiscal; }
+                    }
+                }
+
                 this.MeuDbContextDispose();
 
                 editado = false;
@@ -159,6 +173,28 @@ namespace SisCom.Aplicacao.Formularios
             else
             {
                 empresa = (await empresaController.Adicionar(empresa));
+            }
+
+            if (textNFESerie.Text.Trim() != "")
+            {
+                using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
+                {
+                    var notaFiscalSaidaSerie = (await notaFiscalSaidaSerieController.PesquisarSerie(textNFESerie.Text)).FirstOrDefault();
+
+                    NotaFiscalSaidaSerieViewModel notaFiscalSaidaSerieViewModel = new NotaFiscalSaidaSerieViewModel();
+
+                    notaFiscalSaidaSerieViewModel.Serie = textNFESerie.Text.Trim();
+                    notaFiscalSaidaSerieViewModel.UltimaNotaFiscal = textNFEUltimaNotaFiscal.Text;
+                    notaFiscalSaidaSerieViewModel.EmpresaId = Declaracoes.dados_Empresa_Id;
+
+                    if (notaFiscalSaidaSerie == null)
+                    { notaFiscalSaidaSerieController.Adicionar(notaFiscalSaidaSerieViewModel); }
+                    else
+                    {
+                        notaFiscalSaidaSerieViewModel.Id = notaFiscalSaidaSerie.Id;
+                        notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerieViewModel.Id, notaFiscalSaidaSerieViewModel); 
+                    }
+                }
             }
 
             if (empresa.Id == Declaracoes.dados_Empresa_Id)
@@ -301,7 +337,6 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoGravar_Click(object sender, EventArgs e)
         {
-
             if (!Validacao.CPFCNPJ_Valido(TipoPessoa.Juridica, Funcoes._Classes.Texto.SomenteNumero(maskedCPFCNPJ.Text)))
             {
                 CaixaMensagem.Informacao("Informe o C.N.P.J!");

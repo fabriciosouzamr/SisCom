@@ -39,6 +39,8 @@ namespace SisCom.Aplicacao.Formularios
                                                                                        readOnly: false, 
                                                                                        Tamanho: 200);
 
+            Grid_DataGridView.DataGridView_LinhaLimpar(gridObservacao);
+
             using (ObservacaoController observacaoController = new ObservacaoController(this.MeuDbContext(), this._notifier))
             {
                 IEnumerable<ObservacaoViewModel> ret = await observacaoController.ObterTodos();

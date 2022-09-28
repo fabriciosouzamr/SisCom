@@ -12,7 +12,8 @@ namespace SisCom.Aplicacao.ViewModels
     {
 		[Key]
 		public Guid Id { get; set; }
-		public DateTime DataVenda { get; set; }
+        public int Codigo { get; set; }
+        public DateTime DataVenda { get; set; }
 		public Pessoa Cliente { get; set; }
 		public Funcionario Vendedor { get; set; }
 		public Empresa Empresa { get; set; }

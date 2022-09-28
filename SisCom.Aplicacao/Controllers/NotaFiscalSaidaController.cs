@@ -44,15 +44,15 @@ namespace SisCom.Aplicacao.Controllers
 
             return NotaFiscalSaidaViewModel;
         }
-        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> ObterTodos()
+        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> ObterTodos(Expression<Func<NotaFiscalSaida, bool>> predicate = null)
         {
-            var obterTodos = await _NotaFiscalSaidaService.GetAll(null, null, i => i.NotaFiscalFinalidade,
-                                                                              i => i.Cliente,
-                                                                              i => i.Cliente.Endereco,
-                                                                              i => i.Cliente.Endereco.End_Cidade,
-                                                                              i => i.Cliente.Endereco.End_Cidade.Estado,
-                                                                              i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
-                                                                              i => i.Vendedor);
+            var obterTodos = await _NotaFiscalSaidaService.GetAll(null, predicate, i => i.NotaFiscalFinalidade,
+                                                                                   i => i.Cliente,
+                                                                                   i => i.Cliente.Endereco,
+                                                                                   i => i.Cliente.Endereco.End_Cidade,
+                                                                                   i => i.Cliente.Endereco.End_Cidade.Estado,
+                                                                                   i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
+                                                                                   i => i.Vendedor);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(obterTodos);
 
         }
