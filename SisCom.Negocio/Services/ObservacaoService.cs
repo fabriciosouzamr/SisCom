@@ -58,16 +58,6 @@ namespace SisCom.Negocio.Services
         {
             try
             {
-                //if (!RunValidation(new PessoaValidation(), pessoa)) return;
-
-                //var exists = _observacaoRepository.Exists(f => f.Nome == mercadoria.Nome && f.Id != mercadoria.Id);
-
-                //if (exists)
-                //{
-                //    Notify("Já existe uma mercadoria com esse nome informado.");
-                //    return;
-                //}
-
                 observacao.UltimaAtualizacao = DateTime.Now;
 
                 await _observacaoRepository.Update(observacao);

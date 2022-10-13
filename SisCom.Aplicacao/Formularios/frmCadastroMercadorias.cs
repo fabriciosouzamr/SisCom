@@ -33,6 +33,8 @@ namespace SisCom.Aplicacao.Formularios
         {
             InitializeComponent();
             Inicializar();
+
+            this.Height = 780;
         }
         #region Combos
         private async Task<bool> comboGrupoProduto_Carregar()

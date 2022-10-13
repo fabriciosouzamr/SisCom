@@ -42,7 +42,7 @@ namespace SisCom.Aplicacao.Formularios
         enum TipoManifestacao
         {
             [Description("Todas")]
-            Codigo = 0,
+            Todas = 0,
             [Description("Manifestação")]
             Manifestacao = 1,
             [Description("Sem manifestação")]
@@ -93,6 +93,9 @@ namespace SisCom.Aplicacao.Formularios
             Combo_ComboBox.Formatar(comboTipoData, "", "", ComboBoxStyle.DropDownList, null, typeof(DataPesquisa));
             Combo_ComboBox.Formatar(comboTipoNSU, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoNSU));
             Combo_ComboBox.Formatar(comboTipoTLS, "", "", ComboBoxStyle.DropDownList, null, typeof(TLS));
+
+            comboTipoManifestacao.SelectedValue = TipoManifestacao.Todas;
+            comboTipoData.SelectedValue = DataPesquisa.DataPesquisa;
 
             datePeriodoInicial.Value = DateTime.Now.Date;
             datePeriodoFinal.Value = DateTime.Now.Date;
@@ -153,11 +156,13 @@ namespace SisCom.Aplicacao.Formularios
 
                 var retorno = Zeus.NuvemFiscal(sNSU);
 
-                await (new EmpresaController(this.MeuDbContext(), this._notifier)).AtualizarNSU((Guid)comboEmpresa.SelectedValue, retorno.ultNSU.ToString());
-
-                if (retorno.xMotivo.IndexOf("Rejeicao:") != -1)
+                if (retorno.xMotivo.Contains("Rejeicao:"))
                 {
                     CaixaMensagem.Informacao(retorno.xMotivo);
+                }
+                else
+                {
+                    await (new EmpresaController(this.MeuDbContext(), this._notifier)).AtualizarNSU((Guid)comboEmpresa.SelectedValue, retorno.ultNSU.ToString());
                 }
             }
             else

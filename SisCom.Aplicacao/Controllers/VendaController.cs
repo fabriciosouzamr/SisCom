@@ -50,11 +50,11 @@ namespace SisCom.Aplicacao.Controllers
         public async Task<IEnumerable<VendaViewModel>> ObterTodos(Expression<Func<Venda, object>> order = null)
         {
             var obterTodos = await _vendaService.GetAll(order, null, i => i.Cliente,
-                                                                    i => i.Cliente.Endereco,
-                                                                    i => i.Cliente.Endereco.End_Cidade,
-                                                                    i => i.Cliente.Endereco.End_Cidade.Estado,
-                                                                    i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
-                                                                    i => i.Vendedor);
+                                                                     i => i.Cliente.Endereco,
+                                                                     i => i.Cliente.Endereco.End_Cidade,
+                                                                     i => i.Cliente.Endereco.End_Cidade.Estado,
+                                                                     i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
+                                                                     i => i.Vendedor);
             return Declaracoes.mapper.Map<IEnumerable<VendaViewModel>>(obterTodos);
         }
 

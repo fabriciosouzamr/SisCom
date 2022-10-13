@@ -1,5 +1,6 @@
 ﻿using Funcoes._Entity;
 using Funcoes.Interfaces;
+using NFe.Classes;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -24,6 +25,12 @@ namespace SisCom.Aplicacao.Controllers
             this.meuDbContext = meuDbContext;
             _NotaFiscalSaidaService = new NotaFiscalSaidaService(new NotaFiscalSaidaRepository(meuDbContext), notifier);
         }
+        public async Task<bool> Excluir(Guid Id)
+        {
+            await _NotaFiscalSaidaService.Excluir(Id);
+
+            return true;
+        }
         public async Task<NotaFiscalSaidaViewModel> Adicionar(NotaFiscalSaidaViewModel NotaFiscalSaidaViewModel)
         {
             var NotaFiscalSaida = Declaracoes.mapper.Map<NotaFiscalSaida>(NotaFiscalSaidaViewModel);
@@ -31,12 +38,6 @@ namespace SisCom.Aplicacao.Controllers
             await _NotaFiscalSaidaService.Adicionar(NotaFiscalSaida);
 
             return Declaracoes.mapper.Map<NotaFiscalSaidaViewModel>(NotaFiscalSaida);
-        }
-        public async Task<bool> Excluir(Guid Id)
-        {
-            await _NotaFiscalSaidaService.Excluir(Id);
-
-            return true;
         }
         public async Task<NotaFiscalSaidaViewModel> Atualizar(Guid id, NotaFiscalSaidaViewModel NotaFiscalSaidaViewModel)
         {

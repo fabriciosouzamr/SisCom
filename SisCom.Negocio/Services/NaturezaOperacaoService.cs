@@ -4,6 +4,7 @@ using SisCom.Entidade.Modelos;
 using SisCom.Negocio.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -36,14 +37,44 @@ namespace SisCom.Negocio.Services
             _NaturezaOperacaoRepository?.Dispose();
         }
 
-        public Task Adicionar(NaturezaOperacao NaturezaOperacao)
+        public async Task Adicionar(NaturezaOperacao NaturezaOperacao)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var _NaturezaOperacao = await _NaturezaOperacaoRepository.Search(f => f.Nome == NaturezaOperacao.Nome);
+
+                if (_NaturezaOperacao.Any())
+                {
+                    Notify("Já existe uma Natureza de Operação com esse nome informado.");
+                    return;
+                }
+
+                await _NaturezaOperacaoRepository.Insert(NaturezaOperacao);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Atualizar(NaturezaOperacao NaturezaOperacao)
+        public async Task Atualizar(NaturezaOperacao NaturezaOperacao)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var _NotaFiscalSaida = await _NaturezaOperacaoRepository.Search(f => (f.Nome == NaturezaOperacao.Nome) && (f.Id != NaturezaOperacao.Id));
+
+                if (_NotaFiscalSaida.Any())
+                {
+                    Notify("Já existe uma Natureza de Operação com esse nome informado.");
+                    return;
+                }
+
+                await _NaturezaOperacaoRepository.Update(NaturezaOperacao);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
         public Task Remover(Guid id)

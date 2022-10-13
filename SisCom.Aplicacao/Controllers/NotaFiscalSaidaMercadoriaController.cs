@@ -22,6 +22,12 @@ namespace SisCom.Aplicacao.Controllers
             this.meuDbContext = meuDbContext;
             _NotaFiscalSaidaMercadoriaService = new NotaFiscalSaidaMercadoriaService(new NotaFiscalSaidaMercadoriaRepository(meuDbContext), notifier);
         }
+        public async Task<bool> Excluir(Guid Id)
+        {
+            await _NotaFiscalSaidaMercadoriaService.Excluir(Id);
+
+            return true;
+        }
         public async Task<NotaFiscalSaidaMercadoriaViewModel> Adicionar(NotaFiscalSaidaMercadoriaViewModel NotaFiscalSaidaMercadoriaViewModel)
         {
             var NotaFiscalSaidaMercadoria = Declaracoes.mapper.Map<NotaFiscalSaidaMercadoria>(NotaFiscalSaidaMercadoriaViewModel);
@@ -29,12 +35,6 @@ namespace SisCom.Aplicacao.Controllers
             await _NotaFiscalSaidaMercadoriaService.Adicionar(NotaFiscalSaidaMercadoria);
 
             return Declaracoes.mapper.Map<NotaFiscalSaidaMercadoriaViewModel>(NotaFiscalSaidaMercadoria);
-        }
-        public async Task<bool> Excluir(Guid Id)
-        {
-            await _NotaFiscalSaidaMercadoriaService.Excluir(Id);
-
-            return true;
         }
         public async Task<NotaFiscalSaidaMercadoriaViewModel> Atualizar(Guid id, NotaFiscalSaidaMercadoriaViewModel NotaFiscalSaidaMercadoriaViewModel)
         {

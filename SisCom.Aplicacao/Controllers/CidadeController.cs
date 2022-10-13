@@ -74,5 +74,9 @@ namespace SisCom.Aplicacao.Controllers
             var combo = await _CidadeService.ComboSearch(p => p.EstadoId == EstadoId, order);
             return Declaracoes.mapper.Map<IEnumerable<CidadeComboViewModel>>(combo);
         }
+        //public void dispose()
+        //{
+        //    meudbcontext.dispose();
+        //}
     }
 }

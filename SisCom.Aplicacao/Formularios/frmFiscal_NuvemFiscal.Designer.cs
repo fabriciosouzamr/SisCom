@@ -61,12 +61,11 @@ namespace SisCom.Aplicacao.Formularios
             // gridNotaFiscal
             // 
             this.gridNotaFiscal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridNotaFiscal.Location = new System.Drawing.Point(14, 135);
-            this.gridNotaFiscal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridNotaFiscal.Location = new System.Drawing.Point(12, 101);
             this.gridNotaFiscal.Name = "gridNotaFiscal";
             this.gridNotaFiscal.RowHeadersWidth = 51;
             this.gridNotaFiscal.RowTemplate.Height = 25;
-            this.gridNotaFiscal.Size = new System.Drawing.Size(1471, 391);
+            this.gridNotaFiscal.Size = new System.Drawing.Size(1287, 293);
             this.gridNotaFiscal.TabIndex = 5;
             this.gridNotaFiscal.TabStop = false;
             this.gridNotaFiscal.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscal_CellClick);
@@ -75,37 +74,35 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(23, 40);
+            this.label14.Location = new System.Drawing.Point(20, 30);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(163, 20);
+            this.label14.Size = new System.Drawing.Size(128, 15);
             this.label14.TabIndex = 105;
             this.label14.Text = "Tipo de Manifestação:";
             // 
             // comboTipoManifestacao
             // 
             this.comboTipoManifestacao.FormattingEnabled = true;
-            this.comboTipoManifestacao.Location = new System.Drawing.Point(171, 35);
-            this.comboTipoManifestacao.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboTipoManifestacao.Location = new System.Drawing.Point(150, 26);
             this.comboTipoManifestacao.Name = "comboTipoManifestacao";
-            this.comboTipoManifestacao.Size = new System.Drawing.Size(228, 28);
+            this.comboTipoManifestacao.Size = new System.Drawing.Size(200, 23);
             this.comboTipoManifestacao.TabIndex = 1;
             // 
             // datePeriodoInicial
             // 
             this.datePeriodoInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.datePeriodoInicial.Location = new System.Drawing.Point(719, 35);
-            this.datePeriodoInicial.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.datePeriodoInicial.Location = new System.Drawing.Point(629, 26);
             this.datePeriodoInicial.Name = "datePeriodoInicial";
-            this.datePeriodoInicial.Size = new System.Drawing.Size(92, 27);
+            this.datePeriodoInicial.Size = new System.Drawing.Size(81, 23);
             this.datePeriodoInicial.TabIndex = 3;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(685, 40);
+            this.label8.Location = new System.Drawing.Point(599, 30);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(32, 20);
+            this.label8.Size = new System.Drawing.Size(26, 15);
             this.label8.TabIndex = 100;
             this.label8.Text = "De:";
             // 
@@ -113,101 +110,95 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(104, 79);
+            this.label1.Location = new System.Drawing.Point(91, 59);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 20);
+            this.label1.Size = new System.Drawing.Size(57, 15);
             this.label1.TabIndex = 107;
             this.label1.Text = "Empresa:";
             // 
             // comboEmpresa
             // 
             this.comboEmpresa.FormattingEnabled = true;
-            this.comboEmpresa.Location = new System.Drawing.Point(171, 73);
-            this.comboEmpresa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboEmpresa.Location = new System.Drawing.Point(150, 55);
             this.comboEmpresa.Name = "comboEmpresa";
-            this.comboEmpresa.Size = new System.Drawing.Size(228, 28);
+            this.comboEmpresa.Size = new System.Drawing.Size(200, 23);
             this.comboEmpresa.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(411, 40);
+            this.label2.Location = new System.Drawing.Point(360, 30);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 20);
+            this.label2.Size = new System.Drawing.Size(60, 15);
             this.label2.TabIndex = 109;
             this.label2.Text = "Tipo Data";
             // 
             // comboTipoData
             // 
             this.comboTipoData.FormattingEnabled = true;
-            this.comboTipoData.Location = new System.Drawing.Point(490, 35);
-            this.comboTipoData.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboTipoData.Location = new System.Drawing.Point(429, 26);
             this.comboTipoData.Name = "comboTipoData";
-            this.comboTipoData.Size = new System.Drawing.Size(187, 28);
+            this.comboTipoData.Size = new System.Drawing.Size(164, 23);
             this.comboTipoData.TabIndex = 2;
             // 
             // textChaveNFe
             // 
-            this.textChaveNFe.Location = new System.Drawing.Point(490, 73);
-            this.textChaveNFe.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textChaveNFe.Location = new System.Drawing.Point(429, 55);
             this.textChaveNFe.Name = "textChaveNFe";
-            this.textChaveNFe.Size = new System.Drawing.Size(321, 27);
+            this.textChaveNFe.Size = new System.Drawing.Size(281, 23);
             this.textChaveNFe.TabIndex = 6;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label27.Location = new System.Drawing.Point(411, 79);
+            this.label27.Location = new System.Drawing.Point(360, 59);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(87, 20);
+            this.label27.Size = new System.Drawing.Size(69, 15);
             this.label27.TabIndex = 123;
             this.label27.Text = "Chave NFe:";
             // 
             // datePeriodoFinal
             // 
             this.datePeriodoFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.datePeriodoFinal.Location = new System.Drawing.Point(854, 35);
-            this.datePeriodoFinal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.datePeriodoFinal.Location = new System.Drawing.Point(747, 26);
             this.datePeriodoFinal.Name = "datePeriodoFinal";
-            this.datePeriodoFinal.Size = new System.Drawing.Size(92, 27);
+            this.datePeriodoFinal.Size = new System.Drawing.Size(81, 23);
             this.datePeriodoFinal.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(818, 40);
+            this.label3.Location = new System.Drawing.Point(716, 30);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 20);
+            this.label3.Size = new System.Drawing.Size(25, 15);
             this.label3.TabIndex = 125;
             this.label3.Text = "até";
             // 
             // textNFe
             // 
-            this.textNFe.Location = new System.Drawing.Point(854, 73);
-            this.textNFe.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textNFe.Location = new System.Drawing.Point(747, 55);
             this.textNFe.Name = "textNFe";
-            this.textNFe.Size = new System.Drawing.Size(92, 27);
+            this.textNFe.Size = new System.Drawing.Size(81, 23);
             this.textNFe.TabIndex = 7;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(818, 79);
+            this.label9.Location = new System.Drawing.Point(716, 59);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 20);
+            this.label9.Size = new System.Drawing.Size(29, 15);
             this.label9.TabIndex = 127;
             this.label9.Text = "NFe";
             // 
             // botaoFiltrarNotas
             // 
-            this.botaoFiltrarNotas.Location = new System.Drawing.Point(953, 35);
-            this.botaoFiltrarNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.botaoFiltrarNotas.Location = new System.Drawing.Point(834, 26);
             this.botaoFiltrarNotas.Name = "botaoFiltrarNotas";
-            this.botaoFiltrarNotas.Size = new System.Drawing.Size(118, 69);
+            this.botaoFiltrarNotas.Size = new System.Drawing.Size(103, 52);
             this.botaoFiltrarNotas.TabIndex = 129;
             this.botaoFiltrarNotas.TabStop = false;
             this.botaoFiltrarNotas.Text = "Filtrar Notas";
@@ -216,10 +207,9 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // botaoConsultarNotas
             // 
-            this.botaoConsultarNotas.Location = new System.Drawing.Point(1078, 35);
-            this.botaoConsultarNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.botaoConsultarNotas.Location = new System.Drawing.Point(943, 26);
             this.botaoConsultarNotas.Name = "botaoConsultarNotas";
-            this.botaoConsultarNotas.Size = new System.Drawing.Size(118, 69);
+            this.botaoConsultarNotas.Size = new System.Drawing.Size(103, 52);
             this.botaoConsultarNotas.TabIndex = 130;
             this.botaoConsultarNotas.TabStop = false;
             this.botaoConsultarNotas.Text = "Consultar Notas";
@@ -228,10 +218,9 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // botaoManifestar
             // 
-            this.botaoManifestar.Location = new System.Drawing.Point(610, 533);
-            this.botaoManifestar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.botaoManifestar.Location = new System.Drawing.Point(534, 400);
             this.botaoManifestar.Name = "botaoManifestar";
-            this.botaoManifestar.Size = new System.Drawing.Size(173, 53);
+            this.botaoManifestar.Size = new System.Drawing.Size(151, 40);
             this.botaoManifestar.TabIndex = 131;
             this.botaoManifestar.TabStop = false;
             this.botaoManifestar.Text = "Manifestar";
@@ -240,10 +229,9 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // botaoDownload
             // 
-            this.botaoDownload.Location = new System.Drawing.Point(844, 533);
-            this.botaoDownload.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.botaoDownload.Location = new System.Drawing.Point(738, 400);
             this.botaoDownload.Name = "botaoDownload";
-            this.botaoDownload.Size = new System.Drawing.Size(173, 53);
+            this.botaoDownload.Size = new System.Drawing.Size(151, 40);
             this.botaoDownload.TabIndex = 132;
             this.botaoDownload.TabStop = false;
             this.botaoDownload.Text = "Download";
@@ -252,10 +240,9 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // botaoImprimirDanfe
             // 
-            this.botaoImprimirDanfe.Location = new System.Drawing.Point(1078, 533);
-            this.botaoImprimirDanfe.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.botaoImprimirDanfe.Location = new System.Drawing.Point(943, 400);
             this.botaoImprimirDanfe.Name = "botaoImprimirDanfe";
-            this.botaoImprimirDanfe.Size = new System.Drawing.Size(173, 53);
+            this.botaoImprimirDanfe.Size = new System.Drawing.Size(151, 40);
             this.botaoImprimirDanfe.TabIndex = 133;
             this.botaoImprimirDanfe.TabStop = false;
             this.botaoImprimirDanfe.Text = "Imprimir Danfe";
@@ -265,10 +252,9 @@ namespace SisCom.Aplicacao.Formularios
             // comboTipoNSU
             // 
             this.comboTipoNSU.FormattingEnabled = true;
-            this.comboTipoNSU.Location = new System.Drawing.Point(854, 4);
-            this.comboTipoNSU.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboTipoNSU.Location = new System.Drawing.Point(747, 3);
             this.comboTipoNSU.Name = "comboTipoNSU";
-            this.comboTipoNSU.Size = new System.Drawing.Size(217, 28);
+            this.comboTipoNSU.Size = new System.Drawing.Size(190, 23);
             this.comboTipoNSU.TabIndex = 135;
             this.comboTipoNSU.TabStop = false;
             // 
@@ -276,9 +262,9 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(200, 109);
+            this.label4.Location = new System.Drawing.Point(175, 82);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(905, 20);
+            this.label4.Size = new System.Drawing.Size(708, 15);
             this.label4.TabIndex = 136;
             this.label4.Text = "Último NSU: 0 | Última Consulta: | Ambiente: Produção | Vencimento Certificado: *" +
     " ATENÇÃO CERTIFICADO NÃO INFORMADO *";
@@ -286,19 +272,19 @@ namespace SisCom.Aplicacao.Formularios
             // comboTipoTLS
             // 
             this.comboTipoTLS.FormattingEnabled = true;
-            this.comboTipoTLS.Location = new System.Drawing.Point(1078, 4);
-            this.comboTipoTLS.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboTipoTLS.Location = new System.Drawing.Point(943, 3);
             this.comboTipoTLS.Name = "comboTipoTLS";
-            this.comboTipoTLS.Size = new System.Drawing.Size(117, 28);
+            this.comboTipoTLS.Size = new System.Drawing.Size(103, 23);
             this.comboTipoTLS.TabIndex = 137;
             this.comboTipoTLS.TabStop = false;
             this.comboTipoTLS.Visible = false;
             // 
             // botaoDesmarcarTodos
             // 
-            this.botaoDesmarcarTodos.Location = new System.Drawing.Point(128, 533);
+            this.botaoDesmarcarTodos.Location = new System.Drawing.Point(112, 400);
+            this.botaoDesmarcarTodos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.botaoDesmarcarTodos.Name = "botaoDesmarcarTodos";
-            this.botaoDesmarcarTodos.Size = new System.Drawing.Size(135, 27);
+            this.botaoDesmarcarTodos.Size = new System.Drawing.Size(118, 20);
             this.botaoDesmarcarTodos.TabIndex = 139;
             this.botaoDesmarcarTodos.Text = "Desmarcar Todos";
             this.botaoDesmarcarTodos.UseVisualStyleBackColor = true;
@@ -306,9 +292,10 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // botaoMarcarTodos
             // 
-            this.botaoMarcarTodos.Location = new System.Drawing.Point(14, 533);
+            this.botaoMarcarTodos.Location = new System.Drawing.Point(12, 400);
+            this.botaoMarcarTodos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.botaoMarcarTodos.Name = "botaoMarcarTodos";
-            this.botaoMarcarTodos.Size = new System.Drawing.Size(110, 27);
+            this.botaoMarcarTodos.Size = new System.Drawing.Size(96, 20);
             this.botaoMarcarTodos.TabIndex = 138;
             this.botaoMarcarTodos.Text = "Marcar Todos";
             this.botaoMarcarTodos.UseVisualStyleBackColor = true;
@@ -316,10 +303,9 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // botaoImportarXML
             // 
-            this.botaoImportarXML.Location = new System.Drawing.Point(379, 533);
-            this.botaoImportarXML.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.botaoImportarXML.Location = new System.Drawing.Point(332, 400);
             this.botaoImportarXML.Name = "botaoImportarXML";
-            this.botaoImportarXML.Size = new System.Drawing.Size(173, 53);
+            this.botaoImportarXML.Size = new System.Drawing.Size(151, 40);
             this.botaoImportarXML.TabIndex = 140;
             this.botaoImportarXML.TabStop = false;
             this.botaoImportarXML.Text = "Importar XML";
@@ -328,9 +314,9 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // frmFiscal_NuvemFiscal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1494, 596);
+            this.ClientSize = new System.Drawing.Size(1307, 447);
             this.Controls.Add(this.botaoImportarXML);
             this.Controls.Add(this.botaoDesmarcarTodos);
             this.Controls.Add(this.botaoMarcarTodos);
@@ -357,7 +343,6 @@ namespace SisCom.Aplicacao.Formularios
             this.Controls.Add(this.datePeriodoInicial);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.gridNotaFiscal);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "frmFiscal_NuvemFiscal";
             this.Text = "Nuvem Fiscal - Consulte as Notas emitidas para sua Empresa";

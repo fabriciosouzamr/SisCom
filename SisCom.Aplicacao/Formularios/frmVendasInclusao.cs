@@ -11,10 +11,6 @@ using System.Collections.Generic;
 using SisCom.Aplicacao.ViewModels;
 using System.Data;
 using System.Linq;
-using SisCom.Entidade.Enum;
-using SisCom.Entidade.Modelos;
-using SisCom.Infraestrutura.Migrations;
-using static Grid_DataGridView;
 
 namespace SisCom.Aplicacao.Formularios
 {
@@ -491,7 +487,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 venda.Id = Guid.NewGuid();
                 venda.Codigo = 0;
-                venda = (await vendaController.Adicionar(venda));
+                await vendaController.Adicionar(venda);
             }
 
             VendaMercadoriaViewModel vendaMercadoriaViewModel;
@@ -509,7 +505,10 @@ namespace SisCom.Aplicacao.Formularios
                     { vendaMercadoriaViewModel.VendaId = Guid.Parse(row.Cells[gridProdutos_VendaId].Value.ToString()); }
 
                     row.Cells[gridProdutos_VendaId].Value = vendaMercadoriaViewModel.VendaId;
+                    if (row.Cells[gridProdutos_CodigoSistema].Value != null)
                     vendaMercadoriaViewModel.MercadoriaId = (Guid)row.Cells[gridProdutos_CodigoSistema].Value;
+                    if (row.Cells[gridProdutos_Descricao].Value != null)
+                        vendaMercadoriaViewModel.MercadoriaId = (Guid)row.Cells[gridProdutos_Descricao].Value;
                     vendaMercadoriaViewModel.UnidadeMedidaId = (Guid)row.Cells[gridProdutos_Medida].Value;
                     vendaMercadoriaViewModel.Preco = Funcao.NuloParaValorD(row.Cells[gridProdutos_Preco].Value);
                     vendaMercadoriaViewModel.Quantidade = Funcao.NuloParaValorD(row.Cells[gridProdutos_Quantidade].Value);

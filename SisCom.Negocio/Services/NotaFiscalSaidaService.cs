@@ -37,9 +37,9 @@ namespace SisCom.Negocio.Services
 
             try
             {
-                var _NotaFiscalSaida = await _NotaFiscalSaidaRepository.Search(f => f.CodigoChaveAcesso == NotaFiscalSaida.CodigoChaveAcesso);
+                var _NotaFiscalSaida = await _NotaFiscalSaidaRepository.Search(f => ((f.CodigoChaveAcesso == NotaFiscalSaida.CodigoChaveAcesso) && (!String.IsNullOrEmpty(NotaFiscalSaida.CodigoChaveAcesso))));
 
-                if (_NotaFiscalSaida.Count() != 0)
+                if (_NotaFiscalSaida.Any())
                 {
                     Notify("Já existe uma Nota Fiscal de Saída com essa chave de acesso informado.");
                     return;
@@ -57,9 +57,10 @@ namespace SisCom.Negocio.Services
         {
             try
             {
-                var _NotaFiscalSaida = await _NotaFiscalSaidaRepository.Search(f => (f.EmpresaId == NotaFiscalSaida.EmpresaId && f.NotaFiscal == NotaFiscalSaida.NotaFiscal) && (f.Id != NotaFiscalSaida.Id));
+                var _NotaFiscalSaida = await _NotaFiscalSaidaRepository.Search(f => ((f.CodigoChaveAcesso == NotaFiscalSaida.CodigoChaveAcesso) && 
+                                                                                     (!String.IsNullOrEmpty(NotaFiscalSaida.CodigoChaveAcesso))) && (f.Id != NotaFiscalSaida.Id));
 
-                if (_NotaFiscalSaida.Count() != 0)
+                if (_NotaFiscalSaida.Any())
                 {
                     Notify("Já existe uma Nota Fiscal de Saída com essa chave de acesso informado.");
                     return;
@@ -76,8 +77,6 @@ namespace SisCom.Negocio.Services
         public async Task Excluir(Guid id)
         {
             await _NotaFiscalSaidaRepository.Delete(id);
-
-            Notify("Exclusão Efetuada.");
         }
 
     }

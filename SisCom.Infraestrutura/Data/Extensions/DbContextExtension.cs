@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Funcoes._Entity;
 using Microsoft.Data.SqlClient;
@@ -89,6 +90,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
                 if (!context.TabelaCST_CSOSNs.Any()) AddRangeSync<TabelaCST_CSOSN>(context, _seedPath);
                 if (!context.TabelaMotivoDesoneracaoICMSs.Any()) AddRangeSync<TabelaMotivoDesoneracaoICMS>(context, _seedPath);
                 if (!context.UnidadeMedidaConversoes.Any()) AddRangeSync<UnidadeMedidaConversao>(context, _seedPath);
+                Thread.Sleep(2000);
                 if (!context.NaturezaOperacoes.Any()) AddRangeSync<NaturezaOperacao>(context, _seedPath);
 
                 await context.SaveChangesAsync();

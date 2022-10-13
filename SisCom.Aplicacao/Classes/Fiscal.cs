@@ -45,6 +45,11 @@ using System.Xml.Serialization;
 using NFe.Classes.Informacoes.Detalhe.Tributacao.Federal;
 using NFe.Classes.Servicos.Tipos;
 using static SisCom.Aplicacao.Classes.Declaracoes;
+using SisCom.Aplicacao.Controllers;
+using Funcoes.Interfaces;
+using SisCom.Infraestrutura.Data.Context;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -174,6 +179,95 @@ namespace SisCom.Aplicacao.Classes
             return oConfig;*/
             return null;
         }
+
+        //    public static async Task<IEnumerable<NotaFiscalSaidaViewModel>> Importar(MeuDbContext meuDbContext, INotifier notifier, nfeProc nfe)
+        //    {
+        //        NotaFiscalSaidaViewModel notaFiscalSaida = new NotaFiscalSaidaViewModel();
+
+        //        using (CidadeController cidadeController = new CidadeController(meuDbContext, notifier))
+        //        {
+
+        //        }
+
+        //        using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(meuDbContext, notifier))
+        //        {
+        //            notaFiscalSaida.Id = Guid.NewGuid();
+        //            notaFiscalSaida.NotaFiscal = nfe.NFe.infNFe.ide.nNF.ToString();
+        //            notaFiscalSaida.DataEmissao = nfe.NFe.infNFe.ide.dEmi;
+        //            notaFiscalSaida.DataSaida = nfe.NFe.infNFe.ide.dSaiEnt;
+        //            notaFiscalSaida.Modelo = nfe.NFe.infNFe.ide.mod.GetHashCode().ToString();
+        //            notaFiscalSaida.Serie = nfe.NFe.infNFe.ide.serie.ToString();
+        //            notaFiscalSaida.Status = NF_Status.Transmitida;
+        //            notaFiscalSaida.CNPJ_CPF = String.IsNullOrEmpty(nfe.NFe.infNFe.dest.CNPJ) ? nfe.NFe.infNFe.dest.CPF : nfe.NFe.infNFe.dest.CNPJ;
+        //            notaFiscalSaida.IE = Funcoes._Classes.Texto.NuloString(nfe.NFe.infNFe.emit.IE);
+        //            notaFiscalSaida.Cliente_Endereco.End_CEP = Funcoes._Classes.Texto.NuloString(nfe.NFe.infNFe.emit.enderEmit.CEP);
+        //            notaFiscalSaida.Cliente_Endereco.End_Logradouro = Funcoes._Classes.Texto.NuloString(nfe.NFe.infNFe.emit.enderEmit.xLgr);
+        //            notaFiscalSaida.Cliente_Endereco.End_Numero = Funcoes._Classes.Texto.NuloString(nfe.NFe.infNFe.emit.enderEmit.nro);
+        //            notaFiscalSaida.Cliente_Endereco.End_Bairro = Funcoes._Classes.Texto.NuloString(nfe.NFe.infNFe.emit.enderEmit.xBairro);
+        //            notaFiscalSaida.Cliente_Endereco.End_Complemento = Funcoes._Classes.Texto.NuloString(nfe.NFe.infNFe.emit.enderEmit.xCpl);
+        //            [Column("End_CidadeId")]
+        //            public Nullable<Guid> End_CidadeId { get; set; }
+        //    public Endereco? Cliente_Endereco { get; set; }
+        //    public string? Cliente_Telefone { get; set; }
+        //    public string? Cliente_EMail { get; set; }
+        //    public decimal ValorFrete { get; set; }
+        //    public decimal ValorSeguro { get; set; }
+        //    public decimal OutrasDespesas { get; set; }
+        //    public decimal ValorDesconto { get; set; }
+        //    public decimal PercentualDesconto { get; set; }
+        //    public decimal PercentuaAliquotaSimplesNacional { get; set; }
+        //    public Transportadora Transportadora { get; set; }
+        //    public Funcionario Vendedor { get; set; }
+        //    public TipoFrete Transportadora_FreteConta { get; set; }
+        //    public string Transportadora_CNPJ_CPF { get; set; }
+        //    public string Transportadora_Placa { get; set; }
+        //    public Estado Transportadora_UF { get; set; }
+        //    public string Transportadora_RNTRC { get; set; }
+        //    public int Transportadora_NumeroCarga { get; set; }
+        //    public int VolumeTransportados_Quantidade { get; set; }
+        //    public string VolumeTransportados_Especie { get; set; }
+        //    public string VolumeTransportados_Marca { get; set; }
+        //    public int VolumeTransportados_Numero { get; set; }
+        //    public float VolumeTransportados_PesoBruto { get; set; }
+        //    public float VolumeTransportados_PesoLiquido { get; set; }
+        //    public RegimeTributario RegimeTributario { get; set; }
+        //    public string? ObservacaoDocumento { get; set; }
+        //    public string? InformacoesAdicionaisInteresseFisco { get; set; }
+        //    public string? InformacoesComplementaresInteresseContribuinte_Obsersacao { get; set; }
+        //    public Estado? InformacoesComplementaresInteresseContribuinte_UF { get; set; }
+        //    public string? InformacoesComplementaresInteresseContribuinte_Local { get; set; }
+        //    public string? CodigoChaveAcesso { get; set; }
+        //    public string? Protocolo { get; set; }
+        //    public NF_IndicaPresenca IndicaPresenca { get; set; }
+        //    public NF_TipoEmissao TipoEmissao { get; set; }
+        //    public NF_Operacao Operacao { get; set; }
+        //    public string? EmailDestinoXML { get; set; }
+        //    public bool TransmitirCliente { get; set; }
+        //    public bool TransmitirEnderecoCliente { get; set; }
+        //    public string? RetornoSefaz { get; set; }
+        //    public string? RetornoSefazCodigo { get; set; }
+        //    public DateTime? DataRetornoSefaz { get; set; }
+        //    public virtual List<NotaFiscalSaidaMercadoria> NotaFiscalSaidaMercadoria { get; set; }
+        //    public virtual List<NotaFiscalSaidaPagamento> NotaFiscalSaidaPagamento { get; set; }
+        //    public virtual List<NotaFiscalSaidaReferencia> NotaFiscalSaidaReferencia { get; set; }
+        //    public virtual List<NotaFiscalSaidaObservacao> NotaFiscalSaidaObservacao { get; set; }
+        //    public Venda Venda { get; set; }
+
+        //    /* EF Relation */
+        //    public Guid? EmpresaId { get; set; }
+        //    public Guid? NaturezaOperacaoId { get; set; }
+        //    public Guid? NotaFiscalFinalidadeId { get; set; }
+        //    public Guid? ClienteId { get; set; }
+        //    public Guid? VendedorId { get; set; }
+        //    public Guid? TabelaOrigemVendaId { get; set; }
+        //    public Guid? TransportadoraId { get; set; }
+        //    public Guid? Transportadora_UFId { get; set; }
+        //    public Guid? InformacoesComplementaresInteresseContribuinte_UFId { get; set; }
+        //    public Guid? VendaId { get; set; }
+        //}
+
+        //        return notaFiscalSaida;
+        //    }
 
         private static NFe.Utils.ConfiguracaoServico Fiscal_Configuracao(ModeloDocumento eModeloDocumento = ModeloDocumento.NFe)
         {
@@ -1169,6 +1263,7 @@ namespace SisCom.Aplicacao.Classes
 
             string sNF;
             string sDS_INFORMACOES_ADICIONAIS = "";
+            string sDS_INFORMACOES_FISCO = "";
 
             try
             {
@@ -1199,6 +1294,8 @@ namespace SisCom.Aplicacao.Classes
                         return null;
                     }
                 }
+                if (String.IsNullOrEmpty(notaFiscalSaidaSerieViewModel.UltimaNotaFiscal))
+                    notaFiscalSaidaSerieViewModel.UltimaNotaFiscal = "0";
                 if (String.IsNullOrEmpty(notaFiscalSaidaViewModel.NotaFiscal))
                 {
                     Fiscal_Historico(0, 0 /* iSQ_DOCUMENTOFISCAL */, "Criação do XML do documento fiscal");
@@ -1403,7 +1500,7 @@ namespace SisCom.Aplicacao.Classes
                     {
                         oNFe.infNFe.transp.transporta = new NFe.Classes.Informacoes.Transporte.transporta();
 
-                        if (notaFiscalSaidaViewModel.TransportadoraId != Guid.Empty)
+                        if ((notaFiscalSaidaViewModel.TransportadoraId != null) && (notaFiscalSaidaViewModel.TransportadoraId != Guid.Empty))
                         {
                             if (notaFiscalSaidaViewModel.Transportadora.TipoPessoa == Funcoes._Enum.TipoPessoa.Juridica)
                                 oNFe.infNFe.transp.transporta.CNPJ = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.CNPJ_CPF);
@@ -1419,6 +1516,27 @@ namespace SisCom.Aplicacao.Classes
                                 oNFe.infNFe.transp.transporta.IE = notaFiscalSaidaViewModel.Transportadora.InscricaoEstadual;
                         }
                     }
+                }
+
+                if (oNFe.infNFe.transp != null)
+                {
+                    var vol = new NFe.Classes.Informacoes.Transporte.vol();
+
+                    vol.pesoB = (decimal?)notaFiscalSaidaViewModel.VolumeTransportados_PesoBruto;
+                    vol.pesoL = (decimal?)notaFiscalSaidaViewModel.VolumeTransportados_PesoLiquido;
+                    vol.qVol = notaFiscalSaidaViewModel.VolumeTransportados_Quantidade;
+
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.VolumeTransportados_Especie))
+                    {
+                        vol.nVol = notaFiscalSaidaViewModel.VolumeTransportados_Especie;
+                    }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.VolumeTransportados_Marca))
+                    {
+                        vol.marca = notaFiscalSaidaViewModel.VolumeTransportados_Marca;
+                    }
+
+                    oNFe.infNFe.transp.vol = new List<NFe.Classes.Informacoes.Transporte.vol>();
+                    oNFe.infNFe.transp.vol.Add(vol);
                 }
 
                 // -- Detalhe
@@ -1480,24 +1598,42 @@ namespace SisCom.Aplicacao.Classes
                     oNFE_Det.imposto.vTotTrib = 0;
                     // -- Detalhe Imposto ICMS
                     oNFE_Det.imposto.ICMS = new NFe.Classes.Informacoes.Detalhe.Tributacao.Estadual.ICMS();
-                    oNFE_Det.imposto.ICMS.TipoICMS = ObterIcmsBasico(oNFe.infNFe.emit.CRT, origemMercadoriaServico, CSTDBParaZeus(ntFSMercadoria.TabelaCST_CSOSN.Codigo),
-                                                                     DeterminacaoBaseIcms.DbiPauta, CSOSNDBParaZeus(ntFSMercadoria.TabelaCST_CSOSN.Codigo), ntFSMercadoria.PrecoTotal,
-                                                                     ntFSMercadoria.PercentualICMS, ntFSMercadoria.ValorICMS);
+                    try
+                    {
+                        oNFE_Det.imposto.ICMS.TipoICMS = ObterIcmsBasico(oNFe.infNFe.emit.CRT, origemMercadoriaServico, CSTDBParaZeus(ntFSMercadoria.TabelaCST_CSOSN.Codigo),
+                                                                         DeterminacaoBaseIcms.DbiPauta, CSOSNDBParaZeus(ntFSMercadoria.TabelaCST_CSOSN.Codigo), ntFSMercadoria.PrecoTotal,
+                                                                         ntFSMercadoria.PercentualICMS, ntFSMercadoria.ValorICMS);
+                    }
+                    catch (Exception)
+                    {
+                    }
                     // -- Detalhe Imposto COFINS
                     if ((ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS != null) && (ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS.DestacarPIS_COFINS))
                     {
                         oNFE_Det.imposto.COFINS = new NFe.Classes.Informacoes.Detalhe.Tributacao.Federal.COFINS();
-                        oNFE_Det.imposto.COFINS.TipoCOFINS = ObterCofinsBasico(ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS.Percentual,
-                                                                               CSTCOFINSDBParaZeus(ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS.Codigo), ntFSMercadoria.PrecoTotal, ntFSMercadoria.AliquotaCOFINS,
-                                                                               Valor.Percentagem(ntFSMercadoria.PrecoTotal, ntFSMercadoria.AliquotaCOFINS), ntFSMercadoria.Quantidade, ntFSMercadoria.PrecoUnitario);
+                        try
+                        {
+                            oNFE_Det.imposto.COFINS.TipoCOFINS = ObterCofinsBasico(ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS.Percentual,
+                                                                                   CSTCOFINSDBParaZeus(ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS.Codigo), ntFSMercadoria.PrecoTotal, ntFSMercadoria.AliquotaCOFINS,
+                                                                                   Valor.Percentagem(ntFSMercadoria.PrecoTotal, ntFSMercadoria.AliquotaCOFINS), ntFSMercadoria.Quantidade, ntFSMercadoria.PrecoUnitario);
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                     // -- Detalhe Imposto PIS
                     if ((ntFSMercadoria.TabelaCST_PIS_COFINS_PIS != null) && (ntFSMercadoria.TabelaCST_PIS_COFINS_PIS.DestacarPIS_COFINS))
                     {
                         oNFE_Det.imposto.PIS = new NFe.Classes.Informacoes.Detalhe.Tributacao.Federal.PIS();
-                        oNFE_Det.imposto.PIS.TipoPIS = ObterPisBasico(ntFSMercadoria.TabelaCST_PIS_COFINS_PIS.Percentual, CSTPISDBParaZeus(ntFSMercadoria.TabelaCST_PIS_COFINS_PIS.Codigo),
-                                                                      ntFSMercadoria.PrecoTotal, ntFSMercadoria.AliquotaPIS, Valor.Percentagem(ntFSMercadoria.PrecoTotal, ntFSMercadoria.AliquotaPIS),
-                                                                      ntFSMercadoria.Quantidade, ntFSMercadoria.PrecoUnitario);
+                        try
+                        {
+                            oNFE_Det.imposto.PIS.TipoPIS = ObterPisBasico(ntFSMercadoria.TabelaCST_PIS_COFINS_PIS.Percentual, CSTPISDBParaZeus(ntFSMercadoria.TabelaCST_PIS_COFINS_PIS.Codigo),
+                                                                          ntFSMercadoria.PrecoTotal, ntFSMercadoria.AliquotaPIS, Valor.Percentagem(ntFSMercadoria.PrecoTotal, ntFSMercadoria.AliquotaPIS),
+                                                                          ntFSMercadoria.Quantidade, ntFSMercadoria.PrecoUnitario);
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                     // -- Detalhe Imposto IPI
                     // NFC-e não aceita grupo "IPI"
@@ -1507,7 +1643,13 @@ namespace SisCom.Aplicacao.Classes
                         {
                             oNFE_Det.imposto.IPI = new NFe.Classes.Informacoes.Detalhe.Tributacao.Federal.IPI();
                             oNFE_Det.imposto.IPI.cEnq = 999;
-                            oNFE_Det.imposto.IPI.TipoIPI = ObterIPIBasico(CSTIPIDBParaZeus(ntFSMercadoria.TabelaCST_IPI.Codigo), ntFSMercadoria.ValorBaseIPI, ntFSMercadoria.PercentualIPI, ntFSMercadoria.ValorIPI);
+                            try
+                            {
+                                oNFE_Det.imposto.IPI.TipoIPI = ObterIPIBasico(CSTIPIDBParaZeus(ntFSMercadoria.TabelaCST_IPI.Codigo), ntFSMercadoria.ValorBaseIPI, ntFSMercadoria.PercentualIPI, ntFSMercadoria.ValorIPI);
+                            }
+                            catch (Exception)
+                            {
+                            }
                         }
                     }
 
@@ -1515,7 +1657,23 @@ namespace SisCom.Aplicacao.Classes
                 }
 
                 // -- Total
-                oNFe.infNFe.total = GetTotal("4.00", oNFe.infNFe.det);
+                try
+                {
+                    oNFe.infNFe.total = GetTotal("4.00", oNFe.infNFe.det);
+                    oNFe.infNFe.total.ICMSTot.vFrete = notaFiscalSaidaViewModel.ValorFrete;
+                }
+                catch (Exception)
+                {
+                    if (oNFe.infNFe.total == null)
+                    {
+                        oNFe.infNFe.total = new total();
+                    }
+                    if (oNFe.infNFe.total.ICMSTot == null)
+                    {
+                        oNFe.infNFe.total.ICMSTot = new ICMSTot();
+                        oNFe.infNFe.total.ICMSTot.vFrete = notaFiscalSaidaViewModel.ValorFrete;
+                    }
+                }
 
                 // -- Cobrança
                 if (oNFe.infNFe.ide.mod == ModeloDocumento.NFe)
@@ -1595,16 +1753,31 @@ namespace SisCom.Aplicacao.Classes
                     oNFe.infNFe.ide.NFref = oListaNFref;
                 }
 
-                if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.InformacoesAdicionaisInteresseFisco))
-                    sDS_INFORMACOES_ADICIONAIS = notaFiscalSaidaViewModel.InformacoesAdicionaisInteresseFisco + ". " + sDS_INFORMACOES_ADICIONAIS;
+                if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_Obsersacao))
+                    sDS_INFORMACOES_ADICIONAIS = notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_Obsersacao + ". " + sDS_INFORMACOES_ADICIONAIS;
 
-                if (Strings.Trim(sDS_INFORMACOES_ADICIONAIS) != "")
+                if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.InformacoesAdicionaisInteresseFisco))
+                    sDS_INFORMACOES_FISCO = notaFiscalSaidaViewModel.InformacoesAdicionaisInteresseFisco;
+
+                if ((Strings.Trim(sDS_INFORMACOES_ADICIONAIS) != "") || (Strings.Trim(sDS_INFORMACOES_FISCO) != ""))
                 {
                     oNFe.infNFe.infAdic = new NFe.Classes.Informacoes.Observacoes.infAdic();
-                    sDS_INFORMACOES_ADICIONAIS = sDS_INFORMACOES_ADICIONAIS.Trim();
-                    if (sDS_INFORMACOES_ADICIONAIS.Substring(sDS_INFORMACOES_ADICIONAIS.Length - 1) == ".")
-                        sDS_INFORMACOES_ADICIONAIS = sDS_INFORMACOES_ADICIONAIS.Substring(0, sDS_INFORMACOES_ADICIONAIS.Length - 1);
-                    oNFe.infNFe.infAdic.infCpl = sDS_INFORMACOES_ADICIONAIS;
+
+                    if (Strings.Trim(sDS_INFORMACOES_ADICIONAIS) != "")
+                    {
+                        sDS_INFORMACOES_ADICIONAIS = sDS_INFORMACOES_ADICIONAIS.Trim();
+                        if (sDS_INFORMACOES_ADICIONAIS.Substring(sDS_INFORMACOES_ADICIONAIS.Length - 1) == ".")
+                            sDS_INFORMACOES_ADICIONAIS = sDS_INFORMACOES_ADICIONAIS.Substring(0, sDS_INFORMACOES_ADICIONAIS.Length - 1);
+                        oNFe.infNFe.infAdic.infCpl = sDS_INFORMACOES_ADICIONAIS;
+                    }
+
+                    if (Strings.Trim(sDS_INFORMACOES_FISCO) != "")
+                    {
+                        sDS_INFORMACOES_FISCO = sDS_INFORMACOES_FISCO.Trim();
+                        if (sDS_INFORMACOES_FISCO.Substring(sDS_INFORMACOES_FISCO.Length - 1) == ".")
+                            sDS_INFORMACOES_FISCO = sDS_INFORMACOES_FISCO.Substring(0, sDS_INFORMACOES_FISCO.Length - 1);
+                        oNFe.infNFe.infAdic.infAdFisco = sDS_INFORMACOES_FISCO;
+                    }
                 }
 
                 oNFe.Assina(oConfig);
@@ -1854,11 +2027,11 @@ namespace SisCom.Aplicacao.Classes
 
                 if (oNFe != null)
                 {
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.CodigoChaveAcesso))
-                    {
-                        oNFe_Proc = Fiscal_DocumentoFiscal_AssociarProtocolo(oConfig, oNFe, notaFiscalSaidaViewModel.CodigoChaveAcesso);
-                        oNFe = oNFe_Proc.NFe;
-                    }
+                    //if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.CodigoChaveAcesso))
+                    //{
+                    //    oNFe_Proc = Fiscal_DocumentoFiscal_AssociarProtocolo(oConfig, oNFe, notaFiscalSaidaViewModel.CodigoChaveAcesso);
+                    //    oNFe = oNFe_Proc.NFe;
+                    //}
 
                     GerarDanfe(oNFe.ObterXmlString(), imprimirCancelado, true);
                 }

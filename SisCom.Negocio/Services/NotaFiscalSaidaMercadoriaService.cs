@@ -60,8 +60,6 @@ namespace SisCom.Negocio.Services
         public async Task Excluir(Guid id)
         {
             await _NotaFiscalSaidaMercadoriaRepository.Delete(id);
-
-            Notify("Exclusão Efetuada.");
         }
 
     }

@@ -10,17 +10,17 @@ namespace SisCom.Negocio.Services
 {
     public class NotaFiscalSaidaObservacaoService : BaseService<NotaFiscalSaidaObservacao>, INotaFiscalSaidaObservacaoService
     {
-        private readonly INotaFiscalSaidaObservacaoRepository _NotaFiscalSaidaObservacaoRepository;
+        private readonly INotaFiscalSaidaObservacaoRepository _notaFiscalSaidaObservacaoRepository;
 
         public NotaFiscalSaidaObservacaoService(INotaFiscalSaidaObservacaoRepository NotaFiscalSaidaObservacaoRepository,
                                  INotifier notificador) : base(notificador, NotaFiscalSaidaObservacaoRepository)
         {
-            _NotaFiscalSaidaObservacaoRepository = NotaFiscalSaidaObservacaoRepository;
+            _notaFiscalSaidaObservacaoRepository = NotaFiscalSaidaObservacaoRepository;
         }
 
         public Task<IPagedList<NotaFiscalSaidaObservacao>> GetPagedList(FilteredPagedListParameters parameters)
         {
-            return _NotaFiscalSaidaObservacaoRepository.GetPagedList(f =>
+            return _notaFiscalSaidaObservacaoRepository.GetPagedList(f =>
             (
                 parameters.Search == null || f.Descricao.Contains(parameters.Search)
             ), parameters);
@@ -28,22 +28,36 @@ namespace SisCom.Negocio.Services
 
         public override void Dispose()
         {
-            _NotaFiscalSaidaObservacaoRepository?.Dispose();
+            _notaFiscalSaidaObservacaoRepository?.Dispose();
         }
 
-        public Task Adicionar(NotaFiscalSaidaObservacao NotaFiscalSaidaObservacao)
+        public async Task Adicionar(NotaFiscalSaidaObservacao notaFiscalSaidaObservacao)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _notaFiscalSaidaObservacaoRepository.Insert(notaFiscalSaidaObservacao);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Atualizar(NotaFiscalSaidaObservacao NotaFiscalSaidaObservacao)
+        public async Task Atualizar(NotaFiscalSaidaObservacao notaFiscalSaidaObservacao)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _notaFiscalSaidaObservacaoRepository.Update(notaFiscalSaidaObservacao);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Remover(Guid id)
+        public async Task Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            await _notaFiscalSaidaObservacaoRepository.Delete(id);
         }
     }
 }

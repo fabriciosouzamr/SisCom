@@ -41,7 +41,7 @@ public class Combo_ComboBox
 									.OrderBy(item => item.value)
 									.ToList();
 		}
-		Combo.SelectedIndex = -1;
+		try { Combo.SelectedIndex = -1; } catch (Exception) { }
 		Combo.Tag = null;
 	}
 

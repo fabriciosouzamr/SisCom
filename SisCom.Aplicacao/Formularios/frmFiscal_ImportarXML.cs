@@ -12,6 +12,7 @@ using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -79,7 +80,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 foreach (var item in ret)
                 {
-                    produto.Rows.Add(item.Id, item.Nome, item.Codigo, item.CodigoFabricante);
+                    produto.Rows.Add(item.Id, Funcao.NuloParaString(item.Nome), Funcao.NuloParaString(item.Codigo), Funcao.NuloParaString(item.CodigoFabricante));
                 }
             }
 
@@ -90,14 +91,14 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Preço");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Frete");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Total");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Código Fornecedor");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "ID");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "ID");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "ID");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Qtde.por Caixa");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Grupo", Grid_DataGridView.TipoColuna.ComboBox);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Código Fornecedor", readOnly: false);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "ID", readOnly: false);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "ID", readOnly: false);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "ID", readOnly: false);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Qtde.por Caixa", readOnly: false);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Grupo", Grid_DataGridView.TipoColuna.ComboBox, readOnly: false);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Status");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Vínculo Fiscal", Grid_DataGridView.TipoColuna.ComboBox);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Vínculo Fiscal", Grid_DataGridView.TipoColuna.ComboBox, readOnly: false);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Item", Grid_DataGridView.TipoColuna.Texto, 0);
 
             using (UnidadeMedidaConversaoController unidadeMedidaConversaoController = new UnidadeMedidaConversaoController(this.MeuDbContext(), this._notifier))

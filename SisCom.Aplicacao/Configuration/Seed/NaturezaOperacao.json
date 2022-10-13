@@ -1,91 +1,77 @@
 [
   {
-    "Nome": "COMPRA PARA INDUSTRIALIZA��O",
-    "TabelaCFOPId": "3C4D0DFA-3B50-41F0-904C-A919EF018EF0",
+    "Nome": "COMPRA PARA INDUSTRIALIZAÇÃO",
+    "TabelaCFOPId": "5968D4C4-9C01-4B8E-A3E6-08B0AE933DDF",
     "EntradaSaida": 1,
     "PercentualICMS": 0,
     "Devolucao": false
   },
   {
-    "Nome": "COMPRA PARA COMERCIALIZA��O",
-    "TabelaCFOPId": "904AA484-D99F-4741-8E61-D4F4B380D671",
+    "Nome": "COMPRA PARA COMERCIALIZAÇÃO",
+    "TabelaCFOPId": "A0F7FCC2-BAE9-4B35-9FA0-2202646566C6",
     "EntradaSaida": 1,
     "PercentualICMS": 17,
     "Devolucao": false
   },
   {
-    "Nome": "DEVOLU��O DE VENDA DE MERCADORIA ADQUIRIDA OU RECEBIDA DE TERCEIRO",
-    "TabelaCFOPId": "E528E861-375C-4713-A616-AC16AA29B20E",
+    "Nome": "DEVOLUÇÃO DE VENDA DE MERCADORIA ADQUIRIDA OU RECEBIDA DE TERCEIRO",
+    "TabelaCFOPId": "F6C7C576-0DCC-43D7-9C32-258661754E45",
     "EntradaSaida": 1,
     "PercentualICMS": 0,
     "Devolucao": true
-  },
-  {
-    "Nome": "COMPRA PARA COMERCIALIZA��O",
-    "TabelaCFOPId": "8995CC9C-AE5C-4EAF-B0B0-735EAFA049B4",
-    "EntradaSaida": 1,
-    "PercentualICMS": 12,
-    "Devolucao": false
-  },
-  {
-    "Nome": "COMPRAS",
-    "TabelaCFOPId": "97F3DFD0-B079-45FD-A202-218539BD6FE8",
-    "EntradaSaida": 1,
-    "PercentualICMS": 0,
-    "Devolucao": false
   },
   {
     "Nome": "VENDA DE MERCADORIA ADQUIRIDA OU RECEBIDA DE TERCEIROS",
-    "TabelaCFOPId": "D69AFCEF-0222-42BD-9FA9-8580A9AF15CB",
+    "TabelaCFOPId": "BFDC3E42-3DF4-4463-A866-07684FBAC021",
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": false
   },
   {
-    "Nome": "DEVOLU��O DE COMPRA PARA COMERCIALIZA��O",
-    "TabelaCFOPId": "AFD0892E-9667-4169-B7EA-5689BC6D3BF1",
+    "Nome": "DEVOLUÇÃO DE COMPRA PARA COMERCIALIZAÇÃO",
+    "TabelaCFOPId": "8B494931-4248-4D02-A587-916D3D95DA29",
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": true
   },
   {
-    "Nome": "REMESSA PARA DEP�SITO FECHADO OU ARMAZ�M GERAL",
-    "TabelaCFOPId": "81AC5185-0064-4695-93D6-0E9D3B6A5B8C",
+    "Nome": "REMESSA PARA DEPÓSITO FECHADO OU ARMAZÉM GERAL",
+    "TabelaCFOPId": "94804D0E-029E-4ADA-902D-0D8642A395E1",
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": false
   },
   {
-    "Nome": "REMESSA EM BONIFICA��O, DOA��O OU BRINDE",
-    "TabelaCFOPId": "E6BBA066-9E62-47B1-AAD0-04887D8D765A",
+    "Nome": "REMESSA EM BONIFICAÇÃO, DOAÇÃO OU BRINDE",
+    "TabelaCFOPId": "27A3BCFC-E50A-4ADA-9117-69D66545C193",
     "EntradaSaida": 2,
     "PercentualICMS": 17,
     "Devolucao": false
   },
   {
     "Nome": "VENDA DE MERCADORIA ADQUIRIDA OU RECEBIDA DE TERCEIROS",
-    "TabelaCFOPId": "2967E25F-965D-4D5F-8CD5-BB850EF9CF8D",
+    "TabelaCFOPId": "BFDC3E42-3DF4-4463-A866-07684FBAC021",
     "EntradaSaida": 2,
     "PercentualICMS": 12,
     "Devolucao": false
   },
   {
-    "Nome": "DEVOLU��O DE COMPRA PARA COMERCIALIZA��O",
-    "TabelaCFOPId": "A02B74B8-F8DC-491C-9445-F1270B347886",
+    "Nome": "DEVOLUÇÃO DE COMPRA PARA COMERCIALIZAÇÃO",
+    "TabelaCFOPId": "8B494931-4248-4D02-A587-916D3D95DA29",
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": true
   },
   {
-    "Nome": "REMESSA PARA DEP�SITO FECHADO OU ARMAZ�M GERAL",
-    "TabelaCFOPId": "AD323588-3AFC-4DD5-952B-A95145D96DB4",
+    "Nome": "REMESSA PARA DEPÓSITO FECHADO OU ARMAZÉM GERAL",
+    "TabelaCFOPId": "94804D0E-029E-4ADA-902D-0D8642A395E1",
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": false
   },
   {
-    "Nome": "REMESSA EM BONIFICA��O, DOA��O OU BRINDE",
-    "TabelaCFOPId": "CC3819A8-A1B9-43E4-A847-35A2CDE02A3C",
+    "Nome": "REMESSA EM BONIFICAÇÃO, DOAÇÃO OU BRINDE",
+    "TabelaCFOPId": "27A3BCFC-E50A-4ADA-9117-69D66545C193",
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": false

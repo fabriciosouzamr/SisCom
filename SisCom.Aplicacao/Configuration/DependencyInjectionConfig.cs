@@ -36,6 +36,7 @@ namespace SisCom.Aplicacao.Configuration
             services.AddTransient<frmCadastroTipoCliente>();
             services.AddTransient<frmCadastroEmpresas>();
             services.AddTransient<frmCadastroBuscarCNPJ>();
+            services.AddTransient<frmCadastroNaturezaOperacao>();
             services.AddTransient<frmComprasConsulta>();
             services.AddTransient<frmComprasInclusao>();
             services.AddTransient<frmFiscal_ImportarXML>();

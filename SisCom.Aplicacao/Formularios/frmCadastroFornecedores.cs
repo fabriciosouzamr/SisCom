@@ -149,29 +149,26 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async void AdicionarPessoa()
         {
-            var pessoaController = new PessoaController(this.MeuDbContext(), this._notifier);
-
-            if (pessoa.Id != Guid.Empty)
+            using (PessoaController pessoaController = new PessoaController(this.MeuDbContext(), this._notifier))
             {
-                await pessoaController.Atualizar(pessoa.Id, pessoa);
+                if (pessoa.Id != Guid.Empty)
+                {
+                    await pessoaController.Atualizar(pessoa.Id, pessoa);
+                }
+                else
+                {
+                    pessoa = (await pessoaController.Adicionar(pessoa));
+                }
+
+                Cadastrado = true;
             }
-            else
-            {
-                pessoa = (await pessoaController.Adicionar(pessoa));
-            }
-
-            Cadastrado = true;
-
-            pessoaController = null;
-
-            this.MeuDbContextDispose();
         }
         private async void Excluir()
         {
-            var pessoaController = new PessoaController(this.MeuDbContext(), this._notifier);
-            await pessoaController.Excluir(pessoa.Id);
-            pessoaController = null;
-            this.MeuDbContextDispose();
+            using (PessoaController pessoaController = new PessoaController(this.MeuDbContext(), this._notifier))
+            {
+                await pessoaController.Excluir(pessoa.Id);
+            }
 
             Limpar();
         }

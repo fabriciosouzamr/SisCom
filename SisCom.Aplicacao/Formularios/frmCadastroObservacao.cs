@@ -75,6 +75,8 @@ namespace SisCom.Aplicacao.Formularios
             if ((gridObservacao.CurrentRow != null) && (gridObservacao.CurrentRow.Index > -1))
             {
                 Excluir(Guid.Parse(gridObservacao.CurrentRow.Cells[gridObservacao_ID].Value.ToString()));
+
+                gridObservacao.Rows.Remove(gridObservacao.CurrentRow);
             }
             else
             {
@@ -84,9 +86,15 @@ namespace SisCom.Aplicacao.Formularios
 
         async void Excluir(Guid id)
         {
-            using (ObservacaoController observacaoController = new ObservacaoController(this.MeuDbContext(), this._notifier))
+            try
             {
-                await observacaoController.Excluir(id);
+                using (ObservacaoController observacaoController = new ObservacaoController(this.MeuDbContext(), this._notifier))
+                {
+                    await observacaoController.Excluir(id);
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 

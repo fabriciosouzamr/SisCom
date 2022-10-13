@@ -7,6 +7,7 @@ using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -57,6 +58,29 @@ namespace SisCom.Aplicacao.Controllers
         {
             var serie = await _NotaFiscalSaidaSerieService.GetAll(null, p => p.Serie.Trim() == Serie.Trim());
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaSerieViewModel>>(serie);
+        }
+        public async Task<String> NovoNumeroNotaFiscal(string Serie)
+        {
+            var series = await _NotaFiscalSaidaSerieService.GetAll(null, p => p.Serie.Trim() == Serie.Trim());
+            string notaFiscal = "";
+
+            if (series.Any())
+            {
+                var serie = series.FirstOrDefault();
+
+                notaFiscal = serie.UltimaNotaFiscal;
+
+                if (String.IsNullOrEmpty(notaFiscal))
+                { notaFiscal = "1"; }
+                else
+                { notaFiscal = (Convert.ToInt16(notaFiscal) + 1).ToString(); }
+
+                serie.UltimaNotaFiscal = notaFiscal;
+
+                await _NotaFiscalSaidaSerieService.Atualizar(serie);
+            }
+
+            return notaFiscal;
         }
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<NotaFiscalSaidaSerie, object>> order = null)
         {

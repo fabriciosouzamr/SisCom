@@ -44,13 +44,13 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<TransportadoraViewModel>> ObterTodos()
         {
-            var obterTodos = await _transportadoraService.GetAll();
+            var obterTodos = await _transportadoraService.GetAll(o => o.Nome, null, p => p.Endereco.End_Cidade);
             return Declaracoes.mapper.Map<IEnumerable<TransportadoraViewModel>>(obterTodos);
 
         }
         public async Task<IEnumerable<TransportadoraViewModel>> PesquisarId(Guid Id)
         {
-            var pessoa = await _transportadoraService.Search(p => p.Id == Id);
+            var pessoa = await _transportadoraService.GetAll(null, w => w.Id == Id, p => p.Endereco.End_Cidade);
             return Declaracoes.mapper.Map<IEnumerable<TransportadoraViewModel>>(pessoa);
         }
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<Transportadora, object>> order = null)

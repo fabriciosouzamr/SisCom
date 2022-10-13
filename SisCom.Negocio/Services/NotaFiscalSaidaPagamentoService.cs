@@ -3,24 +3,23 @@ using Funcoes.PagedList;
 using SisCom.Entidade.Modelos;
 using SisCom.Negocio.Interfaces;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SisCom.Negocio.Services
 {
     public class NotaFiscalSaidaPagamentoService : BaseService<NotaFiscalSaidaPagamento>, INotaFiscalSaidaPagamentoService
     {
-        private readonly INotaFiscalSaidaPagamentoRepository _NotaFiscalSaidaPagamentoRepository;
+        private readonly INotaFiscalSaidaPagamentoRepository _notaFiscalSaidaPagamentoRepository;
 
         public NotaFiscalSaidaPagamentoService(INotaFiscalSaidaPagamentoRepository NotaFiscalSaidaPagamentoRepository,
                                  INotifier notificador) : base(notificador, NotaFiscalSaidaPagamentoRepository)
         {
-            _NotaFiscalSaidaPagamentoRepository = NotaFiscalSaidaPagamentoRepository;
+            _notaFiscalSaidaPagamentoRepository = NotaFiscalSaidaPagamentoRepository;
         }
 
         public Task<IPagedList<NotaFiscalSaidaPagamento>> GetPagedList(FilteredPagedListParameters parameters)
         {
-            return _NotaFiscalSaidaPagamentoRepository.GetPagedList(f =>
+            return _notaFiscalSaidaPagamentoRepository.GetPagedList(f =>
             (
                 parameters.Search == null /* || f.Descricao.Contains(parameters.Search) */
             ), parameters);
@@ -28,22 +27,35 @@ namespace SisCom.Negocio.Services
 
         public override void Dispose()
         {
-            _NotaFiscalSaidaPagamentoRepository?.Dispose();
+            _notaFiscalSaidaPagamentoRepository?.Dispose();
         }
 
-        public Task Adicionar(NotaFiscalSaidaPagamento NotaFiscalSaidaPagamento)
+        public async Task Adicionar(NotaFiscalSaidaPagamento NotaFiscalSaidaPagamento)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _notaFiscalSaidaPagamentoRepository.Insert(NotaFiscalSaidaPagamento);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Atualizar(NotaFiscalSaidaPagamento NotaFiscalSaidaPagamento)
+        public async Task Atualizar(NotaFiscalSaidaPagamento NotaFiscalSaidaPagamento)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _notaFiscalSaidaPagamentoRepository.Update(NotaFiscalSaidaPagamento);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
-
-        public Task Remover(Guid id)
+        public async Task Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            await _notaFiscalSaidaPagamentoRepository.Delete(id);
         }
     }
 }

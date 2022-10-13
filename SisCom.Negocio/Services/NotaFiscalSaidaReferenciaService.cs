@@ -10,17 +10,17 @@ namespace SisCom.Negocio.Services
 {
     public class NotaFiscalSaidaReferenciaService : BaseService<NotaFiscalSaidaReferencia>, INotaFiscalSaidaReferenciaService
     {
-        private readonly INotaFiscalSaidaReferenciaRepository _NotaFiscalSaidaReferenciaRepository;
+        private readonly INotaFiscalSaidaReferenciaRepository _notaFiscalSaidaReferenciaRepository;
 
         public NotaFiscalSaidaReferenciaService(INotaFiscalSaidaReferenciaRepository NotaFiscalSaidaReferenciaRepository,
                                  INotifier notificador) : base(notificador, NotaFiscalSaidaReferenciaRepository)
         {
-            _NotaFiscalSaidaReferenciaRepository = NotaFiscalSaidaReferenciaRepository;
+            _notaFiscalSaidaReferenciaRepository = NotaFiscalSaidaReferenciaRepository;
         }
 
         public Task<IPagedList<NotaFiscalSaidaReferencia>> GetPagedList(FilteredPagedListParameters parameters)
         {
-            return _NotaFiscalSaidaReferenciaRepository.GetPagedList(f =>
+            return _notaFiscalSaidaReferenciaRepository.GetPagedList(f =>
             (
                 parameters.Search == null /*|| f.Descricao.Contains(parameters.Search)*/
             ), parameters);
@@ -28,22 +28,36 @@ namespace SisCom.Negocio.Services
 
         public override void Dispose()
         {
-            _NotaFiscalSaidaReferenciaRepository?.Dispose();
+            _notaFiscalSaidaReferenciaRepository?.Dispose();
         }
 
-        public Task Adicionar(NotaFiscalSaidaReferencia NotaFiscalSaidaReferencia)
+        public async Task Adicionar(NotaFiscalSaidaReferencia NotaFiscalSaidaReferencia)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _notaFiscalSaidaReferenciaRepository.Insert(NotaFiscalSaidaReferencia);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Atualizar(NotaFiscalSaidaReferencia NotaFiscalSaidaReferencia)
+        public async Task Atualizar(NotaFiscalSaidaReferencia NotaFiscalSaidaReferencia)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _notaFiscalSaidaReferenciaRepository.Update(NotaFiscalSaidaReferencia);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Remover(Guid id)
+        public async Task Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            await _notaFiscalSaidaReferenciaRepository.Delete(id);
         }
     }
 }

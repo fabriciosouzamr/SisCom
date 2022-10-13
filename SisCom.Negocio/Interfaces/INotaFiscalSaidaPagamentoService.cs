@@ -11,7 +11,7 @@ namespace SisCom.Negocio.Interfaces
     {
         Task Adicionar(NotaFiscalSaidaPagamento NotaFiscalSaidaPagamento);
         Task Atualizar(NotaFiscalSaidaPagamento NotaFiscalSaidaPagamento);
-        Task Remover(Guid id);
+        Task Excluir(Guid id);
         Task<List<NotaFiscalSaidaPagamento>> GetAll(Expression<Func<NotaFiscalSaidaPagamento, object>> order = null);
 
         Task<List<NotaFiscalSaidaPagamento>> Combo(Expression<Func<NotaFiscalSaidaPagamento, object>> order = null);

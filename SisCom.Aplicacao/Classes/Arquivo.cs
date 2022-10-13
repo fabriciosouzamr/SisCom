@@ -7,6 +7,37 @@ namespace SisCom.Aplicacao.Classes
 {
     public static class Arquivo
     {
+        public static string[] CarregarArquivosXML()
+        {
+            string[] filePath = null;
+
+            try
+            {
+
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.InitialDirectory = Application.StartupPath;
+                    openFileDialog.Title = "Selecionar o XML";
+                    openFileDialog.Filter = "XML|*.XML";
+                    openFileDialog.FilterIndex = 1;
+                    openFileDialog.CheckFileExists = true;
+                    openFileDialog.CheckPathExists = true;
+                    openFileDialog.RestoreDirectory = true;
+                    openFileDialog.Multiselect = true;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        filePath = openFileDialog.FileNames;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            return filePath;
+        }
+
         public static string CarregarArquivoXML()
         {
             var filePath = string.Empty;
@@ -23,6 +54,7 @@ namespace SisCom.Aplicacao.Classes
                     openFileDialog.CheckFileExists = true;
                     openFileDialog.CheckPathExists = true;
                     openFileDialog.RestoreDirectory = true;
+                    openFileDialog.Multiselect = false;
 
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {

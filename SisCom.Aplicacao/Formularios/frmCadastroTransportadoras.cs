@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SisCom.Entidade.Modelos;
+using System.Linq;
+using System.Threading;
 
 namespace SisCom.Aplicacao.Formularios
 {
@@ -17,6 +19,8 @@ namespace SisCom.Aplicacao.Formularios
     {
         ViewModels.TransportadoraViewModel transportadora = null;
         TransportadoraController transportadoraController;
+
+        public Guid tranpotadoraId;
 
         public frmCadastroTransportadoras(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
@@ -34,8 +38,19 @@ namespace SisCom.Aplicacao.Formularios
 
             Limpar();
 
-            transportadora = new ViewModels.TransportadoraViewModel();
-            await Navegar(Declaracoes.eNavegar.Primeiro);
+            if (tranpotadoraId == Guid.Empty)
+            {
+                transportadora = new ViewModels.TransportadoraViewModel();
+                await Navegar(Declaracoes.eNavegar.Primeiro);
+            }
+            else
+            {
+                using (TransportadoraController TransportadoraController = new TransportadoraController(this.MeuDbContext(), this._notifier))
+                {
+                    transportadora = (await TransportadoraController.PesquisarId(tranpotadoraId)).FirstOrDefault();
+                    CarregarDados();
+                }
+            }
         }
         void Limpar()
         {
@@ -110,7 +125,11 @@ namespace SisCom.Aplicacao.Formularios
             transportadora.PlacaCarreta01 = Funcao.StringVazioParaNulo(textPlacaCarreta01.Text);
             transportadora.PlacaCarreta02 = Funcao.StringVazioParaNulo(textPlacaCarreta02.Text);
             transportadora.Telefone = Funcao.StringVazioParaNulo(Funcoes._Classes.Texto.Telefone_Tratar(textTelefone.Text));
-            
+
+            if (transportadora.Endereco != null)
+            transportadora.Endereco.End_Cidade = null;
+
+
             if (transportadora.Id != Guid.Empty)
             {
                 await transportadoraController.Atualizar(transportadora.Id, transportadora);
@@ -119,6 +138,9 @@ namespace SisCom.Aplicacao.Formularios
             {
                 transportadora = (await transportadoraController.Adicionar(transportadora));
             }
+
+            tranpotadoraId = transportadora.Id;
+
             await comboTransportadoraNome_Carregar();
         }
         async void Excluir()
@@ -132,7 +154,7 @@ namespace SisCom.Aplicacao.Formularios
 
             Limpar();
         }
-        void CarregarDados()
+        async void CarregarDados()
         {
             if (!FuncaoInterna.NuloModelView(transportadora))
             {
@@ -142,11 +164,20 @@ namespace SisCom.Aplicacao.Formularios
                 comboPesquisarPesquisa.SelectedIndex = -1;
                 comboTipoPessoa.SelectedValue = transportadora.TipoPessoa == 0 ? TipoPessoa.Fisica : transportadora.TipoPessoa;
                 maskedCPFCNPJ.Text = transportadora.CNPJ_CPF;
+                if (transportadora.Endereco != null)
+                {
+                    if (((transportadora.Endereco.End_Cidade != null)) && (transportadora.Endereco.End_Cidade.EstadoId != null))
+                    {
+                        comboEnderecoUF.SelectedValue = transportadora.Endereco.End_Cidade.EstadoId;
+                        await comboEnderecoUF_Tratar();
+                        comboEnderecoCidade.SelectedValue = transportadora.Endereco.End_CidadeId;
+                    }
+                    maskedEnderecoCEP.Text = Funcao.NuloParaString(transportadora.Endereco.End_CEP);
+                    textEnderecoLogradouro.Text = Funcao.NuloParaString(transportadora.Endereco.End_Logradouro);
+                    textEnderecoNumero.Text = Funcao.NuloParaString(transportadora.Endereco.End_Numero);
+                    textEnderecoBairro.Text = Funcao.NuloParaString(transportadora.Endereco.End_Bairro);
+                }
                 textInscricaoEstadual.Text = Funcao.NuloParaString(transportadora.InscricaoEstadual);
-                maskedEnderecoCEP.Text = Funcao.NuloParaString(transportadora.Endereco.End_CEP);
-                textEnderecoLogradouro.Text = Funcao.NuloParaString(transportadora.Endereco.End_Logradouro);
-                textEnderecoNumero.Text = Funcao.NuloParaString(transportadora.Endereco.End_Numero);
-                textEnderecoBairro.Text = Funcao.NuloParaString(transportadora.Endereco.End_Bairro);
                 textNomeContato.Text = Funcao.NuloParaString(transportadora.NomeContato);
                 textPlaca.Text = Funcao.NuloParaString(transportadora.PlacaVeiculo);
                 textPlacaCarreta01.Text = Funcao.NuloParaString(transportadora.PlacaCarreta01);
