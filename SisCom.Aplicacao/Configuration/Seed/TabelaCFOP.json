@@ -486,6 +486,12 @@
     "GrupoCFOPId": "7C17FD79-E4E9-45AA-934F-F5B762DF3100"
   },
   {
+    "Id": "D69AFCEF-0222-42BD-9FA9-8580A9AF15CB",
+    "Codigo": "5102",
+    "Descricao": "Venda de produção do estabelecimento",
+    "GrupoCFOPId": "7C17FD79-E4E9-45AA-934F-F5B762DF3100"
+  },
+  {
     "Id": "DAEA5B55-FE3E-4AAA-B278-277B9FE03E80",
     "Codigo": "1256",
     "Descricao": "Compra de energia elétrica por estabelecimento de produtor rural",

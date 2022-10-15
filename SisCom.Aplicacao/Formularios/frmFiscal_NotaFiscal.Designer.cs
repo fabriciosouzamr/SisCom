@@ -58,8 +58,6 @@
             this.tbcGeral = new System.Windows.Forms.TabControl();
             this.tbsRemetente = new System.Windows.Forms.TabPage();
             this.textNumeroNotaFiscalSaida = new System.Windows.Forms.TextBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.comboCFOP = new System.Windows.Forms.ComboBox();
             this.comboTransportadoraUF = new System.Windows.Forms.ComboBox();
             this.maskedTransportadoraCPFCNPJ = new System.Windows.Forms.MaskedTextBox();
             this.maskedRemetenteCPFCNPJ = new System.Windows.Forms.MaskedTextBox();
@@ -705,8 +703,6 @@
             // tbsRemetente
             // 
             this.tbsRemetente.Controls.Add(this.textNumeroNotaFiscalSaida);
-            this.tbsRemetente.Controls.Add(this.label28);
-            this.tbsRemetente.Controls.Add(this.comboCFOP);
             this.tbsRemetente.Controls.Add(this.comboTransportadoraUF);
             this.tbsRemetente.Controls.Add(this.maskedTransportadoraCPFCNPJ);
             this.tbsRemetente.Controls.Add(this.maskedRemetenteCPFCNPJ);
@@ -813,26 +809,6 @@
             this.textNumeroNotaFiscalSaida.Name = "textNumeroNotaFiscalSaida";
             this.textNumeroNotaFiscalSaida.Size = new System.Drawing.Size(96, 23);
             this.textNumeroNotaFiscalSaida.TabIndex = 163;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(707, 50);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(37, 15);
-            this.label28.TabIndex = 162;
-            this.label28.Text = "CFOP";
-            // 
-            // comboCFOP
-            // 
-            this.comboCFOP.DropDownWidth = 200;
-            this.comboCFOP.FormattingEnabled = true;
-            this.comboCFOP.Location = new System.Drawing.Point(751, 47);
-            this.comboCFOP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboCFOP.Name = "comboCFOP";
-            this.comboCFOP.Size = new System.Drawing.Size(86, 23);
-            this.comboCFOP.TabIndex = 161;
-            this.comboCFOP.SelectedIndexChanged += new System.EventHandler(this.comboCFOP_SelectedIndexChanged);
             // 
             // comboTransportadoraUF
             // 
@@ -1673,6 +1649,7 @@
             this.comboNaturezaOperacao.Name = "comboNaturezaOperacao";
             this.comboNaturezaOperacao.Size = new System.Drawing.Size(324, 23);
             this.comboNaturezaOperacao.TabIndex = 15;
+            this.comboNaturezaOperacao.SelectedIndexChanged += new System.EventHandler(this.comboNaturezaOperacao_SelectedIndexChanged);
             // 
             // label19
             // 
@@ -3937,8 +3914,6 @@
         private System.Windows.Forms.MaskedTextBox maskedRemetenteCPFCNPJ;
         private System.Windows.Forms.MaskedTextBox maskedTransportadoraCPFCNPJ;
         private System.Windows.Forms.ComboBox comboTransportadoraUF;
-        private System.Windows.Forms.ComboBox comboCFOP;
-        private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox textNumeroNotaFiscalSaida;
     }
 }

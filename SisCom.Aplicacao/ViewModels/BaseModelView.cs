@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SisCom.Entidade.Modelos;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SisCom.Aplicacao.ViewModels
@@ -25,6 +26,11 @@ namespace SisCom.Aplicacao.ViewModels
     public class NomeComboViewModel : BaseModelView
     {
         public string Nome { get; set; }
+    }
+    public class ComboNaturezaOperacaoViewModel : BaseModelView
+    {
+        public string Nome { get; set; }
+        public Guid? TabelaCFOPId { get; set; }
     }
     public class DescricaoComboViewModel : BaseModelView
     {

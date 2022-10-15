@@ -121,7 +121,7 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region NaturezaOperacao
                         cfg.CreateMap<NaturezaOperacaoViewModel, NaturezaOperacao>().ReverseMap();
-                        cfg.CreateMap<NaturezaOperacao, NomeComboViewModel>();
+                        cfg.CreateMap<NaturezaOperacao, ComboNaturezaOperacaoViewModel>().ReverseMap();
                         #endregion
                         #region NotaFiscalEntrada
                         cfg.CreateMap<NotaFiscalEntradaViewModel, NotaFiscalEntrada>().ReverseMap();

@@ -82,7 +82,7 @@ namespace SisCom.Aplicacao.Formularios
             dateUnidadeDesativada.Visible = false;
             editado = false;
         }
-        private async void Excluir()
+        private async Task Excluir()
         {
             var empresaController = new EmpresaController(this.MeuDbContext(), this._notifier);
             await empresaController.Excluir(empresa.Id);
@@ -152,7 +152,7 @@ namespace SisCom.Aplicacao.Formularios
                 editado = false;
             }
         }
-        private async void AdicionarEmpresa()
+        private async Task AdicionarEmpresa()
         {
             if (!Funcoes._Classes.Validacao.CNPJ_Valido(empresa.CNPJ))
             {

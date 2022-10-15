@@ -241,6 +241,13 @@ namespace SisCom.Aplicacao.Formularios
 
                     await CarregarDados();
                 }
+
+                if (comboEmpresa.Items.Count == 1)
+                    comboEmpresa.SelectedIndex = 0;
+                if (comboVendedor.Items.Count == 1)
+                    comboVendedor.SelectedIndex = 0;
+                if (comboOrigemVenda.Items.Count == 1)
+                    comboOrigemVenda.SelectedIndex = 0;
             }
             catch (Exception Ex)
             {
@@ -454,11 +461,10 @@ namespace SisCom.Aplicacao.Formularios
         private async Task AdicionarVenda()
         {
             var vendaController = new VendaController(this.MeuDbContext(), this._notifier);
-            var vendaMercadoriaController = new VendaMercadoriaController(this.MeuDbContext(), this._notifier);
+            VendaMercadoriaController vendaMercadoriaController;
 
             venda.DataVenda = DateTime.Parse(dateDataEntrada.Value.ToString("dd/MM/yyyy") + " " + textHora.Text);
             venda.ClienteId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboClienteCodigo);
-            //venda.VendedorId { get; set; }
             venda.EmpresaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEmpresa);
             venda.TabelaOrigemVendaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboOrigemVenda);
             venda.TransportadoraId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboTransportadora);
@@ -485,6 +491,7 @@ namespace SisCom.Aplicacao.Formularios
             }
             else
             {
+                novo = false;
                 venda.Id = Guid.NewGuid();
                 venda.Codigo = 0;
                 await vendaController.Adicionar(venda);
@@ -518,17 +525,17 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         vendaMercadoriaViewModel.Id = Guid.NewGuid();
                         row.Cells[gridProdutos_Id].Value = vendaMercadoriaViewModel.Id;
-                        vendaMercadoriaController.Adicionar(vendaMercadoriaViewModel);
+                        await vendaMercadoriaController.Adicionar(vendaMercadoriaViewModel);
                     }
                     else
                     {
                         vendaMercadoriaViewModel.Id = (Guid)row.Cells[gridProdutos_Id].Value;
-                        vendaMercadoriaController.Atualizar(vendaMercadoriaViewModel.Id, vendaMercadoriaViewModel);
+                        await vendaMercadoriaController.Atualizar(vendaMercadoriaViewModel.Id, vendaMercadoriaViewModel);
                     }
                 }
             }
 
-            CarregarDados();
+            await CarregarDados();
         }
 
         private async void Excluir()
@@ -708,12 +715,14 @@ namespace SisCom.Aplicacao.Formularios
         private void botaoAnterior_Click(object sender, EventArgs e)
         {
             novo = false;
-            Navegar(venda.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
+            if (venda != null)
+                Navegar(venda.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
         }
         private void botaoPosterior_Click(object sender, EventArgs e)
         {
             novo = false;
-            Navegar(venda.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
+            if (venda != null)
+                Navegar(venda.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
         }
 
         private void botaoExcluir_Click(object sender, EventArgs e)

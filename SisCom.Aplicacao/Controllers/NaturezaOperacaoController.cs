@@ -4,10 +4,12 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
-using SisCom.Negocio.Interfaces;
 using SisCom.Negocio.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -31,10 +33,31 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<NaturezaOperacaoViewModel>>(obterTodos);
         }
 
-        public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<NaturezaOperacao, object>> order = null)
+        public async Task<IEnumerable<ComboNaturezaOperacaoViewModel>> Combo(Expression<Func<NaturezaOperacao, object>> order = null)
         {
-            var combo = await _NaturezaOperacaoService.Combo(order);
-            return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
+            var ret = await _NaturezaOperacaoService.GetAll(order, i => i.TabelaCFOP);
+
+            IList<ComboNaturezaOperacaoViewModel> combo = new List<ComboNaturezaOperacaoViewModel>();
+
+            foreach (var item in ret)
+            {
+                ComboNaturezaOperacaoViewModel comboitem = new ComboNaturezaOperacaoViewModel();
+
+                comboitem.Id = item.Id;
+                comboitem.TabelaCFOPId = item.TabelaCFOPId;
+                if (item.TabelaCFOP == null)
+                {
+                    comboitem.Nome = item.Nome;
+                }
+                else
+                {
+                    comboitem.Nome = item.TabelaCFOP.Codigo + " - " + item.Nome;
+                }
+
+                combo.Add(comboitem);
+            }
+
+            return combo;
         }
         public async Task<IEnumerable<NaturezaOperacaoViewModel>> PesquisarId(Guid Id)
         {

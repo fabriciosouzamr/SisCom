@@ -4,7 +4,7 @@
     "Codigo": "BA",
     "Nome": "Bahia",
     "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
-    "CodigoIBGE":  "29"
+    "CodigoIBGE": "29"
   },
   {
     "Id": "1694ED05-6FF5-4C4F-AA86-04446E664FBB",
@@ -187,5 +187,12 @@
     "Nome": "Paraíba",
     "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
     "CodigoIBGE": "25"
+  },
+  {
+    "Id": "61ED2C34-3E61-439E-A669-E60858DA86D4",
+    "Codigo": "TO",
+    "Nome": "Tocantins",
+    "PaisId": "2928F9C6-CBE6-4417-BBF9-BD525BFDF4C9",
+    "CodigoIBGE": "17"
   }
 ]
