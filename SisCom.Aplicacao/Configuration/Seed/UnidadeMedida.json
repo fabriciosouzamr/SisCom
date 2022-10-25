@@ -1,37 +1,7 @@
 [
   {
-    "Id": "62DE1978-CF9E-4EAE-995C-3DCC2381B442",
-    "Codigo": "FRD",
-    "Nome": "Fardo",
-    "UltimaAtualizacao": "2022-03-06T14:59:55.5304657"
-  },
-  {
-    "Id": "9069252E-EEE7-4A17-88EF-6E6F2E9B4DF3",
-    "Codigo": "CXA",
-    "Nome": "Caixa",
-    "UltimaAtualizacao": "2022-03-06T14:59:55.5304620"
-  },
-  {
-    "Id": "93844C9B-2ECD-4DDE-B8C1-7623E9072C03",
-    "Codigo": "LTR",
-    "Nome": "Litro ",
-    "UltimaAtualizacao": "2022-03-06T14:59:55.5304633"
-  },
-  {
-    "Id": "C22B45E8-CCB4-4D85-84BD-76C7290F7905",
-    "Codigo": "MTR",
-    "Nome": "Metro",
-    "UltimaAtualizacao": "2022-03-06T14:59:55.5304627"
-  },
-  {
-    "Id": "B4F2DC84-4B87-4208-B0FB-7FAAD9EABCC2",
-    "Codigo": "UND",
-    "Nome": "Unidade",
-    "UltimaAtualizacao": "2022-03-06T14:59:55.5304600"
-  },
-  {
     "Id": "0410BF7D-8554-4D01-B9A6-91DD3075FDE6",
-    "Codigo": "SCO",
+    "Codigo": "SC",
     "Nome": "Saco",
     "UltimaAtualizacao": "2022-03-06T14:59:55.5304647"
   },
@@ -40,29 +10,5 @@
     "Codigo": "KG ",
     "Nome": "Kilograma",
     "UltimaAtualizacao": "2022-03-06T14:59:55.5304630"
-  },
-  {
-    "Id": "91519156-06AA-4650-9E90-9E7C62B61C91",
-    "Codigo": "GR ",
-    "Nome": "Grama",
-    "UltimaAtualizacao": "2022-03-06T14:59:55.5304654"
-  },
-  {
-    "Id": "52128774-A93A-489C-BFDE-BD08613807CA",
-    "Codigo": "PCA",
-    "Nome": "Peca",
-    "UltimaAtualizacao": "2022-03-06T14:59:55.5304623"
-  },
-  {
-    "Id": "A2335AFC-6D61-469B-A3F0-C670320F1035",
-    "Codigo": "FRC",
-    "Nome": "Frasco",
-    "UltimaAtualizacao": "2022-03-06T14:59:55.5304651"
-  },
-  {
-    "Id": "D9772A37-4F62-4BEF-BF9A-D495CE41B9B9",
-    "Codigo": "PCT",
-    "Nome": "Pacote",
-    "UltimaAtualizacao": "2022-03-06T14:59:55.5304644"
   }
 ]

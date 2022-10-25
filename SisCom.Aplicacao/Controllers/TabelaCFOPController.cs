@@ -30,7 +30,7 @@ namespace SisCom.Aplicacao.Controllers
             var obterTodos = await _TabelaCFOPService.GetAll();
             return Declaracoes.mapper.Map<IEnumerable<TabelaCFOPViewModel>>(obterTodos);
         }
-        public async Task<IEnumerable<CodigoComboViewModel>> Combo(EntradaSaida entradaSaida, Expression<Func<TabelaCFOP, object>> order = null)
+        public async Task<IEnumerable<CodigoComboViewModel>> Combo(EntradaSaida? entradaSaida, Expression<Func<TabelaCFOP, object>> order = null)
         {
             if (entradaSaida == EntradaSaida.Entrada)
             { 
@@ -39,11 +39,16 @@ namespace SisCom.Aplicacao.Controllers
                                                                           w.GrupoCFOP.TipoOperacaoCFOP == Entidade.Enum.TipoOperacaoCFOP.EntradaExterior), i => i.GrupoCFOP);
                 return Declaracoes.mapper.Map<IEnumerable<CodigoComboViewModel>>(combo);
             }
-            else
+            else if (entradaSaida == EntradaSaida.Saida)
             { 
                 var combo = await _TabelaCFOPService.GetAll(order, w => (w.GrupoCFOP.TipoOperacaoCFOP == Entidade.Enum.TipoOperacaoCFOP.SaidaDentroEstado ||
                                                                          w.GrupoCFOP.TipoOperacaoCFOP == Entidade.Enum.TipoOperacaoCFOP.SaidaForaEstado ||
                                                                          w.GrupoCFOP.TipoOperacaoCFOP == Entidade.Enum.TipoOperacaoCFOP.SaidaExterior), i => i.GrupoCFOP);
+                return Declaracoes.mapper.Map<IEnumerable<CodigoComboViewModel>>(combo);
+            }
+            else
+            {
+                var combo = await _TabelaCFOPService.GetAll(order, null, i => i.GrupoCFOP);
                 return Declaracoes.mapper.Map<IEnumerable<CodigoComboViewModel>>(combo);
             }
         }

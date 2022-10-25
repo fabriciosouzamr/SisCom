@@ -50,7 +50,7 @@
   },
   {
     "Nome": "VENDA DE MERCADORIA ADQUIRIDA OU RECEBIDA DE TERCEIROS",
-    "TabelaCFOPId": "BFDC3E42-3DF4-4463-A866-07684FBAC021",
+    "TabelaCFOPId": "40CBC68C-DFA2-4FE2-B819-9036FF92C360",
     "EntradaSaida": 2,
     "PercentualICMS": 12,
     "Devolucao": false
@@ -61,20 +61,6 @@
     "EntradaSaida": 2,
     "PercentualICMS": 0,
     "Devolucao": true
-  },
-  {
-    "Nome": "REMESSA PARA DEPÓSITO FECHADO OU ARMAZÉM GERAL",
-    "TabelaCFOPId": "94804D0E-029E-4ADA-902D-0D8642A395E1",
-    "EntradaSaida": 2,
-    "PercentualICMS": 0,
-    "Devolucao": false
-  },
-  {
-    "Nome": "REMESSA EM BONIFICAÇÃO, DOAÇÃO OU BRINDE",
-    "TabelaCFOPId": "27A3BCFC-E50A-4ADA-9117-69D66545C193",
-    "EntradaSaida": 2,
-    "PercentualICMS": 0,
-    "Devolucao": false
   }
 ]
 

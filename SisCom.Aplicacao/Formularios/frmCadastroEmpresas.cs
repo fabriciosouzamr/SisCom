@@ -164,6 +164,17 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Selecione o regime tributário");
                 return;
             }
+            if (String.IsNullOrEmpty(textEnderecoLogradouro.Text) || 
+                String.IsNullOrEmpty(textNumero.Text) || 
+                String.IsNullOrEmpty(textEnderecoBairro.Text) ||
+                String.IsNullOrEmpty(maskedEnderecoCEP.Text) ||
+                Combo_ComboBox.Selecionado(comboEnderecoUF) ||
+                Combo_ComboBox.Selecionado(comboEnderecoCidade))
+            {
+                CaixaMensagem.Informacao("Selecione o regime tributário");
+                return;
+            }
+
             var empresaController = new EmpresaController(this.MeuDbContext(), this._notifier);
 
             if (empresa.Id != Guid.Empty)

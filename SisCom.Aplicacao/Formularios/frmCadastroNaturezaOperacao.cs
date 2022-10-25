@@ -55,16 +55,17 @@ namespace SisCom.Aplicacao.Formularios
 
             using (TabelaCFOPController tabelaCFOPController = new TabelaCFOPController(this.MeuDbContext(), this._notifier))
             {
-                tabelaCFOP = (List<CodigoComboViewModel>)await tabelaCFOPController.Combo(entradaSaida: EntradaSaida.Saida, o => o.Codigo);
+                tabelaCFOP = (List<CodigoComboViewModel>)await tabelaCFOPController.Combo(null, o => o.Codigo);
             }
             
             Grid_DataGridView.DataGridView_Formatar(gridNaturezaOperacao, AllowUserToAddRows: true);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "Id", "Id", Tamanho: 0);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "Nome", "Nome", Tamanho: 300);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "Devolucao", "Devolução", Tamanho: 80, Tipo: Grid_DataGridView.TipoColuna.CheckBox);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "Nome", "Nome", Tamanho: 300, readOnly: false);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "Devolucao", "Devolução", Tamanho: 80, Tipo: Grid_DataGridView.TipoColuna.CheckBox, readOnly: false);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "EntradaSaida", "Entrada/Saída", Tamanho: 80, Tipo: Grid_DataGridView.TipoColuna.ComboBox, dataSource: EnumUtil.ToDataTable(typeof(EntradaSaida)),
                                                                                                                                                                             dataSource_Descricao: "Description",
-                                                                                                                                                                            dataSource_Valor: "value");
+                                                                                                                                                                            dataSource_Valor: "value",
+                                                                                                                                                                            readOnly: false);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "", "CFOP", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaCFOP, "Codigo", "ID", readOnly: false);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "ICMS", "ICMS", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
 
@@ -76,19 +77,42 @@ namespace SisCom.Aplicacao.Formularios
 
                 foreach (NaturezaOperacaoViewModel naturezaOperacao in naturezaOperacaoViewModel)
                 {
-                    Grid_DataGridView.DataGridView_LinhaAdicionar(gridNaturezaOperacao,
-                                                                    new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_ID,
-                                                                                                                                    Valor = naturezaOperacao.Id },
-                                                                                                     new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_Nome,
-                                                                                                                                    Valor = naturezaOperacao.Nome },
-                                                                                                     new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_Devolucao,
-                                                                                                                                    Valor = naturezaOperacao.Devolucao },
-                                                                                                     new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_EntradaSaida,
-                                                                                                                                    Valor = naturezaOperacao.EntradaSaida },
-                                                                                                     new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_CFOP,
-                                                                                                                                    Valor = naturezaOperacao.TabelaCFOPId },
-                                                                                                     new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_ICMS,
-                                                                                                                                    Valor = naturezaOperacao.PercentualICMS }});
+                    try
+                    {
+                        if (naturezaOperacao.TabelaCFOPId != null)
+                        {
+                            Grid_DataGridView.DataGridView_LinhaAdicionar(gridNaturezaOperacao,
+                                                                            new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_ID,
+                                                                                                                                            Valor = naturezaOperacao.Id },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_Nome,
+                                                                                                                                            Valor = naturezaOperacao.Nome },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_Devolucao,
+                                                                                                                                            Valor = naturezaOperacao.Devolucao },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_EntradaSaida,
+                                                                                                                                            Valor = naturezaOperacao.EntradaSaida },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_CFOP,
+                                                                                                                                            Valor = naturezaOperacao.TabelaCFOPId },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_ICMS,
+                                                                                                                                            Valor = naturezaOperacao.PercentualICMS }});
+                        }
+                        else
+                        {
+                            Grid_DataGridView.DataGridView_LinhaAdicionar(gridNaturezaOperacao,
+                                                                            new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_ID,
+                                                                                                                                            Valor = naturezaOperacao.Id },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_Nome,
+                                                                                                                                            Valor = naturezaOperacao.Nome },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_Devolucao,
+                                                                                                                                            Valor = naturezaOperacao.Devolucao },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_EntradaSaida,
+                                                                                                                                            Valor = naturezaOperacao.EntradaSaida },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_ICMS,
+                                                                                                                                            Valor = naturezaOperacao.PercentualICMS }});
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
 
@@ -99,7 +123,7 @@ namespace SisCom.Aplicacao.Formularios
 
         private void gridNaturezaOperacao_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            Gravar(e.RowIndex);
+            //if (carregado) Gravar(e.RowIndex);
         }
 
         async Task Gravar(int rowIndex)

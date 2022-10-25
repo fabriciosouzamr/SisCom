@@ -100,23 +100,40 @@ namespace SisCom.Aplicacao.Formularios
 
                 foreach (var item in ret)
                 {
-                    linha = Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscalSaida,
-                                                                          new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Id,
-                                                                                                                                          Valor = item.Id },
-                                                                                                           new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Numero,
-                                                                                                                                          Valor = item.NotaFiscal },
-                                                                                                           new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Destinatario,
-                                                                                                                                          Valor = item.Cliente.Nome },
-                                                                                                           new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_CPF_CNPJ,
-                                                                                                                                          Valor = item.Cliente.CNPJ_CPF },
-                                                                                                           new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Status,
-                                                                                                                                          Valor = item.Status.GetDescription() },
-                                                                                                           new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_RetornoSefaz,
-                                                                                                                                          Valor = item.RetornoSefaz },
-                                                                                                           new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_ID_Status,
-                                                                                                                                          Valor = item.Status.GetHashCode() }}).Index;
+                    if (item.Cliente == null)
+                    {
+                        linha = Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscalSaida,
+                                                                              new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Id,
+                                                                                                                                              Valor = item.Id },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Numero,
+                                                                                                                                              Valor = item.NotaFiscal },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Status,
+                                                                                                                                              Valor = item.Status.GetDescription() },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_RetornoSefaz,
+                                                                                                                                              Valor = item.RetornoSefaz },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_ID_Status,
+                                                                                                                                              Valor = item.Status.GetHashCode() }}).Index;
+                    }
+                    else
+                    {
+                        linha = Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscalSaida,
+                                                                              new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Id,
+                                                                                                                                              Valor = item.Id },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Numero,
+                                                                                                                                              Valor = item.NotaFiscal },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Destinatario,
+                                                                                                                                              Valor = item.Cliente.Nome },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_CPF_CNPJ,
+                                                                                                                                              Valor = item.Cliente.CNPJ_CPF },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Status,
+                                                                                                                                              Valor = item.Status.GetDescription() },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_RetornoSefaz,
+                                                                                                                                              Valor = item.RetornoSefaz },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_ID_Status,
+                                                                                                                                              Valor = item.Status.GetHashCode() }}).Index;
+                    }
 
-                    switch(item.Status)
+                    switch (item.Status)
                     {
                         case NF_Status.Finalizada:
                             gridNotaFiscalSaida.Rows[linha].Cells[gridNotaFiscalSaida_Sinal].Style.BackColor = panelStatusPendente.BackColor;
