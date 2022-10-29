@@ -168,10 +168,10 @@ namespace SisCom.Aplicacao.Formularios
                 String.IsNullOrEmpty(textNumero.Text) || 
                 String.IsNullOrEmpty(textEnderecoBairro.Text) ||
                 String.IsNullOrEmpty(maskedEnderecoCEP.Text) ||
-                Combo_ComboBox.Selecionado(comboEnderecoUF) ||
-                Combo_ComboBox.Selecionado(comboEnderecoCidade))
+                !Combo_ComboBox.Selecionado(comboEnderecoUF) ||
+                !Combo_ComboBox.Selecionado(comboEnderecoCidade))
             {
-                CaixaMensagem.Informacao("Selecione o regime tributário");
+                CaixaMensagem.Informacao("Informe o endereço completo");
                 return;
             }
 

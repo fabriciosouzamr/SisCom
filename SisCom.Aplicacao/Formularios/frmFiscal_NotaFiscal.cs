@@ -52,7 +52,6 @@ namespace SisCom.Aplicacao.Formularios
 
         const int gridObservacao_Id = 0;
         const int gridObservacao_Codigo = 1;
-        const int gridObservacao_Descricao = 2;
 
         const int gridInfoNFe_Id = 0;
         const int gridInfoNFe_NFe_NFCe = 1;
@@ -174,6 +173,8 @@ namespace SisCom.Aplicacao.Formularios
                         { textNumeroNotaFiscalSaida.Text = "1"; }
                         else
                         { textNumeroNotaFiscalSaida.Text = (Convert.ToInt16(notaFiscalSaidaSerie.UltimaNotaFiscal) + 1).ToString(); }
+
+                        textNumeroNotaFiscalSaida.Tag = textNumeroNotaFiscalSaida.Text;
 
                         notaFiscalSaidaSerie.UltimaNotaFiscal = textNumeroNotaFiscalSaida.Text;
 
@@ -558,11 +559,13 @@ namespace SisCom.Aplicacao.Formularios
                                         ComboBoxStyle.DropDownList,
                                         await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Nome));
             }
-
-            comboTransportadoraUF.ValueMember = comboRemetenteUF.ValueMember;
-            comboTransportadoraUF.DisplayMember = comboRemetenteUF.DisplayMember;
-            comboTransportadoraUF.DataSource = comboRemetenteUF.DataSource;
-            comboTransportadoraUF.SelectedIndex = -1;
+            using (MeuDbContext meuDbContext = this.MeuDbContext())
+            {
+                Combo_ComboBox.Formatar(comboTransportadoraUF,
+                                        "ID", "Codigo",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Nome));
+            }
 
             return true;
         }
@@ -719,6 +722,8 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                                                  Valor = vendaMercadoriaViewModel.Preco },
                                                                                                                   new Grid_DataGridView.Coluna { Indice = gridMercadoria_Total,
                                                                                                                                                  Valor = vendaMercadoriaViewModel.Total },
+                                                                                                                  new Grid_DataGridView.Coluna { Indice = gridMercadoria_UnidadeMedida,
+                                                                                                                                                 Valor = vendaMercadoriaViewModel.UnidadeMedidaId },
                                                                                                                   new Grid_DataGridView.Coluna { Indice = gridMercadoria_CFOP,
                                                                                                                                                  Valor = cfop },
                                                                                                                   new Grid_DataGridView.Coluna { Indice = gridMercadoria_PesoBruto,
@@ -780,6 +785,8 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     textRemetenteEndereco.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_Endereco.End_Logradouro);
                     textRemetenteNumero.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_Endereco.End_Numero);
+                    textRemetenteBairro.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_Endereco.End_Bairro);
+                    textRemetenteCEP.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_Endereco.End_CEP);
                     textRemetenteFones.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_Telefone);
                     textRemetenteEMail.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_EMail);
                     if (notafiscalsaida.Cliente_Endereco.End_Cidade != null)
@@ -933,9 +940,7 @@ namespace SisCom.Aplicacao.Formularios
                                                                               new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridObservacao_Id,
                                                                                                                                               Valor = observacao.Id },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridObservacao_Codigo,
-                                                                                                                                              Valor = observacao.ObservacaoId },
-                                                                                                               new Grid_DataGridView.Coluna { Indice = gridObservacao_Descricao,
-                                                                                                                                              Valor = observacao.Descricao }}).Index;
+                                                                                                                                              Valor = observacao.ObservacaoId }}).Index;
                     }
                 }
 
@@ -1219,7 +1224,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 IEnumerable<NotaFiscalSaidaViewModel> data = null;
 
-                data = await notaFiscalSaidaController.ObterTodos();
+                data = await notaFiscalSaidaController.ObterTodos(null, o => o.NotaFiscal);
 
                 NotaFiscalSaidaViewModel ItemAnterior = null;
                 NotaFiscalSaidaViewModel ItemRetorno = null;
@@ -1309,7 +1314,6 @@ namespace SisCom.Aplicacao.Formularios
                 notafiscalsaida = new ViewModels.NotaFiscalSaidaViewModel();
 
             await CarregarNotaFiscal();
-
             await AdicionarNotaFiscalSaida(recarregar);
 
             Editar(false);
@@ -1390,6 +1394,9 @@ namespace SisCom.Aplicacao.Formularios
             notafiscalsaida.Transportadora_CNPJ_CPF = null;
             notafiscalsaida.Transportadora_UF = null;
             notafiscalsaida.Venda = null;
+
+            if (notafiscalsaida.ClienteId == null)
+                return;
 
             if (notafiscalsaida.Id != Guid.Empty)
             {
@@ -1479,7 +1486,7 @@ namespace SisCom.Aplicacao.Formularios
                         { notaFiscalSaidaObservacaoViewModel.Id = Guid.Parse(row.Cells[gridObservacao_Id].Value.ToString()); }
 
                         notaFiscalSaidaObservacaoViewModel.NotaFiscalSaidaId = notafiscalsaida.Id;
-                        notaFiscalSaidaObservacaoViewModel.Descricao = row.Cells[gridObservacao_Descricao].Value.ToString();
+                        notaFiscalSaidaObservacaoViewModel.Descricao = row.Cells[gridObservacao_Codigo].EditedFormattedValue.ToString();
                         if (row.Cells[gridObservacao_Codigo].Value != null) notaFiscalSaidaObservacaoViewModel.ObservacaoId = Guid.Parse(row.Cells[gridObservacao_Codigo].Value.ToString());
 
                         if (notaFiscalSaidaObservacaoViewModel.Id == Guid.Empty)
@@ -1545,6 +1552,24 @@ namespace SisCom.Aplicacao.Formularios
                 foreach (Guid Id in notaFiscalSaidaReferenciaExcluir)
                 {
                     await notaFiscalSaidaReferenciaController.Excluir(Id);
+                }
+
+                try
+                {
+                    if (Convert.ToInt32(textNumeroNotaFiscalSaida.Text) > Convert.ToInt32(textNumeroNotaFiscalSaida.Tag))
+                    {
+                        using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
+                        {
+                            var notaFiscalSaidaSerie = (await notaFiscalSaidaSerieController.PesquisarSerie(textSerie.Text)).FirstOrDefault();
+
+                            notaFiscalSaidaSerie.UltimaNotaFiscal = textNumeroNotaFiscalSaida.Text;
+
+                            await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerie.Id, notaFiscalSaidaSerie);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
                 }
             }
 
@@ -1804,14 +1829,6 @@ namespace SisCom.Aplicacao.Formularios
 
             ((DataGridViewComboBoxColumn)gridObservacao.Columns[gridObservacao_Codigo]).DataSource = observacao;
         }
-
-        private void gridObservacao_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == gridObservacao_Codigo)
-            {
-                gridObservacao.Rows[e.RowIndex].Cells[gridObservacao_Descricao].Value = gridObservacao.Rows[e.RowIndex].Cells[gridObservacao_Codigo].EditedFormattedValue;
-            }
-        }
         private void botaoAtualizarInfoComplementoObservacao_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in gridObservacao.Rows)
@@ -1819,7 +1836,7 @@ namespace SisCom.Aplicacao.Formularios
                 if (richInformacoesComplementaresInteresseContribuinte.Text.Trim() != "")
                     richInformacoesComplementaresInteresseContribuinte.Text = richInformacoesComplementaresInteresseContribuinte.Text + Environment.NewLine;
 
-                richInformacoesComplementaresInteresseContribuinte.Text = richInformacoesComplementaresInteresseContribuinte.Text + row.Cells[gridObservacao_Descricao].Value;
+                richInformacoesComplementaresInteresseContribuinte.Text = richInformacoesComplementaresInteresseContribuinte.Text + row.Cells[gridObservacao_Codigo].EditedFormattedValue;
             }
         }
         private void comboInfoNFeOrigem_SelectedIndexChanged(object sender, EventArgs e)
@@ -2067,6 +2084,21 @@ namespace SisCom.Aplicacao.Formularios
                     }
                 }
             }
+        }
+
+        private void botaoRemetente_Click(object sender, EventArgs e)
+        {
+            CadastrarRemetente();
+        }
+
+        async Task CadastrarRemetente()
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmCadastroClientes>();
+            form.ShowDialog(this);
+
+            Thread.Sleep(5000);
+
+            await Assincrono.TaskAsyncAndAwaitAsync(comboRemetente_Carregar());
         }
     }
 }

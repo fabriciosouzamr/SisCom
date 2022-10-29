@@ -1320,6 +1320,11 @@ namespace SisCom.Aplicacao.Classes
 
                     sNF = notaFiscalSaidaViewModel.NotaFiscal;
                 }
+                if (notaFiscalSaidaViewModel.Cliente_Endereco.End_CidadeId == null)
+                {
+                    CaixaMensagem.Informacao("Endereço do cliente não informado");
+                    return null;
+                }
 
                 oNFe = new NFe.Classes.NFe();
 
@@ -1516,10 +1521,14 @@ namespace SisCom.Aplicacao.Classes
                             else
                                 oNFe.infNFe.transp.transporta.CPF = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.CNPJ_CPF);
 
-                            oNFe.infNFe.transp.transporta.xNome = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.Nome);
-                            oNFe.infNFe.transp.transporta.xEnder = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Logradouro);
-                            oNFe.infNFe.transp.transporta.xMun = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Cidade.Nome);
-                            oNFe.infNFe.transp.transporta.UF = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Cidade.Estado.Codigo);
+                            oNFe.infNFe.transp.transporta.xNome = Funcoes._Classes.Texto.NuloString(notaFiscalSaidaViewModel.Transportadora.Nome);
+                            
+                            if (notaFiscalSaidaViewModel.Transportadora.Endereco != null)
+                            {
+                                oNFe.infNFe.transp.transporta.xEnder = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Logradouro);
+                                oNFe.infNFe.transp.transporta.xMun = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Cidade.Nome);
+                                oNFe.infNFe.transp.transporta.UF = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Cidade.Estado.Codigo);
+                            }
 
                             if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Transportadora.InscricaoEstadual))
                                 oNFe.infNFe.transp.transporta.IE = notaFiscalSaidaViewModel.Transportadora.InscricaoEstadual;
@@ -1763,7 +1772,7 @@ namespace SisCom.Aplicacao.Classes
                 }
 
                 if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_Obsersacao))
-                    sDS_INFORMACOES_ADICIONAIS = notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_Obsersacao + ". " + sDS_INFORMACOES_ADICIONAIS;
+                    sDS_INFORMACOES_ADICIONAIS = notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_Obsersacao.Trim() + ". " + sDS_INFORMACOES_ADICIONAIS;
 
                 if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.InformacoesAdicionaisInteresseFisco))
                     sDS_INFORMACOES_FISCO = notaFiscalSaidaViewModel.InformacoesAdicionaisInteresseFisco;

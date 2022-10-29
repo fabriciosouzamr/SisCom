@@ -1420,6 +1420,7 @@
             this.botaoRemetente.Size = new System.Drawing.Size(24, 21);
             this.botaoRemetente.TabIndex = 31;
             this.botaoRemetente.UseVisualStyleBackColor = true;
+            this.botaoRemetente.Click += new System.EventHandler(this.botaoRemetente_Click);
             // 
             // comboRemetente
             // 
@@ -1489,6 +1490,7 @@
             // checkStatusInutilizada
             // 
             this.checkStatusInutilizada.AutoSize = true;
+            this.checkStatusInutilizada.Enabled = false;
             this.checkStatusInutilizada.Location = new System.Drawing.Point(206, 26);
             this.checkStatusInutilizada.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkStatusInutilizada.Name = "checkStatusInutilizada";
@@ -1501,6 +1503,7 @@
             // checkStatusFinalizada
             // 
             this.checkStatusFinalizada.AutoSize = true;
+            this.checkStatusFinalizada.Enabled = false;
             this.checkStatusFinalizada.Location = new System.Drawing.Point(206, 4);
             this.checkStatusFinalizada.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkStatusFinalizada.Name = "checkStatusFinalizada";
@@ -1513,6 +1516,7 @@
             // checkStatusDenegada
             // 
             this.checkStatusDenegada.AutoSize = true;
+            this.checkStatusDenegada.Enabled = false;
             this.checkStatusDenegada.Location = new System.Drawing.Point(115, 26);
             this.checkStatusDenegada.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkStatusDenegada.Name = "checkStatusDenegada";
@@ -1525,6 +1529,7 @@
             // checkStatusCancelado
             // 
             this.checkStatusCancelado.AutoSize = true;
+            this.checkStatusCancelado.Enabled = false;
             this.checkStatusCancelado.Location = new System.Drawing.Point(115, 4);
             this.checkStatusCancelado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkStatusCancelado.Name = "checkStatusCancelado";
@@ -2463,7 +2468,6 @@
             this.gridObservacao.RowTemplate.Height = 25;
             this.gridObservacao.Size = new System.Drawing.Size(730, 158);
             this.gridObservacao.TabIndex = 17;
-            this.gridObservacao.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridObservacao_CellValueChanged);
             this.gridObservacao.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridObservacao_UserDeletedRow);
             // 
             // panel18

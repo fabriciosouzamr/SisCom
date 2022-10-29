@@ -45,9 +45,9 @@ namespace SisCom.Aplicacao.Controllers
 
             return NotaFiscalSaidaViewModel;
         }
-        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> ObterTodos(Expression<Func<NotaFiscalSaida, bool>> predicate = null)
+        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> ObterTodos(Expression<Func<NotaFiscalSaida, bool>> predicate = null, Expression<Func<NotaFiscalSaida, object>> order = null)
         {
-            var obterTodos = await _NotaFiscalSaidaService.GetAll(null, predicate, i => i.NotaFiscalFinalidade,
+            var obterTodos = await _NotaFiscalSaidaService.GetAll(order, predicate, i => i.NotaFiscalFinalidade,
                                                                                    i => i.Cliente,
                                                                                    i => i.Cliente.Endereco,
                                                                                    i => i.Cliente.Endereco.End_Cidade,
