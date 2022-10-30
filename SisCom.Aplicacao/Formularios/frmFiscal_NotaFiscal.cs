@@ -150,9 +150,7 @@ namespace SisCom.Aplicacao.Formularios
                     var empresa = (await empresaController.GetById(Declaracoes.dados_Empresa_Id));
 
                     if (empresa != null)
-                    {
-                        textSerie.Text = Funcao.NuloParaString(empresa.NFE_Serie);
-                    }
+                    { textSerie.Text = Funcao.NuloParaString(empresa.NFE_Serie); }
                 }
             }
 
@@ -292,12 +290,11 @@ namespace SisCom.Aplicacao.Formularios
 
                 Grid_DataGridView.DataGridView_Formatar(gridObservacao, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "ID", "ID", Tamanho: 0);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "Código", "Código", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, dataSource: observacao,
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "Código", "Código", Grid_DataGridView.TipoColuna.ComboBox, 600, 0, dataSource: observacao,
                                                                                                                                                   dataSource_Descricao: "Descricao",
                                                                                                                                                   dataSource_Valor: "ID",
                                                                                                                                                   dropDownWidth: 400,
                                                                                                                                                   readOnly: false);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "Descrição", "Descrição", Grid_DataGridView.TipoColuna.Texto, 400, 0, readOnly: false);
 
                 //NF-e
                 Grid_DataGridView.DataGridView_Formatar(gridInfoNFe, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
@@ -1224,7 +1221,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 IEnumerable<NotaFiscalSaidaViewModel> data = null;
 
-                data = await notaFiscalSaidaController.ObterTodos(null, o => o.NotaFiscal);
+                data = await notaFiscalSaidaController.ObterTodos(null, o => Convert.ToInt32(o.NotaFiscal));
 
                 NotaFiscalSaidaViewModel ItemAnterior = null;
                 NotaFiscalSaidaViewModel ItemRetorno = null;

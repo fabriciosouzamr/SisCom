@@ -12,10 +12,7 @@ namespace SisCom.Negocio.Interfaces
         Task Atualizar(MercadoriaImpostoEstado MercadoriaImpostoEstado);
         Task Remover(Guid id);
         Task<List<MercadoriaImpostoEstado>> GetAll(Expression<Func<MercadoriaImpostoEstado, object>> order = null);
-
-        Task<List<MercadoriaImpostoEstado>> Combo(Expression<Func<MercadoriaImpostoEstado, object>> order = null);
         Task<MercadoriaImpostoEstado> GetById(Guid id);
-
         Task<IPagedList<MercadoriaImpostoEstado>> GetPagedList(FilteredPagedListParameters parameters);
     }
 }

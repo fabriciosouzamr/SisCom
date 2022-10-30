@@ -1485,10 +1485,5 @@ namespace SisCom.Aplicacao.Formularios
         {
             TentarGravar();
         }
-
-        private void botaoClonarMercadoria_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
