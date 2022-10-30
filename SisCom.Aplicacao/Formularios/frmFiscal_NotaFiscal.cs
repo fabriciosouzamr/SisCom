@@ -365,7 +365,6 @@ namespace SisCom.Aplicacao.Formularios
             numericValorDesconto.Value = 0;
             numericPercentualAliquotaSimplesNacional.Value = 0;
             comboTransportadora.SelectedIndex = -1;
-            comboTransportadoraFreteConta.SelectedIndex = -1;
             Texto_MaskedTextBox.Limpar(maskedTransportadoraCPFCNPJ);
             textTransportadoraPlaca.Text = "";
             comboTransportadoraUF.SelectedIndex = -1;
@@ -689,6 +688,7 @@ namespace SisCom.Aplicacao.Formularios
 
                             if ((!Funcao.Nulo(vendaViewModel.VeiculoPlaca01)) && (!Funcao.Nulo(vendaViewModel.VeiculoPlaca01.NumeroPlaca))) textTransportadoraPlaca.Text = vendaViewModel.VeiculoPlaca01.NumeroPlaca;
                             if (!Funcao.Nulo(vendaViewModel.TabelaOrigemVendaId)) textLocalEntregaRetiradaEndereco.Text = vendaViewModel.EnderecoEntrega;
+                            comboTransportadoraFreteConta.SelectedValue = TransportadoraFreteConta.ContratacaoFreteContaRemetente_CIF;
                         }
 
                         await CarregarNotaFiscal();
@@ -811,7 +811,7 @@ namespace SisCom.Aplicacao.Formularios
                 numericPercentualAliquotaSimplesNacional.Value = notafiscalsaida.PercentuaAliquotaSimplesNacional;
 
                 if (!Funcao.Nulo(notafiscalsaida.TransportadoraId)) comboTransportadora.SelectedValue = notafiscalsaida.TransportadoraId;
-                comboTransportadoraFreteConta.SelectedValue = notafiscalsaida.Transportadora_FreteConta;
+                comboTransportadoraFreteConta.SelectedValue = TransportadoraFrete(notafiscalsaida.Transportadora_FreteConta);
                 maskedTransportadoraCPFCNPJ.Text = notafiscalsaida.Transportadora_CNPJ_CPF;
                 textTransportadoraPlaca.Text = notafiscalsaida.Transportadora_Placa;
                 if (!Funcao.Nulo(notafiscalsaida.Transportadora_UFId)) comboTransportadoraUF.SelectedValue = notafiscalsaida.Transportadora_UFId;
@@ -1410,9 +1410,22 @@ namespace SisCom.Aplicacao.Formularios
             }
 
             NotaFiscalMercadoriaDetalhamentoImposto notaFiscalMercadoriaDetalhamentoImposto;
+            MercadoriaViewModel mercadoriaViewModel;
 
             foreach (DataGridViewRow row in gridMercadoria.Rows)
             {
+                using (var mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier))
+                {
+                    try
+                    {
+                        mercadoriaViewModel = (await mercadoriaController.PesquisarId(Guid.Parse(row.Cells[gridMercadoria_Id].Value.ToString()))).FirstOrDefault();
+                    }
+                    catch (Exception)
+                    {
+                        mercadoriaViewModel = new MercadoriaViewModel();
+                    }
+                }
+
                 using (var notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
                 {
                     if (row.Cells[gridMercadoria_CodigoSistema].Value != null)
@@ -1655,6 +1668,7 @@ namespace SisCom.Aplicacao.Formularios
                         {
                             gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_NCM].Value = mercadoria.Fiscal_TabelaNCMId;
                             gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_CST_CSOSN].Value = mercadoria.Fiscal_TabelaCST_CSOSNId;
+                            if (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_UnidadeMedida].Value == null)
                             gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_UnidadeMedida].Value = mercadoria.Estoque_UnidadeMedidaId;
                         }
                     }    
@@ -2099,6 +2113,27 @@ namespace SisCom.Aplicacao.Formularios
             Thread.Sleep(5000);
 
             await Assincrono.TaskAsyncAndAwaitAsync(comboRemetente_Carregar());
+        }
+
+        TransportadoraFreteConta TransportadoraFrete(SisCom.Entidade.Enum.TipoFrete tipoFrete)
+        {
+            switch (tipoFrete)
+            {
+                case TipoFrete.ContratacaoFreteContaRemetente_CIF:
+                    return TransportadoraFreteConta.ContratacaoFreteContaRemetente_CIF;
+                case TipoFrete.ContratacaoFreteContaDestinatario_FOB:
+                    return TransportadoraFreteConta.ContratacaoFreteContaDestinatario_FOB;
+                case TipoFrete.ContratacaoFreteContaTerceiros:
+                    return TransportadoraFreteConta.ContratacaoFreteContaTerceiros;
+                case TipoFrete.TransporteProprioContaRemetente:
+                    return TransportadoraFreteConta.TransporteProprioContaRemetente;
+                case TipoFrete.TransporteProprioContaDestinatario:
+                    return TransportadoraFreteConta.TransporteProprioContaDestinatario;
+                case TipoFrete.SemOcorrenciaTransporte:
+                    return TransportadoraFreteConta.SemOcorrenciaTransporte;
+                default:
+                    return TransportadoraFreteConta.SemOcorrenciaTransporte;
+            }
         }
     }
 }

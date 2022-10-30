@@ -1442,6 +1442,9 @@ namespace SisCom.Aplicacao.Classes
 
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_EMail))
                         oNFe.infNFe.dest.email = notaFiscalSaidaViewModel.Cliente_EMail;
+
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente.InscricaoEstadual))
+                        oNFe.infNFe.dest.IE = notaFiscalSaidaViewModel.Cliente.InscricaoEstadual;
                 }
 
                 if ((!bClienteNaoInformado) && (notaFiscalSaidaViewModel.Cliente_Endereco != null) && (notaFiscalSaidaViewModel.TransmitirEnderecoCliente))
@@ -1469,7 +1472,6 @@ namespace SisCom.Aplicacao.Classes
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Telefone))
                         oNFe.infNFe.dest.enderDest.fone = Convert.ToInt32(Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Cliente_Telefone));
                 }
-
                 if (oNFe.infNFe.ide.mod == DFe.Classes.Flags.ModeloDocumento.NFCe)
                 {
                     if (!bClienteNaoInformado)
@@ -1479,10 +1481,10 @@ namespace SisCom.Aplicacao.Classes
                 {
                     if (oNFe.infNFe.dest != null)
                     {
-                        if (notaFiscalSaidaViewModel.Empresa.TipoContribuinteICMS == null)
-                        { oNFe.infNFe.dest.indIEDest = NFe.Classes.Informacoes.Destinatario.indIEDest.NaoContribuinte; }
+                        if (String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente.InscricaoEstadual))
+                        { oNFe.infNFe.dest.indIEDest = NFe.Classes.Informacoes.Destinatario.indIEDest.Isento; }
                         else
-                        { oNFe.infNFe.dest.indIEDest = (NFe.Classes.Informacoes.Destinatario.indIEDest)notaFiscalSaidaViewModel.Empresa.TipoContribuinteICMS.GetHashCode(); }
+                        { oNFe.infNFe.dest.indIEDest = NFe.Classes.Informacoes.Destinatario.indIEDest.ContribuinteICMS; }
                     }
                     else
                     {
@@ -1490,11 +1492,11 @@ namespace SisCom.Aplicacao.Classes
 
                         if ((notaFiscalSaidaViewModel.Empresa.TipoContribuinteICMS == NF_TipoContribuinteICMS.ContribuinteICMS) && (!bClienteNaoInformado))
                         {
-                            if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.InscricaoEstadual))
-                                oNFe.infNFe.dest.IE = notaFiscalSaidaViewModel.Empresa.InscricaoEstadual;
+                            if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente.InscricaoEstadual))
+                                oNFe.infNFe.dest.IE = notaFiscalSaidaViewModel.Cliente.InscricaoEstadual;
 
-                            if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.InscricaoMunicipal))
-                                oNFe.infNFe.dest.IM = notaFiscalSaidaViewModel.Empresa.InscricaoMunicipal;
+                            if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente.InscricaoMunicipal))
+                                oNFe.infNFe.dest.IM = notaFiscalSaidaViewModel.Cliente.InscricaoMunicipal;
                         }
                     }
                 }
@@ -1626,7 +1628,11 @@ namespace SisCom.Aplicacao.Classes
                     {
                     }
                     // -- Detalhe Imposto COFINS
-                    if ((ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS != null) && (ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS.DestacarPIS_COFINS))
+                    if (ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS == null)
+                        ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS = ntFSMercadoria.Mercadoria.Fiscal_NFE_TabelaCST_COFINS;
+
+                    //if ((ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS != null) && (ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS.DestacarPIS_COFINS))
+                    if (ntFSMercadoria.TabelaCST_PIS_COFINS_COFINS != null)
                     {
                         oNFE_Det.imposto.COFINS = new NFe.Classes.Informacoes.Detalhe.Tributacao.Federal.COFINS();
                         try
@@ -1640,7 +1646,11 @@ namespace SisCom.Aplicacao.Classes
                         }
                     }
                     // -- Detalhe Imposto PIS
-                    if ((ntFSMercadoria.TabelaCST_PIS_COFINS_PIS != null) && (ntFSMercadoria.TabelaCST_PIS_COFINS_PIS.DestacarPIS_COFINS))
+                    if (ntFSMercadoria.TabelaCST_PIS_COFINS_PIS == null)
+                        ntFSMercadoria.TabelaCST_PIS_COFINS_PIS = ntFSMercadoria.Mercadoria.Fiscal_NFE_TabelaCST_PIS;
+
+                    //if ((ntFSMercadoria.TabelaCST_PIS_COFINS_PIS != null) && (ntFSMercadoria.TabelaCST_PIS_COFINS_PIS.DestacarPIS_COFINS))
+                    if (ntFSMercadoria.TabelaCST_PIS_COFINS_PIS != null)
                     {
                         oNFE_Det.imposto.PIS = new NFe.Classes.Informacoes.Detalhe.Tributacao.Federal.PIS();
                         try
@@ -1889,11 +1899,73 @@ namespace SisCom.Aplicacao.Classes
                     icmsTot.vBC = icmsTot.vBC + ((ICMS00)produto.imposto.ICMS.TipoICMS).vBC;
                     icmsTot.vICMS = icmsTot.vICMS + ((ICMS00)produto.imposto.ICMS.TipoICMS).vICMS;
                 }
-
+                if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS10))
+                {
+                    icmsTot.vBC = icmsTot.vBC + ((ICMS10)produto.imposto.ICMS.TipoICMS).vBC;
+                    icmsTot.vICMS = icmsTot.vICMS + ((ICMS10)produto.imposto.ICMS.TipoICMS).vICMS;
+                }
                 if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS20))
                 {
                     icmsTot.vBC = icmsTot.vBC + ((ICMS20)produto.imposto.ICMS.TipoICMS).vBC;
                     icmsTot.vICMS = icmsTot.vICMS + ((ICMS20)produto.imposto.ICMS.TipoICMS).vICMS;
+                }
+                if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS30))
+                {
+                    icmsTot.vBCST = icmsTot.vBCST + ((ICMS30)produto.imposto.ICMS.TipoICMS).vBCST;
+                }
+                if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS40))
+                {
+                    icmsTot.vICMSDeson = icmsTot.vICMSDeson + ((ICMS40)produto.imposto.ICMS.TipoICMS).vICMSDeson;
+                }
+                if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS51))
+                {
+                    icmsTot.vBC = icmsTot.vBC + Funcao.NuloParaValorD(((ICMS51)produto.imposto.ICMS.TipoICMS).vBC);
+                    icmsTot.vICMS = icmsTot.vICMS + Funcao.NuloParaValorD(((ICMS51)produto.imposto.ICMS.TipoICMS).vICMS);
+                }
+                if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS60))
+                {
+                    icmsTot.vFCPSTRet = icmsTot.vFCPSTRet + ((ICMS60)produto.imposto.ICMS.TipoICMS).vFCPSTRet;
+                }
+                if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS70))
+                {
+                    icmsTot.vBC = icmsTot.vBC + Funcao.NuloParaValorD(((ICMS70)produto.imposto.ICMS.TipoICMS).vBC);
+                    icmsTot.vICMS = icmsTot.vICMS + Funcao.NuloParaValorD(((ICMS70)produto.imposto.ICMS.TipoICMS).vICMS);
+                }
+                if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS90))
+                {
+                    icmsTot.vBC = icmsTot.vBC + Funcao.NuloParaValorD(((ICMS90)produto.imposto.ICMS.TipoICMS).vBC);
+                    icmsTot.vICMS = icmsTot.vICMS + Funcao.NuloParaValorD(((ICMS90)produto.imposto.ICMS.TipoICMS).vICMS);
+                }
+
+                if (produto.imposto.PIS.TipoPIS.GetType() == typeof(PISAliq))
+                {
+                    icmsTot.vPIS = icmsTot.vPIS + Funcao.NuloParaValorD(((PISAliq)produto.imposto.PIS.TipoPIS).vPIS);
+                }
+                if (produto.imposto.PIS.TipoPIS.GetType() == typeof(PISQtde))
+                {
+                    icmsTot.vPIS = icmsTot.vPIS + Funcao.NuloParaValorD(((PISQtde)produto.imposto.PIS.TipoPIS).vPIS);
+                }
+                if (produto.imposto.PIS.TipoPIS.GetType() == typeof(PISOutr))
+                {
+                    icmsTot.vPIS = icmsTot.vPIS + Funcao.NuloParaValorD(((PISOutr)produto.imposto.PIS.TipoPIS).vPIS);
+                }
+                if (produto.imposto.COFINS.TipoCOFINS.GetType() == typeof(COFINSAliq))
+                {
+                    icmsTot.vCOFINS = icmsTot.vCOFINS + Funcao.NuloParaValorD(((COFINSAliq)produto.imposto.COFINS.TipoCOFINS).vCOFINS);
+                }
+                if (produto.imposto.COFINS.TipoCOFINS.GetType() == typeof(COFINSQtde))
+                {
+                    icmsTot.vCOFINS = icmsTot.vCOFINS + Funcao.NuloParaValorD(((COFINSQtde)produto.imposto.COFINS.TipoCOFINS).vCOFINS);
+                }
+                if (produto.imposto.COFINS.TipoCOFINS.GetType() == typeof(COFINSOutr))
+                {
+                    icmsTot.vCOFINS = icmsTot.vCOFINS + Funcao.NuloParaValorD(((COFINSOutr)produto.imposto.COFINS.TipoCOFINS).vCOFINS);
+                }
+
+                if (produto.imposto.PIS.TipoPIS.GetType() == typeof(IPITrib))
+                {
+                    icmsTot.vIPI = icmsTot.vIPI + Funcao.NuloParaValorD(((IPITrib)produto.imposto.IPI.TipoIPI).vIPI);
+                    icmsTot.vBC = icmsTot.vBC + Funcao.NuloParaValorD(((IPITrib)produto.imposto.IPI.TipoIPI).vBC);
                 }
             }
 

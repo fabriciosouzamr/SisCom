@@ -14,12 +14,13 @@ namespace SisCom.Aplicacao.Formularios
     public partial class frmVendasConsulta : FormMain
     {
         const int gridVenda_ID = 0;
-        const int gridVenda_Data = 1;
-        const int gridVenda_Pedido = 2;
-        const int gridVenda_NFCe = 3;
-        const int gridVenda_NFe = 4;
-        const int gridVenda_Cliente = 5;
-        const int gridVenda_Vendedor = 6;
+        const int gridVenda_Codigo = 1;
+        const int gridVenda_Data = 2;
+        const int gridVenda_Pedido = 3;
+        const int gridVenda_NFCe = 4;
+        const int gridVenda_NFe = 5;
+        const int gridVenda_Cliente = 6;
+        const int gridVenda_Vendedor = 7;
 
         public frmVendasConsulta(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -48,6 +49,7 @@ namespace SisCom.Aplicacao.Formularios
             //Grid Nota Fiscal Entrada
             Grid_DataGridView.DataGridView_Formatar(gridVenda, true);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "ID", Tamanho: 0);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "Código");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "Data");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "Pedido");
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "NFC - e");
@@ -116,6 +118,8 @@ namespace SisCom.Aplicacao.Formularios
                     Grid_DataGridView.DataGridView_LinhaAdicionar(gridVenda,
                                                                    new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridVenda_ID,
                                                                                                                                    Valor = venda.Id },
+                                                                                                    new Grid_DataGridView.Coluna { Indice = gridVenda_Codigo,
+                                                                                                                                   Valor = venda.Codigo },
                                                                                                     new Grid_DataGridView.Coluna { Indice = gridVenda_Data,
                                                                                                                                    Valor = venda.DataVenda },
                                                                                                     new Grid_DataGridView.Coluna { Indice = gridVenda_Pedido,
