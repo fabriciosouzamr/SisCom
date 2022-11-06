@@ -18,7 +18,8 @@ public static class Grid_DataGridView
         Valor = 7,
         Numero = 8,
         Percentual = 9,
-        Data = 10
+        Data = 10,
+        Inteiro = 11
     }
 
     public enum FormatoColuna
@@ -177,7 +178,8 @@ public static class Grid_DataGridView
                                                                   string dataSource_Valor = "",
                                                                   bool readOnly = true,
                                                                   bool wordWrap = false,
-                                                                  int dropDownWidth = 0)
+                                                                  int dropDownWidth = 0,
+                                                                  DataGridViewContentAlignment alinhamento = DataGridViewContentAlignment.NotSet)
     {
         DataGridViewColumn Coluna = DataGridView_ColunaCriar(Grid,
                                                              Nome,
@@ -193,6 +195,7 @@ public static class Grid_DataGridView
         Coluna.Name = Nome;
         Coluna.HeaderText = Titulo;
         Coluna.ReadOnly = readOnly;
+        Coluna.DefaultCellStyle.Alignment = alinhamento;
 
         switch (Tipo)
         {
@@ -212,6 +215,10 @@ public static class Grid_DataGridView
                 break;
             case TipoColuna.Texto:
                 if (wordWrap) Coluna.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                break;
+            case TipoColuna.Inteiro:
+                Coluna.ValueType = typeof(int);
+                Coluna.DefaultCellStyle.Format = "N";
                 break;
         }
 

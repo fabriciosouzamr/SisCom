@@ -44,7 +44,8 @@ namespace SisCom.Aplicacao.Formularios
         const int gridMercadoria_Impostos = 17;
         const int gridMercadoria_PesoBruto = 18;
         const int gridMercadoria_PesoLiquido = 19;
-        
+        const int gridMercadoria_NotaFiscalSaidaId = 20;
+
         const int gridCobrancaNota_Id = 0;
         const int gridCobrancaNota_TipoPagamento = 1;
         const int gridCobrancaNota_Vencimento = 2;
@@ -265,9 +266,10 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Tamanho: 0);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "PesoBruto", "PesoBruto", Tamanho: 0, Tipo: Grid_DataGridView.TipoColuna.Valor);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "PesoLiquido", "PesoLiquido", Tamanho: 0, Tipo: Grid_DataGridView.TipoColuna.Valor);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadoria, "NotaFiscalSaidaId", "NotaFiscalSaidaId", Tamanho: 0);
 
                 //Cobrança da Nota
-                List<NomeComboViewModel> formaPagamento;
+                List <NomeComboViewModel> formaPagamento;
 
                 using (FormaPagamentoController formaPagamentoController = new FormaPagamentoController(this.MeuDbContext(), this._notifier))
                 {
@@ -692,6 +694,7 @@ namespace SisCom.Aplicacao.Formularios
                     }
 
                     Grid_DataGridView.DataGridView_LinhaLimpar(gridMercadoria);
+                    gridMercadoria.Rows.Clear();
 
                     using (VendaMercadoriaController vendaMercadoriaController = new VendaMercadoriaController(this.MeuDbContext(), this._notifier))
                     {
@@ -815,8 +818,8 @@ namespace SisCom.Aplicacao.Formularios
                 textTransportadoraRNTC.Text = Funcao.NuloParaString(notafiscalsaida.Transportadora_RNTRC);
                 numericTransportadoraNumeroCarga.Value = notafiscalsaida.Transportadora_NumeroCarga;
                 numericVolumeTransportadosQuantidade.Value = notafiscalsaida.VolumeTransportados_Quantidade;
-                textVolumeTransportadosEspecie.Text = notafiscalsaida.VolumeTransportados_Especie;
-                textVolumeTransportadosMarca.Text = notafiscalsaida.VolumeTransportados_Marca;
+                if (!String.IsNullOrEmpty(notafiscalsaida.VolumeTransportados_Especie)) textVolumeTransportadosEspecie.Text = notafiscalsaida.VolumeTransportados_Especie;
+                if (!String.IsNullOrEmpty(notafiscalsaida.VolumeTransportados_Marca)) textVolumeTransportadosMarca.Text = notafiscalsaida.VolumeTransportados_Marca;
                 numericVolumeTransportadosNumero.Value = notafiscalsaida.VolumeTransportados_Numero;
                 numericVolumeTransportadosPesoBruto.Value = (decimal)notafiscalsaida.VolumeTransportados_PesoBruto;
                 numericVolumeTransportadosPesoLiquido.Value = (decimal)notafiscalsaida.VolumeTransportados_PesoLiquido;
@@ -834,6 +837,7 @@ namespace SisCom.Aplicacao.Formularios
                 if (!Funcao.Nulo(notafiscalsaida.TabelaOrigemVendaId)) comboInfoNFeOrigem.SelectedValue = notafiscalsaida.TabelaOrigemVendaId;
 
                 Grid_DataGridView.DataGridView_LinhaLimpar(gridMercadoria);
+                gridMercadoria.Rows.Clear();
 
                 using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
                 {
@@ -875,6 +879,8 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                                              Valor = mercadoria.PrecoTotal },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_CFOP,
                                                                                                                                              Valor = cfop },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_CST_CSOSN,
+                                                                                                                                             Valor = mercadoria.TabelaCST_CSOSNId },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_ICMS,
                                                                                                                                              Valor = mercadoria.PercentualICMS },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_IPI,
@@ -884,14 +890,12 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_PesoBruto,
                                                                                                                                              Valor = mercadoria.Mercadoria.Estoque_PesoBruto },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_PesoLiquido,
-                                                                                                                                             Valor = mercadoria.Mercadoria.Estoque_PesoLiquido }}).Index;
+                                                                                                                                             Valor = mercadoria.Mercadoria.Estoque_PesoLiquido },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_NotaFiscalSaidaId,
+                                                                                                                                             Valor = mercadoria.NotaFiscalSaidaId }}).Index;
 
                         if (mercadoria.TabelaNCMId != null)
                             gridMercadoria.Rows[linha].Cells[gridMercadoria_NCM].Value = mercadoria.TabelaNCMId;
-                        if (mercadoria.TabelaCST_CSOSNId != null)
-                            gridMercadoria.Rows[linha].Cells[gridMercadoria_CST_CSOSN].Value = mercadoria.TabelaCST_CSOSNId;
-                        if (mercadoria.TabelaCST_CSOSNId != null)
-                            gridMercadoria.Rows[linha].Cells[gridMercadoria_CFOP].Value = mercadoria.TabelaCST_CSOSNId;
                         if (mercadoria.UnidadeMedidaId != null)
                             gridMercadoria.Rows[linha].Cells[gridMercadoria_UnidadeMedida].Value = mercadoria.UnidadeMedidaId;
                         if ((cfop != null) && (cfop != Guid.Empty))
@@ -1425,7 +1429,8 @@ namespace SisCom.Aplicacao.Formularios
 
                 using (var notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
                 {
-                    if (row.Cells[gridMercadoria_CodigoSistema].Value != null)
+                    if ((row.Cells[gridMercadoria_CodigoSistema].Value != null) && ((row.Cells[gridMercadoria_NotaFiscalSaidaId].Value == null) || 
+                                                                                    (row.Cells[gridMercadoria_NotaFiscalSaidaId].Value.ToString() == notafiscalsaida.Id.ToString())))
                     {
                         NotaFiscalSaidaMercadoriaViewModel notaFiscalSaidaMercadoriaViewModel = new NotaFiscalSaidaMercadoriaViewModel();
                         if (row.Cells[gridMercadoria_Id].Value != null)
@@ -1644,7 +1649,7 @@ namespace SisCom.Aplicacao.Formularios
                         foreach (MercadoriaImpostoEstadoViewModel impostoestado in mercadoriaImpostoEstado)
                         {
                             if (impostoestado.Mercadoria.Id == (Guid)gridMercadoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
-                                gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value = impostoestado.PercentualICMS_Destino;
+                                gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value = impostoestado.PercentualICMS;
                         }
                     if (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_CFOP].Value == null)
                     {
@@ -1664,7 +1669,8 @@ namespace SisCom.Aplicacao.Formularios
                         if (mercadoria != null)
                         {
                             gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_NCM].Value = mercadoria.Fiscal_TabelaNCMId;
-                            gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_CST_CSOSN].Value = mercadoria.Fiscal_TabelaCST_CSOSNId;
+                            if (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_CST_CSOSN].Value == null)
+                                gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_CST_CSOSN].Value = mercadoria.Fiscal_TabelaCST_CSOSNId;
                             if (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_UnidadeMedida].Value == null)
                             gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_UnidadeMedida].Value = mercadoria.Estoque_UnidadeMedidaId;
                         }
@@ -1712,6 +1718,7 @@ namespace SisCom.Aplicacao.Formularios
                                                         Grid_DataGridView.DataGridView_CalcularColunaValor(gridMercadoria, gridMercadoria_PesoBruto);
             numericVolumeTransportadosPesoLiquido.Value = Grid_DataGridView.DataGridView_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade) *
                                                           Grid_DataGridView.DataGridView_CalcularColunaValor(gridMercadoria, gridMercadoria_PesoLiquido);
+            numericVolumeTransportadosQuantidade.Value = Grid_DataGridView.DataGridView_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade);
         }
         private void CalcularMercadoriaImpostos()
         {
@@ -1845,7 +1852,7 @@ namespace SisCom.Aplicacao.Formularios
             foreach (DataGridViewRow row in gridObservacao.Rows)
             {
                 if (richInformacoesComplementaresInteresseContribuinte.Text.Trim() != "")
-                    richInformacoesComplementaresInteresseContribuinte.Text = richInformacoesComplementaresInteresseContribuinte.Text + Environment.NewLine;
+                    richInformacoesComplementaresInteresseContribuinte.Text = richInformacoesComplementaresInteresseContribuinte.Text.ToString() + ". ";
 
                 richInformacoesComplementaresInteresseContribuinte.Text = richInformacoesComplementaresInteresseContribuinte.Text + row.Cells[gridObservacao_Codigo].EditedFormattedValue;
             }

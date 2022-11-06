@@ -1,4 +1,6 @@
-﻿using Funcoes.Interfaces;
+﻿using DFe.Utils;
+using Funcoes._Entity;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -23,7 +25,12 @@ namespace SisCom.Aplicacao.Controllers
 
             _mercadoriaService = new MercadoriaService(new MercadoriaRepository(meuDbContext), notifier);
         }
+        public async Task<bool> Excluir(Guid Id)
+        {
+            await _mercadoriaService.Excluir(Id);
 
+            return true;
+        }
         public async Task<MercadoriaViewModel> Adicionar(MercadoriaViewModel MercadoriaViewModel)
         {
             var Mercadoria = Declaracoes.mapper.Map<Mercadoria>(MercadoriaViewModel);
@@ -32,33 +39,23 @@ namespace SisCom.Aplicacao.Controllers
 
             return Declaracoes.mapper.Map<MercadoriaViewModel>(Mercadoria);
         }
-
-        public async Task<bool> Excluir(Guid Id)
-        {
-            await _mercadoriaService.Excluir(Id);
-
-            return true;
-        }
-
         public async Task<MercadoriaViewModel> Atualizar(Guid id, MercadoriaViewModel MercadoriaViewModel)
         {
             await _mercadoriaService.Atualizar(Declaracoes.mapper.Map<Mercadoria>(MercadoriaViewModel));
 
             return MercadoriaViewModel;
         }
-
-        public async Task<IEnumerable<MercadoriaViewModel>> ObterTodos()
+        public async Task<IEnumerable<MercadoriaViewModel>> ObterTodos(Expression<Func<Mercadoria, object>> order = null, 
+                                                                       Expression<Func<Mercadoria, bool>> predicate = null)
         {
-            var obterTodos = await _mercadoriaService.GetAll();
+            var obterTodos = await _mercadoriaService.GetAll(order, predicate, null);
             return Declaracoes.mapper.Map<IEnumerable<MercadoriaViewModel>>(obterTodos);
         }
-
         public async Task<IEnumerable<MercadoriaViewModel>> PesquisarId(Guid Id)
         {
             var Mercadoria = await _mercadoriaService.Search(p => p.Id == Id);
             return Declaracoes.mapper.Map<IEnumerable<MercadoriaViewModel>>(Mercadoria);
         }
-
         public void Dispose()
         {
             MeuDbContext.Dispose();

@@ -26,7 +26,9 @@ namespace SisCom.Aplicacao.Formularios
         const int gridNotaFiscalSaida_RetornoSefaz = 7;
         const int gridNotaFiscalSaida_BTN_Transmitir = 8;
         const int gridNotaFiscalSaida_BTN_EMail = 9;
-        const int gridNotaFiscalSaida_ID_Status = 10;
+        const int gridNotaFiscalSaida_BTN_Cancelar = 10;
+        const int gridNotaFiscalSaida_BTN_CartaCorrecao = 11;
+        const int gridNotaFiscalSaida_ID_Status = 12;
 
         public frmFiscal_Transmitir(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -54,9 +56,11 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Destinatário", Tamanho: 300);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "CPF/CNPJ", Tamanho: 100);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Status", Tamanho: 100);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Retorno Sefaz", Tamanho: 300);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "Transmitir", "Transmitir", Grid_DataGridView.TipoColuna.Button, 80);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "E-Mail", "E-Mail", Grid_DataGridView.TipoColuna.Button, 80);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Retorno Sefaz", Tamanho: 150);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "Transmitir", "Transmitir", Grid_DataGridView.TipoColuna.Button, 70);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "E-Mail", "E-Mail", Grid_DataGridView.TipoColuna.Button, 70);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "Cancelar", "Cancelar", Grid_DataGridView.TipoColuna.Button, 70);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "C. Correção", "C. Correção", Grid_DataGridView.TipoColuna.Button, 70);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "ID_Status", "ID_Status", Tamanho: 0);
 
                 await Carregar(null, null, null);

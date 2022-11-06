@@ -18,6 +18,9 @@ namespace SisCom.Aplicacao.Formularios
         ViewModels.MercadoriaViewModel mercadoria = null;
         bool carregandoDados = false;
 
+        const int gridImpostosICMS_ID = 0;
+        const int gridImpostosICMS_Codigo = 1;
+
         enum TipoPesquisa
         {
             [Description("Código")]
@@ -270,9 +273,9 @@ namespace SisCom.Aplicacao.Formularios
             using (MeuDbContext meuDbContext = this.MeuDbContext())
             {
                 Combo_ComboBox.Formatar(comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo,
-                                    "ID", "Codigo",
-                                    ComboBoxStyle.DropDownList,
-                                    await (new TabelaCST_PIS_COFINSController(meuDbContext, this._notifier)).ComboCodigoUsaEntrada(p => p.Codigo));
+                                        "ID", "Codigo",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new TabelaCST_PIS_COFINSController(meuDbContext, this._notifier)).ComboCodigoUsaEntrada(p => p.Codigo));
             }
 
             return true;
@@ -282,9 +285,9 @@ namespace SisCom.Aplicacao.Formularios
             using (MeuDbContext meuDbContext = this.MeuDbContext())
             {
                 Combo_ComboBox.Formatar(comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Codigo,
-                                    "ID", "Codigo",
-                                    ComboBoxStyle.DropDownList,
-                                    await (new TabelaCST_PIS_COFINSController(meuDbContext, this._notifier)).ComboCodigoUsaEntrada(p => p.Codigo)); ;
+                                        "ID", "Codigo",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new TabelaCST_PIS_COFINSController(meuDbContext, this._notifier)).ComboCodigoUsaEntrada(p => p.Codigo)); ;
             }
 
             return true;
@@ -617,6 +620,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 //Cabeçalho
                 await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
+                await Assincrono.TaskAsyncAndAwaitAsync(InicializarGridImpostos());
 
                 Limpar();
 
@@ -666,6 +670,33 @@ namespace SisCom.Aplicacao.Formularios
             await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_SPED_TipoItem_Carregar());
             await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_SPED_CodigoGenero_Carregar());
             await Assincrono.TaskAsyncAndAwaitAsync(comboDetalhesFiscais_SPED_CodigoInformacaoAdicional_Carregar());
+
+            return true;
+        }
+        private async Task<bool> InicializarGridImpostos()
+        {
+            IEnumerable<EstadoViewModel> estados;
+
+            using (EstadoController estadoController = new EstadoController(this.MeuDbContext(), this._notifier))
+            {
+                estados = await estadoController.ObterTodos(o => o.Codigo);
+            }
+
+            Grid_DataGridView.DataGridView_Formatar(gridImpostosICMS, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridImpostosICMS, "Id", "Id", Tamanho: 0);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridImpostosICMS, "UF", " ", Tamanho: 30);
+
+            foreach (EstadoViewModel estado in estados)
+            {
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridImpostosICMS, estado.Codigo, estado.Codigo, Tamanho: 40, 
+                                                                                                               Tipo: Grid_DataGridView.TipoColuna.Numero, 
+                                                                                                               readOnly: false,
+                                                                                                               alinhamento: DataGridViewContentAlignment.MiddleCenter).Tag = estado.Id;
+                Grid_DataGridView.DataGridView_LinhaAdicionar(gridImpostosICMS, new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridImpostosICMS_ID,
+                                                                                                                                                Valor = estado.Id },
+                                                                                                                 new Grid_DataGridView.Coluna { Indice = gridImpostosICMS_Codigo,
+                                                                                                                                                Valor = estado.Codigo }}).Tag = estado.Id;
+            }
 
             return true;
         }
@@ -1019,6 +1050,34 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridListaMercadoriasSimilares, "Similar", "Nome");
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridListaMercadoriasSimilares, "Preco", "Preço");
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridListaMercadoriasSimilares, "QuantidadeEmEstoque", "Quantidade em Estoque");
+
+                using (MercadoriaImpostoEstadoController mercadoriaImpostoEstadoController = new MercadoriaImpostoEstadoController(this.MeuDbContext(), this._notifier))
+                {
+                    var mercadoriaImpostoEstados = await mercadoriaImpostoEstadoController.ObterPorMercadoriaId(mercadoria.Id);
+
+                    foreach (MercadoriaImpostoEstadoViewModel mercadoriaImpostoEstado in mercadoriaImpostoEstados)
+                    {
+                        foreach (DataGridViewRow row in gridImpostosICMS.Rows)
+                        {
+                            foreach (DataGridViewCell celula in row.Cells)
+                            {
+                                if ((row.Tag != null) && (gridImpostosICMS.Columns[celula.ColumnIndex].Tag != null))
+                                {
+                                    celula.Tag = null;
+                                    celula.Value = null;
+                                        
+                                    if ((mercadoriaImpostoEstado.EstadoOrigemId == Guid.Parse(row.Tag.ToString())) &&
+                                        (mercadoriaImpostoEstado.EstadoDestinoId == Guid.Parse(gridImpostosICMS.Columns[celula.ColumnIndex].Tag.ToString())))
+                                    {
+                                        if (celula.Value != null)
+                                            mercadoriaImpostoEstado.PercentualICMS = (decimal)celula.Value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 carregandoDados = false;
             }
         }
@@ -1156,11 +1215,11 @@ namespace SisCom.Aplicacao.Formularios
             //Similares
             // >>> gridListaMercadoriasSimilares
 
-            await Adicionarmercadoria();
+            await AdicionarMercadoria();
 
             return true;
         }
-        private async Task Adicionarmercadoria()
+        private async Task AdicionarMercadoria()
         {
             using (var mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier))
             {
@@ -1170,11 +1229,48 @@ namespace SisCom.Aplicacao.Formularios
                 }
                 else
                 {
+                    mercadoria.Id = Guid.NewGuid();
                     mercadoria = (await mercadoriaController.Adicionar(mercadoria));
                 }
             }
 
-            //this.MeuDbContextDispose();
+            //MercadoriaImpostoEstadoViewModel mercadoriaImpostoEstado;
+
+            //using (MercadoriaImpostoEstadoController mercadoriaImpostoEstadoController = new MercadoriaImpostoEstadoController(this.MeuDbContext(), this._notifier))
+            //{
+            //    foreach (DataGridViewRow row in gridImpostosICMS.Rows)
+            //    {
+            //        foreach (DataGridViewCell celula in row.Cells)
+            //        {
+            //            if (celula.ColumnIndex > 1)
+            //            {
+            //                mercadoriaImpostoEstado = new MercadoriaImpostoEstadoViewModel();
+
+            //                mercadoriaImpostoEstado.MercadoriaId = mercadoria.Id;
+            //                mercadoriaImpostoEstado.EstadoOrigemId = Guid.Parse(row.Tag.ToString());
+            //                mercadoriaImpostoEstado.EstadoDestinoId = Guid.Parse(gridImpostosICMS.Columns[celula.ColumnIndex].Tag.ToString());
+
+            //                if (celula.Value != null)
+            //                    mercadoriaImpostoEstado.PercentualICMS = Convert.ToDecimal(celula.Value);
+
+            //                try
+            //                {
+            //                    if (celula.Tag == null)
+            //                    {
+            //                        mercadoriaImpostoEstado.Id = Guid.NewGuid();
+            //                        await mercadoriaImpostoEstadoController.Adicionar(mercadoriaImpostoEstado);
+            //                        celula.Tag = mercadoriaImpostoEstado.Id;
+            //                    }
+            //                    else
+            //                    { await mercadoriaImpostoEstadoController.Atualizar(mercadoriaImpostoEstado.Id, mercadoriaImpostoEstado); }
+            //                }
+            //                catch (Exception)
+            //                {
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
         }
         private async void Excluir()
         {
@@ -1326,13 +1422,6 @@ namespace SisCom.Aplicacao.Formularios
 
             labelPreco_ValorCustoMercadoria.Tag = precoCusto;
             labelPreco_ValorCustoMercadoria.Text = Valor.Formatar(Funcao.NuloParaValor(precoCusto));
-
-            //if (Declaracoes.calculoPreco == Declaracoes.eCalculoPreco.Venda )
-            //    {
-            //        PrecoVendaSugerido = Format(IIf((CSocial + Declaracoes.Pis + .Fields("ICMS2") + .Fields("Comissão") + .Fields("Desp Operacionais") + .Fields("Diversos")) = 0 And.Fields("Margem Lucro") = 100, 0, (precoCusto / (1 - ((CSocial + Declaracoes.Pis + .Fields("ICMS2") + .Fields("Comissão") + .Fields("Desp Operacionais") + .Fields("Diversos") + .Fields("Margem Lucro")) / 100))) / (1 - (.Fields("Desco2") / 100))), "0.00")
-
-            //    precoPontoEquilibrio = Format(.Fields("Preço de Venda Sugerido") * (1 - (.Fields("Margem Lucro") / 100)), "0.00")
-            //    }
 
             if (Declaracoes.calculoPreco == Declaracoes.eCalculoPreco.Compra)
             {

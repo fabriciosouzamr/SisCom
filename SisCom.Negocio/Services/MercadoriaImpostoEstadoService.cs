@@ -31,14 +31,28 @@ namespace SisCom.Negocio.Services
             _MercadoriaImpostoEstadoRepository?.Dispose();
         }
 
-        public Task Adicionar(MercadoriaImpostoEstado MercadoriaImpostoEstado)
+        public async Task Adicionar(MercadoriaImpostoEstado MercadoriaImpostoEstado)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _MercadoriaImpostoEstadoRepository.Insert(MercadoriaImpostoEstado);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Atualizar(MercadoriaImpostoEstado MercadoriaImpostoEstado)
+        public async Task Atualizar(MercadoriaImpostoEstado MercadoriaImpostoEstado)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _MercadoriaImpostoEstadoRepository.Update(MercadoriaImpostoEstado);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
         public Task Remover(Guid id)

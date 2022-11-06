@@ -4,16 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using NFe.Danfe.Base.NFCe;
 using NFe.Utils.NFe;
-using NFeZeus = NFe.Classes.NFe;
 using DFe.Classes.Flags;
 using NFe.Classes;
-using NFe.Danfe.Nativo.NFCe;
-using NFe.Danfe.Base;
 using NFe.Utils;
-using DFe.Classes.Entidades;
 using DFe.Classes.Extensoes;
 using NFe.Classes.Informacoes.Identificacao.Tipos;
 using System.Net;
@@ -26,9 +21,7 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
 using NFe.Classes.Informacoes.Identificacao;
 using NFe.Classes.Informacoes.Pagamento;
-using NFe.Classes.Informacoes;
 using NFe.Utils.InformacoesSuplementares;
-using SisCom.Entidade.Modelos;
 using Funcoes._Classes;
 using NFe.Classes.Informacoes.Transporte;
 using NFe.Classes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
@@ -40,16 +33,9 @@ using NFe.Classes.Informacoes.Total;
 using NFe.Utils.Tributacao.Estadual;
 using NFe.Utils.Tributacao.Federal;
 using Valor = Funcoes._Classes.Valor;
-using System.ComponentModel;
-using System.Xml.Serialization;
 using NFe.Classes.Informacoes.Detalhe.Tributacao.Federal;
 using NFe.Classes.Servicos.Tipos;
-using static SisCom.Aplicacao.Classes.Declaracoes;
-using SisCom.Aplicacao.Controllers;
-using Funcoes.Interfaces;
-using SisCom.Infraestrutura.Data.Context;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+using NFe.Classes.Servicos.Evento;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -347,6 +333,80 @@ namespace SisCom.Aplicacao.Classes
             }
 
             return oConfig;
+        }
+        public static NotaFiscalSaidaViewModel Fiscal_CartaCorrecao(NotaFiscalSaidaViewModel notaFiscalSaida, string sDescricaoCorrecao = "")
+        {
+            NFe.Servicos.ServicosNFe oNFe_Servico;
+            NFe.Servicos.Retorno.RetornoRecepcaoEvento oNFe_Servico_RetornoRecepcaoEvento;
+            NFe.Utils.ConfiguracaoServico oConfig;
+
+            if (notaFiscalSaida == null)
+            {
+                CaixaMensagem.Informacao("Informe o documento fiscal a ser corrigir");
+                goto Sair;
+            }
+            if (sDescricaoCorrecao.Trim() == "")
+            {
+                CaixaMensagem.Informacao("Informe a descrição da correção");
+                goto Sair;
+            }
+
+            oConfig = Fiscal_Configuracao();
+            if (oConfig == null)
+                goto Sair;
+
+            oNFe_Servico = new ServicosNFe(oConfig);
+
+            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCartaCorrecao(1, 1, notaFiscalSaida.CodigoChaveAcesso, 
+                                                                                                sDescricaoCorrecao, 
+                                                                                                Funcoes._Classes.Texto.SomenteNumero(Declaracoes.dados_Empresa_CNPJ));
+
+            if (Fiscal_NFe_StatusProcessamento(oNFe_Servico_RetornoRecepcaoEvento.Retorno.cStat.ToString()) == enOpcoes_NFe_StatusProcessamento.LoteEventoProcessado)
+            {
+                notaFiscalSaida.DescricaoCartaCorrecao = sDescricaoCorrecao;
+                notaFiscalSaida.DataCartaCorrecao = DateTime.Now;
+            }
+
+        Sair:
+            return notaFiscalSaida;
+        }
+        public static NotaFiscalSaidaViewModel Fiscal_Cancelamento(NotaFiscalSaidaViewModel notaFiscalSaida, string sJustificativa = "")
+        {
+            NFe.Servicos.ServicosNFe oNFe_Servico;
+            NFe.Servicos.Retorno.RetornoRecepcaoEvento oNFe_Servico_RetornoRecepcaoEvento;
+            NFe.Utils.ConfiguracaoServico oConfig;
+
+            if (notaFiscalSaida == null)
+            {
+                CaixaMensagem.Informacao("Informe o documento fiscal a ser corrigir");
+                goto Sair;
+            }
+            if (sJustificativa.Trim() == "")
+            {
+                CaixaMensagem.Informacao("Informe a descrição da justificativa");
+                goto Sair;
+            }
+
+            oConfig = Fiscal_Configuracao();
+            if (oConfig == null)
+                goto Sair;
+
+            oNFe_Servico = new ServicosNFe(oConfig);
+
+            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCancelamento(1, 1, notaFiscalSaida.Protocolo,
+                                                                                               notaFiscalSaida.CodigoChaveAcesso, 
+                                                                                               sJustificativa, 
+                                                                                               Funcoes._Classes.Texto.SomenteNumero(Declaracoes.dados_Empresa_CNPJ));
+
+            if (Fiscal_NFe_StatusProcessamento(oNFe_Servico_RetornoRecepcaoEvento.Retorno.cStat.ToString()) == enOpcoes_NFe_StatusProcessamento.LoteEventoProcessado)
+            {
+                notaFiscalSaida.DescricaoCancelamento = sJustificativa;
+                notaFiscalSaida.DataCancelamento = DateTime.Now;
+                notaFiscalSaida.Status = NF_Status.Cancelado;
+            }
+
+        Sair:
+            return notaFiscalSaida;
         }
 
         public static string Certificado_DataExpiracao()

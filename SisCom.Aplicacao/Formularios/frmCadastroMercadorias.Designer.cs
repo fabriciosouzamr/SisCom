@@ -288,6 +288,8 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoNFSTotalTributos = new System.Windows.Forms.Button();
             this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal = new System.Windows.Forms.NumericUpDown();
             this.label122 = new System.Windows.Forms.Label();
+            this.tabImpostosICMS = new System.Windows.Forms.TabPage();
+            this.gridImpostosICMS = new System.Windows.Forms.DataGridView();
             this.pnlDadosGerais = new System.Windows.Forms.Panel();
             this.botaoSubGrupo = new System.Windows.Forms.Button();
             this.botaoFornecedor = new System.Windows.Forms.Button();
@@ -411,6 +413,8 @@ namespace SisCom.Aplicacao.Formularios
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_OutrosPMC)).BeginInit();
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal)).BeginInit();
+            this.tabImpostosICMS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridImpostosICMS)).BeginInit();
             this.pnlDadosGerais.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.pnlMenuBotao.SuspendLayout();
@@ -1468,7 +1472,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tabProducao.Controls.Add(this.groupBox18);
             this.tabProducao.Location = new System.Drawing.Point(4, 24);
             this.tabProducao.Name = "tabProducao";
-            this.tabProducao.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabProducao.Padding = new System.Windows.Forms.Padding(3);
             this.tabProducao.Size = new System.Drawing.Size(801, 452);
             this.tabProducao.TabIndex = 7;
             this.tabProducao.Text = "Produção";
@@ -1512,7 +1516,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tabDetalhesEstoque.Controls.Add(this.groupBox14);
             this.tabDetalhesEstoque.Location = new System.Drawing.Point(4, 24);
             this.tabDetalhesEstoque.Name = "tabDetalhesEstoque";
-            this.tabDetalhesEstoque.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabDetalhesEstoque.Padding = new System.Windows.Forms.Padding(3);
             this.tabDetalhesEstoque.Size = new System.Drawing.Size(801, 452);
             this.tabDetalhesEstoque.TabIndex = 1;
             this.tabDetalhesEstoque.Text = "Detalhes Estoque";
@@ -1795,7 +1799,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tabSimiliares.Controls.Add(this.groupBox17);
             this.tabSimiliares.Location = new System.Drawing.Point(4, 24);
             this.tabSimiliares.Name = "tabSimiliares";
-            this.tabSimiliares.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabSimiliares.Padding = new System.Windows.Forms.Padding(3);
             this.tabSimiliares.Size = new System.Drawing.Size(801, 452);
             this.tabSimiliares.TabIndex = 5;
             this.tabSimiliares.Text = "Similiares";
@@ -1846,7 +1850,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tabIntegracao.Controls.Add(this.groupBox16);
             this.tabIntegracao.Location = new System.Drawing.Point(4, 24);
             this.tabIntegracao.Name = "tabIntegracao";
-            this.tabIntegracao.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabIntegracao.Padding = new System.Windows.Forms.Padding(3);
             this.tabIntegracao.Size = new System.Drawing.Size(801, 452);
             this.tabIntegracao.TabIndex = 4;
             this.tabIntegracao.Text = "Integração";
@@ -1874,7 +1878,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tabFotoEspecificacao.Controls.Add(this.textEspecificacao);
             this.tabFotoEspecificacao.Location = new System.Drawing.Point(4, 24);
             this.tabFotoEspecificacao.Name = "tabFotoEspecificacao";
-            this.tabFotoEspecificacao.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabFotoEspecificacao.Padding = new System.Windows.Forms.Padding(3);
             this.tabFotoEspecificacao.Size = new System.Drawing.Size(801, 452);
             this.tabFotoEspecificacao.TabIndex = 3;
             this.tabFotoEspecificacao.Text = "Foto e Especificação";
@@ -2245,6 +2249,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tabControl.Controls.Add(this.tabFotoEspecificacao);
             this.tabControl.Controls.Add(this.tabIntegracao);
             this.tabControl.Controls.Add(this.tabSimiliares);
+            this.tabControl.Controls.Add(this.tabImpostosICMS);
             this.tabControl.Location = new System.Drawing.Point(0, 269);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -2259,7 +2264,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tbsPrecoEstoque.Controls.Add(this.pnlPrecoEstoqueImpostos);
             this.tbsPrecoEstoque.Location = new System.Drawing.Point(4, 24);
             this.tbsPrecoEstoque.Name = "tbsPrecoEstoque";
-            this.tbsPrecoEstoque.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tbsPrecoEstoque.Padding = new System.Windows.Forms.Padding(3);
             this.tbsPrecoEstoque.Size = new System.Drawing.Size(801, 452);
             this.tbsPrecoEstoque.TabIndex = 6;
             this.tbsPrecoEstoque.Text = "Preço Estoque";
@@ -3085,7 +3090,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tabDetalhesFiscais.Controls.Add(this.panel2);
             this.tabDetalhesFiscais.Location = new System.Drawing.Point(4, 24);
             this.tabDetalhesFiscais.Name = "tabDetalhesFiscais";
-            this.tabDetalhesFiscais.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabDetalhesFiscais.Padding = new System.Windows.Forms.Padding(3);
             this.tabDetalhesFiscais.Size = new System.Drawing.Size(801, 452);
             this.tabDetalhesFiscais.TabIndex = 0;
             this.tabDetalhesFiscais.Text = "Detalhes Fiscais";
@@ -3203,6 +3208,27 @@ namespace SisCom.Aplicacao.Formularios
             this.label122.Size = new System.Drawing.Size(102, 13);
             this.label122.TabIndex = 107;
             this.label122.Text = "Total dos Tributos:";
+            // 
+            // tabImpostosICMS
+            // 
+            this.tabImpostosICMS.Controls.Add(this.gridImpostosICMS);
+            this.tabImpostosICMS.Location = new System.Drawing.Point(4, 24);
+            this.tabImpostosICMS.Name = "tabImpostosICMS";
+            this.tabImpostosICMS.Padding = new System.Windows.Forms.Padding(3);
+            this.tabImpostosICMS.Size = new System.Drawing.Size(801, 452);
+            this.tabImpostosICMS.TabIndex = 8;
+            this.tabImpostosICMS.Text = "Impostos ICMS";
+            this.tabImpostosICMS.UseVisualStyleBackColor = true;
+            // 
+            // gridImpostosICMS
+            // 
+            this.gridImpostosICMS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridImpostosICMS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridImpostosICMS.Location = new System.Drawing.Point(3, 3);
+            this.gridImpostosICMS.Name = "gridImpostosICMS";
+            this.gridImpostosICMS.RowTemplate.Height = 25;
+            this.gridImpostosICMS.Size = new System.Drawing.Size(795, 446);
+            this.gridImpostosICMS.TabIndex = 0;
             // 
             // pnlDadosGerais
             // 
@@ -3765,6 +3791,8 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal)).EndInit();
+            this.tabImpostosICMS.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridImpostosICMS)).EndInit();
             this.pnlDadosGerais.ResumeLayout(false);
             this.pnlDadosGerais.PerformLayout();
             this.pnlMenuBotaoBotao.ResumeLayout(false);
@@ -4080,5 +4108,7 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.TextBox textDetalhesFiscais_InfoRefNotasFiscaisEntrada_COFINS_Descricao;
         private System.Windows.Forms.TextBox textDetalhesFiscais_InfoRefNotasFiscaisSaida_PIS_Descricao;
         private System.Windows.Forms.TextBox textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao;
+        private System.Windows.Forms.TabPage tabImpostosICMS;
+        private System.Windows.Forms.DataGridView gridImpostosICMS;
     }
 }

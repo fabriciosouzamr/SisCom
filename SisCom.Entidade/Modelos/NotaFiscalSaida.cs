@@ -62,6 +62,10 @@ namespace SisCom.Entidade.Modelos
         public string? RetornoSefaz { get; set; }
         public string? RetornoSefazCodigo { get; set; }
         public DateTime? DataRetornoSefaz { get; set; }
+		public String? DescricaoCartaCorrecao { get; set; }
+        public DateTime? DataCartaCorrecao { get; set; }
+        public String? DescricaoCancelamento { get; set; }
+        public DateTime? DataCancelamento { get; set; }
         public virtual List<NotaFiscalSaidaMercadoria> NotaFiscalSaidaMercadoria { get; set; }
         public virtual List<NotaFiscalSaidaPagamento> NotaFiscalSaidaPagamento { get; set; }
         public virtual List<NotaFiscalSaidaReferencia> NotaFiscalSaidaReferencia { get; set; }

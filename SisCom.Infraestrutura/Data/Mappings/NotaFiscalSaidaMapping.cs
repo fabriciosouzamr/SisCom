@@ -34,6 +34,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
             builder.Property(p => p.Protocolo).HasColumnType("varchar(40)");
             builder.Property(p => p.RetornoSefaz).HasColumnType("varchar(8000)");
             builder.Property(p => p.RetornoSefazCodigo).HasColumnType("varchar(10)");
+            builder.Property(p => p.DescricaoCartaCorrecao).HasColumnType("varchar(8000)");
 
             builder.ToTable("NotaFiscalSaidas");
         }

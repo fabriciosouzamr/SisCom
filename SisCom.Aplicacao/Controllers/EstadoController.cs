@@ -12,16 +12,16 @@ using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
 {
-    public class EstadoController
+    public class EstadoController : IDisposable
     {
         static EstadoService _EstadoService;
-        private readonly MeuDbContext MeuDbContext;
+        private readonly MeuDbContext meuDbContext;
 
         public EstadoController(MeuDbContext MeuDbContext, INotifier notifier)
         {
-            this.MeuDbContext = MeuDbContext;
+            this.meuDbContext = MeuDbContext;
 
-            _EstadoService = new EstadoService(new EstadoRepository(this.MeuDbContext), notifier);
+            _EstadoService = new EstadoService(new EstadoRepository(this.meuDbContext), notifier);
         }
 
         public async Task<EstadoViewModel> Adicionar(EstadoViewModel EstadoViewModel)
@@ -57,9 +57,9 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<EstadoViewModel>(grupo);
         }
 
-        public async Task<IEnumerable<EstadoViewModel>> ObterTodos()
+        public async Task<IEnumerable<EstadoViewModel>> ObterTodos(Expression<Func<Estado, object>> order = null)
         {
-            var obterTodos = await _EstadoService.GetAll();
+            var obterTodos = await _EstadoService.GetAll(order);
             return Declaracoes.mapper.Map<IEnumerable<EstadoViewModel>>(obterTodos);
         }
 
@@ -75,6 +75,10 @@ namespace SisCom.Aplicacao.Controllers
             var ret = Declaracoes.mapper.Map<IEnumerable<CodigoNomeComboViewModel>>(combo);
 
             return Declaracoes.mapper.Map<IEnumerable<CodigoNomeComboViewModel>>(combo);
+        }
+        public void Dispose()
+        {
+            meuDbContext.Dispose();
         }
     }
 }

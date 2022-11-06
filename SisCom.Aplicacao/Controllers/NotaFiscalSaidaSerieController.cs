@@ -87,7 +87,6 @@ namespace SisCom.Aplicacao.Controllers
             var combo = await _NotaFiscalSaidaSerieService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
         }
-
         public void Dispose()
         {
             meuDbContext.Dispose();

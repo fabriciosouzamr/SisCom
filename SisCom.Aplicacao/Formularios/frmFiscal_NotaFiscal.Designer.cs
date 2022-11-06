@@ -869,6 +869,7 @@
             this.textVolumeTransportadosMarca.Name = "textVolumeTransportadosMarca";
             this.textVolumeTransportadosMarca.Size = new System.Drawing.Size(185, 23);
             this.textVolumeTransportadosMarca.TabIndex = 153;
+            this.textVolumeTransportadosMarca.Text = "CAFE";
             // 
             // label63
             // 
@@ -886,6 +887,7 @@
             this.textVolumeTransportadosEspecie.Name = "textVolumeTransportadosEspecie";
             this.textVolumeTransportadosEspecie.Size = new System.Drawing.Size(160, 23);
             this.textVolumeTransportadosEspecie.TabIndex = 151;
+            this.textVolumeTransportadosEspecie.Text = "SACAS";
             // 
             // numericVolumeTransportadosPesoLiquido
             // 

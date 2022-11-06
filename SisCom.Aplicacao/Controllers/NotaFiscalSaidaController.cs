@@ -96,15 +96,20 @@ namespace SisCom.Aplicacao.Controllers
                                                                                    i => i.NotaFiscalSaidaObservacao);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(nota);
         }
-        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarChave(String Chave)
+        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarChave(String chave)
         {
-            var pessoa = await _NotaFiscalSaidaService.Search(p => p.CodigoChaveAcesso == Chave.ToString());
-            return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(pessoa);
+            var notafiscal = await _NotaFiscalSaidaService.Search(p => p.CodigoChaveAcesso == chave.ToString());
+            return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(notafiscal);
         }
-        public async Task<bool> PesquisarChaveExiste(String Chave)
+        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarNotaFiscal(String numeronotafiscal)
         {
-            var pessoa = await PesquisarChave(Chave.ToString());
-            return (pessoa.Count() != 0);
+            var notafiscal = await _NotaFiscalSaidaService.Search(p => p.NotaFiscal == numeronotafiscal.ToString().Trim());
+            return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>((object)notafiscal);
+        }
+        public async Task<bool> PesquisarChaveExiste(String chave)
+        {
+            var notafiscal = await PesquisarChave(chave.ToString());
+            return (notafiscal.Count() != 0);
         }
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<NotaFiscalSaida, object>> order = null)
         {
