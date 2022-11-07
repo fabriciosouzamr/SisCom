@@ -1,6 +1,7 @@
 ﻿using DFe.Classes.Flags;
 using Funcoes._Classes;
 using Funcoes.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Grid_DataGridView;
 
 namespace SisCom.Aplicacao.Formularios
 {
@@ -187,6 +189,42 @@ namespace SisCom.Aplicacao.Formularios
                     break;
                 case gridNotaFiscalSaida_BTN_EMail:
                     break;
+                case gridNotaFiscalSaida_BTN_CartaCorrecao:
+                case gridNotaFiscalSaida_BTN_Cancelar:
+                    Cancamento_CartaCorrecao(Guid.Parse(gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Id].Value.ToString()), e.ColumnIndex);
+                    break;
+            }
+        }
+
+        async void Cancamento_CartaCorrecao(Guid id, int coluna)
+        {
+            NotaFiscalSaidaViewModel notaFiscalSaida;
+
+            using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+            {
+                notaFiscalSaida = (NotaFiscalSaidaViewModel)await notaFiscalSaidaController.PesquisarId(id);
+            }
+
+            if (notaFiscalSaida.Status != NF_Status.Transmitida)
+            {
+                CaixaMensagem.Informacao("Nota fiscal não transmitida");
+                return;
+            }
+
+            switch (coluna)
+            {
+                case gridNotaFiscalSaida_BTN_CartaCorrecao:
+                    var formCartaCorrecao = this.ServiceProvider().GetRequiredService<frmFiscal_CartaCorrecao>();
+                    formCartaCorrecao.notaFiscalSaida = notaFiscalSaida;
+                    formCartaCorrecao.ShowDialog();
+                    formCartaCorrecao.Dispose();
+                    break;
+                case gridNotaFiscalSaida_BTN_Cancelar:
+                    var formCancelamento = this.ServiceProvider().GetRequiredService<frmFiscal_Cancelamento>();
+                    formCancelamento.notaFiscalSaida = notaFiscalSaida;
+                    formCancelamento.ShowDialog();
+                    formCancelamento.Dispose();
+                    break;
             }
         }
 
@@ -261,51 +299,6 @@ namespace SisCom.Aplicacao.Formularios
             using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
             {
                 await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerieViewModel.Id, notaFiscalSaidaSerieViewModel);
-            }
-        }
-
-        async void Visualizar(Guid id)
-        {
-            NotaFiscalSaidaSerieViewModel notaFiscalSaidaSerieViewModel = new NotaFiscalSaidaSerieViewModel();
-            NotaFiscalSaidaViewModel notaFiscalSaidaViewModel = new NotaFiscalSaidaViewModel();
-            IEnumerable<NotaFiscalSaidaViewModel> notaFiscalSaidaViewModels;
-            IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoria;
-            IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamento = new List<NotaFiscalSaidaPagamentoViewModel>();
-            IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferencia = new List<NotaFiscalSaidaReferenciaViewModel>();
-            string sDS_PATH_XML = "";
-            bool bImpressaoNCFe = false;
-
-            using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
-            {
-                notaFiscalSaidaViewModels = await notaFiscalSaidaController.PesquisarCompletoId(id);
-                notaFiscalSaidaViewModel = notaFiscalSaidaViewModels.FirstOrDefault();
-            }
-            using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
-            {
-                notaFiscalSaidaMercadoria = await notaFiscalSaidaMercadoriaController.PesquisarId(notaFiscalSaidaViewModel.Id);
-            }
-            using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
-            {
-                var notaFiscalSaidaSerieViewModels = await notaFiscalSaidaSerieController.PesquisarSerie(notaFiscalSaidaViewModel.Serie);
-                notaFiscalSaidaSerieViewModel = notaFiscalSaidaSerieViewModels.FirstOrDefault();
-            }
-
-            notaFiscalSaidaViewModel.TransmitirEnderecoCliente = (notaFiscalSaidaViewModel.Cliente_Endereco != null);
-
-            foreach (NotaFiscalSaidaViewModel item in notaFiscalSaidaViewModels)
-            {
-                notaFiscalSaidaViewModel = item;
-                notaFiscalSaidaPagamento = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaPagamentoViewModel>>(item.NotaFiscalSaidaPagamento);
-                notaFiscalSaidaReferencia = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaReferenciaViewModel>>(item.NotaFiscalSaidaReferencia);
-
-                Fiscal.Fiscal_DocumentoFiscal_Visualizar(ModeloDocumento.NFe,
-                                                         ref notaFiscalSaidaViewModel,
-                                                         ref notaFiscalSaidaMercadoria,
-                                                         ref notaFiscalSaidaPagamento,
-                                                         ref notaFiscalSaidaReferencia,
-                                                         ref notaFiscalSaidaSerieViewModel,
-                                                         ref sDS_PATH_XML,
-                                                         false);
             }
         }
 
@@ -400,12 +393,24 @@ namespace SisCom.Aplicacao.Formularios
         {
             if (gridNotaFiscalSaida.CurrentRow != null)
             {
-                Visualizar((Guid)gridNotaFiscalSaida.CurrentRow.Cells[gridNotaFiscalSaida_Id].Value);
+                Fiscal.Fiscal_Visualizar((Guid)gridNotaFiscalSaida.CurrentRow.Cells[gridNotaFiscalSaida_Id].Value, this.MeuDbContext(), this._notifier);
             }
             else
             {
                 CaixaMensagem.Informacao("Selecione a nota a ser impressa");
             }
+        }
+
+        private void botaoCancelarNota_Click(object sender, EventArgs e)
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmFiscal_Cancelamento>();
+            form.ShowDialog();
+        }
+
+        private void botaoCartaCorrecaoNota_Click(object sender, EventArgs e)
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmFiscal_CartaCorrecao>();
+            form.ShowDialog();
         }
     }
 }

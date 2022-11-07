@@ -569,6 +569,7 @@
             this.MinimizeBox = false;
             this.Name = "frmFiscal_CartaCorrecao";
             this.Text = "frmFiscal_CartaCorrecao";
+            this.Load += new System.EventHandler(this.frmFiscal_CartaCorrecao_Load);
             this.pnlMenuBotao.ResumeLayout(false);
             this.pnlMenuBotaoBotao.ResumeLayout(false);
             this.pnlMenuBotaoBotao.PerformLayout();

@@ -118,7 +118,7 @@
             this.botaoConfimar.TabStop = false;
             this.botaoConfimar.Text = "Confimar";
             this.botaoConfimar.UseVisualStyleBackColor = true;
-            this.botaoConfimar.Click += new System.EventHandler(this.botaoConfimar_ClickAsync);
+            this.botaoConfimar.Click += new System.EventHandler(this.botaoConfimar_Click);
             // 
             // groupBox1
             // 
@@ -207,7 +207,7 @@
             this.botaoBuscar.Text = "Buscar";
             this.botaoBuscar.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.botaoBuscar.UseVisualStyleBackColor = true;
-            this.botaoBuscar.Click += new System.EventHandler(this.botaoBuscar_ClickAsync);
+            this.botaoBuscar.Click += new System.EventHandler(this.botaoBuscar_Click);
             // 
             // textNumeroNotaFiscal
             // 
@@ -258,6 +258,7 @@
             this.Controls.Add(this.pnlMenuBotao);
             this.Name = "frmFiscal_Cancelamento";
             this.Text = "frmFiscal_Cancelamento";
+            this.Load += new System.EventHandler(this.frmFiscal_Cancelamento_Load);
             this.pnlMenuBotao.ResumeLayout(false);
             this.pnlMenuBotaoBotao.ResumeLayout(false);
             this.pnlMenuBotaoBotao.PerformLayout();

@@ -36,6 +36,9 @@ using Valor = Funcoes._Classes.Valor;
 using NFe.Classes.Informacoes.Detalhe.Tributacao.Federal;
 using NFe.Classes.Servicos.Tipos;
 using NFe.Classes.Servicos.Evento;
+using SisCom.Aplicacao.Controllers;
+using Funcoes.Interfaces;
+using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -2586,6 +2589,51 @@ namespace SisCom.Aplicacao.Classes
             // Public Property vUnid As Decimal?
 
             return IPIGeral.ObterIPIBasico();
+        }
+
+        public async static void Fiscal_Visualizar(Guid id, MeuDbContext meuDbContext, INotifier notifier)
+        {
+            NotaFiscalSaidaSerieViewModel notaFiscalSaidaSerieViewModel = new NotaFiscalSaidaSerieViewModel();
+            NotaFiscalSaidaViewModel notaFiscalSaidaViewModel = new NotaFiscalSaidaViewModel();
+            IEnumerable<NotaFiscalSaidaViewModel> notaFiscalSaidaViewModels;
+            IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoria;
+            IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamento = new List<NotaFiscalSaidaPagamentoViewModel>();
+            IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferencia = new List<NotaFiscalSaidaReferenciaViewModel>();
+            string sDS_PATH_XML = "";
+            bool bImpressaoNCFe = false;
+
+            using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(meuDbContext, notifier))
+            {
+                notaFiscalSaidaViewModels = await notaFiscalSaidaController.PesquisarCompletoId(id);
+                notaFiscalSaidaViewModel = notaFiscalSaidaViewModels.FirstOrDefault();
+            }
+            using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(meuDbContext, notifier))
+            {
+                notaFiscalSaidaMercadoria = await notaFiscalSaidaMercadoriaController.PesquisarId(notaFiscalSaidaViewModel.Id);
+            }
+            using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(meuDbContext, notifier))
+            {
+                var notaFiscalSaidaSerieViewModels = await notaFiscalSaidaSerieController.PesquisarSerie(notaFiscalSaidaViewModel.Serie);
+                notaFiscalSaidaSerieViewModel = notaFiscalSaidaSerieViewModels.FirstOrDefault();
+            }
+
+            notaFiscalSaidaViewModel.TransmitirEnderecoCliente = (notaFiscalSaidaViewModel.Cliente_Endereco != null);
+
+            foreach (NotaFiscalSaidaViewModel item in notaFiscalSaidaViewModels)
+            {
+                notaFiscalSaidaViewModel = item;
+                notaFiscalSaidaPagamento = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaPagamentoViewModel>>(item.NotaFiscalSaidaPagamento);
+                notaFiscalSaidaReferencia = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaReferenciaViewModel>>(item.NotaFiscalSaidaReferencia);
+
+                Fiscal.Fiscal_DocumentoFiscal_Visualizar(ModeloDocumento.NFe,
+                                                         ref notaFiscalSaidaViewModel,
+                                                         ref notaFiscalSaidaMercadoria,
+                                                         ref notaFiscalSaidaPagamento,
+                                                         ref notaFiscalSaidaReferencia,
+                                                         ref notaFiscalSaidaSerieViewModel,
+                                                         ref sDS_PATH_XML,
+                                                         notaFiscalSaidaViewModel.Status == NF_Status.Cancelado);
+            }
         }
     }
 }

@@ -47,6 +47,8 @@ namespace SisCom.Aplicacao.Configuration
             services.AddTransient<frmVendasConsulta>();
             services.AddTransient<frmVendasInclusao>();
             services.AddTransient<frmFiscal_Transmitir>();
+            services.AddTransient<frmFiscal_Cancelamento>();
+            services.AddTransient<frmFiscal_CartaCorrecao>();
             #endregion
 
             #region Cidade

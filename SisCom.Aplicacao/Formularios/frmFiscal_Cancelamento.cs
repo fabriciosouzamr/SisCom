@@ -6,14 +6,12 @@ using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
 {
     public partial class frmFiscal_Cancelamento : FormMain
     {
-        NotaFiscalSaidaViewModel notaFiscalSaida;
+        public NotaFiscalSaidaViewModel notaFiscalSaida;
 
         public frmFiscal_Cancelamento(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -35,10 +33,18 @@ namespace SisCom.Aplicacao.Formularios
 
         private void botaoImprimir_Click(object sender, EventArgs e)
         {
-
+            if (notaFiscalSaida == null)
+            { CaixaMensagem.Informacao("É preciso buscar a nota fiscal"); }
+            else
+            { Fiscal.Fiscal_Visualizar(notaFiscalSaida.Id, this.MeuDbContext(), this._notifier); }            
         }
 
-        private async Task botaoConfimar_ClickAsync(object sender, EventArgs e)
+        private void botaoConfimar_Click(object sender, EventArgs e)
+        {
+            Confimar();
+        }
+
+        async void Confimar()
         {
             StringBuilder strings = new StringBuilder();
 
@@ -61,7 +67,12 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
-        private async Task botaoBuscar_ClickAsync(object sender, EventArgs e)
+        private void botaoBuscar_Click(object sender, EventArgs e)
+        {
+            Buscar();
+        }
+
+        async void Buscar()
         {
             Limpar();
 
@@ -95,6 +106,17 @@ namespace SisCom.Aplicacao.Formularios
                         }
                     }
                 }
+            }
+        }
+
+        private void frmFiscal_Cancelamento_Load(object sender, EventArgs e)
+        {
+            if (notaFiscalSaida != null)
+            {
+                textNumeroNotaFiscal.Text = notaFiscalSaida.NotaFiscal;
+                textChaveAcesso.Text = notaFiscalSaida.CodigoChaveAcesso;
+                textSerie.Text = notaFiscalSaida.Serie;
+                textCliente.Text = notaFiscalSaida.Cliente.Nome;
             }
         }
     }

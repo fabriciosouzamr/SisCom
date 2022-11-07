@@ -16,7 +16,7 @@ namespace SisCom.Aplicacao.Formularios
         const int gridItens_Nome = 0;
         const int gridItens_Descricao = 1;
 
-        NotaFiscalSaidaViewModel notaFiscalSaida;
+        public NotaFiscalSaidaViewModel notaFiscalSaida;
 
         public frmFiscal_CartaCorrecao(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -64,7 +64,12 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.DataGridView_LinhaLimpar(gridItens);
         }
 
-        private async void botaoBuscar_Click(object sender, EventArgs e)
+        private void botaoBuscar_Click(object sender, EventArgs e)
+        {
+            Buscar();
+        }
+
+        async void Buscar()
         { 
             Limpar();
 
@@ -106,7 +111,12 @@ namespace SisCom.Aplicacao.Formularios
 
         }
 
-        private async void botaoConfimar_Click(object sender, EventArgs e)
+        private void botaoConfimar_Click(object sender, EventArgs e)
+        {
+            Confirmar();
+        }
+
+        async void Confirmar()
         {
             StringBuilder strings = new StringBuilder();
 
@@ -160,6 +170,17 @@ namespace SisCom.Aplicacao.Formularios
                         break;
                     }
                 }
+            }
+        }
+
+        private void frmFiscal_CartaCorrecao_Load(object sender, EventArgs e)
+        {
+            if (notaFiscalSaida != null)
+            {
+                textNumeroNotaFiscal.Text = notaFiscalSaida.NotaFiscal;
+                textChaveAcesso.Text = notaFiscalSaida.CodigoChaveAcesso;
+                textSerie.Text = notaFiscalSaida.Serie;
+                textCliente.Text = notaFiscalSaida.Cliente.Nome;
             }
         }
     }
