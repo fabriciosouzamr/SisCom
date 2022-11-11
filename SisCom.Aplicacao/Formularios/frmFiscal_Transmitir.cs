@@ -196,13 +196,14 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
-        async void Cancamento_CartaCorrecao(Guid id, int coluna)
+        async Task Cancamento_CartaCorrecao(Guid id, int coluna)
         {
             NotaFiscalSaidaViewModel notaFiscalSaida;
 
             using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
             {
-                notaFiscalSaida = (NotaFiscalSaidaViewModel)await notaFiscalSaidaController.PesquisarId(id);
+                var notaFiscalSaidas = await notaFiscalSaidaController.PesquisarCompletoId(id);
+                notaFiscalSaida = notaFiscalSaidas.FirstOrDefault();
             }
 
             if (notaFiscalSaida.Status != NF_Status.Transmitida)

@@ -28,7 +28,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             Grid_DataGridView.DataGridView_Formatar(gridItens, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
             Grid_DataGridView.DataGridView_ColunaAdicionar(gridItens, "Itens", "Itens", Tamanho: 100);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridItens, "Descrição", "Descrição", Tamanho: 300);
+            Grid_DataGridView.DataGridView_ColunaAdicionar(gridItens, "Descrição", "Descrição", Tamanho: 600, readOnly: false);
         }
 
         private void botaoFechar_Click(object sender, EventArgs e)

@@ -44,6 +44,11 @@ namespace SisCom.Aplicacao.Classes
 {
     public static class Fiscal
     {
+        private static string TratarString(string texto)
+        {
+            return texto.Trim();
+        }
+
         public static void GerarDanfe(string sXML, bool imprimirCancelado, bool abrirArquivo)
         {
             string sXML_Local = Arquivo.DiretorioMontarCaminhoArquivo(Declaracoes.Aplicacao_CaminhoDiretorioTemporaria, "Danfe.xml");
@@ -1395,7 +1400,7 @@ namespace SisCom.Aplicacao.Classes
                 oNFe.infNFe.versao = "4.00";
                 oNFe.infNFe.ide = new NFe.Classes.Informacoes.Identificacao.ide();
                 oNFe.infNFe.ide.cUF = (DFe.Classes.Entidades.Estado)Convert.ToInt16(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado.CodigoIBGE);
-                oNFe.infNFe.ide.natOp = notaFiscalSaidaViewModel.NaturezaOperacao.Nome;
+                oNFe.infNFe.ide.natOp = TratarString(notaFiscalSaidaViewModel.NaturezaOperacao.Nome);
                 oNFe.infNFe.ide.mod = (ModeloDocumento)Convert.ToInt16(notaFiscalSaidaViewModel.Modelo);
                 oNFe.infNFe.ide.serie = Convert.ToInt16(notaFiscalSaidaViewModel.Serie);
                 oNFe.infNFe.ide.nNF = Convert.ToInt16(sNF);
@@ -1414,7 +1419,7 @@ namespace SisCom.Aplicacao.Classes
                     oNFe.infNFe.ide.xJust = "TESTE DE CONTIGÊNCIA PARA NFe/NFCe";
                 }
 
-                if (notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado != notaFiscalSaidaViewModel.Cliente.Endereco.End_Cidade.Estado)
+                if (notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado.Codigo != notaFiscalSaidaViewModel.Cliente.Endereco.End_Cidade.Estado.Codigo)
                     oNFe.infNFe.ide.idDest = DestinoOperacao.doInterestadual;
                 else
                     oNFe.infNFe.ide.idDest = DestinoOperacao.doInterna;
@@ -1432,8 +1437,8 @@ namespace SisCom.Aplicacao.Classes
                 // -- Emitente
                 oNFe.infNFe.emit = new NFe.Classes.Informacoes.Emitente.emit();
                 oNFe.infNFe.emit.CNPJ = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Empresa.CNPJ);
-                oNFe.infNFe.emit.xNome = notaFiscalSaidaViewModel.Empresa.RazaoSocial;
-                oNFe.infNFe.emit.xFant = notaFiscalSaidaViewModel.Empresa.NomeFantasia;
+                oNFe.infNFe.emit.xNome = TratarString(notaFiscalSaidaViewModel.Empresa.RazaoSocial);
+                oNFe.infNFe.emit.xFant = TratarString(notaFiscalSaidaViewModel.Empresa.NomeFantasia);
                 if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.InscricaoEstadual))
                     oNFe.infNFe.emit.IE = notaFiscalSaidaViewModel.Empresa.InscricaoEstadual;
                 if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.InscricaoMunicipal))
@@ -1459,14 +1464,14 @@ namespace SisCom.Aplicacao.Classes
                 oNFe.infNFe.emit.enderEmit = new NFe.Classes.Informacoes.Emitente.enderEmit();
                 if (notaFiscalSaidaViewModel.Empresa.Endereco != null)
                 {
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Logradouro)) { oNFe.infNFe.emit.enderEmit.xLgr = Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Logradouro).Trim(); }
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Numero)) { oNFe.infNFe.emit.enderEmit.nro = Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Numero).Trim(); }
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Complemento)) { oNFe.infNFe.emit.enderEmit.xCpl = Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Complemento).Trim(); }
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Bairro)) { oNFe.infNFe.emit.enderEmit.xBairro = Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Bairro).Trim(); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Logradouro)) { oNFe.infNFe.emit.enderEmit.xLgr = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Logradouro)); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Numero)) { oNFe.infNFe.emit.enderEmit.nro = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Numero).Trim()); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Complemento)) { oNFe.infNFe.emit.enderEmit.xCpl = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Complemento).Trim()); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Bairro)) { oNFe.infNFe.emit.enderEmit.xBairro = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Bairro).Trim()); }
                     if (notaFiscalSaidaViewModel.Cliente.Endereco.End_Cidade != null)
                     {
                         if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.CodigoIBGE)) { oNFe.infNFe.emit.enderEmit.cMun = Convert.ToInt32(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.CodigoIBGE).Trim()); }
-                        oNFe.infNFe.emit.enderEmit.xMun = Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Nome).Trim();
+                        oNFe.infNFe.emit.enderEmit.xMun = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Nome).Trim());
                         if (notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado != null)
                             oNFe.infNFe.emit.enderEmit.UF = EstadoDBParaEstadoZeus(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado.Codigo).Trim());
                     }
@@ -1506,7 +1511,7 @@ namespace SisCom.Aplicacao.Classes
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_EMail))
                         oNFe.infNFe.dest.email = notaFiscalSaidaViewModel.Cliente_EMail;
 
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente.InscricaoEstadual))
+                    if ((!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente.InscricaoEstadual)) && (notaFiscalSaidaViewModel.Cliente.InscricaoEstadual.Trim().ToUpper() != "ISENTO"))
                         oNFe.infNFe.dest.IE = notaFiscalSaidaViewModel.Cliente.InscricaoEstadual;
                 }
 
@@ -1514,15 +1519,15 @@ namespace SisCom.Aplicacao.Classes
                 {
                     // --Destinatário Endereço
                     oNFe.infNFe.dest.enderDest = new NFe.Classes.Informacoes.Destinatario.enderDest();
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_Logradouro)) { oNFe.infNFe.dest.enderDest.xLgr = notaFiscalSaidaViewModel.Cliente_Endereco.End_Logradouro; }
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_Numero)) { oNFe.infNFe.dest.enderDest.nro = notaFiscalSaidaViewModel.Cliente_Endereco.End_Numero; }
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_Complemento)) { oNFe.infNFe.dest.enderDest.xCpl = notaFiscalSaidaViewModel.Cliente_Endereco.End_Complemento; }
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_Bairro)) { oNFe.infNFe.dest.enderDest.xBairro = notaFiscalSaidaViewModel.Cliente_Endereco.End_Bairro; }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_Logradouro)) { oNFe.infNFe.dest.enderDest.xLgr = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Logradouro); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_Numero)) { oNFe.infNFe.dest.enderDest.nro = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Numero); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_Complemento)) { oNFe.infNFe.dest.enderDest.xCpl = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Complemento); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_Bairro)) { oNFe.infNFe.dest.enderDest.xBairro = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Bairro); }
                     if (notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade != null)
                     {
                         if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.CodigoIBGE))
                             oNFe.infNFe.dest.enderDest.cMun = Convert.ToInt32(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.CodigoIBGE);
-                        oNFe.infNFe.dest.enderDest.xMun = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Nome;
+                        oNFe.infNFe.dest.enderDest.xMun = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Nome);
                         oNFe.infNFe.dest.enderDest.UF = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Codigo;
                         if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_CEP))
                             oNFe.infNFe.dest.enderDest.CEP = notaFiscalSaidaViewModel.Cliente_Endereco.End_CEP.Replace("-", "").Replace(".", "").PadLeft(8, '0');
@@ -1544,7 +1549,7 @@ namespace SisCom.Aplicacao.Classes
                 {
                     if (oNFe.infNFe.dest != null)
                     {
-                        if (String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente.InscricaoEstadual))
+                        if (String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente.InscricaoEstadual) || (notaFiscalSaidaViewModel.Cliente.InscricaoEstadual.Trim().ToUpper() == "ISENTO"))
                         { oNFe.infNFe.dest.indIEDest = NFe.Classes.Informacoes.Destinatario.indIEDest.Isento; }
                         else
                         { oNFe.infNFe.dest.indIEDest = NFe.Classes.Informacoes.Destinatario.indIEDest.ContribuinteICMS; }
@@ -1590,9 +1595,9 @@ namespace SisCom.Aplicacao.Classes
                             
                             if (notaFiscalSaidaViewModel.Transportadora.Endereco != null)
                             {
-                                oNFe.infNFe.transp.transporta.xEnder = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Logradouro);
-                                oNFe.infNFe.transp.transporta.xMun = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Cidade.Nome);
-                                oNFe.infNFe.transp.transporta.UF = Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Cidade.Estado.Codigo);
+                                oNFe.infNFe.transp.transporta.xEnder = TratarString(Funcoes._Classes.Texto.NuloString(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Logradouro));
+                                oNFe.infNFe.transp.transporta.xMun = TratarString(Funcoes._Classes.Texto.NuloString(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Cidade.Nome));
+                                oNFe.infNFe.transp.transporta.UF = Funcoes._Classes.Texto.NuloString(notaFiscalSaidaViewModel.Transportadora.Endereco.End_Cidade.Estado.Codigo);
                             }
 
                             if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Transportadora.InscricaoEstadual))
@@ -2083,15 +2088,6 @@ namespace SisCom.Aplicacao.Classes
 
                 if (oNFe != null)
                 {
-                    //if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.CodigoChaveAcesso))
-                    //{
-                    //    oNFe_Proc = Fiscal_DocumentoFiscal_AssociarProtocolo(oConfig, oNFe, notaFiscalSaidaViewModel.CodigoChaveAcesso);
-                    //    oNFe = oNFe_Proc.NFe;
-
-                    //    if (oNFe_Proc.protNFe != null)
-                    //        bVerificarProtocolo = true;
-                    //}
-
                     string xml = Declaracoes.Aplicacao_CaminhoDiretorioTemporaria + "\\transmitir.xml";
                     oNFe.SalvarArquivoXml(xml);
 

@@ -104,7 +104,7 @@ namespace SisCom.Aplicacao.Controllers
 
         public void Dispose()
         {
-            meuDbContext.Dispose();
+ //           meuDbContext.Dispose();
         }
     }
 }
