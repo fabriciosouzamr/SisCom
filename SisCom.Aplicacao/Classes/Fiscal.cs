@@ -39,6 +39,7 @@ using NFe.Classes.Servicos.Evento;
 using SisCom.Aplicacao.Controllers;
 using Funcoes.Interfaces;
 using SisCom.Infraestrutura.Data.Context;
+using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -342,11 +343,9 @@ namespace SisCom.Aplicacao.Classes
 
             return oConfig;
         }
-        public static NotaFiscalSaidaViewModel Fiscal_CartaCorrecao(NotaFiscalSaidaViewModel notaFiscalSaida, string sDescricaoCorrecao = "")
+        public static bool Fiscal_CartaCorrecao(NotaFiscalSaidaViewModel notaFiscalSaida, string sDescricaoCorrecao)
         {
-            NFe.Servicos.ServicosNFe oNFe_Servico;
-            NFe.Servicos.Retorno.RetornoRecepcaoEvento oNFe_Servico_RetornoRecepcaoEvento;
-            NFe.Utils.ConfiguracaoServico oConfig;
+            bool ok = false;
 
             if (notaFiscalSaida == null)
             {
@@ -359,30 +358,30 @@ namespace SisCom.Aplicacao.Classes
                 goto Sair;
             }
 
-            oConfig = Fiscal_Configuracao();
-            if (oConfig == null)
-                goto Sair;
-
-            oNFe_Servico = new ServicosNFe(oConfig);
-
-            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCartaCorrecao(1, 1, notaFiscalSaida.CodigoChaveAcesso, 
-                                                                                                sDescricaoCorrecao, 
-                                                                                                Funcoes._Classes.Texto.SomenteNumero(Declaracoes.dados_Empresa_CNPJ));
-
-            if (Fiscal_NFe_StatusProcessamento(oNFe_Servico_RetornoRecepcaoEvento.Retorno.cStat.ToString()) == enOpcoes_NFe_StatusProcessamento.LoteEventoProcessado)
+            try
             {
-                notaFiscalSaida.DescricaoCartaCorrecao = sDescricaoCorrecao;
-                notaFiscalSaida.DataCartaCorrecao = DateTime.Now;
+                var ret = Zeus.CartaCorrecao(notaFiscalSaida.CodigoChaveAcesso, Arquivo.CriarArquivoTexto(sDescricaoCorrecao, "cartacorrecao.txt"), notaFiscalSaida.NumeroLoteEnvioSefaz);
+
+                if (Fiscal_NFe_StatusProcessamento(ret.CStat.ToString()) == enOpcoes_NFe_StatusProcessamento.LoteEventoProcessado)
+                {
+                    ok = true;
+                }
+                else
+                {
+                    CaixaMensagem.Informacao(ret.XMotivo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                CaixaMensagem.Informacao(Ex.Message);
             }
 
         Sair:
-            return notaFiscalSaida;
+            return ok;
         }
-        public static NotaFiscalSaidaViewModel Fiscal_Cancelamento(NotaFiscalSaidaViewModel notaFiscalSaida, string sJustificativa = "")
+        public static bool Fiscal_Cancelamento(NotaFiscalSaidaViewModel notaFiscalSaida, string sJustificativa, string Protocolo)
         {
-            NFe.Servicos.ServicosNFe oNFe_Servico;
-            NFe.Servicos.Retorno.RetornoRecepcaoEvento oNFe_Servico_RetornoRecepcaoEvento;
-            NFe.Utils.ConfiguracaoServico oConfig;
+            bool ok = false;
 
             if (notaFiscalSaida == null)
             {
@@ -395,26 +394,27 @@ namespace SisCom.Aplicacao.Classes
                 goto Sair;
             }
 
-            oConfig = Fiscal_Configuracao();
-            if (oConfig == null)
-                goto Sair;
-
-            oNFe_Servico = new ServicosNFe(oConfig);
-
-            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCancelamento(1, 1, notaFiscalSaida.Protocolo,
-                                                                                               notaFiscalSaida.CodigoChaveAcesso, 
-                                                                                               sJustificativa, 
-                                                                                               Funcoes._Classes.Texto.SomenteNumero(Declaracoes.dados_Empresa_CNPJ));
-
-            if (Fiscal_NFe_StatusProcessamento(oNFe_Servico_RetornoRecepcaoEvento.Retorno.cStat.ToString()) == enOpcoes_NFe_StatusProcessamento.LoteEventoProcessado)
+            try
             {
-                notaFiscalSaida.DescricaoCancelamento = sJustificativa;
-                notaFiscalSaida.DataCancelamento = DateTime.Now;
-                notaFiscalSaida.Status = NF_Status.Cancelado;
+                var ret = Zeus.Cancelamento(notaFiscalSaida.CodigoChaveAcesso, Arquivo.CriarArquivoTexto(sJustificativa, "cancelamento.txt"), notaFiscalSaida.Protocolo, notaFiscalSaida.NumeroLoteEnvioSefaz);
+
+                if ((ret.CStat.ToString() == "101" /* Cancelamento de NF-e homologado */) || 
+                    (ret.CStat.ToString() == "151" /* Cancelamento de NF - e homologado fora de prazo */))
+                {
+                    ok = true;
+                }
+                else
+                {
+                    CaixaMensagem.Informacao(ret.RetEvento.InfEvento.XMotivo);
+                }
+            }
+            catch (Exception Ex)
+            {
+                CaixaMensagem.Informacao(Ex.Message);
             }
 
         Sair:
-            return notaFiscalSaida;
+            return ok;
         }
 
         public static string Certificado_DataExpiracao()
@@ -2600,7 +2600,7 @@ namespace SisCom.Aplicacao.Classes
 
             using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(meuDbContext, notifier))
             {
-                notaFiscalSaidaViewModels = await notaFiscalSaidaController.PesquisarCompletoId(id);
+                notaFiscalSaidaViewModels = await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == id);
                 notaFiscalSaidaViewModel = notaFiscalSaidaViewModels.FirstOrDefault();
             }
             using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(meuDbContext, notifier))

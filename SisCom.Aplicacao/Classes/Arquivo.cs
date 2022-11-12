@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Classes
@@ -156,6 +157,22 @@ namespace SisCom.Aplicacao.Classes
                 return sArquivo;
             else
                 return Diretorio_Tratar(Declaracoes.Aplicacao_PathRepositorioArquivo) + sArquivo;
+        }
+
+        public static string CriarArquivoTexto(string texto, string nomearquivo = "temporario.txt")
+        {
+            string arquivo = Path.Combine(Declaracoes.Aplicacao_CaminhoDiretorioTemporaria , nomearquivo);
+
+            if (File.Exists(arquivo)) File.Delete(arquivo);
+
+            StreamWriter valor = new StreamWriter(arquivo, true, Encoding.ASCII);
+
+            valor.Write(texto);
+
+            valor.Close();
+            valor.Dispose();
+
+            return arquivo;
         }
     }
 }

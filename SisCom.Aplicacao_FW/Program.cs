@@ -14,6 +14,7 @@ using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using static System.Windows.Forms.AxHost;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 using NFeZeus = NFe.Classes.NFe;
 
 namespace SisCom.Aplicacao_FW
@@ -49,9 +50,12 @@ namespace SisCom.Aplicacao_FW
         static string _chaveacesso = "";
         static string _NuvemFiscal_SerialNumber = "";
         static string _XML = "";
+        static string _TXT = "";
         static string _PATH_SCHEMAS = "";
         static string _PATH_NUVEMFISCAL = "";
         static string _nFeTipoEvento = "";
+        static string _protocoloAutorizacao = "";
+        static int _lote = 0;
 
         [STAThread]
         static void Main(string[] args)
@@ -59,6 +63,8 @@ namespace SisCom.Aplicacao_FW
             //nuvemfiscal GO 26616809000136 1 1E7F6E6A89ADD10D
             //manifestar GO 31220702623061000130550010000004721385764234 02623061000130 210200 417B2205054DEFE4
             //protocolar GO xml 417B2205054DEFE4
+            //cartacorrecao MG 31221111831939000114550010000007201100007201 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cartacorrecao.txt' 00B8070A04D8A768A8
+            //cancelamento MG 31221111831939000114550010000007201100007202 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cancelamento.txt' 00B8070A04D8A768A8 131225031170016
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -98,6 +104,25 @@ namespace SisCom.Aplicacao_FW
                         _XML = args[2];
                         _NuvemFiscal_SerialNumber = args[3];
                         Protocolar();
+                        break;
+                    case "cartacorrecao":
+                        _EnderecoEmitente_UF = args[1];
+                        _chaveacesso = args[2];
+                        _cnpj = args[3];
+                        _TXT = args[4];
+                        _NuvemFiscal_SerialNumber = args[5];
+                        _lote = Convert.ToInt16(args[6]);
+                        CartaCorrecao();
+                        break;
+                    case "cancelamento":
+                        _EnderecoEmitente_UF = args[1];
+                        _chaveacesso = args[2];
+                        _cnpj = args[3];
+                        _TXT = args[4];
+                        _NuvemFiscal_SerialNumber = args[5];
+                        _protocoloAutorizacao = args[6];
+                        _lote = Convert.ToInt16(args[7]);
+                        Cancelamento();
                         break;
                 }
             }
@@ -282,6 +307,73 @@ namespace SisCom.Aplicacao_FW
             {
                 MessageBox.Show(Ex.Message);
             }
+        }
+
+        public static void CartaCorrecao()
+        {
+            string sDescricaoCorrecao = "";
+
+            NFe.Servicos.ServicosNFe oNFe_Servico;
+            NFe.Servicos.Retorno.RetornoRecepcaoEvento oNFe_Servico_RetornoRecepcaoEvento;
+
+            oNFe_Servico = new ServicosNFe(Configuracao());
+
+            _TXT = _TXT.Replace("\\\\", @"\").Replace("'", "");
+
+            StreamReader srArquivo = new StreamReader(_TXT);
+
+            while (srArquivo.Peek() != -1)
+            {
+                sDescricaoCorrecao = srArquivo.ReadLine();
+            }
+
+            srArquivo.Close();
+            srArquivo.Dispose();
+
+            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCartaCorrecao(1, 1, _chaveacesso,
+                                                                                                sDescricaoCorrecao,
+                                                                                                _cnpj);
+            Console.Write(oNFe_Servico_RetornoRecepcaoEvento.RetornoStr);
+        }
+
+        public static void Cancelamento()
+        {
+            string sDescricaoJustificativa= "";
+            string mensagem = "Sem protocolo";
+            string cStat = "00";
+            string protocolo = "00";
+
+            NFe.Servicos.ServicosNFe oNFe_Servico;
+            NFe.Servicos.Retorno.RetornoRecepcaoEvento oNFe_Servico_RetornoRecepcaoEvento;
+
+            oNFe_Servico = new ServicosNFe(Configuracao());
+
+            _TXT = _TXT.Replace("\\\\", @"\").Replace("'", "");
+
+            StreamReader srArquivo = new StreamReader(_TXT);
+
+            while (srArquivo.Peek() != -1)
+            {
+                sDescricaoJustificativa = srArquivo.ReadLine();
+            }
+
+            srArquivo.Close();
+            srArquivo.Dispose();
+
+            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCancelamento(1, 1, _protocoloAutorizacao, 
+                                                                                               _chaveacesso,
+                                                                                               sDescricaoJustificativa,
+                                                                                               _cnpj);
+
+
+            cStat = oNFe_Servico_RetornoRecepcaoEvento.Retorno.cStat.ToString();
+            mensagem = oNFe_Servico_RetornoRecepcaoEvento.Retorno.retEvento[0].infEvento.xMotivo;
+            protocolo = oNFe_Servico_RetornoRecepcaoEvento.Retorno.retEvento[0].infEvento.tpEvento.ToString();
+
+            var retorno = oNFe_Servico_RetornoRecepcaoEvento.RetornoStr;
+            retorno = retorno.Replace("</retEnvEvento>",
+                                      "<Protocolo><cStat>" + cStat + "</cStat><xMotivo>" + mensagem + "</xMotivo><nProtocolo>" + protocolo + "</nProtocolo></Protocolo></retEnvEvento>");
+            Console.Write(retorno);
         }
 
         private static ConfiguracaoServico Configuracao()

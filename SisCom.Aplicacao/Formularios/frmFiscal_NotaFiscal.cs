@@ -1385,16 +1385,6 @@ namespace SisCom.Aplicacao.Formularios
             notafiscalsaida.EmailDestinoXML = textEmailDestinoXML.Text;
             if (VendaId != Guid.Empty) { notafiscalsaida.VendaId = VendaId; }
 
-            notafiscalsaida.Empresa = null;
-            notafiscalsaida.NaturezaOperacao = null;
-            notafiscalsaida.NotaFiscalFinalidade = null;
-            notafiscalsaida.Cliente = null;
-            notafiscalsaida.Cliente_Endereco.End_Cidade = null;
-            notafiscalsaida.Transportadora = null;
-            notafiscalsaida.Vendedor = null;
-            notafiscalsaida.Transportadora_CNPJ_CPF = null;
-            notafiscalsaida.Transportadora_UF = null;
-            notafiscalsaida.Venda = null;
 
             if (notafiscalsaida.ClienteId == null)
                 return;
@@ -1590,7 +1580,7 @@ namespace SisCom.Aplicacao.Formularios
 
             if (recarregar)
             {
-                notafiscalsaida = (await notaFiscalSaidaController.PesquisarCompletoId(notafiscalsaida.Id)).FirstOrDefault();
+                notafiscalsaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == notafiscalsaida.Id)).FirstOrDefault();
             }
 
             notaFiscalSaidaController.Dispose();
@@ -1917,7 +1907,7 @@ namespace SisCom.Aplicacao.Formularios
 
             using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
             {
-                _notaFiscalSaida = (await notaFiscalSaidaController.PesquisarCompletoId(notafiscalsaida.Id)).FirstOrDefault();
+                _notaFiscalSaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == notafiscalsaida.Id)).FirstOrDefault();
 
                 _notaFiscalSaida.Id = Guid.NewGuid();
                 _notaFiscalSaida.Empresa = null;
@@ -1959,7 +1949,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 await notaFiscalSaidaController.Adicionar(_notaFiscalSaida);
 
-                notafiscalsaida = (await notaFiscalSaidaController.PesquisarCompletoId(_notaFiscalSaida.Id)).FirstOrDefault();
+                notafiscalsaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == _notaFiscalSaida.Id)).FirstOrDefault();
             }
 
             await CarregarDados();

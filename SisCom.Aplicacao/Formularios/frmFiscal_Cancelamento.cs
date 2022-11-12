@@ -59,11 +59,22 @@ namespace SisCom.Aplicacao.Formularios
                 return;
             }
 
-            Fiscal.Fiscal_CartaCorrecao(notaFiscalSaida, strings.ToString());
+            notaFiscalSaida.NumeroLoteEnvioSefaz++;
 
-            using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+            if (Fiscal.Fiscal_Cancelamento(notaFiscalSaida, richJustificativa.Text, strings.ToString()))
             {
-                await notaFiscalSaidaController.Atualizar(notaFiscalSaida.Id, notaFiscalSaida);
+                botaoConfimar.Enabled = false;
+
+                using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                {
+                    notaFiscalSaida.DataCancelamento = DateTime.Now;
+                    notaFiscalSaida.Status = Entidade.Enum.NF_Status.Cancelado;
+                    notaFiscalSaida.DescricaoCancelamento = richJustificativa.Text;
+
+                    await notaFiscalSaidaController.Atualizar(notaFiscalSaida.Id, notaFiscalSaida);
+                }
+
+                CaixaMensagem.Informacao("Cancelamento efeutado");
             }
         }
 
@@ -84,15 +95,21 @@ namespace SisCom.Aplicacao.Formularios
             {
                 using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                 {
-                    var notaFiscalSaidas = await notaFiscalSaidaController.PesquisarNotaFiscal(textNumeroNotaFiscal.Text);
+                    var notaFiscalSaidas = await notaFiscalSaidaController.PesquisarCompleto(p => p.NotaFiscal == textNumeroNotaFiscal.Text);
 
                     if (notaFiscalSaidas == null)
                     {
-                        CaixaMensagem.Informacao("Nota fiscal não saída");
+                        CaixaMensagem.Informacao("Nota fiscal não encontrada");
                     }
                     else
                     {
                         notaFiscalSaida = notaFiscalSaidas.FirstOrDefault();
+
+                        if (notaFiscalSaida.Status != Entidade.Enum.NF_Status.Transmitida)
+                        {
+                            CaixaMensagem.Informacao("A nota fiscall precisa está com o status de transmitida");
+                            return;
+                        }
 
                         if (notaFiscalSaida.Status == Entidade.Enum.NF_Status.Transmitida)
                         {

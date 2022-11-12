@@ -229,6 +229,61 @@ namespace SisCom.Aplicacao.Classes
             }
         }
 
+        public static RetEnvEvento CartaCorrecao(string chaveacesso, string arquivo, int idLote)
+        {
+            List<string> retorno;
+
+            retorno = Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "cartacorrecao " + Declaracoes.dados_Empresa_CodigoEstado + " " +
+                                                                                                     chaveacesso + " " +
+                                                                                                     Declaracoes.dados_Empresa_CNPJ + " " +
+                                                                                                     "'" + arquivo + "' " +
+                                                                                                     Declaracoes.dados_Empresa_SerialNumber + " " +
+                                                                                                     idLote.ToString());
+
+            if ((retorno != null) && (retorno.Count > 0))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(RetEnvEvento));
+
+                using (StringReader reader = new StringReader(XML_RetirarVersao(retorno[0].ToString())))
+                {
+                    var retEnvEvento = (RetEnvEvento)serializer.Deserialize(reader);
+                    return retEnvEvento;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static RetEnvEvento Cancelamento(string chaveacesso, string arquivo, string protocolo, int idLote)
+        {
+            List<string> retorno;
+
+            retorno = Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "cancelamento " + Declaracoes.dados_Empresa_CodigoEstado + " " +
+                                                                                                    chaveacesso + " " +
+                                                                                                    Declaracoes.dados_Empresa_CNPJ + " " +
+                                                                                                    "'" + arquivo + "' " +
+                                                                                                    Declaracoes.dados_Empresa_SerialNumber +  " " +
+                                                                                                    protocolo + " " +
+                                                                                                    idLote.ToString());
+
+            if ((retorno != null) && (retorno.Count > 0))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(RetEnvEvento));
+
+                using (StringReader reader = new StringReader(XML_RetirarVersao(retorno[0].ToString())))
+                {
+                    var retEnvEvento = (RetEnvEvento)serializer.Deserialize(reader);
+                    return retEnvEvento;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static retEnviNFe Protocolar(string xml)
         {
             List<string> retorno;

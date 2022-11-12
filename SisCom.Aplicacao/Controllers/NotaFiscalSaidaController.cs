@@ -6,12 +6,14 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
+using SisCom.Infraestrutura.Migrations;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using NotaFiscalSaida = SisCom.Entidade.Modelos.NotaFiscalSaida;
 
 namespace SisCom.Aplicacao.Controllers
 {
@@ -41,6 +43,17 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<NotaFiscalSaidaViewModel> Atualizar(Guid id, NotaFiscalSaidaViewModel NotaFiscalSaidaViewModel)
         {
+            NotaFiscalSaidaViewModel.Empresa = null;
+            NotaFiscalSaidaViewModel.NaturezaOperacao = null;
+            NotaFiscalSaidaViewModel.NotaFiscalFinalidade = null;
+            NotaFiscalSaidaViewModel.Cliente = null;
+            NotaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade = null;
+            NotaFiscalSaidaViewModel.Transportadora = null;
+            NotaFiscalSaidaViewModel.Vendedor = null;
+            NotaFiscalSaidaViewModel.Transportadora_CNPJ_CPF = null;
+            NotaFiscalSaidaViewModel.Transportadora_UF = null;
+            NotaFiscalSaidaViewModel.Venda = null;
+
             await _NotaFiscalSaidaService.Atualizar(Declaracoes.mapper.Map<NotaFiscalSaida>(NotaFiscalSaidaViewModel));
 
             return NotaFiscalSaidaViewModel;
@@ -70,30 +83,30 @@ namespace SisCom.Aplicacao.Controllers
             var nota = await _NotaFiscalSaidaService.Search(p => p.Id == Id);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(nota);
         }
-        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarCompletoId(Guid Id)
+        public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarCompleto(Expression<Func<NotaFiscalSaida, bool>> predicate)
         {
-            var nota = await _NotaFiscalSaidaService.GetAll(null, p => p.Id == Id, i => i.NaturezaOperacao,
-                                                                                   i => i.Empresa,
-                                                                                   i => i.Empresa.Endereco,
-                                                                                   i => i.Empresa.Endereco.End_Cidade,
-                                                                                   i => i.Empresa.Endereco.End_Cidade.Estado,
-                                                                                   i => i.Empresa.Endereco.End_Cidade.Estado.Pais,
-                                                                                   i => i.Cliente,
-                                                                                   i => i.Cliente.Endereco,
-                                                                                   i => i.Cliente.Endereco.End_Cidade,
-                                                                                   i => i.Cliente.Endereco.End_Cidade.Estado,
-                                                                                   i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
-                                                                                   i => i.Cliente_Endereco.End_Cidade.Estado,
-                                                                                   i => i.Cliente_Endereco.End_Cidade.Estado.Pais,
-                                                                                   i => i.Transportadora,
-                                                                                   i => i.Transportadora.Endereco,
-                                                                                   i => i.Transportadora.Endereco.End_Cidade,
-                                                                                   i => i.Transportadora.Endereco.End_Cidade.Estado,
-                                                                                   i => i.Transportadora.Endereco.End_Cidade.Estado.Pais,
-                                                                                   i => i.NotaFiscalSaidaMercadoria, 
-                                                                                   i => i.NotaFiscalSaidaPagamento, 
-                                                                                   i => i.NotaFiscalSaidaReferencia, 
-                                                                                   i => i.NotaFiscalSaidaObservacao);
+            var nota = await _NotaFiscalSaidaService.GetAll(null, predicate, i => i.NaturezaOperacao,
+                                                                             i => i.Empresa,
+                                                                             i => i.Empresa.Endereco,
+                                                                             i => i.Empresa.Endereco.End_Cidade,
+                                                                             i => i.Empresa.Endereco.End_Cidade.Estado,
+                                                                             i => i.Empresa.Endereco.End_Cidade.Estado.Pais,
+                                                                             i => i.Cliente,
+                                                                             i => i.Cliente.Endereco,
+                                                                             i => i.Cliente.Endereco.End_Cidade,
+                                                                             i => i.Cliente.Endereco.End_Cidade.Estado,
+                                                                             i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
+                                                                             i => i.Cliente_Endereco.End_Cidade.Estado,
+                                                                             i => i.Cliente_Endereco.End_Cidade.Estado.Pais,
+                                                                             i => i.Transportadora,
+                                                                             i => i.Transportadora.Endereco,
+                                                                             i => i.Transportadora.Endereco.End_Cidade,
+                                                                             i => i.Transportadora.Endereco.End_Cidade.Estado,
+                                                                             i => i.Transportadora.Endereco.End_Cidade.Estado.Pais,
+                                                                             i => i.NotaFiscalSaidaMercadoria, 
+                                                                             i => i.NotaFiscalSaidaPagamento, 
+                                                                             i => i.NotaFiscalSaidaReferencia, 
+                                                                             i => i.NotaFiscalSaidaObservacao);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(nota);
         }
         public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarChave(String chave)

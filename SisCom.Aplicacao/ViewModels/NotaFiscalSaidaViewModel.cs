@@ -70,6 +70,7 @@ namespace SisCom.Aplicacao.ViewModels
         public DateTime? DataCartaCorrecao { get; set; }
         public String? DescricaoCancelamento { get; set; }
         public DateTime? DataCancelamento { get; set; }
+        public int NumeroLoteEnvioSefaz { get; set; }
         public virtual List<NotaFiscalSaidaMercadoria> NotaFiscalSaidaMercadoria { get; set; }
         public virtual List<NotaFiscalSaidaPagamento> NotaFiscalSaidaPagamento { get; set; }
         public virtual List<NotaFiscalSaidaReferencia> NotaFiscalSaidaReferencia { get; set; }

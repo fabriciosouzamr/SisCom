@@ -202,7 +202,7 @@ namespace SisCom.Aplicacao.Formularios
 
             using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
             {
-                var notaFiscalSaidas = await notaFiscalSaidaController.PesquisarCompletoId(id);
+                var notaFiscalSaidas = await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == id);
                 notaFiscalSaida = notaFiscalSaidas.FirstOrDefault();
             }
 
@@ -242,7 +242,7 @@ namespace SisCom.Aplicacao.Formularios
 
             using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
             {
-                notaFiscalSaidaViewModels = await notaFiscalSaidaController.PesquisarCompletoId(id);
+                notaFiscalSaidaViewModels = await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == id);
                 notaFiscalSaidaViewModel = notaFiscalSaidaViewModels.FirstOrDefault();
             }
             using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
