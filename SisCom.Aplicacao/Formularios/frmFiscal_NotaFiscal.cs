@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace SisCom.Aplicacao.Formularios
 {
     public partial class frmFiscal_NotaFiscal : FormMain
     {
-        ViewModels.NotaFiscalSaidaViewModel notafiscalsaida = null;
+        ViewModels.NotaFiscalSaidaViewModel notaFiscalSaida = null;
         public Guid VendaId;
         
         const int gridMercadoria_Id = 0;
@@ -154,6 +155,8 @@ namespace SisCom.Aplicacao.Formularios
                     { textSerie.Text = Funcao.NuloParaString(empresa.NFE_Serie); }
                 }
             }
+
+            await Navegar(Declaracoes.eNavegar.Ultimo);
 
             carregando = false;
         }
@@ -316,7 +319,7 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "Código", "Código", Tamanho: 65);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "Data da Venda", "Data da Venda", Tamanho: 140, Tipo: Grid_DataGridView.TipoColuna.Data);
 
-                notafiscalsaida = new ViewModels.NotaFiscalSaidaViewModel();
+                notaFiscalSaida = new ViewModels.NotaFiscalSaidaViewModel();
             }
             catch (Exception Ex)
             {
@@ -641,10 +644,10 @@ namespace SisCom.Aplicacao.Formularios
             {
                 using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                 {
-                    notafiscalsaida = (await notaFiscalSaidaController.ObterTodos(w => w.VendaId == VendaId)).FirstOrDefault();
+                    notaFiscalSaida = (await notaFiscalSaidaController.ObterTodos(w => w.VendaId == VendaId)).FirstOrDefault();
                 }
 
-                if (notafiscalsaida == null)
+                if (notaFiscalSaida == null)
                 {
                     using (VendaController vendaController = new VendaController(this.MeuDbContext(), this._notifier))
                     {
@@ -740,101 +743,101 @@ namespace SisCom.Aplicacao.Formularios
                 Editar(true);
             }
 
-            if ((notafiscalsaida != null) && (notafiscalsaida.Id != Guid.Empty))
+            if ((notaFiscalSaida != null) && (notaFiscalSaida.Id != Guid.Empty))
             {
                 Limpar();
 
                 checkValidado.Checked = true;
 
-                if (!Funcao.Nulo(notafiscalsaida.EmpresaId)) comboEmpresa.SelectedValue = notafiscalsaida.EmpresaId;
-                if (!Funcao.Nulo(notafiscalsaida.NaturezaOperacaoId)) comboNaturezaOperacao.SelectedValue = notafiscalsaida.NaturezaOperacaoId;
-                if (!Funcao.Nulo(notafiscalsaida.NotaFiscalFinalidadeId)) comboFinalidade.SelectedValue = notafiscalsaida.NotaFiscalFinalidadeId;
-                textNumeroNotaFiscalSaida.Text = Funcao.NuloParaString(notafiscalsaida.NotaFiscal);
-                dateDataEmissao.Value = notafiscalsaida.DataEmissao;
-                dateDataSaida.Value = notafiscalsaida.DataSaida;
-                textHora.Text = Funcao.NuloParaString(notafiscalsaida.HoraEmissao);
-                textModelo.Text = Funcao.NuloParaString(notafiscalsaida.Modelo);
-                textSerie.Text = Funcao.NuloParaString(notafiscalsaida.Serie);
-                textInfoNFeNFeSubSerie.Text = Funcao.NuloParaString(notafiscalsaida.SubSerie);
-                checkStatusCancelado.Checked = (notafiscalsaida.Status == NF_Status.Cancelado);
-                checkStatusFinalizada.Checked = (notafiscalsaida.Status == NF_Status.Finalizada);
-                checkStatusDenegada.Checked = (notafiscalsaida.Status == NF_Status.Denegada);
-                checkStatusInutilizada.Checked = (notafiscalsaida.Status == NF_Status.Inutilizada);
-                if (!Funcao.Nulo(notafiscalsaida.ClienteId)) comboRemetente.SelectedValue = notafiscalsaida.ClienteId;
-                maskedRemetenteCPFCNPJ.Text = notafiscalsaida.CNPJ_CPF;
-                textRemetenteIE.Text = notafiscalsaida.IE;
+                if (!Funcao.Nulo(notaFiscalSaida.EmpresaId)) comboEmpresa.SelectedValue = notaFiscalSaida.EmpresaId;
+                if (!Funcao.Nulo(notaFiscalSaida.NaturezaOperacaoId)) comboNaturezaOperacao.SelectedValue = notaFiscalSaida.NaturezaOperacaoId;
+                if (!Funcao.Nulo(notaFiscalSaida.NotaFiscalFinalidadeId)) comboFinalidade.SelectedValue = notaFiscalSaida.NotaFiscalFinalidadeId;
+                textNumeroNotaFiscalSaida.Text = Funcao.NuloParaString(notaFiscalSaida.NotaFiscal);
+                dateDataEmissao.Value = notaFiscalSaida.DataEmissao;
+                dateDataSaida.Value = notaFiscalSaida.DataSaida;
+                textHora.Text = Funcao.NuloParaString(notaFiscalSaida.HoraEmissao);
+                textModelo.Text = Funcao.NuloParaString(notaFiscalSaida.Modelo);
+                textSerie.Text = Funcao.NuloParaString(notaFiscalSaida.Serie);
+                textInfoNFeNFeSubSerie.Text = Funcao.NuloParaString(notaFiscalSaida.SubSerie);
+                checkStatusCancelado.Checked = (notaFiscalSaida.Status == NF_Status.Cancelado);
+                checkStatusFinalizada.Checked = (notaFiscalSaida.Status == NF_Status.Finalizada);
+                checkStatusDenegada.Checked = (notaFiscalSaida.Status == NF_Status.Denegada);
+                checkStatusInutilizada.Checked = (notaFiscalSaida.Status == NF_Status.Inutilizada);
+                if (!Funcao.Nulo(notaFiscalSaida.ClienteId)) comboRemetente.SelectedValue = notaFiscalSaida.ClienteId;
+                maskedRemetenteCPFCNPJ.Text = notaFiscalSaida.CNPJ_CPF;
+                textRemetenteIE.Text = notaFiscalSaida.IE;
 
-                if (notafiscalsaida.Cliente_Endereco.End_Cidade != null)
+                if (notaFiscalSaida.Cliente_Endereco.End_Cidade != null)
                 {
-                    notafiscalsaida.Cliente_Endereco.End_Cidade = notafiscalsaida.Cliente.Endereco.End_Cidade;
-                    notafiscalsaida.Cliente_Endereco.End_Bairro = notafiscalsaida.Cliente.Endereco.End_Bairro;
-                    notafiscalsaida.Cliente_Endereco.End_CEP = notafiscalsaida.Cliente.Endereco.End_CEP;
-                    notafiscalsaida.Cliente_Endereco.End_CidadeId = notafiscalsaida.Cliente.Endereco.End_CidadeId;
-                    notafiscalsaida.Cliente_Endereco.End_Complemento = notafiscalsaida.Cliente.Endereco.End_Complemento;
-                    notafiscalsaida.Cliente_Endereco.End_Logradouro = notafiscalsaida.Cliente.Endereco.End_Logradouro;
-                    notafiscalsaida.Cliente_Endereco.End_Numero = notafiscalsaida.Cliente.Endereco.End_Numero;
-                    notafiscalsaida.Cliente_Endereco.End_PontoReferencia = notafiscalsaida.Cliente.Endereco.End_PontoReferencia;
-                    dadolocal_Cliente_EstadoId = notafiscalsaida.Cliente.Endereco.End_Cidade.EstadoId;
+                    notaFiscalSaida.Cliente_Endereco.End_Cidade = notaFiscalSaida.Cliente.Endereco.End_Cidade;
+                    notaFiscalSaida.Cliente_Endereco.End_Bairro = notaFiscalSaida.Cliente.Endereco.End_Bairro;
+                    notaFiscalSaida.Cliente_Endereco.End_CEP = notaFiscalSaida.Cliente.Endereco.End_CEP;
+                    notaFiscalSaida.Cliente_Endereco.End_CidadeId = notaFiscalSaida.Cliente.Endereco.End_CidadeId;
+                    notaFiscalSaida.Cliente_Endereco.End_Complemento = notaFiscalSaida.Cliente.Endereco.End_Complemento;
+                    notaFiscalSaida.Cliente_Endereco.End_Logradouro = notaFiscalSaida.Cliente.Endereco.End_Logradouro;
+                    notaFiscalSaida.Cliente_Endereco.End_Numero = notaFiscalSaida.Cliente.Endereco.End_Numero;
+                    notaFiscalSaida.Cliente_Endereco.End_PontoReferencia = notaFiscalSaida.Cliente.Endereco.End_PontoReferencia;
+                    dadolocal_Cliente_EstadoId = notaFiscalSaida.Cliente.Endereco.End_Cidade.EstadoId;
                 }
                 else
                 {
                     dadolocal_Cliente_EstadoId = Declaracoes.dados_Empresa_EstadoId;
                 }
 
-                if (!String.IsNullOrEmpty(notafiscalsaida.Cliente_Endereco.End_Logradouro))
+                if (!String.IsNullOrEmpty(notaFiscalSaida.Cliente_Endereco.End_Logradouro))
                 {
-                    textRemetenteEndereco.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_Endereco.End_Logradouro);
-                    textRemetenteNumero.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_Endereco.End_Numero);
-                    textRemetenteBairro.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_Endereco.End_Bairro);
-                    textRemetenteCEP.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_Endereco.End_CEP);
-                    textRemetenteFones.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_Telefone);
-                    textRemetenteEMail.Text = Funcao.NuloParaString(notafiscalsaida.Cliente_EMail);
-                    if (notafiscalsaida.Cliente_Endereco.End_Cidade != null)
+                    textRemetenteEndereco.Text = Funcao.NuloParaString(notaFiscalSaida.Cliente_Endereco.End_Logradouro);
+                    textRemetenteNumero.Text = Funcao.NuloParaString(notaFiscalSaida.Cliente_Endereco.End_Numero);
+                    textRemetenteBairro.Text = Funcao.NuloParaString(notaFiscalSaida.Cliente_Endereco.End_Bairro);
+                    textRemetenteCEP.Text = Funcao.NuloParaString(notaFiscalSaida.Cliente_Endereco.End_CEP);
+                    textRemetenteFones.Text = Funcao.NuloParaString(notaFiscalSaida.Cliente_Telefone);
+                    textRemetenteEMail.Text = Funcao.NuloParaString(notaFiscalSaida.Cliente_EMail);
+                    if (notaFiscalSaida.Cliente_Endereco.End_Cidade != null)
                     {
-                        if (notafiscalsaida.Cliente_Endereco.End_Cidade.Estado != null)
+                        if (notaFiscalSaida.Cliente_Endereco.End_Cidade.Estado != null)
                         {
-                            if (!Funcao.Nulo(notafiscalsaida.Cliente_Endereco.End_Cidade.Estado.Id)) comboRemetenteUF.SelectedValue = notafiscalsaida.Cliente_Endereco.End_Cidade.Estado.Id;
+                            if (!Funcao.Nulo(notaFiscalSaida.Cliente_Endereco.End_Cidade.Estado.Id)) comboRemetenteUF.SelectedValue = notaFiscalSaida.Cliente_Endereco.End_Cidade.Estado.Id;
                             await Assincrono.TaskAsyncAndAwaitAsync(comboRemetenteUF_Tratar());
                         }
-                        if (!Funcao.Nulo(notafiscalsaida.Cliente_Endereco.End_CidadeId)) comboRemetenteCidade.SelectedValue = notafiscalsaida.Cliente_Endereco.End_CidadeId;
+                        if (!Funcao.Nulo(notaFiscalSaida.Cliente_Endereco.End_CidadeId)) comboRemetenteCidade.SelectedValue = notaFiscalSaida.Cliente_Endereco.End_CidadeId;
                     }
                 }
                 else
                 {
                     await CarregarDadosClientes();
                 }
-                numericValorFrete.Value = notafiscalsaida.ValorFrete;
-                numericValorSeguro.Value = notafiscalsaida.ValorSeguro;
-                numericValorOutrasDespesas.Value = notafiscalsaida.OutrasDespesas;
-                numericPercentualDesconto.Value = notafiscalsaida.PercentualDesconto;
-                numericValorDesconto.Value = notafiscalsaida.ValorDesconto;
-                numericPercentualAliquotaSimplesNacional.Value = notafiscalsaida.PercentuaAliquotaSimplesNacional;
+                numericValorFrete.Value = notaFiscalSaida.ValorFrete;
+                numericValorSeguro.Value = notaFiscalSaida.ValorSeguro;
+                numericValorOutrasDespesas.Value = notaFiscalSaida.OutrasDespesas;
+                numericPercentualDesconto.Value = notaFiscalSaida.PercentualDesconto;
+                numericValorDesconto.Value = notaFiscalSaida.ValorDesconto;
+                numericPercentualAliquotaSimplesNacional.Value = notaFiscalSaida.PercentuaAliquotaSimplesNacional;
 
-                if (!Funcao.Nulo(notafiscalsaida.TransportadoraId)) comboTransportadora.SelectedValue = notafiscalsaida.TransportadoraId;
-                comboTransportadoraFreteConta.SelectedValue = TransportadoraFrete(notafiscalsaida.Transportadora_FreteConta);
-                maskedTransportadoraCPFCNPJ.Text = notafiscalsaida.Transportadora_CNPJ_CPF;
-                textTransportadoraPlaca.Text = notafiscalsaida.Transportadora_Placa;
-                if (!Funcao.Nulo(notafiscalsaida.Transportadora_UFId)) comboTransportadoraUF.SelectedValue = notafiscalsaida.Transportadora_UFId;
-                textTransportadoraRNTC.Text = Funcao.NuloParaString(notafiscalsaida.Transportadora_RNTRC);
-                numericTransportadoraNumeroCarga.Value = notafiscalsaida.Transportadora_NumeroCarga;
-                numericVolumeTransportadosQuantidade.Value = notafiscalsaida.VolumeTransportados_Quantidade;
-                if (!String.IsNullOrEmpty(notafiscalsaida.VolumeTransportados_Especie)) textVolumeTransportadosEspecie.Text = notafiscalsaida.VolumeTransportados_Especie;
-                if (!String.IsNullOrEmpty(notafiscalsaida.VolumeTransportados_Marca)) textVolumeTransportadosMarca.Text = notafiscalsaida.VolumeTransportados_Marca;
-                numericVolumeTransportadosNumero.Value = notafiscalsaida.VolumeTransportados_Numero;
-                numericVolumeTransportadosPesoBruto.Value = (decimal)notafiscalsaida.VolumeTransportados_PesoBruto;
-                numericVolumeTransportadosPesoLiquido.Value = (decimal)notafiscalsaida.VolumeTransportados_PesoLiquido;
-                comboRegimeTributario.SelectedValue = notafiscalsaida.RegimeTributario;
-                richInformacoesAdicionaisInteresseFisco.Text = Funcao.NuloParaString(notafiscalsaida.InformacoesAdicionaisInteresseFisco);
-                richInformacoesComplementaresInteresseContribuinte.Text = Funcao.NuloParaString(notafiscalsaida.InformacoesComplementaresInteresseContribuinte_Obsersacao);
-                if (!Funcao.Nulo(notafiscalsaida.InformacoesComplementaresInteresseContribuinte_UFId)) comboInformacoesComplementaresUF.SelectedValue = notafiscalsaida.InformacoesComplementaresInteresseContribuinte_UFId;
-                textInformacoesComplementaresLocal.Text = Funcao.NuloParaString(notafiscalsaida.InformacoesComplementaresInteresseContribuinte_Local);
-                textInfoNFeChaveNFe.Text = Funcao.NuloParaString(notafiscalsaida.CodigoChaveAcesso);
-                textInfoNFeProtocolo.Text = Funcao.NuloParaString(notafiscalsaida.Protocolo);
-                comboInfoNFeIndicaPresenca.SelectedValue = notafiscalsaida.IndicaPresenca;
-                comboInfoNFeTipoEmissao.SelectedValue = notafiscalsaida.TipoEmissao;
-                textEmailDestinoXML.Text = Funcao.NuloParaString(notafiscalsaida.EmailDestinoXML);
+                if (!Funcao.Nulo(notaFiscalSaida.TransportadoraId)) comboTransportadora.SelectedValue = notaFiscalSaida.TransportadoraId;
+                comboTransportadoraFreteConta.SelectedValue = TransportadoraFrete(notaFiscalSaida.Transportadora_FreteConta);
+                maskedTransportadoraCPFCNPJ.Text = notaFiscalSaida.Transportadora_CNPJ_CPF;
+                textTransportadoraPlaca.Text = notaFiscalSaida.Transportadora_Placa;
+                if (!Funcao.Nulo(notaFiscalSaida.Transportadora_UFId)) comboTransportadoraUF.SelectedValue = notaFiscalSaida.Transportadora_UFId;
+                textTransportadoraRNTC.Text = Funcao.NuloParaString(notaFiscalSaida.Transportadora_RNTRC);
+                numericTransportadoraNumeroCarga.Value = notaFiscalSaida.Transportadora_NumeroCarga;
+                numericVolumeTransportadosQuantidade.Value = notaFiscalSaida.VolumeTransportados_Quantidade;
+                if (!String.IsNullOrEmpty(notaFiscalSaida.VolumeTransportados_Especie)) textVolumeTransportadosEspecie.Text = notaFiscalSaida.VolumeTransportados_Especie;
+                if (!String.IsNullOrEmpty(notaFiscalSaida.VolumeTransportados_Marca)) textVolumeTransportadosMarca.Text = notaFiscalSaida.VolumeTransportados_Marca;
+                numericVolumeTransportadosNumero.Value = notaFiscalSaida.VolumeTransportados_Numero;
+                numericVolumeTransportadosPesoBruto.Value = (decimal)notaFiscalSaida.VolumeTransportados_PesoBruto;
+                numericVolumeTransportadosPesoLiquido.Value = (decimal)notaFiscalSaida.VolumeTransportados_PesoLiquido;
+                comboRegimeTributario.SelectedValue = notaFiscalSaida.RegimeTributario;
+                richInformacoesAdicionaisInteresseFisco.Text = Funcao.NuloParaString(notaFiscalSaida.InformacoesAdicionaisInteresseFisco);
+                richInformacoesComplementaresInteresseContribuinte.Text = Funcao.NuloParaString(notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_Obsersacao);
+                if (!Funcao.Nulo(notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_UFId)) comboInformacoesComplementaresUF.SelectedValue = notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_UFId;
+                textInformacoesComplementaresLocal.Text = Funcao.NuloParaString(notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_Local);
+                textInfoNFeChaveNFe.Text = Funcao.NuloParaString(notaFiscalSaida.CodigoChaveAcesso);
+                textInfoNFeProtocolo.Text = Funcao.NuloParaString(notaFiscalSaida.Protocolo);
+                comboInfoNFeIndicaPresenca.SelectedValue = notaFiscalSaida.IndicaPresenca;
+                comboInfoNFeTipoEmissao.SelectedValue = notaFiscalSaida.TipoEmissao;
+                textEmailDestinoXML.Text = Funcao.NuloParaString(notaFiscalSaida.EmailDestinoXML);
 
-                if (!Funcao.Nulo(notafiscalsaida.TabelaOrigemVendaId)) comboInfoNFeOrigem.SelectedValue = notafiscalsaida.TabelaOrigemVendaId;
+                if (!Funcao.Nulo(notaFiscalSaida.TabelaOrigemVendaId)) comboInfoNFeOrigem.SelectedValue = notaFiscalSaida.TabelaOrigemVendaId;
 
                 Grid_DataGridView.DataGridView_LinhaLimpar(gridMercadoria);
                 gridMercadoria.Rows.Clear();
@@ -844,7 +847,7 @@ namespace SisCom.Aplicacao.Formularios
                     NotaFiscalMercadoriaDetalhamentoImposto notaFiscalMercadoriaDetalhamentoImposto;
                     IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoriaViewModels;
 
-                    notaFiscalSaidaMercadoriaViewModels = await notaFiscalSaidaMercadoriaController.PesquisarId(notafiscalsaida.Id);
+                    notaFiscalSaidaMercadoriaViewModels = await notaFiscalSaidaMercadoriaController.PesquisarId(notaFiscalSaida.Id);
 
                     foreach (NotaFiscalSaidaMercadoriaViewModel mercadoria in notaFiscalSaidaMercadoriaViewModels)
                     {
@@ -933,7 +936,7 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     IEnumerable<NotaFiscalSaidaObservacaoViewModel> notaFiscalSaidaObservacaoViewModels;
 
-                    notaFiscalSaidaObservacaoViewModels = await notaFiscalSaidaObservacaoController.PesquisarId(notafiscalsaida.Id);
+                    notaFiscalSaidaObservacaoViewModels = await notaFiscalSaidaObservacaoController.PesquisarId(notaFiscalSaida.Id);
 
                     foreach (NotaFiscalSaidaObservacaoViewModel observacao in notaFiscalSaidaObservacaoViewModels)
                     {
@@ -951,7 +954,7 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamentoViewModels;
 
-                    notaFiscalSaidaPagamentoViewModels = await notaFiscalSaidaPagamentoController.PesquisarId(notafiscalsaida.Id);
+                    notaFiscalSaidaPagamentoViewModels = await notaFiscalSaidaPagamentoController.PesquisarId(notaFiscalSaida.Id);
 
                     foreach (NotaFiscalSaidaPagamentoViewModel pagamento in notaFiscalSaidaPagamentoViewModels)
                     {
@@ -973,7 +976,7 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferenciaViewModels;
 
-                    notaFiscalSaidaReferenciaViewModels = await notaFiscalSaidaReferenciaController.PesquisarId(notafiscalsaida.Id);
+                    notaFiscalSaidaReferenciaViewModels = await notaFiscalSaidaReferenciaController.PesquisarId(notaFiscalSaida.Id);
 
                     foreach (NotaFiscalSaidaReferenciaViewModel referencia in notaFiscalSaidaReferenciaViewModels)
                     {
@@ -987,9 +990,9 @@ namespace SisCom.Aplicacao.Formularios
                     }
                 }
 
-                if (notafiscalsaida.VendaId != null)
+                if (notaFiscalSaida.VendaId != null)
                 {
-                    await Assincrono.TaskAsyncAndAwaitAsync(CarregarListaVenda((Guid)notafiscalsaida.VendaId));
+                    await Assincrono.TaskAsyncAndAwaitAsync(CarregarListaVenda((Guid)notaFiscalSaida.VendaId));
                 }
                 else if (VendaId != Guid.Empty)
                 {
@@ -997,6 +1000,10 @@ namespace SisCom.Aplicacao.Formularios
                 }
 
                 Editar(false);
+
+                botaoEditar.Enabled = ((notaFiscalSaida.Status == NF_Status.Pendente) || (notaFiscalSaida.Status == NF_Status.Finalizada));
+                botaoTransmitir.Enabled = ((notaFiscalSaida.Status == NF_Status.Pendente) || (notaFiscalSaida.Status == NF_Status.Finalizada));
+                botaoCancelar.Enabled = (notaFiscalSaida.Status != NF_Status.Cancelado);
             }
 
             CalcularMercadoriaPeso();
@@ -1087,76 +1094,94 @@ namespace SisCom.Aplicacao.Formularios
         {
             textSerie.Text = textInfoNFeNFeSerie.Text;
         }
-        private void botaoExcluir_Click(object sender, EventArgs e)
+        private void botaoCancelar_Click(object sender, EventArgs e)
         {
-            Excluir();
+            Cancelar();
         }
 
-        async Task Excluir()
+        async Task Cancelar()
         {
             try
             {
                 Editar(false);
 
-                if ((notafiscalsaida != null) && (notafiscalsaida.Id != Guid.Empty))
+                if (notaFiscalSaida.Status == NF_Status.Transmitida)
                 {
-                    if (!CaixaMensagem.Perguntar("Deseja excluir a nota fiscal?")) return;
-
-                    using (NotaFiscalSaidaObservacaoController notaFiscalSaidaObservacaoController = new NotaFiscalSaidaObservacaoController(this.MeuDbContext(), this._notifier))
-                    {
-                        IEnumerable<NotaFiscalSaidaObservacaoViewModel> notaFiscalSaidaObservacaoViewModels;
-
-                        notaFiscalSaidaObservacaoViewModels = await notaFiscalSaidaObservacaoController.PesquisarId(notafiscalsaida.Id);
-
-                        foreach (NotaFiscalSaidaObservacaoViewModel observacao in notaFiscalSaidaObservacaoViewModels)
-                        {
-                            await notaFiscalSaidaObservacaoController.Excluir(observacao.Id);
-                        }
-                    }
-                    using (NotaFiscalSaidaPagamentoController notaFiscalSaidaPagamentoController = new NotaFiscalSaidaPagamentoController(this.MeuDbContext(), this._notifier))
-                    {
-                        IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamentoViewModels;
-
-                        notaFiscalSaidaPagamentoViewModels = await notaFiscalSaidaPagamentoController.PesquisarId(notafiscalsaida.Id);
-
-                        foreach (NotaFiscalSaidaPagamentoViewModel pagamento in notaFiscalSaidaPagamentoViewModels)
-                        {
-                            await notaFiscalSaidaPagamentoController.Excluir(pagamento.Id);
-                        }
-                    }
-                    using (NotaFiscalSaidaReferenciaController notaFiscalSaidaReferenciaController = new NotaFiscalSaidaReferenciaController(this.MeuDbContext(), this._notifier))
-                    {
-                        IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferenciaViewModels;
-
-                        notaFiscalSaidaReferenciaViewModels = await notaFiscalSaidaReferenciaController.PesquisarId(notafiscalsaida.Id);
-
-                        foreach (NotaFiscalSaidaReferenciaViewModel referencia in notaFiscalSaidaReferenciaViewModels)
-                        {
-                            await notaFiscalSaidaReferenciaController.Excluir(referencia.Id);
-                        }
-                    }
-                    using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
-                    {
-                        IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoriaViewModels;
-
-                        notaFiscalSaidaMercadoriaViewModels = await notaFiscalSaidaMercadoriaController.PesquisarId(notafiscalsaida.Id);
-
-                        foreach (NotaFiscalSaidaMercadoriaViewModel mercadoria in notaFiscalSaidaMercadoriaViewModels)
-                        {
-                            await notaFiscalSaidaMercadoriaController.Excluir(mercadoria.Id);
-                        }
-                    }
+                    var formCancelamento = this.ServiceProvider().GetRequiredService<frmFiscal_Cancelamento>();
+                    formCancelamento.notaFiscalSaida = notaFiscalSaida;
+                    formCancelamento.ShowDialog();
+                    formCancelamento.Dispose();
+                }
+                else
+                {
                     using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                     {
-                        await notaFiscalSaidaController.Excluir(notafiscalsaida.Id);
+                        notaFiscalSaida.Status = NF_Status.Cancelado;
+                        notaFiscalSaida.DataCancelamento = DateTime.Now;
+                        notaFiscalSaida.DescricaoCancelamento = "Exclusão de nota fiscal não transamitida";
+                        await notaFiscalSaidaController.Atualizar(notaFiscalSaida.Id, notaFiscalSaida);
                     }
-
-                    CaixaMensagem.Informacao("Exclusão Efeutada");
                 }
+
+                //if ((notafiscalsaida != null) && (notafiscalsaida.Id != Guid.Empty))
+                //{
+                //    if (!CaixaMensagem.Perguntar("Deseja excluir a nota fiscal?")) return;
+
+                //    using (NotaFiscalSaidaObservacaoController notaFiscalSaidaObservacaoController = new NotaFiscalSaidaObservacaoController(this.MeuDbContext(), this._notifier))
+                //    {
+                //        IEnumerable<NotaFiscalSaidaObservacaoViewModel> notaFiscalSaidaObservacaoViewModels;
+
+                //        notaFiscalSaidaObservacaoViewModels = await notaFiscalSaidaObservacaoController.PesquisarId(notafiscalsaida.Id);
+
+                //        foreach (NotaFiscalSaidaObservacaoViewModel observacao in notaFiscalSaidaObservacaoViewModels)
+                //        {
+                //            await notaFiscalSaidaObservacaoController.Excluir(observacao.Id);
+                //        }
+                //    }
+                //    using (NotaFiscalSaidaPagamentoController notaFiscalSaidaPagamentoController = new NotaFiscalSaidaPagamentoController(this.MeuDbContext(), this._notifier))
+                //    {
+                //        IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamentoViewModels;
+
+                //        notaFiscalSaidaPagamentoViewModels = await notaFiscalSaidaPagamentoController.PesquisarId(notafiscalsaida.Id);
+
+                //        foreach (NotaFiscalSaidaPagamentoViewModel pagamento in notaFiscalSaidaPagamentoViewModels)
+                //        {
+                //            await notaFiscalSaidaPagamentoController.Excluir(pagamento.Id);
+                //        }
+                //    }
+                //    using (NotaFiscalSaidaReferenciaController notaFiscalSaidaReferenciaController = new NotaFiscalSaidaReferenciaController(this.MeuDbContext(), this._notifier))
+                //    {
+                //        IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferenciaViewModels;
+
+                //        notaFiscalSaidaReferenciaViewModels = await notaFiscalSaidaReferenciaController.PesquisarId(notafiscalsaida.Id);
+
+                //        foreach (NotaFiscalSaidaReferenciaViewModel referencia in notaFiscalSaidaReferenciaViewModels)
+                //        {
+                //            await notaFiscalSaidaReferenciaController.Excluir(referencia.Id);
+                //        }
+                //    }
+                //    using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
+                //    {
+                //        IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoriaViewModels;
+
+                //        notaFiscalSaidaMercadoriaViewModels = await notaFiscalSaidaMercadoriaController.PesquisarId(notafiscalsaida.Id);
+
+                //        foreach (NotaFiscalSaidaMercadoriaViewModel mercadoria in notaFiscalSaidaMercadoriaViewModels)
+                //        {
+                //            await notaFiscalSaidaMercadoriaController.Excluir(mercadoria.Id);
+                //        }
+                //    }
+                //    using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                //    {
+                //        await notaFiscalSaidaController.Excluir(notafiscalsaida.Id);
+                //    }
+
+                //    CaixaMensagem.Informacao("Exclusão Efeutada");
+                //}
 
                 Limpar();
 
-                notafiscalsaida.Id = Guid.Empty;
+                notaFiscalSaida.Id = Guid.Empty;
             }
             catch (Exception Ex)
             {
@@ -1203,19 +1228,19 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoAnterior_Click(object sender, EventArgs e)
         {
-            if (notafiscalsaida != null)
-                Navegar(notafiscalsaida.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
+            if (notaFiscalSaida != null)
+                Navegar(notaFiscalSaida.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
         }
         private void botaoPosterior_Click(object sender, EventArgs e)
         {
-            if (notafiscalsaida != null)
-                Navegar(notafiscalsaida.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
+            if (notaFiscalSaida != null)
+                Navegar(notaFiscalSaida.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
         }
         private async Task Navegar(Declaracoes.eNavegar posicao)
         {
             if (TentarGravar())
             {
-                await Navegar_PegarTodos(notafiscalsaida.Id, posicao);
+                await Navegar_PegarTodos(notaFiscalSaida.Id, posicao);
                 await CarregarDados();
             }
         }
@@ -1267,16 +1292,16 @@ namespace SisCom.Aplicacao.Formularios
                     ItemRetorno = ItemAnterior;
                 }
 
-                if (ItemRetorno != null) { notafiscalsaida = ItemRetorno; }
+                if (ItemRetorno != null) { notaFiscalSaida = ItemRetorno; }
             }
         }
         bool TentarGravar()
         {
             bool tentarGravar = false;
 
-            if (notafiscalsaida == null) { goto Sair; }
+            if (notaFiscalSaida == null) { goto Sair; }
 
-            if ((notafiscalsaida.Id == Guid.Empty) && (!Combo_ComboBox.Selecionado(comboNaturezaOperacao)))
+            if ((notaFiscalSaida.Id == Guid.Empty) && (!Combo_ComboBox.Selecionado(comboNaturezaOperacao)))
             {
                 tentarGravar = true;
             }
@@ -1296,14 +1321,6 @@ namespace SisCom.Aplicacao.Formularios
         Sair:
             return tentarGravar;
         }
-        NF_Status Status()
-        {
-            if (checkStatusCancelado.Checked) { return NF_Status.Cancelado; }
-            else if (checkStatusDenegada.Checked) { return NF_Status.Denegada; }
-            else if (checkStatusFinalizada.Checked) { return NF_Status.Finalizada; }
-            else if (checkStatusInutilizada.Checked) { return NF_Status.Inutilizada; }
-            else { return NF_Status.Pendente; }
-        }
         private async Task<bool> GravarNotaFiscalSaida(bool mensagemexportada = false, bool validar = true, bool recarregar = false)
         {
             if (validar)
@@ -1311,8 +1328,8 @@ namespace SisCom.Aplicacao.Formularios
                 if (!ValidarDados()) return false;
             }
 
-            if (notafiscalsaida == null)
-                notafiscalsaida = new ViewModels.NotaFiscalSaidaViewModel();
+            if (notaFiscalSaida == null)
+                notaFiscalSaida = new ViewModels.NotaFiscalSaidaViewModel();
 
             await CarregarNotaFiscal();
             await AdicionarNotaFiscalSaida(recarregar);
@@ -1328,76 +1345,76 @@ namespace SisCom.Aplicacao.Formularios
         {
             var notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier);
 
-            notafiscalsaida.NotaFiscal = textNumeroNotaFiscalSaida.Text;
-            notafiscalsaida.EmpresaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEmpresa);
-            notafiscalsaida.NaturezaOperacaoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboNaturezaOperacao);
-            notafiscalsaida.NotaFiscalFinalidadeId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboFinalidade);
+            notaFiscalSaida.NotaFiscal = textNumeroNotaFiscalSaida.Text;
+            notaFiscalSaida.EmpresaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEmpresa);
+            notaFiscalSaida.NaturezaOperacaoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboNaturezaOperacao);
+            notaFiscalSaida.NotaFiscalFinalidadeId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboFinalidade);
             //notafiscalsaida.NotaFiscal = labelNumeroNotaFiscalSaida.Text;
-            notafiscalsaida.DataEmissao = dateDataEmissao.Value;
-            notafiscalsaida.DataSaida = dateDataSaida.Value;
-            notafiscalsaida.HoraEmissao = textHora.Text;
-            notafiscalsaida.Modelo = textModelo.Text;
-            notafiscalsaida.Serie = textInfoNFeNFeSerie.Text;
-            notafiscalsaida.SubSerie = textInfoNFeNFeSubSerie.Text;
-            notafiscalsaida.Status = Status();
-            notafiscalsaida.ClienteId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboRemetente);
-            notafiscalsaida.CNPJ_CPF = Texto.SomenteNumero(maskedRemetenteCPFCNPJ.Text);
-            notafiscalsaida.IE = textRemetenteIE.Text;
-            notafiscalsaida.Cliente_Endereco = new Entidade.Modelos.Endereco();
-            notafiscalsaida.Cliente_Endereco.End_CEP = textRemetenteCEP.Text;
-            notafiscalsaida.Cliente_Endereco.End_Logradouro = textRemetenteEndereco.Text;
-            notafiscalsaida.Cliente_Endereco.End_Numero = textRemetenteNumero.Text;
-            notafiscalsaida.Cliente_Endereco.End_Bairro = textRemetenteBairro.Text;
-            notafiscalsaida.Cliente_Endereco.End_CidadeId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboRemetenteCidade);
-            notafiscalsaida.Cliente_Telefone = textRemetenteFones.Text;
-            notafiscalsaida.Cliente_EMail = textLocalEntregaRetiradaEMail.Text;
-            notafiscalsaida.ValorFrete = numericValorFrete.Value;
-            notafiscalsaida.ValorSeguro = numericValorSeguro.Value;
-            notafiscalsaida.OutrasDespesas = numericValorOutrasDespesas.Value;
-            notafiscalsaida.ValorDesconto = numericValorDesconto.Value;
-            notafiscalsaida.PercentualDesconto = numericPercentualDesconto.Value;
-            notafiscalsaida.PercentuaAliquotaSimplesNacional = numericPercentualAliquotaSimplesNacional.Value;
-            notafiscalsaida.TransportadoraId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboTransportadora);
-            notafiscalsaida.Transportadora_FreteConta = TipoFrete.SemOcorrenciaTransporte;
-            if (Combo_ComboBox.Selecionado(comboTransportadoraFreteConta)) notafiscalsaida.Transportadora_FreteConta = (TipoFrete)comboTransportadoraFreteConta.SelectedValue;
-            notafiscalsaida.Transportadora_CNPJ_CPF = Funcoes._Classes.Texto.SomenteNumero(maskedTransportadoraCPFCNPJ.Text);
-            notafiscalsaida.Transportadora_Placa = textTransportadoraPlaca.Text;
-            notafiscalsaida.Transportadora_UFId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboTransportadoraUF);
-            notafiscalsaida.Transportadora_RNTRC = textTransportadoraRNTC.Text;
-            notafiscalsaida.Transportadora_NumeroCarga = Funcao.NuloParaNumero(numericTransportadoraNumeroCarga.Value);
-            notafiscalsaida.VolumeTransportados_Quantidade = Funcao.NuloParaNumero(numericVolumeTransportadosQuantidade.Value);
-            notafiscalsaida.VolumeTransportados_Especie = textVolumeTransportadosEspecie.Text;
-            notafiscalsaida.VolumeTransportados_Marca = textVolumeTransportadosMarca.Text;
-            notafiscalsaida.VolumeTransportados_Numero = Funcao.NuloParaNumero(numericVolumeTransportadosNumero.Value);
-            notafiscalsaida.VolumeTransportados_PesoBruto = Funcao.NuloParaNumero(numericVolumeTransportadosPesoBruto.Value);
-            notafiscalsaida.VolumeTransportados_PesoLiquido = Funcao.NuloParaNumero(numericVolumeTransportadosPesoLiquido.Value);
-            if (Combo_ComboBox.Selecionado(comboRegimeTributario)) { notafiscalsaida.RegimeTributario = (Entidade.Enum.RegimeTributario)comboRegimeTributario.SelectedValue; }
-            notafiscalsaida.ObservacaoDocumento = "";
-            notafiscalsaida.InformacoesAdicionaisInteresseFisco = richInformacoesAdicionaisInteresseFisco.Text;
-            notafiscalsaida.InformacoesComplementaresInteresseContribuinte_Obsersacao = richInformacoesComplementaresInteresseContribuinte.Text;
-            notafiscalsaida.InformacoesComplementaresInteresseContribuinte_UFId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboInformacoesComplementaresUF);
-            notafiscalsaida.InformacoesComplementaresInteresseContribuinte_Local = textInformacoesComplementaresLocal.Text;
-            notafiscalsaida.CodigoChaveAcesso = textInfoNFeChaveNFe.Text;
-            notafiscalsaida.Protocolo = textInfoNFeProtocolo.Text;
-            notafiscalsaida.IndicaPresenca = (NF_IndicaPresenca)comboInfoNFeIndicaPresenca.SelectedValue;
-            notafiscalsaida.TipoEmissao = (NF_TipoEmissao)comboInfoNFeTipoEmissao.SelectedValue;
-            notafiscalsaida.Operacao = (NF_Operacao)comboInfoNFeOperacao.SelectedValue;
-            notafiscalsaida.EmailDestinoXML = textEmailDestinoXML.Text;
-            if (VendaId != Guid.Empty) { notafiscalsaida.VendaId = VendaId; }
+            notaFiscalSaida.DataEmissao = dateDataEmissao.Value;
+            notaFiscalSaida.DataSaida = dateDataSaida.Value;
+            notaFiscalSaida.HoraEmissao = textHora.Text;
+            notaFiscalSaida.Modelo = textModelo.Text;
+            notaFiscalSaida.Serie = textInfoNFeNFeSerie.Text;
+            notaFiscalSaida.SubSerie = textInfoNFeNFeSubSerie.Text;
+            notaFiscalSaida.Status = notaFiscalSaida.Status == NF_Status.Todos ? NF_Status.Pendente : notaFiscalSaida.Status;
+            notaFiscalSaida.ClienteId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboRemetente);
+            notaFiscalSaida.CNPJ_CPF = Texto.SomenteNumero(maskedRemetenteCPFCNPJ.Text);
+            notaFiscalSaida.IE = textRemetenteIE.Text;
+            notaFiscalSaida.Cliente_Endereco = new Entidade.Modelos.Endereco();
+            notaFiscalSaida.Cliente_Endereco.End_CEP = textRemetenteCEP.Text;
+            notaFiscalSaida.Cliente_Endereco.End_Logradouro = textRemetenteEndereco.Text;
+            notaFiscalSaida.Cliente_Endereco.End_Numero = textRemetenteNumero.Text;
+            notaFiscalSaida.Cliente_Endereco.End_Bairro = textRemetenteBairro.Text;
+            notaFiscalSaida.Cliente_Endereco.End_CidadeId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboRemetenteCidade);
+            notaFiscalSaida.Cliente_Telefone = textRemetenteFones.Text;
+            notaFiscalSaida.Cliente_EMail = textLocalEntregaRetiradaEMail.Text;
+            notaFiscalSaida.ValorFrete = numericValorFrete.Value;
+            notaFiscalSaida.ValorSeguro = numericValorSeguro.Value;
+            notaFiscalSaida.OutrasDespesas = numericValorOutrasDespesas.Value;
+            notaFiscalSaida.ValorDesconto = numericValorDesconto.Value;
+            notaFiscalSaida.PercentualDesconto = numericPercentualDesconto.Value;
+            notaFiscalSaida.PercentuaAliquotaSimplesNacional = numericPercentualAliquotaSimplesNacional.Value;
+            notaFiscalSaida.TransportadoraId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboTransportadora);
+            notaFiscalSaida.Transportadora_FreteConta = TipoFrete.SemOcorrenciaTransporte;
+            if (Combo_ComboBox.Selecionado(comboTransportadoraFreteConta)) notaFiscalSaida.Transportadora_FreteConta = (TipoFrete)comboTransportadoraFreteConta.SelectedValue;
+            notaFiscalSaida.Transportadora_CNPJ_CPF = Funcoes._Classes.Texto.SomenteNumero(maskedTransportadoraCPFCNPJ.Text);
+            notaFiscalSaida.Transportadora_Placa = textTransportadoraPlaca.Text;
+            notaFiscalSaida.Transportadora_UFId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboTransportadoraUF);
+            notaFiscalSaida.Transportadora_RNTRC = textTransportadoraRNTC.Text;
+            notaFiscalSaida.Transportadora_NumeroCarga = Funcao.NuloParaNumero(numericTransportadoraNumeroCarga.Value);
+            notaFiscalSaida.VolumeTransportados_Quantidade = Funcao.NuloParaNumero(numericVolumeTransportadosQuantidade.Value);
+            notaFiscalSaida.VolumeTransportados_Especie = textVolumeTransportadosEspecie.Text;
+            notaFiscalSaida.VolumeTransportados_Marca = textVolumeTransportadosMarca.Text;
+            notaFiscalSaida.VolumeTransportados_Numero = Funcao.NuloParaNumero(numericVolumeTransportadosNumero.Value);
+            notaFiscalSaida.VolumeTransportados_PesoBruto = Funcao.NuloParaNumero(numericVolumeTransportadosPesoBruto.Value);
+            notaFiscalSaida.VolumeTransportados_PesoLiquido = Funcao.NuloParaNumero(numericVolumeTransportadosPesoLiquido.Value);
+            if (Combo_ComboBox.Selecionado(comboRegimeTributario)) { notaFiscalSaida.RegimeTributario = (Entidade.Enum.RegimeTributario)comboRegimeTributario.SelectedValue; }
+            notaFiscalSaida.ObservacaoDocumento = "";
+            notaFiscalSaida.InformacoesAdicionaisInteresseFisco = richInformacoesAdicionaisInteresseFisco.Text;
+            notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_Obsersacao = richInformacoesComplementaresInteresseContribuinte.Text;
+            notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_UFId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboInformacoesComplementaresUF);
+            notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_Local = textInformacoesComplementaresLocal.Text;
+            notaFiscalSaida.CodigoChaveAcesso = textInfoNFeChaveNFe.Text;
+            notaFiscalSaida.Protocolo = textInfoNFeProtocolo.Text;
+            notaFiscalSaida.IndicaPresenca = (NF_IndicaPresenca)comboInfoNFeIndicaPresenca.SelectedValue;
+            notaFiscalSaida.TipoEmissao = (NF_TipoEmissao)comboInfoNFeTipoEmissao.SelectedValue;
+            notaFiscalSaida.Operacao = (NF_Operacao)comboInfoNFeOperacao.SelectedValue;
+            notaFiscalSaida.EmailDestinoXML = textEmailDestinoXML.Text;
+            if (VendaId != Guid.Empty) { notaFiscalSaida.VendaId = VendaId; }
 
 
-            if (notafiscalsaida.ClienteId == null)
+            if (notaFiscalSaida.ClienteId == null)
                 return;
 
-            if (notafiscalsaida.Id != Guid.Empty)
+            if (notaFiscalSaida.Id != Guid.Empty)
             {
-                await notaFiscalSaidaController.Atualizar(notafiscalsaida.Id, notafiscalsaida);
+                await notaFiscalSaidaController.Atualizar(notaFiscalSaida.Id, notaFiscalSaida);
             }
             else
             {
-                notafiscalsaida.Id = Guid.NewGuid();
-                notafiscalsaida.Status = NF_Status.Finalizada;
-                notafiscalsaida = (await notaFiscalSaidaController.Adicionar(notafiscalsaida));
+                notaFiscalSaida.Id = Guid.NewGuid();
+                notaFiscalSaida.Status = NF_Status.Finalizada;
+                notaFiscalSaida = (await notaFiscalSaidaController.Adicionar(notaFiscalSaida));
             }
 
             NotaFiscalMercadoriaDetalhamentoImposto notaFiscalMercadoriaDetalhamentoImposto;
@@ -1420,12 +1437,12 @@ namespace SisCom.Aplicacao.Formularios
                 using (var notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
                 {
                     if ((row.Cells[gridMercadoria_CodigoSistema].Value != null) && ((row.Cells[gridMercadoria_NotaFiscalSaidaId].Value == null) || 
-                                                                                    (row.Cells[gridMercadoria_NotaFiscalSaidaId].Value.ToString() == notafiscalsaida.Id.ToString())))
+                                                                                    (row.Cells[gridMercadoria_NotaFiscalSaidaId].Value.ToString() == notaFiscalSaida.Id.ToString())))
                     {
                         NotaFiscalSaidaMercadoriaViewModel notaFiscalSaidaMercadoriaViewModel = new NotaFiscalSaidaMercadoriaViewModel();
                         if (row.Cells[gridMercadoria_Id].Value != null)
                         { notaFiscalSaidaMercadoriaViewModel.Id = Guid.Parse(row.Cells[gridMercadoria_Id].Value.ToString()); }
-                        notaFiscalSaidaMercadoriaViewModel.NotaFiscalSaidaId = notafiscalsaida.Id;
+                        notaFiscalSaidaMercadoriaViewModel.NotaFiscalSaidaId = notaFiscalSaida.Id;
                         notaFiscalSaidaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[gridMercadoria_CodigoSistema].Value.ToString());
                         notaFiscalSaidaMercadoriaViewModel.TabelaNCMId = (Guid)row.Cells[gridMercadoria_NCM].Value;
                         notaFiscalSaidaMercadoriaViewModel.TabelaCST_CSOSNId = (Guid)row.Cells[gridMercadoria_CST_CSOSN].Value;
@@ -1490,7 +1507,7 @@ namespace SisCom.Aplicacao.Formularios
                         if (row.Cells[gridObservacao_Id].Value != null)
                         { notaFiscalSaidaObservacaoViewModel.Id = Guid.Parse(row.Cells[gridObservacao_Id].Value.ToString()); }
 
-                        notaFiscalSaidaObservacaoViewModel.NotaFiscalSaidaId = notafiscalsaida.Id;
+                        notaFiscalSaidaObservacaoViewModel.NotaFiscalSaidaId = notaFiscalSaida.Id;
                         notaFiscalSaidaObservacaoViewModel.Descricao = row.Cells[gridObservacao_Codigo].EditedFormattedValue.ToString();
                         if (row.Cells[gridObservacao_Codigo].Value != null) notaFiscalSaidaObservacaoViewModel.ObservacaoId = Guid.Parse(row.Cells[gridObservacao_Codigo].Value.ToString());
 
@@ -1515,7 +1532,7 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         NotaFiscalSaidaPagamentoViewModel notaFiscalSaidaPagamentoViewModel = new NotaFiscalSaidaPagamentoViewModel();
 
-                        notaFiscalSaidaPagamentoViewModel.NotaFiscalSaidaId = notafiscalsaida.Id;
+                        notaFiscalSaidaPagamentoViewModel.NotaFiscalSaidaId = notaFiscalSaida.Id;
                         notaFiscalSaidaPagamentoViewModel.DataVecimento = Convert.ToDateTime(row.Cells[gridCobrancaNota_Vencimento].Value);
                         notaFiscalSaidaPagamentoViewModel.Valor = Convert.ToDecimal(row.Cells[gridCobrancaNota_Valor].Value);
                         notaFiscalSaidaPagamentoViewModel.FormaPagamentoId = (Guid)row.Cells[gridCobrancaNota_TipoPagamento].Value;
@@ -1545,7 +1562,7 @@ namespace SisCom.Aplicacao.Formularios
                             notaFiscalSaidaReferenciaViewModel.Id = Guid.Parse(row.Cells[gridInfoNFe_Id].Value.ToString());
                         notaFiscalSaidaReferenciaViewModel.NotaFiscal = row.Cells[gridInfoNFe_NFe_NFCe].Value.ToString();
                         notaFiscalSaidaReferenciaViewModel.CodigoChaveAcesso = row.Cells[gridInfoNFe_ChaveNFe_NFCe].Value.ToString();
-                        notaFiscalSaidaReferenciaViewModel.NotaFiscalSaidaId = notafiscalsaida.Id;
+                        notaFiscalSaidaReferenciaViewModel.NotaFiscalSaidaId = notaFiscalSaida.Id;
 
                         if (notaFiscalSaidaReferenciaViewModel.Id == Guid.Empty)
                             await notaFiscalSaidaReferenciaController.Adicionar(notaFiscalSaidaReferenciaViewModel);
@@ -1580,7 +1597,7 @@ namespace SisCom.Aplicacao.Formularios
 
             if (recarregar)
             {
-                notafiscalsaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == notafiscalsaida.Id)).FirstOrDefault();
+                notaFiscalSaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == notaFiscalSaida.Id)).FirstOrDefault();
             }
 
             notaFiscalSaidaController.Dispose();
@@ -1907,7 +1924,7 @@ namespace SisCom.Aplicacao.Formularios
 
             using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
             {
-                _notaFiscalSaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == notafiscalsaida.Id)).FirstOrDefault();
+                _notaFiscalSaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == notaFiscalSaida.Id)).FirstOrDefault();
 
                 _notaFiscalSaida.Id = Guid.NewGuid();
                 _notaFiscalSaida.Empresa = null;
@@ -1949,7 +1966,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 await notaFiscalSaidaController.Adicionar(_notaFiscalSaida);
 
-                notafiscalsaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == _notaFiscalSaida.Id)).FirstOrDefault();
+                notaFiscalSaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == _notaFiscalSaida.Id)).FirstOrDefault();
             }
 
             await CarregarDados();

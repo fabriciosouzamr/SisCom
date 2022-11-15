@@ -31,6 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFiscal_Transmitir));
             this.pnlMenuBotao = new System.Windows.Forms.Panel();
             this.pnlMenuBotaoBotao = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.botaoCartaCorrecaoNota = new System.Windows.Forms.Button();
+            this.botaoCancelarNota = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -78,10 +82,6 @@
             this.botaoMarcarTodos = new System.Windows.Forms.Button();
             this.gridNotaFiscalSaida = new System.Windows.Forms.DataGridView();
             this.labelValidade = new System.Windows.Forms.Label();
-            this.botaoCancelarNota = new System.Windows.Forms.Button();
-            this.botaoCartaCorrecaoNota = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -98,7 +98,7 @@
             this.pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
             this.pnlMenuBotao.Name = "pnlMenuBotao";
-            this.pnlMenuBotao.Size = new System.Drawing.Size(1062, 83);
+            this.pnlMenuBotao.Size = new System.Drawing.Size(1253, 83);
             this.pnlMenuBotao.TabIndex = 14;
             // 
             // pnlMenuBotaoBotao
@@ -122,10 +122,50 @@
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoImprimirNota);
             this.pnlMenuBotaoBotao.Controls.Add(this.label7);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoFechar);
-            this.pnlMenuBotaoBotao.Location = new System.Drawing.Point(406, 0);
+            this.pnlMenuBotaoBotao.Location = new System.Drawing.Point(590, 0);
             this.pnlMenuBotaoBotao.Name = "pnlMenuBotaoBotao";
             this.pnlMenuBotaoBotao.Size = new System.Drawing.Size(651, 83);
             this.pnlMenuBotaoBotao.TabIndex = 2;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label20.Location = new System.Drawing.Point(188, 56);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(44, 24);
+            this.label20.TabIndex = 76;
+            this.label20.Text = "Carta de\r\nCorreção\r\n";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label19.Location = new System.Drawing.Point(134, 56);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(39, 24);
+            this.label19.TabIndex = 75;
+            this.label19.Text = "Cancela\r\nmento";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoCartaCorrecaoNota
+            // 
+            this.botaoCartaCorrecaoNota.Location = new System.Drawing.Point(184, 0);
+            this.botaoCartaCorrecaoNota.Name = "botaoCartaCorrecaoNota";
+            this.botaoCartaCorrecaoNota.Size = new System.Drawing.Size(53, 56);
+            this.botaoCartaCorrecaoNota.TabIndex = 74;
+            this.botaoCartaCorrecaoNota.UseVisualStyleBackColor = true;
+            this.botaoCartaCorrecaoNota.Click += new System.EventHandler(this.botaoCartaCorrecaoNota_Click);
+            // 
+            // botaoCancelarNota
+            // 
+            this.botaoCancelarNota.Location = new System.Drawing.Point(127, 0);
+            this.botaoCancelarNota.Name = "botaoCancelarNota";
+            this.botaoCancelarNota.Size = new System.Drawing.Size(53, 56);
+            this.botaoCancelarNota.TabIndex = 73;
+            this.botaoCancelarNota.UseVisualStyleBackColor = true;
+            this.botaoCancelarNota.Click += new System.EventHandler(this.botaoCancelarNota_Click);
             // 
             // label30
             // 
@@ -268,7 +308,7 @@
             // 
             this.panel2.Controls.Add(this.panelStatusServico);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Location = new System.Drawing.Point(873, 83);
+            this.panel2.Location = new System.Drawing.Point(1057, 83);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(184, 26);
             this.panel2.TabIndex = 16;
@@ -511,7 +551,7 @@
             // botaoAplicarFiltros
             // 
             this.botaoAplicarFiltros.Image = ((System.Drawing.Image)(resources.GetObject("botaoAplicarFiltros.Image")));
-            this.botaoAplicarFiltros.Location = new System.Drawing.Point(954, 5);
+            this.botaoAplicarFiltros.Location = new System.Drawing.Point(1141, 5);
             this.botaoAplicarFiltros.Name = "botaoAplicarFiltros";
             this.botaoAplicarFiltros.Size = new System.Drawing.Size(100, 45);
             this.botaoAplicarFiltros.TabIndex = 98;
@@ -522,7 +562,7 @@
             // botaoLimparFiltros
             // 
             this.botaoLimparFiltros.Image = ((System.Drawing.Image)(resources.GetObject("botaoLimparFiltros.Image")));
-            this.botaoLimparFiltros.Location = new System.Drawing.Point(954, 54);
+            this.botaoLimparFiltros.Location = new System.Drawing.Point(1141, 54);
             this.botaoLimparFiltros.Name = "botaoLimparFiltros";
             this.botaoLimparFiltros.Size = new System.Drawing.Size(100, 45);
             this.botaoLimparFiltros.TabIndex = 99;
@@ -545,7 +585,7 @@
             this.panel3.Controls.Add(this.label5);
             this.panel3.Location = new System.Drawing.Point(0, 113);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1057, 104);
+            this.panel3.Size = new System.Drawing.Size(1250, 104);
             this.panel3.TabIndex = 18;
             // 
             // botaoDesmarcarTodos
@@ -577,7 +617,7 @@
             this.gridNotaFiscalSaida.Name = "gridNotaFiscalSaida";
             this.gridNotaFiscalSaida.RowHeadersWidth = 51;
             this.gridNotaFiscalSaida.RowTemplate.Height = 25;
-            this.gridNotaFiscalSaida.Size = new System.Drawing.Size(1057, 343);
+            this.gridNotaFiscalSaida.Size = new System.Drawing.Size(1250, 343);
             this.gridNotaFiscalSaida.TabIndex = 17;
             this.gridNotaFiscalSaida.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscalSaida_CellClick);
             this.gridNotaFiscalSaida.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscalSaida_CellDoubleClick);
@@ -592,51 +632,11 @@
             this.labelValidade.Tag = "Validade do Certificado:";
             this.labelValidade.Text = "Validade do Certificado:";
             // 
-            // botaoCancelarNota
-            // 
-            this.botaoCancelarNota.Location = new System.Drawing.Point(127, 0);
-            this.botaoCancelarNota.Name = "botaoCancelarNota";
-            this.botaoCancelarNota.Size = new System.Drawing.Size(53, 56);
-            this.botaoCancelarNota.TabIndex = 73;
-            this.botaoCancelarNota.UseVisualStyleBackColor = true;
-            this.botaoCancelarNota.Click += new System.EventHandler(this.botaoCancelarNota_Click);
-            // 
-            // botaoCartaCorrecaoNota
-            // 
-            this.botaoCartaCorrecaoNota.Location = new System.Drawing.Point(184, 0);
-            this.botaoCartaCorrecaoNota.Name = "botaoCartaCorrecaoNota";
-            this.botaoCartaCorrecaoNota.Size = new System.Drawing.Size(53, 56);
-            this.botaoCartaCorrecaoNota.TabIndex = 74;
-            this.botaoCartaCorrecaoNota.UseVisualStyleBackColor = true;
-            this.botaoCartaCorrecaoNota.Click += new System.EventHandler(this.botaoCartaCorrecaoNota_Click);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label19.Location = new System.Drawing.Point(134, 56);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(39, 24);
-            this.label19.TabIndex = 75;
-            this.label19.Text = "Cancela\r\nmento";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label20.Location = new System.Drawing.Point(188, 56);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(44, 24);
-            this.label20.TabIndex = 76;
-            this.label20.Text = "Carta de\r\nCorreção\r\n";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // frmFiscal_Transmitir
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 600);
+            this.ClientSize = new System.Drawing.Size(1253, 600);
             this.Controls.Add(this.labelValidade);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);

@@ -62,7 +62,7 @@ namespace SisCom.Aplicacao_FW
         {
             //nuvemfiscal GO 26616809000136 1 1E7F6E6A89ADD10D
             //manifestar GO 31220702623061000130550010000004721385764234 02623061000130 210200 417B2205054DEFE4
-            //protocolar GO xml 417B2205054DEFE4
+            //protocolar MG 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\transmitir.xml' 00B8070A04D8A768A8
             //cartacorrecao MG 31221111831939000114550010000007201100007201 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cartacorrecao.txt' 00B8070A04D8A768A8
             //cancelamento MG 31221111831939000114550010000007201100007202 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cancelamento.txt' 00B8070A04D8A768A8 131225031170016
 
@@ -71,65 +71,62 @@ namespace SisCom.Aplicacao_FW
 
             _PATH_SCHEMAS = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
             _PATH_NUVEMFISCAL = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
-            
-            try
+
+            _Operacao = args[0];
+
+            switch (_Operacao)
             {
-                _Operacao = args[0];
+                case "manifestar":
+                    _EnderecoEmitente_UF = args[1];
+                    _chaveacesso = args[2];
+                    _cnpj = args[3];
+                    _nFeTipoEvento = args[4];
+                    _NuvemFiscal_SerialNumber = args[5];
 
-                switch (_Operacao)
-                {
-                    case "manifestar":
-                        _EnderecoEmitente_UF = args[1];
-                        _chaveacesso = args[2];
-                        _cnpj = args[3];
-                        _nFeTipoEvento = args[4];
-                        _NuvemFiscal_SerialNumber = args[5];
+                    Manifestar(_chaveacesso, _cnpj, (NFeTipoEvento)Convert.ToInt64(_nFeTipoEvento));
 
-                        Manifestar(_chaveacesso, _cnpj, (NFeTipoEvento)Convert.ToInt64(_nFeTipoEvento));
+                    break;
+                case "nuvemfiscal":
+                    _EnderecoEmitente_UF = args[1];
+                    _cnpj = args[2];
+                    if ((!String.IsNullOrEmpty(args[3])) && (args[3] != "''")) { _nsu = args[3]; }
+                    _NuvemFiscal_SerialNumber = args[4];
 
-                        break;
-                    case "nuvemfiscal":
-                        _EnderecoEmitente_UF = args[1];
-                        _cnpj = args[2];
-                        if ((!String.IsNullOrEmpty(args[3])) && (args[3] != "''")) { _nsu = args[3]; }
-                        _NuvemFiscal_SerialNumber = args[4];
+                    System.IO.DirectoryInfo di = new DirectoryInfo(_PATH_NUVEMFISCAL);
 
-                        System.IO.DirectoryInfo di = new DirectoryInfo(_PATH_NUVEMFISCAL);
+                    NuvemFiscal(_EnderecoEmitente_UF, _cnpj, _nsu, _chnfe);
 
-                        NuvemFiscal(_EnderecoEmitente_UF, _cnpj, _nsu, _chnfe);
-
-                        break;
-                    case "protocolar":
-                        _EnderecoEmitente_UF = args[1];
-                        _XML = args[2];
-                        _NuvemFiscal_SerialNumber = args[3];
-                        Protocolar();
-                        break;
-                    case "cartacorrecao":
-                        _EnderecoEmitente_UF = args[1];
-                        _chaveacesso = args[2];
-                        _cnpj = args[3];
-                        _TXT = args[4];
-                        _NuvemFiscal_SerialNumber = args[5];
-                        _lote = Convert.ToInt16(args[6]);
-                        CartaCorrecao();
-                        break;
-                    case "cancelamento":
-                        _EnderecoEmitente_UF = args[1];
-                        _chaveacesso = args[2];
-                        _cnpj = args[3];
-                        _TXT = args[4];
-                        _NuvemFiscal_SerialNumber = args[5];
-                        _protocoloAutorizacao = args[6];
-                        _lote = Convert.ToInt16(args[7]);
-                        Cancelamento();
-                        break;
-                }
+                    break;
+                case "protocolar":
+                    _EnderecoEmitente_UF = args[1];
+                    _XML = args[2];
+                    _NuvemFiscal_SerialNumber = args[3];
+                    Protocolar();
+                    break;
+                case "cartacorrecao":
+                    _EnderecoEmitente_UF = args[1];
+                    _chaveacesso = args[2];
+                    _cnpj = args[3];
+                    _TXT = args[4];
+                    _NuvemFiscal_SerialNumber = args[5];
+                    _lote = Convert.ToInt16(args[6]);
+                    CartaCorrecao();
+                    break;
+                case "cancelamento":
+                    _EnderecoEmitente_UF = args[1];
+                    _chaveacesso = args[2];
+                    _cnpj = args[3];
+                    _TXT = args[4];
+                    _NuvemFiscal_SerialNumber = args[5];
+                    _protocoloAutorizacao = args[6];
+                    _lote = Convert.ToInt16(args[7]);
+                    Cancelamento();
+                    break;
+                default:
+                    break;
             }
-            catch (Exception Ex)
-            {
-                MessageBox.Show(Ex.Message);
-            }
+
+            Application.Exit();
         }
 
         public static void NuvemFiscal(string EnderecoEmitente_UF,
@@ -301,6 +298,14 @@ namespace SisCom.Aplicacao_FW
                 retorno = retorno.Replace("</retEnviNFe>",
                                           "<Protocolo><cStat>" + cStat + "</cStat><xMotivo>" + mensagem + "</xMotivo><nProtocolo>" + protocolo + "</nProtocolo></Protocolo></retEnviNFe>");
 
+                try
+                {
+                    retorno = retorno.Replace(retorno.Substring(retorno.IndexOf("<Signature"), retorno.IndexOf("</Signature>") - retorno.IndexOf("<Signature") + ("</Signature>").Length), "");
+                }
+                catch (Exception)
+                {
+                }
+
                 Console.Write(retorno);
             }
             catch (Exception Ex)
@@ -330,9 +335,7 @@ namespace SisCom.Aplicacao_FW
             srArquivo.Close();
             srArquivo.Dispose();
 
-            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCartaCorrecao(1, 1, _chaveacesso,
-                                                                                                sDescricaoCorrecao,
-                                                                                                _cnpj);
+            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCartaCorrecao(1, _lote, _chaveacesso, sDescricaoCorrecao, _cnpj);
             Console.Write(oNFe_Servico_RetornoRecepcaoEvento.RetornoStr);
         }
 
@@ -360,10 +363,7 @@ namespace SisCom.Aplicacao_FW
             srArquivo.Close();
             srArquivo.Dispose();
 
-            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCancelamento(1, 1, _protocoloAutorizacao, 
-                                                                                               _chaveacesso,
-                                                                                               sDescricaoJustificativa,
-                                                                                               _cnpj);
+            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCancelamento(1, _lote, _protocoloAutorizacao, _chaveacesso,sDescricaoJustificativa,_cnpj);
 
 
             cStat = oNFe_Servico_RetornoRecepcaoEvento.Retorno.cStat.ToString();

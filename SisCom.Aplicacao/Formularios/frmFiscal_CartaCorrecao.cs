@@ -152,7 +152,7 @@ namespace SisCom.Aplicacao.Formularios
 
             notaFiscalSaida.NumeroLoteEnvioSefaz++;
 
-            if (Fiscal.Fiscal_CartaCorrecao(notaFiscalSaida, strings.ToString()))
+            if (Fiscal.Fiscal_CartaCorrecao(ref notaFiscalSaida, strings.ToString()))
             {
                 using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                 {

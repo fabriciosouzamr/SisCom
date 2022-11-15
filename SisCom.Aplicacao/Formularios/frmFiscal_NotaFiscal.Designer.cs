@@ -45,7 +45,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.botaoExcluir = new System.Windows.Forms.Button();
+            this.botaoCancelar = new System.Windows.Forms.Button();
             this.botaoEditar = new System.Windows.Forms.Button();
             this.label38 = new System.Windows.Forms.Label();
             this.botaoTransmitir = new System.Windows.Forms.Button();
@@ -418,7 +418,7 @@
             this.pnlMenuBotaoBotao.Controls.Add(this.label2);
             this.pnlMenuBotaoBotao.Controls.Add(this.label1);
             this.pnlMenuBotaoBotao.Controls.Add(this.label5);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoExcluir);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoCancelar);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoEditar);
             this.pnlMenuBotaoBotao.Controls.Add(this.label38);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoTransmitir);
@@ -581,15 +581,15 @@
             this.label5.Text = "Importar\r\nXML NF-e";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // botaoExcluir
+            // botaoCancelar
             // 
-            this.botaoExcluir.Image = ((System.Drawing.Image)(resources.GetObject("botaoExcluir.Image")));
-            this.botaoExcluir.Location = new System.Drawing.Point(625, 0);
-            this.botaoExcluir.Name = "botaoExcluir";
-            this.botaoExcluir.Size = new System.Drawing.Size(53, 56);
-            this.botaoExcluir.TabIndex = 59;
-            this.botaoExcluir.UseVisualStyleBackColor = true;
-            this.botaoExcluir.Click += new System.EventHandler(this.botaoExcluir_Click);
+            this.botaoCancelar.Image = ((System.Drawing.Image)(resources.GetObject("botaoCancelar.Image")));
+            this.botaoCancelar.Location = new System.Drawing.Point(625, 0);
+            this.botaoCancelar.Name = "botaoCancelar";
+            this.botaoCancelar.Size = new System.Drawing.Size(53, 56);
+            this.botaoCancelar.TabIndex = 59;
+            this.botaoCancelar.UseVisualStyleBackColor = true;
+            this.botaoCancelar.Click += new System.EventHandler(this.botaoCancelar_Click);
             // 
             // botaoEditar
             // 
@@ -3636,7 +3636,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button botaoExcluir;
+        private System.Windows.Forms.Button botaoCancelar;
         private System.Windows.Forms.Button botaoEditar;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Button botaoTransmitir;

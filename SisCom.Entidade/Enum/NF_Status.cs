@@ -15,6 +15,8 @@ namespace SisCom.Entidade.Enum
         [Description("Inutilizada")]
         Inutilizada = 5,
         [Description("Transmitida")]
-        Transmitida = 6
+        Transmitida = 6,
+        [Description("Todos")]
+        Todos = 100
     }
 }

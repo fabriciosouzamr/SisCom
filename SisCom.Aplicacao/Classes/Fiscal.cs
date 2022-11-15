@@ -343,7 +343,7 @@ namespace SisCom.Aplicacao.Classes
 
             return oConfig;
         }
-        public static bool Fiscal_CartaCorrecao(NotaFiscalSaidaViewModel notaFiscalSaida, string sDescricaoCorrecao)
+        public static bool Fiscal_CartaCorrecao(ref NotaFiscalSaidaViewModel notaFiscalSaida, string sDescricaoCorrecao)
         {
             bool ok = false;
 
@@ -362,6 +362,11 @@ namespace SisCom.Aplicacao.Classes
             {
                 var ret = Zeus.CartaCorrecao(notaFiscalSaida.CodigoChaveAcesso, Arquivo.CriarArquivoTexto(sDescricaoCorrecao, "cartacorrecao.txt"), notaFiscalSaida.NumeroLoteEnvioSefaz);
 
+                if ((ret.RetEvento != null) && (ret.RetEvento.InfEvento != null))
+                { notaFiscalSaida.RetornoCartaCorrecao = ret.RetEvento.InfEvento.XMotivo; }
+                else
+                { notaFiscalSaida.RetornoCartaCorrecao = ret.XMotivo; }
+
                 if (Fiscal_NFe_StatusProcessamento(ret.CStat.ToString()) == enOpcoes_NFe_StatusProcessamento.LoteEventoProcessado)
                 {
                     ok = true;
@@ -379,7 +384,7 @@ namespace SisCom.Aplicacao.Classes
         Sair:
             return ok;
         }
-        public static bool Fiscal_Cancelamento(NotaFiscalSaidaViewModel notaFiscalSaida, string sJustificativa, string Protocolo)
+        public static bool Fiscal_Cancelamento(ref NotaFiscalSaidaViewModel notaFiscalSaida, string sJustificativa, string Protocolo)
         {
             bool ok = false;
 
@@ -397,6 +402,11 @@ namespace SisCom.Aplicacao.Classes
             try
             {
                 var ret = Zeus.Cancelamento(notaFiscalSaida.CodigoChaveAcesso, Arquivo.CriarArquivoTexto(sJustificativa, "cancelamento.txt"), notaFiscalSaida.Protocolo, notaFiscalSaida.NumeroLoteEnvioSefaz);
+
+                if ((ret.RetEvento != null) && (ret.RetEvento.InfEvento != null))
+                { notaFiscalSaida.RetornoCartaCorrecao = ret.RetEvento.InfEvento.XMotivo; }
+                else
+                { notaFiscalSaida.RetornoCartaCorrecao = ret.XMotivo; }
 
                 if ((ret.CStat.ToString() == "101" /* Cancelamento de NF-e homologado */) || 
                     (ret.CStat.ToString() == "151" /* Cancelamento de NF - e homologado fora de prazo */))
@@ -2109,9 +2119,6 @@ namespace SisCom.Aplicacao.Classes
                         {
                             case 302:
                                 notaFiscalSaidaViewModel.Status = NF_Status.Denegada;
-                                break;
-                            default:
-                                notaFiscalSaidaViewModel.Status = NF_Status.Pendente;
                                 break;
                         }
                     }

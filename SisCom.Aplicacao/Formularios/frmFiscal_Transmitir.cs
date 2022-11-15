@@ -21,16 +21,17 @@ namespace SisCom.Aplicacao.Formularios
         const int gridNotaFiscalSaida_Id = 0;
         const int gridNotaFiscalSaida_Chk = 1;
         const int gridNotaFiscalSaida_Sinal = 2;
-        const int gridNotaFiscalSaida_Numero = 3;
-        const int gridNotaFiscalSaida_Destinatario = 4;
-        const int gridNotaFiscalSaida_CPF_CNPJ = 5;
-        const int gridNotaFiscalSaida_Status = 6;
-        const int gridNotaFiscalSaida_RetornoSefaz = 7;
-        const int gridNotaFiscalSaida_BTN_Transmitir = 8;
-        const int gridNotaFiscalSaida_BTN_EMail = 9;
-        const int gridNotaFiscalSaida_BTN_Cancelar = 10;
-        const int gridNotaFiscalSaida_BTN_CartaCorrecao = 11;
-        const int gridNotaFiscalSaida_ID_Status = 12;
+        const int gridNotaFiscalSaida_DataEmissao = 3;
+        const int gridNotaFiscalSaida_Numero = 4;
+        const int gridNotaFiscalSaida_Destinatario = 5;
+        const int gridNotaFiscalSaida_CPF_CNPJ = 6;
+        const int gridNotaFiscalSaida_Status = 7;
+        const int gridNotaFiscalSaida_RetornoSefaz = 8;
+        const int gridNotaFiscalSaida_BTN_Transmitir = 9;
+        const int gridNotaFiscalSaida_BTN_EMail = 10;
+        const int gridNotaFiscalSaida_BTN_Cancelar = 11;
+        const int gridNotaFiscalSaida_BTN_CartaCorrecao = 12;
+        const int gridNotaFiscalSaida_ID_Status = 13;
 
         public frmFiscal_Transmitir(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -54,7 +55,8 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "ID", "ID", Tamanho: 0);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "...", Grid_DataGridView.TipoColuna.CheckBox, Tamanho: 30, readOnly: false);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "", Tamanho: 30);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Número", Tamanho: 50);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Data de Emissão", Tamanho: 120);
+                Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Número", Tamanho: 60);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Destinatário", Tamanho: 300);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "CPF/CNPJ", Tamanho: 100);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "", "Status", Tamanho: 100);
@@ -65,7 +67,9 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "C. Correção", "C. Correção", Grid_DataGridView.TipoColuna.Button, 70);
                 Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalSaida, "ID_Status", "ID_Status", Tamanho: 0);
 
-                await Carregar(null, null, null);
+                comboStatusVenda.SelectedValue = NF_Status.Todos;
+
+                await Carregar(NF_Status.Todos, DateTime.Now.Date, DateTime.Now.Date);
             }
             catch (Exception Ex)
             {
@@ -91,7 +95,7 @@ namespace SisCom.Aplicacao.Formularios
                     DateTime dataF = (DateTime)dataFinal;
 
                     ret = await notaFiscalSaidaController.Pesquisar(order: o => o.DataEmissao,
-                                                predicate: p => (((statusId == null) || (p.Status == statusId)) && 
+                                                predicate: p => (((statusId == null) || (p.Status == statusId) || (statusId == NF_Status.Todos)) && 
                                                                  (p.DataEmissao.Date >= dataI.Date) &&
                                                                  (p.DataEmissao.Date <= dataF.Date)),
                                                 i => i.NaturezaOperacao, c => c.Cliente); ;
@@ -111,6 +115,8 @@ namespace SisCom.Aplicacao.Formularios
                         linha = Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscalSaida,
                                                                               new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Id,
                                                                                                                                               Valor = item.Id },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_DataEmissao,
+                                                                                                                                              Valor = item.DataEmissao },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Numero,
                                                                                                                                               Valor = item.NotaFiscal },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Status,
@@ -125,6 +131,8 @@ namespace SisCom.Aplicacao.Formularios
                         linha = Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscalSaida,
                                                                               new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Id,
                                                                                                                                               Valor = item.Id },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_DataEmissao,
+                                                                                                                                              Valor = item.DataEmissao },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Numero,
                                                                                                                                               Valor = item.NotaFiscal },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridNotaFiscalSaida_Destinatario,
@@ -186,12 +194,15 @@ namespace SisCom.Aplicacao.Formularios
                         }
                     }
 
+                    { Carregar((NF_Status?)comboStatusVenda.SelectedValue, dateDataVendaInicial.Value, dateDataVendaFinal.Value); }
+
                     break;
                 case gridNotaFiscalSaida_BTN_EMail:
                     break;
                 case gridNotaFiscalSaida_BTN_CartaCorrecao:
                 case gridNotaFiscalSaida_BTN_Cancelar:
                     Cancamento_CartaCorrecao(Guid.Parse(gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Id].Value.ToString()), e.ColumnIndex);
+                    { Carregar((NF_Status?)comboStatusVenda.SelectedValue, dateDataVendaInicial.Value, dateDataVendaFinal.Value); }
                     break;
             }
         }
