@@ -18,7 +18,7 @@ namespace SisCom.Aplicacao.Formularios
     public partial class frmCadastroEmpresas : FormMain
     {
         ViewModels.EmpresaViewModel empresa = null;
-        bool editado = false;
+        private bool editado = false;
         string serialNumber = "";
 
         public frmCadastroEmpresas(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
@@ -127,6 +127,7 @@ namespace SisCom.Aplicacao.Formularios
                 textNuvemFiscalCertificado.Text = Funcao.NuloParaString(empresa.NuvemFiscal_Certificado);
                 checkUtilizarNuvemFiscal.Checked = empresa.NuvemFiscal_Usar;
                 if (!Funcao.Nulo(empresa.MDFe_TipoEmirssor)) comboNuvemFiscalAmbienteWebService.SelectedValue = empresa.NuvemFiscal_AmbienteWebService;
+                textNuvemFiscalDiretorioXMLs.Text = Funcao.NuloParaString(empresa.PathDocumentoFiscal);
 
                 if (!Funcao.Nulo(empresa.Endereco.End_CidadeId)) Combo_ComboBox.ComboCidade_Carregar(this._serviceProvider,
                                                                                                      this._dbCtxFactory,
@@ -399,6 +400,7 @@ namespace SisCom.Aplicacao.Formularios
             empresa.NuvemFiscal_Certificado = Funcao.StringVazioParaNulo(textNuvemFiscalCertificado.Text);
             empresa.NuvemFiscal_Usar = checkUtilizarNuvemFiscal.Checked;
             if (Combo_ComboBox.Selecionado(comboNuvemFiscalAmbienteWebService)) { empresa.NuvemFiscal_AmbienteWebService = (AmbienteSistemas)comboNuvemFiscalAmbienteWebService.SelectedValue; } else { empresa.NuvemFiscal_AmbienteWebService = null; }
+            empresa.PathDocumentoFiscal = Funcao.StringVazioParaNulo(textNuvemFiscalDiretorioXMLs.Text);
 
             AdicionarEmpresa();
         }
@@ -431,6 +433,11 @@ namespace SisCom.Aplicacao.Formularios
             //        return;
             //    }
             //}
+        }
+
+        private void botaoNuvemFiscalDiretorioXMLs_Click(object sender, EventArgs e)
+        {
+            textNuvemFiscalDiretorioXMLs.Text = Arquivo.SelecionarDiretorio();
         }
     }
 }

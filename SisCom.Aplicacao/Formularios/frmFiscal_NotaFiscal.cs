@@ -177,10 +177,6 @@ namespace SisCom.Aplicacao.Formularios
                         { textNumeroNotaFiscalSaida.Text = (Convert.ToInt16(notaFiscalSaidaSerie.UltimaNotaFiscal) + 1).ToString(); }
 
                         textNumeroNotaFiscalSaida.Tag = textNumeroNotaFiscalSaida.Text;
-
-                        notaFiscalSaidaSerie.UltimaNotaFiscal = textNumeroNotaFiscalSaida.Text;
-
-                        await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerie.Id, notaFiscalSaidaSerie);
                     }
                 }
             }
@@ -760,7 +756,7 @@ namespace SisCom.Aplicacao.Formularios
                 textSerie.Text = Funcao.NuloParaString(notaFiscalSaida.Serie);
                 textInfoNFeNFeSubSerie.Text = Funcao.NuloParaString(notaFiscalSaida.SubSerie);
                 checkStatusCancelado.Checked = (notaFiscalSaida.Status == NF_Status.Cancelado);
-                checkStatusFinalizada.Checked = (notaFiscalSaida.Status == NF_Status.Finalizada);
+                checkStatusFinalizada.Checked = (notaFiscalSaida.Status == NF_Status.Transmitida);
                 checkStatusDenegada.Checked = (notaFiscalSaida.Status == NF_Status.Denegada);
                 checkStatusInutilizada.Checked = (notaFiscalSaida.Status == NF_Status.Inutilizada);
                 if (!Funcao.Nulo(notaFiscalSaida.ClienteId)) comboRemetente.SelectedValue = notaFiscalSaida.ClienteId;
@@ -1000,14 +996,23 @@ namespace SisCom.Aplicacao.Formularios
                 }
 
                 Editar(false);
-
-                botaoEditar.Enabled = ((notaFiscalSaida.Status == NF_Status.Pendente) || (notaFiscalSaida.Status == NF_Status.Finalizada));
-                botaoTransmitir.Enabled = ((notaFiscalSaida.Status == NF_Status.Pendente) || (notaFiscalSaida.Status == NF_Status.Finalizada));
-                botaoCancelar.Enabled = (notaFiscalSaida.Status != NF_Status.Cancelado);
             }
 
             CalcularMercadoriaPeso();
             CalcularMercadoriaImpostos();
+
+            if (notaFiscalSaida!= null)
+            {
+                botaoEditar.Enabled = ((notaFiscalSaida.Status == NF_Status.Pendente) || (notaFiscalSaida.Status == NF_Status.Finalizada));
+                botaoExportarNFe.Enabled = ((notaFiscalSaida.Status == NF_Status.Pendente) || (notaFiscalSaida.Status == NF_Status.Finalizada));
+                botaoCancelar.Enabled = (notaFiscalSaida.Status != NF_Status.Cancelado);
+            }
+            else
+            {
+                botaoEditar.Enabled = true;
+                botaoExportarNFe.Enabled = true;
+                botaoCancelar.Enabled = true;
+            }
 
             return true;
         }
@@ -1241,7 +1246,7 @@ namespace SisCom.Aplicacao.Formularios
             if (TentarGravar())
             {
                 await Navegar_PegarTodos(notaFiscalSaida.Id, posicao);
-                await CarregarDados();
+                await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
             }
         }
         private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.eNavegar Posicao)
@@ -1329,7 +1334,10 @@ namespace SisCom.Aplicacao.Formularios
             }
 
             if (notaFiscalSaida == null)
+            {
                 notaFiscalSaida = new ViewModels.NotaFiscalSaidaViewModel();
+                notaFiscalSaida.Status = NF_Status.Pendente;
+            }
 
             await CarregarNotaFiscal();
             await AdicionarNotaFiscalSaida(recarregar);
@@ -1356,7 +1364,6 @@ namespace SisCom.Aplicacao.Formularios
             notaFiscalSaida.Modelo = textModelo.Text;
             notaFiscalSaida.Serie = textInfoNFeNFeSerie.Text;
             notaFiscalSaida.SubSerie = textInfoNFeNFeSubSerie.Text;
-            notaFiscalSaida.Status = notaFiscalSaida.Status == NF_Status.Todos ? NF_Status.Pendente : notaFiscalSaida.Status;
             notaFiscalSaida.ClienteId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboRemetente);
             notaFiscalSaida.CNPJ_CPF = Texto.SomenteNumero(maskedRemetenteCPFCNPJ.Text);
             notaFiscalSaida.IE = textRemetenteIE.Text;
@@ -1578,16 +1585,13 @@ namespace SisCom.Aplicacao.Formularios
 
                 try
                 {
-                    if (Convert.ToInt32(textNumeroNotaFiscalSaida.Text) > Convert.ToInt32(textNumeroNotaFiscalSaida.Tag))
+                    using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
                     {
-                        using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
-                        {
-                            var notaFiscalSaidaSerie = (await notaFiscalSaidaSerieController.PesquisarSerie(textSerie.Text)).FirstOrDefault();
+                        var notaFiscalSaidaSerie = (await notaFiscalSaidaSerieController.PesquisarSerie(textSerie.Text)).FirstOrDefault();
 
-                            notaFiscalSaidaSerie.UltimaNotaFiscal = textNumeroNotaFiscalSaida.Text;
+                        notaFiscalSaidaSerie.UltimaNotaFiscal = textNumeroNotaFiscalSaida.Text;
 
-                            await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerie.Id, notaFiscalSaidaSerie);
-                        }
+                        await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerie.Id, notaFiscalSaidaSerie);
                     }
                 }
                 catch (Exception)
@@ -1605,7 +1609,7 @@ namespace SisCom.Aplicacao.Formularios
             VendaId = Guid.Empty;
 
             if (recarregar)
-            await CarregarDados();
+            await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
             this.MeuDbContextDispose();
         }
@@ -1914,8 +1918,14 @@ namespace SisCom.Aplicacao.Formularios
 
         private void botaoTransmitir_Click(object sender, EventArgs e)
         {
+            Transmitir();
+        }
+        async Task Transmitir()
+        {
             var form = this.ServiceProvider().GetRequiredService<frmFiscal_Transmitir>();
             form.ShowDialog(this);
+
+            await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
         }
 
         private async void botaoClonarNFe_Click(object sender, EventArgs e)
@@ -1969,7 +1979,7 @@ namespace SisCom.Aplicacao.Formularios
                 notaFiscalSaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == _notaFiscalSaida.Id)).FirstOrDefault();
             }
 
-            await CarregarDados();
+            await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
             CaixaMensagem.Informacao("Nota Fiscal Clonada");
         }

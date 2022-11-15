@@ -28,6 +28,7 @@ namespace SisCom.Entidade.Modelos
         public NFE_Layout? NFE_Layout { get; set; }
         public string? NFE_Serie { get; set; }
         public string? PathLogomarca { get; set; }
+        public string? PathDocumentoFiscal { get; set; }
         public byte[]? ImagemLogomarca { get; set; }
         public Sped_TipoGeracaoInventario? Sped_TipoGeracaoInventario { get; set; }
         public string? MDFe_Serie { get; set; }

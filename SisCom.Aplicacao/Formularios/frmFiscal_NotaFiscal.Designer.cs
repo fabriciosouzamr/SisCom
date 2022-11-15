@@ -849,6 +849,11 @@
             // numericVolumeTransportadosNumero
             // 
             this.numericVolumeTransportadosNumero.Location = new System.Drawing.Point(355, 395);
+            this.numericVolumeTransportadosNumero.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
             this.numericVolumeTransportadosNumero.Name = "numericVolumeTransportadosNumero";
             this.numericVolumeTransportadosNumero.Size = new System.Drawing.Size(100, 23);
             this.numericVolumeTransportadosNumero.TabIndex = 155;
@@ -894,7 +899,7 @@
             this.numericVolumeTransportadosPesoLiquido.DecimalPlaces = 2;
             this.numericVolumeTransportadosPesoLiquido.Location = new System.Drawing.Point(959, 395);
             this.numericVolumeTransportadosPesoLiquido.Maximum = new decimal(new int[] {
-            1000000,
+            100000000,
             0,
             0,
             0});
@@ -917,7 +922,7 @@
             this.numericVolumeTransportadosPesoBruto.DecimalPlaces = 2;
             this.numericVolumeTransportadosPesoBruto.Location = new System.Drawing.Point(671, 395);
             this.numericVolumeTransportadosPesoBruto.Maximum = new decimal(new int[] {
-            1000000,
+            100000000,
             0,
             0,
             0});
@@ -938,6 +943,11 @@
             // numericVolumeTransportadosQuantidade
             // 
             this.numericVolumeTransportadosQuantidade.Location = new System.Drawing.Point(355, 372);
+            this.numericVolumeTransportadosQuantidade.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
             this.numericVolumeTransportadosQuantidade.Name = "numericVolumeTransportadosQuantidade";
             this.numericVolumeTransportadosQuantidade.Size = new System.Drawing.Size(100, 23);
             this.numericVolumeTransportadosQuantidade.TabIndex = 145;

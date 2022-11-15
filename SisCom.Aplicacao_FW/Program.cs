@@ -2,7 +2,6 @@
 using DFe.Classes.Extensoes;
 using DFe.Utils;
 using NFe.Classes;
-using NFe.Classes.Informacoes;
 using NFe.Classes.Informacoes.Identificacao.Tipos;
 using NFe.Classes.Servicos.Tipos;
 using NFe.Servicos;
@@ -13,18 +12,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using static System.Windows.Forms.AxHost;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 using NFeZeus = NFe.Classes.NFe;
 
 namespace SisCom.Aplicacao_FW
 {
     internal static class Program
     {
-        /// <summary>
-        /// Ponto de entrada principal para o aplicativo.
-        /// </summary>
-        /// 
         class cResNF
         {
             public string chNFe { get; set; }
@@ -91,9 +84,6 @@ namespace SisCom.Aplicacao_FW
                     _cnpj = args[2];
                     if ((!String.IsNullOrEmpty(args[3])) && (args[3] != "''")) { _nsu = args[3]; }
                     _NuvemFiscal_SerialNumber = args[4];
-
-                    System.IO.DirectoryInfo di = new DirectoryInfo(_PATH_NUVEMFISCAL);
-
                     NuvemFiscal(_EnderecoEmitente_UF, _cnpj, _nsu, _chnfe);
 
                     break;
@@ -389,7 +379,6 @@ namespace SisCom.Aplicacao_FW
             oConfig.tpAmb = DFe.Classes.Flags.TipoAmbiente.Producao;
             oConfig.tpEmis = TipoEmissao.teNormal;
             oConfig.ProtocoloDeSeguranca = ServicePointManager.SecurityProtocol;
-
             oConfig.Certificado = new ConfiguracaoCertificado();
 
             switch (tipoCertificado)
