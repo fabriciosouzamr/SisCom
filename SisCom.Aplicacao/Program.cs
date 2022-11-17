@@ -13,7 +13,7 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
 

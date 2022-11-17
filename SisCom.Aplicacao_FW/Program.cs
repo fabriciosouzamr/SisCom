@@ -3,6 +3,7 @@ using DFe.Classes.Extensoes;
 using DFe.Utils;
 using NFe.Classes;
 using NFe.Classes.Informacoes.Identificacao.Tipos;
+using NFe.Classes.Servicos.DistribuicaoDFe.Schemas;
 using NFe.Classes.Servicos.Tipos;
 using NFe.Servicos;
 using NFe.Utils;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+using nfeProc = NFe.Classes.nfeProc;
 using NFeZeus = NFe.Classes.NFe;
 
 namespace SisCom.Aplicacao_FW
@@ -46,6 +48,7 @@ namespace SisCom.Aplicacao_FW
         static string _TXT = "";
         static string _PATH_SCHEMAS = "";
         static string _PATH_NUVEMFISCAL = "";
+        static string _PATH_DOCFISCAL = "";
         static string _nFeTipoEvento = "";
         static string _protocoloAutorizacao = "";
         static int _lote = 0;
@@ -64,6 +67,11 @@ namespace SisCom.Aplicacao_FW
 
             _PATH_SCHEMAS = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
             _PATH_NUVEMFISCAL = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
+
+            if (String.IsNullOrEmpty(Properties.Settings.Default.PathDocumentoFiscal))
+            { _PATH_DOCFISCAL = _PATH_NUVEMFISCAL; }
+            else
+            { _PATH_DOCFISCAL = Properties.Settings.Default.PathDocumentoFiscal; }
 
             _Operacao = args[0];
 
@@ -161,8 +169,20 @@ namespace SisCom.Aplicacao_FW
         {
             try
             {
-                var servicoNFe = new ServicosNFe(Configuracao());
                 var oNFe = new NFe.Classes.NFe().CarregarDeArquivoXml(_XML.Replace("'", ""));
+
+                if (oNFe.infNFe.emit.CNPJ.Length == 13)
+                { _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\Enviados\\0" + oNFe.infNFe.emit.CNPJ; }
+                else
+                { _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\Enviados\\" + oNFe.infNFe.emit.CNPJ; }
+
+                _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + oNFe.infNFe.ide.dhEmi.Year + "\\" + oNFe.infNFe.ide.dhEmi.Month.ToString("00") + "\\" + oNFe.infNFe.ide.dhEmi.Day.ToString("00");
+
+                if (!Directory.Exists(_PATH_DOCFISCAL)) Directory.CreateDirectory(_PATH_DOCFISCAL);
+
+                _PATH_NUVEMFISCAL = _PATH_DOCFISCAL;
+
+                var servicoNFe = new ServicosNFe(Configuracao());
                 var sNFe_Chave = oNFe.infNFe.Id.Substring(3);
                 string retorno = "";
                 string mensagem = "Sem protocolo";
@@ -268,6 +288,15 @@ namespace SisCom.Aplicacao_FW
                 }
                 else
                 {
+                    NFe.Classes.nfeProc oNFe_Proc;
+                    oNFe_Proc = new nfeProc();
+                    oNFe_Proc.NFe = oNFe;
+                    oNFe_Proc.protNFe = new NFe.Classes.Protocolo.protNFe();
+                    oNFe_Proc.protNFe = retornoConsulta.Retorno.protNFe;
+                    oNFe_Proc.versao = retornoConsulta.Retorno.versao;
+                    var sNFe_Arquivo = Path.Combine(_PATH_NUVEMFISCAL, sNFe_Chave + "-procNfe.xml");
+                    FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, sNFe_Arquivo);
+
                     cStat = retornoConsulta.Retorno.cStat.ToString();
                     mensagem = retornoConsulta.Retorno.xMotivo;
                     retorno = retornoConsulta.RetornoStr;

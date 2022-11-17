@@ -1,21 +1,10 @@
-﻿using DFe.Classes.Entidades;
-using DFe.Classes.Extensoes;
-using DFe.Utils;
-using Funcoes._Enum;
-using NFe.Classes.Informacoes.Identificacao.Tipos;
-using NFe.Classes.Servicos.Tipos;
-using NFe.Servicos;
-using NFe.Servicos.Retorno;
-using NFe.Utils;
+﻿using Funcoes._Enum;
 using NFe.Utils.NFe;
 using NFe.Utils.Tributacao.Estadual;
 using NFe.Utils.Tributacao.Federal;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IdentityModel.Tokens.Jwt;
 using System.IO;
-using System.Net;
 using System.Xml.Serialization;
 
 namespace SisCom.Aplicacao.Classes
@@ -78,44 +67,30 @@ namespace SisCom.Aplicacao.Classes
     [XmlRoot(ElementName = "retEnvEvento")]
     public class RetEnvEvento
     {
-
         [XmlElement(ElementName = "idLote")]
         public int IdLote { get; set; }
-
         [XmlElement(ElementName = "tpAmb")]
         public int TpAmb { get; set; }
-
         [XmlElement(ElementName = "verAplic")]
         public string VerAplic { get; set; }
-
         [XmlElement(ElementName = "cOrgao")]
         public int COrgao { get; set; }
-
         [XmlElement(ElementName = "cStat")]
         public int CStat { get; set; }
-
         [XmlElement(ElementName = "xMotivo")]
         public string XMotivo { get; set; }
-
         [XmlElement(ElementName = "retEvento")]
         public RetEvento RetEvento { get; set; }
     }
 
     public class retDistDFeInt
     {
-
         public int tpAmb { get; set; }
-
         public string verAplic { get; set; }
-
         public int cStat { get; set; }
-
         public string xMotivo { get; set; }
-
         public string dhResp { get; set; }
-
         public int ultNSU { get; set; }
-
         public int maxNSU { get; set; }
     }
 

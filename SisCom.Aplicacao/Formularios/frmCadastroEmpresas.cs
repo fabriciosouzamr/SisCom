@@ -2,6 +2,7 @@
 using Funcoes._Enum;
 using Funcoes.Classes;
 using Funcoes.Interfaces;
+using NFe.Classes.Informacoes.Detalhe.DeclaracaoImportacao;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
@@ -9,9 +10,12 @@ using SisCom.Entidade.Enum;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SisCom.Aplicacao.Formularios
 {
@@ -128,6 +132,7 @@ namespace SisCom.Aplicacao.Formularios
                 checkUtilizarNuvemFiscal.Checked = empresa.NuvemFiscal_Usar;
                 if (!Funcao.Nulo(empresa.MDFe_TipoEmirssor)) comboNuvemFiscalAmbienteWebService.SelectedValue = empresa.NuvemFiscal_AmbienteWebService;
                 textNuvemFiscalDiretorioXMLs.Text = Funcao.NuloParaString(empresa.PathDocumentoFiscal);
+                if (!Funcao.Nulo(empresa.PathDocumentoFiscal)) textNuvemFiscalDiretorioXMLs.Text = empresa.PathDocumentoFiscal;
 
                 if (!Funcao.Nulo(empresa.Endereco.End_CidadeId)) Combo_ComboBox.ComboCidade_Carregar(this._serviceProvider,
                                                                                                      this._dbCtxFactory,
@@ -214,6 +219,7 @@ namespace SisCom.Aplicacao.Formularios
                 Declaracoes.dados_Empresa_EstadoId = empresa.Endereco.End_Cidade.EstadoId;
                 Declaracoes.dados_Empresa_CodigoEstado = empresa.Endereco.End_Cidade.Estado.Codigo;
                 Declaracoes.dados_Empresa_SerialNumber = empresa.NuvemFiscal_SerialNumber;
+                Declaracoes.dados_Path_DocumentoFiscal = empresa.PathDocumentoFiscal;
                 Declaracoes.dados_Empresa_CNPJ = empresa.CNPJ;
                 if (empresa.RegimeTributario != null)
                 Declaracoes.dados_Empresa_RegimeTributario = (RegimeTributario)empresa.RegimeTributario;
@@ -403,6 +409,18 @@ namespace SisCom.Aplicacao.Formularios
             empresa.PathDocumentoFiscal = Funcao.StringVazioParaNulo(textNuvemFiscalDiretorioXMLs.Text);
 
             AdicionarEmpresa();
+
+            var config = ConfigurationManager.OpenExeConfiguration(Declaracoes.externos_SisCom_Aplicacao_FW);
+            string diretorioXMLs = "<SisCom.Aplicacao_FW.Properties.Settings><setting name=\"PathDocumentoFiscal\" serializeAs=\"String\"><value>" + textNuvemFiscalDiretorioXMLs.Text + "X</value></setting></SisCom.Aplicacao_FW.Properties.Settings>";
+
+            var data = File.ReadAllText(config.FilePath);
+            data = data.Replace(data.Substring(data.IndexOf("<SisCom.Aplicacao_FW.Properties.Settings>"), data.IndexOf("</SisCom.Aplicacao_FW.Properties.Settings>") - 
+                                                                                                          data.IndexOf("<SisCom.Aplicacao_FW.Properties.Settings>") + 
+                                                                                                          ("</SisCom.Aplicacao_FW.Properties.Settings>").Length), diretorioXMLs);
+
+            StreamWriter sw = new StreamWriter(config.FilePath);
+            sw.WriteLine(data);
+            sw.Close();
         }
         private void botaoUnidadeAtivo_Click(object sender, EventArgs e)
         {

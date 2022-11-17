@@ -58,6 +58,8 @@ namespace SisCom.Aplicacao.Formularios
                             Declaracoes.dados_Empresa_CNPJ = empresa.CNPJ;
                             if (empresa.RegimeTributario != null)
                                 Declaracoes.dados_Empresa_RegimeTributario = (RegimeTributario)empresa.RegimeTributario;
+                            if (!String.IsNullOrEmpty(empresa.PathDocumentoFiscal))
+                                Declaracoes.dados_Path_DocumentoFiscal = empresa.PathDocumentoFiscal;
                         }
                     }
                 }

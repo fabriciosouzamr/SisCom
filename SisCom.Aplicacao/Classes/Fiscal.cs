@@ -40,6 +40,7 @@ using SisCom.Aplicacao.Controllers;
 using Funcoes.Interfaces;
 using SisCom.Infraestrutura.Data.Context;
 using System.Windows.Forms;
+using SisCom.Infraestrutura.Migrations;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -2161,38 +2162,57 @@ namespace SisCom.Aplicacao.Classes
             string sCD_NFCe_Token_ID = "";
             string sCD_NFCe_Token_CSC = "";
             bool bOk = false;
+            string _PATH_DOCFISCAL = "";
 
             try
             {
-                oConfig = Fiscal_Configuracao(eModeloDocumento);
-                if (oConfig == null)
-                    goto Sair;
+                if (notaFiscalSaidaViewModel.Empresa.CNPJ.Length == 13)
+                { _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\Enviados\\0" + notaFiscalSaidaViewModel.Empresa.CNPJ; }
+                else
+                { _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\Enviados\\" + notaFiscalSaidaViewModel.Empresa.CNPJ; }
 
-                Fiscal_Historico(0, 0, "Início de transmissão");
-
-                oNFe = Fiscal_DocumentoFiscal_Gerar(ref notaFiscalSaidaViewModel,
-                                                    ref notaFiscalSaidaMercadoriaViewModels,
-                                                    ref notaFiscalSaidaPagamentoViewModels,
-                                                    ref notaFiscalSaidaReferenciaViewModels,
-                                                    ref notaFiscalSaidaSerieViewModel,
-                                                    oConfig,
-                                                    ref sCD_NFCe_DetalheVendaNormal,
-                                                    ref sCD_NFCe_DetalheVendaContigencia,
-                                                    ref sCD_NFCe_Token_ID,
-                                                    ref sCD_NFCe_Token_CSC);
-
-                if (oNFe != null)
+                if (notaFiscalSaidaViewModel.DataTransmissao != null)
                 {
-                    //if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.CodigoChaveAcesso))
-                    //{
-                    //    oNFe_Proc = Fiscal_DocumentoFiscal_AssociarProtocolo(oConfig, oNFe, notaFiscalSaidaViewModel.CodigoChaveAcesso);
-                    //    oNFe = oNFe_Proc.NFe;
-                    //}
+                    DateTime dataTransmissao = (DateTime)notaFiscalSaidaViewModel.DataTransmissao;
 
-                    GerarDanfe(oNFe.ObterXmlString(), imprimirCancelado, true);
+                    _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + dataTransmissao.Year + "\\" + dataTransmissao.Month.ToString("00") + "\\" + dataTransmissao.Day.ToString("00");
+                }
+
+                _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + notaFiscalSaidaViewModel.CodigoChaveAcesso + "-procNfe.xml";
+                _PATH_DOCFISCAL = Declaracoes.dados_Path_DocumentoFiscal + "\\" + _PATH_DOCFISCAL;
+                _PATH_DOCFISCAL = _PATH_DOCFISCAL.Replace("\\\\", "\\");
+
+                if (File.Exists(_PATH_DOCFISCAL))
+                {
+                    var data = File.ReadAllText(_PATH_DOCFISCAL);
+                    GerarDanfe(data, imprimirCancelado, true);
                 }
                 else
-                    goto Sair;
+                {
+                    oConfig = Fiscal_Configuracao(eModeloDocumento);
+                    if (oConfig == null)
+                        goto Sair;
+
+                    Fiscal_Historico(0, 0, "Início de transmissão");
+
+                    oNFe = Fiscal_DocumentoFiscal_Gerar(ref notaFiscalSaidaViewModel,
+                                                        ref notaFiscalSaidaMercadoriaViewModels,
+                                                        ref notaFiscalSaidaPagamentoViewModels,
+                                                        ref notaFiscalSaidaReferenciaViewModels,
+                                                        ref notaFiscalSaidaSerieViewModel,
+                                                        oConfig,
+                                                        ref sCD_NFCe_DetalheVendaNormal,
+                                                        ref sCD_NFCe_DetalheVendaContigencia,
+                                                        ref sCD_NFCe_Token_ID,
+                                                        ref sCD_NFCe_Token_CSC);
+
+                    if (oNFe != null)
+                    {
+                        GerarDanfe(oNFe.ObterXmlString(), imprimirCancelado, true);
+                    }
+                    else
+                        goto Sair;
+                }
             }
             catch (Exception ex)
             {
