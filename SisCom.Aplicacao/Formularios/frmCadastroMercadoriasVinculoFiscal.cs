@@ -90,11 +90,11 @@ namespace SisCom.Aplicacao.Formularios
             numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosEstaduais.Value = 0;
             numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosTotal.Value = 0;
             //Mercadorias
-            Grid_DataGridView.DataGridView_Formatar(gridMercadorias);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadorias, "Código", "Codigo");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadorias, "Referência", "Referencia");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridMercadorias, "Mercadoria", "Mercadoria");
-            Grid_DataGridView.DataGridView_Formatar(gridMercadorias);
+            Grid_DataGridView.User_Formatar(gridMercadorias);
+            Grid_DataGridView.User_ColunaAdicionar(gridMercadorias, "Código", "Codigo");
+            Grid_DataGridView.User_ColunaAdicionar(gridMercadorias, "Referência", "Referencia");
+            Grid_DataGridView.User_ColunaAdicionar(gridMercadorias, "Mercadoria", "Mercadoria");
+            Grid_DataGridView.User_Formatar(gridMercadorias);
             //Produção
         }
         #endregion

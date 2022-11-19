@@ -40,16 +40,16 @@ public static class Grid_DataGridView
         public FormatoColuna Formato;
     }
 
-    public static void DataGridView_Formatar(DataGridView Grid,
-                                             bool AllowUserToAddRows = false,
-                                             bool AllowUserToDeleteRows = false)
+    public static void User_Formatar(this DataGridView Grid,
+                                     bool AllowUserToAddRows = false,
+                                     bool AllowUserToDeleteRows = false)
     {
         Grid.AllowUserToAddRows = AllowUserToAddRows;
         Grid.AllowUserToDeleteRows = AllowUserToDeleteRows;
         Grid.Rows.Clear();
     }
 
-    public static void DataGridView_DataSource(DataGridView Grid, object dataSource, bool  allowNew)
+    public static void User_DataSource(this DataGridView Grid, object dataSource, bool  allowNew)
     {
         BindingSource binding = new BindingSource();
         binding.DataSource = dataSource;
@@ -61,8 +61,8 @@ public static class Grid_DataGridView
         dataSource = null;
     }
 
-    public static decimal DataGridView_CalcularColunaValor(DataGridView Grid,
-                                                          int IndiceColuna)
+    public static decimal User_CalcularColunaValor(this DataGridView Grid,
+                                                   int IndiceColuna)
     {
         decimal Valor = 0;
 
@@ -74,8 +74,7 @@ public static class Grid_DataGridView
         return Valor;
     }
 
-    public static double DataGridView_CalcularColuna(DataGridView Grid,
-                                                     int IndiceColuna)
+    public static double User_CalcularColuna(this DataGridView Grid, int IndiceColuna)
     {
         double Valor = 0;
 
@@ -86,8 +85,7 @@ public static class Grid_DataGridView
 
         return Valor;
     }
-    public static int DataGridView_QuantidadeLinha(DataGridView Grid,
-                                                  int IndiceColuna)
+    public static int User_QuantidadeLinha(this DataGridView Grid, int IndiceColuna)
     {
         int iQuantidade = 0;
 
@@ -102,25 +100,13 @@ public static class Grid_DataGridView
         return iQuantidade;
     }
 
-    private static DataGridViewColumn DataGridView_ColunaCriar(DataGridView Grid,
-                                                               string Nome,
-                                                               string Titulo,
-                                                               TipoColuna Tipo = TipoColuna.Texto,
-                                                               int Tamanho = 100,
-                                                               int Caracteres = 0,
-                                                               object dataSource = null,
-                                                               string dataSource_Descricao = "",
-                                                               string dataSource_Valor = "",
-                                                               int dropDownWidth = 0)
+    private static DataGridViewColumn User_ColunaCriar(this DataGridView Grid, string Nome, string Titulo, TipoColuna Tipo = TipoColuna.Texto, int Tamanho = 100, int Caracteres = 0, object dataSource = null,
+                                                       string dataSource_Descricao = "", string dataSource_Valor = "", int dropDownWidth = 0)
 
     {
         switch (Tipo)
         {
             case TipoColuna.Texto:
-            case TipoColuna.Valor:
-            case TipoColuna.Numero:
-            case TipoColuna.Data:
-            case TipoColuna.Percentual:
                 {
                     DataGridViewTextBoxColumn Coluna = new DataGridViewTextBoxColumn();
 
@@ -128,7 +114,16 @@ public static class Grid_DataGridView
                     {
                         Coluna.MaxInputLength = Caracteres;
                     }
- 
+
+                    return Coluna;
+                }
+            case TipoColuna.Valor:
+            case TipoColuna.Numero:
+            case TipoColuna.Data:
+            case TipoColuna.Percentual:
+                {
+                    DataGridViewTextBoxColumn Coluna = new DataGridViewTextBoxColumn();
+
                     return Coluna;
                 }
             case TipoColuna.ComboBox:
@@ -167,30 +162,19 @@ public static class Grid_DataGridView
         }
     }
 
-    public static DataGridViewColumn DataGridView_ColunaAdicionar(DataGridView Grid,
-                                                                  string Nome,
-                                                                  string Titulo,
-                                                                  TipoColuna Tipo = TipoColuna.Texto,
-                                                                  int Tamanho = 100,
-                                                                  int Caracteres = 0,
-                                                                  object dataSource = null,
-                                                                  string dataSource_Descricao = "",
-                                                                  string dataSource_Valor = "",
-                                                                  bool readOnly = true,
-                                                                  bool wordWrap = false,
-                                                                  int dropDownWidth = 0,
-                                                                  DataGridViewContentAlignment alinhamento = DataGridViewContentAlignment.NotSet)
+    public static DataGridViewColumn User_ColunaAdicionar(DataGridView Grid, string Nome, string Titulo, TipoColuna Tipo = TipoColuna.Texto, int Tamanho = 100, int Caracteres = 0, object dataSource = null, string                                                                 dataSource_Descricao = "", string dataSource_Valor = "", bool readOnly = true, bool wordWrap = false, int dropDownWidth = 0,
+                                                          DataGridViewContentAlignment alinhamento = DataGridViewContentAlignment.NotSet)
     {
-        DataGridViewColumn Coluna = DataGridView_ColunaCriar(Grid,
-                                                             Nome,
-                                                             Titulo,
-                                                             Tipo,
-                                                             Tamanho,
-                                                             Caracteres,
-                                                             dataSource,
-                                                             dataSource_Descricao,
-                                                             dataSource_Valor, 
-                                                             dropDownWidth);
+        DataGridViewColumn Coluna = User_ColunaCriar(Grid,
+                                                     Nome,
+                                                     Titulo,
+                                                     Tipo,
+                                                     Tamanho,
+                                                     Caracteres,
+                                                     dataSource,
+                                                     dataSource_Descricao,
+                                                     dataSource_Valor, 
+                                                     dropDownWidth);
 
         Coluna.Name = Nome;
         Coluna.HeaderText = Titulo;
@@ -200,15 +184,17 @@ public static class Grid_DataGridView
         switch (Tipo)
         {
             case TipoColuna.Valor:
-                Coluna.DefaultCellStyle.Format = "c2";
+                Coluna.DefaultCellStyle.Format = "C";
+                Coluna.DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("pt-BR");
                 Coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 Coluna.ValueType = typeof(decimal);
                 break;
             case TipoColuna.Numero:
             case TipoColuna.Percentual:
                 Coluna.DefaultCellStyle.Format = "N2";
+                Coluna.DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("pt-BR");
                 Coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                Coluna.ValueType = typeof(int);
+                Coluna.ValueType = typeof(double);
                 break;
             case TipoColuna.Data:
                 Coluna.ValueType = typeof(DateTime);
@@ -234,17 +220,17 @@ public static class Grid_DataGridView
         return Coluna;
     }
 
-    public static void DataGridView_CelularAlimentar(DataGridView grid, int linha, int coluna, object valor)
+    public static void User_CelularAlimentar(this DataGridView grid, int linha, int coluna, object valor)
     {
         grid.Rows[linha].Cells[coluna].Value = valor;
     }
 
-    public static void DataGridView_LinhaLimpar(DataGridView grid)
+    public static void User_LinhaLimpar(this DataGridView grid)
     {
         grid.Rows.Clear();
     }
 
-    public static int DataGridView_Linhas(DataGridView grid, int coluna)
+    public static int User_Linhas(this DataGridView grid, int coluna)
     {
         int iCont = 0;
 
@@ -257,7 +243,7 @@ public static class Grid_DataGridView
         return iCont;
     }
 
-    public static DataGridViewRow DataGridView_LinhaAdicionar(DataGridView grid, Coluna[] valores)
+    public static DataGridViewRow User_LinhaAdicionar(this DataGridView grid, Coluna[] valores)
     {
         int linha = grid.Rows.Add();
 
@@ -291,21 +277,21 @@ public static class Grid_DataGridView
                         break;
                 }
 
-                DataGridView_CelularAlimentar(grid, linha, coluna.Indice, valor);
+                User_CelularAlimentar(grid, linha, coluna.Indice, valor);
             }
         }
 
         return grid.Rows[linha];
     }
 
-    public static void DataGridView_Carregar(DataGridView Grid, IRepository<Entity> Repository)
+    public static void User_Carregar(this DataGridView Grid, IRepository<Entity> Repository)
     {
         Grid.DataSource = Repository.GetAll();
     }
 
-    public static void DataGridView_KeyPress(object sender, KeyPressEventArgs e)
+    public static void User_KeyPress(object sender, KeyPressEventArgs e)
     {
-        if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+        if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
         {
             e.Handled = true;
         }

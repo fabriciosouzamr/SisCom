@@ -20,10 +20,10 @@ namespace SisCom.Aplicacao.Formularios
 
         private void Inicializar()
         {
-            Grid_DataGridView.DataGridView_Formatar(gridNCM);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNCM, "Descricao", "Descrição");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNCM, "CST", "CST");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNCM, "CSTEquivalente", "CST Equivalente", Grid_DataGridView.TipoColuna.ComboBox);
+            Grid_DataGridView.User_Formatar(gridNCM);
+            Grid_DataGridView.User_ColunaAdicionar(gridNCM, "Descricao", "Descrição");
+            Grid_DataGridView.User_ColunaAdicionar(gridNCM, "CST", "CST");
+            Grid_DataGridView.User_ColunaAdicionar(gridNCM, "CSTEquivalente", "CST Equivalente", Grid_DataGridView.TipoColuna.ComboBox);
         }
 
         private void botaoFechar_Click(object sender, EventArgs e)

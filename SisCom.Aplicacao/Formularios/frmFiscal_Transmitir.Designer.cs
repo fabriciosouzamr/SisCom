@@ -82,6 +82,8 @@
             this.botaoMarcarTodos = new System.Windows.Forms.Button();
             this.gridNotaFiscalSaida = new System.Windows.Forms.DataGridView();
             this.labelValidade = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.botaoTransmitirXML = new System.Windows.Forms.Button();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -98,12 +100,14 @@
             this.pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
             this.pnlMenuBotao.Name = "pnlMenuBotao";
-            this.pnlMenuBotao.Size = new System.Drawing.Size(1253, 83);
+            this.pnlMenuBotao.Size = new System.Drawing.Size(1317, 83);
             this.pnlMenuBotao.TabIndex = 14;
             // 
             // pnlMenuBotaoBotao
             // 
             this.pnlMenuBotaoBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.pnlMenuBotaoBotao.Controls.Add(this.label21);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoTransmitirXML);
             this.pnlMenuBotaoBotao.Controls.Add(this.label20);
             this.pnlMenuBotaoBotao.Controls.Add(this.label19);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoCartaCorrecaoNota);
@@ -122,9 +126,9 @@
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoImprimirNota);
             this.pnlMenuBotaoBotao.Controls.Add(this.label7);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoFechar);
-            this.pnlMenuBotaoBotao.Location = new System.Drawing.Point(590, 0);
+            this.pnlMenuBotaoBotao.Location = new System.Drawing.Point(656, 0);
             this.pnlMenuBotaoBotao.Name = "pnlMenuBotaoBotao";
-            this.pnlMenuBotaoBotao.Size = new System.Drawing.Size(651, 83);
+            this.pnlMenuBotaoBotao.Size = new System.Drawing.Size(649, 83);
             this.pnlMenuBotaoBotao.TabIndex = 2;
             // 
             // label20
@@ -308,7 +312,7 @@
             // 
             this.panel2.Controls.Add(this.panelStatusServico);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Location = new System.Drawing.Point(1057, 83);
+            this.panel2.Location = new System.Drawing.Point(1121, 83);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(184, 26);
             this.panel2.TabIndex = 16;
@@ -551,7 +555,7 @@
             // botaoAplicarFiltros
             // 
             this.botaoAplicarFiltros.Image = ((System.Drawing.Image)(resources.GetObject("botaoAplicarFiltros.Image")));
-            this.botaoAplicarFiltros.Location = new System.Drawing.Point(1141, 5);
+            this.botaoAplicarFiltros.Location = new System.Drawing.Point(1205, 5);
             this.botaoAplicarFiltros.Name = "botaoAplicarFiltros";
             this.botaoAplicarFiltros.Size = new System.Drawing.Size(100, 45);
             this.botaoAplicarFiltros.TabIndex = 98;
@@ -562,7 +566,7 @@
             // botaoLimparFiltros
             // 
             this.botaoLimparFiltros.Image = ((System.Drawing.Image)(resources.GetObject("botaoLimparFiltros.Image")));
-            this.botaoLimparFiltros.Location = new System.Drawing.Point(1141, 54);
+            this.botaoLimparFiltros.Location = new System.Drawing.Point(1205, 54);
             this.botaoLimparFiltros.Name = "botaoLimparFiltros";
             this.botaoLimparFiltros.Size = new System.Drawing.Size(100, 45);
             this.botaoLimparFiltros.TabIndex = 99;
@@ -585,7 +589,7 @@
             this.panel3.Controls.Add(this.label5);
             this.panel3.Location = new System.Drawing.Point(0, 113);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1250, 104);
+            this.panel3.Size = new System.Drawing.Size(1314, 104);
             this.panel3.TabIndex = 18;
             // 
             // botaoDesmarcarTodos
@@ -617,7 +621,7 @@
             this.gridNotaFiscalSaida.Name = "gridNotaFiscalSaida";
             this.gridNotaFiscalSaida.RowHeadersWidth = 51;
             this.gridNotaFiscalSaida.RowTemplate.Height = 25;
-            this.gridNotaFiscalSaida.Size = new System.Drawing.Size(1250, 343);
+            this.gridNotaFiscalSaida.Size = new System.Drawing.Size(1314, 343);
             this.gridNotaFiscalSaida.TabIndex = 17;
             this.gridNotaFiscalSaida.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscalSaida_CellClick);
             this.gridNotaFiscalSaida.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNotaFiscalSaida_CellDoubleClick);
@@ -632,11 +636,31 @@
             this.labelValidade.Tag = "Validade do Certificado:";
             this.labelValidade.Text = "Validade do Certificado:";
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label21.Location = new System.Drawing.Point(14, 56);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(46, 24);
+            this.label21.TabIndex = 78;
+            this.label21.Text = "Transmitir\r\nXML";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoTransmitirXML
+            // 
+            this.botaoTransmitirXML.Location = new System.Drawing.Point(11, 0);
+            this.botaoTransmitirXML.Name = "botaoTransmitirXML";
+            this.botaoTransmitirXML.Size = new System.Drawing.Size(53, 56);
+            this.botaoTransmitirXML.TabIndex = 77;
+            this.botaoTransmitirXML.UseVisualStyleBackColor = true;
+            this.botaoTransmitirXML.Click += new System.EventHandler(this.botaoTransmitirXML_Click);
+            // 
             // frmFiscal_Transmitir
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1253, 600);
+            this.ClientSize = new System.Drawing.Size(1317, 600);
             this.Controls.Add(this.labelValidade);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -719,5 +743,7 @@
         private System.Windows.Forms.Button botaoCancelarNota;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button botaoTransmitirXML;
     }
 }

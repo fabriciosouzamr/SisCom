@@ -301,29 +301,31 @@ namespace SisCom.Aplicacao_FW
                     mensagem = retornoConsulta.Retorno.xMotivo;
                     retorno = retornoConsulta.RetornoStr;
 
-                    switch (retornoConsulta.Retorno.cStat.ToString())
-                    {
-                        case "100": /* Autorizado o uso da NF-e */
-                            protocolo = retornoConsulta.Retorno.protNFe.infProt.nProt;
-                            break;
-                        default:
-                            break;
-                    }
+                    if ((retornoConsulta.Retorno != null) && 
+                        (retornoConsulta.Retorno.protNFe != null) && 
+                        (retornoConsulta.Retorno.protNFe.infProt != null) && 
+                        String.IsNullOrEmpty(retornoConsulta.Retorno.protNFe.infProt.nProt))
+                        protocolo = retornoConsulta.Retorno.protNFe.infProt.nProt;
                 }
 
                 retorno = retorno.Replace("retConsSitNFe", "retEnviNFe");
-                retorno = retorno.Replace("</verAplic>", "</verAplic>" + retorno.Substring(retorno.IndexOf("<dhRecbto>"), retorno.IndexOf("</dhRecbto>") - retorno.IndexOf("<dhRecbto>") + "<dhRecbto>".Length + 1));
+                try
+                { 
+                    if (retorno.IndexOf("<dhRecbto>") != -1)
+                    retorno = retorno.Replace("</verAplic>", "</verAplic>" + retorno.Substring(retorno.IndexOf("<dhRecbto>"), retorno.IndexOf("</dhRecbto>") - retorno.IndexOf("<dhRecbto>") + "<dhRecbto>".Length + 1)); 
+                }
+                catch (Exception) { }
+               
                 retorno = retorno.Replace("dhRecbto", "dhRegEvento");                
                 retorno = retorno.Replace("</retEnviNFe>",
                                           "<Protocolo><cStat>" + cStat + "</cStat><xMotivo>" + mensagem + "</xMotivo><nProtocolo>" + protocolo + "</nProtocolo></Protocolo></retEnviNFe>");
 
                 try
-                {
-                    retorno = retorno.Replace(retorno.Substring(retorno.IndexOf("<Signature"), retorno.IndexOf("</Signature>") - retorno.IndexOf("<Signature") + ("</Signature>").Length), "");
+                { 
+                    if (retorno.IndexOf("<Signature") != -1)
+                    retorno = retorno.Replace(retorno.Substring(retorno.IndexOf("<Signature"), retorno.IndexOf("</Signature>") - retorno.IndexOf("<Signature") + ("</Signature>").Length), ""); 
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
 
                 Console.Write(retorno);
             }

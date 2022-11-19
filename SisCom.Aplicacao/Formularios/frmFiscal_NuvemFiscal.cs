@@ -105,21 +105,21 @@ namespace SisCom.Aplicacao.Formularios
                                     ComboBoxStyle.DropDownList,
                                     await (new EmpresaController(this.MeuDbContext(), this._notifier)).ComboNuvemFiscal(p => p.Unidade));
 
-            Grid_DataGridView.DataGridView_Formatar(gridNotaFiscal);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "NF-e");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Série");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Chave de Acesso");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "CNPJ/CPF");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "IE");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Razão Social");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "D/H Emissão");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Vlr. NF-e", Tipo: Grid_DataGridView.TipoColuna.Valor);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Situação NF-e");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Manifestação");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "...", Grid_DataGridView.TipoColuna.CheckBox, readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Importar", Grid_DataGridView.TipoColuna.Button);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Manifestar", Grid_DataGridView.TipoColuna.Button);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Conteudo", Tamanho: 0);
+            Grid_DataGridView.User_Formatar(gridNotaFiscal);
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "NF-e");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Série");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Chave de Acesso");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "CNPJ/CPF");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "IE");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Razão Social");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "D/H Emissão");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Vlr. NF-e", Tipo: Grid_DataGridView.TipoColuna.Valor);
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Situação NF-e");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Manifestação");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "...", Grid_DataGridView.TipoColuna.CheckBox, readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Importar", Grid_DataGridView.TipoColuna.Button);
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Manifestar", Grid_DataGridView.TipoColuna.Button);
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Conteudo", Tamanho: 0);
 
             datePeriodoInicial.Value = DateTime.Now.Date;
             datePeriodoFinal.Value = DateTime.Now.Date;
@@ -174,7 +174,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             try
             {
-                Grid_DataGridView.DataGridView_LinhaLimpar(gridNotaFiscal);
+                Grid_DataGridView.User_LinhaLimpar(gridNotaFiscal);
 
                 string[] diretorios = Directory.GetFiles(Declaracoes.externos_Path_NuvemFiscal, "*.xml");
                 bool achou = false;
@@ -267,7 +267,7 @@ namespace SisCom.Aplicacao.Formularios
 
                         if (linha == -1)
                         {
-                            linha = Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscal,
+                            linha = Grid_DataGridView.User_LinhaAdicionar(gridNotaFiscal,
                                                                                   new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_ChaveAcesso,
                                                                                                                                                  Valor = chNFe },
                                                                                                                   new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_StatusManifestacao,

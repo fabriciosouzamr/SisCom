@@ -147,7 +147,7 @@ namespace SisCom.Aplicacao.Formularios
                 textObservacao.Text = Funcoes._Classes.Texto.NuloString(venda.Observacao);
                 checkOutrosDados_PossuiEntrega.Checked = venda.PosuiEntrega;
 
-                Grid_DataGridView.DataGridView_LinhaLimpar(gridProdutos);
+                Grid_DataGridView.User_LinhaLimpar(gridProdutos);
 
                 using (VendaMercadoriaController vendaMercadoriaController = new VendaMercadoriaController(this.MeuDbContext(), this._notifier))
                 {
@@ -155,7 +155,7 @@ namespace SisCom.Aplicacao.Formularios
 
                     foreach (VendaMercadoriaViewModel vendaMercadoriaViewModel in ret)
                     {
-                        Grid_DataGridView.DataGridView_LinhaAdicionar(gridProdutos,
+                        Grid_DataGridView.User_LinhaAdicionar(gridProdutos,
                                                                       new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = gridProdutos_Id, Valor = vendaMercadoriaViewModel.Id },
                                                                                                       new Grid_DataGridView.Coluna { Indice = gridProdutos_VendaId, Valor = vendaMercadoriaViewModel.VendaId },
                                                                                                       new Grid_DataGridView.Coluna { Indice = gridProdutos_CodigoSistema, Valor = vendaMercadoriaViewModel.MercadoriaId },
@@ -204,17 +204,17 @@ namespace SisCom.Aplicacao.Formularios
                 }
 
                 //Detalhe de Estoque
-                Grid_DataGridView.DataGridView_Formatar(gridProdutos, true);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "", "ID", Tamanho: 0);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "", "VendaID", Tamanho: 0);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "ID", readOnly: false);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "ID", readOnly: false);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 400, 0, produto, "Descricao", "ID", readOnly: false);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "Medida", "Medida", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, unidadeMedida, "Nome", "ID", readOnly: false);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "Quantidade", "Quantidade", Grid_DataGridView.TipoColuna.Numero, readOnly: false);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "Preço", "Preço", Grid_DataGridView.TipoColuna.Valor, readOnly: false);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "Total", "Total", Grid_DataGridView.TipoColuna.Valor, readOnly: true);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProdutos, "Excluir", "Excluir", Grid_DataGridView.TipoColuna.Button);
+                Grid_DataGridView.User_Formatar(gridProdutos, true);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "", "ID", Tamanho: 0);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "", "VendaID", Tamanho: 0);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "ID", readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "ID", readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 400, 0, produto, "Descricao", "ID", readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Medida", "Medida", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, unidadeMedida, "Nome", "ID", readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Quantidade", "Quantidade", Grid_DataGridView.TipoColuna.Numero, readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Preço", "Preço", Grid_DataGridView.TipoColuna.Valor, readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Total", "Total", Grid_DataGridView.TipoColuna.Valor, readOnly: true);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Excluir", "Excluir", Grid_DataGridView.TipoColuna.Button);
 
                 //Cabeçalho
                 await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
@@ -428,7 +428,7 @@ namespace SisCom.Aplicacao.Formularios
                     CaixaMensagem.Informacao("Informe algum produto");
                     return false;
                 }
-                if (Grid_DataGridView.DataGridView_Linhas(gridProdutos, gridProdutos_Descricao) == 0)
+                if (Grid_DataGridView.User_Linhas(gridProdutos, gridProdutos_Descricao) == 0)
                 {
                     CaixaMensagem.Informacao("Selecione algum produto");
                     return false;
@@ -630,7 +630,7 @@ namespace SisCom.Aplicacao.Formularios
                          (e.ColumnIndex == gridProdutos_Preco))
                 {
                     gridProdutos.Rows[e.RowIndex].Cells[gridProdutos_Total].Value = Funcao.NuloParaNumero(gridProdutos.Rows[e.RowIndex].Cells[gridProdutos_Quantidade].Value) *
-                                                                                    Funcao.NuloParaNumero(gridProdutos.Rows[e.RowIndex].Cells[gridProdutos_Preco].Value);
+                                                                                    Funcao.NuloParaValorD(gridProdutos.Rows[e.RowIndex].Cells[gridProdutos_Preco].Value);
                 }
 
                 CalcularSubTotal();
@@ -641,7 +641,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void gridProdutos_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.Control.KeyPress += new KeyPressEventHandler(Grid_DataGridView.DataGridView_KeyPress);
+            e.Control.KeyPress += new KeyPressEventHandler(Grid_DataGridView.User_KeyPress);
         }
         private void gridProdutos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -652,7 +652,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void numericPercentualDesconto_ValueChanged(object sender, EventArgs e)
         {
-            if (Grid_DataGridView.DataGridView_CalcularColunaValor(gridProdutos, gridProdutos_Total) != 0)
+            if (Grid_DataGridView.User_CalcularColunaValor(gridProdutos, gridProdutos_Total) != 0)
             {
                 numericValorDesconto.Value = Valor.Percentagem(Funcao.NuloParaValorD(labelSubTotal.Tag), numericPercentualDesconto.Value);
                 CalcularTotal();
@@ -660,22 +660,22 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void numericValorDesconto_ValueChanged(object sender, EventArgs e)
         {
-            if (Grid_DataGridView.DataGridView_CalcularColunaValor(gridProdutos, gridProdutos_Total) != 0)
+            if (Grid_DataGridView.User_CalcularColunaValor(gridProdutos, gridProdutos_Total) != 0)
             {
-                numericPercentualDesconto.Value = numericValorDesconto.Value / Grid_DataGridView.DataGridView_CalcularColunaValor(gridProdutos, gridProdutos_Total) * 100;
+                numericPercentualDesconto.Value = numericValorDesconto.Value / Grid_DataGridView.User_CalcularColunaValor(gridProdutos, gridProdutos_Total) * 100;
             }
         }
         private void CalcularDesconto()
         {
-            if (Grid_DataGridView.DataGridView_CalcularColunaValor(gridProdutos, gridProdutos_Total) != 0)
+            if (Grid_DataGridView.User_CalcularColunaValor(gridProdutos, gridProdutos_Total) != 0)
             {
                 if (numericPercentualDesconto.Value != 0)
                 {
-                    numericValorDesconto.Value = Valor.Percentagem(Grid_DataGridView.DataGridView_CalcularColunaValor(gridProdutos, gridProdutos_Total), numericPercentualDesconto.Value);
+                    numericValorDesconto.Value = Valor.Percentagem(Grid_DataGridView.User_CalcularColunaValor(gridProdutos, gridProdutos_Total), numericPercentualDesconto.Value);
                 }
                 else if (numericValorDesconto.Value != 0)
                 {
-                    numericPercentualDesconto.Value = numericValorDesconto.Value / Grid_DataGridView.DataGridView_CalcularColunaValor(gridProdutos, gridProdutos_Total) * 100;
+                    numericPercentualDesconto.Value = numericValorDesconto.Value / Grid_DataGridView.User_CalcularColunaValor(gridProdutos, gridProdutos_Total) * 100;
                 }
             }
 
@@ -683,7 +683,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void CalcularSubTotal()
         {
-            labelSubTotal.Tag = Grid_DataGridView.DataGridView_CalcularColunaValor(gridProdutos, gridProdutos_Total);
+            labelSubTotal.Tag = Grid_DataGridView.User_CalcularColunaValor(gridProdutos, gridProdutos_Total);
             labelSubTotal.Text = "Sub-Total: " + labelSubTotal.Tag.ToString();
             CalcularDesconto();
         }

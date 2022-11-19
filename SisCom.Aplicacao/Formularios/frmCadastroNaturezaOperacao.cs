@@ -58,16 +58,16 @@ namespace SisCom.Aplicacao.Formularios
                 tabelaCFOP = (List<CodigoComboViewModel>)await tabelaCFOPController.Combo(null, o => o.Codigo);
             }
             
-            Grid_DataGridView.DataGridView_Formatar(gridNaturezaOperacao, AllowUserToAddRows: true);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "Id", "Id", Tamanho: 0);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "Nome", "Nome", Tamanho: 300, readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "Devolucao", "Devolução", Tamanho: 80, Tipo: Grid_DataGridView.TipoColuna.CheckBox, readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "EntradaSaida", "Entrada/Saída", Tamanho: 80, Tipo: Grid_DataGridView.TipoColuna.ComboBox, dataSource: EnumUtil.ToDataTable(typeof(EntradaSaida)),
+            Grid_DataGridView.User_Formatar(gridNaturezaOperacao, AllowUserToAddRows: true);
+            Grid_DataGridView.User_ColunaAdicionar(gridNaturezaOperacao, "Id", "Id", Tamanho: 0);
+            Grid_DataGridView.User_ColunaAdicionar(gridNaturezaOperacao, "Nome", "Nome", Tamanho: 300, readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridNaturezaOperacao, "Devolucao", "Devolução", Tamanho: 80, Tipo: Grid_DataGridView.TipoColuna.CheckBox, readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridNaturezaOperacao, "EntradaSaida", "Entrada/Saída", Tamanho: 80, Tipo: Grid_DataGridView.TipoColuna.ComboBox, dataSource: EnumUtil.ToDataTable(typeof(EntradaSaida)),
                                                                                                                                                                             dataSource_Descricao: "Description",
                                                                                                                                                                             dataSource_Valor: "value",
                                                                                                                                                                             readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "", "CFOP", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaCFOP, "Codigo", "ID", readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNaturezaOperacao, "ICMS", "ICMS", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridNaturezaOperacao, "", "CFOP", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaCFOP, "Codigo", "ID", readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridNaturezaOperacao, "ICMS", "ICMS", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
 
             using (NaturezaOperacaoController naturezaOperacaoController = new NaturezaOperacaoController(this.MeuDbContext(), this._notifier))
             {
@@ -81,7 +81,7 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         if (naturezaOperacao.TabelaCFOPId != null)
                         {
-                            Grid_DataGridView.DataGridView_LinhaAdicionar(gridNaturezaOperacao,
+                            Grid_DataGridView.User_LinhaAdicionar(gridNaturezaOperacao,
                                                                             new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_ID,
                                                                                                                                             Valor = naturezaOperacao.Id },
                                                                                                              new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_Nome,
@@ -97,7 +97,7 @@ namespace SisCom.Aplicacao.Formularios
                         }
                         else
                         {
-                            Grid_DataGridView.DataGridView_LinhaAdicionar(gridNaturezaOperacao,
+                            Grid_DataGridView.User_LinhaAdicionar(gridNaturezaOperacao,
                                                                             new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_ID,
                                                                                                                                             Valor = naturezaOperacao.Id },
                                                                                                              new Grid_DataGridView.Coluna { Indice = gridNaturezaOperacao_Nome,

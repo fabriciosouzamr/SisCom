@@ -36,28 +36,28 @@ namespace SisCom.Aplicacao
         {
             Combo_ComboBox.Formatar(comboTipoManifestacao, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoManifestar));
 
-            Grid_DataGridView.DataGridView_Formatar(gridNotaFiscal);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "", Grid_DataGridView.TipoColuna.Texto, 30);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "NF-e");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Serie");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "D/H Emissão");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "Vlr. NF-e", Tipo: Grid_DataGridView.TipoColuna.Valor);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "ManifestacaoAtual");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "PedidoManifestacao");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "RetornoSefaz");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "CNPJ");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscal, "", "ChaveAcesso");
+            Grid_DataGridView.User_Formatar(gridNotaFiscal);
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "", Grid_DataGridView.TipoColuna.Texto, 30);
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "NF-e");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Serie");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "D/H Emissão");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "Vlr. NF-e", Tipo: Grid_DataGridView.TipoColuna.Valor);
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "ManifestacaoAtual");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "PedidoManifestacao");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "RetornoSefaz");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "CNPJ");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscal, "", "ChaveAcesso");
         }
 
         public void Carregar()
         {
             if (gridNotaFiscal.Columns.Count == 0) { Inicializar(); }
 
-            Grid_DataGridView.DataGridView_LinhaLimpar(gridNotaFiscal);
+            Grid_DataGridView.User_LinhaLimpar(gridNotaFiscal);
 
             foreach (NotaFiscalManifestar notaFiscalManifestar in NotasFiscalManifestar)
             {
-                Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscal,
+                Grid_DataGridView.User_LinhaAdicionar(gridNotaFiscal,
                                                               new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_NFe,
                                                                                                                              Valor = notaFiscalManifestar.NFe },
                                                                                               new Grid_DataGridView.Coluna { Indice = grdNotaFiscal_Serie,

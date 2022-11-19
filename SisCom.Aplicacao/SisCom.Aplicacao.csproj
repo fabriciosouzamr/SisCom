@@ -802,4 +802,5 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties configuration_4seed_4unidademedida_1json__JsonSchema="https://citation-file-format.github.io/1.2.0/schema.json" /></VisualStudio></ProjectExtensions>
 </Project>

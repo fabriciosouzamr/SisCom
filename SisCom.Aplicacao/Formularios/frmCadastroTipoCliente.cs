@@ -25,9 +25,9 @@ namespace SisCom.Aplicacao.Formularios
         #region Funcoes
         private async void Inicializar()
         {
-            Grid_DataGridView.DataGridView_Formatar(dataTipoCliente);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(dataTipoCliente, "ID", "ID", TipoColuna.Texto, 0);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(dataTipoCliente, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres);
+            Grid_DataGridView.User_Formatar(dataTipoCliente);
+            Grid_DataGridView.User_ColunaAdicionar(dataTipoCliente, "ID", "ID", TipoColuna.Texto, 0);
+            Grid_DataGridView.User_ColunaAdicionar(dataTipoCliente, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres);
             GridAtualizar();
         }
 
@@ -35,7 +35,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             TipoClienteController TipoClienteController = new TipoClienteController(this.MeuDbContext(), this._notifier);
             object Data = await TipoClienteController.ObterTodos(p => p.Nome);
-            Grid_DataGridView.DataGridView_DataSource(dataTipoCliente, Data, true);
+            Grid_DataGridView.User_DataSource(dataTipoCliente, Data, true);
             TipoClienteController = null;
             this.MeuDbContextDispose();
         }

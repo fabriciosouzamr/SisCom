@@ -47,15 +47,15 @@ namespace SisCom.Aplicacao.Formularios
                                     await (new FuncionarioController(this.MeuDbContext(), this._notifier)).Combo(p => p.Nome));
 
             //Grid Nota Fiscal Entrada
-            Grid_DataGridView.DataGridView_Formatar(gridVenda, true);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "ID", Tamanho: 0);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "Código");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "Data");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "Pedido");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "NFC - e");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "NF - e");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "Cliente");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridVenda, "", "Vendedor");
+            Grid_DataGridView.User_Formatar(gridVenda, true);
+            Grid_DataGridView.User_ColunaAdicionar(gridVenda, "", "ID", Tamanho: 0);
+            Grid_DataGridView.User_ColunaAdicionar(gridVenda, "", "Código");
+            Grid_DataGridView.User_ColunaAdicionar(gridVenda, "", "Data");
+            Grid_DataGridView.User_ColunaAdicionar(gridVenda, "", "Pedido");
+            Grid_DataGridView.User_ColunaAdicionar(gridVenda, "", "NFC - e");
+            Grid_DataGridView.User_ColunaAdicionar(gridVenda, "", "NF - e");
+            Grid_DataGridView.User_ColunaAdicionar(gridVenda, "", "Cliente");
+            Grid_DataGridView.User_ColunaAdicionar(gridVenda, "", "Vendedor");
 
             InicializarFiltro();
 
@@ -88,7 +88,7 @@ namespace SisCom.Aplicacao.Formularios
             var vendaController = new VendaController(this.MeuDbContext(), this._notifier);
             var vendas = await vendaController.ObterTodos(o => o.Codigo);
 
-            Grid_DataGridView.DataGridView_LinhaLimpar(gridVenda);
+            Grid_DataGridView.User_LinhaLimpar(gridVenda);
 
             foreach (var venda in vendas)
             {
@@ -115,7 +115,7 @@ namespace SisCom.Aplicacao.Formularios
                     //if ((NF_Modelo)Convert.ToInt16(venda.Modelo) != NF_Modelo.CupomFiscalEletronica)
                         //nFCe = venda.NotaFiscal;
 
-                    Grid_DataGridView.DataGridView_LinhaAdicionar(gridVenda,
+                    Grid_DataGridView.User_LinhaAdicionar(gridVenda,
                                                                    new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridVenda_ID,
                                                                                                                                    Valor = venda.Id },
                                                                                                     new Grid_DataGridView.Coluna { Indice = gridVenda_Codigo,

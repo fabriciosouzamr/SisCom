@@ -682,17 +682,17 @@ namespace SisCom.Aplicacao.Formularios
                 estados = await estadoController.ObterTodos(o => o.Codigo);
             }
 
-            Grid_DataGridView.DataGridView_Formatar(gridImpostosICMS, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridImpostosICMS, "Id", "Id", Tamanho: 0);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridImpostosICMS, "UF", " ", Tamanho: 30);
+            Grid_DataGridView.User_Formatar(gridImpostosICMS, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
+            Grid_DataGridView.User_ColunaAdicionar(gridImpostosICMS, "Id", "Id", Tamanho: 0);
+            Grid_DataGridView.User_ColunaAdicionar(gridImpostosICMS, "UF", " ", Tamanho: 30);
 
             foreach (EstadoViewModel estado in estados)
             {
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridImpostosICMS, estado.Codigo, estado.Codigo, Tamanho: 40, 
+                Grid_DataGridView.User_ColunaAdicionar(gridImpostosICMS, estado.Codigo, estado.Codigo, Tamanho: 40, 
                                                                                                                Tipo: Grid_DataGridView.TipoColuna.Numero, 
                                                                                                                readOnly: false,
                                                                                                                alinhamento: DataGridViewContentAlignment.MiddleCenter).Tag = estado.Id;
-                Grid_DataGridView.DataGridView_LinhaAdicionar(gridImpostosICMS, new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridImpostosICMS_ID,
+                Grid_DataGridView.User_LinhaAdicionar(gridImpostosICMS, new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridImpostosICMS_ID,
                                                                                                                                                 Valor = estado.Id },
                                                                                                                  new Grid_DataGridView.Coluna { Indice = gridImpostosICMS_Codigo,
                                                                                                                                                 Valor = estado.Codigo }}).Tag = estado.Id;
@@ -841,11 +841,11 @@ namespace SisCom.Aplicacao.Formularios
             numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosTotal.Value = 0;
             numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal.Value = 0;
             //Detalhe de Estoque
-            Grid_DataGridView.DataGridView_Formatar(gridEstoqueEmpresa);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "Almoxarifado", "Almoxarifado");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadeEstoque", "Quantidade");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadeBloqueada", "Bloqueada");
-            Grid_DataGridView.DataGridView_Formatar(gridEstoqueEmTransito);
+            Grid_DataGridView.User_Formatar(gridEstoqueEmpresa);
+            Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "Almoxarifado", "Almoxarifado");
+            Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadeEstoque", "Quantidade");
+            Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadeBloqueada", "Bloqueada");
+            Grid_DataGridView.User_Formatar(gridEstoqueEmTransito);
             //Foto e Especificação
             textEspecificacao.Text = "";
             textURL.Text = "";
@@ -854,21 +854,21 @@ namespace SisCom.Aplicacao.Formularios
             //Produção
             txtProducao_Configuracao_ValidadeDias.Value = 0;
             chkProducao_Configuracao_NaoBaixarComposicaoVenda.Checked = false;
-            Grid_DataGridView.DataGridView_Formatar(gridProducao_Composicao);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProducao_Composicao, "MercadoriaComponente", "");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProducao_Composicao, "Quantidade", "Quantidade");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProducao_Composicao, "Sequencia", "Sequência");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProducao_Composicao, "PercentualPerdaQuebra", "% Perda/Quebra");
+            Grid_DataGridView.User_Formatar(gridProducao_Composicao);
+            Grid_DataGridView.User_ColunaAdicionar(gridProducao_Composicao, "MercadoriaComponente", "");
+            Grid_DataGridView.User_ColunaAdicionar(gridProducao_Composicao, "Quantidade", "Quantidade");
+            Grid_DataGridView.User_ColunaAdicionar(gridProducao_Composicao, "Sequencia", "Sequência");
+            Grid_DataGridView.User_ColunaAdicionar(gridProducao_Composicao, "PercentualPerdaQuebra", "% Perda/Quebra");
             //Integração
-            Grid_DataGridView.DataGridView_Formatar(gridIntegracaoEmpresaFornecedor);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "Fornecedor", "Fornecedor");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "CodigoFonecedor", "Código");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadePorCaixa", "Quantidade por Caixa");
+            Grid_DataGridView.User_Formatar(gridIntegracaoEmpresaFornecedor);
+            Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "Fornecedor", "Fornecedor");
+            Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "CodigoFonecedor", "Código");
+            Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadePorCaixa", "Quantidade por Caixa");
             //Similares
-            Grid_DataGridView.DataGridView_Formatar(gridListaMercadoriasSimilares);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridListaMercadoriasSimilares, "Similar", "Nome");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridListaMercadoriasSimilares, "Preco", "Preço");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridListaMercadoriasSimilares, "QuantidadeEmEstoque", "Quantidade em Estoque");
+            Grid_DataGridView.User_Formatar(gridListaMercadoriasSimilares);
+            Grid_DataGridView.User_ColunaAdicionar(gridListaMercadoriasSimilares, "Similar", "Nome");
+            Grid_DataGridView.User_ColunaAdicionar(gridListaMercadoriasSimilares, "Preco", "Preço");
+            Grid_DataGridView.User_ColunaAdicionar(gridListaMercadoriasSimilares, "QuantidadeEmEstoque", "Quantidade em Estoque");
         }
         private async Task CarregarDados()
         {
@@ -1022,11 +1022,11 @@ namespace SisCom.Aplicacao.Formularios
                 numericDetalhesFiscais_InfoRefNotasFiscaisSaida_TributosTotal.Value = mercadoria.Fiscal_NFS_TributosTotal;
                 numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal.Value = mercadoria.Fiscal_NFS_ValorTributosTotal;
                 //Detalhe de Estoque
-                Grid_DataGridView.DataGridView_Formatar(gridEstoqueEmpresa);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "Almoxarifado", "Almoxarifado");
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadeEstoque", "Quantidade");
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadeBloqueada", "Bloqueada");
-                Grid_DataGridView.DataGridView_Formatar(gridEstoqueEmTransito);
+                Grid_DataGridView.User_Formatar(gridEstoqueEmpresa);
+                Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "Almoxarifado", "Almoxarifado");
+                Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadeEstoque", "Quantidade");
+                Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadeBloqueada", "Bloqueada");
+                Grid_DataGridView.User_Formatar(gridEstoqueEmTransito);
                 //Foto e Especificação
                 textEspecificacao.Text = Funcao.NuloParaString(mercadoria.FotoEspecificacao_Especificacao);
                 textURL.Text = Funcao.NuloParaString(mercadoria.FotoEspecificacao_URL); ;
@@ -1035,21 +1035,21 @@ namespace SisCom.Aplicacao.Formularios
                 //Produção
                 txtProducao_Configuracao_ValidadeDias.Value = mercadoria.Producao_Configuracao_ValidadeDias;
                 chkProducao_Configuracao_NaoBaixarComposicaoVenda.Checked = mercadoria.Producao_Configuracao_NaoBaixarComposicaoVenda;
-                Grid_DataGridView.DataGridView_Formatar(gridProducao_Composicao);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProducao_Composicao, "MercadoriaComponente", "");
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProducao_Composicao, "Quantidade", "Quantidade");
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProducao_Composicao, "Sequencia", "Sequência");
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridProducao_Composicao, "PercentualPerdaQuebra", "% Perda/Quebra");
+                Grid_DataGridView.User_Formatar(gridProducao_Composicao);
+                Grid_DataGridView.User_ColunaAdicionar(gridProducao_Composicao, "MercadoriaComponente", "");
+                Grid_DataGridView.User_ColunaAdicionar(gridProducao_Composicao, "Quantidade", "Quantidade");
+                Grid_DataGridView.User_ColunaAdicionar(gridProducao_Composicao, "Sequencia", "Sequência");
+                Grid_DataGridView.User_ColunaAdicionar(gridProducao_Composicao, "PercentualPerdaQuebra", "% Perda/Quebra");
                 //Integração
-                Grid_DataGridView.DataGridView_Formatar(gridIntegracaoEmpresaFornecedor);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "Fornecedor", "Fornecedor");
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "CodigoFonecedor", "Código");
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadePorCaixa", "Quantidade por Caixa");
+                Grid_DataGridView.User_Formatar(gridIntegracaoEmpresaFornecedor);
+                Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "Fornecedor", "Fornecedor");
+                Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "CodigoFonecedor", "Código");
+                Grid_DataGridView.User_ColunaAdicionar(gridEstoqueEmpresa, "QuantidadePorCaixa", "Quantidade por Caixa");
                 //Similares
-                Grid_DataGridView.DataGridView_Formatar(gridListaMercadoriasSimilares);
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridListaMercadoriasSimilares, "Similar", "Nome");
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridListaMercadoriasSimilares, "Preco", "Preço");
-                Grid_DataGridView.DataGridView_ColunaAdicionar(gridListaMercadoriasSimilares, "QuantidadeEmEstoque", "Quantidade em Estoque");
+                Grid_DataGridView.User_Formatar(gridListaMercadoriasSimilares);
+                Grid_DataGridView.User_ColunaAdicionar(gridListaMercadoriasSimilares, "Similar", "Nome");
+                Grid_DataGridView.User_ColunaAdicionar(gridListaMercadoriasSimilares, "Preco", "Preço");
+                Grid_DataGridView.User_ColunaAdicionar(gridListaMercadoriasSimilares, "QuantidadeEmEstoque", "Quantidade em Estoque");
 
                 using (MercadoriaImpostoEstadoController mercadoriaImpostoEstadoController = new MercadoriaImpostoEstadoController(this.MeuDbContext(), this._notifier))
                 {

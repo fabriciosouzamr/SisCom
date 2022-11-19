@@ -28,18 +28,18 @@ namespace SisCom.Aplicacao.Formularios
         {
             var row = EnumUtil.ToDataTable(typeof(TipoObservacao));
 
-            Grid_DataGridView.DataGridView_Formatar(gridObservacao);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "", "ID", Tamanho: 0);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "", "Código");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "", "Descrição", readOnly: false, Tamanho: 200, wordWrap: true);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridObservacao, "", "Tipo", Tipo: Grid_DataGridView.TipoColuna.ComboBox,
+            Grid_DataGridView.User_Formatar(gridObservacao);
+            Grid_DataGridView.User_ColunaAdicionar(gridObservacao, "", "ID", Tamanho: 0);
+            Grid_DataGridView.User_ColunaAdicionar(gridObservacao, "", "Código");
+            Grid_DataGridView.User_ColunaAdicionar(gridObservacao, "", "Descrição", readOnly: false, Tamanho: 200, wordWrap: true);
+            Grid_DataGridView.User_ColunaAdicionar(gridObservacao, "", "Tipo", Tipo: Grid_DataGridView.TipoColuna.ComboBox,
                                                                                        dataSource: EnumUtil.ToDataTable(typeof(TipoObservacao)), 
                                                                                        dataSource_Valor: "Value", 
                                                                                        dataSource_Descricao: "Description", 
                                                                                        readOnly: false, 
                                                                                        Tamanho: 200);
 
-            Grid_DataGridView.DataGridView_LinhaLimpar(gridObservacao);
+            Grid_DataGridView.User_LinhaLimpar(gridObservacao);
 
             using (ObservacaoController observacaoController = new ObservacaoController(this.MeuDbContext(), this._notifier))
             {
@@ -47,7 +47,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 foreach (var item in ret)
                 {
-                    Grid_DataGridView.DataGridView_LinhaAdicionar(gridObservacao,
+                    Grid_DataGridView.User_LinhaAdicionar(gridObservacao,
                                                                   new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = gridObservacao_ID,
                                                                                                                                  Valor = item.Id },
                                                                                                   new Grid_DataGridView.Coluna { Indice = gridObservacao_Codigo,

@@ -25,16 +25,16 @@ namespace SisCom.Aplicacao.Formularios
         #region Funcoes
         private async void Inicializar()
         {
-            Grid_DataGridView.DataGridView_Formatar(dataFabricante);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(dataFabricante, "ID", "ID", TipoColuna.Texto, 0);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(dataFabricante, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres);
+            Grid_DataGridView.User_Formatar(dataFabricante);
+            Grid_DataGridView.User_ColunaAdicionar(dataFabricante, "ID", "ID", TipoColuna.Texto, 0);
+            Grid_DataGridView.User_ColunaAdicionar(dataFabricante, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres);
             GridAtualizar();
         }
         private async Task GridAtualizar()
         {
             FabricanteController fabricanteController = new FabricanteController(this.MeuDbContext(), this._notifier);
             object Data = await fabricanteController.ObterTodos(p => p.Nome);
-            Grid_DataGridView.DataGridView_DataSource(dataFabricante, Data, true);
+            Grid_DataGridView.User_DataSource(dataFabricante, Data, true);
             fabricanteController = null;
             this.MeuDbContextDispose();
         }

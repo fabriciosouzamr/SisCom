@@ -16,7 +16,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
 
             builder.Property(p => p.Codigo)
                 .IsRequired()
-                .HasColumnType("char(3)");
+                .HasColumnType("varchar(3)");
 
             builder.ToTable("UnidadeMedidas");
         }

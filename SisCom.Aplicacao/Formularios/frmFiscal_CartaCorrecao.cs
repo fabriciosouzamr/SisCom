@@ -26,9 +26,9 @@ namespace SisCom.Aplicacao.Formularios
 
         void Inicializar()
         {
-            Grid_DataGridView.DataGridView_Formatar(gridItens, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridItens, "Itens", "Itens", Tamanho: 100);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridItens, "Descrição", "Descrição", Tamanho: 600, readOnly: false);
+            Grid_DataGridView.User_Formatar(gridItens, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
+            Grid_DataGridView.User_ColunaAdicionar(gridItens, "Itens", "Itens", Tamanho: 100);
+            Grid_DataGridView.User_ColunaAdicionar(gridItens, "Descrição", "Descrição", Tamanho: 600, readOnly: false);
         }
 
         private void botaoFechar_Click(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace SisCom.Aplicacao.Formularios
             checkItem_UnidadeMedidaProduto.Checked = false;
             checkItem_Vencimento.Checked = false;
             checkItem_Volume.Checked = false;
-            Grid_DataGridView.DataGridView_LinhaLimpar(gridItens);
+            Grid_DataGridView.User_LinhaLimpar(gridItens);
         }
 
         private void botaoBuscar_Click(object sender, EventArgs e)
@@ -172,7 +172,7 @@ namespace SisCom.Aplicacao.Formularios
 
             if (checkBox.Checked)
             {
-                Grid_DataGridView.DataGridView_LinhaAdicionar(gridItens, new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridItens_Nome,
+                Grid_DataGridView.User_LinhaAdicionar(gridItens, new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridItens_Nome,
                                                                                                                                          Valor = checkBox.Text },
                                                                                                           new Grid_DataGridView.Coluna { Indice = gridItens_Descricao,
                                                                                                                                          Valor = "" }});

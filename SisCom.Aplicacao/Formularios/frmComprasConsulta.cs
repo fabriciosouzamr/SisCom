@@ -42,17 +42,17 @@ namespace SisCom.Aplicacao.Formularios
             await Assincrono.TaskAsyncAndAwaitAsync(comboFiltroFornecedor_Carregar());
             await Assincrono.TaskAsyncAndAwaitAsync(comboFiltroEmpresa_Carregar());
 
-            Grid_DataGridView.DataGridView_Formatar(gridNotaFiscalEntrada);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","Data da Entrada");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","Data de Emissão");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","Nota Fiscal");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","Fornecedor");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","CFOP");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","UF");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","Modelo");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","Empresa");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "","Valor");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridNotaFiscalEntrada, "", "Id", Grid_DataGridView.TipoColuna.Texto, 0);
+            Grid_DataGridView.User_Formatar(gridNotaFiscalEntrada);
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalEntrada, "","Data da Entrada");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalEntrada, "","Data de Emissão");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalEntrada, "","Nota Fiscal");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalEntrada, "","Fornecedor");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalEntrada, "","CFOP");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalEntrada, "","UF");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalEntrada, "","Modelo");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalEntrada, "","Empresa");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalEntrada, "","Valor");
+            Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalEntrada, "", "Id", Grid_DataGridView.TipoColuna.Texto, 0);
 
             LimparFiltros();
         }
@@ -146,7 +146,7 @@ namespace SisCom.Aplicacao.Formularios
             var notaFiscalentradamercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier);
             var notaFiscalentradamercadorias = await notaFiscalentradamercadoriaController.ObterTodos();
 
-            Grid_DataGridView.DataGridView_LinhaLimpar(gridNotaFiscalEntrada);
+            Grid_DataGridView.User_LinhaLimpar(gridNotaFiscalEntrada);
 
             foreach (var notaFiscalentradamercadoria in notaFiscalentradamercadorias)
             {
@@ -171,7 +171,7 @@ namespace SisCom.Aplicacao.Formularios
                     if (notaFiscalentradamercadoria.NotaFiscalEntrada.Fornecedor.Endereco != null)
                         Estado_Codigo = notaFiscalentradamercadoria.NotaFiscalEntrada.Fornecedor.Endereco.End_Cidade.Estado.Codigo;
 
-                    Grid_DataGridView.DataGridView_LinhaAdicionar(gridNotaFiscalEntrada,
+                    Grid_DataGridView.User_LinhaAdicionar(gridNotaFiscalEntrada,
                                                                   new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridNotaFiscalEntradaDataEntrada,
                                                                                                                                   Valor = notaFiscalentradamercadoria.NotaFiscalEntrada.DataEntrada },
                                                                                                    new Grid_DataGridView.Coluna { Indice = gridNotaFiscalEntradaDataEmissao,

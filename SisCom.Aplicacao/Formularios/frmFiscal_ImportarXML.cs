@@ -84,22 +84,22 @@ namespace SisCom.Aplicacao.Formularios
                 }
             }
 
-            Grid_DataGridView.DataGridView_Formatar(gridProduto);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Descrição");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Unidade");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Quantidade");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Preço");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Frete");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Total");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Código Fornecedor", readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "ID", readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "ID", readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "ID", readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Qtde.por Caixa", readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Grupo", Grid_DataGridView.TipoColuna.ComboBox, readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Status");
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Vínculo Fiscal", Grid_DataGridView.TipoColuna.ComboBox, readOnly: false);
-            Grid_DataGridView.DataGridView_ColunaAdicionar(gridProduto, "", "Item", Grid_DataGridView.TipoColuna.Texto, 0);
+            Grid_DataGridView.User_Formatar(gridProduto);
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Descrição");
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Unidade");
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Quantidade");
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Preço");
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Frete");
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Total");
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Código Fornecedor", readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "ID", readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "ID", readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "ID", readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Qtde.por Caixa", readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Grupo", Grid_DataGridView.TipoColuna.ComboBox, readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Status");
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Vínculo Fiscal", Grid_DataGridView.TipoColuna.ComboBox, readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Item", Grid_DataGridView.TipoColuna.Texto, 0);
 
             using (UnidadeMedidaConversaoController unidadeMedidaConversaoController = new UnidadeMedidaConversaoController(this.MeuDbContext(), this._notifier))
             {
@@ -157,7 +157,7 @@ namespace SisCom.Aplicacao.Formularios
             if (_nfeProc.NFe != null)
             {
                 textAmbiente.Text = ((AmbienteSistemas)(int)_nfeProc.NFe.infNFe.ide.tpAmb).GetDescription();
-                textChave.Text = _nfeProc.NFe.infNFe.Id.Substring(3);
+                textChave.Text = Fiscal.Fiscal_ChaveNFe(_nfeProc.NFe);
                 textNumero.Text = _nfeProc.NFe.infNFe.ide.cNF;
                 textNumeroSerie.Text = _nfeProc.NFe.infNFe.ide.serie.ToString();
                 dateDateEmissao.Value = _nfeProc.NFe.infNFe.ide.dhEmi.DateTime;
@@ -166,14 +166,14 @@ namespace SisCom.Aplicacao.Formularios
                 textInscricaoEstadual.Text = _nfeProc.NFe.infNFe.emit.IE;
                 Forms.comboFornecedor_SelecionarPorCNPJ_CPF(comboFornecedor, _nfeProc.NFe.infNFe.emit.CNPJ);
 
-                Grid_DataGridView.DataGridView_LinhaLimpar(gridProduto);
+                Grid_DataGridView.User_LinhaLimpar(gridProduto);
 
                 _nfeProc.NFe.infNFe.det.ForEach(d =>
                 {
                     volumes = volumes + d.prod.qCom;
                     valores = valores + d.prod.vProd;
 
-                    Grid_DataGridView.DataGridView_LinhaAdicionar(gridProduto,
+                    Grid_DataGridView.User_LinhaAdicionar(gridProduto,
                                                                   new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = grdProduto_Descricao,
                                                                                                                                  Valor = d.prod.xProd },
                                                                                                   new Grid_DataGridView.Coluna { Indice = grdProduto_Unidade,
