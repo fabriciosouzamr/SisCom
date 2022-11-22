@@ -2124,20 +2124,26 @@ namespace SisCom.Aplicacao.Classes
                     if (retorno.Protocolo.NProtocolo != "00")
                     {
                         notaFiscalSaidaViewModel.Protocolo = retorno.Protocolo.NProtocolo;
-                        notaFiscalSaidaViewModel.Status = NF_Status.Transmitida;
-                        notaFiscalSaidaViewModel.DataTransmissao = DateTime.Now;
+                        if (notaFiscalSaidaViewModel.DataTransmissao == null)
+                            notaFiscalSaidaViewModel.DataTransmissao = retorno.dhRegEvento;
                     }
-                    else
+                    
+                    switch (retorno.Protocolo.CStat)
                     {
-                        switch(retorno.Protocolo.CStat)
-                        {
-                            case 302: /* Uso Denegado: Irregularidade fiscal do destinatário */
-                                notaFiscalSaidaViewModel.Status = NF_Status.Denegada;
-                                break;
-                            case 101: /* Cancelamento de NF-e homologado */
-                                notaFiscalSaidaViewModel.Status = NF_Status.Cancelado;
-                                break;
-                        }
+                        case 302: /* Uso Denegado: Irregularidade fiscal do destinatário */
+                            notaFiscalSaidaViewModel.Status = NF_Status.Denegada;
+                            break;
+                        case 101: /* Cancelamento de NF-e homologado */
+                            notaFiscalSaidaViewModel.Status = NF_Status.Cancelado;
+                            if (notaFiscalSaidaViewModel.DataCancelamento == null)
+                                notaFiscalSaidaViewModel.DataCancelamento = retorno.dhRegEvento;
+                            break;
+                        case 100: /* Autorizado o uso da NF-e */
+                            notaFiscalSaidaViewModel.Status = NF_Status.Transmitida;
+                            break;
+                        default:
+                            notaFiscalSaidaViewModel.Status = NF_Status.Pendente;
+                            break;
                     }
                 }
             }

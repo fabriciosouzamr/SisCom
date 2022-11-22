@@ -54,6 +54,14 @@ namespace SisCom.Aplicacao.Controllers
             NotaFiscalSaidaViewModel.Transportadora_UF = null;
             NotaFiscalSaidaViewModel.Venda = null;
 
+            if (!String.IsNullOrEmpty(NotaFiscalSaidaViewModel.Protocolo) && (NotaFiscalSaidaViewModel.Status == Entidade.Enum.NF_Status.Finalizada))
+            {
+                if (NotaFiscalSaidaViewModel.DataCancelamento != null)
+                    NotaFiscalSaidaViewModel.Status = Entidade.Enum.NF_Status.Cancelado;
+                else
+                    NotaFiscalSaidaViewModel.Status = Entidade.Enum.NF_Status.Transmitida;
+            }
+
             await _NotaFiscalSaidaService.Atualizar(Declaracoes.mapper.Map<NotaFiscalSaida>(NotaFiscalSaidaViewModel));
 
             return NotaFiscalSaidaViewModel;
@@ -61,12 +69,12 @@ namespace SisCom.Aplicacao.Controllers
         public async Task<IEnumerable<NotaFiscalSaidaViewModel>> ObterTodos(Expression<Func<NotaFiscalSaida, bool>> predicate = null, Expression<Func<NotaFiscalSaida, object>> order = null)
         {
             var obterTodos = await _NotaFiscalSaidaService.GetAll(order, predicate, i => i.NotaFiscalFinalidade,
-                                                                                   i => i.Cliente,
-                                                                                   i => i.Cliente.Endereco,
-                                                                                   i => i.Cliente.Endereco.End_Cidade,
-                                                                                   i => i.Cliente.Endereco.End_Cidade.Estado,
-                                                                                   i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
-                                                                                   i => i.Vendedor);
+                                                                                    i => i.Cliente,
+                                                                                    i => i.Cliente.Endereco,
+                                                                                    i => i.Cliente.Endereco.End_Cidade,
+                                                                                    i => i.Cliente.Endereco.End_Cidade.Estado,
+                                                                                    i => i.Cliente.Endereco.End_Cidade.Estado.Pais,
+                                                                                    i => i.Vendedor);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(obterTodos);
 
         }

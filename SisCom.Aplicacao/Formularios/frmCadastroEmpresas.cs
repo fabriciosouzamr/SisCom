@@ -133,6 +133,7 @@ namespace SisCom.Aplicacao.Formularios
                 if (!Funcao.Nulo(empresa.MDFe_TipoEmirssor)) comboNuvemFiscalAmbienteWebService.SelectedValue = empresa.NuvemFiscal_AmbienteWebService;
                 textNuvemFiscalDiretorioXMLs.Text = Funcao.NuloParaString(empresa.PathDocumentoFiscal);
                 if (!Funcao.Nulo(empresa.PathDocumentoFiscal)) textNuvemFiscalDiretorioXMLs.Text = empresa.PathDocumentoFiscal;
+                if (!Funcao.Nulo(empresa.NuvemFiscal_SerialNumber)) serialNumber = empresa.NuvemFiscal_SerialNumber;
 
                 if (!Funcao.Nulo(empresa.Endereco.End_CidadeId)) Combo_ComboBox.ComboCidade_Carregar(this._serviceProvider,
                                                                                                      this._dbCtxFactory,
@@ -411,7 +412,7 @@ namespace SisCom.Aplicacao.Formularios
             AdicionarEmpresa();
 
             var config = ConfigurationManager.OpenExeConfiguration(Declaracoes.externos_SisCom_Aplicacao_FW);
-            string diretorioXMLs = "<SisCom.Aplicacao_FW.Properties.Settings><setting name=\"PathDocumentoFiscal\" serializeAs=\"String\"><value>" + textNuvemFiscalDiretorioXMLs.Text + "X</value></setting></SisCom.Aplicacao_FW.Properties.Settings>";
+            string diretorioXMLs = "<SisCom.Aplicacao_FW.Properties.Settings><setting name=\"PathDocumentoFiscal\" serializeAs=\"String\"><value>" + textNuvemFiscalDiretorioXMLs.Text + "</value></setting></SisCom.Aplicacao_FW.Properties.Settings>";
 
             var data = File.ReadAllText(config.FilePath);
             data = data.Replace(data.Substring(data.IndexOf("<SisCom.Aplicacao_FW.Properties.Settings>"), data.IndexOf("</SisCom.Aplicacao_FW.Properties.Settings>") - 

@@ -304,7 +304,7 @@ namespace SisCom.Aplicacao_FW
                     if ((retornoConsulta.Retorno != null) && 
                         (retornoConsulta.Retorno.protNFe != null) && 
                         (retornoConsulta.Retorno.protNFe.infProt != null) && 
-                        String.IsNullOrEmpty(retornoConsulta.Retorno.protNFe.infProt.nProt))
+                        !String.IsNullOrEmpty(retornoConsulta.Retorno.protNFe.infProt.nProt))
                         protocolo = retornoConsulta.Retorno.protNFe.infProt.nProt;
                 }
 
