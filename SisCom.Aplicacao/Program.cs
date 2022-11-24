@@ -339,10 +339,12 @@ namespace SisCom.Aplicacao
 
                 Declaracoes.Aplicacao_CaminhoDiretorioTemporaria = Path.Combine(Directory.GetCurrentDirectory(), "temp");
                 Declaracoes.externos_Path_Schemas = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
-                Declaracoes.externos_Path_NuvemFiscal = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
+                Declaracoes.externos_Path_NuvemFiscal_Vendas = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_Vendas");
+                Declaracoes.externos_Path_NuvemFiscal_Compras = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_Compras");
                 if (!Directory.Exists(Declaracoes.Aplicacao_CaminhoDiretorioTemporaria)) { Directory.CreateDirectory(Declaracoes.Aplicacao_CaminhoDiretorioTemporaria); }
                 if (!Directory.Exists(Declaracoes.externos_Path_Schemas)) { Directory.CreateDirectory(Declaracoes.externos_Path_Schemas); }
-                if (!Directory.Exists(Declaracoes.externos_Path_NuvemFiscal)) { Directory.CreateDirectory(Declaracoes.externos_Path_NuvemFiscal); }
+                if (!Directory.Exists(Declaracoes.externos_Path_NuvemFiscal_Vendas)) { Directory.CreateDirectory(Declaracoes.externos_Path_NuvemFiscal_Vendas); }
+                if (!Directory.Exists(Declaracoes.externos_Path_NuvemFiscal_Compras)) { Directory.CreateDirectory(Declaracoes.externos_Path_NuvemFiscal_Compras); }
             }
         }
         public class MeuDbContextFactory : IDesignTimeDbContextFactory<MeuDbContext>

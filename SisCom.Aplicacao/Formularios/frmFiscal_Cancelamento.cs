@@ -59,6 +59,8 @@ namespace SisCom.Aplicacao.Formularios
                 return;
             }
 
+            botaoConfimar.Enabled = false;
+
             notaFiscalSaida.NumeroLoteEnvioSefaz++;
 
             if (Fiscal.Fiscal_Cancelamento(ref notaFiscalSaida, richJustificativa.Text, strings.ToString()))

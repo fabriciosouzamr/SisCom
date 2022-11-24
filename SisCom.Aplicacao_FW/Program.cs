@@ -66,7 +66,7 @@ namespace SisCom.Aplicacao_FW
             Application.SetCompatibleTextRenderingDefault(false);
 
             _PATH_SCHEMAS = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
-            _PATH_NUVEMFISCAL = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal");
+            _PATH_NUVEMFISCAL = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_Vendas");
 
             if (String.IsNullOrEmpty(Properties.Settings.Default.PathDocumentoFiscal))
             { _PATH_DOCFISCAL = _PATH_NUVEMFISCAL; }
@@ -88,6 +88,7 @@ namespace SisCom.Aplicacao_FW
 
                     break;
                 case "nuvemfiscal":
+                    _PATH_NUVEMFISCAL = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_Compras");
                     _EnderecoEmitente_UF = args[1];
                     _cnpj = args[2];
                     if ((!String.IsNullOrEmpty(args[3])) && (args[3] != "''")) { _nsu = args[3]; }

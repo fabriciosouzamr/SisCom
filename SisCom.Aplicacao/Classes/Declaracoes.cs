@@ -40,7 +40,8 @@ namespace SisCom.Aplicacao.Classes
 
         public static string externos_SisCom_Aplicacao_FW = "";
         public static string externos_Path_Schemas = "";
-        public static string externos_Path_NuvemFiscal = "";
+        public static string externos_Path_NuvemFiscal_Vendas = "";
+        public static string externos_Path_NuvemFiscal_Compras = "";
 
         public static Guid dados_Empresa_Id;
         public static Guid dados_Empresa_EstadoId;

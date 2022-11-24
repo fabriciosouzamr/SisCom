@@ -176,7 +176,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 Grid_DataGridView.User_LinhaLimpar(gridNotaFiscal);
 
-                string[] diretorios = Directory.GetFiles(Declaracoes.externos_Path_NuvemFiscal, "*.xml");
+                string[] diretorios = Directory.GetFiles(Declaracoes.externos_Path_NuvemFiscal_Compras, "*.xml");
                 bool achou = false;
 
                 foreach (string arquivo in diretorios)
@@ -517,7 +517,7 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     if (!Consultar_Carregar(nfe.protNFe.infProt.chNFe, true))
                     {
-                        nfe.SalvarArquivoXml(Path.Combine(externos_Path_NuvemFiscal, nfe.protNFe.infProt.chNFe + "-procNFe.xml"));
+                        nfe.SalvarArquivoXml(Path.Combine(externos_Path_NuvemFiscal_Compras, nfe.protNFe.infProt.chNFe + "-procNFe.xml"));
                         Consultar_Carregar(nfe.protNFe.infProt.chNFe);
                     }
                 }

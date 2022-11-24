@@ -409,7 +409,8 @@ namespace SisCom.Aplicacao.Classes
                 { notaFiscalSaida.RetornoCartaCorrecao = ret.XMotivo; }
 
                 if ((ret.CStat.ToString() == "101" /* Cancelamento de NF-e homologado */) || 
-                    (ret.CStat.ToString() == "151" /* Cancelamento de NF - e homologado fora de prazo */))
+                    (ret.CStat.ToString() == "151" /* Cancelamento de NF - e homologado fora de prazo */) ||
+                    (ret.CStat.ToString() == "135" /* Evento registrado e vinculado a NF-e */))
                 {
                     ok = true;
                 }
