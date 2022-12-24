@@ -146,6 +146,14 @@ namespace SisCom.Aplicacao.Formularios
             await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
             await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
+            await Navegar(Declaracoes.eNavegar.Ultimo);
+            await CarregarSerie(false);
+
+            carregando = false;
+        }
+
+        async Task CarregarSerie(bool carregarnotas)
+        {
             if (String.IsNullOrEmpty(textSerie.Text))
             {
                 using (EmpresaController empresaController = new EmpresaController(this.MeuDbContext(), this._notifier))
@@ -153,16 +161,15 @@ namespace SisCom.Aplicacao.Formularios
                     var empresa = (await empresaController.GetById(Declaracoes.dados_Empresa_Id));
 
                     if (empresa != null)
-                    { textSerie.Text = Funcao.NuloParaString(empresa.NFE_Serie); }
+                    { 
+                        textSerie.Text = Funcao.NuloParaString(empresa.NFE_Serie);
+                        if (carregarnotas) { await CarregarNotaFiscal(); }
+                    }
                 }
             }
-
-            await Navegar(Declaracoes.eNavegar.Ultimo);
-
-            carregando = false;
         }
 
-        async Task CarregarNotaFiscal()
+        async Task<bool> CarregarNotaFiscal()
         {
             if (String.IsNullOrEmpty(textNumeroNotaFiscalSaida.Text))
             {
@@ -181,6 +188,8 @@ namespace SisCom.Aplicacao.Formularios
                     }
                 }
             }
+
+            return true;
         }
 
         private async Task<bool> Inicializar()
@@ -373,8 +382,8 @@ namespace SisCom.Aplicacao.Formularios
             numericTransportadoraNumeroCarga.Value = 0;
             comboRegimeTributario.SelectedValue = Declaracoes.dados_Empresa_RegimeTributario;
             numericVolumeTransportadosQuantidade.Value = 0;
-            textVolumeTransportadosEspecie.Text = "";
-            textVolumeTransportadosMarca.Text = "";
+            textVolumeTransportadosEspecie.Text = "SACAS";
+            textVolumeTransportadosMarca.Text = "CAFÉ";
             numericVolumeTransportadosNumero.Value = 0;
             numericVolumeTransportadosPesoBruto.Value = 0;
             numericVolumeTransportadosPesoLiquido.Value = 0;
@@ -406,7 +415,6 @@ namespace SisCom.Aplicacao.Formularios
 
             textInfoNFeChaveNFe.Text = "";
             textInfoNFeProtocolo.Text = "";
-            textInfoNFeNFeSerie.Text = "";
             textInfoNFeNFeSubSerie.Text = "";
 
             gridAutorizarXML.Rows.Clear();
@@ -692,7 +700,7 @@ namespace SisCom.Aplicacao.Formularios
                             comboTransportadoraFreteConta.SelectedValue = TransportadoraFreteConta.ContratacaoFreteContaRemetente_CIF;
                         }
 
-                        await CarregarNotaFiscal();
+                        await CarregarSerie(true);
                     }
 
                     Grid_DataGridView.User_LinhaLimpar(gridMercadoria);
@@ -756,7 +764,7 @@ namespace SisCom.Aplicacao.Formularios
                 dateDataSaida.Value = notaFiscalSaida.DataSaida;
                 textHora.Text = Funcao.NuloParaString(notaFiscalSaida.HoraEmissao);
                 textModelo.Text = Funcao.NuloParaString(notaFiscalSaida.Modelo);
-                textSerie.Text = Funcao.NuloParaString(notaFiscalSaida.Serie);
+                if (!String.IsNullOrEmpty(notaFiscalSaida.Serie)) textSerie.Text = Funcao.NuloParaString(notaFiscalSaida.Serie);
                 textInfoNFeNFeSubSerie.Text = Funcao.NuloParaString(notaFiscalSaida.SubSerie);
                 checkStatusCancelado.Checked = (notaFiscalSaida.Status == NF_Status.Cancelado);
                 checkStatusFinalizada.Checked = (notaFiscalSaida.Status == NF_Status.Transmitida);
@@ -929,6 +937,8 @@ namespace SisCom.Aplicacao.Formularios
                         gridMercadoria.Rows[linha].Cells[gridMercadoria_Impostos].Value = notaFiscalMercadoriaDetalhamentoImposto;
                         gridMercadoria.Rows[linha].Cells[gridMercadoria_BaseCalculoICMS].Value = notaFiscalMercadoriaDetalhamentoImposto.ValorBaseCalculo;
                         gridMercadoria.Rows[linha].Cells[gridMercadoria_ValorICMS].Value = notaFiscalMercadoriaDetalhamentoImposto.ValorICMS;
+
+                        //if (mercadoria.Mercadoria.)
                     }
                 }
 
@@ -1007,7 +1017,39 @@ namespace SisCom.Aplicacao.Formularios
             CalcularMercadoriaPeso();
             CalcularMercadoriaImpostos();
 
-            if (notaFiscalSaida!= null)
+            ValidarStatus();
+
+            return true;
+        }
+        async Task<bool> CarregarStatusNotaFsical()
+        {
+            if (notaFiscalSaida != null)
+            {
+                using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                {
+                    notaFiscalSaida = (NotaFiscalSaidaViewModel)await notaFiscalSaidaController.PesquisarId(notaFiscalSaida.Id);
+                    ValidarStatus();
+                }
+            }
+            else if (String.IsNullOrEmpty(textNumeroNotaFiscalSaida.Text))
+            {
+                using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                {
+                    var notaFiscalSaidas = await notaFiscalSaidaController.PesquisarNotaFiscal(textNumeroNotaFiscalSaida.Text);
+
+                    if (notaFiscalSaidas != null)
+                    {
+                        notaFiscalSaida = notaFiscalSaidas.FirstOrDefault();
+                        ValidarStatus();
+                    }
+                }
+            }
+
+            return true;
+        }
+        void ValidarStatus()
+        {
+            if (notaFiscalSaida != null)
             {
                 botaoEditar.Enabled = ((notaFiscalSaida.Status == NF_Status.Pendente) || (notaFiscalSaida.Status == NF_Status.Finalizada));
                 botaoExportarNFe.Enabled = ((notaFiscalSaida.Status == NF_Status.Pendente) || (notaFiscalSaida.Status == NF_Status.Finalizada));
@@ -1019,8 +1061,6 @@ namespace SisCom.Aplicacao.Formularios
                 botaoExportarNFe.Enabled = true;
                 botaoCancelar.Enabled = true;
             }
-
-            return true;
         }
         private void gridMercadoria_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
@@ -1100,10 +1140,6 @@ namespace SisCom.Aplicacao.Formularios
         private void textSerie_TextChanged(object sender, EventArgs e)
         {
             textInfoNFeNFeSerie.Text = textSerie.Text;
-        }
-        private void textInfoNFeNFeSerie_TextChanged(object sender, EventArgs e)
-        {
-            textSerie.Text = textInfoNFeNFeSerie.Text;
         }
         private void botaoCancelar_Click(object sender, EventArgs e)
         {
@@ -1249,10 +1285,13 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async Task Navegar(Declaracoes.eNavegar posicao)
         {
-            if (TentarGravar())
+            try
             {
                 await Navegar_PegarTodos(notaFiscalSaida.Id, posicao);
                 await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
+            }
+            catch (Exception)
+            {
             }
         }
         private async Task Navegar_PegarTodos(Guid? Id, Declaracoes.eNavegar Posicao)
@@ -1344,8 +1383,8 @@ namespace SisCom.Aplicacao.Formularios
                 notaFiscalSaida = new ViewModels.NotaFiscalSaidaViewModel();
             }
 
-            await CarregarNotaFiscal();
-            await AdicionarNotaFiscalSaida(recarregar);
+            Assincrono.TaskAsyncAndAwaitAsync(CarregarNotaFiscal());
+            Assincrono.TaskAsyncAndAwaitAsync(AdicionarNotaFiscalSaida(recarregar));
 
             Editar(false);
             checkValidado.Checked = true;
@@ -1354,7 +1393,7 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
-        private async Task AdicionarNotaFiscalSaida(bool recarregar)
+        private async Task<bool> AdicionarNotaFiscalSaida(bool recarregar)
         {
             var notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier);
 
@@ -1415,7 +1454,7 @@ namespace SisCom.Aplicacao.Formularios
             if (VendaId != Guid.Empty) { notaFiscalSaida.VendaId = VendaId; }
 
             if (notaFiscalSaida.ClienteId == null)
-                return;
+                return false;
 
             if ((notaFiscalSaida.Status != NF_Status.Transmitida) && 
                 (notaFiscalSaida.Status != NF_Status.Cancelado) && 
@@ -1629,6 +1668,8 @@ namespace SisCom.Aplicacao.Formularios
             await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
             this.MeuDbContextDispose();
+
+            return true;
         }
         private void frmFiscal_NotaFiscal_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -1945,7 +1986,7 @@ namespace SisCom.Aplicacao.Formularios
             var form = this.ServiceProvider().GetRequiredService<frmFiscal_Transmitir>();
             form.ShowDialog(this);
 
-            await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
+            await Assincrono.TaskAsyncAndAwaitAsync(CarregarStatusNotaFsical());
         }
 
         private async void botaoClonarNFe_Click(object sender, EventArgs e)
@@ -1999,6 +2040,7 @@ namespace SisCom.Aplicacao.Formularios
                 notaFiscalSaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == _notaFiscalSaida.Id)).FirstOrDefault();
             }
 
+            VendaId = Guid.Empty;
             await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
             CaixaMensagem.Informacao("Nota Fiscal Clonada");

@@ -4,6 +4,7 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Formularios;
 using SisCom.Infraestrutura.Data.Context;
 using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace SisCom.Aplicacao
@@ -17,6 +18,11 @@ namespace SisCom.Aplicacao
         private void frmMDI_Load(object sender, EventArgs e)
         {
             this.Text = Declaracoes.Aplicacao_Nome + " - Versão " + Application.ProductVersion.ToString();
+
+            this.Top = 0;
+            this.Left = 0;
+            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
+            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
         }
         private void cmdSair_Click(object sender, EventArgs e)
         {
@@ -44,6 +50,12 @@ namespace SisCom.Aplicacao
         private void botaoNota_Click(object sender, EventArgs e)
         {
             var form = this.ServiceProvider().GetRequiredService<frmFiscal_NotaFiscal>();
+            form.ShowDialog(this);
+        }
+
+        private void cmdMDFe_Click(object sender, EventArgs e)
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmFiscal_MDFe>();
             form.ShowDialog(this);
         }
     }

@@ -1634,7 +1634,7 @@ namespace SisCom.Aplicacao.Classes
 
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.VolumeTransportados_Especie))
                     {
-                        vol.nVol = notaFiscalSaidaViewModel.VolumeTransportados_Especie;
+                        vol.esp = notaFiscalSaidaViewModel.VolumeTransportados_Especie;
                     }
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.VolumeTransportados_Marca))
                     {

@@ -2731,7 +2731,6 @@
             this.textInfoNFeNFeSerie.Name = "textInfoNFeNFeSerie";
             this.textInfoNFeNFeSerie.Size = new System.Drawing.Size(219, 23);
             this.textInfoNFeNFeSerie.TabIndex = 42;
-            this.textInfoNFeNFeSerie.TextChanged += new System.EventHandler(this.textInfoNFeNFeSerie_TextChanged);
             // 
             // panel27
             // 
@@ -3526,6 +3525,7 @@
             this.Controls.Add(this.pnlMenuBotao);
             this.MaximizeBox = false;
             this.Name = "frmFiscal_NotaFiscal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nota Fiscal - Gerar";
             this.pnlMenuBotao.ResumeLayout(false);
             this.pnlMenuBotaoBotao.ResumeLayout(false);
