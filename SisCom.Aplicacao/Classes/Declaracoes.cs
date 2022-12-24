@@ -21,6 +21,8 @@ namespace SisCom.Aplicacao.Classes
         public const string Aplicacao_CaminhoFoto = "\\fotos\\";
         public static string Aplicacao_CaminhoDiretorioTemporaria = "\\temp\\";
         public static string Aplicacao_PathRepositorioArquivo = "";
+        public static int Aplicacao_AlturaTela = 0;
+        public static int Aplicacao_LarguraTela = 0;
 
         public static string Estacao_CD_OPT_NFCe_DETALHE_VENDA_NORMAL = "";
         public static string Estacao_TRABALHO_CD_OPT_NFCe_DETALHE_VENDA_CONTIGENCIA = "";

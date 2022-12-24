@@ -35,6 +35,7 @@
             this.botaoFechar = new System.Windows.Forms.Button();
             this.pnlCentral = new System.Windows.Forms.Panel();
             this.groupInformacoesComplementaresInteresseContribuinte = new System.Windows.Forms.GroupBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.groupInformaoeesAdicionaisInteresseFisco = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupPercurso = new System.Windows.Forms.GroupBox();
@@ -133,7 +134,6 @@
             this.textHora = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.dateDataSaida = new System.Windows.Forms.DateTimePicker();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.pnlCentral.SuspendLayout();
@@ -200,6 +200,7 @@
             this.botaoFechar.TabIndex = 20;
             this.botaoFechar.TabStop = false;
             this.botaoFechar.UseVisualStyleBackColor = true;
+            this.botaoFechar.Click += new System.EventHandler(this.botaoFechar_Click);
             // 
             // pnlCentral
             // 
@@ -228,6 +229,15 @@
             this.groupInformacoesComplementaresInteresseContribuinte.TabIndex = 166;
             this.groupInformacoesComplementaresInteresseContribuinte.TabStop = false;
             this.groupInformacoesComplementaresInteresseContribuinte.Text = "Informações complementares de interesse do Contribuinte";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Location = new System.Drawing.Point(3, 19);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(977, 212);
+            this.richTextBox2.TabIndex = 1;
+            this.richTextBox2.Text = "";
             // 
             // groupInformaoeesAdicionaisInteresseFisco
             // 
@@ -1239,15 +1249,6 @@
             this.dateDataSaida.Size = new System.Drawing.Size(81, 23);
             this.dateDataSaida.TabIndex = 24;
             // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Location = new System.Drawing.Point(3, 19);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(977, 212);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
-            // 
             // frmFiscal_MDFe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1255,6 +1256,7 @@
             this.ClientSize = new System.Drawing.Size(1013, 766);
             this.Controls.Add(this.pnlCentral);
             this.Controls.Add(this.pnlMenuBotao);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmFiscal_MDFe";
             this.Text = "Nota Fiscal - MDF-e";
             this.pnlMenuBotao.ResumeLayout(false);

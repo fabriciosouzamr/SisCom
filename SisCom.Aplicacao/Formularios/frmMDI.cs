@@ -23,6 +23,10 @@ namespace SisCom.Aplicacao
             this.Left = 0;
             this.Width = Screen.PrimaryScreen.WorkingArea.Width;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+            Declaracoes.Aplicacao_AlturaTela = this.Height;
+            Declaracoes.Aplicacao_LarguraTela = this.Width;
+            toolUsuario.Text = Declaracoes.sistema_UsuarioLogado;
+            toolScreen.Text = $"{Screen.PrimaryScreen.Bounds.Height}X{Screen.PrimaryScreen.Bounds.Width}";
         }
         private void cmdSair_Click(object sender, EventArgs e)
         {

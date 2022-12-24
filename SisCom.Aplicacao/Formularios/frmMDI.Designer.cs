@@ -59,8 +59,11 @@ namespace SisCom.Aplicacao
             this.cmdCompras = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.cmdCadastro = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusRodape = new System.Windows.Forms.StatusStrip();
+            this.toolUsuario = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolScreen = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlMenuBotao.SuspendLayout();
+            this.statusRodape.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMenuBotao
@@ -374,21 +377,37 @@ namespace SisCom.Aplicacao
             this.cmdCadastro.UseVisualStyleBackColor = true;
             this.cmdCadastro.Click += new System.EventHandler(this.cmdCadastro_Click);
             // 
-            // statusStrip1
+            // statusRodape
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1275, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusRodape.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusRodape.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolUsuario,
+            this.toolScreen});
+            this.statusRodape.Location = new System.Drawing.Point(0, 428);
+            this.statusRodape.Name = "statusRodape";
+            this.statusRodape.Size = new System.Drawing.Size(1275, 22);
+            this.statusRodape.TabIndex = 2;
+            this.statusRodape.Text = "statusStrip1";
+            // 
+            // toolUsuario
+            // 
+            this.toolUsuario.AutoSize = false;
+            this.toolUsuario.Name = "toolUsuario";
+            this.toolUsuario.Size = new System.Drawing.Size(118, 17);
+            this.toolUsuario.Text = "toolStripStatusLabel1";
+            // 
+            // toolScreen
+            // 
+            this.toolScreen.Name = "toolScreen";
+            this.toolScreen.Size = new System.Drawing.Size(118, 17);
+            this.toolScreen.Text = "toolStripStatusLabel1";
             // 
             // frmMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1275, 450);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.statusRodape);
             this.Controls.Add(this.pnlMenuBotao);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
@@ -397,6 +416,8 @@ namespace SisCom.Aplicacao
             this.Load += new System.EventHandler(this.frmMDI_Load);
             this.pnlMenuBotao.ResumeLayout(false);
             this.pnlMenuBotao.PerformLayout();
+            this.statusRodape.ResumeLayout(false);
+            this.statusRodape.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,8 +452,10 @@ namespace SisCom.Aplicacao
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip statusRodape;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button cmdMDFe;
+        private System.Windows.Forms.ToolStripStatusLabel toolUsuario;
+        private System.Windows.Forms.ToolStripStatusLabel toolScreen;
     }
 }

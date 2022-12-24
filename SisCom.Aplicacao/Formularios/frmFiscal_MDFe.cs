@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SisCom.Aplicacao.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,15 @@ namespace SisCom.Aplicacao.Formularios
         public frmFiscal_MDFe()
         {
             InitializeComponent();
+            if (Declaracoes.Aplicacao_AlturaTela < this.Height)
+                this.Height = Declaracoes.Aplicacao_AlturaTela;
+
+            pnlCentral.Height = this.Height - pnlCentral.Top - 35;
+        }
+
+        private void botaoFechar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
