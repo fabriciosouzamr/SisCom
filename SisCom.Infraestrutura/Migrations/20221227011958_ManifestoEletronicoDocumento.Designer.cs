@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221227011958_ManifestoEletronicoDocumento")]
+    partial class ManifestoEletronicoDocumento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -510,7 +512,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("DadoVeiculoVeiculoTerceiros_RNTRCProprietario")
                         .HasColumnType("varchar(10)");
 
-                    b.Property<int?>("DadoVeiculoVeiculoTerceiros_TipoProprietario")
+                    b.Property<int>("DadoVeiculoVeiculoTerceiros_TipoProprietario")
                         .HasColumnType("int");
 
                     b.Property<double>("DadoVeiculo_CapacidadeKG")
@@ -537,10 +539,10 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("float")
                         .HasDefaultValue(0.0);
 
-                    b.Property<int?>("DadoVeiculo_TipoCarroceria")
+                    b.Property<int>("DadoVeiculo_TipoCarroceria")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DadoVeiculo_TipoRodado")
+                    b.Property<int>("DadoVeiculo_TipoRodado")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataHoraEmissao")
@@ -585,13 +587,13 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<int>("TipoEmissao")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TipoTransportador")
+                    b.Property<int>("TipoTransportador")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UnidadePeso")
+                    b.Property<int>("UnidadePeso")
                         .HasColumnType("int");
 
                     b.Property<decimal>("ValorTotalCarga")
@@ -630,7 +632,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<Guid?>("CidadeDescargaId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ManifestoEletronicoDocumentoId")
+                    b.Property<Guid?>("ManifestoEletronicoDocumentoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("NotaFiscalEntradaId")
@@ -680,7 +682,7 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<Guid>("EstadoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ManifestoEletronicoDocumentoId")
+                    b.Property<Guid?>("ManifestoEletronicoDocumentoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UltimaAtualizacao")
@@ -3606,8 +3608,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.HasOne("SisCom.Entidade.Modelos.ManifestoEletronicoDocumento", "ManifestoEletronicoDocumento")
                         .WithMany()
-                        .HasForeignKey("ManifestoEletronicoDocumentoId")
-                        .IsRequired();
+                        .HasForeignKey("ManifestoEletronicoDocumentoId");
 
                     b.HasOne("SisCom.Entidade.Modelos.NotaFiscalEntrada", "NotaFiscalEntrada")
                         .WithMany()
@@ -3635,8 +3636,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.HasOne("SisCom.Entidade.Modelos.ManifestoEletronicoDocumento", "ManifestoEletronicoDocumento")
                         .WithMany()
-                        .HasForeignKey("ManifestoEletronicoDocumentoId")
-                        .IsRequired();
+                        .HasForeignKey("ManifestoEletronicoDocumentoId");
 
                     b.Navigation("Estado");
 

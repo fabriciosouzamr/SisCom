@@ -35,9 +35,9 @@
             this.botaoFechar = new System.Windows.Forms.Button();
             this.pnlCentral = new System.Windows.Forms.Panel();
             this.groupInformacoesComplementaresInteresseContribuinte = new System.Windows.Forms.GroupBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richInformacoesComplementaresInteresseContribuinte = new System.Windows.Forms.RichTextBox();
             this.groupInformaoeesAdicionaisInteresseFisco = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richInformaoeesAdicionaisInteresseFisco = new System.Windows.Forms.RichTextBox();
             this.groupPercurso = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.comboPercursoEstado01 = new System.Windows.Forms.ComboBox();
@@ -51,89 +51,89 @@
             this.ucFiscal_mdFe_AdicionarNotas = new SisCom.Aplicacao.Formularios.ucFiscal_MDFe_AdicionarNotas();
             this.groupCondutor = new System.Windows.Forms.GroupBox();
             this.label36 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textCondutor_NomeCondutor = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textCondutor_CPFCNPJCondutor = new System.Windows.Forms.TextBox();
             this.groupAutorizacao = new System.Windows.Forms.GroupBox();
             this.groupAutorizacaoStatus = new System.Windows.Forms.GroupBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.checkAutorizacao_SatusCancelado = new System.Windows.Forms.CheckBox();
+            this.checkAutorizacao_SatusEncerramento = new System.Windows.Forms.CheckBox();
+            this.checkAutorizacao_SatusAutorizado = new System.Windows.Forms.CheckBox();
+            this.checkAutorizacao_SatusValidado = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textAutorizacao_DataHoraAutorizazacao = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textAutorizacao_Protocolo = new System.Windows.Forms.TextBox();
             this.label105 = new System.Windows.Forms.Label();
-            this.textInfoNFeChaveNFe = new System.Windows.Forms.TextBox();
+            this.textAutorizacao_ChaveAutorizacao = new System.Windows.Forms.TextBox();
             this.groupTotalizadores = new System.Windows.Forms.GroupBox();
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.comboBox13 = new System.Windows.Forms.ComboBox();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.comboTotalizadores_UnidadePeso = new System.Windows.Forms.ComboBox();
+            this.numericTotalizadores_PesoBrutoCarga = new System.Windows.Forms.NumericUpDown();
+            this.numericTotalizadores_QuantidadeNfe = new System.Windows.Forms.NumericUpDown();
             this.label29 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.numericTotalizadores_ValorTotalCarga = new System.Windows.Forms.NumericUpDown();
             this.groupDadosVeiculo = new System.Windows.Forms.GroupBox();
             this.groupVeículoTerceiro = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.comboBox12 = new System.Windows.Forms.ComboBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.comboBox11 = new System.Windows.Forms.ComboBox();
+            this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario = new System.Windows.Forms.ComboBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.DadosVeiculoVeiculoTerceiro_IEProprietario = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textDadosVeiculoVeiculoTerceiro_RNTCProprietario = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textDadosVeiculoVeiculoTerceiro_NomeProprietario = new System.Windows.Forms.TextBox();
+            this.checkDadosVeiculoVceiuloTerceiro_Sim = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericDadosVeiculo_CapacidadeM3 = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textDadosVeiculo_Renavam = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.comboDadosVeiculo_TipoCarroceria = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericVolumeTransportadosQuantidade = new System.Windows.Forms.NumericUpDown();
+            this.numericDadosVeiculo_CapacidadeKG = new System.Windows.Forms.NumericUpDown();
+            this.numericDadosVeiculo_TaraKG = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
+            this.comboDadosVeiculo_UF = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.comboDadosVeiculo_TipoRodado = new System.Windows.Forms.ComboBox();
+            this.botaoPlaca = new System.Windows.Forms.Button();
+            this.comboDadosVeiculo_Placa = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.groupIdentificacao = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.textIdentificacao_Carga = new System.Windows.Forms.TextBox();
+            this.comboIdentificacao_CidadeCarregamento = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textIdentificacao_RNTRCEmitente = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboIdentificacao_TipoTransportador = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboIdentificacao_UFDescarga = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboIdentificacao_TipoEmissao = new System.Windows.Forms.ComboBox();
+            this.comboIdentificacao_UFCarregamento = new System.Windows.Forms.ComboBox();
+            this.comboIdentificacao_Serie = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboFinalidade = new System.Windows.Forms.ComboBox();
+            this.comboIdentificacao_Empresa = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.textHora = new System.Windows.Forms.TextBox();
+            this.textIdentificacao_HoraEmissao = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.dateDataSaida = new System.Windows.Forms.DateTimePicker();
+            this.dateIdentificacao_Emissao = new System.Windows.Forms.DateTimePicker();
+            this.numericIdentificacao_Numero = new System.Windows.Forms.NumericUpDown();
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario = new System.Windows.Forms.ComboBox();
+            this.textAutorizacao_DtaHoraEncerramento = new System.Windows.Forms.TextBox();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.pnlCentral.SuspendLayout();
@@ -149,15 +149,16 @@
             this.groupAutorizacao.SuspendLayout();
             this.groupAutorizacaoStatus.SuspendLayout();
             this.groupTotalizadores.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTotalizadores_PesoBrutoCarga)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTotalizadores_QuantidadeNfe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTotalizadores_ValorTotalCarga)).BeginInit();
             this.groupDadosVeiculo.SuspendLayout();
             this.groupVeículoTerceiro.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericVolumeTransportadosQuantidade)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDadosVeiculo_CapacidadeM3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDadosVeiculo_CapacidadeKG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDadosVeiculo_TaraKG)).BeginInit();
             this.groupIdentificacao.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericIdentificacao_Numero)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenuBotao
@@ -222,48 +223,48 @@
             // 
             // groupInformacoesComplementaresInteresseContribuinte
             // 
-            this.groupInformacoesComplementaresInteresseContribuinte.Controls.Add(this.richTextBox2);
-            this.groupInformacoesComplementaresInteresseContribuinte.Location = new System.Drawing.Point(6, 1786);
+            this.groupInformacoesComplementaresInteresseContribuinte.Controls.Add(this.richInformacoesComplementaresInteresseContribuinte);
+            this.groupInformacoesComplementaresInteresseContribuinte.Location = new System.Drawing.Point(6, 1751);
             this.groupInformacoesComplementaresInteresseContribuinte.Name = "groupInformacoesComplementaresInteresseContribuinte";
             this.groupInformacoesComplementaresInteresseContribuinte.Size = new System.Drawing.Size(983, 234);
             this.groupInformacoesComplementaresInteresseContribuinte.TabIndex = 166;
             this.groupInformacoesComplementaresInteresseContribuinte.TabStop = false;
             this.groupInformacoesComplementaresInteresseContribuinte.Text = "Informações complementares de interesse do Contribuinte";
             // 
-            // richTextBox2
+            // richInformacoesComplementaresInteresseContribuinte
             // 
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Location = new System.Drawing.Point(3, 19);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(977, 212);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
+            this.richInformacoesComplementaresInteresseContribuinte.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richInformacoesComplementaresInteresseContribuinte.Location = new System.Drawing.Point(3, 19);
+            this.richInformacoesComplementaresInteresseContribuinte.Name = "richInformacoesComplementaresInteresseContribuinte";
+            this.richInformacoesComplementaresInteresseContribuinte.Size = new System.Drawing.Size(977, 212);
+            this.richInformacoesComplementaresInteresseContribuinte.TabIndex = 1;
+            this.richInformacoesComplementaresInteresseContribuinte.Text = "";
             // 
             // groupInformaoeesAdicionaisInteresseFisco
             // 
-            this.groupInformaoeesAdicionaisInteresseFisco.Controls.Add(this.richTextBox1);
-            this.groupInformaoeesAdicionaisInteresseFisco.Location = new System.Drawing.Point(6, 1552);
+            this.groupInformaoeesAdicionaisInteresseFisco.Controls.Add(this.richInformaoeesAdicionaisInteresseFisco);
+            this.groupInformaoeesAdicionaisInteresseFisco.Location = new System.Drawing.Point(6, 1517);
             this.groupInformaoeesAdicionaisInteresseFisco.Name = "groupInformaoeesAdicionaisInteresseFisco";
             this.groupInformaoeesAdicionaisInteresseFisco.Size = new System.Drawing.Size(983, 234);
             this.groupInformaoeesAdicionaisInteresseFisco.TabIndex = 165;
             this.groupInformaoeesAdicionaisInteresseFisco.TabStop = false;
             this.groupInformaoeesAdicionaisInteresseFisco.Text = "Informações adicionais de interesse do Fisco";
             // 
-            // richTextBox1
+            // richInformaoeesAdicionaisInteresseFisco
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 19);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(977, 212);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.richInformaoeesAdicionaisInteresseFisco.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richInformaoeesAdicionaisInteresseFisco.Location = new System.Drawing.Point(3, 19);
+            this.richInformaoeesAdicionaisInteresseFisco.Name = "richInformaoeesAdicionaisInteresseFisco";
+            this.richInformaoeesAdicionaisInteresseFisco.Size = new System.Drawing.Size(977, 212);
+            this.richInformaoeesAdicionaisInteresseFisco.TabIndex = 601;
+            this.richInformaoeesAdicionaisInteresseFisco.Text = "";
             // 
             // groupPercurso
             // 
             this.groupPercurso.Controls.Add(this.panel3);
             this.groupPercurso.Controls.Add(this.panel1);
             this.groupPercurso.Controls.Add(this.picPercurso);
-            this.groupPercurso.Location = new System.Drawing.Point(6, 735);
+            this.groupPercurso.Location = new System.Drawing.Point(6, 700);
             this.groupPercurso.Name = "groupPercurso";
             this.groupPercurso.Size = new System.Drawing.Size(983, 817);
             this.groupPercurso.TabIndex = 164;
@@ -285,7 +286,7 @@
             this.comboPercursoEstado01.Location = new System.Drawing.Point(5, 27);
             this.comboPercursoEstado01.Name = "comboPercursoEstado01";
             this.comboPercursoEstado01.Size = new System.Drawing.Size(169, 23);
-            this.comboPercursoEstado01.TabIndex = 1;
+            this.comboPercursoEstado01.TabIndex = 501;
             // 
             // botaoPercursoLimpar
             // 
@@ -328,7 +329,7 @@
             // 
             // pnlRodape
             // 
-            this.pnlRodape.Location = new System.Drawing.Point(0, 2020);
+            this.pnlRodape.Location = new System.Drawing.Point(0, 1985);
             this.pnlRodape.Name = "pnlRodape";
             this.pnlRodape.Size = new System.Drawing.Size(999, 16);
             this.pnlRodape.TabIndex = 162;
@@ -336,7 +337,7 @@
             // groupAdicionarNotas
             // 
             this.groupAdicionarNotas.Controls.Add(this.panel2);
-            this.groupAdicionarNotas.Location = new System.Drawing.Point(9, 610);
+            this.groupAdicionarNotas.Location = new System.Drawing.Point(9, 575);
             this.groupAdicionarNotas.Name = "groupAdicionarNotas";
             this.groupAdicionarNotas.Size = new System.Drawing.Size(987, 125);
             this.groupAdicionarNotas.TabIndex = 161;
@@ -362,10 +363,10 @@
             // groupCondutor
             // 
             this.groupCondutor.Controls.Add(this.label36);
-            this.groupCondutor.Controls.Add(this.textBox13);
+            this.groupCondutor.Controls.Add(this.textCondutor_NomeCondutor);
             this.groupCondutor.Controls.Add(this.label35);
-            this.groupCondutor.Controls.Add(this.textBox12);
-            this.groupCondutor.Location = new System.Drawing.Point(8, 543);
+            this.groupCondutor.Controls.Add(this.textCondutor_CPFCNPJCondutor);
+            this.groupCondutor.Location = new System.Drawing.Point(8, 508);
             this.groupCondutor.Name = "groupCondutor";
             this.groupCondutor.Size = new System.Drawing.Size(987, 67);
             this.groupCondutor.TabIndex = 160;
@@ -381,13 +382,13 @@
             this.label36.TabIndex = 54;
             this.label36.Text = "Nome do Condutor";
             // 
-            // textBox13
+            // textCondutor_NomeCondutor
             // 
-            this.textBox13.Location = new System.Drawing.Point(126, 35);
-            this.textBox13.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(635, 23);
-            this.textBox13.TabIndex = 53;
+            this.textCondutor_NomeCondutor.Location = new System.Drawing.Point(126, 35);
+            this.textCondutor_NomeCondutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textCondutor_NomeCondutor.Name = "textCondutor_NomeCondutor";
+            this.textCondutor_NomeCondutor.Size = new System.Drawing.Size(635, 23);
+            this.textCondutor_NomeCondutor.TabIndex = 402;
             // 
             // label35
             // 
@@ -398,26 +399,26 @@
             this.label35.TabIndex = 52;
             this.label35.Text = "CPF/CNPJ Condutor";
             // 
-            // textBox12
+            // textCondutor_CPFCNPJCondutor
             // 
-            this.textBox12.Location = new System.Drawing.Point(6, 35);
-            this.textBox12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(114, 23);
-            this.textBox12.TabIndex = 51;
+            this.textCondutor_CPFCNPJCondutor.Location = new System.Drawing.Point(6, 35);
+            this.textCondutor_CPFCNPJCondutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textCondutor_CPFCNPJCondutor.Name = "textCondutor_CPFCNPJCondutor";
+            this.textCondutor_CPFCNPJCondutor.Size = new System.Drawing.Size(114, 23);
+            this.textCondutor_CPFCNPJCondutor.TabIndex = 401;
             // 
             // groupAutorizacao
             // 
             this.groupAutorizacao.Controls.Add(this.groupAutorizacaoStatus);
-            this.groupAutorizacao.Controls.Add(this.textBox11);
+            this.groupAutorizacao.Controls.Add(this.textAutorizacao_DtaHoraEncerramento);
             this.groupAutorizacao.Controls.Add(this.label34);
             this.groupAutorizacao.Controls.Add(this.label33);
-            this.groupAutorizacao.Controls.Add(this.textBox10);
+            this.groupAutorizacao.Controls.Add(this.textAutorizacao_DataHoraAutorizazacao);
             this.groupAutorizacao.Controls.Add(this.label32);
-            this.groupAutorizacao.Controls.Add(this.textBox9);
+            this.groupAutorizacao.Controls.Add(this.textAutorizacao_Protocolo);
             this.groupAutorizacao.Controls.Add(this.label105);
-            this.groupAutorizacao.Controls.Add(this.textInfoNFeChaveNFe);
-            this.groupAutorizacao.Location = new System.Drawing.Point(8, 438);
+            this.groupAutorizacao.Controls.Add(this.textAutorizacao_ChaveAutorizacao);
+            this.groupAutorizacao.Location = new System.Drawing.Point(8, 403);
             this.groupAutorizacao.Name = "groupAutorizacao";
             this.groupAutorizacao.Size = new System.Drawing.Size(987, 105);
             this.groupAutorizacao.TabIndex = 159;
@@ -426,75 +427,75 @@
             // 
             // groupAutorizacaoStatus
             // 
-            this.groupAutorizacaoStatus.Controls.Add(this.checkBox4);
-            this.groupAutorizacaoStatus.Controls.Add(this.checkBox5);
-            this.groupAutorizacaoStatus.Controls.Add(this.checkBox3);
-            this.groupAutorizacaoStatus.Controls.Add(this.checkBox2);
+            this.groupAutorizacaoStatus.Controls.Add(this.checkAutorizacao_SatusCancelado);
+            this.groupAutorizacaoStatus.Controls.Add(this.checkAutorizacao_SatusEncerramento);
+            this.groupAutorizacaoStatus.Controls.Add(this.checkAutorizacao_SatusAutorizado);
+            this.groupAutorizacaoStatus.Controls.Add(this.checkAutorizacao_SatusValidado);
             this.groupAutorizacaoStatus.Location = new System.Drawing.Point(363, 42);
             this.groupAutorizacaoStatus.Name = "groupAutorizacaoStatus";
             this.groupAutorizacaoStatus.Size = new System.Drawing.Size(222, 56);
             this.groupAutorizacaoStatus.TabIndex = 160;
             this.groupAutorizacaoStatus.TabStop = false;
             // 
-            // checkBox4
+            // checkAutorizacao_SatusCancelado
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.checkBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.checkBox4.Location = new System.Drawing.Point(126, 34);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBox4.Size = new System.Drawing.Size(82, 19);
-            this.checkBox4.TabIndex = 3;
-            this.checkBox4.Text = "Cancelado";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkAutorizacao_SatusCancelado.AutoSize = true;
+            this.checkAutorizacao_SatusCancelado.Enabled = false;
+            this.checkAutorizacao_SatusCancelado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.checkAutorizacao_SatusCancelado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.checkAutorizacao_SatusCancelado.Location = new System.Drawing.Point(126, 34);
+            this.checkAutorizacao_SatusCancelado.Name = "checkAutorizacao_SatusCancelado";
+            this.checkAutorizacao_SatusCancelado.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkAutorizacao_SatusCancelado.Size = new System.Drawing.Size(82, 19);
+            this.checkAutorizacao_SatusCancelado.TabIndex = 3;
+            this.checkAutorizacao_SatusCancelado.TabStop = false;
+            this.checkAutorizacao_SatusCancelado.Text = "Cancelado";
+            this.checkAutorizacao_SatusCancelado.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // checkAutorizacao_SatusEncerramento
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.checkBox5.ForeColor = System.Drawing.Color.Purple;
-            this.checkBox5.Location = new System.Drawing.Point(10, 34);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBox5.Size = new System.Drawing.Size(105, 19);
-            this.checkBox5.TabIndex = 2;
-            this.checkBox5.Text = "Encerramento";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkAutorizacao_SatusEncerramento.AutoSize = true;
+            this.checkAutorizacao_SatusEncerramento.Enabled = false;
+            this.checkAutorizacao_SatusEncerramento.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.checkAutorizacao_SatusEncerramento.ForeColor = System.Drawing.Color.Purple;
+            this.checkAutorizacao_SatusEncerramento.Location = new System.Drawing.Point(10, 34);
+            this.checkAutorizacao_SatusEncerramento.Name = "checkAutorizacao_SatusEncerramento";
+            this.checkAutorizacao_SatusEncerramento.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkAutorizacao_SatusEncerramento.Size = new System.Drawing.Size(105, 19);
+            this.checkAutorizacao_SatusEncerramento.TabIndex = 2;
+            this.checkAutorizacao_SatusEncerramento.TabStop = false;
+            this.checkAutorizacao_SatusEncerramento.Text = "Encerramento";
+            this.checkAutorizacao_SatusEncerramento.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // checkAutorizacao_SatusAutorizado
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.checkBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.checkBox3.Location = new System.Drawing.Point(121, 15);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBox3.Size = new System.Drawing.Size(87, 19);
-            this.checkBox3.TabIndex = 1;
-            this.checkBox3.Text = "Autorizado";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkAutorizacao_SatusAutorizado.AutoSize = true;
+            this.checkAutorizacao_SatusAutorizado.Enabled = false;
+            this.checkAutorizacao_SatusAutorizado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.checkAutorizacao_SatusAutorizado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.checkAutorizacao_SatusAutorizado.Location = new System.Drawing.Point(121, 15);
+            this.checkAutorizacao_SatusAutorizado.Name = "checkAutorizacao_SatusAutorizado";
+            this.checkAutorizacao_SatusAutorizado.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkAutorizacao_SatusAutorizado.Size = new System.Drawing.Size(87, 19);
+            this.checkAutorizacao_SatusAutorizado.TabIndex = 1;
+            this.checkAutorizacao_SatusAutorizado.TabStop = false;
+            this.checkAutorizacao_SatusAutorizado.Text = "Autorizado";
+            this.checkAutorizacao_SatusAutorizado.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // checkAutorizacao_SatusValidado
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.checkBox2.ForeColor = System.Drawing.Color.Green;
-            this.checkBox2.Location = new System.Drawing.Point(43, 15);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBox2.Size = new System.Drawing.Size(72, 19);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "Validado";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(147, 76);
-            this.textBox11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(120, 23);
-            this.textBox11.TabIndex = 159;
+            this.checkAutorizacao_SatusValidado.AutoSize = true;
+            this.checkAutorizacao_SatusValidado.Enabled = false;
+            this.checkAutorizacao_SatusValidado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.checkAutorizacao_SatusValidado.ForeColor = System.Drawing.Color.Green;
+            this.checkAutorizacao_SatusValidado.Location = new System.Drawing.Point(43, 15);
+            this.checkAutorizacao_SatusValidado.Name = "checkAutorizacao_SatusValidado";
+            this.checkAutorizacao_SatusValidado.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkAutorizacao_SatusValidado.Size = new System.Drawing.Size(72, 19);
+            this.checkAutorizacao_SatusValidado.TabIndex = 0;
+            this.checkAutorizacao_SatusValidado.TabStop = false;
+            this.checkAutorizacao_SatusValidado.Text = "Validado";
+            this.checkAutorizacao_SatusValidado.UseVisualStyleBackColor = true;
             // 
             // label34
             // 
@@ -516,13 +517,13 @@
             this.label33.TabIndex = 157;
             this.label33.Text = "Data/Hora Autorização";
             // 
-            // textBox10
+            // textAutorizacao_DataHoraAutorizazacao
             // 
-            this.textBox10.Location = new System.Drawing.Point(147, 47);
-            this.textBox10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(120, 23);
-            this.textBox10.TabIndex = 156;
+            this.textAutorizacao_DataHoraAutorizazacao.Location = new System.Drawing.Point(147, 47);
+            this.textAutorizacao_DataHoraAutorizazacao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textAutorizacao_DataHoraAutorizazacao.Name = "textAutorizacao_DataHoraAutorizazacao";
+            this.textAutorizacao_DataHoraAutorizazacao.Size = new System.Drawing.Size(120, 23);
+            this.textAutorizacao_DataHoraAutorizazacao.TabIndex = 303;
             // 
             // label32
             // 
@@ -534,13 +535,13 @@
             this.label32.TabIndex = 155;
             this.label32.Text = "Protocolo";
             // 
-            // textBox9
+            // textAutorizacao_Protocolo
             // 
-            this.textBox9.Location = new System.Drawing.Point(661, 18);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 23);
-            this.textBox9.TabIndex = 154;
+            this.textAutorizacao_Protocolo.Location = new System.Drawing.Point(661, 18);
+            this.textAutorizacao_Protocolo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textAutorizacao_Protocolo.Name = "textAutorizacao_Protocolo";
+            this.textAutorizacao_Protocolo.Size = new System.Drawing.Size(100, 23);
+            this.textAutorizacao_Protocolo.TabIndex = 302;
             // 
             // label105
             // 
@@ -552,25 +553,25 @@
             this.label105.TabIndex = 43;
             this.label105.Text = "Chave Autorização";
             // 
-            // textInfoNFeChaveNFe
+            // textAutorizacao_ChaveAutorizacao
             // 
-            this.textInfoNFeChaveNFe.Location = new System.Drawing.Point(147, 18);
-            this.textInfoNFeChaveNFe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textInfoNFeChaveNFe.Name = "textInfoNFeChaveNFe";
-            this.textInfoNFeChaveNFe.Size = new System.Drawing.Size(438, 23);
-            this.textInfoNFeChaveNFe.TabIndex = 42;
+            this.textAutorizacao_ChaveAutorizacao.Location = new System.Drawing.Point(147, 18);
+            this.textAutorizacao_ChaveAutorizacao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textAutorizacao_ChaveAutorizacao.Name = "textAutorizacao_ChaveAutorizacao";
+            this.textAutorizacao_ChaveAutorizacao.Size = new System.Drawing.Size(438, 23);
+            this.textAutorizacao_ChaveAutorizacao.TabIndex = 301;
             // 
             // groupTotalizadores
             // 
             this.groupTotalizadores.Controls.Add(this.label31);
             this.groupTotalizadores.Controls.Add(this.label30);
             this.groupTotalizadores.Controls.Add(this.label28);
-            this.groupTotalizadores.Controls.Add(this.comboBox13);
-            this.groupTotalizadores.Controls.Add(this.numericUpDown5);
-            this.groupTotalizadores.Controls.Add(this.numericUpDown4);
+            this.groupTotalizadores.Controls.Add(this.comboTotalizadores_UnidadePeso);
+            this.groupTotalizadores.Controls.Add(this.numericTotalizadores_PesoBrutoCarga);
+            this.groupTotalizadores.Controls.Add(this.numericTotalizadores_QuantidadeNfe);
             this.groupTotalizadores.Controls.Add(this.label29);
-            this.groupTotalizadores.Controls.Add(this.numericUpDown3);
-            this.groupTotalizadores.Location = new System.Drawing.Point(8, 387);
+            this.groupTotalizadores.Controls.Add(this.numericTotalizadores_ValorTotalCarga);
+            this.groupTotalizadores.Location = new System.Drawing.Point(8, 352);
             this.groupTotalizadores.Name = "groupTotalizadores";
             this.groupTotalizadores.Size = new System.Drawing.Size(987, 51);
             this.groupTotalizadores.TabIndex = 158;
@@ -607,39 +608,42 @@
             this.label28.TabIndex = 155;
             this.label28.Text = "Valor Total da Carga";
             // 
-            // comboBox13
+            // comboTotalizadores_UnidadePeso
             // 
-            this.comboBox13.DropDownWidth = 200;
-            this.comboBox13.FormattingEnabled = true;
-            this.comboBox13.Location = new System.Drawing.Point(716, 18);
-            this.comboBox13.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox13.Name = "comboBox13";
-            this.comboBox13.Size = new System.Drawing.Size(45, 23);
-            this.comboBox13.TabIndex = 154;
+            this.comboTotalizadores_UnidadePeso.DropDownWidth = 200;
+            this.comboTotalizadores_UnidadePeso.FormattingEnabled = true;
+            this.comboTotalizadores_UnidadePeso.Location = new System.Drawing.Point(716, 18);
+            this.comboTotalizadores_UnidadePeso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboTotalizadores_UnidadePeso.Name = "comboTotalizadores_UnidadePeso";
+            this.comboTotalizadores_UnidadePeso.Size = new System.Drawing.Size(45, 23);
+            this.comboTotalizadores_UnidadePeso.TabIndex = 204;
             // 
-            // numericUpDown5
+            // numericTotalizadores_PesoBrutoCarga
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(528, 18);
-            this.numericUpDown5.Maximum = new decimal(new int[] {
+            this.numericTotalizadores_PesoBrutoCarga.Location = new System.Drawing.Point(528, 18);
+            this.numericTotalizadores_PesoBrutoCarga.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(85, 23);
-            this.numericUpDown5.TabIndex = 153;
+            this.numericTotalizadores_PesoBrutoCarga.Name = "numericTotalizadores_PesoBrutoCarga";
+            this.numericTotalizadores_PesoBrutoCarga.ReadOnly = true;
+            this.numericTotalizadores_PesoBrutoCarga.Size = new System.Drawing.Size(85, 23);
+            this.numericTotalizadores_PesoBrutoCarga.TabIndex = 203;
             // 
-            // numericUpDown4
+            // numericTotalizadores_QuantidadeNfe
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(117, 18);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
+            this.numericTotalizadores_QuantidadeNfe.Location = new System.Drawing.Point(117, 18);
+            this.numericTotalizadores_QuantidadeNfe.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(85, 23);
-            this.numericUpDown4.TabIndex = 152;
+            this.numericTotalizadores_QuantidadeNfe.Name = "numericTotalizadores_QuantidadeNfe";
+            this.numericTotalizadores_QuantidadeNfe.ReadOnly = true;
+            this.numericTotalizadores_QuantidadeNfe.Size = new System.Drawing.Size(85, 23);
+            this.numericTotalizadores_QuantidadeNfe.TabIndex = 201;
+            this.numericTotalizadores_QuantidadeNfe.TabStop = false;
             // 
             // label29
             // 
@@ -651,41 +655,42 @@
             this.label29.TabIndex = 151;
             this.label29.Text = "Quantidade de NFe";
             // 
-            // numericUpDown3
+            // numericTotalizadores_ValorTotalCarga
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(321, 18);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
+            this.numericTotalizadores_ValorTotalCarga.Location = new System.Drawing.Point(321, 18);
+            this.numericTotalizadores_ValorTotalCarga.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(85, 23);
-            this.numericUpDown3.TabIndex = 150;
+            this.numericTotalizadores_ValorTotalCarga.Name = "numericTotalizadores_ValorTotalCarga";
+            this.numericTotalizadores_ValorTotalCarga.ReadOnly = true;
+            this.numericTotalizadores_ValorTotalCarga.Size = new System.Drawing.Size(85, 23);
+            this.numericTotalizadores_ValorTotalCarga.TabIndex = 202;
             // 
             // groupDadosVeiculo
             // 
             this.groupDadosVeiculo.Controls.Add(this.groupVeículoTerceiro);
             this.groupDadosVeiculo.Controls.Add(this.label18);
-            this.groupDadosVeiculo.Controls.Add(this.numericUpDown2);
+            this.groupDadosVeiculo.Controls.Add(this.numericDadosVeiculo_CapacidadeM3);
             this.groupDadosVeiculo.Controls.Add(this.label17);
-            this.groupDadosVeiculo.Controls.Add(this.textBox4);
+            this.groupDadosVeiculo.Controls.Add(this.textDadosVeiculo_Renavam);
             this.groupDadosVeiculo.Controls.Add(this.label16);
-            this.groupDadosVeiculo.Controls.Add(this.comboBox10);
+            this.groupDadosVeiculo.Controls.Add(this.comboDadosVeiculo_TipoCarroceria);
             this.groupDadosVeiculo.Controls.Add(this.label15);
-            this.groupDadosVeiculo.Controls.Add(this.numericUpDown1);
-            this.groupDadosVeiculo.Controls.Add(this.numericVolumeTransportadosQuantidade);
+            this.groupDadosVeiculo.Controls.Add(this.numericDadosVeiculo_CapacidadeKG);
+            this.groupDadosVeiculo.Controls.Add(this.numericDadosVeiculo_TaraKG);
             this.groupDadosVeiculo.Controls.Add(this.label14);
-            this.groupDadosVeiculo.Controls.Add(this.comboBox9);
+            this.groupDadosVeiculo.Controls.Add(this.comboDadosVeiculo_UF);
             this.groupDadosVeiculo.Controls.Add(this.label13);
             this.groupDadosVeiculo.Controls.Add(this.label12);
-            this.groupDadosVeiculo.Controls.Add(this.comboBox8);
-            this.groupDadosVeiculo.Controls.Add(this.button1);
-            this.groupDadosVeiculo.Controls.Add(this.comboBox7);
+            this.groupDadosVeiculo.Controls.Add(this.comboDadosVeiculo_TipoRodado);
+            this.groupDadosVeiculo.Controls.Add(this.botaoPlaca);
+            this.groupDadosVeiculo.Controls.Add(this.comboDadosVeiculo_Placa);
             this.groupDadosVeiculo.Controls.Add(this.label11);
-            this.groupDadosVeiculo.Location = new System.Drawing.Point(8, 166);
+            this.groupDadosVeiculo.Location = new System.Drawing.Point(8, 135);
             this.groupDadosVeiculo.Name = "groupDadosVeiculo";
-            this.groupDadosVeiculo.Size = new System.Drawing.Size(987, 221);
+            this.groupDadosVeiculo.Size = new System.Drawing.Size(987, 217);
             this.groupDadosVeiculo.TabIndex = 19;
             this.groupDadosVeiculo.TabStop = false;
             this.groupDadosVeiculo.Text = "Dados do Veículo";
@@ -693,21 +698,21 @@
             // groupVeículoTerceiro
             // 
             this.groupVeículoTerceiro.Controls.Add(this.label27);
-            this.groupVeículoTerceiro.Controls.Add(this.comboBox12);
+            this.groupVeículoTerceiro.Controls.Add(this.comboDadosVeiculoVeiculoTerceiro_UFProprietario);
             this.groupVeículoTerceiro.Controls.Add(this.label26);
-            this.groupVeículoTerceiro.Controls.Add(this.comboBox11);
+            this.groupVeículoTerceiro.Controls.Add(this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario);
             this.groupVeículoTerceiro.Controls.Add(this.label25);
-            this.groupVeículoTerceiro.Controls.Add(this.textBox8);
+            this.groupVeículoTerceiro.Controls.Add(this.DadosVeiculoVeiculoTerceiro_IEProprietario);
             this.groupVeículoTerceiro.Controls.Add(this.label22);
-            this.groupVeículoTerceiro.Controls.Add(this.textBox7);
+            this.groupVeículoTerceiro.Controls.Add(this.textDadosVeiculoVeiculoTerceiro_RNTCProprietario);
             this.groupVeículoTerceiro.Controls.Add(this.label20);
-            this.groupVeículoTerceiro.Controls.Add(this.textBox6);
+            this.groupVeículoTerceiro.Controls.Add(this.textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario);
             this.groupVeículoTerceiro.Controls.Add(this.label19);
-            this.groupVeículoTerceiro.Controls.Add(this.textBox5);
-            this.groupVeículoTerceiro.Controls.Add(this.checkBox1);
+            this.groupVeículoTerceiro.Controls.Add(this.textDadosVeiculoVeiculoTerceiro_NomeProprietario);
+            this.groupVeículoTerceiro.Controls.Add(this.checkDadosVeiculoVceiuloTerceiro_Sim);
             this.groupVeículoTerceiro.Location = new System.Drawing.Point(8, 105);
             this.groupVeículoTerceiro.Name = "groupVeículoTerceiro";
-            this.groupVeículoTerceiro.Size = new System.Drawing.Size(972, 109);
+            this.groupVeículoTerceiro.Size = new System.Drawing.Size(972, 107);
             this.groupVeículoTerceiro.TabIndex = 156;
             this.groupVeículoTerceiro.TabStop = false;
             this.groupVeículoTerceiro.Text = "Veículo de Terceiro";
@@ -721,16 +726,6 @@
             this.label27.TabIndex = 58;
             this.label27.Text = "UF Proprietário";
             // 
-            // comboBox12
-            // 
-            this.comboBox12.DropDownWidth = 200;
-            this.comboBox12.FormattingEnabled = true;
-            this.comboBox12.Location = new System.Drawing.Point(372, 76);
-            this.comboBox12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox12.Name = "comboBox12";
-            this.comboBox12.Size = new System.Drawing.Size(123, 23);
-            this.comboBox12.TabIndex = 57;
-            // 
             // label26
             // 
             this.label26.AutoSize = true;
@@ -740,15 +735,15 @@
             this.label26.TabIndex = 56;
             this.label26.Text = "Tipo do Proprietário";
             // 
-            // comboBox11
+            // comboDadosVeiculoVeiculoTerceiro_TipoProprietario
             // 
-            this.comboBox11.DropDownWidth = 200;
-            this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Location = new System.Drawing.Point(134, 76);
-            this.comboBox11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox11.Name = "comboBox11";
-            this.comboBox11.Size = new System.Drawing.Size(123, 23);
-            this.comboBox11.TabIndex = 55;
+            this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario.DropDownWidth = 200;
+            this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario.FormattingEnabled = true;
+            this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario.Location = new System.Drawing.Point(134, 76);
+            this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario.Name = "comboDadosVeiculoVeiculoTerceiro_TipoProprietario";
+            this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario.Size = new System.Drawing.Size(123, 23);
+            this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario.TabIndex = 155;
             // 
             // label25
             // 
@@ -759,13 +754,13 @@
             this.label25.TabIndex = 54;
             this.label25.Text = "IE Proprietário";
             // 
-            // textBox8
+            // DadosVeiculoVeiculoTerceiro_IEProprietario
             // 
-            this.textBox8.Location = new System.Drawing.Point(372, 47);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(123, 23);
-            this.textBox8.TabIndex = 53;
+            this.DadosVeiculoVeiculoTerceiro_IEProprietario.Location = new System.Drawing.Point(372, 47);
+            this.DadosVeiculoVeiculoTerceiro_IEProprietario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DadosVeiculoVeiculoTerceiro_IEProprietario.Name = "DadosVeiculoVeiculoTerceiro_IEProprietario";
+            this.DadosVeiculoVeiculoTerceiro_IEProprietario.Size = new System.Drawing.Size(123, 23);
+            this.DadosVeiculoVeiculoTerceiro_IEProprietario.TabIndex = 153;
             // 
             // label22
             // 
@@ -776,13 +771,13 @@
             this.label22.TabIndex = 52;
             this.label22.Text = "RNTRC Proprietário";
             // 
-            // textBox7
+            // textDadosVeiculoVeiculoTerceiro_RNTCProprietario
             // 
-            this.textBox7.Location = new System.Drawing.Point(623, 47);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(123, 23);
-            this.textBox7.TabIndex = 51;
+            this.textDadosVeiculoVeiculoTerceiro_RNTCProprietario.Location = new System.Drawing.Point(623, 47);
+            this.textDadosVeiculoVeiculoTerceiro_RNTCProprietario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textDadosVeiculoVeiculoTerceiro_RNTCProprietario.Name = "textDadosVeiculoVeiculoTerceiro_RNTCProprietario";
+            this.textDadosVeiculoVeiculoTerceiro_RNTCProprietario.Size = new System.Drawing.Size(123, 23);
+            this.textDadosVeiculoVeiculoTerceiro_RNTCProprietario.TabIndex = 154;
             // 
             // label20
             // 
@@ -793,13 +788,13 @@
             this.label20.TabIndex = 50;
             this.label20.Text = "CPF/CNPJ Proprietário";
             // 
-            // textBox6
+            // textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario
             // 
-            this.textBox6.Location = new System.Drawing.Point(134, 47);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(110, 23);
-            this.textBox6.TabIndex = 49;
+            this.textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario.Location = new System.Drawing.Point(134, 47);
+            this.textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario.Name = "textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario";
+            this.textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario.Size = new System.Drawing.Size(110, 23);
+            this.textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario.TabIndex = 152;
             // 
             // label19
             // 
@@ -811,22 +806,22 @@
             this.label19.TabIndex = 48;
             this.label19.Text = "Nome do Proprietário";
             // 
-            // textBox5
+            // textDadosVeiculoVeiculoTerceiro_NomeProprietario
             // 
-            this.textBox5.Location = new System.Drawing.Point(134, 18);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(612, 23);
-            this.textBox5.TabIndex = 47;
+            this.textDadosVeiculoVeiculoTerceiro_NomeProprietario.Location = new System.Drawing.Point(134, 18);
+            this.textDadosVeiculoVeiculoTerceiro_NomeProprietario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textDadosVeiculoVeiculoTerceiro_NomeProprietario.Name = "textDadosVeiculoVeiculoTerceiro_NomeProprietario";
+            this.textDadosVeiculoVeiculoTerceiro_NomeProprietario.Size = new System.Drawing.Size(612, 23);
+            this.textDadosVeiculoVeiculoTerceiro_NomeProprietario.TabIndex = 151;
             // 
-            // checkBox1
+            // checkDadosVeiculoVceiuloTerceiro_Sim
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(112, 2);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkDadosVeiculoVceiuloTerceiro_Sim.AutoSize = true;
+            this.checkDadosVeiculoVceiuloTerceiro_Sim.Location = new System.Drawing.Point(112, 2);
+            this.checkDadosVeiculoVceiuloTerceiro_Sim.Name = "checkDadosVeiculoVceiuloTerceiro_Sim";
+            this.checkDadosVeiculoVceiuloTerceiro_Sim.Size = new System.Drawing.Size(15, 14);
+            this.checkDadosVeiculoVceiuloTerceiro_Sim.TabIndex = 150;
+            this.checkDadosVeiculoVceiuloTerceiro_Sim.UseVisualStyleBackColor = true;
             // 
             // label18
             // 
@@ -838,17 +833,17 @@
             this.label18.TabIndex = 155;
             this.label18.Text = "Capacidade(M3)";
             // 
-            // numericUpDown2
+            // numericDadosVeiculo_CapacidadeM3
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(596, 51);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.numericDadosVeiculo_CapacidadeM3.Location = new System.Drawing.Point(596, 51);
+            this.numericDadosVeiculo_CapacidadeM3.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(123, 23);
-            this.numericUpDown2.TabIndex = 154;
+            this.numericDadosVeiculo_CapacidadeM3.Name = "numericDadosVeiculo_CapacidadeM3";
+            this.numericDadosVeiculo_CapacidadeM3.Size = new System.Drawing.Size(123, 23);
+            this.numericDadosVeiculo_CapacidadeM3.TabIndex = 116;
             // 
             // label17
             // 
@@ -858,15 +853,15 @@
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(56, 15);
             this.label17.TabIndex = 153;
-            this.label17.Text = "Renavem";
+            this.label17.Text = "Renavam";
             // 
-            // textBox4
+            // textDadosVeiculo_Renavam
             // 
-            this.textBox4.Location = new System.Drawing.Point(596, 18);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(165, 23);
-            this.textBox4.TabIndex = 152;
+            this.textDadosVeiculo_Renavam.Location = new System.Drawing.Point(596, 18);
+            this.textDadosVeiculo_Renavam.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textDadosVeiculo_Renavam.Name = "textDadosVeiculo_Renavam";
+            this.textDadosVeiculo_Renavam.Size = new System.Drawing.Size(165, 23);
+            this.textDadosVeiculo_Renavam.TabIndex = 113;
             // 
             // label16
             // 
@@ -877,15 +872,15 @@
             this.label16.TabIndex = 151;
             this.label16.Text = "Tipo de Carroceria";
             // 
-            // comboBox10
+            // comboDadosVeiculo_TipoCarroceria
             // 
-            this.comboBox10.DropDownWidth = 200;
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(342, 77);
-            this.comboBox10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(123, 23);
-            this.comboBox10.TabIndex = 150;
+            this.comboDadosVeiculo_TipoCarroceria.DropDownWidth = 200;
+            this.comboDadosVeiculo_TipoCarroceria.FormattingEnabled = true;
+            this.comboDadosVeiculo_TipoCarroceria.Location = new System.Drawing.Point(342, 77);
+            this.comboDadosVeiculo_TipoCarroceria.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboDadosVeiculo_TipoCarroceria.Name = "comboDadosVeiculo_TipoCarroceria";
+            this.comboDadosVeiculo_TipoCarroceria.Size = new System.Drawing.Size(123, 23);
+            this.comboDadosVeiculo_TipoCarroceria.TabIndex = 118;
             // 
             // label15
             // 
@@ -897,29 +892,29 @@
             this.label15.TabIndex = 149;
             this.label15.Text = "Capacidade(KG)";
             // 
-            // numericUpDown1
+            // numericDadosVeiculo_CapacidadeKG
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(342, 47);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.numericDadosVeiculo_CapacidadeKG.Location = new System.Drawing.Point(342, 47);
+            this.numericDadosVeiculo_CapacidadeKG.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(123, 23);
-            this.numericUpDown1.TabIndex = 148;
+            this.numericDadosVeiculo_CapacidadeKG.Name = "numericDadosVeiculo_CapacidadeKG";
+            this.numericDadosVeiculo_CapacidadeKG.Size = new System.Drawing.Size(123, 23);
+            this.numericDadosVeiculo_CapacidadeKG.TabIndex = 115;
             // 
-            // numericVolumeTransportadosQuantidade
+            // numericDadosVeiculo_TaraKG
             // 
-            this.numericVolumeTransportadosQuantidade.Location = new System.Drawing.Point(98, 47);
-            this.numericVolumeTransportadosQuantidade.Maximum = new decimal(new int[] {
+            this.numericDadosVeiculo_TaraKG.Location = new System.Drawing.Point(98, 47);
+            this.numericDadosVeiculo_TaraKG.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
-            this.numericVolumeTransportadosQuantidade.Name = "numericVolumeTransportadosQuantidade";
-            this.numericVolumeTransportadosQuantidade.Size = new System.Drawing.Size(123, 23);
-            this.numericVolumeTransportadosQuantidade.TabIndex = 147;
+            this.numericDadosVeiculo_TaraKG.Name = "numericDadosVeiculo_TaraKG";
+            this.numericDadosVeiculo_TaraKG.Size = new System.Drawing.Size(123, 23);
+            this.numericDadosVeiculo_TaraKG.TabIndex = 114;
             // 
             // label14
             // 
@@ -930,15 +925,15 @@
             this.label14.TabIndex = 50;
             this.label14.Text = "UF";
             // 
-            // comboBox9
+            // comboDadosVeiculo_UF
             // 
-            this.comboBox9.DropDownWidth = 200;
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(342, 18);
-            this.comboBox9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(123, 23);
-            this.comboBox9.TabIndex = 49;
+            this.comboDadosVeiculo_UF.DropDownWidth = 200;
+            this.comboDadosVeiculo_UF.FormattingEnabled = true;
+            this.comboDadosVeiculo_UF.Location = new System.Drawing.Point(342, 18);
+            this.comboDadosVeiculo_UF.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboDadosVeiculo_UF.Name = "comboDadosVeiculo_UF";
+            this.comboDadosVeiculo_UF.Size = new System.Drawing.Size(123, 23);
+            this.comboDadosVeiculo_UF.TabIndex = 102;
             // 
             // label13
             // 
@@ -959,33 +954,34 @@
             this.label12.TabIndex = 37;
             this.label12.Text = "Tipo de Rodado";
             // 
-            // comboBox8
+            // comboDadosVeiculo_TipoRodado
             // 
-            this.comboBox8.DropDownWidth = 200;
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(98, 76);
-            this.comboBox8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(123, 23);
-            this.comboBox8.TabIndex = 36;
+            this.comboDadosVeiculo_TipoRodado.DropDownWidth = 200;
+            this.comboDadosVeiculo_TipoRodado.FormattingEnabled = true;
+            this.comboDadosVeiculo_TipoRodado.Location = new System.Drawing.Point(98, 76);
+            this.comboDadosVeiculo_TipoRodado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboDadosVeiculo_TipoRodado.Name = "comboDadosVeiculo_TipoRodado";
+            this.comboDadosVeiculo_TipoRodado.Size = new System.Drawing.Size(123, 23);
+            this.comboDadosVeiculo_TipoRodado.TabIndex = 117;
             // 
-            // button1
+            // botaoPlaca
             // 
-            this.button1.Location = new System.Drawing.Point(185, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(23, 23);
-            this.button1.TabIndex = 32;
-            this.button1.UseVisualStyleBackColor = true;
+            this.botaoPlaca.Location = new System.Drawing.Point(185, 18);
+            this.botaoPlaca.Name = "botaoPlaca";
+            this.botaoPlaca.Size = new System.Drawing.Size(23, 23);
+            this.botaoPlaca.TabIndex = 32;
+            this.botaoPlaca.TabStop = false;
+            this.botaoPlaca.UseVisualStyleBackColor = true;
             // 
-            // comboBox7
+            // comboDadosVeiculo_Placa
             // 
-            this.comboBox7.DropDownWidth = 200;
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(98, 18);
-            this.comboBox7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(85, 23);
-            this.comboBox7.TabIndex = 31;
+            this.comboDadosVeiculo_Placa.DropDownWidth = 200;
+            this.comboDadosVeiculo_Placa.FormattingEnabled = true;
+            this.comboDadosVeiculo_Placa.Location = new System.Drawing.Point(98, 18);
+            this.comboDadosVeiculo_Placa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboDadosVeiculo_Placa.Name = "comboDadosVeiculo_Placa";
+            this.comboDadosVeiculo_Placa.Size = new System.Drawing.Size(85, 23);
+            this.comboDadosVeiculo_Placa.TabIndex = 101;
             // 
             // label11
             // 
@@ -998,34 +994,34 @@
             // 
             // groupIdentificacao
             // 
+            this.groupIdentificacao.Controls.Add(this.numericIdentificacao_Numero);
             this.groupIdentificacao.Controls.Add(this.label10);
             this.groupIdentificacao.Controls.Add(this.label9);
-            this.groupIdentificacao.Controls.Add(this.textBox3);
-            this.groupIdentificacao.Controls.Add(this.textBox2);
-            this.groupIdentificacao.Controls.Add(this.comboBox6);
+            this.groupIdentificacao.Controls.Add(this.textIdentificacao_Carga);
+            this.groupIdentificacao.Controls.Add(this.comboIdentificacao_CidadeCarregamento);
             this.groupIdentificacao.Controls.Add(this.label8);
             this.groupIdentificacao.Controls.Add(this.label6);
-            this.groupIdentificacao.Controls.Add(this.textBox1);
+            this.groupIdentificacao.Controls.Add(this.textIdentificacao_RNTRCEmitente);
             this.groupIdentificacao.Controls.Add(this.label5);
-            this.groupIdentificacao.Controls.Add(this.comboBox5);
+            this.groupIdentificacao.Controls.Add(this.comboIdentificacao_TipoTransportador);
             this.groupIdentificacao.Controls.Add(this.label4);
-            this.groupIdentificacao.Controls.Add(this.comboBox4);
+            this.groupIdentificacao.Controls.Add(this.comboIdentificacao_UFDescarga);
             this.groupIdentificacao.Controls.Add(this.label3);
             this.groupIdentificacao.Controls.Add(this.label2);
-            this.groupIdentificacao.Controls.Add(this.comboBox3);
-            this.groupIdentificacao.Controls.Add(this.comboBox2);
-            this.groupIdentificacao.Controls.Add(this.comboBox1);
+            this.groupIdentificacao.Controls.Add(this.comboIdentificacao_TipoEmissao);
+            this.groupIdentificacao.Controls.Add(this.comboIdentificacao_UFCarregamento);
+            this.groupIdentificacao.Controls.Add(this.comboIdentificacao_Serie);
             this.groupIdentificacao.Controls.Add(this.label1);
-            this.groupIdentificacao.Controls.Add(this.comboFinalidade);
+            this.groupIdentificacao.Controls.Add(this.comboIdentificacao_Empresa);
             this.groupIdentificacao.Controls.Add(this.label21);
             this.groupIdentificacao.Controls.Add(this.label24);
-            this.groupIdentificacao.Controls.Add(this.textHora);
+            this.groupIdentificacao.Controls.Add(this.textIdentificacao_HoraEmissao);
             this.groupIdentificacao.Controls.Add(this.label23);
-            this.groupIdentificacao.Controls.Add(this.dateDataSaida);
+            this.groupIdentificacao.Controls.Add(this.dateIdentificacao_Emissao);
             this.groupIdentificacao.Location = new System.Drawing.Point(8, 0);
             this.groupIdentificacao.Name = "groupIdentificacao";
-            this.groupIdentificacao.Size = new System.Drawing.Size(987, 166);
-            this.groupIdentificacao.TabIndex = 18;
+            this.groupIdentificacao.Size = new System.Drawing.Size(987, 135);
+            this.groupIdentificacao.TabIndex = 12;
             this.groupIdentificacao.TabStop = false;
             this.groupIdentificacao.Text = "Identificação";
             // 
@@ -1049,31 +1045,23 @@
             this.label9.TabIndex = 46;
             this.label9.Text = "Número";
             // 
-            // textBox3
+            // textIdentificacao_Carga
             // 
-            this.textBox3.Location = new System.Drawing.Point(596, 47);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(165, 23);
-            this.textBox3.TabIndex = 45;
+            this.textIdentificacao_Carga.Location = new System.Drawing.Point(596, 47);
+            this.textIdentificacao_Carga.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textIdentificacao_Carga.Name = "textIdentificacao_Carga";
+            this.textIdentificacao_Carga.Size = new System.Drawing.Size(165, 23);
+            this.textIdentificacao_Carga.TabIndex = 6;
             // 
-            // textBox2
+            // comboIdentificacao_CidadeCarregamento
             // 
-            this.textBox2.Location = new System.Drawing.Point(596, 18);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(165, 23);
-            this.textBox2.TabIndex = 44;
-            // 
-            // comboBox6
-            // 
-            this.comboBox6.DropDownWidth = 200;
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(596, 76);
-            this.comboBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(165, 23);
-            this.comboBox6.TabIndex = 43;
+            this.comboIdentificacao_CidadeCarregamento.DropDownWidth = 200;
+            this.comboIdentificacao_CidadeCarregamento.FormattingEnabled = true;
+            this.comboIdentificacao_CidadeCarregamento.Location = new System.Drawing.Point(596, 76);
+            this.comboIdentificacao_CidadeCarregamento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboIdentificacao_CidadeCarregamento.Name = "comboIdentificacao_CidadeCarregamento";
+            this.comboIdentificacao_CidadeCarregamento.Size = new System.Drawing.Size(165, 23);
+            this.comboIdentificacao_CidadeCarregamento.TabIndex = 9;
             // 
             // label8
             // 
@@ -1087,19 +1075,19 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 138);
+            this.label6.Location = new System.Drawing.Point(500, 109);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 15);
             this.label6.TabIndex = 41;
             this.label6.Text = "RNTRC Emitente";
             // 
-            // textBox1
+            // textIdentificacao_RNTRCEmitente
             // 
-            this.textBox1.Location = new System.Drawing.Point(101, 134);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(123, 23);
-            this.textBox1.TabIndex = 40;
+            this.textIdentificacao_RNTRCEmitente.Location = new System.Drawing.Point(596, 105);
+            this.textIdentificacao_RNTRCEmitente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textIdentificacao_RNTRCEmitente.Name = "textIdentificacao_RNTRCEmitente";
+            this.textIdentificacao_RNTRCEmitente.Size = new System.Drawing.Size(165, 23);
+            this.textIdentificacao_RNTRCEmitente.TabIndex = 40;
             // 
             // label5
             // 
@@ -1110,15 +1098,15 @@
             this.label5.TabIndex = 39;
             this.label5.Text = "Tipo Transportador";
             // 
-            // comboBox5
+            // comboIdentificacao_TipoTransportador
             // 
-            this.comboBox5.DropDownWidth = 200;
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(342, 105);
-            this.comboBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(123, 23);
-            this.comboBox5.TabIndex = 38;
+            this.comboIdentificacao_TipoTransportador.DropDownWidth = 200;
+            this.comboIdentificacao_TipoTransportador.FormattingEnabled = true;
+            this.comboIdentificacao_TipoTransportador.Location = new System.Drawing.Point(342, 105);
+            this.comboIdentificacao_TipoTransportador.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboIdentificacao_TipoTransportador.Name = "comboIdentificacao_TipoTransportador";
+            this.comboIdentificacao_TipoTransportador.Size = new System.Drawing.Size(123, 23);
+            this.comboIdentificacao_TipoTransportador.TabIndex = 11;
             // 
             // label4
             // 
@@ -1129,15 +1117,15 @@
             this.label4.TabIndex = 37;
             this.label4.Text = "UF Descarga";
             // 
-            // comboBox4
+            // comboIdentificacao_UFDescarga
             // 
-            this.comboBox4.DropDownWidth = 200;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(101, 105);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(123, 23);
-            this.comboBox4.TabIndex = 36;
+            this.comboIdentificacao_UFDescarga.DropDownWidth = 200;
+            this.comboIdentificacao_UFDescarga.FormattingEnabled = true;
+            this.comboIdentificacao_UFDescarga.Location = new System.Drawing.Point(101, 105);
+            this.comboIdentificacao_UFDescarga.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboIdentificacao_UFDescarga.Name = "comboIdentificacao_UFDescarga";
+            this.comboIdentificacao_UFDescarga.Size = new System.Drawing.Size(123, 23);
+            this.comboIdentificacao_UFDescarga.TabIndex = 10;
             // 
             // label3
             // 
@@ -1157,35 +1145,35 @@
             this.label2.TabIndex = 34;
             this.label2.Text = "Tipo de Emissão";
             // 
-            // comboBox3
+            // comboIdentificacao_TipoEmissao
             // 
-            this.comboBox3.DropDownWidth = 200;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(101, 76);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(123, 23);
-            this.comboBox3.TabIndex = 33;
+            this.comboIdentificacao_TipoEmissao.DropDownWidth = 200;
+            this.comboIdentificacao_TipoEmissao.FormattingEnabled = true;
+            this.comboIdentificacao_TipoEmissao.Location = new System.Drawing.Point(101, 76);
+            this.comboIdentificacao_TipoEmissao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboIdentificacao_TipoEmissao.Name = "comboIdentificacao_TipoEmissao";
+            this.comboIdentificacao_TipoEmissao.Size = new System.Drawing.Size(123, 23);
+            this.comboIdentificacao_TipoEmissao.TabIndex = 7;
             // 
-            // comboBox2
+            // comboIdentificacao_UFCarregamento
             // 
-            this.comboBox2.DropDownWidth = 200;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(342, 76);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(123, 23);
-            this.comboBox2.TabIndex = 32;
+            this.comboIdentificacao_UFCarregamento.DropDownWidth = 200;
+            this.comboIdentificacao_UFCarregamento.FormattingEnabled = true;
+            this.comboIdentificacao_UFCarregamento.Location = new System.Drawing.Point(342, 76);
+            this.comboIdentificacao_UFCarregamento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboIdentificacao_UFCarregamento.Name = "comboIdentificacao_UFCarregamento";
+            this.comboIdentificacao_UFCarregamento.Size = new System.Drawing.Size(123, 23);
+            this.comboIdentificacao_UFCarregamento.TabIndex = 8;
             // 
-            // comboBox1
+            // comboIdentificacao_Serie
             // 
-            this.comboBox1.DropDownWidth = 200;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(342, 47);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(123, 23);
-            this.comboBox1.TabIndex = 31;
+            this.comboIdentificacao_Serie.DropDownWidth = 200;
+            this.comboIdentificacao_Serie.FormattingEnabled = true;
+            this.comboIdentificacao_Serie.Location = new System.Drawing.Point(342, 47);
+            this.comboIdentificacao_Serie.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboIdentificacao_Serie.Name = "comboIdentificacao_Serie";
+            this.comboIdentificacao_Serie.Size = new System.Drawing.Size(123, 23);
+            this.comboIdentificacao_Serie.TabIndex = 5;
             // 
             // label1
             // 
@@ -1196,15 +1184,15 @@
             this.label1.TabIndex = 30;
             this.label1.Text = "Série";
             // 
-            // comboFinalidade
+            // comboIdentificacao_Empresa
             // 
-            this.comboFinalidade.DropDownWidth = 200;
-            this.comboFinalidade.FormattingEnabled = true;
-            this.comboFinalidade.Location = new System.Drawing.Point(101, 47);
-            this.comboFinalidade.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboFinalidade.Name = "comboFinalidade";
-            this.comboFinalidade.Size = new System.Drawing.Size(123, 23);
-            this.comboFinalidade.TabIndex = 29;
+            this.comboIdentificacao_Empresa.DropDownWidth = 200;
+            this.comboIdentificacao_Empresa.FormattingEnabled = true;
+            this.comboIdentificacao_Empresa.Location = new System.Drawing.Point(101, 47);
+            this.comboIdentificacao_Empresa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboIdentificacao_Empresa.Name = "comboIdentificacao_Empresa";
+            this.comboIdentificacao_Empresa.Size = new System.Drawing.Size(123, 23);
+            this.comboIdentificacao_Empresa.TabIndex = 4;
             // 
             // label21
             // 
@@ -1224,13 +1212,13 @@
             this.label24.TabIndex = 27;
             this.label24.Text = "Hora de Emissão:";
             // 
-            // textHora
+            // textIdentificacao_HoraEmissao
             // 
-            this.textHora.Location = new System.Drawing.Point(342, 18);
-            this.textHora.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textHora.Name = "textHora";
-            this.textHora.Size = new System.Drawing.Size(44, 23);
-            this.textHora.TabIndex = 26;
+            this.textIdentificacao_HoraEmissao.Location = new System.Drawing.Point(342, 18);
+            this.textIdentificacao_HoraEmissao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textIdentificacao_HoraEmissao.Name = "textIdentificacao_HoraEmissao";
+            this.textIdentificacao_HoraEmissao.Size = new System.Drawing.Size(44, 23);
+            this.textIdentificacao_HoraEmissao.TabIndex = 2;
             // 
             // label23
             // 
@@ -1241,13 +1229,43 @@
             this.label23.TabIndex = 25;
             this.label23.Text = "Data de Emissão";
             // 
-            // dateDataSaida
+            // dateIdentificacao_Emissao
             // 
-            this.dateDataSaida.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDataSaida.Location = new System.Drawing.Point(101, 18);
-            this.dateDataSaida.Name = "dateDataSaida";
-            this.dateDataSaida.Size = new System.Drawing.Size(81, 23);
-            this.dateDataSaida.TabIndex = 24;
+            this.dateIdentificacao_Emissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateIdentificacao_Emissao.Location = new System.Drawing.Point(101, 18);
+            this.dateIdentificacao_Emissao.Name = "dateIdentificacao_Emissao";
+            this.dateIdentificacao_Emissao.Size = new System.Drawing.Size(81, 23);
+            this.dateIdentificacao_Emissao.TabIndex = 1;
+            // 
+            // numericIdentificacao_Numero
+            // 
+            this.numericIdentificacao_Numero.Location = new System.Drawing.Point(596, 18);
+            this.numericIdentificacao_Numero.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.numericIdentificacao_Numero.Name = "numericIdentificacao_Numero";
+            this.numericIdentificacao_Numero.Size = new System.Drawing.Size(165, 23);
+            this.numericIdentificacao_Numero.TabIndex = 3;
+            // 
+            // comboDadosVeiculoVeiculoTerceiro_UFProprietario
+            // 
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.DropDownWidth = 200;
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.FormattingEnabled = true;
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Location = new System.Drawing.Point(372, 76);
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Name = "comboDadosVeiculoVeiculoTerceiro_UFProprietario";
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Size = new System.Drawing.Size(123, 23);
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.TabIndex = 156;
+            // 
+            // textAutorizacao_DtaHoraEncerramento
+            // 
+            this.textAutorizacao_DtaHoraEncerramento.Location = new System.Drawing.Point(147, 76);
+            this.textAutorizacao_DtaHoraEncerramento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textAutorizacao_DtaHoraEncerramento.Name = "textAutorizacao_DtaHoraEncerramento";
+            this.textAutorizacao_DtaHoraEncerramento.Size = new System.Drawing.Size(120, 23);
+            this.textAutorizacao_DtaHoraEncerramento.TabIndex = 304;
             // 
             // frmFiscal_MDFe
             // 
@@ -1282,18 +1300,19 @@
             this.groupAutorizacaoStatus.PerformLayout();
             this.groupTotalizadores.ResumeLayout(false);
             this.groupTotalizadores.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTotalizadores_PesoBrutoCarga)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTotalizadores_QuantidadeNfe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericTotalizadores_ValorTotalCarga)).EndInit();
             this.groupDadosVeiculo.ResumeLayout(false);
             this.groupDadosVeiculo.PerformLayout();
             this.groupVeículoTerceiro.ResumeLayout(false);
             this.groupVeículoTerceiro.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericVolumeTransportadosQuantidade)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDadosVeiculo_CapacidadeM3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDadosVeiculo_CapacidadeKG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDadosVeiculo_TaraKG)).EndInit();
             this.groupIdentificacao.ResumeLayout(false);
             this.groupIdentificacao.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericIdentificacao_Numero)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1308,88 +1327,85 @@
         private System.Windows.Forms.GroupBox groupIdentificacao;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.TextBox textIdentificacao_Carga;
+        private System.Windows.Forms.ComboBox comboIdentificacao_CidadeCarregamento;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textIdentificacao_RNTRCEmitente;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox comboIdentificacao_TipoTransportador;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox comboIdentificacao_UFDescarga;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboIdentificacao_TipoEmissao;
+        private System.Windows.Forms.ComboBox comboIdentificacao_Serie;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboFinalidade;
+        private System.Windows.Forms.ComboBox comboIdentificacao_Empresa;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox textHora;
+        private System.Windows.Forms.TextBox textIdentificacao_HoraEmissao;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.DateTimePicker dateDataSaida;
+        private System.Windows.Forms.DateTimePicker dateIdentificacao_Emissao;
         private System.Windows.Forms.GroupBox groupDadosVeiculo;
-        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.ComboBox comboDadosVeiculo_Placa;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button botaoPlaca;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox comboBox8;
+        private System.Windows.Forms.ComboBox comboDadosVeiculo_TipoRodado;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboIdentificacao_UFCarregamento;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox comboBox9;
-        private System.Windows.Forms.NumericUpDown numericVolumeTransportadosQuantidade;
+        private System.Windows.Forms.ComboBox comboDadosVeiculo_UF;
+        private System.Windows.Forms.NumericUpDown numericDadosVeiculo_TaraKG;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericDadosVeiculo_CapacidadeKG;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox comboBox10;
+        private System.Windows.Forms.ComboBox comboDadosVeiculo_TipoCarroceria;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textDadosVeiculo_Renavam;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericDadosVeiculo_CapacidadeM3;
         private System.Windows.Forms.GroupBox groupVeículoTerceiro;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkDadosVeiculoVceiuloTerceiro_Sim;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textDadosVeiculoVeiculoTerceiro_NomeProprietario;
+        private System.Windows.Forms.TextBox textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textDadosVeiculoVeiculoTerceiro_RNTCProprietario;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox DadosVeiculoVeiculoTerceiro_IEProprietario;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.ComboBox comboBox11;
+        private System.Windows.Forms.ComboBox comboDadosVeiculoVeiculoTerceiro_TipoProprietario;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.ComboBox comboBox12;
         private System.Windows.Forms.GroupBox groupTotalizadores;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.ComboBox comboBox13;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.ComboBox comboTotalizadores_UnidadePeso;
+        private System.Windows.Forms.NumericUpDown numericTotalizadores_PesoBrutoCarga;
+        private System.Windows.Forms.NumericUpDown numericTotalizadores_QuantidadeNfe;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericTotalizadores_ValorTotalCarga;
         private System.Windows.Forms.GroupBox groupAutorizacao;
         private System.Windows.Forms.Label label105;
-        private System.Windows.Forms.TextBox textInfoNFeChaveNFe;
+        private System.Windows.Forms.TextBox textAutorizacao_ChaveAutorizacao;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textAutorizacao_Protocolo;
+        private System.Windows.Forms.TextBox textAutorizacao_DataHoraAutorizazacao;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.GroupBox groupAutorizacaoStatus;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkAutorizacao_SatusValidado;
+        private System.Windows.Forms.CheckBox checkAutorizacao_SatusAutorizado;
+        private System.Windows.Forms.CheckBox checkAutorizacao_SatusCancelado;
+        private System.Windows.Forms.CheckBox checkAutorizacao_SatusEncerramento;
         private System.Windows.Forms.GroupBox groupCondutor;
         private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textCondutor_NomeCondutor;
         private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textCondutor_CPFCNPJCondutor;
         private System.Windows.Forms.GroupBox groupAdicionarNotas;
         private System.Windows.Forms.Panel panel2;
         private ucFiscal_MDFe_AdicionarNotas ucFiscal_mdFe_AdicionarNotas;
@@ -1402,8 +1418,11 @@
         private System.Windows.Forms.ComboBox comboPercursoEstado01;
         private System.Windows.Forms.PictureBox picPercurso;
         private System.Windows.Forms.GroupBox groupInformaoeesAdicionaisInteresseFisco;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richInformaoeesAdicionaisInteresseFisco;
         private System.Windows.Forms.GroupBox groupInformacoesComplementaresInteresseContribuinte;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richInformacoesComplementaresInteresseContribuinte;
+        private System.Windows.Forms.NumericUpDown numericIdentificacao_Numero;
+        private System.Windows.Forms.ComboBox comboDadosVeiculoVeiculoTerceiro_UFProprietario;
+        private System.Windows.Forms.TextBox textAutorizacao_DtaHoraEncerramento;
     }
 }

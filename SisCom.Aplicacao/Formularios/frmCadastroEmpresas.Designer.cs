@@ -99,6 +99,13 @@ namespace SisCom.Aplicacao.Formularios
             this.comboNFELayout = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.comboNFEAmbiente = new System.Windows.Forms.ComboBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label31 = new System.Windows.Forms.Label();
+            this.textMDFeSerie = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.comboMDFeAmbiente = new System.Windows.Forms.ComboBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.comboMDFeTipoEmissor = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label30 = new System.Windows.Forms.Label();
@@ -109,23 +116,18 @@ namespace SisCom.Aplicacao.Formularios
             this.botaoBuscarLogomarca = new System.Windows.Forms.Button();
             this.textCaminhoLogomarca = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.label31 = new System.Windows.Forms.Label();
-            this.textMDFeSerie = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.comboMDFeAmbiente = new System.Windows.Forms.ComboBox();
-            this.label36 = new System.Windows.Forms.Label();
-            this.comboMDFeTipoEmissor = new System.Windows.Forms.ComboBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.botaoNuvemFiscalDiretorioXMLs = new System.Windows.Forms.Button();
+            this.textNuvemFiscalDiretorioXMLs = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.botaoSelecionarCertificado = new System.Windows.Forms.Button();
             this.checkUtilizarNuvemFiscal = new System.Windows.Forms.CheckBox();
             this.textNuvemFiscalCertificado = new System.Windows.Forms.TextBox();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.comboNuvemFiscalAmbienteWebService = new System.Windows.Forms.ComboBox();
-            this.botaoNuvemFiscalDiretorioXMLs = new System.Windows.Forms.Button();
-            this.textNuvemFiscalDiretorioXMLs = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.textMDFEUltimoNumero = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -137,11 +139,11 @@ namespace SisCom.Aplicacao.Formularios
             this.tabIdentificacao.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCreditoSimplesNacional)).BeginInit();
             this.tabPage1.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureLogomarca)).BeginInit();
-            this.tabPage6.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -341,8 +343,8 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.tabEnderecos.Controls.Add(this.tabIdentificacao);
             this.tabEnderecos.Controls.Add(this.tabPage1);
-            this.tabEnderecos.Controls.Add(this.tabPage5);
             this.tabEnderecos.Controls.Add(this.tabPage6);
+            this.tabEnderecos.Controls.Add(this.tabPage5);
             this.tabEnderecos.Controls.Add(this.tabPage7);
             this.tabEnderecos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabEnderecos.Location = new System.Drawing.Point(0, 0);
@@ -393,7 +395,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tabIdentificacao.Controls.Add(this.textTelefone);
             this.tabIdentificacao.Location = new System.Drawing.Point(4, 24);
             this.tabIdentificacao.Name = "tabIdentificacao";
-            this.tabIdentificacao.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabIdentificacao.Padding = new System.Windows.Forms.Padding(3);
             this.tabIdentificacao.Size = new System.Drawing.Size(718, 333);
             this.tabIdentificacao.TabIndex = 0;
             this.tabIdentificacao.Text = "Identificação";
@@ -763,10 +765,10 @@ namespace SisCom.Aplicacao.Formularios
             this.tabPage1.Controls.Add(this.comboNFEAmbiente);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(718, 333);
             this.tabPage1.TabIndex = 1;
-            this.tabPage1.Text = "Nfe";
+            this.tabPage1.Text = "NFe";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // textNFEUltimaNotaFiscal
@@ -860,13 +862,87 @@ namespace SisCom.Aplicacao.Formularios
             this.comboNFEAmbiente.TabIndex = 101;
             this.comboNFEAmbiente.TextChanged += new System.EventHandler(this.textoTextChanged);
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.textMDFEUltimoNumero);
+            this.tabPage6.Controls.Add(this.label33);
+            this.tabPage6.Controls.Add(this.label31);
+            this.tabPage6.Controls.Add(this.textMDFeSerie);
+            this.tabPage6.Controls.Add(this.label32);
+            this.tabPage6.Controls.Add(this.comboMDFeAmbiente);
+            this.tabPage6.Controls.Add(this.label36);
+            this.tabPage6.Controls.Add(this.comboMDFeTipoEmissor);
+            this.tabPage6.Location = new System.Drawing.Point(4, 24);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(718, 333);
+            this.tabPage6.TabIndex = 6;
+            this.tabPage6.Text = "MDFe";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(22, 66);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(35, 15);
+            this.label31.TabIndex = 82;
+            this.label31.Text = "Série:";
+            // 
+            // textMDFeSerie
+            // 
+            this.textMDFeSerie.Location = new System.Drawing.Point(131, 66);
+            this.textMDFeSerie.MaxLength = 2;
+            this.textMDFeSerie.Name = "textMDFeSerie";
+            this.textMDFeSerie.Size = new System.Drawing.Size(80, 23);
+            this.textMDFeSerie.TabIndex = 303;
+            this.textMDFeSerie.TextChanged += new System.EventHandler(this.textoTextChanged);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(22, 41);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(94, 15);
+            this.label32.TabIndex = 80;
+            this.label32.Text = "Tipo do Emissor:";
+            // 
+            // comboMDFeAmbiente
+            // 
+            this.comboMDFeAmbiente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboMDFeAmbiente.FormattingEnabled = true;
+            this.comboMDFeAmbiente.Location = new System.Drawing.Point(131, 8);
+            this.comboMDFeAmbiente.Name = "comboMDFeAmbiente";
+            this.comboMDFeAmbiente.Size = new System.Drawing.Size(130, 23);
+            this.comboMDFeAmbiente.TabIndex = 301;
+            this.comboMDFeAmbiente.TextChanged += new System.EventHandler(this.textoTextChanged);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(22, 12);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(65, 15);
+            this.label36.TabIndex = 77;
+            this.label36.Text = "Ambiente: ";
+            // 
+            // comboMDFeTipoEmissor
+            // 
+            this.comboMDFeTipoEmissor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboMDFeTipoEmissor.FormattingEnabled = true;
+            this.comboMDFeTipoEmissor.Location = new System.Drawing.Point(131, 37);
+            this.comboMDFeTipoEmissor.Name = "comboMDFeTipoEmissor";
+            this.comboMDFeTipoEmissor.Size = new System.Drawing.Size(130, 23);
+            this.comboMDFeTipoEmissor.TabIndex = 302;
+            this.comboMDFeTipoEmissor.TextChanged += new System.EventHandler(this.textoTextChanged);
+            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.groupBox3);
             this.tabPage5.Controls.Add(this.groupBox2);
             this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(718, 333);
             this.tabPage5.TabIndex = 5;
             this.tabPage5.Text = "Configuração";
@@ -960,78 +1036,6 @@ namespace SisCom.Aplicacao.Formularios
             this.label28.TabIndex = 14;
             this.label28.Text = "Caminho da Logomarca:";
             // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.label31);
-            this.tabPage6.Controls.Add(this.textMDFeSerie);
-            this.tabPage6.Controls.Add(this.label32);
-            this.tabPage6.Controls.Add(this.comboMDFeAmbiente);
-            this.tabPage6.Controls.Add(this.label36);
-            this.tabPage6.Controls.Add(this.comboMDFeTipoEmissor);
-            this.tabPage6.Location = new System.Drawing.Point(4, 24);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage6.Size = new System.Drawing.Size(718, 333);
-            this.tabPage6.TabIndex = 6;
-            this.tabPage6.Text = "MDFe";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(22, 12);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(35, 15);
-            this.label31.TabIndex = 82;
-            this.label31.Text = "Série:";
-            // 
-            // textMDFeSerie
-            // 
-            this.textMDFeSerie.Location = new System.Drawing.Point(131, 8);
-            this.textMDFeSerie.MaxLength = 2;
-            this.textMDFeSerie.Name = "textMDFeSerie";
-            this.textMDFeSerie.Size = new System.Drawing.Size(80, 23);
-            this.textMDFeSerie.TabIndex = 301;
-            this.textMDFeSerie.TextChanged += new System.EventHandler(this.textoTextChanged);
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(22, 66);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(94, 15);
-            this.label32.TabIndex = 80;
-            this.label32.Text = "Tipo do Emissor:";
-            // 
-            // comboMDFeAmbiente
-            // 
-            this.comboMDFeAmbiente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboMDFeAmbiente.FormattingEnabled = true;
-            this.comboMDFeAmbiente.Location = new System.Drawing.Point(131, 35);
-            this.comboMDFeAmbiente.Name = "comboMDFeAmbiente";
-            this.comboMDFeAmbiente.Size = new System.Drawing.Size(130, 23);
-            this.comboMDFeAmbiente.TabIndex = 302;
-            this.comboMDFeAmbiente.TextChanged += new System.EventHandler(this.textoTextChanged);
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(22, 39);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(65, 15);
-            this.label36.TabIndex = 77;
-            this.label36.Text = "Ambiente: ";
-            // 
-            // comboMDFeTipoEmissor
-            // 
-            this.comboMDFeTipoEmissor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboMDFeTipoEmissor.FormattingEnabled = true;
-            this.comboMDFeTipoEmissor.Location = new System.Drawing.Point(131, 62);
-            this.comboMDFeTipoEmissor.Name = "comboMDFeTipoEmissor";
-            this.comboMDFeTipoEmissor.Size = new System.Drawing.Size(130, 23);
-            this.comboMDFeTipoEmissor.TabIndex = 303;
-            this.comboMDFeTipoEmissor.TextChanged += new System.EventHandler(this.textoTextChanged);
-            // 
             // tabPage7
             // 
             this.tabPage7.Controls.Add(this.botaoNuvemFiscalDiretorioXMLs);
@@ -1045,11 +1049,37 @@ namespace SisCom.Aplicacao.Formularios
             this.tabPage7.Controls.Add(this.comboNuvemFiscalAmbienteWebService);
             this.tabPage7.Location = new System.Drawing.Point(4, 24);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage7.Size = new System.Drawing.Size(718, 333);
             this.tabPage7.TabIndex = 7;
             this.tabPage7.Text = "Nuvel Fiscal";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // botaoNuvemFiscalDiretorioXMLs
+            // 
+            this.botaoNuvemFiscalDiretorioXMLs.Location = new System.Drawing.Point(684, 89);
+            this.botaoNuvemFiscalDiretorioXMLs.Name = "botaoNuvemFiscalDiretorioXMLs";
+            this.botaoNuvemFiscalDiretorioXMLs.Size = new System.Drawing.Size(23, 23);
+            this.botaoNuvemFiscalDiretorioXMLs.TabIndex = 405;
+            this.botaoNuvemFiscalDiretorioXMLs.UseVisualStyleBackColor = true;
+            this.botaoNuvemFiscalDiretorioXMLs.Click += new System.EventHandler(this.botaoNuvemFiscalDiretorioXMLs_Click);
+            // 
+            // textNuvemFiscalDiretorioXMLs
+            // 
+            this.textNuvemFiscalDiretorioXMLs.Location = new System.Drawing.Point(155, 89);
+            this.textNuvemFiscalDiretorioXMLs.MaxLength = 200;
+            this.textNuvemFiscalDiretorioXMLs.Name = "textNuvemFiscalDiretorioXMLs";
+            this.textNuvemFiscalDiretorioXMLs.Size = new System.Drawing.Size(523, 23);
+            this.textNuvemFiscalDiretorioXMLs.TabIndex = 406;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(22, 93);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 15);
+            this.label3.TabIndex = 404;
+            this.label3.Text = "Diratório XMLs:";
             // 
             // botaoSelecionarCertificado
             // 
@@ -1108,31 +1138,22 @@ namespace SisCom.Aplicacao.Formularios
             this.comboNuvemFiscalAmbienteWebService.TabIndex = 402;
             this.comboNuvemFiscalAmbienteWebService.TextChanged += new System.EventHandler(this.textoTextChanged);
             // 
-            // botaoNuvemFiscalDiretorioXMLs
+            // textMDFEUltimoNumero
             // 
-            this.botaoNuvemFiscalDiretorioXMLs.Location = new System.Drawing.Point(684, 89);
-            this.botaoNuvemFiscalDiretorioXMLs.Name = "botaoNuvemFiscalDiretorioXMLs";
-            this.botaoNuvemFiscalDiretorioXMLs.Size = new System.Drawing.Size(23, 23);
-            this.botaoNuvemFiscalDiretorioXMLs.TabIndex = 405;
-            this.botaoNuvemFiscalDiretorioXMLs.UseVisualStyleBackColor = true;
-            this.botaoNuvemFiscalDiretorioXMLs.Click += new System.EventHandler(this.botaoNuvemFiscalDiretorioXMLs_Click);
+            this.textMDFEUltimoNumero.Location = new System.Drawing.Point(131, 95);
+            this.textMDFEUltimoNumero.MaxLength = 6;
+            this.textMDFEUltimoNumero.Name = "textMDFEUltimoNumero";
+            this.textMDFEUltimoNumero.Size = new System.Drawing.Size(80, 23);
+            this.textMDFEUltimoNumero.TabIndex = 304;
             // 
-            // textNuvemFiscalDiretorioXMLs
+            // label33
             // 
-            this.textNuvemFiscalDiretorioXMLs.Location = new System.Drawing.Point(155, 89);
-            this.textNuvemFiscalDiretorioXMLs.MaxLength = 200;
-            this.textNuvemFiscalDiretorioXMLs.Name = "textNuvemFiscalDiretorioXMLs";
-            this.textNuvemFiscalDiretorioXMLs.Size = new System.Drawing.Size(523, 23);
-            this.textNuvemFiscalDiretorioXMLs.TabIndex = 406;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 93);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 15);
-            this.label3.TabIndex = 404;
-            this.label3.Text = "Diratório XMLs:";
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(22, 99);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(106, 15);
+            this.label33.TabIndex = 304;
+            this.label33.Text = "Última Nota Fiscal:";
             // 
             // frmCadastroEmpresas
             // 
@@ -1160,14 +1181,14 @@ namespace SisCom.Aplicacao.Formularios
             ((System.ComponentModel.ISupportInitialize)(this.numericCreditoSimplesNacional)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureLogomarca)).EndInit();
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
             this.ResumeLayout(false);
@@ -1271,5 +1292,7 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Button botaoNuvemFiscalDiretorioXMLs;
         private System.Windows.Forms.TextBox textNuvemFiscalDiretorioXMLs;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textMDFEUltimoNumero;
+        private System.Windows.Forms.Label label33;
     }
 }

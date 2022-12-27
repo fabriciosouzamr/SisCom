@@ -36,6 +36,10 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<GrupoMercadoria> GrupoMercadorias { get; set; }
         public DbSet<GrupoNaturezaReceita_CTS_PIS_COFINS> GrupoNaturezaReceita_CTS_PIS_COFINSs { get; set; }
         public DbSet<GrupoCFOP> GrupoCFOPs { get; set; }
+        public DbSet<ManifestoEletronicoDocumento> ManifestoEletronicoDocumentos { get; set; }
+        public DbSet<ManifestoEletronicoDocumentoNota> ManifestoEletronicoDocumentoNotas { get; set; }
+        public DbSet<ManifestoEletronicoDocumentoPercurso> ManifestoEletronicoDocumentoPercursos { get; set; }
+        public DbSet<ManifestoEletronicoDocumentoSerie> ManifestoEletronicoDocumentoSeries { get; set; }
         public DbSet<Mercadoria> Mercadorias { get; set; }
         public DbSet<MercadoriaComposicao> MercadoriaComposicaos { get; set; }
         public DbSet<MercadoriaImpostoEstado> MercadoriaImpostoEstados { get; set; }

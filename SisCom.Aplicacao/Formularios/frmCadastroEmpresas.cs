@@ -2,7 +2,6 @@
 using Funcoes._Enum;
 using Funcoes.Classes;
 using Funcoes.Interfaces;
-using NFe.Classes.Informacoes.Detalhe.DeclaracaoImportacao;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
@@ -15,7 +14,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace SisCom.Aplicacao.Formularios
 {
@@ -154,6 +152,17 @@ namespace SisCom.Aplicacao.Formularios
                     }
                 }
 
+                if (textMDFeSerie.Text.Trim() != "")
+                {
+                    using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(this.MeuDbContext(), this._notifier))
+                    {
+                        var manifestoEletronicoDocumentoSerie = (await manifestoEletronicoDocumentoSerieController.PesquisarSerie(textMDFeSerie.Text)).FirstOrDefault();
+
+                        if (manifestoEletronicoDocumentoSerie != null)
+                        { textMDFEUltimoNumero.Text = manifestoEletronicoDocumentoSerie.UltimoNumeroManifestoEletronicoDocumento; }
+                    }
+                }
+
                 this.MeuDbContextDispose();
 
                 editado = false;
@@ -211,6 +220,28 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         notaFiscalSaidaSerieViewModel.Id = notaFiscalSaidaSerie.Id;
                         notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerieViewModel.Id, notaFiscalSaidaSerieViewModel); 
+                    }
+                }
+            }
+
+            if (textMDFeSerie.Text.Trim() != "")
+            {
+                using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(this.MeuDbContext(), this._notifier))
+                {
+                    var manifestoEletronicoDocumentoSerie = (await manifestoEletronicoDocumentoSerieController.PesquisarSerie(textMDFeSerie.Text)).FirstOrDefault();
+
+                    ManifestoEletronicoDocumentoSerieViewModel manifestoEletronicoDocumentoSerieViewModel = new ManifestoEletronicoDocumentoSerieViewModel();
+
+                    manifestoEletronicoDocumentoSerieViewModel.Serie = textMDFeSerie.Text.Trim();
+                    manifestoEletronicoDocumentoSerieViewModel.UltimoNumeroManifestoEletronicoDocumento = textMDFEUltimoNumero.Text;
+                    manifestoEletronicoDocumentoSerieViewModel.EmpresaId = Declaracoes.dados_Empresa_Id;
+
+                    if (manifestoEletronicoDocumentoSerie == null)
+                    { manifestoEletronicoDocumentoSerieController.Adicionar(manifestoEletronicoDocumentoSerieViewModel); }
+                    else
+                    {
+                        manifestoEletronicoDocumentoSerieViewModel.Id = manifestoEletronicoDocumentoSerie.Id;
+                        manifestoEletronicoDocumentoSerieController.Atualizar(manifestoEletronicoDocumentoSerieViewModel.Id, manifestoEletronicoDocumentoSerieViewModel);
                     }
                 }
             }
