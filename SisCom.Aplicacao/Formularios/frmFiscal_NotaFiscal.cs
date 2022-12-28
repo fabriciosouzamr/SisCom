@@ -304,10 +304,10 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.User_Formatar(gridObservacao, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
                 Grid_DataGridView.User_ColunaAdicionar(gridObservacao, "ID", "ID", Tamanho: 0);
                 Grid_DataGridView.User_ColunaAdicionar(gridObservacao, "Código", "Código", Grid_DataGridView.TipoColuna.ComboBox, 600, 0, dataSource: observacao,
-                                                                                                                                                  dataSource_Descricao: "Descricao",
-                                                                                                                                                  dataSource_Valor: "ID",
-                                                                                                                                                  dropDownWidth: 400,
-                                                                                                                                                  readOnly: false);
+                                                                                                                                          dataSource_Descricao: "Descricao",
+                                                                                                                                          dataSource_Valor: "ID",
+                                                                                                                                          dropDownWidth: 400,
+                                                                                                                                          readOnly: false);
 
                 //NF-e
                 Grid_DataGridView.User_Formatar(gridInfoNFe, AllowUserToAddRows: true, AllowUserToDeleteRows: true);

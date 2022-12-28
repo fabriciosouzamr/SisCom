@@ -1,12 +1,13 @@
-﻿using System.Xml.Serialization;
+﻿using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace SisCom.Entidade.Enum
 {
     public enum MDFe_TipoEmissao
     {
-        [XmlEnum("1")]
+        [Description("Normal")]
         Normal = 1,
-        [XmlEnum("2")]
+        [Description("Contingência")]
         Contingencia = 2
     }
 }

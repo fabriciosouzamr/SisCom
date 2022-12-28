@@ -40,7 +40,7 @@
             this.richInformaoeesAdicionaisInteresseFisco = new System.Windows.Forms.RichTextBox();
             this.groupPercurso = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.comboPercursoEstado01 = new System.Windows.Forms.ComboBox();
+            this.gridPercurso = new System.Windows.Forms.DataGridView();
             this.botaoPercursoLimpar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label37 = new System.Windows.Forms.Label();
@@ -60,6 +60,7 @@
             this.checkAutorizacao_SatusEncerramento = new System.Windows.Forms.CheckBox();
             this.checkAutorizacao_SatusAutorizado = new System.Windows.Forms.CheckBox();
             this.checkAutorizacao_SatusValidado = new System.Windows.Forms.CheckBox();
+            this.textAutorizacao_DtaHoraEncerramento = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.textAutorizacao_DataHoraAutorizazacao = new System.Windows.Forms.TextBox();
@@ -79,6 +80,7 @@
             this.groupDadosVeiculo = new System.Windows.Forms.GroupBox();
             this.groupVeículoTerceiro = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario = new System.Windows.Forms.ComboBox();
             this.label26 = new System.Windows.Forms.Label();
             this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario = new System.Windows.Forms.ComboBox();
             this.label25 = new System.Windows.Forms.Label();
@@ -108,6 +110,7 @@
             this.comboDadosVeiculo_Placa = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.groupIdentificacao = new System.Windows.Forms.GroupBox();
+            this.numericIdentificacao_Numero = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.textIdentificacao_Carga = new System.Windows.Forms.TextBox();
@@ -125,15 +128,10 @@
             this.comboIdentificacao_UFCarregamento = new System.Windows.Forms.ComboBox();
             this.comboIdentificacao_Serie = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboIdentificacao_Empresa = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.textIdentificacao_HoraEmissao = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.dateIdentificacao_Emissao = new System.Windows.Forms.DateTimePicker();
-            this.numericIdentificacao_Numero = new System.Windows.Forms.NumericUpDown();
-            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario = new System.Windows.Forms.ComboBox();
-            this.textAutorizacao_DtaHoraEncerramento = new System.Windows.Forms.TextBox();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.pnlCentral.SuspendLayout();
@@ -141,6 +139,7 @@
             this.groupInformaoeesAdicionaisInteresseFisco.SuspendLayout();
             this.groupPercurso.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridPercurso)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPercurso)).BeginInit();
             this.groupAdicionarNotas.SuspendLayout();
@@ -273,20 +272,21 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.comboPercursoEstado01);
+            this.panel3.Controls.Add(this.gridPercurso);
             this.panel3.Controls.Add(this.botaoPercursoLimpar);
             this.panel3.Location = new System.Drawing.Point(0, 59);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(179, 754);
             this.panel3.TabIndex = 60;
             // 
-            // comboPercursoEstado01
+            // gridPercurso
             // 
-            this.comboPercursoEstado01.FormattingEnabled = true;
-            this.comboPercursoEstado01.Location = new System.Drawing.Point(5, 27);
-            this.comboPercursoEstado01.Name = "comboPercursoEstado01";
-            this.comboPercursoEstado01.Size = new System.Drawing.Size(169, 23);
-            this.comboPercursoEstado01.TabIndex = 501;
+            this.gridPercurso.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridPercurso.Location = new System.Drawing.Point(0, 25);
+            this.gridPercurso.Name = "gridPercurso";
+            this.gridPercurso.RowTemplate.Height = 25;
+            this.gridPercurso.Size = new System.Drawing.Size(179, 726);
+            this.gridPercurso.TabIndex = 1;
             // 
             // botaoPercursoLimpar
             // 
@@ -309,13 +309,13 @@
             // 
             // label37
             // 
-            this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label37.Location = new System.Drawing.Point(28, 0);
+            this.label37.Location = new System.Drawing.Point(0, 0);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(123, 28);
+            this.label37.Size = new System.Drawing.Size(176, 28);
             this.label37.TabIndex = 0;
             this.label37.Text = "UF Percurso";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // picPercurso
             // 
@@ -326,6 +326,7 @@
             this.picPercurso.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picPercurso.TabIndex = 0;
             this.picPercurso.TabStop = false;
+            this.picPercurso.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.picPercurso_MouseDoubleClick);
             // 
             // pnlRodape
             // 
@@ -496,6 +497,14 @@
             this.checkAutorizacao_SatusValidado.TabStop = false;
             this.checkAutorizacao_SatusValidado.Text = "Validado";
             this.checkAutorizacao_SatusValidado.UseVisualStyleBackColor = true;
+            // 
+            // textAutorizacao_DtaHoraEncerramento
+            // 
+            this.textAutorizacao_DtaHoraEncerramento.Location = new System.Drawing.Point(147, 76);
+            this.textAutorizacao_DtaHoraEncerramento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textAutorizacao_DtaHoraEncerramento.Name = "textAutorizacao_DtaHoraEncerramento";
+            this.textAutorizacao_DtaHoraEncerramento.Size = new System.Drawing.Size(120, 23);
+            this.textAutorizacao_DtaHoraEncerramento.TabIndex = 304;
             // 
             // label34
             // 
@@ -726,6 +735,16 @@
             this.label27.TabIndex = 58;
             this.label27.Text = "UF Proprietário";
             // 
+            // comboDadosVeiculoVeiculoTerceiro_UFProprietario
+            // 
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.DropDownWidth = 200;
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.FormattingEnabled = true;
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Location = new System.Drawing.Point(372, 76);
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Name = "comboDadosVeiculoVeiculoTerceiro_UFProprietario";
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Size = new System.Drawing.Size(123, 23);
+            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.TabIndex = 156;
+            // 
             // label26
             // 
             this.label26.AutoSize = true;
@@ -827,7 +846,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label18.Location = new System.Drawing.Point(471, 55);
+            this.label18.Location = new System.Drawing.Point(500, 55);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(94, 15);
             this.label18.TabIndex = 155;
@@ -835,7 +854,7 @@
             // 
             // numericDadosVeiculo_CapacidadeM3
             // 
-            this.numericDadosVeiculo_CapacidadeM3.Location = new System.Drawing.Point(596, 51);
+            this.numericDadosVeiculo_CapacidadeM3.Location = new System.Drawing.Point(625, 51);
             this.numericDadosVeiculo_CapacidadeM3.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -849,7 +868,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label17.Location = new System.Drawing.Point(471, 22);
+            this.label17.Location = new System.Drawing.Point(500, 22);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(56, 15);
             this.label17.TabIndex = 153;
@@ -857,7 +876,7 @@
             // 
             // textDadosVeiculo_Renavam
             // 
-            this.textDadosVeiculo_Renavam.Location = new System.Drawing.Point(596, 18);
+            this.textDadosVeiculo_Renavam.Location = new System.Drawing.Point(625, 18);
             this.textDadosVeiculo_Renavam.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textDadosVeiculo_Renavam.Name = "textDadosVeiculo_Renavam";
             this.textDadosVeiculo_Renavam.Size = new System.Drawing.Size(165, 23);
@@ -866,7 +885,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(230, 81);
+            this.label16.Location = new System.Drawing.Point(243, 81);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(103, 15);
             this.label16.TabIndex = 151;
@@ -876,7 +895,7 @@
             // 
             this.comboDadosVeiculo_TipoCarroceria.DropDownWidth = 200;
             this.comboDadosVeiculo_TipoCarroceria.FormattingEnabled = true;
-            this.comboDadosVeiculo_TipoCarroceria.Location = new System.Drawing.Point(342, 77);
+            this.comboDadosVeiculo_TipoCarroceria.Location = new System.Drawing.Point(349, 77);
             this.comboDadosVeiculo_TipoCarroceria.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboDadosVeiculo_TipoCarroceria.Name = "comboDadosVeiculo_TipoCarroceria";
             this.comboDadosVeiculo_TipoCarroceria.Size = new System.Drawing.Size(123, 23);
@@ -886,7 +905,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(230, 51);
+            this.label15.Location = new System.Drawing.Point(243, 51);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(91, 15);
             this.label15.TabIndex = 149;
@@ -894,7 +913,7 @@
             // 
             // numericDadosVeiculo_CapacidadeKG
             // 
-            this.numericDadosVeiculo_CapacidadeKG.Location = new System.Drawing.Point(342, 47);
+            this.numericDadosVeiculo_CapacidadeKG.Location = new System.Drawing.Point(349, 47);
             this.numericDadosVeiculo_CapacidadeKG.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -906,7 +925,7 @@
             // 
             // numericDadosVeiculo_TaraKG
             // 
-            this.numericDadosVeiculo_TaraKG.Location = new System.Drawing.Point(98, 47);
+            this.numericDadosVeiculo_TaraKG.Location = new System.Drawing.Point(114, 47);
             this.numericDadosVeiculo_TaraKG.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -919,7 +938,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(230, 22);
+            this.label14.Location = new System.Drawing.Point(243, 22);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(21, 15);
             this.label14.TabIndex = 50;
@@ -929,7 +948,7 @@
             // 
             this.comboDadosVeiculo_UF.DropDownWidth = 200;
             this.comboDadosVeiculo_UF.FormattingEnabled = true;
-            this.comboDadosVeiculo_UF.Location = new System.Drawing.Point(342, 18);
+            this.comboDadosVeiculo_UF.Location = new System.Drawing.Point(349, 18);
             this.comboDadosVeiculo_UF.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboDadosVeiculo_UF.Name = "comboDadosVeiculo_UF";
             this.comboDadosVeiculo_UF.Size = new System.Drawing.Size(123, 23);
@@ -958,7 +977,7 @@
             // 
             this.comboDadosVeiculo_TipoRodado.DropDownWidth = 200;
             this.comboDadosVeiculo_TipoRodado.FormattingEnabled = true;
-            this.comboDadosVeiculo_TipoRodado.Location = new System.Drawing.Point(98, 76);
+            this.comboDadosVeiculo_TipoRodado.Location = new System.Drawing.Point(114, 76);
             this.comboDadosVeiculo_TipoRodado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboDadosVeiculo_TipoRodado.Name = "comboDadosVeiculo_TipoRodado";
             this.comboDadosVeiculo_TipoRodado.Size = new System.Drawing.Size(123, 23);
@@ -966,7 +985,7 @@
             // 
             // botaoPlaca
             // 
-            this.botaoPlaca.Location = new System.Drawing.Point(185, 18);
+            this.botaoPlaca.Location = new System.Drawing.Point(201, 18);
             this.botaoPlaca.Name = "botaoPlaca";
             this.botaoPlaca.Size = new System.Drawing.Size(23, 23);
             this.botaoPlaca.TabIndex = 32;
@@ -977,7 +996,7 @@
             // 
             this.comboDadosVeiculo_Placa.DropDownWidth = 200;
             this.comboDadosVeiculo_Placa.FormattingEnabled = true;
-            this.comboDadosVeiculo_Placa.Location = new System.Drawing.Point(98, 18);
+            this.comboDadosVeiculo_Placa.Location = new System.Drawing.Point(114, 18);
             this.comboDadosVeiculo_Placa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboDadosVeiculo_Placa.Name = "comboDadosVeiculo_Placa";
             this.comboDadosVeiculo_Placa.Size = new System.Drawing.Size(85, 23);
@@ -1012,8 +1031,6 @@
             this.groupIdentificacao.Controls.Add(this.comboIdentificacao_UFCarregamento);
             this.groupIdentificacao.Controls.Add(this.comboIdentificacao_Serie);
             this.groupIdentificacao.Controls.Add(this.label1);
-            this.groupIdentificacao.Controls.Add(this.comboIdentificacao_Empresa);
-            this.groupIdentificacao.Controls.Add(this.label21);
             this.groupIdentificacao.Controls.Add(this.label24);
             this.groupIdentificacao.Controls.Add(this.textIdentificacao_HoraEmissao);
             this.groupIdentificacao.Controls.Add(this.label23);
@@ -1025,11 +1042,23 @@
             this.groupIdentificacao.TabStop = false;
             this.groupIdentificacao.Text = "Identificação";
             // 
+            // numericIdentificacao_Numero
+            // 
+            this.numericIdentificacao_Numero.Location = new System.Drawing.Point(625, 18);
+            this.numericIdentificacao_Numero.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.numericIdentificacao_Numero.Name = "numericIdentificacao_Numero";
+            this.numericIdentificacao_Numero.Size = new System.Drawing.Size(165, 23);
+            this.numericIdentificacao_Numero.TabIndex = 3;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(471, 51);
+            this.label10.Location = new System.Drawing.Point(500, 51);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(38, 15);
             this.label10.TabIndex = 47;
@@ -1039,7 +1068,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(471, 22);
+            this.label9.Location = new System.Drawing.Point(500, 22);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 15);
             this.label9.TabIndex = 46;
@@ -1047,7 +1076,7 @@
             // 
             // textIdentificacao_Carga
             // 
-            this.textIdentificacao_Carga.Location = new System.Drawing.Point(596, 47);
+            this.textIdentificacao_Carga.Location = new System.Drawing.Point(625, 47);
             this.textIdentificacao_Carga.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textIdentificacao_Carga.Name = "textIdentificacao_Carga";
             this.textIdentificacao_Carga.Size = new System.Drawing.Size(165, 23);
@@ -1057,7 +1086,7 @@
             // 
             this.comboIdentificacao_CidadeCarregamento.DropDownWidth = 200;
             this.comboIdentificacao_CidadeCarregamento.FormattingEnabled = true;
-            this.comboIdentificacao_CidadeCarregamento.Location = new System.Drawing.Point(596, 76);
+            this.comboIdentificacao_CidadeCarregamento.Location = new System.Drawing.Point(625, 76);
             this.comboIdentificacao_CidadeCarregamento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboIdentificacao_CidadeCarregamento.Name = "comboIdentificacao_CidadeCarregamento";
             this.comboIdentificacao_CidadeCarregamento.Size = new System.Drawing.Size(165, 23);
@@ -1066,7 +1095,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(471, 80);
+            this.label8.Location = new System.Drawing.Point(500, 80);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(123, 15);
             this.label8.TabIndex = 42;
@@ -1083,7 +1112,7 @@
             // 
             // textIdentificacao_RNTRCEmitente
             // 
-            this.textIdentificacao_RNTRCEmitente.Location = new System.Drawing.Point(596, 105);
+            this.textIdentificacao_RNTRCEmitente.Location = new System.Drawing.Point(625, 105);
             this.textIdentificacao_RNTRCEmitente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textIdentificacao_RNTRCEmitente.Name = "textIdentificacao_RNTRCEmitente";
             this.textIdentificacao_RNTRCEmitente.Size = new System.Drawing.Size(165, 23);
@@ -1092,7 +1121,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(230, 109);
+            this.label5.Location = new System.Drawing.Point(6, 109);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(106, 15);
             this.label5.TabIndex = 39;
@@ -1102,7 +1131,7 @@
             // 
             this.comboIdentificacao_TipoTransportador.DropDownWidth = 200;
             this.comboIdentificacao_TipoTransportador.FormattingEnabled = true;
-            this.comboIdentificacao_TipoTransportador.Location = new System.Drawing.Point(342, 105);
+            this.comboIdentificacao_TipoTransportador.Location = new System.Drawing.Point(114, 105);
             this.comboIdentificacao_TipoTransportador.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboIdentificacao_TipoTransportador.Name = "comboIdentificacao_TipoTransportador";
             this.comboIdentificacao_TipoTransportador.Size = new System.Drawing.Size(123, 23);
@@ -1111,7 +1140,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 109);
+            this.label4.Location = new System.Drawing.Point(6, 80);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 15);
             this.label4.TabIndex = 37;
@@ -1121,7 +1150,7 @@
             // 
             this.comboIdentificacao_UFDescarga.DropDownWidth = 200;
             this.comboIdentificacao_UFDescarga.FormattingEnabled = true;
-            this.comboIdentificacao_UFDescarga.Location = new System.Drawing.Point(101, 105);
+            this.comboIdentificacao_UFDescarga.Location = new System.Drawing.Point(114, 76);
             this.comboIdentificacao_UFDescarga.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboIdentificacao_UFDescarga.Name = "comboIdentificacao_UFDescarga";
             this.comboIdentificacao_UFDescarga.Size = new System.Drawing.Size(123, 23);
@@ -1130,7 +1159,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(230, 80);
+            this.label3.Location = new System.Drawing.Point(243, 80);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 15);
             this.label3.TabIndex = 35;
@@ -1139,7 +1168,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 80);
+            this.label2.Location = new System.Drawing.Point(6, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 15);
             this.label2.TabIndex = 34;
@@ -1149,7 +1178,7 @@
             // 
             this.comboIdentificacao_TipoEmissao.DropDownWidth = 200;
             this.comboIdentificacao_TipoEmissao.FormattingEnabled = true;
-            this.comboIdentificacao_TipoEmissao.Location = new System.Drawing.Point(101, 76);
+            this.comboIdentificacao_TipoEmissao.Location = new System.Drawing.Point(114, 47);
             this.comboIdentificacao_TipoEmissao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboIdentificacao_TipoEmissao.Name = "comboIdentificacao_TipoEmissao";
             this.comboIdentificacao_TipoEmissao.Size = new System.Drawing.Size(123, 23);
@@ -1159,17 +1188,18 @@
             // 
             this.comboIdentificacao_UFCarregamento.DropDownWidth = 200;
             this.comboIdentificacao_UFCarregamento.FormattingEnabled = true;
-            this.comboIdentificacao_UFCarregamento.Location = new System.Drawing.Point(342, 76);
+            this.comboIdentificacao_UFCarregamento.Location = new System.Drawing.Point(349, 76);
             this.comboIdentificacao_UFCarregamento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboIdentificacao_UFCarregamento.Name = "comboIdentificacao_UFCarregamento";
             this.comboIdentificacao_UFCarregamento.Size = new System.Drawing.Size(123, 23);
             this.comboIdentificacao_UFCarregamento.TabIndex = 8;
+            this.comboIdentificacao_UFCarregamento.SelectedIndexChanged += new System.EventHandler(this.comboIdentificacao_UFCarregamento_SelectedIndexChanged);
             // 
             // comboIdentificacao_Serie
             // 
             this.comboIdentificacao_Serie.DropDownWidth = 200;
             this.comboIdentificacao_Serie.FormattingEnabled = true;
-            this.comboIdentificacao_Serie.Location = new System.Drawing.Point(342, 47);
+            this.comboIdentificacao_Serie.Location = new System.Drawing.Point(349, 47);
             this.comboIdentificacao_Serie.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboIdentificacao_Serie.Name = "comboIdentificacao_Serie";
             this.comboIdentificacao_Serie.Size = new System.Drawing.Size(123, 23);
@@ -1178,35 +1208,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(230, 51);
+            this.label1.Location = new System.Drawing.Point(243, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 15);
             this.label1.TabIndex = 30;
             this.label1.Text = "Série";
             // 
-            // comboIdentificacao_Empresa
-            // 
-            this.comboIdentificacao_Empresa.DropDownWidth = 200;
-            this.comboIdentificacao_Empresa.FormattingEnabled = true;
-            this.comboIdentificacao_Empresa.Location = new System.Drawing.Point(101, 47);
-            this.comboIdentificacao_Empresa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboIdentificacao_Empresa.Name = "comboIdentificacao_Empresa";
-            this.comboIdentificacao_Empresa.Size = new System.Drawing.Size(123, 23);
-            this.comboIdentificacao_Empresa.TabIndex = 4;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 51);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(52, 15);
-            this.label21.TabIndex = 28;
-            this.label21.Text = "Empresa";
-            // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(230, 22);
+            this.label24.Location = new System.Drawing.Point(243, 22);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(98, 15);
             this.label24.TabIndex = 27;
@@ -1214,7 +1225,7 @@
             // 
             // textIdentificacao_HoraEmissao
             // 
-            this.textIdentificacao_HoraEmissao.Location = new System.Drawing.Point(342, 18);
+            this.textIdentificacao_HoraEmissao.Location = new System.Drawing.Point(349, 18);
             this.textIdentificacao_HoraEmissao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textIdentificacao_HoraEmissao.Name = "textIdentificacao_HoraEmissao";
             this.textIdentificacao_HoraEmissao.Size = new System.Drawing.Size(44, 23);
@@ -1232,40 +1243,10 @@
             // dateIdentificacao_Emissao
             // 
             this.dateIdentificacao_Emissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateIdentificacao_Emissao.Location = new System.Drawing.Point(101, 18);
+            this.dateIdentificacao_Emissao.Location = new System.Drawing.Point(114, 18);
             this.dateIdentificacao_Emissao.Name = "dateIdentificacao_Emissao";
             this.dateIdentificacao_Emissao.Size = new System.Drawing.Size(81, 23);
             this.dateIdentificacao_Emissao.TabIndex = 1;
-            // 
-            // numericIdentificacao_Numero
-            // 
-            this.numericIdentificacao_Numero.Location = new System.Drawing.Point(596, 18);
-            this.numericIdentificacao_Numero.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.numericIdentificacao_Numero.Name = "numericIdentificacao_Numero";
-            this.numericIdentificacao_Numero.Size = new System.Drawing.Size(165, 23);
-            this.numericIdentificacao_Numero.TabIndex = 3;
-            // 
-            // comboDadosVeiculoVeiculoTerceiro_UFProprietario
-            // 
-            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.DropDownWidth = 200;
-            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.FormattingEnabled = true;
-            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Location = new System.Drawing.Point(372, 76);
-            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Name = "comboDadosVeiculoVeiculoTerceiro_UFProprietario";
-            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.Size = new System.Drawing.Size(123, 23);
-            this.comboDadosVeiculoVeiculoTerceiro_UFProprietario.TabIndex = 156;
-            // 
-            // textAutorizacao_DtaHoraEncerramento
-            // 
-            this.textAutorizacao_DtaHoraEncerramento.Location = new System.Drawing.Point(147, 76);
-            this.textAutorizacao_DtaHoraEncerramento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textAutorizacao_DtaHoraEncerramento.Name = "textAutorizacao_DtaHoraEncerramento";
-            this.textAutorizacao_DtaHoraEncerramento.Size = new System.Drawing.Size(120, 23);
-            this.textAutorizacao_DtaHoraEncerramento.TabIndex = 304;
             // 
             // frmFiscal_MDFe
             // 
@@ -1286,8 +1267,8 @@
             this.groupPercurso.ResumeLayout(false);
             this.groupPercurso.PerformLayout();
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridPercurso)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPercurso)).EndInit();
             this.groupAdicionarNotas.ResumeLayout(false);
             this.groupAdicionarNotas.PerformLayout();
@@ -1340,8 +1321,6 @@
         private System.Windows.Forms.ComboBox comboIdentificacao_TipoEmissao;
         private System.Windows.Forms.ComboBox comboIdentificacao_Serie;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboIdentificacao_Empresa;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox textIdentificacao_HoraEmissao;
         private System.Windows.Forms.Label label23;
@@ -1415,7 +1394,6 @@
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button botaoPercursoLimpar;
-        private System.Windows.Forms.ComboBox comboPercursoEstado01;
         private System.Windows.Forms.PictureBox picPercurso;
         private System.Windows.Forms.GroupBox groupInformaoeesAdicionaisInteresseFisco;
         private System.Windows.Forms.RichTextBox richInformaoeesAdicionaisInteresseFisco;
@@ -1424,5 +1402,6 @@
         private System.Windows.Forms.NumericUpDown numericIdentificacao_Numero;
         private System.Windows.Forms.ComboBox comboDadosVeiculoVeiculoTerceiro_UFProprietario;
         private System.Windows.Forms.TextBox textAutorizacao_DtaHoraEncerramento;
+        private System.Windows.Forms.DataGridView gridPercurso;
     }
 }

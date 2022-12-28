@@ -1,12 +1,13 @@
-﻿using System.Xml.Serialization;
+﻿using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace SisCom.Entidade.Enum
 {
     public enum MDFe_TipoTransportador
     {
-        [XmlEnum("1")]
+        [Description("Prestador de Serviço de Transporte")]
         PrestadorServicoDeTransporte = 1,
-        [XmlEnum("2")]
+        [Description("Transportador de Carga Própria")]
         TransportadorCargaPropria = 2
     }
 }

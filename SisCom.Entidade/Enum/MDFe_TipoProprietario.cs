@@ -1,14 +1,14 @@
-﻿using System.Xml.Serialization;
+﻿using System.ComponentModel;
 
 namespace SisCom.Entidade.Enum
 {
     public enum MDFe_TipoProprietario
     {
-        [XmlEnum("0-TAC Agregado")]
+        [Description("0-TAC Agregado")]
         TACAgregado = 1,
-        [XmlEnum("1-TAC Independente")]
+        [Description("1-TAC Independente")]
         TACIndependente = 2,
-        [XmlEnum("2 – Outros")]
+        [Description("2 – Outros")]
         Outros = 3
     }
 }

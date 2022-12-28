@@ -1,5 +1,4 @@
 ﻿using Funcoes._Classes;
-using Funcoes._Enum;
 using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
@@ -8,7 +7,6 @@ using SisCom.Entidade.Enum;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,6 +18,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             InitializeComponent();
             Inicializa();
+
             if (Declaracoes.Aplicacao_AlturaTela < this.Height)
                 this.Height = Declaracoes.Aplicacao_AlturaTela;
 
@@ -27,172 +26,110 @@ namespace SisCom.Aplicacao.Formularios
         }
         async Task Inicializa()
         {
-            await Assincrono.TaskAsyncAndAwaitAsync(Inicializar());
-            await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
-            await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
+            try
+            {
+                Combo_ComboBox.Formatar(comboIdentificacao_TipoEmissao, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoEmissao));
+                Combo_ComboBox.Formatar(comboIdentificacao_TipoTransportador, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoTransportador));
+                Combo_ComboBox.Formatar(comboDadosVeiculo_TipoRodado, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoRodado));
+                Combo_ComboBox.Formatar(comboDadosVeiculo_TipoCarroceria, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoCarroceria));
+                Combo_ComboBox.Formatar(comboDadosVeiculoVeiculoTerceiro_TipoProprietario, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoProprietario));
+                Combo_ComboBox.Formatar(comboDadosVeiculoVeiculoTerceiro_TipoProprietario, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_OrigemNota));
+
+                await Assincrono.TaskAsyncAndAwaitAsync(Inicializar());
+                await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
+                await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
+            }
+            catch (Exception Ex)
+            {
+                CaixaMensagem.Informacao(Ex.Message);
+            }
         }
         #region Combo
-        private async Task<bool> comboEmpresa_Carregar()
+        private async Task<bool> comboSerie_Carregar()
         {
             using (MeuDbContext meuDbContext = this.MeuDbContext())
             {
-                Combo_ComboBox.Formatar(comboIdentificacao_Empresa,
-                                        "ID", "Unidade",
+                Combo_ComboBox.Formatar(comboIdentificacao_Serie,
+                                        "ID", "Serie",
                                         ComboBoxStyle.DropDownList,
-                                        await (new EmpresaController(this.MeuDbContext(), this._notifier)).ComboNuvemFiscal(p => p.Unidade));
+                                        await (new ManifestoEletronicoDocumentoSerieController(this.MeuDbContext(), this._notifier)).Combo(w => w.EmpresaId == Declaracoes.dados_Empresa_Id));
             }
 
             return true;
         }
-        private async Task<bool> InicializarCombos()
+        private async Task<bool> comboUF_Carregar()
         {
-            await Assincrono.TaskAsyncAndAwaitAsync(comboEmpresa_Carregar());
+            using (MeuDbContext meuDbContext = this.MeuDbContext())
+            {
+                Combo_ComboBox.Formatar(comboIdentificacao_UFCarregamento,"ID", "Codigo",ComboBoxStyle.DropDownList, await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo());
+                Combo_ComboBox.Formatar(comboIdentificacao_UFDescarga, "ID", "Codigo", ComboBoxStyle.DropDownList, await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo());
+                Combo_ComboBox.Formatar(comboDadosVeiculo_UF, "ID", "Codigo", ComboBoxStyle.DropDownList, await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo());
+            }
+
+            return true;
+        }
+        private async Task<bool> comboIdentificacao_CidadeCarregamento_Carregar(Guid EstadoId)
+        {
+            using (MeuDbContext meuDbContext = this.MeuDbContext())
+            {
+                var id = comboIdentificacao_CidadeCarregamento.SelectedValue;
+
+                Combo_ComboBox.Formatar(comboIdentificacao_CidadeCarregamento,
+                                        "ID", "Nome",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new CidadeController(this.MeuDbContext(), this._notifier)).ComboEstado(EstadoId, p => p.Nome));
+
+                if (id != null) comboIdentificacao_CidadeCarregamento.SelectedValue = id;
+            }
+
+            return true;
+        }
+        private async Task<bool> comboDadosVeiculo_Placa_Carregar()
+        {
+            using (MeuDbContext meuDbContext = this.MeuDbContext())
+            {
+                Combo_ComboBox.Formatar(comboDadosVeiculo_Placa,
+                                        "ID", "NumeroPlaca",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new VeiculoPlacaController(this.MeuDbContext(), this._notifier)).Combo());            }
 
             return true;
         }
         #endregion
+        private async Task<bool> InicializarCombos()
+        {
+            await Assincrono.TaskAsyncAndAwaitAsync(comboSerie_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboUF_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboDadosVeiculo_Placa_Carregar());
+
+            return true;
+        }
 
         private async Task<bool> Inicializar()
         {
-            //try
-            //{
-            //    Texto_MaskedTextBox.FormatarTipoPessoa(TipoPessoaCliente.Juridica, maskedRemetenteCPFCNPJ);
-            //    Texto_MaskedTextBox.FormatarTipoPessoa(TipoPessoaCliente.Juridica, maskedTransportadoraCPFCNPJ);
+            try
+            {
+                dateIdentificacao_Emissao.Value = DateTime.Now;
+                textIdentificacao_HoraEmissao.Text = DateTime.Now.ToShortTimeString();
 
-            //    Limpar();
+                List<CodigoDescricaoComboViewModel> estado;
 
-            //    List<NomeComboViewModel> unidadeMedida;
-            //    List<CodigoComboViewModel> tabelaCFOP;
-            //    List<CodigoDescricaoComboViewModel> tabelaNCM;
-            //    List<CodigoDescricaoComboViewModel> tabelaCST_CSOSN;
+                using (EstadoController observacaoController = new EstadoController(this.MeuDbContext(), this._notifier))
+                {
+                    estado = (List<CodigoDescricaoComboViewModel>)await observacaoController.Combo(o => o.Codigo);
+                }
 
-            //    DataTable produto = new DataTable();
-            //    produto.Columns.Add("ID", typeof(Guid));
-            //    produto.Columns.Add("Descricao", typeof(string));
-            //    produto.Columns.Add("Codigo", typeof(string));
-            //    produto.Columns.Add("CodigoFabricante", typeof(string));
-            //    produto.Columns.Add("PesoBruto", typeof(double));
-            //    produto.Columns.Add("PesoLiquido", typeof(double));
-
-            //    using (MercadoriaController mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier))
-            //    {
-            //        IEnumerable<MercadoriaViewModel> ret = await mercadoriaController.ObterTodos();
-
-            //        foreach (var item in ret)
-            //        {
-            //            produto.Rows.Add(item.Id, item.Nome, item.Codigo, item.CodigoFabricante, item.Estoque_PesoBruto, item.Estoque_PesoLiquido);
-            //        }
-            //    }
-            //    using (UnidadeMedidaController unidadeMedidaController = new UnidadeMedidaController(this.MeuDbContext(), this._notifier))
-            //    {
-            //        unidadeMedida = (List<NomeComboViewModel>)await unidadeMedidaController.Combo(o => o.Nome);
-            //    }
-            //    using (TabelaCFOPController tabelaCFOPController = new TabelaCFOPController(this.MeuDbContext(), this._notifier))
-            //    {
-            //        tabelaCFOP = (List<CodigoComboViewModel>)await tabelaCFOPController.Combo(entradaSaida: EntradaSaida.Saida, o => o.Codigo);
-            //    }
-            //    using (TabelaNCMController tabelaNCMController = new TabelaNCMController(this.MeuDbContext(), this._notifier))
-            //    {
-            //        tabelaNCM = (List<CodigoDescricaoComboViewModel>)await tabelaNCMController.Combo(o => o.Codigo);
-            //    }
-            //    using (TabelaCST_CSOSNController tabelaCST_CSOSNController = new TabelaCST_CSOSNController(this.MeuDbContext(), this._notifier))
-            //    {
-            //        tabelaCST_CSOSN = (List<CodigoDescricaoComboViewModel>)await tabelaCST_CSOSNController.Combo(o => o.Codigo, w => w.CRT == Declaracoes.dados_Empresa_RegimeTributario.GetHashCode());
-            //    }
-
-            //    foreach (CodigoComboViewModel cfop in tabelaCFOP)
-            //    {
-            //        switch (cfop.Codigo)
-            //        {
-            //            case "5102":
-            //                cfop_5102 = cfop.Id;
-            //                break;
-            //            case "6102":
-            //                cfop_6102 = cfop.Id;
-            //                break;
-            //        }
-            //    }
-
-            //    //Detalhe de Mercadoria
-            //    Grid_DataGridView.User_Formatar(gridMercadoria, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Id", "Id", Tamanho: 0);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "Id", readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "Id", readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Mercadoria", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "Id", readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Descrição", readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "NCM", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaNCM, "Codigo", "ID", readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "CST/CSOSN", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaCST_CSOSN, "Codigo", "ID", readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "CFOP", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaCFOP, "Codigo", "ID", readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Medida", "Medida", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, unidadeMedida, "Nome", "ID", readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Quantidade", "Quantidade", Grid_DataGridView.TipoColuna.Numero, 80, readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Preço", "Preço", Grid_DataGridView.TipoColuna.Valor, 80, readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Total", "Total", Grid_DataGridView.TipoColuna.Valor, 80, readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "ICMS", "ICMS", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Valor ICMS", "ValorICMS", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Base de Calc. ICMS", "BaseCalcICMS", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "IPI", "IPI", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Frete", "Frete", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Grid_DataGridView.TipoColuna.Button, 80);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Excluir", "Excluir", Grid_DataGridView.TipoColuna.Button, 80);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Tamanho: 0);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "PesoBruto", "PesoBruto", Tamanho: 0, Tipo: Grid_DataGridView.TipoColuna.Valor);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "PesoLiquido", "PesoLiquido", Tamanho: 0, Tipo: Grid_DataGridView.TipoColuna.Valor);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "NotaFiscalSaidaId", "NotaFiscalSaidaId", Tamanho: 0);
-
-            //    //Cobrança da Nota
-            //    List<NomeComboViewModel> formaPagamento;
-
-            //    using (FormaPagamentoController formaPagamentoController = new FormaPagamentoController(this.MeuDbContext(), this._notifier))
-            //    {
-            //        formaPagamento = (List<NomeComboViewModel>)await formaPagamentoController.Combo(o => o.Nome);
-            //    }
-
-            //    Grid_DataGridView.User_Formatar(gridCobrancaNota, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridCobrancaNota, "ID", "ID", Tamanho: 0);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridCobrancaNota, "Pagamento", "MedidaPagamento", Grid_DataGridView.TipoColuna.ComboBox, 200, 0, formaPagamento, "Nome", "ID", false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridCobrancaNota, "Vencimento", "Vencimento", Grid_DataGridView.TipoColuna.Data, 100, 0, readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridCobrancaNota, "Valor", "Valor", Grid_DataGridView.TipoColuna.Valor, 100, 0, readOnly: false);
-
-            //    //Obsrevação
-            //    List<CodigoDescricaoComboViewModel> observacao;
-
-            //    using (ObservacaoController observacaoController = new ObservacaoController(this.MeuDbContext(), this._notifier))
-            //    {
-            //        observacao = (List<CodigoDescricaoComboViewModel>)await observacaoController.Combo(o => o.Descricao);
-            //    }
-
-            //    Grid_DataGridView.User_Formatar(gridObservacao, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridObservacao, "ID", "ID", Tamanho: 0);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridObservacao, "Código", "Código", Grid_DataGridView.TipoColuna.ComboBox, 600, 0, dataSource: observacao,
-            //                                                                                                                                      dataSource_Descricao: "Descricao",
-            //                                                                                                                                      dataSource_Valor: "ID",
-            //                                                                                                                                      dropDownWidth: 400,
-            //                                                                                                                                      readOnly: false);
-
-            //    //NF-e
-            //    Grid_DataGridView.User_Formatar(gridInfoNFe, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridInfoNFe, "ID", "ID", Tamanho: 0);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridInfoNFe, "NF-e/NFC-e Nº", "NF-e/NFC-e Nº", Tamanho: 100, Tipo: Grid_DataGridView.TipoColuna.ComboBox,
-            //                                                                                                                dataSource_Descricao: "NotaFiscal",
-            //                                                                                                                dataSource_Valor: "ID",
-            //                                                                                                                readOnly: false);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridInfoNFe, "Chave NF-e/NFC-e", "Chave NF-e/NFC-e", Tamanho: 500, Tipo: Grid_DataGridView.TipoColuna.ComboBox,
-            //                                                                                                                      dataSource_Descricao: "CodigoChaveAcesso",
-            //                                                                                                                      dataSource_Valor: "ID",
-            //                                                                                                                      readOnly: false);
-
-            //    //Venda
-            //    Grid_DataGridView.User_Formatar(gridVenda, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridVenda, "ID", "ID", Tamanho: 0);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridVenda, "Código", "Código", Tamanho: 65);
-            //    Grid_DataGridView.User_ColunaAdicionar(gridVenda, "Data da Venda", "Data da Venda", Tamanho: 140, Tipo: Grid_DataGridView.TipoColuna.Data);
-
-            //    notaFiscalSaida = new ViewModels.NotaFiscalSaidaViewModel();
-            //}
-            //catch (Exception Ex)
-            //{
-            //    CaixaMensagem.Informacao(Ex.Message);
-            //}
+                Grid_DataGridView.User_Formatar(gridPercurso, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
+                Grid_DataGridView.User_ColunaAdicionar(gridPercurso, "U.F.", "U.F.", Tamanho: 100, dataSource: estado,
+                                                                                                               dataSource_Descricao: "Codigo",
+                                                                                                               dataSource_Valor: "ID",
+                                                                                                               dropDownWidth: 400,
+                                                                                                               readOnly: false);
+            }
+            catch (Exception Ex)
+            {
+                CaixaMensagem.Informacao(Ex.Message);
+            }
 
             return true;
         }
@@ -578,6 +515,35 @@ namespace SisCom.Aplicacao.Formularios
         private void botaoFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+        private async void comboIdentificacao_UFCarregamento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((comboIdentificacao_UFCarregamento.SelectedIndex != -1) && (comboIdentificacao_UFCarregamento.Tag != Declaracoes.ComboBox_Carregando) && Combo_ComboBox.Selecionado(comboIdentificacao_UFDescarga))
+            {
+                await Assincrono.TaskAsyncAndAwaitAsync(comboIdentificacao_UFCarregamento_Tratar());
+            }
+        }
+        private async Task<bool> comboIdentificacao_UFCarregamento_Tratar()
+        {
+            await comboIdentificacao_CidadeCarregamento_Carregar(Guid.Parse(comboIdentificacao_UFCarregamento.SelectedValue.ToString()));
+
+            return true;
+        }
+
+        private void picPercurso_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string estado = "";
+
+            if ((e.Location.X >= 115) && (e.Location.X <= 260) && (e.Location.Y >= 145) && (e.Location.Y <= 260))
+            {
+                estado = "AM";
+            }
+            else
+            {
+                estado = $"X{e.Location.X}-Y{e.Location.Y}";
+            }
+
+            //label37.Text = estado;
         }
     }
 }
