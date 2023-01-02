@@ -68,7 +68,7 @@ namespace SisCom.Aplicacao.Controllers
             var combo = await _notaFiscalEntradaService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
         }
-        public async Task<IEnumerable<NF_ComboViewModel>> ComboChave(Expression<Func<NotaFiscalEntrada, object>> order = null)
+        public async Task<IEnumerable<NF_ComboViewModel>> ComboDadosFiscais(Expression<Func<NotaFiscalEntrada, object>> order = null)
         {
             var combo = await _notaFiscalEntradaService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<NF_ComboViewModel>>(combo);

@@ -34,17 +34,14 @@ namespace SisCom.Aplicacao.Formularios
 
             return meuDbContext;
         }
-
         public void MeuDbContextDispose()
         {
             scope.Dispose();
         }
-
         public IServiceProvider ServiceProvider()
         {
             return this._serviceProvider;
         }
-
         public IServiceScopeFactory<MeuDbContext> dbCtxFactory()
         {
             return this._dbCtxFactory;

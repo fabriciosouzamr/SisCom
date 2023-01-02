@@ -57,9 +57,9 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<CidadeViewModel>(grupo);
         }
 
-        public async Task<IEnumerable<CidadeViewModel>> ObterTodos()
+        public async Task<IEnumerable<CidadeViewModel>> ObterTodos(Expression<Func<Cidade, object>> order = null)
         {
-            var obterTodos = await _CidadeService.GetAll();
+            var obterTodos = await _CidadeService.GetAll(order: order, includes: i => i.Estado);
             return Declaracoes.mapper.Map<IEnumerable<CidadeViewModel>>(obterTodos);
         }
 

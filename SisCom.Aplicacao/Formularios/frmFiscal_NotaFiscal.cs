@@ -1946,13 +1946,13 @@ namespace SisCom.Aplicacao.Formularios
                         case TipoNotaReferenciada.Cliente:
                             using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                             {
-                                comboViewModel = (List<NF_ComboViewModel>)await notaFiscalSaidaController.ComboChave(o => o.CodigoChaveAcesso);
+                                comboViewModel = (List<NF_ComboViewModel>)await notaFiscalSaidaController.ComboDadosFiscais(o => o.CodigoChaveAcesso);
                             }
                             break;
                         case TipoNotaReferenciada.Fornecedor:
                             using (NotaFiscalEntradaController notaFiscalEntradaController = new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier))
                             {
-                                comboViewModel = (List<NF_ComboViewModel>)await notaFiscalEntradaController.ComboChave(o => o.CodigoChaveAcesso);
+                                comboViewModel = (List<NF_ComboViewModel>)await notaFiscalEntradaController.ComboDadosFiscais(o => o.CodigoChaveAcesso);
                             }
                             break;
                         case TipoNotaReferenciada.NFCe:

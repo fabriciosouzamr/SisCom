@@ -14,9 +14,13 @@ namespace SisCom.Aplicacao.Formularios
 {
     public partial class frmFiscal_MDFe : FormMain
     {
+        int AdicionarNotasItem_Notas = 1;
+        int AdicionarNotasItem_UltimoTop = 1;
+
         public frmFiscal_MDFe(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
             InitializeComponent();
+
             Inicializa();
 
             if (Declaracoes.Aplicacao_AlturaTela < this.Height)
@@ -33,11 +37,14 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboDadosVeiculo_TipoRodado, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoRodado));
                 Combo_ComboBox.Formatar(comboDadosVeiculo_TipoCarroceria, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoCarroceria));
                 Combo_ComboBox.Formatar(comboDadosVeiculoVeiculoTerceiro_TipoProprietario, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoProprietario));
-                Combo_ComboBox.Formatar(comboDadosVeiculoVeiculoTerceiro_TipoProprietario, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_OrigemNota));
 
                 await Assincrono.TaskAsyncAndAwaitAsync(Inicializar());
                 await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
                 await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
+
+                AdicionarNotasItem_Configurar(pnlAdicionarNotasItem01);
+
+                AdicionarNotasItem_UltimoTop = pnlAdicionarNotasItem01.Top;
             }
             catch (Exception Ex)
             {
@@ -91,7 +98,20 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboDadosVeiculo_Placa,
                                         "ID", "NumeroPlaca",
                                         ComboBoxStyle.DropDownList,
-                                        await (new VeiculoPlacaController(this.MeuDbContext(), this._notifier)).Combo());            }
+                                        await (new VeiculoPlacaController(this.MeuDbContext(), this._notifier)).Combo());            
+            }
+
+            return true;
+        }
+        private async Task<bool> comboCidade_Carregar(ComboBox comboAdicionarNotasItem_Cidade)
+        {
+            using (MeuDbContext meuDbContext = this.MeuDbContext())
+            {
+                Combo_ComboBox.Formatar(comboAdicionarNotasItem_Cidade,
+                                        "ID", "Nome",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new CidadeController(this.MeuDbContext(), this._notifier)).ObterTodos(o => o.Nome));
+            }
 
             return true;
         }
@@ -112,19 +132,20 @@ namespace SisCom.Aplicacao.Formularios
                 dateIdentificacao_Emissao.Value = DateTime.Now;
                 textIdentificacao_HoraEmissao.Text = DateTime.Now.ToShortTimeString();
 
-                List<CodigoDescricaoComboViewModel> estado;
+                List<CodigoNomeComboViewModel> estado;
 
                 using (EstadoController observacaoController = new EstadoController(this.MeuDbContext(), this._notifier))
                 {
-                    estado = (List<CodigoDescricaoComboViewModel>)await observacaoController.Combo(o => o.Codigo);
+                    estado = (List<CodigoNomeComboViewModel>)await observacaoController.ComboCodigo(o => o.Codigo);
                 }
 
                 Grid_DataGridView.User_Formatar(gridPercurso, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
-                Grid_DataGridView.User_ColunaAdicionar(gridPercurso, "U.F.", "U.F.", Tamanho: 100, dataSource: estado,
-                                                                                                               dataSource_Descricao: "Codigo",
-                                                                                                               dataSource_Valor: "ID",
-                                                                                                               dropDownWidth: 400,
-                                                                                                               readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridPercurso, "U.F.", "U.F.", Tamanho: 100, Tipo: Grid_DataGridView.TipoColuna.ComboBox,
+                                                                                                   dataSource: estado,
+                                                                                                   dataSource_Descricao: "Codigo",
+                                                                                                   dataSource_Valor: "ID",
+                                                                                                   dropDownWidth: 400,
+                                                                                                   readOnly: false);;
             }
             catch (Exception Ex)
             {
@@ -518,7 +539,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async void comboIdentificacao_UFCarregamento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((comboIdentificacao_UFCarregamento.SelectedIndex != -1) && (comboIdentificacao_UFCarregamento.Tag != Declaracoes.ComboBox_Carregando) && Combo_ComboBox.Selecionado(comboIdentificacao_UFDescarga))
+            if ((comboIdentificacao_UFCarregamento.SelectedIndex != -1) && (comboIdentificacao_UFCarregamento.Tag != Declaracoes.ComboBox_Carregando) && Combo_ComboBox.Selecionado(comboIdentificacao_UFCarregamento))
             {
                 await Assincrono.TaskAsyncAndAwaitAsync(comboIdentificacao_UFCarregamento_Tratar());
             }
@@ -544,6 +565,276 @@ namespace SisCom.Aplicacao.Formularios
             }
 
             //label37.Text = estado;
+        }
+
+        private void botaoAdicionarNotas_Click(object sender, EventArgs e)
+        {
+            Panel pnlAdicionarNotasItem = new Panel();
+            ComboBox comboAdicionarNotasItem_Tipo = new ComboBox();
+            ComboBox comboAdicionarNotasItem_NumeroNota = new ComboBox();
+            ComboBox comboAdicionarNotasItem_ChaveAcesso = new ComboBox();
+            ComboBox comboAdicionarNotasItem_Cidade = new ComboBox();
+            Label labelAdicionarNotasItem_UF = new Label();
+            NumericUpDown numericAdicionarNotasItem_ValorNota = new NumericUpDown();
+            NumericUpDown numericAdicionarNotasItem_PesoNota = new NumericUpDown();
+
+            AdicionarNotasItem_Notas++;
+
+            pnlAdicionarNotasItem.Name = "pnlAdicionarNotasItem" + AdicionarNotasItem_Notas.ToString("00");
+            pnlAdicionarNotas.Controls.Add(pnlAdicionarNotasItem);
+            pnlAdicionarNotasItem.Left = 0;
+            pnlAdicionarNotasItem.Width = 971;
+            pnlAdicionarNotasItem.Height = 33;
+            pnlAdicionarNotasItem.Visible = true;
+            pnlAdicionarNotasItem.Top = AdicionarNotasItem_UltimoTop + pnlAdicionarNotasItem.Height + 1;
+            AdicionarNotasItem_UltimoTop = pnlAdicionarNotasItem.Top;
+            pnlAdicionarNotas.Height = pnlAdicionarNotasItem.Top + pnlAdicionarNotasItem.Height + 3;
+            groupAdicionarNotas.Height = pnlAdicionarNotas.Height + 13;
+
+            comboAdicionarNotasItem_Tipo.Name = "comboAdicionarNotasItem_Tipo" + AdicionarNotasItem_Notas.ToString("00");
+            pnlAdicionarNotasItem.Controls.Add(comboAdicionarNotasItem_Tipo);
+            comboAdicionarNotasItem_Tipo.Left = 5;
+            comboAdicionarNotasItem_Tipo.Top = 5;
+            comboAdicionarNotasItem_Tipo.Width = 70;
+            comboAdicionarNotasItem_Tipo.SelectedIndexChanged += new System.EventHandler(this.comboAdicionarNotasItem_Tipo_SelectedIndexChanged);
+            comboAdicionarNotasItem_Tipo.Visible = true;
+
+            comboAdicionarNotasItem_NumeroNota.Name = "comboAdicionarNotasItem_NumeroNota" + AdicionarNotasItem_Notas.ToString("00");
+            pnlAdicionarNotasItem.Controls.Add(comboAdicionarNotasItem_NumeroNota);
+            comboAdicionarNotasItem_NumeroNota.Left = 81;
+            comboAdicionarNotasItem_NumeroNota.Top = 5;
+            comboAdicionarNotasItem_NumeroNota.Width = 90;
+            comboAdicionarNotasItem_NumeroNota.SelectedIndexChanged += new System.EventHandler(this.comboAdicionarNotasItem_NumeroNota_SelectedIndexChanged);
+            comboAdicionarNotasItem_NumeroNota.Visible = true;
+
+            comboAdicionarNotasItem_ChaveAcesso.Name = "comboAdicionarNotasItem_ChaveAcesso" + AdicionarNotasItem_Notas.ToString("00");
+            pnlAdicionarNotasItem.Controls.Add(comboAdicionarNotasItem_ChaveAcesso);
+            comboAdicionarNotasItem_ChaveAcesso.Left = 177;
+            comboAdicionarNotasItem_ChaveAcesso.Top = 5;
+            comboAdicionarNotasItem_ChaveAcesso.Width = 290;
+            comboAdicionarNotasItem_ChaveAcesso.SelectedIndexChanged += new System.EventHandler(this.comboAdicionarNotasItem_ChaveAcesso_SelectedIndexChanged);
+            comboAdicionarNotasItem_ChaveAcesso.Visible = true;
+
+            comboAdicionarNotasItem_Cidade.Name = "comboAdicionarNotasItem_Cidade" + AdicionarNotasItem_Notas.ToString("00");
+            pnlAdicionarNotasItem.Controls.Add(comboAdicionarNotasItem_Cidade);
+            comboAdicionarNotasItem_Cidade.Left = 473;
+            comboAdicionarNotasItem_Cidade.Top = 5;
+            comboAdicionarNotasItem_Cidade.Width = 240;
+            comboAdicionarNotasItem_Cidade.SelectedIndexChanged += new System.EventHandler(this.comboAdicionarNotasItem_Cidade_SelectedIndexChanged);
+            comboAdicionarNotasItem_Cidade.Visible = true;
+
+            labelAdicionarNotasItem_UF.Name = "labelAdicionarNotasItem_UF" + AdicionarNotasItem_Notas.ToString("00");
+            pnlAdicionarNotasItem.Controls.Add(labelAdicionarNotasItem_UF);
+            labelAdicionarNotasItem_UF.Left = 719;
+            labelAdicionarNotasItem_UF.Top = 5;
+            labelAdicionarNotasItem_UF.Width = 35;
+            labelAdicionarNotasItem_UF.Height = 23;
+            labelAdicionarNotasItem_UF.BorderStyle = labelAdicionarNotasItem_UF01.BorderStyle;
+            labelAdicionarNotasItem_UF.BackColor = labelAdicionarNotasItem_UF01.BackColor;
+            labelAdicionarNotasItem_UF.Visible = true;
+
+            numericAdicionarNotasItem_ValorNota.Name = "numericAdicionarNotasItem_ValorNota" + AdicionarNotasItem_Notas.ToString("00");
+            pnlAdicionarNotasItem.Controls.Add(numericAdicionarNotasItem_ValorNota);
+            numericAdicionarNotasItem_ValorNota.Left = 760;
+            numericAdicionarNotasItem_ValorNota.Top = 5;
+            numericAdicionarNotasItem_ValorNota.Width = 100;
+            numericAdicionarNotasItem_ValorNota.Visible = true;
+
+            numericAdicionarNotasItem_PesoNota.Name = "numericAdicionarNotasItem_PesoNota" + AdicionarNotasItem_Notas.ToString("00");
+            pnlAdicionarNotasItem.Controls.Add(numericAdicionarNotasItem_PesoNota);
+            numericAdicionarNotasItem_PesoNota.Left = 866;
+            numericAdicionarNotasItem_PesoNota.Top = 5;
+            numericAdicionarNotasItem_PesoNota.Width = 100;
+            numericAdicionarNotasItem_PesoNota.Visible = true;
+
+            AdicionarNotasItem_Configurar(pnlAdicionarNotasItem);
+
+            groupPercurso.Top = groupAdicionarNotas.Top + groupAdicionarNotas.Height;
+            groupInformaoeesAdicionaisInteresseFisco.Top = groupPercurso.Top + groupPercurso.Height;
+            groupInformacoesComplementaresInteresseContribuinte.Top = groupInformaoeesAdicionaisInteresseFisco.Top + groupInformaoeesAdicionaisInteresseFisco.Height;
+            pnlRodape.Top = groupInformacoesComplementaresInteresseContribuinte.Top + groupInformacoesComplementaresInteresseContribuinte.Height;
+        }
+
+        async Task AdicionarNotasItem_Configurar(Panel pnlAdicionarNotasItem)
+        {
+            foreach (Control control in pnlAdicionarNotasItem.Controls)
+            {
+                if (control.Name.Contains("comboAdicionarNotasItem_Tipo"))
+                {
+                    Combo_ComboBox.Formatar((ComboBox)control, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_OrigemNota));
+                }
+                else if (control.Name.Contains("comboAdicionarNotasItem_Cidade"))
+                {
+                    await comboCidade_Carregar((ComboBox)control);
+                }
+            }
+        }
+        private void comboAdicionarNotasItem_Tipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboAdicionarNotasItem_Tipo_Tratar(sender);
+        }
+
+        async Task comboAdicionarNotasItem_Tipo_Tratar(object sender)
+        {
+            string numerocontrole = ((ComboBox)sender).Name.Substring(("comboAdicionarNotasItem_Tipo").Length);
+
+            if (((ComboBox)sender).SelectedIndex > -1)
+            {
+                if (((ComboBox)sender).SelectedValue is MDFe_OrigemNota.Entrada)
+                {
+                    using (MeuDbContext meuDbContext = this.MeuDbContext())
+                    {
+                        Combo_ComboBox.Formatar(((ComboBox)Controls.Find("comboAdicionarNotasItem_NumeroNota" + numerocontrole, true)[0]),
+                                                "ID", "NotaFiscal",
+                                                ComboBoxStyle.DropDownList,
+                                                await(new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier)).ComboDadosFiscais(o => o.NotaFiscal));
+                        Combo_ComboBox.Formatar(((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]),
+                                                "ID", "CodigoChaveAcesso",
+                                                ComboBoxStyle.DropDownList,
+                                                await (new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier)).ComboDadosFiscais(o => o.CodigoChaveAcesso));
+                    }
+                }               
+                else if (((ComboBox)sender).SelectedValue is MDFe_OrigemNota.Saida)
+                {
+                    using (MeuDbContext meuDbContext = this.MeuDbContext())
+                    {
+                        Combo_ComboBox.Formatar(((ComboBox)Controls.Find("comboAdicionarNotasItem_NumeroNota" + numerocontrole, true)[0]),
+                                                "ID", "NotaFiscal",
+                                                ComboBoxStyle.DropDownList,
+                                                await (new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier)).ComboDadosFiscais(o => o.NotaFiscal));
+                        Combo_ComboBox.Formatar(((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]),
+                                                "ID", "CodigoChaveAcesso",
+                                                ComboBoxStyle.DropDownList,
+                                                await (new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier)).ComboDadosFiscais(o => o.CodigoChaveAcesso));
+                    }
+                }
+            }
+            else
+            {
+                ((ComboBox)Controls.Find("comboAdicionarNotasItem_NumeroNota" + numerocontrole, true)[0]).DataSource = null;
+                ((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]).DataSource = null;
+                ((ComboBox)Controls.Find("comboAdicionarNotasItem_Cidade" + numerocontrole, true)[0]).SelectedIndex = -1;
+                ((NumericUpDown)Controls.Find("numericAdicionarNotasItem_ValorNota" + numerocontrole, true)[0]).Value = 0;
+                ((NumericUpDown)Controls.Find("numericAdicionarNotasItem_PesoNota" + numerocontrole, true)[0]).Value = 0;
+            }
+        }
+
+        private void comboAdicionarNotasItem_NumeroNota_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string numerocontrole = ((ComboBox)sender).Name.Substring(("comboAdicionarNotasItem_NumeroNota").Length);
+            if (((ComboBox)Controls.Find("comboAdicionarNotasItem_NumeroNota" + numerocontrole, true)[0]).SelectedIndex > -1)
+            {
+                ((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]).SelectedValue = ((ComboBox)Controls.Find("comboAdicionarNotasItem_NumeroNota" + numerocontrole, true)[0]).SelectedValue;
+            }
+            else
+            {
+                ((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]).SelectedIndex = -1;
+            }
+        }
+        private void comboAdicionarNotasItem_ChaveAcesso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string numerocontrole = ((ComboBox)sender).Name.Substring(("comboAdicionarNotasItem_ChaveAcesso").Length);
+            if (((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]).SelectedIndex > -1)
+            {
+                ((ComboBox)Controls.Find("comboAdicionarNotasItem_NumeroNota" + numerocontrole, true)[0]).SelectedValue = ((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]).SelectedValue;
+            }
+            else
+            {
+                ((ComboBox)Controls.Find("comboAdicionarNotasItem_NumeroNota" + numerocontrole, true)[0]).SelectedIndex = -1;
+            }
+        }
+
+        private void comboAdicionarNotasItem_Cidade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string numerocontrole = ((ComboBox)sender).Name.Substring(("comboAdicionarNotasItem_Cidade").Length);
+
+            if (((ComboBox)sender).SelectedIndex > -1)
+            {
+                ((Label)Controls.Find("labelAdicionarNotasItem_UF" + numerocontrole, true)[0]).Text = ((CidadeViewModel)((ComboBox)sender).SelectedItem).Estado.Codigo;
+            }
+            else
+            {
+                ((Label)Controls.Find("labelAdicionarNotasItem_UF" + numerocontrole, true)[0]).Text = "";
+            }
+        }
+
+        private void botaoExcluir_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botaoGravar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botaoNovo_Click(object sender, EventArgs e)
+        {
+            Limpar();
+        }
+
+        void Limpar()
+        {
+            checkAutorizacao_SatusAutorizado.Checked = false;
+            checkAutorizacao_SatusCancelado.Checked = false;
+            checkAutorizacao_SatusEncerramento.Checked = false;
+            checkAutorizacao_SatusValidado.Checked = false;
+            checkDadosVeiculoVceiuloTerceiro_Sim.Checked = false;
+
+            comboDadosVeiculo_Placa.SelectedIndex =-1;
+            comboDadosVeiculo_TipoCarroceria.SelectedIndex = -1;
+            comboDadosVeiculo_TipoRodado.SelectedIndex = -1;
+            comboDadosVeiculo_UF.SelectedIndex = -1;
+            comboDadosVeiculoVeiculoTerceiro_TipoProprietario.SelectedIndex = -1;
+            comboDadosVeiculoVeiculoTerceiro_UFProprietario.SelectedIndex = -1;
+            comboIdentificacao_CidadeCarregamento.DataSource = null;
+            comboIdentificacao_Serie.SelectedIndex = -1;
+            comboIdentificacao_TipoEmissao.SelectedIndex = -1;
+            comboIdentificacao_TipoTransportador.SelectedIndex = -1;
+            comboIdentificacao_UFCarregamento.SelectedIndex = -1;
+            comboIdentificacao_UFDescarga.SelectedIndex = -1;
+            comboTotalizadores_UnidadePeso.SelectedIndex = -1;
+
+            gridPercurso.Rows.Clear();
+
+            dateIdentificacao_Emissao.Value = DateTime.Now;
+
+            numericAdicionarNotasItem_PesoNota01.Value = 0;
+            numericAdicionarNotasItem_ValorNota01.Value = 0;
+            numericDadosVeiculo_CapacidadeKG.Value = 0;
+            numericDadosVeiculo_CapacidadeM3.Value = 0;
+            numericDadosVeiculo_TaraKG.Value = 0;
+            numericIdentificacao_Numero.Value = 0;
+            numericTotalizadores_PesoBrutoCarga.Value = 0;
+            numericTotalizadores_QuantidadeNfe.Value = 0;
+            numericTotalizadores_ValorTotalCarga.Value = 0;
+
+            richInformacoesComplementaresInteresseContribuinte.Text = "";
+            richInformaoeesAdicionaisInteresseFisco.Text = "";
+
+            DadosVeiculoVeiculoTerceiro_IEProprietario.Text = "";
+            textAutorizacao_ChaveAutorizacao.Text = "";
+            textAutorizacao_DataHoraAutorizazacao.Text = "";
+            textAutorizacao_DtaHoraEncerramento.Text = "";
+            textAutorizacao_Protocolo.Text = "";
+            textCondutor_CPFCNPJCondutor.Text = "";
+            textCondutor_NomeCondutor.Text = "";
+            textDadosVeiculo_Renavam.Text = "";
+            textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario.Text = "";
+            textDadosVeiculoVeiculoTerceiro_NomeProprietario.Text = "";
+            textDadosVeiculoVeiculoTerceiro_RNTCProprietario.Text = "";
+            textIdentificacao_Carga.Text = "";
+            textIdentificacao_HoraEmissao.Text = "";
+            textIdentificacao_RNTRCEmitente.Text = "";
+
+            //pnlAdicionarNotas;
+            //pnlAdicionarNotasItem01;
+
+            //comboAdicionarNotasItem_ChaveAcesso01.;
+            //comboAdicionarNotasItem_Cidade01;
+            //comboAdicionarNotasItem_NumeroNota01;
+            //comboAdicionarNotasItem_Tipo01;
+            //labelAdicionarNotasItem_UF01;
         }
     }
 }
