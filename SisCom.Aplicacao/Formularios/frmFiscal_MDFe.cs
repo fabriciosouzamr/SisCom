@@ -14,6 +14,8 @@ namespace SisCom.Aplicacao.Formularios
 {
     public partial class frmFiscal_MDFe : FormMain
     {
+        ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumentoSerie;
+
         int AdicionarNotasItem_Notas = 1;
         int AdicionarNotasItem_UltimoTop = 1;
 
@@ -145,7 +147,7 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                    dataSource_Descricao: "Codigo",
                                                                                                    dataSource_Valor: "ID",
                                                                                                    dropDownWidth: 400,
-                                                                                                   readOnly: false);;
+                                                                                                   readOnly: false);
             }
             catch (Exception Ex)
             {
