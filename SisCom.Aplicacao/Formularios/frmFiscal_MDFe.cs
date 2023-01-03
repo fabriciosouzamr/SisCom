@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
 {
-    public partial class frmFiscal_MDFe : FormMain
+    public partial class frmFiscal_MDFe : Form
     {
         ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumentoSerie;
 
@@ -767,7 +767,95 @@ namespace SisCom.Aplicacao.Formularios
 
         private void botaoGravar_Click(object sender, EventArgs e)
         {
-
+            if (Funcoes._Classes.Funcao.NuloData(dateIdentificacao_Emissao.Value))
+            {
+                CaixaMensagem.Informacao("Informe a data de emissão");
+                return;
+            }
+            if (!Funcoes._Classes.Validacao.Hora_Valido(textIdentificacao_HoraEmissao.Text))
+            {
+                CaixaMensagem.Informacao("Informe a data de emissão");
+                return;
+            }
+            if (Combo_ComboBox.Selecionado(comboIdentificacao_Serie))
+            {
+                CaixaMensagem.Informacao("Selecione a série do MDF-e");
+                return;
+            }
+            if (!Combo_ComboBox.Selecionado(comboIdentificacao_TipoEmissao))
+            {
+                CaixaMensagem.Informacao("Selecione tipo de emissão");
+                return;
+            }
+            if (!Combo_ComboBox.Selecionado(comboIdentificacao_UFCarregamento))
+            {
+                CaixaMensagem.Informacao("Selecione U.F. Carregamento");
+                return;
+            }
+            if (!Combo_ComboBox.Selecionado(comboIdentificacao_UFDescarga))
+            {
+                CaixaMensagem.Informacao("Selecione U.F. Descarga");
+                return;
+            }
+            if (!Combo_ComboBox.Selecionado(comboIdentificacao_TipoTransportador))
+            {
+                CaixaMensagem.Informacao("Selecione Tipo de Transportador");
+                return;
+            }
+            if (!String.IsNullOrEmpty(textIdentificacao_RNTRCEmitente.Text))
+            {
+                CaixaMensagem.Informacao("Informe o RNTRC Emitente");
+                return;
+            }
+            if (!String.IsNullOrEmpty(textIdentificacao_RNTRCEmitente.Text))
+            {
+                CaixaMensagem.Informacao("Informe o RNTRC Emitente");
+                return;
+            }
+            if (!Combo_ComboBox.Selecionado(comboDadosVeiculo_Placa))
+            {
+                CaixaMensagem.Informacao("Selecione a placa do veículo");
+                return;
+            }
+            if (!Combo_ComboBox.Selecionado(comboDadosVeiculo_UF))
+            {
+                CaixaMensagem.Informacao("Selecione a U.F. do veículo");
+                return;
+            }
+            if (!String.IsNullOrEmpty(textDadosVeiculo_Renavam.Text))
+            {
+                CaixaMensagem.Informacao("Informe o renavam do veículo");
+                return;
+            }
+            if (numericDadosVeiculo_TaraKG.Value == 0)
+            {
+                CaixaMensagem.Informacao("Informe a tara (KG) do veículo");
+                return;
+            }
+            if (numericDadosVeiculo_CapacidadeKG.Value == 0)
+            {
+                CaixaMensagem.Informacao("Informe a capacidade (KG) do veículo");
+                return;
+            }
+            if (numericDadosVeiculo_CapacidadeM3.Value == 0)
+            {
+                CaixaMensagem.Informacao("Informe a capacidade (M3) do veículo");
+                return;
+            }
+            if (!Combo_ComboBox.Selecionado(comboDadosVeiculo_TipoRodado))
+            {
+                CaixaMensagem.Informacao("Selecione o tipo do rodado do veículo");
+                return;
+            }
+            if (!Combo_ComboBox.Selecionado(comboDadosVeiculo_TipoCarroceria))
+            {
+                CaixaMensagem.Informacao("Selecione o tipo da carroceria do veículo");
+                return;
+            }
+            if (checkDadosVeiculoVceiuloTerceiro_Sim.Checked)
+            {
+                if (!String.IsNullOrEmpty(propri))
+            }
         }
 
         private void botaoNovo_Click(object sender, EventArgs e)
@@ -806,7 +894,7 @@ namespace SisCom.Aplicacao.Formularios
             numericDadosVeiculo_CapacidadeKG.Value = 0;
             numericDadosVeiculo_CapacidadeM3.Value = 0;
             numericDadosVeiculo_TaraKG.Value = 0;
-            numericIdentificacao_Numero.Value = 0;
+            textIdentificacao_Numero.Text = "0";
             numericTotalizadores_PesoBrutoCarga.Value = 0;
             numericTotalizadores_QuantidadeNfe.Value = 0;
             numericTotalizadores_ValorTotalCarga.Value = 0;

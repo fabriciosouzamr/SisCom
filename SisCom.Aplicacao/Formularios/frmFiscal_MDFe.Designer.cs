@@ -135,7 +135,6 @@
             this.comboDadosVeiculo_Placa = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.groupIdentificacao = new System.Windows.Forms.GroupBox();
-            this.numericIdentificacao_Numero = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.textIdentificacao_Carga = new System.Windows.Forms.TextBox();
@@ -157,6 +156,7 @@
             this.textIdentificacao_HoraEmissao = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.dateIdentificacao_Emissao = new System.Windows.Forms.DateTimePicker();
+            this.textIdentificacao_Numero = new System.Windows.Forms.TextBox();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.pnlCentral.SuspendLayout();
@@ -187,7 +187,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericDadosVeiculo_CapacidadeKG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDadosVeiculo_TaraKG)).BeginInit();
             this.groupIdentificacao.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericIdentificacao_Numero)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenuBotao
@@ -1325,7 +1324,7 @@
             // 
             // groupIdentificacao
             // 
-            this.groupIdentificacao.Controls.Add(this.numericIdentificacao_Numero);
+            this.groupIdentificacao.Controls.Add(this.textIdentificacao_Numero);
             this.groupIdentificacao.Controls.Add(this.label10);
             this.groupIdentificacao.Controls.Add(this.label9);
             this.groupIdentificacao.Controls.Add(this.textIdentificacao_Carga);
@@ -1353,18 +1352,6 @@
             this.groupIdentificacao.TabIndex = 12;
             this.groupIdentificacao.TabStop = false;
             this.groupIdentificacao.Text = "Identificação";
-            // 
-            // numericIdentificacao_Numero
-            // 
-            this.numericIdentificacao_Numero.Location = new System.Drawing.Point(625, 18);
-            this.numericIdentificacao_Numero.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.numericIdentificacao_Numero.Name = "numericIdentificacao_Numero";
-            this.numericIdentificacao_Numero.Size = new System.Drawing.Size(165, 23);
-            this.numericIdentificacao_Numero.TabIndex = 3;
             // 
             // label10
             // 
@@ -1560,6 +1547,15 @@
             this.dateIdentificacao_Emissao.Size = new System.Drawing.Size(81, 23);
             this.dateIdentificacao_Emissao.TabIndex = 1;
             // 
+            // textIdentificacao_Numero
+            // 
+            this.textIdentificacao_Numero.Location = new System.Drawing.Point(625, 18);
+            this.textIdentificacao_Numero.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textIdentificacao_Numero.Name = "textIdentificacao_Numero";
+            this.textIdentificacao_Numero.ReadOnly = true;
+            this.textIdentificacao_Numero.Size = new System.Drawing.Size(165, 23);
+            this.textIdentificacao_Numero.TabIndex = 48;
+            // 
             // frmFiscal_MDFe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1610,7 +1606,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericDadosVeiculo_TaraKG)).EndInit();
             this.groupIdentificacao.ResumeLayout(false);
             this.groupIdentificacao.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericIdentificacao_Numero)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1715,7 +1710,6 @@
         private System.Windows.Forms.RichTextBox richInformaoeesAdicionaisInteresseFisco;
         private System.Windows.Forms.GroupBox groupInformacoesComplementaresInteresseContribuinte;
         private System.Windows.Forms.RichTextBox richInformacoesComplementaresInteresseContribuinte;
-        private System.Windows.Forms.NumericUpDown numericIdentificacao_Numero;
         private System.Windows.Forms.ComboBox comboDadosVeiculoVeiculoTerceiro_UFProprietario;
         private System.Windows.Forms.TextBox textAutorizacao_DtaHoraEncerramento;
         private System.Windows.Forms.DataGridView gridPercurso;
@@ -1745,5 +1739,6 @@
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Button botaoNovo;
         private System.Windows.Forms.Button botaoExcluir;
+        private System.Windows.Forms.TextBox textIdentificacao_Numero;
     }
 }
