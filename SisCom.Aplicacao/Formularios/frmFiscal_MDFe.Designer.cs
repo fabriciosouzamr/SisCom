@@ -109,7 +109,7 @@
             this.label26 = new System.Windows.Forms.Label();
             this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario = new System.Windows.Forms.ComboBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.DadosVeiculoVeiculoTerceiro_IEProprietario = new System.Windows.Forms.TextBox();
+            this.textDadosVeiculoVeiculoTerceiro_IEProprietario = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.textDadosVeiculoVeiculoTerceiro_RNTCProprietario = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -135,6 +135,7 @@
             this.comboDadosVeiculo_Placa = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.groupIdentificacao = new System.Windows.Forms.GroupBox();
+            this.textIdentificacao_Numero = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.textIdentificacao_Carga = new System.Windows.Forms.TextBox();
@@ -156,7 +157,6 @@
             this.textIdentificacao_HoraEmissao = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.dateIdentificacao_Emissao = new System.Windows.Forms.DateTimePicker();
-            this.textIdentificacao_Numero = new System.Windows.Forms.TextBox();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.pnlCentral.SuspendLayout();
@@ -299,6 +299,7 @@
             this.botaoTransmitir.Size = new System.Drawing.Size(53, 56);
             this.botaoTransmitir.TabIndex = 56;
             this.botaoTransmitir.UseVisualStyleBackColor = true;
+            this.botaoTransmitir.Click += new System.EventHandler(this.botaoTransmitir_Click);
             // 
             // label7
             // 
@@ -1022,7 +1023,7 @@
             this.groupVeículoTerceiro.Controls.Add(this.label26);
             this.groupVeículoTerceiro.Controls.Add(this.comboDadosVeiculoVeiculoTerceiro_TipoProprietario);
             this.groupVeículoTerceiro.Controls.Add(this.label25);
-            this.groupVeículoTerceiro.Controls.Add(this.DadosVeiculoVeiculoTerceiro_IEProprietario);
+            this.groupVeículoTerceiro.Controls.Add(this.textDadosVeiculoVeiculoTerceiro_IEProprietario);
             this.groupVeículoTerceiro.Controls.Add(this.label22);
             this.groupVeículoTerceiro.Controls.Add(this.textDadosVeiculoVeiculoTerceiro_RNTCProprietario);
             this.groupVeículoTerceiro.Controls.Add(this.label20);
@@ -1084,13 +1085,13 @@
             this.label25.TabIndex = 54;
             this.label25.Text = "IE Proprietário";
             // 
-            // DadosVeiculoVeiculoTerceiro_IEProprietario
+            // textDadosVeiculoVeiculoTerceiro_IEProprietario
             // 
-            this.DadosVeiculoVeiculoTerceiro_IEProprietario.Location = new System.Drawing.Point(372, 47);
-            this.DadosVeiculoVeiculoTerceiro_IEProprietario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DadosVeiculoVeiculoTerceiro_IEProprietario.Name = "DadosVeiculoVeiculoTerceiro_IEProprietario";
-            this.DadosVeiculoVeiculoTerceiro_IEProprietario.Size = new System.Drawing.Size(123, 23);
-            this.DadosVeiculoVeiculoTerceiro_IEProprietario.TabIndex = 153;
+            this.textDadosVeiculoVeiculoTerceiro_IEProprietario.Location = new System.Drawing.Point(372, 47);
+            this.textDadosVeiculoVeiculoTerceiro_IEProprietario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textDadosVeiculoVeiculoTerceiro_IEProprietario.Name = "textDadosVeiculoVeiculoTerceiro_IEProprietario";
+            this.textDadosVeiculoVeiculoTerceiro_IEProprietario.Size = new System.Drawing.Size(123, 23);
+            this.textDadosVeiculoVeiculoTerceiro_IEProprietario.TabIndex = 153;
             // 
             // label22
             // 
@@ -1312,6 +1313,7 @@
             this.comboDadosVeiculo_Placa.Name = "comboDadosVeiculo_Placa";
             this.comboDadosVeiculo_Placa.Size = new System.Drawing.Size(85, 23);
             this.comboDadosVeiculo_Placa.TabIndex = 101;
+            this.comboDadosVeiculo_Placa.SelectedIndexChanged += new System.EventHandler(this.comboDadosVeiculo_Placa_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -1352,6 +1354,15 @@
             this.groupIdentificacao.TabIndex = 12;
             this.groupIdentificacao.TabStop = false;
             this.groupIdentificacao.Text = "Identificação";
+            // 
+            // textIdentificacao_Numero
+            // 
+            this.textIdentificacao_Numero.Location = new System.Drawing.Point(625, 18);
+            this.textIdentificacao_Numero.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textIdentificacao_Numero.Name = "textIdentificacao_Numero";
+            this.textIdentificacao_Numero.ReadOnly = true;
+            this.textIdentificacao_Numero.Size = new System.Drawing.Size(165, 23);
+            this.textIdentificacao_Numero.TabIndex = 48;
             // 
             // label10
             // 
@@ -1547,15 +1558,6 @@
             this.dateIdentificacao_Emissao.Size = new System.Drawing.Size(81, 23);
             this.dateIdentificacao_Emissao.TabIndex = 1;
             // 
-            // textIdentificacao_Numero
-            // 
-            this.textIdentificacao_Numero.Location = new System.Drawing.Point(625, 18);
-            this.textIdentificacao_Numero.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textIdentificacao_Numero.Name = "textIdentificacao_Numero";
-            this.textIdentificacao_Numero.ReadOnly = true;
-            this.textIdentificacao_Numero.Size = new System.Drawing.Size(165, 23);
-            this.textIdentificacao_Numero.TabIndex = 48;
-            // 
             // frmFiscal_MDFe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1666,7 +1668,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox textDadosVeiculoVeiculoTerceiro_RNTCProprietario;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox DadosVeiculoVeiculoTerceiro_IEProprietario;
+        private System.Windows.Forms.TextBox textDadosVeiculoVeiculoTerceiro_IEProprietario;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.ComboBox comboDadosVeiculoVeiculoTerceiro_TipoProprietario;
         private System.Windows.Forms.Label label27;

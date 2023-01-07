@@ -26,7 +26,7 @@ namespace SisCom.Aplicacao.ViewModels
         public string? DadoVeiculo_Renavam { get; set; }
         public double DadoVeiculo_TaraKG { get; set; }
         public double DadoVeiculo_CapacidadeKG { get; set; }
-        public double DadoVeiculo_CapacidadeME { get; set; }
+        public double DadoVeiculo_CapacidadeM3 { get; set; }
         public MDFe_TipoRodado? DadoVeiculo_TipoRodado { get; set; }
         public MDFe_TipoCarroceria? DadoVeiculo_TipoCarroceria { get; set; }
         public string? DadoVeiculoVeiculoTerceiros_NomeProprietario { get; set; }
@@ -46,7 +46,7 @@ namespace SisCom.Aplicacao.ViewModels
         public DateTime? Autorizacao_DataHoraAutorizacao { get; set; }
         public DateTime Autorizacao_DataHoraEncerramento { get; set; }
 
-        public string? Condutor_CNPJ_CPF { get; set; }
+        public string? Condutor_CPF { get; set; }
         public string? Condutor_Nome { get; set; }
 
         public string? InformacoesAdicionaisInteresseFisco { get; set; }

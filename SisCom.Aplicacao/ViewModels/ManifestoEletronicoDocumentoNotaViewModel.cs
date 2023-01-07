@@ -23,5 +23,6 @@ namespace SisCom.Aplicacao.ViewModels
         public Guid ManifestoEletronicoDocumentoId { get; set; }
         public Guid? NotaFiscalSaidaId { get; set; }
         public Guid? NotaFiscalEntradaId { get; set; }
+        public Guid? CidadeDescargaId { get; set; }
     }
 }

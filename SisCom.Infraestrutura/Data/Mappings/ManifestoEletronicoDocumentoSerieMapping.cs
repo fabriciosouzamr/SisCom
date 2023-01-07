@@ -14,6 +14,8 @@ namespace SisCom.Infraestrutura.Data.Mappings
 
             builder.Property(p => p.Serie).IsRequired().HasColumnType("varchar(3)");
 
+            builder.HasMany(a => a.ManifestoEletronicoDocumento).WithOne(a => a.ManifestoEletronicoDocumentoSerie);
+
             builder.ToTable("ManifestoEletronicoDocumentoSeries");
         }
     }

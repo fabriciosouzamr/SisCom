@@ -40,5 +40,9 @@ namespace SisCom.Entidade.Modelos
         public string? NuvemFiscal_SerialNumber { get; set; }
         public string NSU { get; set; }
         public string? Controle { get; set; }
+        public string? Responsaveltecnico_CNPJ { get; set; }
+        public string? Responsaveltecnico_Email { get; set; }
+        public string? Responsaveltecnico_Fone { get; set; }
+        public string? Responsaveltecnico_Contato { get; set; }
     }
 }

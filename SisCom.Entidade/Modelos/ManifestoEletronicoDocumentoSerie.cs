@@ -1,5 +1,6 @@
 ﻿using Funcoes._Entity;
 using System;
+using System.Collections.Generic;
 
 namespace SisCom.Entidade.Modelos
 {
@@ -9,6 +10,8 @@ namespace SisCom.Entidade.Modelos
         public string Serie { get; set; }
         public String UltimoNumeroManifestoEletronicoDocumento { get; set; }
         public ManifestoEletronicoDocumento UltimoManifestoEletronicoDocumento { get; set; }
+        public ICollection<ManifestoEletronicoDocumento> ManifestoEletronicoDocumento { get; set; }
+
 
         /* EF Relation */
         public Guid? UltimoManifestoEletronicoDocumentoId { get; set; }
