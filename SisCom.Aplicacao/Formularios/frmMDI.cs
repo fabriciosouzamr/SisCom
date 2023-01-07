@@ -59,7 +59,7 @@ namespace SisCom.Aplicacao
 
         private void cmdMDFe_Click(object sender, EventArgs e)
         {
-            var form = this.ServiceProvider().GetRequiredService<frmFiscal_MDFe>();
+            var form = this.ServiceProvider().GetRequiredService<frmFiscal_MDFe_Consulta>();
             form.ShowDialog(this);
         }
     }

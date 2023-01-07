@@ -1887,10 +1887,10 @@ namespace SisCom.Aplicacao.Classes
             return rand.Next(11111111, 99999999);
         }
 
-        private static MDFe.Classes.Informacoes.MDFe Fiscal_ManifestoEletronicoDocumento_Gerar(ViewModels.EmpresaViewModel empresa,
-                                                                                               ref ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento,
-                                                                                               ref List<ManifestoEletronicoDocumentoNotaViewModel> manifestoEletronicoDocumentoNota,
-                                                                                               ref List<ManifestoEletronicoDocumentoPercursoViewModel> manifestoEletronicoDocumentoPercurso)
+        private static MDFe.Classes.Informacoes.MDFe Fiscal_ManifestoEletronicoDocumento_Transmitir(ViewModels.EmpresaViewModel empresa,
+                                                                                                    ref ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento,
+                                                                                                    ref List<ManifestoEletronicoDocumentoNotaViewModel> manifestoEletronicoDocumentoNota,
+                                                                                                    ref List<ManifestoEletronicoDocumentoPercursoViewModel> manifestoEletronicoDocumentoPercurso)
         {
             Fiscal_Configuracao_MDFe();
 

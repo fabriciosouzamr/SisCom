@@ -41,6 +41,7 @@ namespace SisCom.Aplicacao.Configuration
             services.AddTransient<frmComprasInclusao>();
             services.AddTransient<frmFiscal_ImportarXML>();
             services.AddTransient<frmFiscal_MDFe>();
+            services.AddTransient<frmFiscal_MDFe_Consulta>();
             services.AddTransient<frmFiscal_NotaFiscal>();
             services.AddTransient<frmFiscal_NotaFiscal_Impostos>();
             services.AddTransient<frmFiscal_NuvemFiscal>();
