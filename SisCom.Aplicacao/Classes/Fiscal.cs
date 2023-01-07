@@ -34,13 +34,10 @@ using NFe.Utils.Tributacao.Estadual;
 using NFe.Utils.Tributacao.Federal;
 using Valor = Funcoes._Classes.Valor;
 using NFe.Classes.Informacoes.Detalhe.Tributacao.Federal;
-using NFe.Classes.Servicos.Tipos;
 using NFe.Classes.Servicos.Evento;
 using SisCom.Aplicacao.Controllers;
 using Funcoes.Interfaces;
 using SisCom.Infraestrutura.Data.Context;
-using System.Windows.Forms;
-using SisCom.Infraestrutura.Migrations;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -1358,6 +1355,20 @@ namespace SisCom.Aplicacao.Classes
             string sDS_INFORMACOES_ADICIONAIS = "";
             string sDS_INFORMACOES_FISCO = "";
 
+            TipoNFe tipoNfe = TipoNFe.tnSaida;
+
+            try
+            {
+                if ((notaFiscalSaidaMercadoriaViewModels.FirstOrDefault().TabelaCFOP.GrupoCFOP.TipoOperacaoCFOP == TipoOperacaoCFOP.EntradaDentroEstado) ||
+                    (notaFiscalSaidaMercadoriaViewModels.FirstOrDefault().TabelaCFOP.GrupoCFOP.TipoOperacaoCFOP == TipoOperacaoCFOP.EntradaForaEstado) ||
+                    (notaFiscalSaidaMercadoriaViewModels.FirstOrDefault().TabelaCFOP.GrupoCFOP.TipoOperacaoCFOP == TipoOperacaoCFOP.EntradaExterior))
+                    tipoNfe = TipoNFe.tnEntrada;
+            }
+            catch (Exception e)
+            {
+                tipoNfe = TipoNFe.tnSaida;
+            }
+
             try
             {
                 if (String.IsNullOrEmpty(notaFiscalSaidaViewModel.Serie))
@@ -1422,7 +1433,7 @@ namespace SisCom.Aplicacao.Classes
                 oNFe.infNFe.ide.mod = (ModeloDocumento)Convert.ToInt16(notaFiscalSaidaViewModel.Modelo);
                 oNFe.infNFe.ide.serie = Convert.ToInt16(notaFiscalSaidaViewModel.Serie);
                 oNFe.infNFe.ide.nNF = Convert.ToInt16(sNF);
-                oNFe.infNFe.ide.tpNF = TipoNFe.tnSaida;
+                oNFe.infNFe.ide.tpNF = tipoNfe;
                 oNFe.infNFe.ide.cMunFG = Convert.ToInt32(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.CodigoIBGE);
                 oNFe.infNFe.ide.tpEmis = TipoEmissao.teNormal;
                 oNFe.infNFe.ide.tpImp = TipoImpressao.tiRetrato;
@@ -1524,7 +1535,7 @@ namespace SisCom.Aplicacao.Classes
                     if (oNFe.infNFe.ide.tpAmb == TipoAmbiente.Homologacao)
                         oNFe.infNFe.dest.xNome = "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL";
                     else
-                        oNFe.infNFe.dest.xNome = notaFiscalSaidaViewModel.Cliente.Nome;
+                        oNFe.infNFe.dest.xNome = TratarString(notaFiscalSaidaViewModel.Cliente.Nome);
 
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_EMail))
                         oNFe.infNFe.dest.email = notaFiscalSaidaViewModel.Cliente_EMail;

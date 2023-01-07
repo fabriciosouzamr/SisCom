@@ -7,7 +7,12 @@ namespace Funcoes._Classes
 {
     public static class Validacao
     {
-		public static bool CPFCNPJ_Valido(TipoPessoa tipoPessoa, string CPFCNPJ)
+        public static bool CPFCNPJ_Valido(string CPFCNPJ)
+        {
+            return (CNPJ_Valido(CPFCNPJ) || CPF_Valido(CPFCNPJ));
+        }
+
+        public static bool CPFCNPJ_Valido(TipoPessoa tipoPessoa, string CPFCNPJ)
         {
 			bool ret = false;
 

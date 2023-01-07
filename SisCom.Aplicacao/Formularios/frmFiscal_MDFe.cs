@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
 {
-    public partial class frmFiscal_MDFe : Form
+    public partial class frmFiscal_MDFe : FormMain
     {
         ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumentoSerie;
 
@@ -854,8 +854,90 @@ namespace SisCom.Aplicacao.Formularios
             }
             if (checkDadosVeiculoVceiuloTerceiro_Sim.Checked)
             {
-                if (!String.IsNullOrEmpty(propri))
+                if (!String.IsNullOrEmpty(textDadosVeiculoVeiculoTerceiro_NomeProprietario.Text))
+                {
+                    CaixaMensagem.Informacao("Informe o nome do proprietário do Veículo");
+                    return;
+                }
+                if (!Validacao.CPFCNPJ_Valido(textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario.Text))
+                {
+                    CaixaMensagem.Informacao("Informe um CPF/CNPJ válido do proprietário do Veículo");
+                }
+                if (!Combo_ComboBox.Selecionado(comboDadosVeiculoVeiculoTerceiro_TipoProprietario))
+                {
+                    CaixaMensagem.Informacao("Selecione o tipo do proprietário do Veículo");
+                    return;
+                }
+                if (!Combo_ComboBox.Selecionado(comboDadosVeiculoVeiculoTerceiro_UFProprietario))
+                {
+                    CaixaMensagem.Informacao("Selecione a U.F. do proprietário do Veículo");
+                    return;
+                }
             }
+            if (!Validacao.CPFCNPJ_Valido(textCondutor_CPFCNPJCondutor.Text))
+            {
+                CaixaMensagem.Informacao("Informe um CPF/CNPJ válido do condutor");
+                return;
+            }
+            if (!String.IsNullOrEmpty(textDadosVeiculoVeiculoTerceiro_NomeProprietario.Text))
+            {
+                CaixaMensagem.Informacao("Informe o nome do condutor");
+                return;
+            }
+
+            for (int i = 1; i <= AdicionarNotasItem_Notas; i++)
+            {
+                try
+                {
+                    Panel pnlAdicionarNotasItem = (Panel)this.Controls.Find("pnlAdicionarNotasItem" + i.ToString("00"), false)[0];
+
+                    if (!Combo_ComboBox.Selecionado((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Tipo", false)[0]))
+                    {
+                        CaixaMensagem.Informacao("Selecione a origem da nota fiscal " + i.ToString("00"));
+                        return;
+                    }
+                    if (!Combo_ComboBox.Selecionado((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_NumeroNota", false)[0]))
+                    {
+                        CaixaMensagem.Informacao("Selecione o número da nota fiscal " + i.ToString("00"));
+                        return;
+                    }
+                    if (!Combo_ComboBox.Selecionado((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_ChaveAcesso", false)[0]))
+                    {
+                        CaixaMensagem.Informacao("Selecione a chave de acesso da nota fiscal " + i.ToString("00"));
+                        return;
+                    }
+                    if (!Combo_ComboBox.Selecionado((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Cidade", false)[0]))
+                    {
+                        CaixaMensagem.Informacao("Selecione o município da nota fiscal " + i.ToString("00"));
+                        return;
+                    }
+                    if (((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_ValorNota", false)[0]).Value == 0)
+                    {
+                        CaixaMensagem.Informacao("Informe o valor da nota fiscal " + i.ToString("00"));
+                        return;
+                    }
+                    if (((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_PesoNota", false)[0]).Value == 0)
+                    {
+                        CaixaMensagem.Informacao("Informe o peso bruto da nota fiscal " + i.ToString("00"));
+                        return;
+                    }
+                }
+                catch (Exception exception)
+                {
+                    CaixaMensagem.Informacao("Erro na validação da nota " + i.ToString("00"));
+                    return;
+                }
+                foreach (DataGridViewRow row in gridPercurso.Rows)
+                {
+                    if (row.Cells[0].Value == null)
+                    {
+                        CaixaMensagem.Informacao("Selecione o percurso de todas as linhas selecionadas");
+                        return;
+                    }
+                }
+            }
+
+
         }
 
         private void botaoNovo_Click(object sender, EventArgs e)

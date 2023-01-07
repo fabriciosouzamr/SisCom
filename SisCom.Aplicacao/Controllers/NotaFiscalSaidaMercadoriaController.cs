@@ -88,6 +88,7 @@ namespace SisCom.Aplicacao.Controllers
                                                                                                               i => i.Mercadoria.Estoque_UnidadeMedidaMedida ,
                                                                                                               i => i.Mercadoria.Fiscal_VinculoFiscal,
                                                                                                               i => i.TabelaCFOP,
+                                                                                                              i => i.TabelaCFOP.GrupoCFOP,
                                                                                                               i => i.TabelaCST_CSOSN,
                                                                                                               i => i.TabelaCST_IPI,
                                                                                                               i => i.TabelaCST_PIS_COFINS_COFINS,
