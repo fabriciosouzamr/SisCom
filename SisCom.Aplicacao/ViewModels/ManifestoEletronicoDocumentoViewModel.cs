@@ -58,7 +58,7 @@ namespace SisCom.Aplicacao.ViewModels
 
         /* EF Relation */
         public Guid? EmpresaId { get; set; }
-        public Guid? ManifestoEletronicoDocumentoId { get; set; }
+        public Guid? ManifestoEletronicoDocumentoSerieId { get; set; }
         public Guid? EstadoCarregamentoId { get; set; }
         public Guid? CidadeCarregamentoId { get; set; }
         public Guid? EstadoDescargaId { get; set; }

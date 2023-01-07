@@ -14,7 +14,7 @@ namespace SisCom.Aplicacao.Formularios
 {
     public partial class frmFiscal_MDFe : FormMain
     {
-        ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumentoSerie;
+        ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento = new ManifestoEletronicoDocumentoViewModel();
 
         int AdicionarNotasItem_Notas = 1;
         int AdicionarNotasItem_UltimoTop = 1;
@@ -937,7 +937,17 @@ namespace SisCom.Aplicacao.Formularios
                 }
             }
 
+            if (manifestoEletronicoDocumento.Id == Guid.Empty) { manifestoEletronicoDocumento.Id = Guid.NewGuid(); }
 
+
+            manifestoEletronicoDocumento.DataHoraEmissao = Validacao.Data_AdicionarHora(dateIdentificacao_Emissao.Value, textIdentificacao_HoraEmissao.Text);
+            manifestoEletronicoDocumento.TipoEmissao = (MDFe_TipoEmissao)comboIdentificacao_TipoEmissao.SelectedValue;
+            manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerie = (Entidade.Modelos.ManifestoEletronicoDocumentoSerie)comboIdentificacao_Serie.SelectedValue;
+
+            using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
+            {
+
+            }
         }
 
         private void botaoNovo_Click(object sender, EventArgs e)

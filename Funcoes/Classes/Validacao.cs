@@ -141,5 +141,17 @@ namespace Funcoes._Classes
 				return false;
             }
 		}
+
+		public static DateTime Data_AdicionarHora(DateTime data, string hora)
+		{
+			try
+			{
+				return data.Date.AddHours(Convert.ToInt16(hora.Split(':')[0])).AddMinutes(Convert.ToInt16(hora.Split(':')[1]));
+            }
+            catch (Exception)
+			{
+				return data;
+            }
+        }
     }
 }
