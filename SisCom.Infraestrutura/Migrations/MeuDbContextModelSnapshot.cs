@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
@@ -201,6 +200,18 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<int?>("RegimeTributario")
                         .HasColumnType("int");
+
+                    b.Property<string>("Responsaveltecnico_CNPJ")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Responsaveltecnico_Contato")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Responsaveltecnico_Email")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Responsaveltecnico_Fone")
+                        .HasColumnType("varchar(100)");
 
                     b.Property<int?>("Sped_TipoGeracaoInventario")
                         .HasColumnType("int");
@@ -463,273 +474,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasIndex("TabelaCST_PIS_COFINSRelacionado02Id");
 
                     b.ToTable("GrupoNaturezaReceita_CTS_PIS_COFINSs");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.ManifestoEletronicoDocumento", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Autorizacao_ChaveAutenticacao")
-                        .HasColumnType("varchar(44)");
-
-                    b.Property<DateTime?>("Autorizacao_DataHoraAutorizacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Autorizacao_DataHoraEncerramento")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Autorizacao_Protocolo")
-                        .HasColumnType("varchar(44)");
-
-                    b.Property<string>("Carga")
-                        .HasColumnType("varchar(8)");
-
-                    b.Property<Guid?>("CidadeCarregamentoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Condutor_CNPJ_CPF")
-                        .HasColumnType("varchar(14)");
-
-                    b.Property<string>("Condutor_Nome")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("DadoVeiculoVeiculoTerceiros_CPFCNPJProprietario")
-                        .HasColumnType("varchar(14)");
-
-                    b.Property<Guid?>("DadoVeiculoVeiculoTerceiros_EstadoProprietarioId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("DadoVeiculoVeiculoTerceiros_IEProprietario")
-                        .HasColumnType("varchar(15)");
-
-                    b.Property<string>("DadoVeiculoVeiculoTerceiros_NomeProprietario")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("DadoVeiculoVeiculoTerceiros_RNTRCProprietario")
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<int?>("DadoVeiculoVeiculoTerceiros_TipoProprietario")
-                        .HasColumnType("int");
-
-                    b.Property<double>("DadoVeiculo_CapacidadeKG")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
-
-                    b.Property<double>("DadoVeiculo_CapacidadeME")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
-
-                    b.Property<Guid?>("DadoVeiculo_EstadoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("DadoVeiculo_PlacaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("DadoVeiculo_Renavam")
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<double>("DadoVeiculo_TaraKG")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
-
-                    b.Property<int?>("DadoVeiculo_TipoCarroceria")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DadoVeiculo_TipoRodado")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataHoraEmissao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("EmpresaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("EstadoCarregamentoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("EstadoDescargaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("InformacoesAdicionaisInteresseFisco")
-                        .HasColumnType("varchar(8000)");
-
-                    b.Property<string>("InformacoesComplementaresInteresseContribuinte")
-                        .HasColumnType("varchar(8000)");
-
-                    b.Property<Guid>("ManifestoEletronicoDocumentoSerieId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Numero")
-                        .IsRequired()
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<decimal>("PesoBrutoCarga")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(0m);
-
-                    b.Property<int>("QuantidadeNFe")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RNTRCEmitente")
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoEmissao")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TipoTransportador")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UltimaAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UnidadePeso")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("ValorTotalCarga")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(0m);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CidadeCarregamentoId");
-
-                    b.HasIndex("DadoVeiculoVeiculoTerceiros_EstadoProprietarioId");
-
-                    b.HasIndex("DadoVeiculo_EstadoId");
-
-                    b.HasIndex("DadoVeiculo_PlacaId");
-
-                    b.HasIndex("EmpresaId");
-
-                    b.HasIndex("EstadoCarregamentoId");
-
-                    b.HasIndex("EstadoDescargaId");
-
-                    b.HasIndex("ManifestoEletronicoDocumentoSerieId");
-
-                    b.ToTable("ManifestoEletronicoDocumentos");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.ManifestoEletronicoDocumentoNota", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ChaveAcesso")
-                        .HasColumnType("varchar(44)");
-
-                    b.Property<Guid?>("CidadeDescargaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ManifestoEletronicoDocumentoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("NotaFiscalEntradaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("NotaFiscalSaidaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("NumeroNotaFiscal")
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<decimal>("PesoNota")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(0m);
-
-                    b.Property<int>("TipoManifestoEletronicoDocumentoNotas")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UltimaAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("ValorNota")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(0m);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CidadeDescargaId");
-
-                    b.HasIndex("ManifestoEletronicoDocumentoId");
-
-                    b.HasIndex("NotaFiscalEntradaId");
-
-                    b.HasIndex("NotaFiscalSaidaId");
-
-                    b.ToTable("ManifestoEletronicoDocumentoNotas");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.ManifestoEletronicoDocumentoPercurso", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EstadoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ManifestoEletronicoDocumentoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("UltimaAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EstadoId");
-
-                    b.HasIndex("ManifestoEletronicoDocumentoId");
-
-                    b.ToTable("ManifestoEletronicoDocumentoPercursos");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.ManifestoEletronicoDocumentoSerie", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EmpresaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Serie")
-                        .IsRequired()
-                        .HasColumnType("varchar(3)");
-
-                    b.Property<DateTime>("UltimaAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("UltimoManifestoEletronicoDocumentoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UltimoManifestoEletronicoDocumentoId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UltimoNumeroManifestoEletronicoDocumento")
-                        .IsRequired()
-                        .HasColumnType("varchar(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmpresaId");
-
-                    b.HasIndex("UltimoManifestoEletronicoDocumentoId1");
-
-                    b.ToTable("ManifestoEletronicoDocumentoSeries");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Mercadoria", b =>
@@ -3560,119 +3304,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Navigation("TabelaCST_PIS_COFINSRelacionado02");
                 });
 
-            modelBuilder.Entity("SisCom.Entidade.Modelos.ManifestoEletronicoDocumento", b =>
-                {
-                    b.HasOne("SisCom.Entidade.Modelos.Cidade", "CidadeCarregamento")
-                        .WithMany()
-                        .HasForeignKey("CidadeCarregamentoId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.Estado", "DadoVeiculoVeiculoTerceiros_EstadoProprietario")
-                        .WithMany()
-                        .HasForeignKey("DadoVeiculoVeiculoTerceiros_EstadoProprietarioId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.Estado", "DadoVeiculo_Estado")
-                        .WithMany()
-                        .HasForeignKey("DadoVeiculo_EstadoId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.VeiculoPlaca", "DadoVeiculo_Placa")
-                        .WithMany()
-                        .HasForeignKey("DadoVeiculo_PlacaId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.Empresa", "Empresa")
-                        .WithMany()
-                        .HasForeignKey("EmpresaId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.Estado", "EstadoCarregamento")
-                        .WithMany()
-                        .HasForeignKey("EstadoCarregamentoId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.Estado", "EstadoDescarga")
-                        .WithMany()
-                        .HasForeignKey("EstadoDescargaId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.ManifestoEletronicoDocumentoSerie", "ManifestoEletronicoDocumentoSerie")
-                        .WithMany("ManifestoEletronicoDocumento")
-                        .HasForeignKey("ManifestoEletronicoDocumentoSerieId")
-                        .IsRequired();
-
-                    b.Navigation("CidadeCarregamento");
-
-                    b.Navigation("DadoVeiculo_Estado");
-
-                    b.Navigation("DadoVeiculo_Placa");
-
-                    b.Navigation("DadoVeiculoVeiculoTerceiros_EstadoProprietario");
-
-                    b.Navigation("Empresa");
-
-                    b.Navigation("EstadoCarregamento");
-
-                    b.Navigation("EstadoDescarga");
-
-                    b.Navigation("ManifestoEletronicoDocumentoSerie");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.ManifestoEletronicoDocumentoNota", b =>
-                {
-                    b.HasOne("SisCom.Entidade.Modelos.Cidade", "CidadeDescarga")
-                        .WithMany()
-                        .HasForeignKey("CidadeDescargaId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.ManifestoEletronicoDocumento", "ManifestoEletronicoDocumento")
-                        .WithMany()
-                        .HasForeignKey("ManifestoEletronicoDocumentoId")
-                        .IsRequired();
-
-                    b.HasOne("SisCom.Entidade.Modelos.NotaFiscalEntrada", "NotaFiscalEntrada")
-                        .WithMany()
-                        .HasForeignKey("NotaFiscalEntradaId");
-
-                    b.HasOne("SisCom.Entidade.Modelos.NotaFiscalSaida", "NotaFiscalSaida")
-                        .WithMany()
-                        .HasForeignKey("NotaFiscalSaidaId");
-
-                    b.Navigation("CidadeDescarga");
-
-                    b.Navigation("ManifestoEletronicoDocumento");
-
-                    b.Navigation("NotaFiscalEntrada");
-
-                    b.Navigation("NotaFiscalSaida");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.ManifestoEletronicoDocumentoPercurso", b =>
-                {
-                    b.HasOne("SisCom.Entidade.Modelos.Estado", "Estado")
-                        .WithMany()
-                        .HasForeignKey("EstadoId")
-                        .IsRequired();
-
-                    b.HasOne("SisCom.Entidade.Modelos.ManifestoEletronicoDocumento", "ManifestoEletronicoDocumento")
-                        .WithMany()
-                        .HasForeignKey("ManifestoEletronicoDocumentoId")
-                        .IsRequired();
-
-                    b.Navigation("Estado");
-
-                    b.Navigation("ManifestoEletronicoDocumento");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.ManifestoEletronicoDocumentoSerie", b =>
-                {
-                    b.HasOne("SisCom.Entidade.Modelos.Empresa", "Empresa")
-                        .WithMany()
-                        .HasForeignKey("EmpresaId")
-                        .IsRequired();
-
-                    b.HasOne("SisCom.Entidade.Modelos.ManifestoEletronicoDocumento", "UltimoManifestoEletronicoDocumento")
-                        .WithMany()
-                        .HasForeignKey("UltimoManifestoEletronicoDocumentoId1");
-
-                    b.Navigation("Empresa");
-
-                    b.Navigation("UltimoManifestoEletronicoDocumento");
-                });
-
             modelBuilder.Entity("SisCom.Entidade.Modelos.Mercadoria", b =>
                 {
                     b.HasOne("SisCom.Entidade.Modelos.TabelaCFOP", "Estoque_TributacaoNFCe_TabelaCFOP")
@@ -4526,11 +4157,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Navigation("UnidadeMedida");
 
                     b.Navigation("Venda");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.ManifestoEletronicoDocumentoSerie", b =>
-                {
-                    b.Navigation("ManifestoEletronicoDocumento");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaida", b =>

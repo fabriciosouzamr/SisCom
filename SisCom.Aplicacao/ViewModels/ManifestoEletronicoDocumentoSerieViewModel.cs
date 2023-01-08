@@ -1,7 +1,5 @@
-﻿
-using SisCom.Entidade.Modelos;
+﻿using SisCom.Entidade.Modelos;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SisCom.Aplicacao.ViewModels
@@ -13,7 +11,7 @@ namespace SisCom.Aplicacao.ViewModels
         public Empresa Empresa { get; set; }
         public string Serie { get; set; }
         public String UltimoNumeroManifestoEletronicoDocumento { get; set; }
-        public ManifestoEletronicoDocumento UltimoManifestoEletronicoDocumento { get; set; }
+        public virtual ManifestoEletronicoDocumento UltimoManifestoEletronicoDocumento { get; set; }
 
         /* EF Relation */
         public Guid? UltimoManifestoEletronicoDocumentoId { get; set; }

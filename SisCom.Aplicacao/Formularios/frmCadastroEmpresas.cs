@@ -128,7 +128,7 @@ namespace SisCom.Aplicacao.Formularios
                 if (!Funcao.Nulo(empresa.MDFe_TipoEmirssor)) comboMDFeTipoEmissor.SelectedValue = empresa.MDFe_TipoEmirssor;
                 textNuvemFiscalCertificado.Text = Funcao.NuloParaString(empresa.NuvemFiscal_Certificado);
                 checkUtilizarNuvemFiscal.Checked = empresa.NuvemFiscal_Usar;
-                if (!Funcao.Nulo(empresa.MDFe_TipoEmirssor)) comboNuvemFiscalAmbienteWebService.SelectedValue = empresa.NuvemFiscal_AmbienteWebService;
+                if (!Funcao.Nulo(empresa.MDFe_TipoEmirssor)) comboMDFeTipoEmissor.SelectedValue = empresa.MDFe_TipoEmirssor;
                 textNuvemFiscalDiretorioXMLs.Text = Funcao.NuloParaString(empresa.PathDocumentoFiscal);
                 if (!Funcao.Nulo(empresa.PathDocumentoFiscal)) textNuvemFiscalDiretorioXMLs.Text = empresa.PathDocumentoFiscal;
                 if (!Funcao.Nulo(empresa.NuvemFiscal_SerialNumber)) serialNumber = empresa.NuvemFiscal_SerialNumber;
@@ -237,7 +237,10 @@ namespace SisCom.Aplicacao.Formularios
                     manifestoEletronicoDocumentoSerieViewModel.EmpresaId = Declaracoes.dados_Empresa_Id;
 
                     if (manifestoEletronicoDocumentoSerie == null)
-                    { manifestoEletronicoDocumentoSerieController.Adicionar(manifestoEletronicoDocumentoSerieViewModel); }
+                    {
+                        manifestoEletronicoDocumentoSerieViewModel.Id = Guid.NewGuid();
+                        manifestoEletronicoDocumentoSerieController.Adicionar(manifestoEletronicoDocumentoSerieViewModel); 
+                    }
                     else
                     {
                         manifestoEletronicoDocumentoSerieViewModel.Id = manifestoEletronicoDocumentoSerie.Id;

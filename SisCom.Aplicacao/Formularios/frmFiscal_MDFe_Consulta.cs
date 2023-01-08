@@ -64,7 +64,6 @@ namespace SisCom.Aplicacao.Formularios
             {
                 empresa = await empresaController.GetById(Declaracoes.dados_Empresa_Id);
             }
-
             using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
             {
                 manifestoEletronicoDocumento = await manifestoEletronicoDocumentoController.PesquisarId(id);
@@ -81,13 +80,11 @@ namespace SisCom.Aplicacao.Formularios
             var form = this.ServiceProvider().GetRequiredService<frmFiscal_MDFe>();
             form.ShowDialog(this);
         }
-
         private void botaoLimparFiltros_Click(object sender, EventArgs e)
         {
             dateDataEmissaoInicial.Value = DateTime.Now;
             dateDataEmissaoFinal.Value = DateTime.Now;
         }
-
         private void botaoDesmarcarTodos_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in gridManifestoDocumentoEletronico.Rows)
@@ -95,7 +92,6 @@ namespace SisCom.Aplicacao.Formularios
                 row.Cells[gridManifestoDocumentoEletronico_Chk].Value = false;
             }
         }
-
         private void botaoMarcarTodos_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in gridManifestoDocumentoEletronico.Rows)
@@ -108,8 +104,8 @@ namespace SisCom.Aplicacao.Formularios
         {
             using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
             {
-                manifestoEletronicoDocumentoController.ObterTodos(order: o => o.DataHoraEmissao, predicate: p => p.DataHoraEmissao.Date >= dateDataEmissaoInicial.Value.Date &&
-                                                                                                                 p.DataHoraEmissao.Date <= dateDataEmissaoFinal.Value.Date);
+                await manifestoEletronicoDocumentoController.ObterTodos(order: o => o.DataHoraEmissao, predicate: p => p.DataHoraEmissao.Date >= dateDataEmissaoInicial.Value.Date &&
+                                                                                                                       p.DataHoraEmissao.Date <= dateDataEmissaoFinal.Value.Date);
             }
 
             return true;
