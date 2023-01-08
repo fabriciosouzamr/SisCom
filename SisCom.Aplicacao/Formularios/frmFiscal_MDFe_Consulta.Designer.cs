@@ -34,11 +34,9 @@
             this.botaoLimparFiltros = new System.Windows.Forms.Button();
             this.botaoAplicarFiltros = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.dateDataVendaFinal = new System.Windows.Forms.DateTimePicker();
+            this.dateDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
-            this.dateDataVendaInicial = new System.Windows.Forms.DateTimePicker();
-            this.comboStatusVenda = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.dateDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
             this.labelValidade = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -58,13 +56,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelStatusServico = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.gridNotaFiscalSaida = new System.Windows.Forms.DataGridView();
+            this.gridManifestoDocumentoEletronico = new System.Windows.Forms.DataGridView();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalSaida)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridManifestoDocumentoEletronico)).BeginInit();
             this.SuspendLayout();
             // 
             // botaoDesmarcarTodos
@@ -76,6 +74,7 @@
             this.botaoDesmarcarTodos.TabIndex = 101;
             this.botaoDesmarcarTodos.Text = "Desmarcar Todos";
             this.botaoDesmarcarTodos.UseVisualStyleBackColor = true;
+            this.botaoDesmarcarTodos.Click += new System.EventHandler(this.botaoDesmarcarTodos_Click);
             // 
             // botaoMarcarTodos
             // 
@@ -86,6 +85,7 @@
             this.botaoMarcarTodos.TabIndex = 100;
             this.botaoMarcarTodos.Text = "Marcar Todos";
             this.botaoMarcarTodos.UseVisualStyleBackColor = true;
+            this.botaoMarcarTodos.Click += new System.EventHandler(this.botaoMarcarTodos_Click);
             // 
             // botaoLimparFiltros
             // 
@@ -96,6 +96,7 @@
             this.botaoLimparFiltros.TabIndex = 99;
             this.botaoLimparFiltros.TabStop = false;
             this.botaoLimparFiltros.UseVisualStyleBackColor = true;
+            this.botaoLimparFiltros.Click += new System.EventHandler(this.botaoLimparFiltros_Click);
             // 
             // botaoAplicarFiltros
             // 
@@ -106,57 +107,41 @@
             this.botaoAplicarFiltros.TabIndex = 98;
             this.botaoAplicarFiltros.TabStop = false;
             this.botaoAplicarFiltros.UseVisualStyleBackColor = true;
+            this.botaoAplicarFiltros.Click += new System.EventHandler(this.botaoAplicarFiltros_Click);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(294, 26);
+            this.label10.Location = new System.Drawing.Point(88, 26);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(13, 15);
             this.label10.TabIndex = 5;
             this.label10.Text = "a";
             // 
-            // dateDataVendaFinal
+            // dateDataEmissaoFinal
             // 
-            this.dateDataVendaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDataVendaFinal.Location = new System.Drawing.Point(309, 22);
-            this.dateDataVendaFinal.Name = "dateDataVendaFinal";
-            this.dateDataVendaFinal.Size = new System.Drawing.Size(81, 23);
-            this.dateDataVendaFinal.TabIndex = 4;
+            this.dateDataEmissaoFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateDataEmissaoFinal.Location = new System.Drawing.Point(103, 22);
+            this.dateDataEmissaoFinal.Name = "dateDataEmissaoFinal";
+            this.dateDataEmissaoFinal.Size = new System.Drawing.Size(81, 23);
+            this.dateDataEmissaoFinal.TabIndex = 4;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(211, 5);
+            this.label9.Location = new System.Drawing.Point(5, 5);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(107, 15);
+            this.label9.Size = new System.Drawing.Size(110, 15);
             this.label9.TabIndex = 3;
-            this.label9.Text = "Período de Criação";
+            this.label9.Text = "Período de Emissão";
             // 
-            // dateDataVendaInicial
+            // dateDataEmissaoInicial
             // 
-            this.dateDataVendaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDataVendaInicial.Location = new System.Drawing.Point(211, 22);
-            this.dateDataVendaInicial.Name = "dateDataVendaInicial";
-            this.dateDataVendaInicial.Size = new System.Drawing.Size(81, 23);
-            this.dateDataVendaInicial.TabIndex = 2;
-            // 
-            // comboStatusVenda
-            // 
-            this.comboStatusVenda.FormattingEnabled = true;
-            this.comboStatusVenda.Location = new System.Drawing.Point(5, 22);
-            this.comboStatusVenda.Name = "comboStatusVenda";
-            this.comboStatusVenda.Size = new System.Drawing.Size(200, 23);
-            this.comboStatusVenda.TabIndex = 1;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(5, 5);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(95, 15);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Status do MDF-e";
+            this.dateDataEmissaoInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateDataEmissaoInicial.Location = new System.Drawing.Point(5, 22);
+            this.dateDataEmissaoInicial.Name = "dateDataEmissaoInicial";
+            this.dateDataEmissaoInicial.Size = new System.Drawing.Size(81, 23);
+            this.dateDataEmissaoInicial.TabIndex = 2;
             // 
             // labelValidade
             // 
@@ -176,11 +161,9 @@
             this.panel3.Controls.Add(this.botaoLimparFiltros);
             this.panel3.Controls.Add(this.botaoAplicarFiltros);
             this.panel3.Controls.Add(this.label10);
-            this.panel3.Controls.Add(this.dateDataVendaFinal);
+            this.panel3.Controls.Add(this.dateDataEmissaoFinal);
             this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.dateDataVendaInicial);
-            this.panel3.Controls.Add(this.comboStatusVenda);
-            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.dateDataEmissaoInicial);
             this.panel3.Location = new System.Drawing.Point(0, 112);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1314, 104);
@@ -364,15 +347,15 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Status do Serviço:";
             // 
-            // gridNotaFiscalSaida
+            // gridManifestoDocumentoEletronico
             // 
-            this.gridNotaFiscalSaida.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridNotaFiscalSaida.Location = new System.Drawing.Point(0, 222);
-            this.gridNotaFiscalSaida.Name = "gridNotaFiscalSaida";
-            this.gridNotaFiscalSaida.RowHeadersWidth = 51;
-            this.gridNotaFiscalSaida.RowTemplate.Height = 25;
-            this.gridNotaFiscalSaida.Size = new System.Drawing.Size(1314, 343);
-            this.gridNotaFiscalSaida.TabIndex = 106;
+            this.gridManifestoDocumentoEletronico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridManifestoDocumentoEletronico.Location = new System.Drawing.Point(0, 222);
+            this.gridManifestoDocumentoEletronico.Name = "gridManifestoDocumentoEletronico";
+            this.gridManifestoDocumentoEletronico.RowHeadersWidth = 51;
+            this.gridManifestoDocumentoEletronico.RowTemplate.Height = 25;
+            this.gridManifestoDocumentoEletronico.Size = new System.Drawing.Size(1314, 343);
+            this.gridManifestoDocumentoEletronico.TabIndex = 106;
             // 
             // frmFiscal_MDFe_Consulta
             // 
@@ -384,7 +367,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlMenuBotao);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.gridNotaFiscalSaida);
+            this.Controls.Add(this.gridManifestoDocumentoEletronico);
             this.Name = "frmFiscal_MDFe_Consulta";
             this.Text = "Nota Fiscal - MDF-e - Consultar";
             this.panel3.ResumeLayout(false);
@@ -396,7 +379,7 @@
             this.pnlMenuBotaoBotao.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscalSaida)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridManifestoDocumentoEletronico)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,11 +391,9 @@
         private System.Windows.Forms.Button botaoLimparFiltros;
         private System.Windows.Forms.Button botaoAplicarFiltros;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DateTimePicker dateDataVendaFinal;
+        private System.Windows.Forms.DateTimePicker dateDataEmissaoFinal;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DateTimePicker dateDataVendaInicial;
-        private System.Windows.Forms.ComboBox comboStatusVenda;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker dateDataEmissaoInicial;
         private System.Windows.Forms.Label labelValidade;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel1;
@@ -424,7 +405,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelStatusServico;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DataGridView gridNotaFiscalSaida;
+        private System.Windows.Forms.DataGridView gridManifestoDocumentoEletronico;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button botaoCancelar;

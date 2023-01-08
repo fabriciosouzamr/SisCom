@@ -1,14 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SisCom.Entidade.Modelos
+namespace SisCom.Aplicacao.ViewModels
 {
     public class ManifestoEletronicoDocumentoPercursoViewModel
     {
         [Key]
         public Guid Id { get; set; }
-        public ManifestoEletronicoDocumento ManifestoEletronicoDocumento { get; set; }
-        public Estado Estado { get; set; }
+        public ManifestoEletronicoDocumentoViewModel ManifestoEletronicoDocumento { get; set; }
+        public EstadoViewModel Estado { get; set; }
 
         /* EF Relation */
         public Guid ManifestoEletronicoDocumentoId { get; set; }

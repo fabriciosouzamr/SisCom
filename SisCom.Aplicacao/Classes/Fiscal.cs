@@ -1887,10 +1887,8 @@ namespace SisCom.Aplicacao.Classes
             return rand.Next(11111111, 99999999);
         }
 
-        private static MDFe.Classes.Informacoes.MDFe Fiscal_ManifestoEletronicoDocumento_Transmitir(ViewModels.EmpresaViewModel empresa,
-                                                                                                    ref ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento,
-                                                                                                    ref List<ManifestoEletronicoDocumentoNotaViewModel> manifestoEletronicoDocumentoNota,
-                                                                                                    ref List<ManifestoEletronicoDocumentoPercursoViewModel> manifestoEletronicoDocumentoPercurso)
+        public static MDFe.Classes.Informacoes.MDFe Fiscal_ManifestoEletronicoDocumento_Transmitir(ViewModels.EmpresaViewModel empresa,
+                                                                                                   ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento)
         {
             Fiscal_Configuracao_MDFe();
 
@@ -1962,8 +1960,8 @@ namespace SisCom.Aplicacao.Classes
                 mdfe.InfMDFe.Ide.TpEmis = MDFeTipoEmissao.Normal;
                 mdfe.InfMDFe.Ide.ProcEmi = MDFeIdentificacaoProcessoEmissao.EmissaoComAplicativoContribuinte;
                 mdfe.InfMDFe.Ide.VerProc = "versao28383";
-                mdfe.InfMDFe.Ide.UFIni = oEstado.SiglaParaEstado(manifestoEletronicoDocumentoPercurso.FirstOrDefault().Estado.Codigo);
-                mdfe.InfMDFe.Ide.UFFim = oEstado.SiglaParaEstado(manifestoEletronicoDocumentoPercurso.LastOrDefault().Estado.Codigo);
+                mdfe.InfMDFe.Ide.UFIni = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos.FirstOrDefault().Estado.Codigo);
+                mdfe.InfMDFe.Ide.UFFim = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos.LastOrDefault().Estado.Codigo);
 
                 mdfe.InfMDFe.Ide.InfMunCarrega.Add(new MDFeInfMunCarrega
                 {
@@ -2085,7 +2083,7 @@ namespace SisCom.Aplicacao.Classes
                 #endregion modal
 
                 #region infMunDescarga
-                manifestoEletronicoDocumentoNota.ForEach(n =>
+                manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas.ForEach(n =>
                 {
                     mdfe.InfMDFe.InfDoc.InfMunDescarga = new List<MDFeInfMunDescarga>
                     {

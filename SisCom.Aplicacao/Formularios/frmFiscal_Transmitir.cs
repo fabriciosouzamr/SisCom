@@ -51,7 +51,6 @@ namespace SisCom.Aplicacao.Formularios
             {
                 Combo_ComboBox.Formatar(comboStatusVenda, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Status));
 
-                //Detalhe de Estoque
                 Grid_DataGridView.User_Formatar(gridNotaFiscalSaida, true);
                 Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalSaida, "ID", "ID", Tamanho: 0);
                 Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalSaida, "", "...", Grid_DataGridView.TipoColuna.CheckBox, Tamanho: 30, readOnly: false);

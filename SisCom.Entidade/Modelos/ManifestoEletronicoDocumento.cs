@@ -1,6 +1,7 @@
 ﻿using Funcoes._Entity;
 using SisCom.Entidade.Enum;
 using System;
+using System.Collections.Generic;
 
 namespace SisCom.Entidade.Modelos
 {
@@ -60,5 +61,7 @@ namespace SisCom.Entidade.Modelos
         public Guid? DadoVeiculo_PlacaId { get; set; }
         public Guid? DadoVeiculo_EstadoId { get; set; }
         public Guid? DadoVeiculoVeiculoTerceiros_EstadoProprietarioId { get; set; }
+        public virtual List<ManifestoEletronicoDocumentoNota> ManifestoEletronicoDocumentoNotas { get; set; }
+        public virtual List<ManifestoEletronicoDocumentoPercurso> ManifestoEletronicoDocumentoPercursos { get; set; }
     }
 }

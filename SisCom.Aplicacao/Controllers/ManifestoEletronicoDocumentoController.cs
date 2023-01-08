@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Entity;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -43,16 +44,20 @@ namespace SisCom.Aplicacao.Controllers
 
             return ManifestoEletronicoDocumentoViewModel;
         }
-        public async Task<IEnumerable<ManifestoEletronicoDocumentoViewModel>> ObterTodos()
+        public async Task<IEnumerable<ManifestoEletronicoDocumentoViewModel>> ObterTodos(Expression<Func<ManifestoEletronicoDocumento, object>> order = null, 
+                                                                                         Expression<Func<ManifestoEletronicoDocumento, bool>> predicate = null, 
+                                                                                         params Expression<Func<ManifestoEletronicoDocumento, object>>[] includes)
         {
-            var obterTodos = await _manifestoEletronicoDocumentoService.GetAll(null, null);
+            var obterTodos = await _manifestoEletronicoDocumentoService.GetAll(order, predicate, includes);
             return Declaracoes.mapper.Map<IEnumerable<ManifestoEletronicoDocumentoViewModel>>(obterTodos);
 
         }
-        public async Task<IEnumerable<ManifestoEletronicoDocumentoViewModel>> PesquisarId(Guid Id)
+        public async Task<ManifestoEletronicoDocumentoViewModel> PesquisarId(Guid Id)
         {
-            var pessoa = await _manifestoEletronicoDocumentoService.GetAll(null, p => p.Id == Id);
-            return Declaracoes.mapper.Map<IEnumerable<ManifestoEletronicoDocumentoViewModel>>(pessoa);
+            var manifesto = await _manifestoEletronicoDocumentoService.GetAll(null, p => p.Id == Id, i => i.ManifestoEletronicoDocumentoSerie,
+                                                                                                     i => i.ManifestoEletronicoDocumentoNotas,
+                                                                                                     i => i.ManifestoEletronicoDocumentoPercursos);
+            return Declaracoes.mapper.Map<ManifestoEletronicoDocumentoViewModel>(manifesto.FirstOrDefault());
         }
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<ManifestoEletronicoDocumento, object>> order = null)
         {

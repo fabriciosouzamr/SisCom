@@ -23,7 +23,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
             builder.Property(p => p.DadoVeiculoVeiculoTerceiros_RNTRCProprietario).HasColumnType("varchar(10)");
             builder.Property(p => p.Autorizacao_ChaveAutenticacao).HasColumnType("varchar(44)");
             builder.Property(p => p.Autorizacao_Protocolo).HasColumnType("varchar(44)");
-            builder.Property(p => p.Condutor_CNPJ_CPF).HasColumnType("varchar(14)");
+            builder.Property(p => p.Condutor_CPF).HasColumnType("varchar(14)");
             builder.Property(p => p.Condutor_Nome).HasColumnType("varchar(100)");
             builder.Property(p => p.InformacoesAdicionaisInteresseFisco).HasColumnType("varchar(8000)");
             builder.Property(p => p.InformacoesComplementaresInteresseContribuinte).HasColumnType("varchar(8000)");
