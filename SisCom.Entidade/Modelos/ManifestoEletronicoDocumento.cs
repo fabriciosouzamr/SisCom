@@ -18,7 +18,6 @@ namespace SisCom.Entidade.Modelos
         public Estado? EstadoDescarga { get; set; }
         public MDFe_TipoTransportador? TipoTransportador { get; set; }
         public string? RNTRCEmitente { get; set; }
-
         public VeiculoPlaca? DadoVeiculo_Placa { get; set; }
         public Estado? DadoVeiculo_Estado { get; set; }
         public string? DadoVeiculo_Renavam { get; set; }
@@ -33,23 +32,18 @@ namespace SisCom.Entidade.Modelos
         public string? DadoVeiculoVeiculoTerceiros_RNTRCProprietario { get; set; }
         public MDFe_TipoProprietario? DadoVeiculoVeiculoTerceiros_TipoProprietario { get; set; }
         public Estado? DadoVeiculoVeiculoTerceiros_EstadoProprietario { get; set; }
-
         public int QuantidadeNFe { get; set; }
         public decimal ValorTotalCarga { get; set; }
         public decimal PesoBrutoCarga { get; set; }
         public MDFe_UidadePeso? UnidadePeso { get; set; }
-
         public string? Autorizacao_ChaveAutenticacao { get; set; }
         public string? Autorizacao_Protocolo { get; set; }
         public DateTime? Autorizacao_DataHoraAutorizacao { get; set; }
         public DateTime Autorizacao_DataHoraEncerramento { get; set; }
-
         public string? Condutor_CPF { get; set; }
         public string? Condutor_Nome { get; set; }
-
         public string? InformacoesAdicionaisInteresseFisco { get; set; }
         public string? InformacoesComplementaresInteresseContribuinte { get; set; }
-
         public MDFe_Status Status { get; set; }
 
         /* EF Relation */

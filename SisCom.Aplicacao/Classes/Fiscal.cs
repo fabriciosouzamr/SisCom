@@ -1065,7 +1065,6 @@ namespace SisCom.Aplicacao.Classes
                     CaixaMensagem.Informacao("o código do C.E.P. do endereço da pessoa está em formato incorreto");
                     goto Sair;
                 }
-
                 foreach (NotaFiscalSaidaMercadoriaViewModel notaFiscalSaidaMercadoriaViewModel in notaFiscalSaidaMercadoriaViewModels)
                 {
                     if (sAux.Length != 0) { sAux.AppendLine(Environment.NewLine); }

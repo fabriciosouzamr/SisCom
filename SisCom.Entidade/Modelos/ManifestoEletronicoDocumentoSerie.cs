@@ -9,8 +9,7 @@ namespace SisCom.Entidade.Modelos
         public Empresa Empresa { get; set; }
         public string Serie { get; set; }
         public String UltimoNumeroManifestoEletronicoDocumento { get; set; }
-        public ManifestoEletronicoDocumento UltimoManifestoEletronicoDocumento { get; set; }
-        public virtual ICollection<ManifestoEletronicoDocumento> ManifestoEletronicoDocumentos { get; set; }
+
         /* EF Relation */
         public Guid? UltimoManifestoEletronicoDocumentoId { get; set; }
         public Guid EmpresaId { get; set; }

@@ -119,6 +119,18 @@ namespace SisCom.Aplicacao
                         #region MercadoriaImpostoEstado
                         cfg.CreateMap<MercadoriaImpostoEstadoViewModel, MercadoriaImpostoEstado>().ReverseMap();
                         #endregion
+                        #region ManifestoEletronicoDocumento
+                        cfg.CreateMap<ManifestoEletronicoDocumentoViewModel, ManifestoEletronicoDocumento>().ReverseMap();
+                        #endregion
+                        #region ManifestoEletronicoDocumentoNota
+                        cfg.CreateMap<ManifestoEletronicoDocumentoNotaViewModel, ManifestoEletronicoDocumentoNota>().ReverseMap();
+                        #endregion
+                        #region ManifestoEletronicoDocumentoPercurso
+                        cfg.CreateMap<ManifestoEletronicoDocumentoPercursoViewModel, ManifestoEletronicoDocumentoPercurso>().ReverseMap();
+                        #endregion
+                        #region ManifestoEletronicoDocumentoSerie
+                        cfg.CreateMap<ManifestoEletronicoDocumentoSerieViewModel, ManifestoEletronicoDocumentoSerie>().ReverseMap();
+                        #endregion
                         #region NaturezaOperacao
                         cfg.CreateMap<NaturezaOperacaoViewModel, NaturezaOperacao>().ReverseMap();
                         cfg.CreateMap<NaturezaOperacao, ComboNaturezaOperacaoViewModel>().ReverseMap();

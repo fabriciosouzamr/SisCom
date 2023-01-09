@@ -1394,6 +1394,7 @@
             // 
             // comboIdentificacao_CidadeCarregamento
             // 
+            this.comboIdentificacao_CidadeCarregamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboIdentificacao_CidadeCarregamento.DropDownWidth = 200;
             this.comboIdentificacao_CidadeCarregamento.FormattingEnabled = true;
             this.comboIdentificacao_CidadeCarregamento.Location = new System.Drawing.Point(625, 76);
@@ -1444,7 +1445,7 @@
             this.comboIdentificacao_TipoTransportador.Location = new System.Drawing.Point(114, 105);
             this.comboIdentificacao_TipoTransportador.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboIdentificacao_TipoTransportador.Name = "comboIdentificacao_TipoTransportador";
-            this.comboIdentificacao_TipoTransportador.Size = new System.Drawing.Size(123, 23);
+            this.comboIdentificacao_TipoTransportador.Size = new System.Drawing.Size(358, 23);
             this.comboIdentificacao_TipoTransportador.TabIndex = 11;
             // 
             // label4

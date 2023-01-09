@@ -82,10 +82,10 @@ namespace SisCom.Aplicacao.Controllers
 
             return notaFiscal;
         }
-        public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<ManifestoEletronicoDocumentoSerie, object>> order = null)
+        public async Task<IEnumerable<ManifestoEletronicoDocumentoSerieViewModel>> Combo(Expression<Func<ManifestoEletronicoDocumentoSerie, object>> order = null)
         {
             var combo = await _manifestoEletronicoDocumentoSerieService.Combo(order);
-            return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
+            return Declaracoes.mapper.Map<IEnumerable<ManifestoEletronicoDocumentoSerieViewModel>>(combo);
         }
         public void Dispose()
         {
