@@ -28,10 +28,10 @@ namespace SisCom.Aplicacao.Controllers
             var obterTodos = await _UnidadeMedidaService.GetAll();
             return Declaracoes.mapper.Map<IEnumerable<UnidadeMedidaViewModel>>(obterTodos);
         }
-        public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<UnidadeMedida, object>> order = null)
+        public async Task<IEnumerable<CodigoNomeComboViewModel>> Combo(Expression<Func<UnidadeMedida, object>> order = null)
         {
             var combo = await _UnidadeMedidaService.Combo(order);
-            return Declaracoes.mapper.Map<IEnumerable<NomeComboViewModel>>(combo);
+            return Declaracoes.mapper.Map<IEnumerable<CodigoNomeComboViewModel>>(combo);
         }
         public void Dispose()
         {

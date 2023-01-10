@@ -79,7 +79,6 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
-
         async Task<bool> Carregar(Entidade.Enum.NF_Status? statusId, DateTime? dataInicial, DateTime? dataFinal)
         {
             int linha = 0;
@@ -256,7 +255,6 @@ namespace SisCom.Aplicacao.Formularios
                 notaFiscalSaidaViewModels = await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == id);
                 notaFiscalSaidaViewModel = notaFiscalSaidaViewModels.FirstOrDefault();
             }
-
             if (notaFiscalSaidaViewModel.Status == NF_Status.Cancelado)
             {
                 if (exibirmensagem) CaixaMensagem.Informacao("Nota fiscal cancelada");

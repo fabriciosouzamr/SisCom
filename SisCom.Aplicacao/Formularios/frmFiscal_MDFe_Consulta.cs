@@ -1,10 +1,12 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Classes;
+using Funcoes.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Infraestrutura.Data.Context;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,7 +18,7 @@ namespace SisCom.Aplicacao.Formularios
         const int gridManifestoDocumentoEletronico_Chk = 1;
         const int gridManifestoDocumentoEletronico_DataHoraEmissao = 2;
         const int gridManifestoDocumentoEletronico_Numero = 3;
-        const int gridManifestoDocumentoEletronico_TipoEmissao = 4;
+        const int gridManifestoDocumentoEletronico_Status = 4;
         const int gridManifestoDocumentoEletronico_Condutor_Nome = 5;
         const int gridManifestoDocumentoEletronico_Condutor_CNPJ_CPF = 6;
 
@@ -34,7 +36,7 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "", "...", Grid_DataGridView.TipoColuna.CheckBox, Tamanho: 30, readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "DataEmissao", "Data Emissão", Tamanho: 150);
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "Numero", "Número", Tamanho: 100);
-            Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "TipoEmissao", "Tipo de Emissão", Tamanho: 100);
+            Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "Status", "Status", Tamanho: 100);
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "NomeCondutor", "Nome Condutor", Tamanho: 150);
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "CPFCondutor", "C.P.F. Condutor", Tamanho: 100);
 
@@ -67,6 +69,14 @@ namespace SisCom.Aplicacao.Formularios
             using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
             {
                 manifestoEletronicoDocumento = await manifestoEletronicoDocumentoController.PesquisarId(id);
+            }
+            using (ManifestoEletronicoDocumentoPercursoController manifestoEletronicoDocumentoPercursoController = new ManifestoEletronicoDocumentoPercursoController(this.MeuDbContext(), this._notifier))
+            {
+                manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos = (List<ManifestoEletronicoDocumentoPercursoViewModel>)await manifestoEletronicoDocumentoPercursoController.ObterTodos(w => w.ManifestoEletronicoDocumentoId == id);
+            }
+            using (ManifestoEletronicoDocumentoNotaController manifestoEletronicoDocumentoNotaController = new ManifestoEletronicoDocumentoNotaController(this.MeuDbContext(), this._notifier))
+            {
+                manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas = (List<ManifestoEletronicoDocumentoNotaViewModel>)await manifestoEletronicoDocumentoNotaController.ObterTodos(w => w.ManifestoEletronicoDocumentoId == id);
             }
 
             Fiscal.Fiscal_ManifestoEletronicoDocumento_Transmitir(empresa, manifestoEletronicoDocumento);
@@ -102,10 +112,31 @@ namespace SisCom.Aplicacao.Formularios
         }
         async Task<bool> Carregar(DateTime? dataInicial, DateTime? dataFinal)
         {
+            IEnumerable<ManifestoEletronicoDocumentoViewModel> manifestoEletronicoDocumentos = new List<ManifestoEletronicoDocumentoViewModel>();
+
             using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
             {
-                await manifestoEletronicoDocumentoController.ObterTodos(order: o => o.DataHoraEmissao, predicate: p => p.DataHoraEmissao.Date >= dateDataEmissaoInicial.Value.Date &&
+                manifestoEletronicoDocumentos = await manifestoEletronicoDocumentoController.ObterTodos(order: o => o.DataHoraEmissao, predicate: p => p.DataHoraEmissao.Date >= dateDataEmissaoInicial.Value.Date &&
                                                                                                                        p.DataHoraEmissao.Date <= dateDataEmissaoFinal.Value.Date);
+            }
+
+            Grid_DataGridView.User_LinhaLimpar(gridManifestoDocumentoEletronico);
+
+            foreach (ManifestoEletronicoDocumentoViewModel item in manifestoEletronicoDocumentos)
+            {
+                Grid_DataGridView.User_LinhaAdicionar(gridManifestoDocumentoEletronico,
+                                                                      new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_Id,
+                                                                                                                                              Valor = item.Id },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_DataHoraEmissao,
+                                                                                                                                              Valor = item.DataHoraEmissao },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_Numero,
+                                                                                                                                              Valor = item.Numero },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_Status,
+                                                                                                                                              Valor = item.Status.GetDescription() },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_Condutor_Nome,
+                                                                                                                                              Valor = item.Condutor_Nome },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_Condutor_CNPJ_CPF,
+                                                                                                                                              Valor = item.Condutor_CPF }});
             }
 
             return true;

@@ -8,6 +8,11 @@ namespace SisCom.Aplicacao.ViewModels
 {
     public class ManifestoEletronicoDocumentoViewModel
     {
+        public ManifestoEletronicoDocumentoViewModel()
+        {
+            Status = MDFe_Status.Validado;
+        }
+
         [Key]
         public Guid Id { get; set; }
         public Empresa Empresa { get; set; }
@@ -22,6 +27,7 @@ namespace SisCom.Aplicacao.ViewModels
         public MDFe_TipoTransportador? TipoTransportador { get; set; }
         public string? RNTRCEmitente { get; set; }
         public VeiculoPlaca? DadoVeiculo_Placa { get; set; }
+        public String? DadoVeiculo_NumeroPlaca { get; set; }
         public Estado? DadoVeiculo_Estado { get; set; }
         public string? DadoVeiculo_Renavam { get; set; }
         public double DadoVeiculo_TaraKG { get; set; }

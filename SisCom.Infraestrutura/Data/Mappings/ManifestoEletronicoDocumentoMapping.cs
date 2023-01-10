@@ -14,6 +14,10 @@ namespace SisCom.Infraestrutura.Data.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(20)");
 
+            builder.Property(p => p.DadoVeiculo_NumeroPlaca)
+                .IsRequired()
+                .HasColumnType("varchar(10)");
+
             builder.Property(p => p.Carga).HasColumnType("varchar(8)");
             builder.Property(p => p.RNTRCEmitente).HasColumnType("varchar(10)");
             builder.Property(p => p.DadoVeiculo_Renavam).HasColumnType("varchar(10)");

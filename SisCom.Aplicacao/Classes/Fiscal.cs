@@ -2051,8 +2051,8 @@ namespace SisCom.Aplicacao.Classes
 
                         VeicTracao = new MDFeVeicTracao
                         {
-                            Placa = manifestoEletronicoDocumento.DadoVeiculo_Placa.NumeroPlaca,
-                            RENAVAM = manifestoEletronicoDocumento.DadoVeiculo_Placa.CodigoRenavan,
+                            Placa = manifestoEletronicoDocumento.DadoVeiculo_NumeroPlaca.Replace("-",""),
+                            RENAVAM = manifestoEletronicoDocumento.DadoVeiculo_Renavam,
                             UF = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.DadoVeiculo_Estado.Codigo),
                             Tara = (int?)manifestoEletronicoDocumento.DadoVeiculo_TaraKG,
                             CapM3 = (int?)manifestoEletronicoDocumento.DadoVeiculo_CapacidadeM3,
@@ -2184,19 +2184,29 @@ namespace SisCom.Aplicacao.Classes
                 }
                 #endregion
 
-                #region dados responsavel tecnico 
-                mdfe.InfMDFe.infRespTec = new infRespTec
+                if (!string.IsNullOrEmpty(empresa.Responsaveltecnico_CNPJ))
                 {
-                    CNPJ = empresa.Responsaveltecnico_CNPJ,
-                    email = empresa.Responsaveltecnico_Email,
-                    fone = empresa.Responsaveltecnico_Fone,
-                    xContato = empresa.Responsaveltecnico_Contato
-                };
-                #endregion
+                    #region dados responsavel tecnico 
+                    mdfe.InfMDFe.infRespTec = new infRespTec
+                    {
+                        CNPJ = empresa.Responsaveltecnico_CNPJ,
+                        email = empresa.Responsaveltecnico_Email,
+                        fone = empresa.Responsaveltecnico_Fone,
+                        xContato = empresa.Responsaveltecnico_Contato
+                    };
+                    #endregion
+                }
 
                 var servicoRecepcao = new MDFe.Servicos.RecepcaoMDFe.ServicoMDFeRecepcao();
 
-                var retornoEnvio = servicoRecepcao.MDFeRecepcao(1, mdfe);
+                try
+                {
+                    var retornoEnvio = servicoRecepcao.MDFeRecepcao(1, mdfe);
+                }
+                catch (Exception Ex)
+                {
+                    CaixaMensagem.Informacao(Ex.Message);
+                }
             }
 
             return mdfe;

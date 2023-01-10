@@ -269,7 +269,7 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region TipoServicoFiscal
                         cfg.CreateMap<TipoServicoFiscalViewModel, TipoServicoFiscal>().ReverseMap();
-                        cfg.CreateMap<UnidadeMedida, NomeComboViewModel>();
+                        cfg.CreateMap<UnidadeMedida, CodigoNomeComboViewModel>();
                         #endregion
                         #region TipoCliente
                         cfg.CreateMap<TipoClienteViewModel, TipoCliente>().ReverseMap();

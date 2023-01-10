@@ -103,6 +103,7 @@
             this.label29 = new System.Windows.Forms.Label();
             this.numericTotalizadores_ValorTotalCarga = new System.Windows.Forms.NumericUpDown();
             this.groupDadosVeiculo = new System.Windows.Forms.GroupBox();
+            this.textDadosVeiculo_Placa = new System.Windows.Forms.TextBox();
             this.groupVeículoTerceiro = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
             this.comboDadosVeiculoVeiculoTerceiro_UFProprietario = new System.Windows.Forms.ComboBox();
@@ -132,7 +133,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.comboDadosVeiculo_TipoRodado = new System.Windows.Forms.ComboBox();
             this.botaoPlaca = new System.Windows.Forms.Button();
-            this.comboDadosVeiculo_Placa = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.groupIdentificacao = new System.Windows.Forms.GroupBox();
             this.textIdentificacao_Numero = new System.Windows.Forms.TextBox();
@@ -991,6 +991,7 @@
             // 
             // groupDadosVeiculo
             // 
+            this.groupDadosVeiculo.Controls.Add(this.textDadosVeiculo_Placa);
             this.groupDadosVeiculo.Controls.Add(this.groupVeículoTerceiro);
             this.groupDadosVeiculo.Controls.Add(this.label18);
             this.groupDadosVeiculo.Controls.Add(this.numericDadosVeiculo_CapacidadeM3);
@@ -1007,7 +1008,6 @@
             this.groupDadosVeiculo.Controls.Add(this.label12);
             this.groupDadosVeiculo.Controls.Add(this.comboDadosVeiculo_TipoRodado);
             this.groupDadosVeiculo.Controls.Add(this.botaoPlaca);
-            this.groupDadosVeiculo.Controls.Add(this.comboDadosVeiculo_Placa);
             this.groupDadosVeiculo.Controls.Add(this.label11);
             this.groupDadosVeiculo.Location = new System.Drawing.Point(8, 135);
             this.groupDadosVeiculo.Name = "groupDadosVeiculo";
@@ -1015,6 +1015,15 @@
             this.groupDadosVeiculo.TabIndex = 19;
             this.groupDadosVeiculo.TabStop = false;
             this.groupDadosVeiculo.Text = "Dados do Veículo";
+            // 
+            // textDadosVeiculo_Placa
+            // 
+            this.textDadosVeiculo_Placa.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textDadosVeiculo_Placa.Location = new System.Drawing.Point(114, 18);
+            this.textDadosVeiculo_Placa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textDadosVeiculo_Placa.Name = "textDadosVeiculo_Placa";
+            this.textDadosVeiculo_Placa.Size = new System.Drawing.Size(85, 23);
+            this.textDadosVeiculo_Placa.TabIndex = 101;
             // 
             // groupVeículoTerceiro
             // 
@@ -1304,17 +1313,6 @@
             this.botaoPlaca.TabStop = false;
             this.botaoPlaca.UseVisualStyleBackColor = true;
             // 
-            // comboDadosVeiculo_Placa
-            // 
-            this.comboDadosVeiculo_Placa.DropDownWidth = 200;
-            this.comboDadosVeiculo_Placa.FormattingEnabled = true;
-            this.comboDadosVeiculo_Placa.Location = new System.Drawing.Point(114, 18);
-            this.comboDadosVeiculo_Placa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboDadosVeiculo_Placa.Name = "comboDadosVeiculo_Placa";
-            this.comboDadosVeiculo_Placa.Size = new System.Drawing.Size(85, 23);
-            this.comboDadosVeiculo_Placa.TabIndex = 101;
-            this.comboDadosVeiculo_Placa.SelectedIndexChanged += new System.EventHandler(this.comboDadosVeiculo_Placa_SelectedIndexChanged);
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -1515,6 +1513,7 @@
             this.comboIdentificacao_Serie.Name = "comboIdentificacao_Serie";
             this.comboIdentificacao_Serie.Size = new System.Drawing.Size(123, 23);
             this.comboIdentificacao_Serie.TabIndex = 5;
+            this.comboIdentificacao_Serie.SelectedIndexChanged += new System.EventHandler(this.comboIdentificacao_Serie_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -1641,7 +1640,6 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.DateTimePicker dateIdentificacao_Emissao;
         private System.Windows.Forms.GroupBox groupDadosVeiculo;
-        private System.Windows.Forms.ComboBox comboDadosVeiculo_Placa;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button botaoPlaca;
         private System.Windows.Forms.Label label13;
@@ -1743,5 +1741,6 @@
         private System.Windows.Forms.Button botaoNovo;
         private System.Windows.Forms.Button botaoExcluir;
         private System.Windows.Forms.TextBox textIdentificacao_Numero;
+        private System.Windows.Forms.TextBox textDadosVeiculo_Placa;
     }
 }

@@ -239,7 +239,19 @@
     <None Update="Externos\Schemas\consDPEC_v1.01.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\Schemas\consMDFeNaoEncTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consMDFeNaoEnc_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\Schemas\consNFeDest_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consReciMDFeTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consReciMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\consReciNFe_v2.00.xsd">
@@ -249,6 +261,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\consReciNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consSitMDFeTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consSitMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\consSitNFe_v2.00.xsd">
@@ -261,6 +279,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\consSitNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consStatServMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\consStatServTiposBasico_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\consStatServ_v2.00.xsd">
@@ -276,6 +300,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\distDFeInt_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\distMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\downloadNFe_v1.00.xsd">
@@ -368,6 +395,9 @@
     <None Update="Externos\Schemas\envFiscoNfe_v1.0.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\Schemas\enviMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\Schemas\enviNFe_v2.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -392,6 +422,12 @@
     <None Update="Externos\Schemas\EPEC_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\Schemas\evCancMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\evEncMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\Schemas\eventoCancNFe_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -404,7 +440,22 @@
     <None Update="Externos\Schemas\eventoEPEC_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\Schemas\eventoMDFeTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\eventoMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\Schemas\eventoRemIndus_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\evIncCondutorMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\evInclusaoDFeMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\evPagtoOperMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\inutNFe_v2.00.xsd">
@@ -459,6 +510,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\leiauteConsultaCadastro_v3.10.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\leiauteDistMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\leiauteDownloadNFe_v1.00.xsd">
@@ -530,6 +584,30 @@
     <None Update="Externos\Schemas\lmcComum_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\Schemas\mdfeConsultaDFeTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\mdfeConsultaDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\mdfeModalAereo_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\mdfeModalAquaviario_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\mdfeModalFerroviario_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\mdfeModalRodoviario_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\mdfeTiposBasico_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\mdfe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\Schemas\nfe_v2.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -560,6 +638,9 @@
     <None Update="Externos\Schemas\procEventoCancSubst_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\Schemas\procEventoMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\Schemas\procEventoNFe_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -573,6 +654,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\procInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\procMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\procNFe_v2.00.xsd">
@@ -611,7 +695,16 @@
     <None Update="Externos\Schemas\retConsDPEC_v1.01.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\Schemas\retConsMDFeNaoEnc_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsMDFeNaoEnc_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\Schemas\retconsNFeDest_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsReciMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\retConsReciNFe_v2.00.xsd">
@@ -623,6 +716,9 @@
     <None Update="Externos\Schemas\retConsReciNFe_v4.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\Schemas\retConsSitMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\Schemas\retConsSitNFe_v2.01.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -630,6 +726,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\retConsSitNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retConsStatServMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\retConsStatServ_v2.00.xsd">
@@ -645,6 +744,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\retDistDFeInt_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retDistMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\retDownloadNFe_v1.00.xsd">
@@ -680,6 +782,9 @@
     <None Update="Externos\Schemas\retEnvFiscoNFe_v1.0.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\Schemas\retEnviMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\Schemas\retEnviNFe_v2.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -701,6 +806,9 @@
     <None Update="Externos\Schemas\retEventoEPEC_v0.01.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\Schemas\retEventoMDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\Schemas\retInutNFe_v2.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -708,6 +816,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\retInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retMDFeConsultaDFe_v3.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\retMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\retPProrrogNFe_v1.0.xsd">
@@ -744,6 +858,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\tiposDistDFe_v1.01.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\Schemas\tiposGeralMDFe_v3.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\Schemas\xmldsig-core-schema_v1.01.xsd">

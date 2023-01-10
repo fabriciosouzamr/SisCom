@@ -56,7 +56,11 @@ namespace SisCom.Aplicacao.Controllers
         {
             var manifesto = await _manifestoEletronicoDocumentoService.GetAll(null, p => p.Id == Id, i => i.ManifestoEletronicoDocumentoSerie,
                                                                                                      i => i.ManifestoEletronicoDocumentoNotas,
-                                                                                                     i => i.ManifestoEletronicoDocumentoPercursos);
+                                                                                                     i => i.ManifestoEletronicoDocumentoPercursos,
+                                                                                                     i => i.CidadeCarregamento,
+                                                                                                     i => i.EstadoCarregamento,
+                                                                                                     i => i.EstadoDescarga,
+                                                                                                     i => i.DadoVeiculo_Estado);
             return Declaracoes.mapper.Map<ManifestoEletronicoDocumentoViewModel>(manifesto.FirstOrDefault());
         }
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<ManifestoEletronicoDocumento, object>> order = null)

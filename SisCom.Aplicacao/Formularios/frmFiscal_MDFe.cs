@@ -6,15 +6,19 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
+using SisCom.Infraestrutura.Migrations;
+using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
 {
-    public partial class frmFiscal_MDFe : Form
+    public partial class frmFiscal_MDFe : FormMain
     {
         ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento = new ManifestoEletronicoDocumentoViewModel();
 
@@ -70,6 +74,18 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
+        private async Task<bool> comboUnidadeMedida_Carregar()
+        {
+            using (MeuDbContext meuDbContext = this.MeuDbContext())
+            {
+                Combo_ComboBox.Formatar(comboTotalizadores_UnidadePeso,
+                                        "ID", "Codigo",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new UnidadeMedidaController(this.MeuDbContext(), this._notifier)).Combo(o => o.Codigo));
+            }
+
+            return true;
+        }
         private async Task<bool> comboUF_Carregar()
         {
             using (MeuDbContext meuDbContext = this.MeuDbContext())
@@ -77,6 +93,7 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboIdentificacao_UFCarregamento,"ID", "Codigo",ComboBoxStyle.DropDownList, await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(o => o.Codigo));
                 Combo_ComboBox.Formatar(comboIdentificacao_UFDescarga, "ID", "Codigo", ComboBoxStyle.DropDownList, await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(o => o.Codigo));
                 Combo_ComboBox.Formatar(comboDadosVeiculo_UF, "ID", "Codigo", ComboBoxStyle.DropDownList, await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(o => o.Codigo));
+                Combo_ComboBox.Formatar(comboDadosVeiculoVeiculoTerceiro_UFProprietario, "ID", "Codigo", ComboBoxStyle.DropDownList, await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(o => o.Codigo));
             }
 
             return true;
@@ -99,13 +116,13 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async Task<bool> comboDadosVeiculo_Placa_Carregar()
         {
-            using (MeuDbContext meuDbContext = this.MeuDbContext())
-            {
-                Combo_ComboBox.Formatar(comboDadosVeiculo_Placa,
-                                        "ID", "NumeroPlaca",
-                                        ComboBoxStyle.DropDownList,
-                                        await (new VeiculoPlacaController(this.MeuDbContext(), this._notifier)).Combo());            
-            }
+            //using (MeuDbContext meuDbContext = this.MeuDbContext())
+            //{
+            //    Combo_ComboBox.Formatar(comboDadosVeiculo_Placa,
+            //                            "ID", "NumeroPlaca",
+            //                            ComboBoxStyle.DropDownList,
+            //                            await (new VeiculoPlacaController(this.MeuDbContext(), this._notifier)).Combo());            
+            //}
 
             return true;
         }
@@ -127,10 +144,10 @@ namespace SisCom.Aplicacao.Formularios
             await Assincrono.TaskAsyncAndAwaitAsync(comboSerie_Carregar());
             await Assincrono.TaskAsyncAndAwaitAsync(comboUF_Carregar());
             await Assincrono.TaskAsyncAndAwaitAsync(comboDadosVeiculo_Placa_Carregar());
+            await Assincrono.TaskAsyncAndAwaitAsync(comboUnidadeMedida_Carregar());
 
             return true;
         }
-
         private async Task<bool> Inicializar()
         {
             try
@@ -556,7 +573,6 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
-
         private void picPercurso_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string estado = "";
@@ -771,6 +787,11 @@ namespace SisCom.Aplicacao.Formularios
 
         private void botaoGravar_Click(object sender, EventArgs e)
         {
+            TentarGravar();
+        }
+
+        async Task TentarGravar()
+        {
             if (Funcoes._Classes.Funcao.NuloData(dateIdentificacao_Emissao.Value))
             {
                 CaixaMensagem.Informacao("Informe a data de emissão");
@@ -806,17 +827,7 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Selecione Tipo de Transportador");
                 return;
             }
-            if (!String.IsNullOrEmpty(textIdentificacao_RNTRCEmitente.Text))
-            {
-                CaixaMensagem.Informacao("Informe o RNTRC Emitente");
-                return;
-            }
-            if (!String.IsNullOrEmpty(textIdentificacao_RNTRCEmitente.Text))
-            {
-                CaixaMensagem.Informacao("Informe o RNTRC Emitente");
-                return;
-            }
-            if (!Combo_ComboBox.Selecionado(comboDadosVeiculo_Placa))
+            if (String.IsNullOrEmpty(textDadosVeiculo_Placa.Text))
             {
                 CaixaMensagem.Informacao("Selecione a placa do veículo");
                 return;
@@ -826,7 +837,7 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Selecione a U.F. do veículo");
                 return;
             }
-            if (!String.IsNullOrEmpty(textDadosVeiculo_Renavam.Text))
+            if (String.IsNullOrEmpty(textDadosVeiculo_Renavam.Text))
             {
                 CaixaMensagem.Informacao("Informe o renavam do veículo");
                 return;
@@ -858,7 +869,7 @@ namespace SisCom.Aplicacao.Formularios
             }
             if (checkDadosVeiculoVceiuloTerceiro_Sim.Checked)
             {
-                if (!String.IsNullOrEmpty(textDadosVeiculoVeiculoTerceiro_NomeProprietario.Text))
+                if (String.IsNullOrEmpty(textDadosVeiculoVeiculoTerceiro_NomeProprietario.Text))
                 {
                     CaixaMensagem.Informacao("Informe o nome do proprietário do Veículo");
                     return;
@@ -883,7 +894,7 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Informe um CPF/CNPJ válido do condutor");
                 return;
             }
-            if (!String.IsNullOrEmpty(textDadosVeiculoVeiculoTerceiro_NomeProprietario.Text))
+            if (String.IsNullOrEmpty(textCondutor_NomeCondutor.Text))
             {
                 CaixaMensagem.Informacao("Informe o nome do condutor");
                 return;
@@ -933,7 +944,7 @@ namespace SisCom.Aplicacao.Formularios
                 }
                 foreach (DataGridViewRow row in gridPercurso.Rows)
                 {
-                    if (row.Cells[0].Value == null)
+                    if ((row.Cells[0].Value == null) && (row.Index < gridPercurso.Rows.Count -1))
                     {
                         CaixaMensagem.Informacao("Selecione o percurso de todas as linhas selecionadas");
                         return;
@@ -941,7 +952,7 @@ namespace SisCom.Aplicacao.Formularios
                 }
             }
 
-            Gravar();
+            await Gravar();
         }
 
         async Task Gravar()
@@ -956,7 +967,8 @@ namespace SisCom.Aplicacao.Formularios
             manifestoEletronicoDocumento.CidadeCarregamentoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboIdentificacao_CidadeCarregamento);
             manifestoEletronicoDocumento.TipoTransportador = (MDFe_TipoTransportador?)comboIdentificacao_TipoTransportador.SelectedValue;
             manifestoEletronicoDocumento.RNTRCEmitente = textIdentificacao_RNTRCEmitente.Text;
-            manifestoEletronicoDocumento.DadoVeiculo_PlacaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboDadosVeiculo_Placa);
+            //manifestoEletronicoDocumento.DadoVeiculo_PlacaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboDadosVeiculo_Placa);
+            manifestoEletronicoDocumento.DadoVeiculo_NumeroPlaca = textDadosVeiculo_Placa.Text; // Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboDadosVeiculo_Placa);
             manifestoEletronicoDocumento.DadoVeiculo_EstadoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboDadosVeiculo_UF);
             manifestoEletronicoDocumento.DadoVeiculo_Renavam = textDadosVeiculo_Renavam.Text;
             manifestoEletronicoDocumento.DadoVeiculo_TaraKG = (double)numericDadosVeiculo_TaraKG.Value;
@@ -999,6 +1011,9 @@ namespace SisCom.Aplicacao.Formularios
                 if (manifestoEletronicoDocumento.Id == Guid.Empty) 
                 {
                     manifestoEletronicoDocumento.Id = Guid.NewGuid();
+                    manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerie = null;
+                    manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos = null;
+                    manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas = null;
                     await manifestoEletronicoDocumentoController.Adicionar(manifestoEletronicoDocumento);
                 }
                 else
@@ -1015,6 +1030,7 @@ namespace SisCom.Aplicacao.Formularios
                 for (int i = 1; i <= AdicionarNotasItem_Notas; i++)
                 {
                     manifestoEletronicoDocumentoNota = new ManifestoEletronicoDocumentoNotaViewModel();
+                    NF_ComboViewModel nf_ComboViewModel = new NF_ComboViewModel();
 
                     Panel pnlAdicionarNotasItem = (Panel)this.Controls.Find("pnlAdicionarNotasItem" + i.ToString("00"), true)[0];
 
@@ -1028,12 +1044,14 @@ namespace SisCom.Aplicacao.Formularios
                             break;
                         case MDFe_TipoManifestoEletronicoDocumentoNotas.Saida:
                             manifestoEletronicoDocumentoNota.TipoManifestoEletronicoDocumentoNotas = MDFe_TipoManifestoEletronicoDocumentoNotas.Saida;
-                            manifestoEletronicoDocumentoNota.NotaFiscalSaidaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_NumeroNota" + i.ToString("00"), false)[0]);
+
+                            nf_ComboViewModel = (NF_ComboViewModel)((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_NumeroNota" + i.ToString("00"), false)[0]).SelectedItem;
+                            manifestoEletronicoDocumentoNota.NotaFiscalSaidaId = nf_ComboViewModel.Id;
                             break;
                     }
 
                     manifestoEletronicoDocumentoNota.ManifestoEletronicoDocumentoId = manifestoEletronicoDocumento.Id;
-                    manifestoEletronicoDocumentoNota.NumeroNotaFiscal = ((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Tipo" + i.ToString("00"), false)[0]).Text;
+                    manifestoEletronicoDocumentoNota.NumeroNotaFiscal = nf_ComboViewModel.NotaFiscal;
                     manifestoEletronicoDocumentoNota.ChaveAcesso = ((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + i.ToString("00"), false)[0]).Text;
                     manifestoEletronicoDocumentoNota.CidadeDescargaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Cidade" + i.ToString("00"), false)[0]);
                     manifestoEletronicoDocumentoNota.ValorNota = ((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_ValorNota" + i.ToString("00"), false)[0]).Value;
@@ -1047,13 +1065,16 @@ namespace SisCom.Aplicacao.Formularios
             {
                 foreach (DataGridViewRow row in gridPercurso.Rows)
                 {
-                    manifestoEletronicoDocumentoPercurso = new ManifestoEletronicoDocumentoPercursoViewModel();
+                    if ((Guid)row.Cells[0].Value != null)
+                    {
+                        manifestoEletronicoDocumentoPercurso = new ManifestoEletronicoDocumentoPercursoViewModel();
 
-                    manifestoEletronicoDocumentoPercurso.Id = Guid.NewGuid();
-                    manifestoEletronicoDocumentoPercurso.ManifestoEletronicoDocumentoId = manifestoEletronicoDocumento.Id;
-                    manifestoEletronicoDocumentoPercurso.EstadoId = (Guid)row.Cells[0].Value;
+                        manifestoEletronicoDocumentoPercurso.Id = Guid.NewGuid();
+                        manifestoEletronicoDocumentoPercurso.ManifestoEletronicoDocumentoId = manifestoEletronicoDocumento.Id;
+                        manifestoEletronicoDocumentoPercurso.EstadoId = (Guid)row.Cells[0].Value;
 
-                    await manifestoEletronicoDocumentoPercursoController.Adicionar(manifestoEletronicoDocumentoPercurso);
+                        await manifestoEletronicoDocumentoPercursoController.Adicionar(manifestoEletronicoDocumentoPercurso);
+                    }
                 }
             }
 
@@ -1073,7 +1094,8 @@ namespace SisCom.Aplicacao.Formularios
             checkAutorizacao_SatusValidado.Checked = false;
             checkDadosVeiculoVceiuloTerceiro_Sim.Checked = false;
 
-            comboDadosVeiculo_Placa.SelectedIndex =-1;
+            //comboDadosVeiculo_Placa.SelectedIndex =-1;
+            textDadosVeiculo_Placa.Text = "";
             comboDadosVeiculo_TipoCarroceria.SelectedIndex = -1;
             comboDadosVeiculo_TipoRodado.SelectedIndex = -1;
             comboDadosVeiculo_UF.SelectedIndex = -1;
@@ -1139,7 +1161,7 @@ namespace SisCom.Aplicacao.Formularios
 
         }
 
-        private void CalcularTotais()
+        private async void CalcularTotais()
         {
             numericTotalizadores_PesoBrutoCarga.Value = 0;
             numericTotalizadores_QuantidadeNfe.Value = 0;
@@ -1159,16 +1181,57 @@ namespace SisCom.Aplicacao.Formularios
                         case MDFe_TipoManifestoEletronicoDocumentoNotas.Saida:
                             try
                             {
-                                NotaFiscalSaida notaFiscalSaida = (NotaFiscalSaida)((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Tipo" + i.ToString("00"), false)[0]).SelectedItem;
-                                numericTotalizadores_PesoBrutoCarga.Value = numericTotalizadores_PesoBrutoCarga.Value + (decimal)notaFiscalSaida.VolumeTransportados_PesoBruto;
-                                numericTotalizadores_QuantidadeNfe.Value = numericTotalizadores_QuantidadeNfe.Value + 1;
-                                numericTotalizadores_ValorTotalCarga.Value = numericTotalizadores_ValorTotalCarga.Value + notaFiscalSaida.NotaFiscalSaidaMercadoria.Sum(s => s.PrecoTotal);
+                                Guid? notaFiscalSaidaId = ((NF_ComboViewModel)((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_NumeroNota" + i.ToString("00"), false)[0]).SelectedItem).Id;
+
+                                if (notaFiscalSaidaId != null)
+                                {
+                                    IEnumerable<NotaFiscalSaidaViewModel> notaFiscalSaida;
+
+                                    using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                                    {
+                                        notaFiscalSaida = await notaFiscalSaidaController.PesquisarCompleto(w => w.Id == (Guid)notaFiscalSaidaId);
+                                    }
+
+                                    if (notaFiscalSaida.Any())
+                                    {
+                                        ((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_ValorNota" + i.ToString("00"), false)[0]).Value = notaFiscalSaida.FirstOrDefault().NotaFiscalSaidaMercadoria.Sum(s => s.PrecoTotal);
+                                        ((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_PesoNota" + i.ToString("00"), false)[0]).Value = notaFiscalSaida.FirstOrDefault().NotaFiscalSaidaMercadoria.Sum(s => s.PrecoTotal);
+
+                                        numericTotalizadores_PesoBrutoCarga.Value = numericTotalizadores_PesoBrutoCarga.Value + (decimal)(notaFiscalSaida.FirstOrDefault()).VolumeTransportados_PesoBruto;
+                                        numericTotalizadores_QuantidadeNfe.Value = numericTotalizadores_QuantidadeNfe.Value + 1;
+                                        numericTotalizadores_ValorTotalCarga.Value = numericTotalizadores_ValorTotalCarga.Value + notaFiscalSaida.FirstOrDefault().NotaFiscalSaidaMercadoria.Sum(s => s.PrecoTotal);
+                                    }
+                                }
                             }
                             catch (Exception)
                             {
                             }
 
                             break;
+                    }
+                }
+            }
+        }
+
+        private void comboIdentificacao_Serie_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Serie_Tratar();
+        }
+
+        async Task Serie_Tratar()
+        {
+            if (comboIdentificacao_Serie.SelectedIndex != -1)
+            {
+                using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(this.MeuDbContext(), this._notifier))
+                {
+                    var serie = await manifestoEletronicoDocumentoSerieController.PesquisarSerie(comboIdentificacao_Serie.Text);
+
+                    if (serie != null)
+                    {
+                        if (String.IsNullOrEmpty(serie.FirstOrDefault().UltimoNumeroManifestoEletronicoDocumento))
+                        { textIdentificacao_Numero.Text = "1"; }
+                        else
+                        { textIdentificacao_Numero.Text = (Convert.ToInt16(serie.FirstOrDefault().UltimoNumeroManifestoEletronicoDocumento) + 1).ToString(); }
                     }
                 }
             }

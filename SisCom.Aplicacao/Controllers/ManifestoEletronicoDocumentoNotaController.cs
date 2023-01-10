@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Entity;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -42,9 +43,9 @@ namespace SisCom.Aplicacao.Controllers
 
             return ManifestoEletronicoDocumentoNotaViewModel;
         }
-        public async Task<IEnumerable<ManifestoEletronicoDocumentoNotaViewModel>> ObterTodos()
+        public async Task<IEnumerable<ManifestoEletronicoDocumentoNotaViewModel>> ObterTodos(Expression<Func<ManifestoEletronicoDocumentoNota, bool>> predicate = null)
         {
-            var obterTodos = await _ManifestoEletronicoDocumentoNotaService.GetAll(null, null);
+            var obterTodos = await _ManifestoEletronicoDocumentoNotaService.GetAll(predicate: predicate, includes: i => i.CidadeDescarga);
             return Declaracoes.mapper.Map<IEnumerable<ManifestoEletronicoDocumentoNotaViewModel>>(obterTodos);
 
         }
