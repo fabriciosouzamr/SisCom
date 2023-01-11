@@ -9,7 +9,7 @@ namespace SisCom.Entidade.Enum
         [Description("Validado")]
         Validado = 2,
         [Description("Autorizado")]
-        Autorizado = 3,
+        Transmitido = 3,
         [Description("Cancelado")]
         Cancelado = 4
     }

@@ -245,6 +245,9 @@ public static class Grid_DataGridView
 
     public static DataGridViewRow User_LinhaAdicionar(this DataGridView grid, Coluna[] valores)
     {
+        if (grid.Columns.Count == 0)
+            return new DataGridViewRow();
+
         int linha = grid.Rows.Add();
 
         if (valores != null)

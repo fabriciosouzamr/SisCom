@@ -4,9 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
+using SisCom.Entidade.Enum;
+using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -52,38 +55,23 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoTransmitir_Click(object sender, EventArgs e)
         {
+            Transmitir();
+        }
+        async void Transmitir()
+        {
             if (gridManifestoDocumentoEletronico.CurrentRow != null)
             {
-                Transmitir(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()));
-            }
-        }
-        async void Transmitir(Guid id)
-        {
-            EmpresaViewModel empresa;
-            ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento;
+                await Fiscal.MDFe_Transmitir(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()), this.MeuDbContext(), this._notifier);
 
-            using (EmpresaController empresaController = new EmpresaController(this.MeuDbContext(), this._notifier))
-            {
-                empresa = await empresaController.GetById(Declaracoes.dados_Empresa_Id);
+                gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value = MDFe_Status.Transmitido.GetDescription();
             }
-            using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
-            {
-                manifestoEletronicoDocumento = await manifestoEletronicoDocumentoController.PesquisarId(id);
-            }
-            using (ManifestoEletronicoDocumentoPercursoController manifestoEletronicoDocumentoPercursoController = new ManifestoEletronicoDocumentoPercursoController(this.MeuDbContext(), this._notifier))
-            {
-                manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos = (List<ManifestoEletronicoDocumentoPercursoViewModel>)await manifestoEletronicoDocumentoPercursoController.ObterTodos(w => w.ManifestoEletronicoDocumentoId == id);
-            }
-            using (ManifestoEletronicoDocumentoNotaController manifestoEletronicoDocumentoNotaController = new ManifestoEletronicoDocumentoNotaController(this.MeuDbContext(), this._notifier))
-            {
-                manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas = (List<ManifestoEletronicoDocumentoNotaViewModel>)await manifestoEletronicoDocumentoNotaController.ObterTodos(w => w.ManifestoEletronicoDocumentoId == id);
-            }
-
-            Fiscal.Fiscal_ManifestoEletronicoDocumento_Transmitir(empresa, manifestoEletronicoDocumento);
         }
         private void botaoCancelar_Click(object sender, EventArgs e)
         {
+            
 
+            Fiscal.Fiscal_ManifestoEletronicoDocumento_Cancelar(ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento,
+                                                                string justificativa);
         }
         private void botaoNovo_Click(object sender, EventArgs e)
         {

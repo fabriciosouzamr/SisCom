@@ -51,6 +51,12 @@ namespace SisCom.Aplicacao.ViewModels
         public string? Autorizacao_Protocolo { get; set; }
         public DateTime? Autorizacao_DataHoraAutorizacao { get; set; }
         public DateTime Autorizacao_DataHoraEncerramento { get; set; }
+        public string? RetornoSefaz { get; set; }
+        public string? RetornoSefazCodigo { get; set; }
+        public DateTime? DataRetornoSefaz { get; set; }
+        public String? DescricaoCancelamento { get; set; }
+        public DateTime? DataCancelamento { get; set; }
+        public String? RetornoCancelamento { get; set; }
 
         public string? Condutor_CPF { get; set; }
         public string? Condutor_Nome { get; set; }

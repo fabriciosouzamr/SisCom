@@ -201,7 +201,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 Limpar();
 
-                List<NomeComboViewModel> unidadeMedida;
+                List<CodigoNomeComboViewModel> unidadeMedida;
                 List<CodigoComboViewModel> tabelaCFOP;
                 List<CodigoDescricaoComboViewModel> tabelaNCM;
                 List<CodigoDescricaoComboViewModel> tabelaCST_CSOSN;
@@ -225,7 +225,7 @@ namespace SisCom.Aplicacao.Formularios
                 }
                 using (UnidadeMedidaController unidadeMedidaController = new UnidadeMedidaController(this.MeuDbContext(), this._notifier))
                 {
-                    unidadeMedida = (List<NomeComboViewModel>)await unidadeMedidaController.Combo(o => o.Nome);
+                    unidadeMedida = (List<CodigoNomeComboViewModel>)await unidadeMedidaController.Combo(o => o.Nome);
                 }
                 using (TabelaCFOPController tabelaCFOPController = new TabelaCFOPController(this.MeuDbContext(), this._notifier))
                 {

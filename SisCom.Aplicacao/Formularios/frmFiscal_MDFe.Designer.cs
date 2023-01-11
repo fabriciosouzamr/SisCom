@@ -579,7 +579,6 @@
             // 
             // numericAdicionarNotasItem_PesoNota01
             // 
-            this.numericAdicionarNotasItem_PesoNota01.DecimalPlaces = 2;
             this.numericAdicionarNotasItem_PesoNota01.Location = new System.Drawing.Point(866, 5);
             this.numericAdicionarNotasItem_PesoNota01.Maximum = new decimal(new int[] {
             100000000,
@@ -589,6 +588,7 @@
             this.numericAdicionarNotasItem_PesoNota01.Name = "numericAdicionarNotasItem_PesoNota01";
             this.numericAdicionarNotasItem_PesoNota01.Size = new System.Drawing.Size(100, 23);
             this.numericAdicionarNotasItem_PesoNota01.TabIndex = 19;
+            this.numericAdicionarNotasItem_PesoNota01.ThousandsSeparator = true;
             // 
             // numericAdicionarNotasItem_ValorNota01
             // 
@@ -602,6 +602,7 @@
             this.numericAdicionarNotasItem_ValorNota01.Name = "numericAdicionarNotasItem_ValorNota01";
             this.numericAdicionarNotasItem_ValorNota01.Size = new System.Drawing.Size(100, 23);
             this.numericAdicionarNotasItem_ValorNota01.TabIndex = 18;
+            this.numericAdicionarNotasItem_ValorNota01.ThousandsSeparator = true;
             // 
             // labelAdicionarNotasItem_UF01
             // 
@@ -951,6 +952,7 @@
             this.numericTotalizadores_PesoBrutoCarga.ReadOnly = true;
             this.numericTotalizadores_PesoBrutoCarga.Size = new System.Drawing.Size(85, 23);
             this.numericTotalizadores_PesoBrutoCarga.TabIndex = 203;
+            this.numericTotalizadores_PesoBrutoCarga.ThousandsSeparator = true;
             // 
             // numericTotalizadores_QuantidadeNfe
             // 
@@ -978,6 +980,7 @@
             // 
             // numericTotalizadores_ValorTotalCarga
             // 
+            this.numericTotalizadores_ValorTotalCarga.DecimalPlaces = 2;
             this.numericTotalizadores_ValorTotalCarga.Location = new System.Drawing.Point(321, 18);
             this.numericTotalizadores_ValorTotalCarga.Maximum = new decimal(new int[] {
             100000000,
@@ -988,6 +991,7 @@
             this.numericTotalizadores_ValorTotalCarga.ReadOnly = true;
             this.numericTotalizadores_ValorTotalCarga.Size = new System.Drawing.Size(85, 23);
             this.numericTotalizadores_ValorTotalCarga.TabIndex = 202;
+            this.numericTotalizadores_ValorTotalCarga.ThousandsSeparator = true;
             // 
             // groupDadosVeiculo
             // 

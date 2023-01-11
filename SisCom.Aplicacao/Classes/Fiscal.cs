@@ -45,6 +45,11 @@ using MDFe.Classes.Informacoes;
 using MDFe.Utils.Configuracoes;
 using DFe.Classes.Entidades;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Runtime.InteropServices.WindowsRuntime;
+using MDFe.Classes.Retorno;
+using MDFe.Classes.Servicos.Autorizacao;
+using MDFe.Servicos.EventosMDFe;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -1886,8 +1891,8 @@ namespace SisCom.Aplicacao.Classes
             return rand.Next(11111111, 99999999);
         }
 
-        public static MDFe.Classes.Informacoes.MDFe Fiscal_ManifestoEletronicoDocumento_Transmitir(ViewModels.EmpresaViewModel empresa,
-                                                                                                   ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento)
+        private static MDFe.Classes.Informacoes.MDFe Fiscal_ManifestoEletronicoDocumento_Transmitir(ViewModels.EmpresaViewModel empresa,
+                                                                                                    ref ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento)
         {
             Fiscal_Configuracao_MDFe();
 
@@ -2202,6 +2207,12 @@ namespace SisCom.Aplicacao.Classes
                 try
                 {
                     var retornoEnvio = servicoRecepcao.MDFeRecepcao(1, mdfe);
+                    manifestoEletronicoDocumento.Autorizacao_ChaveAutenticacao = mdfe.InfMDFe.Id.Substring(4);
+                    manifestoEletronicoDocumento.Autorizacao_Protocolo = retornoEnvio.InfRec.NRec;
+                    manifestoEletronicoDocumento.Autorizacao_DataHoraAutorizacao = retornoEnvio.InfRec.DhRecbto;
+                    manifestoEletronicoDocumento.RetornoSefaz = retornoEnvio.XMotivo;
+                    manifestoEletronicoDocumento.RetornoSefazCodigo = retornoEnvio.CStat.ToString();
+                    manifestoEletronicoDocumento.DataRetornoSefaz = retornoEnvio.InfRec.DhRecbto;
                 }
                 catch (Exception Ex)
                 {
@@ -2210,6 +2221,43 @@ namespace SisCom.Aplicacao.Classes
             }
 
             return mdfe;
+        }
+        public static ManifestoEletronicoDocumentoViewModel Fiscal_ManifestoEletronicoDocumento_Cancelar(ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento,
+                                                                                                         string justificativa)
+        {
+            Fiscal_Configuracao_MDFe();
+
+            var evento = new ServicoMDFeEvento();
+
+            MDFeEletronico mdfe;
+            var caminhoXml = Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, manifestoEletronicoDocumento.Autorizacao_ChaveAutenticacao.Concat("-mdfe.xml").ToString());
+
+            try
+            {
+                var enviMDFe = MDFeEnviMDFe.LoadXmlArquivo(caminhoXml);
+
+                mdfe = enviMDFe.MDFe;
+            }
+            catch
+            {
+                try
+                {
+                    mdfe = MDFeEletronico.LoadXmlArquivo(caminhoXml);
+                }
+                catch
+                {
+                    var proc = FuncoesXml.ArquivoXmlParaClasse<MDFeProcMDFe>(caminhoXml);
+                    mdfe = proc.MDFe;
+                }
+            }
+
+            var retorno = evento.MDFeEventoCancelar(mdfe, 1, manifestoEletronicoDocumento.Autorizacao_Protocolo, justificativa);
+
+            manifestoEletronicoDocumento.DataCancelamento = retorno.InfEvento.DhRegEvento;
+            manifestoEletronicoDocumento.DescricaoCancelamento = justificativa;
+            manifestoEletronicoDocumento.RetornoCancelamento = retorno.InfEvento.XMotivo;
+
+            return manifestoEletronicoDocumento;
         }
 
         private static total GetTotal(string sVersao, List<det> produtos)
@@ -2940,6 +2988,73 @@ namespace SisCom.Aplicacao.Classes
             catch (Exception Ex)
             {
                 CaixaMensagem.Informacao(Ex.Message);
+            }
+        }
+
+        public static async Task MDFe_Transmitir(Guid id, MeuDbContext meuDbContext, INotifier notifier)
+        {
+            ViewModels.EmpresaViewModel empresa;
+            ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento;
+
+            using (EmpresaController empresaController = new EmpresaController(meuDbContext, notifier))
+            {
+                empresa = await empresaController.GetById(Declaracoes.dados_Empresa_Id);
+            }
+            using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(meuDbContext, notifier))
+            {
+                manifestoEletronicoDocumento = await manifestoEletronicoDocumentoController.PesquisarId(id);
+            }
+
+            if (manifestoEletronicoDocumento.Status == MDFe_Status.Transmitido)
+            {
+                CaixaMensagem.Informacao("MDF-e já transmitido");
+                return;
+            }
+            if (manifestoEletronicoDocumento.Status == MDFe_Status.Cancelado)
+            {
+                CaixaMensagem.Informacao("MDF-e cancelado");
+                return;
+            }
+            if (manifestoEletronicoDocumento.Status == MDFe_Status.Validado)
+            {
+                CaixaMensagem.Informacao("MDF-e ainda não validado");
+                return;
+            }
+
+            using (ManifestoEletronicoDocumentoPercursoController manifestoEletronicoDocumentoPercursoController = new ManifestoEletronicoDocumentoPercursoController(meuDbContext, notifier))
+            {
+                manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos = (List<ManifestoEletronicoDocumentoPercursoViewModel>)await manifestoEletronicoDocumentoPercursoController.ObterTodos(w => w.ManifestoEletronicoDocumentoId == id);
+            }
+            using (ManifestoEletronicoDocumentoNotaController manifestoEletronicoDocumentoNotaController = new ManifestoEletronicoDocumentoNotaController(meuDbContext, notifier))
+            {
+                manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas = (List<ManifestoEletronicoDocumentoNotaViewModel>)await manifestoEletronicoDocumentoNotaController.ObterTodos(w => w.ManifestoEletronicoDocumentoId == id);
+            }
+
+            Fiscal.Fiscal_ManifestoEletronicoDocumento_Transmitir(empresa, ref manifestoEletronicoDocumento);
+
+            using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(meuDbContext, notifier))
+            {
+                manifestoEletronicoDocumento.Status = Entidade.Enum.MDFe_Status.Transmitido;
+
+                await manifestoEletronicoDocumentoController.Atualizar(manifestoEletronicoDocumento.Id, manifestoEletronicoDocumento);
+            }
+            using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(meuDbContext, notifier))
+            {
+                var manifestoEletronicoDocumentoSerie = (await manifestoEletronicoDocumentoSerieController.PesquisarId((Guid)manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerieId)).FirstOrDefault();
+
+                if (String.IsNullOrEmpty(manifestoEletronicoDocumentoSerie.UltimoNumeroManifestoEletronicoDocumento))
+                {
+                    manifestoEletronicoDocumentoSerie.UltimoNumeroManifestoEletronicoDocumento = manifestoEletronicoDocumento.Numero;
+                }
+                else
+                {
+                    if (Convert.ToInt32(manifestoEletronicoDocumentoSerie.UltimoNumeroManifestoEletronicoDocumento) < Convert.ToInt32(manifestoEletronicoDocumento.Numero))
+                    {
+                        manifestoEletronicoDocumentoSerie.UltimoNumeroManifestoEletronicoDocumento = manifestoEletronicoDocumento.Numero;
+                    }
+                }
+
+                await manifestoEletronicoDocumentoSerieController.Atualizar(manifestoEletronicoDocumentoSerie.Id, manifestoEletronicoDocumentoSerie);
             }
         }
     }

@@ -6,13 +6,9 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
-using SisCom.Infraestrutura.Migrations;
-using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -661,6 +657,9 @@ namespace SisCom.Aplicacao.Formularios
             numericAdicionarNotasItem_ValorNota.Top = 5;
             numericAdicionarNotasItem_ValorNota.Width = 100;
             numericAdicionarNotasItem_ValorNota.Visible = true;
+            numericAdicionarNotasItem_ValorNota.Maximum = 1000000000;
+            numericAdicionarNotasItem_ValorNota.DecimalPlaces = 2;
+            numericAdicionarNotasItem_ValorNota.ThousandsSeparator = true;
 
             numericAdicionarNotasItem_PesoNota.Name = "numericAdicionarNotasItem_PesoNota" + AdicionarNotasItem_Notas.ToString("00");
             pnlAdicionarNotasItem.Controls.Add(numericAdicionarNotasItem_PesoNota);
@@ -668,6 +667,8 @@ namespace SisCom.Aplicacao.Formularios
             numericAdicionarNotasItem_PesoNota.Top = 5;
             numericAdicionarNotasItem_PesoNota.Width = 100;
             numericAdicionarNotasItem_PesoNota.Visible = true;
+            numericAdicionarNotasItem_PesoNota.Maximum = 1000000000;
+            numericAdicionarNotasItem_PesoNota.ThousandsSeparator = true;
 
             AdicionarNotasItem_Configurar(pnlAdicionarNotasItem);
 
@@ -1151,14 +1152,18 @@ namespace SisCom.Aplicacao.Formularios
             //labelAdicionarNotasItem_UF01;
         }
 
-        private void comboDadosVeiculo_Placa_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void botaoTransmitir_Click(object sender, EventArgs e)
         {
+            Transmitir();
+        }
+        async void Transmitir()
+        {
+            if (manifestoEletronicoDocumento != null)
+            {
+                await Fiscal.MDFe_Transmitir(manifestoEletronicoDocumento.Id, this.MeuDbContext(), this._notifier);
 
+                CaixaMensagem.Informacao("MDF-e transmitido");
+            }
         }
 
         private async void CalcularTotais()
@@ -1195,7 +1200,7 @@ namespace SisCom.Aplicacao.Formularios
                                     if (notaFiscalSaida.Any())
                                     {
                                         ((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_ValorNota" + i.ToString("00"), false)[0]).Value = notaFiscalSaida.FirstOrDefault().NotaFiscalSaidaMercadoria.Sum(s => s.PrecoTotal);
-                                        ((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_PesoNota" + i.ToString("00"), false)[0]).Value = notaFiscalSaida.FirstOrDefault().NotaFiscalSaidaMercadoria.Sum(s => s.PrecoTotal);
+                                        ((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_PesoNota" + i.ToString("00"), false)[0]).Value = (decimal)notaFiscalSaida.FirstOrDefault().VolumeTransportados_PesoBruto;
 
                                         numericTotalizadores_PesoBrutoCarga.Value = numericTotalizadores_PesoBrutoCarga.Value + (decimal)(notaFiscalSaida.FirstOrDefault()).VolumeTransportados_PesoBruto;
                                         numericTotalizadores_QuantidadeNfe.Value = numericTotalizadores_QuantidadeNfe.Value + 1;

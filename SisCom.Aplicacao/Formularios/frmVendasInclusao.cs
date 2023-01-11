@@ -181,7 +181,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 Limpar();
 
-                List<NomeComboViewModel> unidadeMedida;
+                List<CodigoNomeComboViewModel> unidadeMedida;
 
                 DataTable produto = new DataTable();
                 produto.Columns.Add("ID", typeof(Guid));
@@ -200,7 +200,7 @@ namespace SisCom.Aplicacao.Formularios
                 }
                 using (UnidadeMedidaController unidadeMedidaController = new UnidadeMedidaController(this.MeuDbContext(), this._notifier))
                 {
-                    unidadeMedida = (List<NomeComboViewModel>)await unidadeMedidaController.Combo();
+                    unidadeMedida = (List<CodigoNomeComboViewModel>)await unidadeMedidaController.Combo();
                 }
 
                 //Detalhe de Estoque
@@ -387,7 +387,6 @@ namespace SisCom.Aplicacao.Formularios
                 if (ItemRetorno != null) { venda = ItemRetorno; }
             }
         }
-
         bool TentarGravar(bool Gravar)
         {
             bool tentarGravar = false;
@@ -724,12 +723,10 @@ namespace SisCom.Aplicacao.Formularios
             if (venda != null)
                 Navegar(venda.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
         }
-
         private void botaoExcluir_Click(object sender, EventArgs e)
         {
             Excluir();
         }
-
         private void botaoEditar_Click(object sender, EventArgs e)
         {
             Editar(true);
