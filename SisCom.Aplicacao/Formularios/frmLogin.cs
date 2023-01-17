@@ -52,6 +52,7 @@ namespace SisCom.Aplicacao.Formularios
                             {
                                 Declaracoes.dados_Empresa_CodigoEstado = empresa.Endereco.End_Cidade.Estado.Codigo;
                                 Declaracoes.dados_Empresa_EstadoId = empresa.Endereco.End_Cidade.Estado.Id;
+                                Declaracoes.dados_Empresa_CidadeId = empresa.Endereco.End_Cidade.Id;
                             }
                             Declaracoes.dados_Empresa_Id = empresa.Id;
                             Declaracoes.dados_Empresa_SerialNumber = empresa.NuvemFiscal_SerialNumber;

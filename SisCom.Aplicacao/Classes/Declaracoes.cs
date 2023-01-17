@@ -48,6 +48,7 @@ namespace SisCom.Aplicacao.Classes
 
         public static Guid dados_Empresa_Id;
         public static Guid dados_Empresa_EstadoId;
+        public static Guid dados_Empresa_CidadeId;
         public static string dados_Empresa_CodigoEstado;
         public static string dados_Empresa_SerialNumber;
         public static string dados_Empresa_CNPJ;

@@ -1,4 +1,5 @@
 ﻿using DFe.Classes.Entidades;
+using SisCom.Entidade.Modelos;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,6 +13,11 @@ namespace SisCom.Aplicacao.ViewModels
         public string CodigoIBGE { get; set; }
         public EstadoViewModel Estado { get; set; }
         public Guid EstadoId { get; set; }
+
+        public static explicit operator CidadeViewModel(Cidade v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class CidadeComboViewModel

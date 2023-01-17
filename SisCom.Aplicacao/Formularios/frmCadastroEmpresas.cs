@@ -252,6 +252,7 @@ namespace SisCom.Aplicacao.Formularios
             if (empresa.Id == Declaracoes.dados_Empresa_Id)
             {
                 Declaracoes.dados_Empresa_EstadoId = empresa.Endereco.End_Cidade.EstadoId;
+                Declaracoes.dados_Empresa_CidadeId = empresa.Endereco.End_Cidade.Id;
                 Declaracoes.dados_Empresa_CodigoEstado = empresa.Endereco.End_Cidade.Estado.Codigo;
                 Declaracoes.dados_Empresa_SerialNumber = empresa.NuvemFiscal_SerialNumber;
                 Declaracoes.dados_Path_DocumentoFiscal = empresa.PathDocumentoFiscal;

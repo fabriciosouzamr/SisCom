@@ -1,4 +1,5 @@
-﻿using Funcoes._Classes;
+﻿using DanfeSharp.Esquemas.NFe;
+using Funcoes._Classes;
 using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
@@ -20,6 +21,8 @@ namespace SisCom.Aplicacao.Formularios
 
         int AdicionarNotasItem_Notas = 1;
         int AdicionarNotasItem_UltimoTop = 1;
+
+        bool Carregando = true;
 
         public frmFiscal_MDFe(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -48,9 +51,19 @@ namespace SisCom.Aplicacao.Formularios
                 await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
                 await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
+                comboIdentificacao_UFCarregamento.SelectedValue = Declaracoes.dados_Empresa_EstadoId;
+                comboIdentificacao_UFCarregamento_Tratar();
+                comboIdentificacao_CidadeCarregamento.SelectedValue = Declaracoes.dados_Empresa_CidadeId;
+                textDadosVeiculo_Renavam.Text = "0";
+                numericDadosVeiculo_CapacidadeKG.Value = 0;
+
+                comboIdentificacao_TipoTransportador.SelectedValue = MDFe_TipoTransportador.TransportadorCargaPropria;
+
                 AdicionarNotasItem_Configurar(pnlAdicionarNotasItem01);
 
                 AdicionarNotasItem_UltimoTop = pnlAdicionarNotasItem01.Top;
+
+                Carregando = false;
             }
             catch (Exception Ex)
             {
@@ -698,6 +711,7 @@ namespace SisCom.Aplicacao.Formularios
         async Task comboAdicionarNotasItem_Tipo_Tratar(object sender)
         {
             string numerocontrole = ((ComboBox)sender).Name.Substring(("comboAdicionarNotasItem_Tipo").Length);
+            bool limpar = false;
 
             if (((ComboBox)sender).SelectedIndex > -1)
             {
@@ -708,13 +722,13 @@ namespace SisCom.Aplicacao.Formularios
                         Combo_ComboBox.Formatar(((ComboBox)Controls.Find("comboAdicionarNotasItem_NumeroNota" + numerocontrole, true)[0]),
                                                 "ID", "NotaFiscal",
                                                 ComboBoxStyle.DropDownList,
-                                                await(new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier)).ComboDadosFiscais(o => o.NotaFiscal));
+                                                await (new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier)).ComboDadosFiscais(o => o.NotaFiscal));
                         Combo_ComboBox.Formatar(((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]),
                                                 "ID", "CodigoChaveAcesso",
                                                 ComboBoxStyle.DropDownList,
                                                 await (new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier)).ComboDadosFiscais(o => o.CodigoChaveAcesso));
                     }
-                }               
+                }
                 else if (((ComboBox)sender).SelectedValue is MDFe_OrigemNota.Saida)
                 {
                     using (MeuDbContext meuDbContext = this.MeuDbContext())
@@ -729,14 +743,20 @@ namespace SisCom.Aplicacao.Formularios
                                                 await (new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier)).ComboDadosFiscais(o => o.CodigoChaveAcesso));
                     }
                 }
+                else
+                    limpar = true;
             }
             else
+                limpar = true;
+
+            if (limpar)
             {
                 ((ComboBox)Controls.Find("comboAdicionarNotasItem_NumeroNota" + numerocontrole, true)[0]).DataSource = null;
                 ((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]).DataSource = null;
                 ((ComboBox)Controls.Find("comboAdicionarNotasItem_Cidade" + numerocontrole, true)[0]).SelectedIndex = -1;
                 ((NumericUpDown)Controls.Find("numericAdicionarNotasItem_ValorNota" + numerocontrole, true)[0]).Value = 0;
                 ((NumericUpDown)Controls.Find("numericAdicionarNotasItem_PesoNota" + numerocontrole, true)[0]).Value = 0;
+                ((ComboBox)Controls.Find("comboAdicionarNotasItem_Cidade" + numerocontrole, true)[0]).SelectedIndex =-1;
             }
         }
 
@@ -752,7 +772,7 @@ namespace SisCom.Aplicacao.Formularios
                 ((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]).SelectedIndex = -1;
             }
 
-            CalcularTotais();
+            NotasSelecionadas_Tratart();
         }
         private void comboAdicionarNotasItem_ChaveAcesso_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -848,12 +868,12 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Informe a tara (KG) do veículo");
                 return;
             }
-            if (numericDadosVeiculo_CapacidadeKG.Value == 0)
+            if (numericDadosVeiculo_CapacidadeKG.Value < 0)
             {
                 CaixaMensagem.Informacao("Informe a capacidade (KG) do veículo");
                 return;
             }
-            if (numericDadosVeiculo_CapacidadeM3.Value == 0)
+            if (numericDadosVeiculo_CapacidadeM3.Value < 0)
             {
                 CaixaMensagem.Informacao("Informe a capacidade (M3) do veículo");
                 return;
@@ -912,30 +932,33 @@ namespace SisCom.Aplicacao.Formularios
                         CaixaMensagem.Informacao("Selecione a origem da nota fiscal " + i.ToString("00"));
                         return;
                     }
-                    if (!Combo_ComboBox.Selecionado((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_NumeroNota" + i.ToString("00"), false)[0]))
+                    if ((MDFe_OrigemNota)((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Tipo" + i.ToString("00"), false)[0]).SelectedValue != MDFe_OrigemNota.Todos)
                     {
-                        CaixaMensagem.Informacao("Selecione o número da nota fiscal " + i.ToString("00"));
-                        return;
-                    }
-                    if (!Combo_ComboBox.Selecionado((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + i.ToString("00"), false)[0]))
-                    {
-                        CaixaMensagem.Informacao("Selecione a chave de acesso da nota fiscal " + i.ToString("00"));
-                        return;
-                    }
-                    if (!Combo_ComboBox.Selecionado((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Cidade" + i.ToString("00"), false)[0]))
-                    {
-                        CaixaMensagem.Informacao("Selecione o município da nota fiscal " + i.ToString("00"));
-                        return;
-                    }
-                    if (((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_ValorNota" + i.ToString("00"), false)[0]).Value == 0)
-                    {
-                        CaixaMensagem.Informacao("Informe o valor da nota fiscal " + i.ToString("00"));
-                        return;
-                    }
-                    if (((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_PesoNota" + i.ToString("00"), false)[0]).Value == 0)
-                    {
-                        CaixaMensagem.Informacao("Informe o peso bruto da nota fiscal " + i.ToString("00"));
-                        return;
+                        if (!Combo_ComboBox.Selecionado((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_NumeroNota" + i.ToString("00"), false)[0]))
+                        {
+                            CaixaMensagem.Informacao("Selecione o número da nota fiscal " + i.ToString("00"));
+                            return;
+                        }
+                        if (!Combo_ComboBox.Selecionado((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + i.ToString("00"), false)[0]))
+                        {
+                            CaixaMensagem.Informacao("Selecione a chave de acesso da nota fiscal " + i.ToString("00"));
+                            return;
+                        }
+                        if (!Combo_ComboBox.Selecionado((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Cidade" + i.ToString("00"), false)[0]))
+                        {
+                            CaixaMensagem.Informacao("Selecione o município da nota fiscal " + i.ToString("00"));
+                            return;
+                        }
+                        if (((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_ValorNota" + i.ToString("00"), false)[0]).Value == 0)
+                        {
+                            CaixaMensagem.Informacao("Informe o valor da nota fiscal " + i.ToString("00"));
+                            return;
+                        }
+                        if (((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_PesoNota" + i.ToString("00"), false)[0]).Value == 0)
+                        {
+                            CaixaMensagem.Informacao("Informe o peso bruto da nota fiscal " + i.ToString("00"));
+                            return;
+                        }
                     }
                 }
                 catch (Exception exception)
@@ -1160,14 +1183,23 @@ namespace SisCom.Aplicacao.Formularios
         {
             if (manifestoEletronicoDocumento != null)
             {
-                await Fiscal.MDFe_Transmitir(manifestoEletronicoDocumento.Id, this.MeuDbContext(), this._notifier);
+                ViewModels.EmpresaViewModel empresa;
+
+                using (EmpresaController empresaController = new EmpresaController(this.MeuDbContext(), this._notifier))
+                {
+                    empresa = await empresaController.GetById(Declaracoes.dados_Empresa_Id);
+                }
+
+                await Fiscal.MDFe_Transmitir(manifestoEletronicoDocumento.Id, this.MeuDbContext(), this._notifier, empresa);
 
                 CaixaMensagem.Informacao("MDF-e transmitido");
             }
         }
 
-        private async void CalcularTotais()
+        private async void NotasSelecionadas_Tratart()
         {
+            if (Carregando) return;
+
             numericTotalizadores_PesoBrutoCarga.Value = 0;
             numericTotalizadores_QuantidadeNfe.Value = 0;
             numericTotalizadores_ValorTotalCarga.Value = 0;
@@ -1199,6 +1231,14 @@ namespace SisCom.Aplicacao.Formularios
 
                                     if (notaFiscalSaida.Any())
                                     {
+                                        foreach (object Item in ((ComboBox)Controls.Find("comboAdicionarNotasItem_Cidade" + i.ToString("00"), true)[0]).Items)
+                                        {
+                                            if (((CidadeViewModel)Item).Id == notaFiscalSaida.FirstOrDefault().Cliente_Endereco.End_CidadeId)
+                                            {
+                                                ((ComboBox)Controls.Find("comboAdicionarNotasItem_Cidade" + i.ToString("00"), true)[0]).SelectedItem = Item;
+                                                break;
+                                            }
+                                        }
                                         ((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_ValorNota" + i.ToString("00"), false)[0]).Value = notaFiscalSaida.FirstOrDefault().NotaFiscalSaidaMercadoria.Sum(s => s.PrecoTotal);
                                         ((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_PesoNota" + i.ToString("00"), false)[0]).Value = (decimal)notaFiscalSaida.FirstOrDefault().VolumeTransportados_PesoBruto;
 
@@ -1240,6 +1280,10 @@ namespace SisCom.Aplicacao.Formularios
                     }
                 }
             }
+        }
+        private void comboAdicionarNotasItem_Tipo_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

@@ -61,17 +61,51 @@ namespace SisCom.Aplicacao.Formularios
         {
             if (gridManifestoDocumentoEletronico.CurrentRow != null)
             {
-                await Fiscal.MDFe_Transmitir(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()), this.MeuDbContext(), this._notifier);
+                ViewModels.EmpresaViewModel empresa;
+
+                using (EmpresaController empresaController = new EmpresaController(this.MeuDbContext(), this._notifier))
+                {
+                    empresa = await empresaController.GetById(Declaracoes.dados_Empresa_Id);
+                }
+
+                await Fiscal.MDFe_Transmitir(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()), 
+                                             this.MeuDbContext(), this._notifier, empresa);
 
                 gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value = MDFe_Status.Transmitido.GetDescription();
             }
+            else
+            {
+                CaixaMensagem.Informacao("Selecione o manifesto a ser transmitido");
+            }
         }
-        private void botaoCancelar_Click(object sender, EventArgs e)
+        private async void botaoCancelar_Click(object sender, EventArgs e)
         {
-            
+            Cancelar();
+        }
+        async Task Cancelar()
+        {
+            if (gridManifestoDocumentoEletronico.CurrentRow != null)
+            {
+                string justificativa;
+                using (frmTexto frmTexto = new frmTexto())
+                {
+                    frmTexto.ShowDialog();
+                    justificativa = frmTexto.Texto;
+                }
 
-            Fiscal.Fiscal_ManifestoEletronicoDocumento_Cancelar(ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento,
-                                                                string justificativa);
+                using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
+                {
+                    var manifestoEletronicoDocumento = await manifestoEletronicoDocumentoController.PesquisarId(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()));
+
+                    Fiscal.Fiscal_ManifestoEletronicoDocumento_Cancelar(manifestoEletronicoDocumento, justificativa);
+
+                    await manifestoEletronicoDocumentoController.Atualizar(manifestoEletronicoDocumento.Id, manifestoEletronicoDocumento);
+                }
+            }
+            else
+            {
+                CaixaMensagem.Informacao("Selecione o manifesto a ser cancelado");
+            }
         }
         private void botaoNovo_Click(object sender, EventArgs e)
         {
