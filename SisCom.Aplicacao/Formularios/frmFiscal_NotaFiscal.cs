@@ -148,8 +148,23 @@ namespace SisCom.Aplicacao.Formularios
 
             await Navegar(Declaracoes.eNavegar.Ultimo);
             await CarregarSerie(false);
+            await CarregarDadosEmpresa();
 
             carregando = false;
+        }
+
+        async Task CarregarDadosEmpresa()
+        {
+            using (EmpresaController empresaController = new EmpresaController(this.MeuDbContext(), this._notifier))
+            {
+                var empresa = (await empresaController.GetById(Declaracoes.dados_Empresa_Id));
+
+                if (empresa != null)
+                {
+                    textVolumeTransportadosEspecie.Text = Funcao.NuloParaString(empresa.EspeciePadrao);
+                    textVolumeTransportadosMarca.Text = Funcao.NuloParaString(empresa.MarcaPadrao);
+                }
+            }
         }
 
         async Task CarregarSerie(bool carregarnotas)
@@ -199,7 +214,7 @@ namespace SisCom.Aplicacao.Formularios
                 Texto_MaskedTextBox.FormatarTipoPessoa(TipoPessoaCliente.Juridica, maskedRemetenteCPFCNPJ);
                 Texto_MaskedTextBox.FormatarTipoPessoa(TipoPessoaCliente.Juridica, maskedTransportadoraCPFCNPJ);
 
-                Limpar();
+                Limpar();                
 
                 List<CodigoNomeComboViewModel> unidadeMedida;
                 List<CodigoComboViewModel> tabelaCFOP;
@@ -382,8 +397,8 @@ namespace SisCom.Aplicacao.Formularios
             numericTransportadoraNumeroCarga.Value = 0;
             comboRegimeTributario.SelectedValue = Declaracoes.dados_Empresa_RegimeTributario;
             numericVolumeTransportadosQuantidade.Value = 0;
-            textVolumeTransportadosEspecie.Text = "SACAS";
-            textVolumeTransportadosMarca.Text = "CAFÉ";
+            textVolumeTransportadosEspecie.Text = "";
+            textVolumeTransportadosMarca.Text = "";
             numericVolumeTransportadosNumero.Value = 0;
             numericVolumeTransportadosPesoBruto.Value = 0;
             numericVolumeTransportadosPesoLiquido.Value = 0;

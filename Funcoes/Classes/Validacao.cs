@@ -150,7 +150,7 @@ namespace Funcoes._Classes
             }
             catch (Exception)
 			{
-				return data;
+				return data.Date;
             }
         }
     }

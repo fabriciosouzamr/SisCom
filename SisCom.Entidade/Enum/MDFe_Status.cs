@@ -8,9 +8,11 @@ namespace SisCom.Entidade.Enum
         Criado = 1,
         [Description("Validado")]
         Validado = 2,
-        [Description("Autorizado")]
+        [Description("Transmitido")]
         Transmitido = 3,
         [Description("Cancelado")]
-        Cancelado = 4
+        Cancelado = 4,
+        [Description("Autorizado")]
+        Autorizado = 5
     }
 }

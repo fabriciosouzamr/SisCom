@@ -45,6 +45,8 @@ namespace SisCom.Aplicacao.ViewModels
         public string? Responsaveltecnico_Email { get; set; }
         public string? Responsaveltecnico_Fone { get; set; }
         public string? Responsaveltecnico_Contato { get; set; }
+        public string? EspeciePadrao { get; set; }
+        public string? MarcaPadrao { get; set; }
     }
 
     public class EmpresaComboViewModel

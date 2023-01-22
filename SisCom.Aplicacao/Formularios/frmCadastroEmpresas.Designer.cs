@@ -89,6 +89,10 @@ namespace SisCom.Aplicacao.Formularios
             this.label11 = new System.Windows.Forms.Label();
             this.textTelefone = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label64 = new System.Windows.Forms.Label();
+            this.textMarcaPadrao = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.textEspeciePadrao = new System.Windows.Forms.TextBox();
             this.textNFEUltimaNotaFiscal = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textNFESerie = new System.Windows.Forms.TextBox();
@@ -100,6 +104,8 @@ namespace SisCom.Aplicacao.Formularios
             this.label20 = new System.Windows.Forms.Label();
             this.comboNFEAmbiente = new System.Windows.Forms.ComboBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.textMDFEUltimoNumero = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.textMDFeSerie = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
@@ -126,8 +132,6 @@ namespace SisCom.Aplicacao.Formularios
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.comboNuvemFiscalAmbienteWebService = new System.Windows.Forms.ComboBox();
-            this.textMDFEUltimoNumero = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -753,6 +757,10 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label64);
+            this.tabPage1.Controls.Add(this.textMarcaPadrao);
+            this.tabPage1.Controls.Add(this.label63);
+            this.tabPage1.Controls.Add(this.textEspeciePadrao);
             this.tabPage1.Controls.Add(this.textNFEUltimaNotaFiscal);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.textNFESerie);
@@ -770,6 +778,41 @@ namespace SisCom.Aplicacao.Formularios
             this.tabPage1.TabIndex = 1;
             this.tabPage1.Text = "NFe";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(85, 167);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(43, 15);
+            this.label64.TabIndex = 158;
+            this.label64.Text = "Marca:";
+            // 
+            // textVolumeTransportadosMarca
+            // 
+            this.textMarcaPadrao.Location = new System.Drawing.Point(144, 163);
+            this.textMarcaPadrao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textMarcaPadrao.Name = "textVolumeTransportadosMarca";
+            this.textMarcaPadrao.Size = new System.Drawing.Size(185, 23);
+            this.textMarcaPadrao.TabIndex = 157;
+            this.textMarcaPadrao.Text = "CAFE";
+            // 
+            // label63
+            // 
+            this.label63.Location = new System.Drawing.Point(82, 140);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(46, 15);
+            this.label63.TabIndex = 156;
+            this.label63.Text = "Espécie:";
+            // 
+            // textVolumeTransportadosEspecie
+            // 
+            this.textEspeciePadrao.Location = new System.Drawing.Point(144, 136);
+            this.textEspeciePadrao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textEspeciePadrao.Name = "textVolumeTransportadosEspecie";
+            this.textEspeciePadrao.Size = new System.Drawing.Size(185, 23);
+            this.textEspeciePadrao.TabIndex = 155;
+            this.textEspeciePadrao.Text = "SACAS";
             // 
             // textNFEUltimaNotaFiscal
             // 
@@ -879,6 +922,23 @@ namespace SisCom.Aplicacao.Formularios
             this.tabPage6.TabIndex = 6;
             this.tabPage6.Text = "MDFe";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // textMDFEUltimoNumero
+            // 
+            this.textMDFEUltimoNumero.Location = new System.Drawing.Point(131, 95);
+            this.textMDFEUltimoNumero.MaxLength = 6;
+            this.textMDFEUltimoNumero.Name = "textMDFEUltimoNumero";
+            this.textMDFEUltimoNumero.Size = new System.Drawing.Size(80, 23);
+            this.textMDFEUltimoNumero.TabIndex = 304;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(22, 99);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(106, 15);
+            this.label33.TabIndex = 304;
+            this.label33.Text = "Última Nota Fiscal:";
             // 
             // label31
             // 
@@ -1138,23 +1198,6 @@ namespace SisCom.Aplicacao.Formularios
             this.comboNuvemFiscalAmbienteWebService.TabIndex = 402;
             this.comboNuvemFiscalAmbienteWebService.TextChanged += new System.EventHandler(this.textoTextChanged);
             // 
-            // textMDFEUltimoNumero
-            // 
-            this.textMDFEUltimoNumero.Location = new System.Drawing.Point(131, 95);
-            this.textMDFEUltimoNumero.MaxLength = 6;
-            this.textMDFEUltimoNumero.Name = "textMDFEUltimoNumero";
-            this.textMDFEUltimoNumero.Size = new System.Drawing.Size(80, 23);
-            this.textMDFEUltimoNumero.TabIndex = 304;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(22, 99);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(106, 15);
-            this.label33.TabIndex = 304;
-            this.label33.Text = "Última Nota Fiscal:";
-            // 
             // frmCadastroEmpresas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1294,5 +1337,9 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textMDFEUltimoNumero;
         private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.TextBox textMarcaPadrao;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.TextBox textEspeciePadrao;
     }
 }

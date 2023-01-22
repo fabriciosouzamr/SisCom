@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Entity;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -23,9 +24,9 @@ namespace SisCom.Aplicacao.Controllers
 
             _UnidadeMedidaService = new UnidadeMedidaService(new UnidadeMedidaRepository(this.MeuDbContext), notifier);
         }
-        public async Task<IEnumerable<UnidadeMedidaViewModel>> ObterTodos()
+        public async Task<IEnumerable<UnidadeMedidaViewModel>> ObterTodos(Expression<Func<UnidadeMedida, object>> order = null)
         {
-            var obterTodos = await _UnidadeMedidaService.GetAll();
+            var obterTodos = await _UnidadeMedidaService.GetAll(order);
             return Declaracoes.mapper.Map<IEnumerable<UnidadeMedidaViewModel>>(obterTodos);
         }
         public async Task<IEnumerable<CodigoNomeComboViewModel>> Combo(Expression<Func<UnidadeMedida, object>> order = null)

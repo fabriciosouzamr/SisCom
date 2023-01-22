@@ -22,8 +22,9 @@ namespace SisCom.Aplicacao.Formularios
         const int gridManifestoDocumentoEletronico_DataHoraEmissao = 2;
         const int gridManifestoDocumentoEletronico_Numero = 3;
         const int gridManifestoDocumentoEletronico_Status = 4;
-        const int gridManifestoDocumentoEletronico_Condutor_Nome = 5;
-        const int gridManifestoDocumentoEletronico_Condutor_CNPJ_CPF = 6;
+        const int gridManifestoDocumentoEletronico_RetornoSefaz = 5;
+        const int gridManifestoDocumentoEletronico_Condutor_Nome = 6;
+        const int gridManifestoDocumentoEletronico_Condutor_CNPJ_CPF = 7;
 
         public frmFiscal_MDFe_Consulta(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -40,6 +41,7 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "DataEmissao", "Data Emissão", Tamanho: 150);
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "Numero", "Número", Tamanho: 100);
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "Status", "Status", Tamanho: 100);
+            Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "Retorno Sefaz", "RetornoSefaz", Tamanho: 100);
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "NomeCondutor", "Nome Condutor", Tamanho: 150);
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "CPFCondutor", "C.P.F. Condutor", Tamanho: 100);
 
@@ -155,6 +157,8 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                                               Valor = item.Numero },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_Status,
                                                                                                                                               Valor = item.Status.GetDescription() },
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_RetornoSefaz,
+                                                                                                                                              Valor = item.RetornoSefaz },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_Condutor_Nome,
                                                                                                                                               Valor = item.Condutor_Nome },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_Condutor_CNPJ_CPF,

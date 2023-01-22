@@ -137,6 +137,9 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("EMail")
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("EspeciePadrao")
+                        .HasColumnType("varchar(200)");
+
                     b.Property<byte[]>("ImagemLogomarca")
                         .HasColumnType("varbinary(max)");
 
@@ -157,6 +160,9 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<int?>("MDFe_TipoEmirssor")
                         .HasColumnType("int");
+
+                    b.Property<string>("MarcaPadrao")
+                        .HasColumnType("varchar(200)");
 
                     b.Property<int?>("NFE_Ambiente")
                         .HasColumnType("int");
@@ -203,7 +209,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Responsaveltecnico_CNPJ")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(14)");
 
                     b.Property<string>("Responsaveltecnico_Contato")
                         .HasColumnType("varchar(100)");
@@ -212,7 +218,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("Responsaveltecnico_Fone")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<int?>("Sped_TipoGeracaoInventario")
                         .HasColumnType("int");

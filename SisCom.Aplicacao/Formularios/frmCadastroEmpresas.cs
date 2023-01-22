@@ -132,6 +132,8 @@ namespace SisCom.Aplicacao.Formularios
                 textNuvemFiscalDiretorioXMLs.Text = Funcao.NuloParaString(empresa.PathDocumentoFiscal);
                 if (!Funcao.Nulo(empresa.PathDocumentoFiscal)) textNuvemFiscalDiretorioXMLs.Text = empresa.PathDocumentoFiscal;
                 if (!Funcao.Nulo(empresa.NuvemFiscal_SerialNumber)) serialNumber = empresa.NuvemFiscal_SerialNumber;
+                textEspeciePadrao.Text = Funcao.NuloParaString(empresa.EspeciePadrao);
+                textMarcaPadrao.Text = Funcao.NuloParaString(empresa.MarcaPadrao);
 
                 if (!Funcao.Nulo(empresa.Endereco.End_CidadeId)) Combo_ComboBox.ComboCidade_Carregar(this._serviceProvider,
                                                                                                      this._dbCtxFactory,
@@ -389,7 +391,7 @@ namespace SisCom.Aplicacao.Formularios
 
             textNuvemFiscalCertificado.Text = completo;
         }
-        private void botaoGravar_Click(object sender, EventArgs e)
+        private async void botaoGravar_Click(object sender, EventArgs e)
         {
             if (!Validacao.CPFCNPJ_Valido(TipoPessoa.Juridica, Funcoes._Classes.Texto.SomenteNumero(maskedCPFCNPJ.Text)))
             {
@@ -443,8 +445,10 @@ namespace SisCom.Aplicacao.Formularios
             empresa.NuvemFiscal_Usar = checkUtilizarNuvemFiscal.Checked;
             if (Combo_ComboBox.Selecionado(comboNuvemFiscalAmbienteWebService)) { empresa.NuvemFiscal_AmbienteWebService = (AmbienteSistemas)comboNuvemFiscalAmbienteWebService.SelectedValue; } else { empresa.NuvemFiscal_AmbienteWebService = null; }
             empresa.PathDocumentoFiscal = Funcao.StringVazioParaNulo(textNuvemFiscalDiretorioXMLs.Text);
+            empresa.EspeciePadrao = Funcao.StringVazioParaNulo(textEspeciePadrao.Text);
+            empresa.MarcaPadrao = Funcao.StringVazioParaNulo(textMarcaPadrao.Text);
 
-            AdicionarEmpresa();
+            await AdicionarEmpresa();
 
             var config = ConfigurationManager.OpenExeConfiguration(Declaracoes.externos_SisCom_Aplicacao_FW);
             string diretorioXMLs = "<SisCom.Aplicacao_FW.Properties.Settings><setting name=\"PathDocumentoFiscal\" serializeAs=\"String\"><value>" + textNuvemFiscalDiretorioXMLs.Text + "</value></setting></SisCom.Aplicacao_FW.Properties.Settings>";

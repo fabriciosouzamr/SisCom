@@ -30,7 +30,6 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.User_ColunaAdicionar(dataTipoCliente, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres);
             GridAtualizar();
         }
-
         private async Task GridAtualizar()
         {
             TipoClienteController TipoClienteController = new TipoClienteController(this.MeuDbContext(), this._notifier);
