@@ -33,7 +33,8 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void cmdConfiguracoesGerais_Click(object sender, EventArgs e)
         {
-
+            var form = this.ServiceProvider().GetRequiredService<frmCadastroConfiguracao>();
+            form.ShowDialog(this);
         }
         private void cmdEmpresas_Click(object sender, EventArgs e)
         {

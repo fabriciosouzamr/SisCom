@@ -140,6 +140,7 @@
             this.dataUnidadeMedida.RowTemplate.Height = 25;
             this.dataUnidadeMedida.Size = new System.Drawing.Size(1261, 550);
             this.dataUnidadeMedida.TabIndex = 0;
+            this.dataUnidadeMedida.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataUnidadeMedida_UserDeletingRow);
             // 
             // frmCadastroConfiguracao
             // 

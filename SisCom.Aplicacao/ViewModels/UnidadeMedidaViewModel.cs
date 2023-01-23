@@ -7,8 +7,8 @@ namespace SisCom.Aplicacao.ViewModels
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid UnidadeMedidaAId { get; set; }
-        public Guid UnidadeMedidaBId { get; set; }
+        public string Codigo { get; set; }
+        public string Nome { get; set; }
         public decimal Conversor { get; set; }
     }
 }

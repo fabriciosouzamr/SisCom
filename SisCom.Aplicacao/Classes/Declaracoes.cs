@@ -130,6 +130,7 @@ namespace SisCom.Aplicacao.Classes
     {
         public static string Mensagem_Fabricante_Remover = "Deseja remover o fabricante [Param01]?";
         public static string Mensagem_TipoCliente_Remover = "Deseja remover o tipo de cliente [Param01]?";
+        public static string Mensagem_UnidadeMedida_Remover = "Deseja remover a unidade medida [Param01]?";
         public static string Mensagem_Grupo_NaoSelecionado = "Não foi selecionado nenhum grupo!";
         public static string Mensagem_Grupo_Remover = "Deseja remover o grupo [Param01]?";
     }

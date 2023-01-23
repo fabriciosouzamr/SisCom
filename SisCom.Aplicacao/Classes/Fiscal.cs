@@ -54,6 +54,7 @@ using MDFe.Servicos.ConsultaProtocoloMDFe;
 using MDFe.Classes.Extencoes;
 using System.Security.Policy;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using MDFe.Servicos.RetRecepcaoMDFe;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -1896,7 +1897,7 @@ namespace SisCom.Aplicacao.Classes
         {
             Fiscal_Configuracao_MDFe();
 
-            string chave = manifestoEletronicoDocumento.Autorizacao_ChaveAutenticacao;
+            string nrrecibo = manifestoEletronicoDocumento.Autorizacao_ChaveAutenticacao;
             var mdfe = new MDFeEletronico();
 
             if (String.IsNullOrEmpty(chave))
@@ -1997,66 +1998,8 @@ namespace SisCom.Aplicacao.Classes
                     #endregion dados emitente (emit)
 
                     #region modal
-                    //if (MDFeConfiguracao.VersaoWebService.VersaoLayout = VersaoServico.Versao100)
-                    //{
-                    //    mdfe.InfMDFe.InfModal.Modal = new MDFeRodo
-                    //    {
-                    //        RNTRC = config.Empresa.RNTRC,
-                    //        VeicTracao = new MDFeVeicTracao
-                    //        {
-                    //            Placa = "KKK9888",
-                    //            RENAVAM = "888888888",
-                    //            UF = Estado.GO,
-                    //            Tara = 222,
-                    //            CapM3 = 222,
-                    //            CapKG = 22,
-                    //            Condutor = new List<MDFeCondutor>
-                    //    {
-                    //        new MDFeCondutor
-                    //        {
-                    //            CPF = "11392381754",
-                    //            XNome = "Ricardão"
-                    //        }
-                    //    },
-                    //            TpRod = MDFeTpRod.Outros,
-                    //            TpCar = MDFeTpCar.NaoAplicavel
-                    //        }
-                    //    };
-                    //}
-
-
-                    //if (MDFeConfiguracao.VersaoWebService.VersaoLayout == VersaoServico.Versao300)
-                    //{
                     mdfe.InfMDFe.InfModal.Modal = new MDFeRodo()
                     {
-                        //infANTT = new MDFeInfANTT
-                        //{                            
-                        //    RNTRC = manifestoEletronicoDocumento.RNTRCEmitente,
-
-                        ////    // não é obrigatorio
-                        ////    infCIOT = new List<infCIOT>
-                        ////{
-                        ////    new infCIOT
-                        ////    {
-                        ////        CIOT = "123456789123",
-                        ////        CNPJ = "21025760000123"
-                        ////    }
-                        ////}
-                        //    /*valePed = new MDFeValePed
-                        //    {
-                        //        Disp = new List<MDFeDisp>
-                        //                {
-                        //                    new MDFeDisp
-                        //                    {
-                        //                        CNPJForn = "21025760000123",
-                        //                        CNPJPg = "21025760000123",
-                        //                        NCompra = "838388383",
-                        //                        vValePed = 100.33m
-                        //                    }
-                        //                }
-                        //    }*/
-                        //},
-
                         VeicTracao = new MDFeVeicTracao
                         {
                             Placa = manifestoEletronicoDocumento.DadoVeiculo_NumeroPlaca.Replace("-", ""),
@@ -2084,8 +2027,6 @@ namespace SisCom.Aplicacao.Classes
                         }
                     }
                     };
-                    //}
-
                     #endregion modal
 
                     #region infMunDescarga
@@ -2107,72 +2048,7 @@ namespace SisCom.Aplicacao.Classes
                         }
                     };
                     });
-
-
-                    //if (MDFeConfiguracao.VersaoWebService.VersaoLayout == VersaoServico.Versao300)
-                    //{
-                    //mdfe.InfMDFe.InfDoc.InfMunDescarga[0].InfCTe[0].Peri = new List<MDFePeri>
-                    //{
-                    //    new MDFePeri
-                    //    {
-                    //        NONU = "1111",
-                    //        QTotProd = "quantidade 20"
-                    //    }
-                    //};
-                    //}
-
                     #endregion infMunDescarga
-
-                    //#region seg
-                    ////if (MDFeConfiguracao.VersaoWebService.VersaoLayout == VersaoServico.Versao300)
-                    ////{
-                    //    mdfe.InfMDFe.Seg = new List<MDFeSeg>();
-
-                    //    mdfe.InfMDFe.Seg.Add(new MDFeSeg
-                    //    {
-                    //        InfResp = new MDFeInfResp
-                    //        {
-                    //            CNPJ = "21025760000123",
-                    //            RespSeg = MDFeRespSeg.EmitenteDoMDFe
-                    //        },
-                    //        InfSeg = new MDFeInfSeg
-                    //        {
-                    //            CNPJ = "21025760000123",
-                    //            XSeg = "aaaaaaaaaa"
-                    //        },
-                    //        NApol = "aaaaaaaaaa",
-                    //        NAver = new List<string>
-                    //        {
-                    //            "aaaaaaaa"
-                    //        }
-                    //    });
-                    ////}
-
-                    //#endregion
-
-                    //#region Produto Predominante
-
-                    //if (MDFeConfiguracao.VersaoWebService.VersaoLayout == VersaoServico.Versao300)
-                    //{
-                    //    mdfe.InfMDFe.prodPred = new prodPred
-                    //    {
-                    //        tpCarga = tpCarga.CargaGeral,
-                    //        xProd = "aaaaaaaaaaaaaaaaaaaaa",
-                    //        infLotacao = new infLotacao
-                    //        {
-                    //            infLocalCarrega = new infLocalCarrega
-                    //            {
-                    //                CEP = "75950000"
-                    //            },
-                    //            infLocalDescarrega = new infLocalDescarrega
-                    //            {
-                    //                CEP = "75950000"
-                    //            }
-                    //        }
-                    //    };
-                    //}
-
-                    //#endregion
 
                     #region Totais (tot)
                     mdfe.InfMDFe.Tot.QNFe = manifestoEletronicoDocumento.QuantidadeNFe;
@@ -2259,18 +2135,18 @@ namespace SisCom.Aplicacao.Classes
                     if (File.Exists(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-ped-sit.xml"))) { File.Delete(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-ped-sit.xml")); }
                     if (File.Exists(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-sit.xml"))) { File.Delete(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-sit.xml")); }
 
-                    var servicoConsultaProtocolo = new ServicoMDFeConsultaProtocolo();
-                    var retorno = servicoConsultaProtocolo.MDFeConsultaProtocolo(chave);
+                    var servicoConsultaProtocolo = new ServicoMDFeRetRecepcao();
+                    var retorno = servicoConsultaProtocolo.MDFeRetRecepcao(chave);
 
-                    if ((retorno.ProtMDFe != null) && (retorno.ProtMDFe.InfProt != null))
+                    if ((retorno.ProtMdFe != null) && (retorno.ProtMdFe.InfProt != null))
                     {
-                        manifestoEletronicoDocumento.Autorizacao_Protocolo = retorno.ProtMDFe.InfProt.NProt;
-                        manifestoEletronicoDocumento.RetornoSefazCodigo = retorno.ProtMDFe.InfProt.CStat.ToString();
-                        manifestoEletronicoDocumento.RetornoSefaz = retorno.ProtMDFe.InfProt.XMotivo;
-                        manifestoEletronicoDocumento.Autorizacao_DataHoraAutorizacao = retorno.ProtMDFe.InfProt.DhRecbto;
-                        manifestoEletronicoDocumento.DataRetornoSefaz = retorno.ProtMDFe.InfProt.DhRecbto;
+                        manifestoEletronicoDocumento.Autorizacao_Protocolo = retorno.ProtMdFe.InfProt.NProt;
+                        manifestoEletronicoDocumento.RetornoSefazCodigo = retorno.ProtMdFe.InfProt.CStat.ToString();
+                        manifestoEletronicoDocumento.RetornoSefaz = retorno.ProtMdFe.InfProt.XMotivo;
+                        manifestoEletronicoDocumento.Autorizacao_DataHoraAutorizacao = retorno.ProtMdFe.InfProt.DhRecbto;
+                        manifestoEletronicoDocumento.DataRetornoSefaz = retorno.ProtMdFe.InfProt.DhRecbto;
                         manifestoEletronicoDocumento.Status = MDFe_Status.Autorizado;
-                        retorno.SalvarXmlEmDisco(chave);
+                        retorno.SalvarXmlEmDisco();
                     }
                     else
                     {
