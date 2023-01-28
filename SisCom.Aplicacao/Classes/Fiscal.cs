@@ -1897,10 +1897,12 @@ namespace SisCom.Aplicacao.Classes
         {
             Fiscal_Configuracao_MDFe();
 
-            string nrrecibo = manifestoEletronicoDocumento.Autorizacao_ChaveAutenticacao;
+            string nrrecibo = manifestoEletronicoDocumento.Autorizacao_Protocolo;
             var mdfe = new MDFeEletronico();
 
-            if (String.IsNullOrEmpty(chave))
+            string chave = "";
+
+            if (String.IsNullOrEmpty(nrrecibo))
             {
                 if (manifestoEletronicoDocumento != null)
                 {
@@ -1968,8 +1970,8 @@ namespace SisCom.Aplicacao.Classes
                     mdfe.InfMDFe.Ide.TpEmis = MDFeTipoEmissao.Normal;
                     mdfe.InfMDFe.Ide.ProcEmi = MDFeIdentificacaoProcessoEmissao.EmissaoComAplicativoContribuinte;
                     mdfe.InfMDFe.Ide.VerProc = "versao28383";
-                    mdfe.InfMDFe.Ide.UFIni = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos.FirstOrDefault().Estado.Codigo);
-                    mdfe.InfMDFe.Ide.UFFim = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos.LastOrDefault().Estado.Codigo);
+                    mdfe.InfMDFe.Ide.UFIni = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.EstadoCarregamento.Codigo);
+                    mdfe.InfMDFe.Ide.UFFim = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.EstadoDescarga.Codigo);
                     mdfe.InfMDFe.Ide.DhIniViagem = DateTime.Now;
 
                     mdfe.InfMDFe.Ide.InfMunCarrega.Add(new MDFeInfMunCarrega
@@ -2103,7 +2105,21 @@ namespace SisCom.Aplicacao.Classes
                         };
                     }
 
-                    var servicoRecepcao= new MDFe.Servicos.RecepcaoMDFe.ServicoMDFeRecepcao();
+                    #region Percurso
+                    if (manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos != null)
+                    {
+                        foreach (var percurso in manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos.OrderBy(o => o.Ordem))
+                        {
+                            MDFeInfPercurso ipercurso = new MDFeInfPercurso();
+
+                            ipercurso.UFPer = oEstado.SiglaParaEstado(percurso.Estado.Codigo);
+
+                            mdfe.InfMDFe.Ide.InfPercurso.Add(ipercurso);
+                        }
+                    }
+                    #endregion
+
+                    var servicoRecepcao = new MDFe.Servicos.RecepcaoMDFe.ServicoMDFeRecepcao();
 
                     try
                     {
@@ -2120,6 +2136,7 @@ namespace SisCom.Aplicacao.Classes
                         manifestoEletronicoDocumento.RetornoSefazCodigo = retornoEnvio.CStat.ToString();
                         manifestoEletronicoDocumento.DataRetornoSefaz = retornoEnvio.InfRec.DhRecbto;
                         manifestoEletronicoDocumento.Status = MDFe_Status.Transmitido;
+                        nrrecibo = retornoEnvio.InfRec.NRec;
                     }
                     catch (Exception Ex)
                     {
@@ -2128,7 +2145,7 @@ namespace SisCom.Aplicacao.Classes
                 }
             }
 
-            if (!String.IsNullOrEmpty(chave))
+            if (!String.IsNullOrEmpty(nrrecibo))
             {
                 try
                 {
@@ -2136,16 +2153,22 @@ namespace SisCom.Aplicacao.Classes
                     if (File.Exists(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-sit.xml"))) { File.Delete(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-sit.xml")); }
 
                     var servicoConsultaProtocolo = new ServicoMDFeRetRecepcao();
-                    var retorno = servicoConsultaProtocolo.MDFeRetRecepcao(chave);
+                    var retorno = servicoConsultaProtocolo.MDFeRetRecepcao(nrrecibo);
 
                     if ((retorno.ProtMdFe != null) && (retorno.ProtMdFe.InfProt != null))
                     {
-                        manifestoEletronicoDocumento.Autorizacao_Protocolo = retorno.ProtMdFe.InfProt.NProt;
                         manifestoEletronicoDocumento.RetornoSefazCodigo = retorno.ProtMdFe.InfProt.CStat.ToString();
                         manifestoEletronicoDocumento.RetornoSefaz = retorno.ProtMdFe.InfProt.XMotivo;
                         manifestoEletronicoDocumento.Autorizacao_DataHoraAutorizacao = retorno.ProtMdFe.InfProt.DhRecbto;
                         manifestoEletronicoDocumento.DataRetornoSefaz = retorno.ProtMdFe.InfProt.DhRecbto;
-                        manifestoEletronicoDocumento.Status = MDFe_Status.Autorizado;
+
+                        if (manifestoEletronicoDocumento.RetornoSefaz.Contains("Rejeição:"))
+                        { 
+                            manifestoEletronicoDocumento.Status = MDFe_Status.Transmitido;
+                            manifestoEletronicoDocumento.Autorizacao_Protocolo = retorno.ProtMdFe.InfProt.NProt;
+                        }
+                        else
+                        { manifestoEletronicoDocumento.Status = MDFe_Status.Autorizado; }
                         retorno.SalvarXmlEmDisco();
                     }
                     else

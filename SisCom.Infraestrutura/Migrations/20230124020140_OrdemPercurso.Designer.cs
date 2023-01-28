@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230124020140_OrdemPercurso")]
+    partial class OrdemPercurso
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -724,9 +726,6 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<Guid>("ManifestoEletronicoDocumentoId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Ordem")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
@@ -3269,63 +3268,23 @@ namespace SisCom.Infraestrutura.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("CapacidadeKG")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
-
-                    b.Property<double>("CapacidadeM3")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
-
-                    b.Property<Guid?>("EstadoId")
+                    b.Property<Guid?>("CidadeId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CodigoRenavan")
+                        .IsRequired()
+                        .HasColumnType("varchar(11)");
 
                     b.Property<string>("NumeroPlaca")
                         .IsRequired()
                         .HasColumnType("varchar(10)");
-
-                    b.Property<string>("Renavam")
-                        .HasColumnType("varchar(11)");
-
-                    b.Property<double>("TaraKG")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(0.0);
-
-                    b.Property<string>("Terceiros_CPFCNPJProprietario")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<Guid?>("Terceiros_EstadoProprietarioId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Terceiros_IEProprietario")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Terceiros_NomeProprietario")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Terceiros_RNTRCProprietario")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int?>("Terceiros_TipoProprietario")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TipoCarroceria")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TipoRodado")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EstadoId");
-
-                    b.HasIndex("Terceiros_EstadoProprietarioId");
+                    b.HasIndex("CidadeId");
 
                     b.ToTable("VeiculoPlacas");
                 });
@@ -4514,17 +4473,11 @@ namespace SisCom.Infraestrutura.Migrations
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.VeiculoPlaca", b =>
                 {
-                    b.HasOne("SisCom.Entidade.Modelos.Estado", "Estado")
+                    b.HasOne("SisCom.Entidade.Modelos.Cidade", "Cidade")
                         .WithMany()
-                        .HasForeignKey("EstadoId");
+                        .HasForeignKey("CidadeId");
 
-                    b.HasOne("SisCom.Entidade.Modelos.Estado", "Terceiros_EstadoProprietario")
-                        .WithMany()
-                        .HasForeignKey("Terceiros_EstadoProprietarioId");
-
-                    b.Navigation("Estado");
-
-                    b.Navigation("Terceiros_EstadoProprietario");
+                    b.Navigation("Cidade");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Venda", b =>

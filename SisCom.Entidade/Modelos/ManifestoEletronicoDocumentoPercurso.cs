@@ -7,6 +7,7 @@ namespace SisCom.Entidade.Modelos
     {
         public ManifestoEletronicoDocumento ManifestoEletronicoDocumento { get; set; }
         public Estado Estado { get; set; }
+        public int Ordem { get; set; }
 
         /* EF Relation */
         public Guid ManifestoEletronicoDocumentoId { get; set; }
