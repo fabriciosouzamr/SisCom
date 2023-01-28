@@ -53,14 +53,14 @@ namespace SisCom.Aplicacao.Formularios
                 await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
                 comboIdentificacao_UFCarregamento.SelectedValue = Declaracoes.dados_Empresa_EstadoId;
-                comboIdentificacao_UFCarregamento_Tratar();
+                await comboIdentificacao_UFCarregamento_Tratar();
                 comboIdentificacao_CidadeCarregamento.SelectedValue = Declaracoes.dados_Empresa_CidadeId;
                 textDadosVeiculo_Renavam.Text = "0";
                 numericDadosVeiculo_CapacidadeKG.Value = 0;
 
                 comboIdentificacao_TipoTransportador.SelectedValue = MDFe_TipoTransportador.TransportadorCargaPropria;
 
-                AdicionarNotasItem_Configurar(pnlAdicionarNotasItem01);
+                await AdicionarNotasItem_Configurar(pnlAdicionarNotasItem01);
 
                 AdicionarNotasItem_UltimoTop = pnlAdicionarNotasItem01.Top;
 
@@ -126,13 +126,13 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async Task<bool> comboDadosVeiculo_Placa_Carregar()
         {
-            //using (MeuDbContext meuDbContext = this.MeuDbContext())
-            //{
-            //    Combo_ComboBox.Formatar(comboDadosVeiculo_Placa,
-            //                            "ID", "NumeroPlaca",
-            //                            ComboBoxStyle.DropDownList,
-            //                            await (new VeiculoPlacaController(this.MeuDbContext(), this._notifier)).Combo());            
-            //}
+            using (MeuDbContext meuDbContext = this.MeuDbContext())
+            {
+                Combo_ComboBox.Formatar(comboDadosVeiculo_Placa,
+                                        "ID", "NumeroPlaca",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new VeiculoPlacaController(this.MeuDbContext(), this._notifier)).Combo(o => o.NumeroPlaca));
+            }
 
             return true;
         }
@@ -849,7 +849,7 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Selecione Tipo de Transportador");
                 return;
             }
-            if (String.IsNullOrEmpty(textDadosVeiculo_Placa.Text))
+            if (!Combo_ComboBox.Selecionado(comboDadosVeiculo_Placa))
             {
                 CaixaMensagem.Informacao("Selecione a placa do veículo");
                 return;
@@ -996,7 +996,7 @@ namespace SisCom.Aplicacao.Formularios
                 manifestoEletronicoDocumento.CidadeCarregamentoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboIdentificacao_CidadeCarregamento);
                 manifestoEletronicoDocumento.TipoTransportador = (MDFe_TipoTransportador?)comboIdentificacao_TipoTransportador.SelectedValue;
                 manifestoEletronicoDocumento.RNTRCEmitente = textIdentificacao_RNTRCEmitente.Text;
-                manifestoEletronicoDocumento.DadoVeiculo_NumeroPlaca = textDadosVeiculo_Placa.Text;
+                manifestoEletronicoDocumento.DadoVeiculo_NumeroPlaca = comboDadosVeiculo_Placa.Text;
                 manifestoEletronicoDocumento.DadoVeiculo_EstadoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboDadosVeiculo_UF);
                 manifestoEletronicoDocumento.DadoVeiculo_Renavam = textDadosVeiculo_Renavam.Text;
                 manifestoEletronicoDocumento.DadoVeiculo_TaraKG = (double)numericDadosVeiculo_TaraKG.Value;
@@ -1149,8 +1149,7 @@ namespace SisCom.Aplicacao.Formularios
             checkAutorizacao_SatusValidado.Checked = false;
             checkDadosVeiculoVceiuloTerceiro_Sim.Checked = false;
 
-            //comboDadosVeiculo_Placa.SelectedIndex =-1;
-            textDadosVeiculo_Placa.Text = "";
+            comboDadosVeiculo_Placa.SelectedIndex =-1;
             comboDadosVeiculo_TipoCarroceria.SelectedIndex = -1;
             comboDadosVeiculo_TipoRodado.SelectedIndex = -1;
             comboDadosVeiculo_UF.SelectedIndex = -1;
@@ -1313,10 +1312,42 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
-        private void botaoPlaca_Click(object sender, EventArgs e)
+        private async void botaoPlaca_Click(object sender, EventArgs e)
         {
             var form = this.ServiceProvider().GetRequiredService<frmCadastroVeiculoPlaca>();
             form.ShowDialog(this);
+
+            if (form.Cadastrado) { await Assincrono.TaskAsyncAndAwaitAsync(comboDadosVeiculo_Placa_Carregar()); }
+        }
+
+        private async void comboDadosVeiculo_Placa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Combo_ComboBox.Selecionado(comboDadosVeiculo_Placa))
+            {
+                using(VeiculoPlacaController veiculoPlacaController = new VeiculoPlacaController(this.MeuDbContext(), this._notifier))
+                {
+                    var veiculoPlaca = await veiculoPlacaController.GetById((Guid)comboDadosVeiculo_Placa.SelectedValue);
+
+                    if (veiculoPlaca != null)
+                    {
+                        if (!Funcao.Nulo(veiculoPlaca.EstadoId)) comboDadosVeiculo_UF.SelectedValue = veiculoPlaca.EstadoId;
+                        textDadosVeiculo_Renavam.Text = veiculoPlaca.Renavam;
+                        if (!Funcao.Nulo(veiculoPlaca.TipoCarroceria)) comboDadosVeiculo_TipoCarroceria.SelectedValue = veiculoPlaca.TipoCarroceria;
+                        if (!Funcao.Nulo(veiculoPlaca.TipoRodado)) comboDadosVeiculo_TipoRodado.SelectedValue = veiculoPlaca.TipoRodado;
+                        numericDadosVeiculo_CapacidadeKG.Value = (decimal)veiculoPlaca.CapacidadeKG;
+                        numericDadosVeiculo_TaraKG.Value = (decimal)veiculoPlaca.TaraKG;
+                        numericDadosVeiculo_CapacidadeM3.Value = (decimal)veiculoPlaca.CapacidadeM3;
+
+                        checkDadosVeiculoVceiuloTerceiro_Sim.Checked = (!String.IsNullOrEmpty(veiculoPlaca.Terceiros_NomeProprietario));
+                        if (!Funcao.Nulo(veiculoPlaca.Terceiros_TipoProprietario)) comboDadosVeiculoVeiculoTerceiro_TipoProprietario.SelectedValue = veiculoPlaca.Terceiros_TipoProprietario;
+                        textDadosVeiculoVeiculoTerceiro_IEProprietario.Text = veiculoPlaca.Terceiros_IEProprietario;
+                        textDadosVeiculoVeiculoTerceiro_RNTCProprietario.Text = veiculoPlaca.Terceiros_RNTRCProprietario;
+                        textDadosVeiculoVeiculoTerceiro_CPFCNPJProprietario.Text = veiculoPlaca.Terceiros_CPFCNPJProprietario;
+                        textDadosVeiculoVeiculoTerceiro_NomeProprietario.Text = veiculoPlaca.Terceiros_NomeProprietario;
+                        if (!Funcao.Nulo(veiculoPlaca.Terceiros_EstadoProprietarioId)) comboDadosVeiculoVeiculoTerceiro_UFProprietario.SelectedValue = veiculoPlaca.Terceiros_EstadoProprietarioId;
+                    }
+                }
+            }
         }
     }
 }

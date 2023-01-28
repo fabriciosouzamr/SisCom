@@ -40,6 +40,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.botaoFechar = new System.Windows.Forms.Button();
             this.groupDadosVeiculo = new System.Windows.Forms.GroupBox();
+            this.checkDadosVeiculoVeiculoTerceiro_Sim = new System.Windows.Forms.CheckBox();
             this.textPlaca = new System.Windows.Forms.TextBox();
             this.groupVeículoTerceiro = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -54,7 +55,6 @@
             this.textVeiculoTerceiro_CPFCNPJProprietario = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textVeiculoTerceiro_NomeProprietario = new System.Windows.Forms.TextBox();
-            this.checkDadosVeiculoVeiculoTerceiro_Sim = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.numericCapacidadeM3 = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
@@ -198,6 +198,7 @@
             // 
             // groupDadosVeiculo
             // 
+            this.groupDadosVeiculo.Controls.Add(this.checkDadosVeiculoVeiculoTerceiro_Sim);
             this.groupDadosVeiculo.Controls.Add(this.textPlaca);
             this.groupDadosVeiculo.Controls.Add(this.groupVeículoTerceiro);
             this.groupDadosVeiculo.Controls.Add(this.label18);
@@ -222,6 +223,16 @@
             this.groupDadosVeiculo.TabStop = false;
             this.groupDadosVeiculo.Text = "Dados do Veículo";
             // 
+            // checkDadosVeiculoVeiculoTerceiro_Sim
+            // 
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.AutoSize = true;
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.Location = new System.Drawing.Point(121, 107);
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.Name = "checkDadosVeiculoVeiculoTerceiro_Sim";
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.Size = new System.Drawing.Size(15, 14);
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.TabIndex = 158;
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.UseVisualStyleBackColor = true;
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.CheckedChanged += new System.EventHandler(this.checkDadosVeiculoVeiculoTerceiro_Sim_CheckedChanged);
+            // 
             // textPlaca
             // 
             this.textPlaca.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -245,7 +256,6 @@
             this.groupVeículoTerceiro.Controls.Add(this.textVeiculoTerceiro_CPFCNPJProprietario);
             this.groupVeículoTerceiro.Controls.Add(this.label19);
             this.groupVeículoTerceiro.Controls.Add(this.textVeiculoTerceiro_NomeProprietario);
-            this.groupVeículoTerceiro.Controls.Add(this.checkDadosVeiculoVeiculoTerceiro_Sim);
             this.groupVeículoTerceiro.Location = new System.Drawing.Point(8, 105);
             this.groupVeículoTerceiro.Name = "groupVeículoTerceiro";
             this.groupVeículoTerceiro.Size = new System.Drawing.Size(782, 107);
@@ -359,16 +369,6 @@
             this.textVeiculoTerceiro_NomeProprietario.Name = "textVeiculoTerceiro_NomeProprietario";
             this.textVeiculoTerceiro_NomeProprietario.Size = new System.Drawing.Size(612, 23);
             this.textVeiculoTerceiro_NomeProprietario.TabIndex = 151;
-            // 
-            // checkDadosVeiculoVceiuloTerceiro_Sim
-            // 
-            this.checkDadosVeiculoVeiculoTerceiro_Sim.AutoSize = true;
-            this.checkDadosVeiculoVeiculoTerceiro_Sim.Location = new System.Drawing.Point(112, 2);
-            this.checkDadosVeiculoVeiculoTerceiro_Sim.Name = "checkDadosVeiculoVceiuloTerceiro_Sim";
-            this.checkDadosVeiculoVeiculoTerceiro_Sim.Size = new System.Drawing.Size(15, 14);
-            this.checkDadosVeiculoVeiculoTerceiro_Sim.TabIndex = 150;
-            this.checkDadosVeiculoVeiculoTerceiro_Sim.UseVisualStyleBackColor = true;
-            this.checkDadosVeiculoVeiculoTerceiro_Sim.CheckedChanged += new System.EventHandler(this.checkDadosVeiculoVceiuloTerceiro_Sim_CheckedChanged);
             // 
             // label18
             // 
@@ -626,7 +626,6 @@
         private System.Windows.Forms.TextBox textVeiculoTerceiro_CPFCNPJProprietario;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textVeiculoTerceiro_NomeProprietario;
-        private System.Windows.Forms.CheckBox checkDadosVeiculoVeiculoTerceiro_Sim;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.NumericUpDown numericCapacidadeM3;
         private System.Windows.Forms.Label label17;
@@ -647,5 +646,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboPesquisarTipoFiltro;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox checkDadosVeiculoVeiculoTerceiro_Sim;
     }
 }

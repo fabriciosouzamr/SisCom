@@ -1,9 +1,8 @@
-﻿using Funcoes.Interfaces;
-using Newtonsoft.Json.Linq;
+﻿using Funcoes._Classes;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
-using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -16,6 +15,10 @@ namespace SisCom.Aplicacao.Formularios
 {
     public partial class frmCadastroVeiculoPlaca : FormMain
     {
+        public bool Cadastrado = false;
+
+        bool carregado = false;
+
         Guid veiculoPlacaId = Guid.Empty;
 
         enum TipoPesquisa
@@ -46,6 +49,7 @@ namespace SisCom.Aplicacao.Formularios
                 comboPesquisarTipoFiltro.SelectedValue = TipoPesquisa.Placa;
 
                 await CarregaDados();
+                await comboUF_Carregar();
 
                 Limpar();
             }
@@ -54,15 +58,41 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao(Ex.Message);
             }
         }
+        private async Task<bool> comboUF_Carregar()
+        {
+            using (MeuDbContext meuDbContext = this.MeuDbContext())
+            {
+                Combo_ComboBox.Formatar(comboUF, "ID", "Codigo", ComboBoxStyle.DropDownList, await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(o => o.Codigo));
+                Combo_ComboBox.Formatar(comboVeiculoTerceiro_UFProprietario, "ID", "Codigo", ComboBoxStyle.DropDownList, await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(o => o.Codigo));
+            }
+
+            return true;
+        }
         private async Task CarregaDados()
         {
             Limpar();
 
-            if (comboPesquisarPesquisa.SelectedIndex != -1)
+            if ((comboPesquisarPesquisa.SelectedIndex != -1) && (carregado))
             {
                 using (VeiculoPlacaController veiculoPlacaController = new VeiculoPlacaController(this.MeuDbContext(), this._notifier))
                 {
-                    var veiculoPlaca = veiculoPlacaController.GetById((Guid)comboPesquisarPesquisa.SelectedValue);
+                    var veiculoPlaca = await veiculoPlacaController.GetById((Guid)comboPesquisarPesquisa.SelectedValue);
+
+                    veiculoPlacaId = veiculoPlaca.Id;
+                    textPlaca.Text = veiculoPlaca.NumeroPlaca;
+                    if (!Funcao.Nulo(veiculoPlaca.EstadoId)) comboUF.SelectedValue = veiculoPlaca.EstadoId;
+                    if (!Funcao.Nulo(veiculoPlaca.Terceiros_TipoProprietario)) comboVeiculoTerceiro_TipoProprietario.SelectedValue = veiculoPlaca.Terceiros_TipoProprietario;
+                    textVeiculoTerceiro_IEProprietario.Text = veiculoPlaca.Terceiros_IEProprietario;
+                    textVeiculoTerceiro_RNTCProprietario.Text = veiculoPlaca.Terceiros_RNTRCProprietario;
+                    textVeiculoTerceiro_CPFCNPJProprietario.Text = veiculoPlaca.Terceiros_CPFCNPJProprietario;
+                    textVeiculoTerceiro_NomeProprietario.Text = veiculoPlaca.Terceiros_NomeProprietario;
+                    numericCapacidadeM3.Value = (decimal)veiculoPlaca.CapacidadeM3;
+                    textRenavam.Text = veiculoPlaca.Renavam;
+                    if (!Funcao.Nulo(veiculoPlaca.TipoCarroceria)) comboTipoCarroceria.SelectedValue = veiculoPlaca.TipoCarroceria;
+                    if (!Funcao.Nulo(veiculoPlaca.TipoRodado)) comboTipoRodado.SelectedValue = veiculoPlaca.TipoRodado;
+                    numericCapacidadeKG.Value = (decimal)veiculoPlaca.CapacidadeKG;
+                    numericTaraKG.Value = (decimal)veiculoPlaca.TaraKG;
+                    if (!Funcao.Nulo(veiculoPlaca.Terceiros_EstadoProprietarioId)) comboVeiculoTerceiro_UFProprietario.SelectedValue = veiculoPlaca.Terceiros_EstadoProprietarioId;
                 }
             }
         }
@@ -102,15 +132,15 @@ namespace SisCom.Aplicacao.Formularios
                 veiculoPlaca.Id = veiculoPlacaId;
                 veiculoPlaca.NumeroPlaca = textPlaca.Text.Trim();
                 veiculoPlaca.EstadoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboUF);
-                if (comboVeiculoTerceiro_TipoProprietario.SelectedIndex == -1) { veiculoPlaca.Terceiros_TipoProprietario = (MDFe_TipoProprietario)comboVeiculoTerceiro_TipoProprietario.SelectedValue; };
+                if (comboVeiculoTerceiro_TipoProprietario.SelectedIndex != -1) { veiculoPlaca.Terceiros_TipoProprietario = (MDFe_TipoProprietario)comboVeiculoTerceiro_TipoProprietario.SelectedValue; };
                 veiculoPlaca.Terceiros_IEProprietario = textVeiculoTerceiro_IEProprietario.Text.Trim();
                 veiculoPlaca.Terceiros_RNTRCProprietario = textVeiculoTerceiro_RNTCProprietario.Text.Trim();
                 veiculoPlaca.Terceiros_CPFCNPJProprietario = textVeiculoTerceiro_CPFCNPJProprietario.Text.Trim();
                 veiculoPlaca.Terceiros_NomeProprietario = textVeiculoTerceiro_NomeProprietario.Text.Trim();
                 veiculoPlaca.CapacidadeM3 = (double)numericCapacidadeM3.Value;
                 veiculoPlaca.Renavam = textRenavam.Text.Trim();
-                if (comboTipoCarroceria.SelectedIndex == -1) { veiculoPlaca.TipoCarroceria = (MDFe_TipoCarroceria)comboTipoCarroceria.SelectedValue; }
-                if (comboTipoRodado.SelectedIndex == -1) { veiculoPlaca.TipoRodado = (MDFe_TipoRodado)comboTipoRodado.SelectedValue; }
+                if (comboTipoCarroceria.SelectedIndex != -1) { veiculoPlaca.TipoCarroceria = (MDFe_TipoCarroceria)comboTipoCarroceria.SelectedValue; }
+                if (comboTipoRodado.SelectedIndex != -1) { veiculoPlaca.TipoRodado = (MDFe_TipoRodado)comboTipoRodado.SelectedValue; }
                 veiculoPlaca.CapacidadeKG = (double)numericCapacidadeKG.Value;
                 veiculoPlaca.TaraKG = (double)numericTaraKG.Value;
                 veiculoPlaca.Terceiros_EstadoProprietarioId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboVeiculoTerceiro_UFProprietario);
@@ -119,7 +149,10 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     if (veiculoPlaca.Id == Guid.Empty)
                     {
+                        Cadastrado = true;
                         await veiculoPlacaController.Adicionar(veiculoPlaca);
+
+                        await PesquisarTipoFiltro();
                     }
                     else
                     {
@@ -138,6 +171,13 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async void comboPesquisarTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
+            await PesquisarTipoFiltro();
+        }
+
+        private async Task PesquisarTipoFiltro()
+        {
+            Limpar();
+
             using (VeiculoPlacaController veiculoPlacaController = new VeiculoPlacaController(this.MeuDbContext(), this._notifier))
             {
                 IEnumerable<VeiculoPlacaViewModel> veiculoPlaca;
@@ -150,6 +190,27 @@ namespace SisCom.Aplicacao.Formularios
                                                 "ID", "Nome",
                                                 ComboBoxStyle.DropDownList,
                                                 veiculoPlaca.Select(s => new NomeComboViewModel { Id = s.Id, Nome = s.NumeroPlaca }).ToList());
+                        break;
+                    case TipoPesquisa.Renavem:
+                        veiculoPlaca = await veiculoPlacaController.ObterTodos(order: o => o.Renavam, predicate: w => !String.IsNullOrEmpty(w.Renavam));
+                        Combo_ComboBox.Formatar(comboPesquisarPesquisa,
+                                                "ID", "Nome",
+                                                ComboBoxStyle.DropDownList,
+                                                veiculoPlaca.Select(s => new NomeComboViewModel { Id = s.Id, Nome = s.Renavam }).ToList());
+                        break;
+                    case TipoPesquisa.CPF_CNPJProprietario:
+                        veiculoPlaca = await veiculoPlacaController.ObterTodos(order: o => o.Terceiros_CPFCNPJProprietario, predicate: w => !String.IsNullOrEmpty(w.Terceiros_CPFCNPJProprietario));
+                        Combo_ComboBox.Formatar(comboPesquisarPesquisa,
+                                                "ID", "Nome",
+                                                ComboBoxStyle.DropDownList,
+                                                veiculoPlaca.Select(s => new NomeComboViewModel { Id = s.Id, Nome = s.Terceiros_CPFCNPJProprietario }).ToList());
+                        break;
+                    case TipoPesquisa.NomeProprietario:
+                        veiculoPlaca = await veiculoPlacaController.ObterTodos(order: o => o.Terceiros_NomeProprietario, predicate: w => !String.IsNullOrEmpty(w.Terceiros_NomeProprietario));
+                        Combo_ComboBox.Formatar(comboPesquisarPesquisa,
+                                                "ID", "Nome",
+                                                ComboBoxStyle.DropDownList,
+                                                veiculoPlaca.Select(s => new NomeComboViewModel { Id = s.Id, Nome = s.Terceiros_NomeProprietario }).ToList());
                         break;
                 }
             }
@@ -168,8 +229,10 @@ namespace SisCom.Aplicacao.Formularios
             comboTipoRodado.SelectedValue = MDFe_TipoRodado.Outros;
             LimparVeiculoTerceiro();
         }
-        private void LimparVeiculoTerceiro()
+        private void LimparVeiculoTerceiro(bool limparTudo = true)
         {
+            if (limparTudo) { checkDadosVeiculoVeiculoTerceiro_Sim.Checked = false; }
+            groupVeículoTerceiro.Enabled = false;
             comboVeiculoTerceiro_UFProprietario.SelectedIndex = -1;
             comboVeiculoTerceiro_TipoProprietario.SelectedValue = MDFe_TipoProprietario.Outros;
             textVeiculoTerceiro_IEProprietario.Text = "";
@@ -182,11 +245,11 @@ namespace SisCom.Aplicacao.Formularios
             await CarregaDados();
         }
 
-        private void checkDadosVeiculoVceiuloTerceiro_Sim_CheckedChanged(object sender, EventArgs e)
+        private void checkDadosVeiculoVeiculoTerceiro_Sim_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkDadosVeiculoVeiculoTerceiro_Sim.Checked)
+            if (!checkDadosVeiculoVeiculoTerceiro_Sim.Checked)
             {
-                LimparVeiculoTerceiro();
+                LimparVeiculoTerceiro(false);
             }
         }
     }

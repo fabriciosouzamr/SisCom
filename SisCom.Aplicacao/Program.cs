@@ -288,6 +288,9 @@ namespace SisCom.Aplicacao
                         #region VendaMercadoria
                         cfg.CreateMap<VendaMercadoriaViewModel, VendaMercadoria>().ReverseMap();
                         #endregion
+                        #region VeiculoPlaca
+                        cfg.CreateMap<VeiculoPlacaViewModel, VeiculoPlaca>().ReverseMap();
+                        #endregion
                         #region VinculoFiscal
                         cfg.CreateMap<VinculoFiscalViewModel, VinculoFiscal>().ReverseMap();
                         cfg.CreateMap<VinculoFiscal, NomeComboViewModel>();
