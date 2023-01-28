@@ -54,7 +54,7 @@
             this.textVeiculoTerceiro_CPFCNPJProprietario = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textVeiculoTerceiro_NomeProprietario = new System.Windows.Forms.TextBox();
-            this.checkDadosVeiculoVceiuloTerceiro_Sim = new System.Windows.Forms.CheckBox();
+            this.checkDadosVeiculoVeiculoTerceiro_Sim = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.numericCapacidadeM3 = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
@@ -245,7 +245,7 @@
             this.groupVeículoTerceiro.Controls.Add(this.textVeiculoTerceiro_CPFCNPJProprietario);
             this.groupVeículoTerceiro.Controls.Add(this.label19);
             this.groupVeículoTerceiro.Controls.Add(this.textVeiculoTerceiro_NomeProprietario);
-            this.groupVeículoTerceiro.Controls.Add(this.checkDadosVeiculoVceiuloTerceiro_Sim);
+            this.groupVeículoTerceiro.Controls.Add(this.checkDadosVeiculoVeiculoTerceiro_Sim);
             this.groupVeículoTerceiro.Location = new System.Drawing.Point(8, 105);
             this.groupVeículoTerceiro.Name = "groupVeículoTerceiro";
             this.groupVeículoTerceiro.Size = new System.Drawing.Size(782, 107);
@@ -362,12 +362,13 @@
             // 
             // checkDadosVeiculoVceiuloTerceiro_Sim
             // 
-            this.checkDadosVeiculoVceiuloTerceiro_Sim.AutoSize = true;
-            this.checkDadosVeiculoVceiuloTerceiro_Sim.Location = new System.Drawing.Point(112, 2);
-            this.checkDadosVeiculoVceiuloTerceiro_Sim.Name = "checkDadosVeiculoVceiuloTerceiro_Sim";
-            this.checkDadosVeiculoVceiuloTerceiro_Sim.Size = new System.Drawing.Size(15, 14);
-            this.checkDadosVeiculoVceiuloTerceiro_Sim.TabIndex = 150;
-            this.checkDadosVeiculoVceiuloTerceiro_Sim.UseVisualStyleBackColor = true;
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.AutoSize = true;
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.Location = new System.Drawing.Point(112, 2);
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.Name = "checkDadosVeiculoVceiuloTerceiro_Sim";
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.Size = new System.Drawing.Size(15, 14);
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.TabIndex = 150;
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.UseVisualStyleBackColor = true;
+            this.checkDadosVeiculoVeiculoTerceiro_Sim.CheckedChanged += new System.EventHandler(this.checkDadosVeiculoVceiuloTerceiro_Sim_CheckedChanged);
             // 
             // label18
             // 
@@ -535,17 +536,18 @@
             // comboPesquisarPesquisa
             // 
             this.comboPesquisarPesquisa.FormattingEnabled = true;
-            this.comboPesquisarPesquisa.Location = new System.Drawing.Point(304, 15);
+            this.comboPesquisarPesquisa.Location = new System.Drawing.Point(327, 15);
             this.comboPesquisarPesquisa.Name = "comboPesquisarPesquisa";
-            this.comboPesquisarPesquisa.Size = new System.Drawing.Size(484, 23);
+            this.comboPesquisarPesquisa.Size = new System.Drawing.Size(461, 23);
             this.comboPesquisarPesquisa.TabIndex = 3;
             this.comboPesquisarPesquisa.TabStop = false;
+            this.comboPesquisarPesquisa.SelectedIndexChanged += new System.EventHandler(this.comboPesquisarPesquisa_SelectedIndexChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(247, 19);
+            this.label9.Location = new System.Drawing.Point(265, 19);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(56, 15);
             this.label9.TabIndex = 2;
@@ -556,7 +558,7 @@
             this.comboPesquisarTipoFiltro.FormattingEnabled = true;
             this.comboPesquisarTipoFiltro.Location = new System.Drawing.Point(102, 15);
             this.comboPesquisarTipoFiltro.Name = "comboPesquisarTipoFiltro";
-            this.comboPesquisarTipoFiltro.Size = new System.Drawing.Size(121, 23);
+            this.comboPesquisarTipoFiltro.Size = new System.Drawing.Size(157, 23);
             this.comboPesquisarTipoFiltro.TabIndex = 1;
             this.comboPesquisarTipoFiltro.TabStop = false;
             this.comboPesquisarTipoFiltro.SelectedIndexChanged += new System.EventHandler(this.comboPesquisarTipoFiltro_SelectedIndexChanged);
@@ -624,7 +626,7 @@
         private System.Windows.Forms.TextBox textVeiculoTerceiro_CPFCNPJProprietario;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textVeiculoTerceiro_NomeProprietario;
-        private System.Windows.Forms.CheckBox checkDadosVeiculoVceiuloTerceiro_Sim;
+        private System.Windows.Forms.CheckBox checkDadosVeiculoVeiculoTerceiro_Sim;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.NumericUpDown numericCapacidadeM3;
         private System.Windows.Forms.Label label17;

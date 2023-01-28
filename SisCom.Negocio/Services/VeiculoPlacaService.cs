@@ -9,17 +9,17 @@ namespace SisCom.Negocio.Services
 {
     public class VeiculoPlacaService : BaseService<VeiculoPlaca>, IVeiculoPlacaService
     {
-        private readonly IVeiculoPlacaRepository _VeiculoPlacaRepository;
+        private readonly IVeiculoPlacaRepository veiculoPlacaRepository;
 
         public VeiculoPlacaService(IVeiculoPlacaRepository VeiculoPlacaRepository,
                                    INotifier notificador) : base(notificador, VeiculoPlacaRepository)
         {
-            _VeiculoPlacaRepository = VeiculoPlacaRepository;
+            veiculoPlacaRepository = VeiculoPlacaRepository;
         }
 
         public Task<IPagedList<VeiculoPlaca>> GetPagedList(FilteredPagedListParameters parameters)
         {
-            return _VeiculoPlacaRepository.GetPagedList(f =>
+            return veiculoPlacaRepository.GetPagedList(f =>
             (
                 parameters.Search == null || f.NumeroPlaca.Contains(parameters.Search)
             ), parameters);
@@ -27,22 +27,38 @@ namespace SisCom.Negocio.Services
 
         public override void Dispose()
         {
-            _VeiculoPlacaRepository?.Dispose();
+            veiculoPlacaRepository?.Dispose();
         }
 
-        public Task Adicionar(VeiculoPlaca VeiculoPlaca)
+        public async Task Adicionar(VeiculoPlaca veiculoPlaca)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await veiculoPlacaRepository.Insert(veiculoPlaca);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Atualizar(VeiculoPlaca VeiculoPlaca)
+        public async Task Atualizar(VeiculoPlaca veiculoPlaca)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await veiculoPlacaRepository.Update(veiculoPlaca);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
 
-        public Task Remover(Guid id)
+        public async Task Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            await veiculoPlacaRepository.Delete(id);
+
+            Notify("Exclusão Efetuada.");
         }
     }
 }

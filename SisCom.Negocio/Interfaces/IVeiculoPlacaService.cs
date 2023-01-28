@@ -11,7 +11,7 @@ namespace SisCom.Negocio.Interfaces
     {
         Task Adicionar(VeiculoPlaca veiculoPlaca);
         Task Atualizar(VeiculoPlaca veiculoPlaca);
-        Task Remover(Guid id);
+        Task Excluir(Guid id);
         Task<List<VeiculoPlaca>> GetAll(Expression<Func<VeiculoPlaca, object>> order = null);
         Task<List<VeiculoPlaca>> Combo(Expression<Func<VeiculoPlaca, object>> order = null);
         Task<VeiculoPlaca> GetById(Guid id);
