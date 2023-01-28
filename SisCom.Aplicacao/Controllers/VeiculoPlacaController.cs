@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Entity;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -12,21 +13,22 @@ using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
 {
-    public class VeiculoPlacaController
+    public class VeiculoPlacaController : IDisposable
     {
         static VeiculoPlacaService _VeiculoPlacaService;
-        private readonly MeuDbContext MeuDbContext;
+        private readonly MeuDbContext meuDbContext;
 
         public VeiculoPlacaController(MeuDbContext MeuDbContext, INotifier notifier)
         {
-            this.MeuDbContext = MeuDbContext;
+            this.meuDbContext = MeuDbContext;
 
-            _VeiculoPlacaService = new VeiculoPlacaService(new VeiculoPlacaRepository(this.MeuDbContext), notifier);
+            _VeiculoPlacaService = new VeiculoPlacaService(new VeiculoPlacaRepository(this.meuDbContext), notifier);
         }
-
-        public async Task<IEnumerable<VeiculoPlacaViewModel>> ObterTodos()
+        public async Task<IEnumerable<VeiculoPlacaViewModel>> ObterTodos(Expression<Func<VeiculoPlaca, object>> order = null, 
+                                                                         Expression<Func<VeiculoPlaca, bool>> predicate = null, 
+                                                                         params Expression<Func<VeiculoPlaca, object>>[] includes)
         {
-            var obterTodos = await _VeiculoPlacaService.GetAll();
+            var obterTodos = await _VeiculoPlacaService.GetAll(order: order, predicate: predicate, includes: includes);
             return Declaracoes.mapper.Map<IEnumerable<VeiculoPlacaViewModel>>(obterTodos);
         }
 
@@ -34,6 +36,10 @@ namespace SisCom.Aplicacao.Controllers
         {
             var combo = await _VeiculoPlacaService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<VeiculoPlacaViewModel>>(combo);
+        }
+        public void Dispose()
+        {
+            meuDbContext.Dispose();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DanfeSharp.Esquemas.NFe;
 using Funcoes._Classes;
 using Funcoes.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
@@ -1311,9 +1312,11 @@ namespace SisCom.Aplicacao.Formularios
                 }
             }
         }
-        private void comboAdicionarNotasItem_Tipo_KeyDown(object sender, KeyEventArgs e)
-        {
 
+        private void botaoPlaca_Click(object sender, EventArgs e)
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmCadastroVeiculoPlaca>();
+            form.ShowDialog(this);
         }
     }
 }

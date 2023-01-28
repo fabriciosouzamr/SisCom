@@ -651,7 +651,6 @@
             this.comboAdicionarNotasItem_Tipo01.Size = new System.Drawing.Size(70, 23);
             this.comboAdicionarNotasItem_Tipo01.TabIndex = 14;
             this.comboAdicionarNotasItem_Tipo01.SelectedIndexChanged += new System.EventHandler(this.comboAdicionarNotasItem_Tipo_SelectedIndexChanged);
-            this.comboAdicionarNotasItem_Tipo01.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboAdicionarNotasItem_Tipo_KeyDown);
             // 
             // panel4
             // 
@@ -1317,6 +1316,7 @@
             this.botaoPlaca.TabIndex = 32;
             this.botaoPlaca.TabStop = false;
             this.botaoPlaca.UseVisualStyleBackColor = true;
+            this.botaoPlaca.Click += new System.EventHandler(this.botaoPlaca_Click);
             // 
             // label11
             // 
