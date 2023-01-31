@@ -25,6 +25,7 @@ namespace SisCom.Infraestrutura.Data.Context
             optionsBuilder.EnableSensitiveDataLogging(true);
         }
         public DbSet<Almoxarifado> Almoxarifados { get; set; }
+        public DbSet<Condutor> Condutores { get; set; }
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<TabelaCNAE> TabelaCNAEs { get; set; }
         public DbSet<Empresa> Empresas { get; set; }

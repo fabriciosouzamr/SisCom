@@ -75,10 +75,11 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.botaoAdicionarNotas = new System.Windows.Forms.Button();
             this.groupCondutor = new System.Windows.Forms.GroupBox();
+            this.comboCondutor_CPFCNPJCondutor = new System.Windows.Forms.ComboBox();
+            this.botacaoCondutor = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.textCondutor_NomeCondutor = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
-            this.textCondutor_CPFCNPJCondutor = new System.Windows.Forms.TextBox();
             this.groupAutorizacao = new System.Windows.Forms.GroupBox();
             this.groupAutorizacaoStatus = new System.Windows.Forms.GroupBox();
             this.checkAutorizacao_SatusCancelado = new System.Windows.Forms.CheckBox();
@@ -676,10 +677,11 @@
             // 
             // groupCondutor
             // 
+            this.groupCondutor.Controls.Add(this.comboCondutor_CPFCNPJCondutor);
+            this.groupCondutor.Controls.Add(this.botacaoCondutor);
             this.groupCondutor.Controls.Add(this.label36);
             this.groupCondutor.Controls.Add(this.textCondutor_NomeCondutor);
             this.groupCondutor.Controls.Add(this.label35);
-            this.groupCondutor.Controls.Add(this.textCondutor_CPFCNPJCondutor);
             this.groupCondutor.Location = new System.Drawing.Point(8, 508);
             this.groupCondutor.Name = "groupCondutor";
             this.groupCondutor.Size = new System.Drawing.Size(987, 67);
@@ -687,10 +689,31 @@
             this.groupCondutor.TabStop = false;
             this.groupCondutor.Text = "Condutor";
             // 
+            // comboCondutor_CPFCNPJCondutor
+            // 
+            this.comboCondutor_CPFCNPJCondutor.DropDownWidth = 200;
+            this.comboCondutor_CPFCNPJCondutor.FormattingEnabled = true;
+            this.comboCondutor_CPFCNPJCondutor.Location = new System.Drawing.Point(6, 35);
+            this.comboCondutor_CPFCNPJCondutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboCondutor_CPFCNPJCondutor.Name = "comboCondutor_CPFCNPJCondutor";
+            this.comboCondutor_CPFCNPJCondutor.Size = new System.Drawing.Size(170, 23);
+            this.comboCondutor_CPFCNPJCondutor.TabIndex = 404;
+            this.comboCondutor_CPFCNPJCondutor.SelectedIndexChanged += new System.EventHandler(this.comboCondutor_CPFCNPJCondutor_SelectedIndexChanged);
+            // 
+            // botacaoCondutor
+            // 
+            this.botacaoCondutor.Location = new System.Drawing.Point(951, 35);
+            this.botacaoCondutor.Name = "botacaoCondutor";
+            this.botacaoCondutor.Size = new System.Drawing.Size(23, 23);
+            this.botacaoCondutor.TabIndex = 403;
+            this.botacaoCondutor.TabStop = false;
+            this.botacaoCondutor.UseVisualStyleBackColor = true;
+            this.botacaoCondutor.Click += new System.EventHandler(this.botacaoCondutor_Click);
+            // 
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(126, 18);
+            this.label36.Location = new System.Drawing.Point(182, 18);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(111, 15);
             this.label36.TabIndex = 54;
@@ -698,9 +721,10 @@
             // 
             // textCondutor_NomeCondutor
             // 
-            this.textCondutor_NomeCondutor.Location = new System.Drawing.Point(126, 35);
+            this.textCondutor_NomeCondutor.Location = new System.Drawing.Point(182, 35);
             this.textCondutor_NomeCondutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textCondutor_NomeCondutor.Name = "textCondutor_NomeCondutor";
+            this.textCondutor_NomeCondutor.ReadOnly = true;
             this.textCondutor_NomeCondutor.Size = new System.Drawing.Size(635, 23);
             this.textCondutor_NomeCondutor.TabIndex = 402;
             // 
@@ -712,14 +736,6 @@
             this.label35.Size = new System.Drawing.Size(114, 15);
             this.label35.TabIndex = 52;
             this.label35.Text = "CPF/CNPJ Condutor";
-            // 
-            // textCondutor_CPFCNPJCondutor
-            // 
-            this.textCondutor_CPFCNPJCondutor.Location = new System.Drawing.Point(6, 35);
-            this.textCondutor_CPFCNPJCondutor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textCondutor_CPFCNPJCondutor.Name = "textCondutor_CPFCNPJCondutor";
-            this.textCondutor_CPFCNPJCondutor.Size = new System.Drawing.Size(114, 23);
-            this.textCondutor_CPFCNPJCondutor.TabIndex = 401;
             // 
             // groupAutorizacao
             // 
@@ -1704,7 +1720,6 @@
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.TextBox textCondutor_NomeCondutor;
         private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.TextBox textCondutor_CPFCNPJCondutor;
         private System.Windows.Forms.GroupBox groupAdicionarNotas;
         private System.Windows.Forms.Panel pnlAdicionarNotas;
         private System.Windows.Forms.Panel pnlRodape;
@@ -1749,5 +1764,7 @@
         private System.Windows.Forms.Button botaoExcluir;
         private System.Windows.Forms.TextBox textIdentificacao_Numero;
         private System.Windows.Forms.ComboBox comboDadosVeiculo_Placa;
+        private System.Windows.Forms.Button botacaoCondutor;
+        private System.Windows.Forms.ComboBox comboCondutor_CPFCNPJCondutor;
     }
 }

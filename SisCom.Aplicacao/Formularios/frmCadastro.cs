@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SisCom.Infraestrutura.Data.Context;
 using System;
+using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
 {

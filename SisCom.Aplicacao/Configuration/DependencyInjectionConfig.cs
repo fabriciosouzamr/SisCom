@@ -22,6 +22,7 @@ namespace SisCom.Aplicacao.Configuration
             services.AddSingleton<frmMDI>();
             services.AddTransient<frmLogin>();
             services.AddTransient<frmCadastro>();
+            services.AddTransient<frmCadastroCondutor>();
             services.AddTransient<frmCadastroConfiguracao>();
             services.AddTransient<frmCadastroGrupo>();
             services.AddTransient<frmCadastroFabricante>();

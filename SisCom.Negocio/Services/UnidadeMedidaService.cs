@@ -18,7 +18,6 @@ namespace SisCom.Negocio.Services
         {
             unidadeMedidaRepository = UnidadeMedidaRepository;
         }
-
         public Task<IPagedList<UnidadeMedida>> GetPagedList(FilteredPagedListParameters parameters)
         {
             return unidadeMedidaRepository.GetPagedList(f =>
@@ -26,7 +25,6 @@ namespace SisCom.Negocio.Services
                 parameters.Search == null || f.Nome.Contains(parameters.Search)
             ), parameters);
         }
-
         public virtual async Task Adicionar(UnidadeMedida unidadeMedida)
         {
             try
@@ -46,7 +44,6 @@ namespace SisCom.Negocio.Services
                 Notify("ERRO: " + Ex.Message + ".");
             }
         }
-
         public virtual async Task Atualizar(UnidadeMedida unidadeMedida)
         {
             try
@@ -66,7 +63,6 @@ namespace SisCom.Negocio.Services
                 Notify("ERRO: " + Ex.Message + ".");
             }
         }
-
         public async Task Excluir(Guid id)
         {
             await unidadeMedidaRepository.Delete(id);

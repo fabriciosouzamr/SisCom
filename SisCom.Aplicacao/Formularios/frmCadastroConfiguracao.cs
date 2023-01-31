@@ -16,9 +16,9 @@ namespace SisCom.Aplicacao
 {
     public partial class frmCadastroConfiguracao : FormMain
     {
-        const int GridUnidadeMedica_Id = 0;
-        const int GridUnidadeMedica_Codigo = 1;
-        const int GridUnidadeMedica_Nome = 2;
+        const int GridCondutor_Id = 0;
+        const int GridCondutor_Codigo = 1;
+        const int GriCondutor_Nome = 2;
 
         List<string> unidadeMedidaRemover = new List<string>();
 
@@ -31,7 +31,7 @@ namespace SisCom.Aplicacao
         {
             Grid_DataGridView.User_Formatar(dataUnidadeMedida, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
             Grid_DataGridView.User_ColunaAdicionar(dataUnidadeMedida, "ID", "ID", TipoColuna.Texto, 0);
-            Grid_DataGridView.User_ColunaAdicionar(dataUnidadeMedida, "Codigo", "Código", TipoColuna.Texto, 100, 3, readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(dataUnidadeMedida, "CPF_CNPJ", "C.P.F./C.N.P.J.", TipoColuna.Texto, 100, 3, readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(dataUnidadeMedida, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres, readOnly: false);
 
             await GridAtualizar();
@@ -54,12 +54,12 @@ namespace SisCom.Aplicacao
             {
                 if (row.Index < dataUnidadeMedida.RowCount - 1)
                 {
-                    if (Funcao.NuloString(row.Cells[GridUnidadeMedica_Codigo].Value))
+                    if (Funcao.NuloString(row.Cells[GridCondutor_Codigo].Value))
                     {
                         CaixaMensagem.Informacao("Informe o código de todas as unidades de medida");
                         return;
                     }
-                    if (Funcao.NuloString(row.Cells[GridUnidadeMedica_Nome].Value))
+                    if (Funcao.NuloString(row.Cells[GriCondutor_Nome].Value))
                     {
                         CaixaMensagem.Informacao("Informe o nome de todas as unidades de medida");
                         return;
@@ -71,21 +71,21 @@ namespace SisCom.Aplicacao
             {
                 foreach (DataGridViewRow row in dataUnidadeMedida.Rows)
                 {
-                    if (!Funcao.NuloString(row.Cells[GridUnidadeMedica_Nome].Value))
+                    if (!Funcao.NuloString(row.Cells[GriCondutor_Nome].Value))
                     {
                         UnidadeMedidaViewModel unidadeMedida = new UnidadeMedidaViewModel();
 
-                        unidadeMedida.Codigo = row.Cells[GridUnidadeMedica_Codigo].Value.ToString();
-                        unidadeMedida.Nome = row.Cells[GridUnidadeMedica_Nome].Value.ToString();
+                        unidadeMedida.Codigo = row.Cells[GridCondutor_Codigo].Value.ToString();
+                        unidadeMedida.Nome = row.Cells[GriCondutor_Nome].Value.ToString();
 
-                        if (row.Cells[GridUnidadeMedica_Id].Value == null)
+                        if (row.Cells[GridCondutor_Id].Value == null)
                         {
                             unidadeMedida.Id = Guid.NewGuid();
                             await unidadeMedidaController.Adicionar(unidadeMedida);
                         }
                         else
                         {
-                            unidadeMedida.Id = Guid.Parse(row.Cells[GridUnidadeMedica_Id].Value.ToString());
+                            unidadeMedida.Id = Guid.Parse(row.Cells[GridCondutor_Id].Value.ToString());
                             await unidadeMedidaController.Atualizar(unidadeMedida);
                         }
                     }
@@ -103,11 +103,11 @@ namespace SisCom.Aplicacao
         {
             if (dataUnidadeMedida.Rows.Count != 0)
             {
-                if (Funcoes._Classes.Texto.NuloString(e.Row.Cells[GridUnidadeMedica_Nome].Value) != "")
+                if (Funcoes._Classes.Texto.NuloString(e.Row.Cells[GriCondutor_Nome].Value) != "")
                 {
                     if (CaixaMensagem.PerguntarTexto(Classes.Texto.Mensagem_UnidadeMedida_Remover,
-                                                      new string[] { e.Row.Cells[GridUnidadeMedica_Nome].Value.ToString() }))
-                    { unidadeMedidaRemover.Add(e.Row.Cells[GridUnidadeMedica_Id].Value.ToString());  }
+                                                      new string[] { e.Row.Cells[GriCondutor_Nome].Value.ToString() }))
+                    { unidadeMedidaRemover.Add(e.Row.Cells[GridCondutor_Id].Value.ToString());  }
                     else
                     { e.Cancel = true; }
 

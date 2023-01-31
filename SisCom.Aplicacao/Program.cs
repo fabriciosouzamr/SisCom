@@ -89,6 +89,10 @@ namespace SisCom.Aplicacao
                         cfg.CreateMap<Empresa, EmpresaNuvemFiscalComboViewModel>().
                             ForPath(Est => Est.Estado, Emp => Emp.MapFrom(src => src.Endereco.End_Cidade.Estado));
                         #endregion
+                        #region Condutor
+                        cfg.CreateMap<Condutor, CondutorViewModel>().ReverseMap();
+                        cfg.CreateMap<Condutor, CodigoDescricaoComboViewModel>();
+                        #endregion
                         #region Estado
                         cfg.CreateMap<EstadoViewModel, Estado>().ReverseMap();
                         cfg.CreateMap<Estado, CodigoNomeComboViewModel>();
