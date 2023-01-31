@@ -25,7 +25,8 @@ namespace SisCom.Aplicacao.Formularios
         int AdicionarNotasItem_Notas = 1;
         int AdicionarNotasItem_UltimoTop = 1;
 
-        bool Carregando = true;
+        bool CarregandoForm = true;
+        bool CarregandoDados = false;
 
         public frmFiscal_MDFe(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -37,9 +38,6 @@ namespace SisCom.Aplicacao.Formularios
                 this.Height = Declaracoes.Aplicacao_AlturaTela;
 
             pnlCentral.Height = this.Height - pnlCentral.Top - 35;
-
-            if (manifestoEletronicoDocumentoId != Guid.Empty)
-                CarregarDados();
         }
         async Task Inicializa()
         {
@@ -54,8 +52,7 @@ namespace SisCom.Aplicacao.Formularios
                 comboIdentificacao_TipoEmissao.SelectedValue = MDFe_TipoEmissao.Normal;
 
                 await Assincrono.TaskAsyncAndAwaitAsync(Inicializar());
-                await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
-                await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
+                await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());                
 
                 comboIdentificacao_UFCarregamento.SelectedValue = Declaracoes.dados_Empresa_EstadoId;
                 await comboIdentificacao_UFCarregamento_Tratar();
@@ -69,7 +66,10 @@ namespace SisCom.Aplicacao.Formularios
 
                 AdicionarNotasItem_UltimoTop = pnlAdicionarNotasItem01.Top;
 
-                Carregando = false;
+                CarregandoForm = false;
+
+                if (manifestoEletronicoDocumentoId != Guid.Empty)
+                    await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
             }
             catch (Exception Ex)
             {
@@ -191,7 +191,6 @@ namespace SisCom.Aplicacao.Formularios
                 }
 
                 Grid_DataGridView.User_Formatar(gridPercurso, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
-                Grid_DataGridView.User_ColunaAdicionar(gridPercurso, "ID", "ID", Tamanho: 0);
                 Grid_DataGridView.User_ColunaAdicionar(gridPercurso, "U.F.", "U.F.", Tamanho: 100, Tipo: Grid_DataGridView.TipoColuna.ComboBox,
                                                                                                    dataSource: estado,
                                                                                                    dataSource_Descricao: "Codigo",
@@ -210,19 +209,25 @@ namespace SisCom.Aplicacao.Formularios
         {
             try
             {
-                Carregando = true;
+                CarregandoDados = true;
 
                 using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
                 {
                     manifestoEletronicoDocumento = await manifestoEletronicoDocumentoController.PesquisarId(manifestoEletronicoDocumentoId);
                 }
-                using (ManifestoEletronicoDocumentoPercursoController manifestoEletronicoDocumentoPercursoController = new ManifestoEletronicoDocumentoPercursoController(this.MeuDbContext(), this._notifier))
+                if (manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos == null)
                 {
-                    manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos = (List<ManifestoEletronicoDocumentoPercursoViewModel>)await manifestoEletronicoDocumentoPercursoController.ObterTodos(w => w.ManifestoEletronicoDocumentoId == manifestoEletronicoDocumentoId);
+                    using (ManifestoEletronicoDocumentoPercursoController manifestoEletronicoDocumentoPercursoController = new ManifestoEletronicoDocumentoPercursoController(this.MeuDbContext(), this._notifier))
+                    {
+                        manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos = (List<ManifestoEletronicoDocumentoPercursoViewModel>)await manifestoEletronicoDocumentoPercursoController.ObterTodos(w => w.ManifestoEletronicoDocumentoId == manifestoEletronicoDocumentoId);
+                    }
                 }
-                using (ManifestoEletronicoDocumentoNotaController manifestoEletronicoDocumentoNotaController = new ManifestoEletronicoDocumentoNotaController(this.MeuDbContext(), this._notifier))
+                if (manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas == null)
                 {
-                    manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas = (List<ManifestoEletronicoDocumentoNotaViewModel>)await manifestoEletronicoDocumentoNotaController.ObterTodos(w => w.ManifestoEletronicoDocumentoId == manifestoEletronicoDocumentoId);
+                    using (ManifestoEletronicoDocumentoNotaController manifestoEletronicoDocumentoNotaController = new ManifestoEletronicoDocumentoNotaController(this.MeuDbContext(), this._notifier))
+                    {
+                        manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas = (List<ManifestoEletronicoDocumentoNotaViewModel>)await manifestoEletronicoDocumentoNotaController.ObterTodos(w => w.ManifestoEletronicoDocumentoId == manifestoEletronicoDocumentoId);
+                    }
                 }
 
                 dateIdentificacao_Emissao.Value = manifestoEletronicoDocumento.DataHoraEmissao.Date;
@@ -275,30 +280,55 @@ namespace SisCom.Aplicacao.Formularios
                 richInformaoeesAdicionaisInteresseFisco.Text = Funcao.NuloParaString(manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco);
                 richInformacoesComplementaresInteresseContribuinte.Text = Funcao.NuloParaString(manifestoEletronicoDocumento.InformacoesComplementaresInteresseContribuinte);
 
+                int i = 1;
+
                 if (manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas != null)
                 {
-                    manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas.ForEach(async nota =>
+                    foreach(ManifestoEletronicoDocumentoNotaViewModel nota in manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas)
                     {
-                        var pnlAdicionarNotasItem = await AdicionarNotas();
-                        int i = (int)pnlAdicionarNotasItem.Tag;
+                        Panel pnlAdicionarNotasItem;
 
-                        ((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + i.ToString("00"), false)[0]).Text = nota.ChaveAcesso;
+                        if (i != 1)
+                        {
+                            pnlAdicionarNotasItem = await AdicionarNotas();
+                            i = (int)pnlAdicionarNotasItem.Tag;
+                        }
+                        else
+                        {
+                            pnlAdicionarNotasItem = pnlAdicionarNotasItem01;
+                        }
+
+                        ComboBox comboAdicionarNotasItem_Tipo = ((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Tipo" + i.ToString("00"), false)[0]);
+
+                        if (comboAdicionarNotasItem_Tipo.Items.Count == 0)
+                        {
+                            Combo_ComboBox.Formatar(comboAdicionarNotasItem_Tipo, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_OrigemNota));
+                        }
+
+                        comboAdicionarNotasItem_Tipo.SelectedIndex = 2;
+                        ((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_NumeroNota" + i.ToString("00"), false)[0]).SelectedValue = nota.NotaFiscalSaidaId;
+                        ((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + i.ToString("00"), false)[0]).SelectedValue= nota.NotaFiscalSaidaId;
                         ((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Cidade" + i.ToString("00"), false)[0]).SelectedValue = nota.CidadeDescargaId;
                         ((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_ValorNota" + i.ToString("00"), false)[0]).Value = nota.ValorNota;
                         ((NumericUpDown)pnlAdicionarNotasItem.Controls.Find("numericAdicionarNotasItem_PesoNota" + i.ToString("00"), false)[0]).Value = nota.PesoNota;
-                    });
+
+                        i++;
+                    }
                 }
+
+                i = 0;
 
                 if (manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos != null)
                 {
                     manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos.OrderBy(o => o.Ordem).ToList().ForEach(async percurso =>
                     {
-                        gridPercurso.Rows[gridPercurso.Rows.Count - 1].Cells[0].Value = percurso.EstadoId;
+                        gridPercurso.Rows[i].Cells[0].Value = percurso.EstadoId;
                         gridPercurso.Rows.Add();
+                        i++;
                     });
                 }
 
-                Carregando = false;
+                CarregandoDados = false;
             }
             catch (Exception Ex)
             {
@@ -336,8 +366,6 @@ namespace SisCom.Aplicacao.Formularios
             {
                 estado = $"X{e.Location.X}-Y{e.Location.Y}";
             }
-
-            //label37.Text = estado;
         }
 
         private async void botaoAdicionarNotas_Click(object sender, EventArgs e)
@@ -510,8 +538,9 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
-        private void comboAdicionarNotasItem_NumeroNota_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboAdicionarNotasItem_NumeroNota_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (CarregandoDados) return;
             string numerocontrole = ((ComboBox)sender).Name.Substring(("comboAdicionarNotasItem_NumeroNota").Length);
             if (((ComboBox)Controls.Find("comboAdicionarNotasItem_NumeroNota" + numerocontrole, true)[0]).SelectedIndex > -1)
             {
@@ -522,7 +551,7 @@ namespace SisCom.Aplicacao.Formularios
                 ((ComboBox)Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + numerocontrole, true)[0]).SelectedIndex = -1;
             }
 
-            NotasSelecionadas_Tratart();
+            await NotasSelecionadas_Tratart();
         }
         private void comboAdicionarNotasItem_ChaveAcesso_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -981,9 +1010,9 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
-        private async void NotasSelecionadas_Tratart()
+        private async Task<bool> NotasSelecionadas_Tratart()
         {
-            if (Carregando) return;
+            if (CarregandoDados) return true;
 
             numericTotalizadores_PesoBrutoCarga.Value = 0;
             numericTotalizadores_QuantidadeNfe.Value = 0;
@@ -1041,6 +1070,8 @@ namespace SisCom.Aplicacao.Formularios
                     }
                 }
             }
+
+            return true;
         }
         private void comboIdentificacao_Serie_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -13,6 +13,8 @@ namespace SisCom.Entidade.Enum
         [Description("Cancelado")]
         Cancelado = 4,
         [Description("Autorizado")]
-        Autorizado = 5
+        Autorizado = 5,
+        [Description("Encerrado")]
+        Encerrado = 5
     }
 }

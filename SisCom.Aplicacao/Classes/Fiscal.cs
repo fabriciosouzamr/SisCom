@@ -2186,8 +2186,7 @@ namespace SisCom.Aplicacao.Classes
 
             return mdfe;
         }
-        public static ManifestoEletronicoDocumentoViewModel Fiscal_ManifestoEletronicoDocumento_Cancelar(ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento,
-                                                                                                         string justificativa)
+        public static ManifestoEletronicoDocumentoViewModel Fiscal_ManifestoEletronicoDocumento_Cancelar(ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento, string justificativa)
         {
             Fiscal_Configuracao_MDFe();
 
@@ -2198,28 +2197,78 @@ namespace SisCom.Aplicacao.Classes
 
             try
             {
-                var enviMDFe = MDFeEnviMDFe.LoadXmlArquivo(caminhoXml);
-
-                mdfe = enviMDFe.MDFe;
-            }
-            catch
-            {
                 try
                 {
-                    mdfe = MDFeEletronico.LoadXmlArquivo(caminhoXml);
+                    var enviMDFe = MDFeEnviMDFe.LoadXmlArquivo(caminhoXml);
+
+                    mdfe = enviMDFe.MDFe;
                 }
                 catch
                 {
-                    var proc = FuncoesXml.ArquivoXmlParaClasse<MDFeProcMDFe>(caminhoXml);
-                    mdfe = proc.MDFe;
+                    try
+                    {
+                        mdfe = MDFeEletronico.LoadXmlArquivo(caminhoXml);
+                    }
+                    catch
+                    {
+                        var proc = FuncoesXml.ArquivoXmlParaClasse<MDFeProcMDFe>(caminhoXml);
+                        mdfe = proc.MDFe;
+                    }
                 }
+
+                var retorno = evento.MDFeEventoCancelar(mdfe, 1, manifestoEletronicoDocumento.Autorizacao_Protocolo, justificativa);
+
+                manifestoEletronicoDocumento.DataCancelamento = retorno.InfEvento.DhRegEvento;
+                manifestoEletronicoDocumento.DescricaoCancelamento = justificativa;
+                manifestoEletronicoDocumento.RetornoCancelamento = retorno.InfEvento.XMotivo;
+            }
+            catch (Exception Ex)
+            {
+                CaixaMensagem.Informacao(Ex.Message);
             }
 
-            var retorno = evento.MDFeEventoCancelar(mdfe, 1, manifestoEletronicoDocumento.Autorizacao_Protocolo, justificativa);
+            return manifestoEletronicoDocumento;
+        }
+        public static ManifestoEletronicoDocumentoViewModel Fiscal_ManifestoEletronicoDocumento_Encerrar(ManifestoEletronicoDocumentoViewModel manifestoEletronicoDocumento)
+        {
+            Fiscal_Configuracao_MDFe();
 
-            manifestoEletronicoDocumento.DataCancelamento = retorno.InfEvento.DhRegEvento;
-            manifestoEletronicoDocumento.DescricaoCancelamento = justificativa;
-            manifestoEletronicoDocumento.RetornoCancelamento = retorno.InfEvento.XMotivo;
+            var evento = new ServicoMDFeEvento();
+
+            MDFeEletronico mdfe;
+            var caminhoXml = Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, manifestoEletronicoDocumento.Autorizacao_ChaveAutenticacao.Concat("-mdfe.xml").ToString());
+
+            try
+            {
+                try
+                {
+                    var enviMDFe = MDFeEnviMDFe.LoadXmlArquivo(caminhoXml);
+
+                    mdfe = enviMDFe.MDFe;
+                }
+                catch
+                {
+                    try
+                    {
+                        mdfe = MDFeEletronico.LoadXmlArquivo(caminhoXml);
+                    }
+                    catch
+                    {
+                        var proc = FuncoesXml.ArquivoXmlParaClasse<MDFeProcMDFe>(caminhoXml);
+                        mdfe = proc.MDFe;
+                    }
+                }
+
+                var retorno = evento.MDFeEventoEncerramentoMDFeEventoEncerramento(mdfe, 1, manifestoEletronicoDocumento.Autorizacao_Protocolo);
+
+                manifestoEletronicoDocumento.DataEncerramento = retorno.InfEvento.DhRegEvento;
+                manifestoEletronicoDocumento.RetornoEncerramento = retorno.InfEvento.XMotivo;
+                manifestoEletronicoDocumento.Status = MDFe_Status.Encerrado;
+            }
+            catch(Exception Ex)
+            {
+                CaixaMensagem.Informacao(Ex.Message);
+            }
 
             return manifestoEletronicoDocumento;
         }

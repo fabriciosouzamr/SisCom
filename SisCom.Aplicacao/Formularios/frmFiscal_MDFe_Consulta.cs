@@ -53,7 +53,16 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoEditar_Click(object sender, EventArgs e)
         {
-
+            if (gridManifestoDocumentoEletronico.CurrentRow != null)
+            {
+                var form = this.ServiceProvider().GetRequiredService<frmFiscal_MDFe>();
+                form.manifestoEletronicoDocumentoId = Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString());
+                form.ShowDialog(this);
+            }
+            else
+            {
+                CaixaMensagem.Informacao("Selecione o manifesto a ser alterado");
+            }
         }
         private void botaoTransmitir_Click(object sender, EventArgs e)
         {
@@ -82,7 +91,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async void botaoCancelar_Click(object sender, EventArgs e)
         {
-            Cancelar();
+            await Cancelar();
         }
         async Task Cancelar()
         {
@@ -100,7 +109,7 @@ namespace SisCom.Aplicacao.Formularios
                     var manifestoEletronicoDocumento = await manifestoEletronicoDocumentoController.PesquisarId(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()));
 
                     Fiscal.Fiscal_ManifestoEletronicoDocumento_Cancelar(manifestoEletronicoDocumento, justificativa);
-
+                    
                     await manifestoEletronicoDocumentoController.Atualizar(manifestoEletronicoDocumento.Id, manifestoEletronicoDocumento);
                 }
             }
@@ -171,6 +180,32 @@ namespace SisCom.Aplicacao.Formularios
         private void botaoAplicarFiltros_Click(object sender, EventArgs e)
         {
             Carregar(dateDataEmissaoInicial.Value, dateDataEmissaoFinal.Value);
+        }
+
+        private async void botaoEncerramento_Click(object sender, EventArgs e)
+        {
+            if (gridManifestoDocumentoEletronico.CurrentRow != null)
+            {
+                string justificativa;
+                using (frmTexto frmTexto = new frmTexto())
+                {
+                    frmTexto.ShowDialog();
+                    justificativa = frmTexto.Texto;
+                }
+
+                using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
+                {
+                    var manifestoEletronicoDocumento = await manifestoEletronicoDocumentoController.PesquisarId(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()));
+
+                    Fiscal.Fiscal_ManifestoEletronicoDocumento_Encerrar(manifestoEletronicoDocumento);
+
+                    await manifestoEletronicoDocumentoController.Atualizar(manifestoEletronicoDocumento.Id, manifestoEletronicoDocumento);
+                }
+            }
+            else
+            {
+                CaixaMensagem.Informacao("Selecione o manifesto a ser cancelado");
+            }
         }
     }
 }

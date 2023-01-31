@@ -57,6 +57,8 @@ namespace SisCom.Aplicacao.ViewModels
         public String? DescricaoCancelamento { get; set; }
         public DateTime? DataCancelamento { get; set; }
         public String? RetornoCancelamento { get; set; }
+        public DateTime? DataEncerramento { get; set; }
+        public String? RetornoEncerramento { get; set; }
 
         public string? Condutor_CPF { get; set; }
         public string? Condutor_Nome { get; set; }
