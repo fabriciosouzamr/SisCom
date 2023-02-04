@@ -43,6 +43,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pnlMenuBotao = new System.Windows.Forms.Panel();
             this.pnlMenuBotaoBotao = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.botaoEncerramento = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.botaoCancelar = new System.Windows.Forms.Button();
@@ -57,8 +59,8 @@
             this.panelStatusServico = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.gridManifestoDocumentoEletronico = new System.Windows.Forms.DataGridView();
-            this.botaoEncerramento = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.botaoClonar = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlMenuBotao.SuspendLayout();
@@ -202,6 +204,8 @@
             // pnlMenuBotaoBotao
             // 
             this.pnlMenuBotaoBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.pnlMenuBotaoBotao.Controls.Add(this.label5);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoClonar);
             this.pnlMenuBotaoBotao.Controls.Add(this.label4);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoEncerramento);
             this.pnlMenuBotaoBotao.Controls.Add(this.label2);
@@ -219,22 +223,42 @@
             this.pnlMenuBotaoBotao.Size = new System.Drawing.Size(649, 83);
             this.pnlMenuBotaoBotao.TabIndex = 2;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(423, 57);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 12);
+            this.label4.TabIndex = 73;
+            this.label4.Text = "Encerramento";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoEncerramento
+            // 
+            this.botaoEncerramento.Location = new System.Drawing.Point(430, 1);
+            this.botaoEncerramento.Name = "botaoEncerramento";
+            this.botaoEncerramento.Size = new System.Drawing.Size(53, 56);
+            this.botaoEncerramento.TabIndex = 72;
+            this.botaoEncerramento.UseVisualStyleBackColor = true;
+            this.botaoEncerramento.Click += new System.EventHandler(this.botaoEncerramento_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(324, 57);
+            this.label2.Location = new System.Drawing.Point(329, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 24);
+            this.label2.Size = new System.Drawing.Size(35, 24);
             this.label2.TabIndex = 71;
-            this.label2.Text = "Alterar\r\nNF-e";
+            this.label2.Text = "Alterar\r\nMDF-e";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(489, 57);
+            this.label1.Location = new System.Drawing.Point(490, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 12);
             this.label1.TabIndex = 70;
@@ -244,7 +268,7 @@
             // botaoCancelar
             // 
             this.botaoCancelar.Image = ((System.Drawing.Image)(resources.GetObject("botaoCancelar.Image")));
-            this.botaoCancelar.Location = new System.Drawing.Point(484, 1);
+            this.botaoCancelar.Location = new System.Drawing.Point(485, 1);
             this.botaoCancelar.Name = "botaoCancelar";
             this.botaoCancelar.Size = new System.Drawing.Size(53, 56);
             this.botaoCancelar.TabIndex = 69;
@@ -254,7 +278,7 @@
             // botaoEditar
             // 
             this.botaoEditar.Image = ((System.Drawing.Image)(resources.GetObject("botaoEditar.Image")));
-            this.botaoEditar.Location = new System.Drawing.Point(314, 1);
+            this.botaoEditar.Location = new System.Drawing.Point(320, 1);
             this.botaoEditar.Name = "botaoEditar";
             this.botaoEditar.Size = new System.Drawing.Size(53, 56);
             this.botaoEditar.TabIndex = 68;
@@ -265,7 +289,7 @@
             // 
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label38.Location = new System.Drawing.Point(374, 57);
+            this.label38.Location = new System.Drawing.Point(378, 57);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(46, 12);
             this.label38.TabIndex = 67;
@@ -275,7 +299,7 @@
             // botaoTransmitir
             // 
             this.botaoTransmitir.Image = ((System.Drawing.Image)(resources.GetObject("botaoTransmitir.Image")));
-            this.botaoTransmitir.Location = new System.Drawing.Point(371, 1);
+            this.botaoTransmitir.Location = new System.Drawing.Point(375, 1);
             this.botaoTransmitir.Name = "botaoTransmitir";
             this.botaoTransmitir.Size = new System.Drawing.Size(53, 56);
             this.botaoTransmitir.TabIndex = 66;
@@ -286,7 +310,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(547, 57);
+            this.label3.Location = new System.Drawing.Point(546, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 24);
             this.label3.TabIndex = 65;
@@ -296,7 +320,7 @@
             // botaoNovo
             // 
             this.botaoNovo.Image = ((System.Drawing.Image)(resources.GetObject("botaoNovo.Image")));
-            this.botaoNovo.Location = new System.Drawing.Point(541, 1);
+            this.botaoNovo.Location = new System.Drawing.Point(540, 1);
             this.botaoNovo.Name = "botaoNovo";
             this.botaoNovo.Size = new System.Drawing.Size(53, 56);
             this.botaoNovo.TabIndex = 64;
@@ -307,7 +331,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(607, 56);
+            this.label7.Location = new System.Drawing.Point(604, 56);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 12);
             this.label7.TabIndex = 29;
@@ -317,7 +341,7 @@
             // botaoFechar
             // 
             this.botaoFechar.Image = ((System.Drawing.Image)(resources.GetObject("botaoFechar.Image")));
-            this.botaoFechar.Location = new System.Drawing.Point(598, 0);
+            this.botaoFechar.Location = new System.Drawing.Point(595, 0);
             this.botaoFechar.Name = "botaoFechar";
             this.botaoFechar.Size = new System.Drawing.Size(53, 56);
             this.botaoFechar.TabIndex = 20;
@@ -361,25 +385,25 @@
             this.gridManifestoDocumentoEletronico.Size = new System.Drawing.Size(1314, 343);
             this.gridManifestoDocumentoEletronico.TabIndex = 106;
             // 
-            // botaoEncerramento
+            // label5
             // 
-            this.botaoEncerramento.Location = new System.Drawing.Point(428, 1);
-            this.botaoEncerramento.Name = "botaoEncerramento";
-            this.botaoEncerramento.Size = new System.Drawing.Size(53, 56);
-            this.botaoEncerramento.TabIndex = 72;
-            this.botaoEncerramento.UseVisualStyleBackColor = true;
-            this.botaoEncerramento.Click += new System.EventHandler(this.botaoEncerramento_Click);
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(275, 59);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(33, 12);
+            this.label5.TabIndex = 75;
+            this.label5.Text = "Clonar";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // botaoClonar
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(421, 57);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 12);
-            this.label4.TabIndex = 73;
-            this.label4.Text = "Encerramento";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.botaoClonar.Location = new System.Drawing.Point(265, 1);
+            this.botaoClonar.Name = "botaoClonar";
+            this.botaoClonar.Size = new System.Drawing.Size(53, 56);
+            this.botaoClonar.TabIndex = 74;
+            this.botaoClonar.UseVisualStyleBackColor = true;
+            this.botaoClonar.Click += new System.EventHandler(this.botaoClonar_Click);
             // 
             // frmFiscal_MDFe_Consulta
             // 
@@ -440,5 +464,7 @@
         private System.Windows.Forms.Button botaoNovo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button botaoEncerramento;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button botaoClonar;
     }
 }

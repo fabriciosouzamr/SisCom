@@ -31,7 +31,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             Grid_DataGridView.User_Formatar(dataCondutor, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
             Grid_DataGridView.User_ColunaAdicionar(dataCondutor, "ID", "ID", TipoColuna.Texto, 0);
-            Grid_DataGridView.User_ColunaAdicionar(dataCondutor, "CPF_CNPJ", "C.P.F./C.N.P.J.", TipoColuna.Texto, 150, 14, readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(dataCondutor, "CNPJ_CPF", "C.P.F./C.N.P.J.", TipoColuna.Texto, 150, 14, readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(dataCondutor, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres, readOnly: false);
 
             await GridAtualizar();

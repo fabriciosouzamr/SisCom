@@ -3,6 +3,7 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.Formularios;
 using SisCom.Aplicacao.ViewModels;
+using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.ComponentModel;
@@ -68,8 +69,8 @@ public class Combo_ComboBox
 
 		for (int i = 0; i <= Combo.Items.Count -1 ; i += 1)
 		{
-			item = (CodigoNomeComboViewModel)Combo.Items[i];
-			if (Funcoes._Classes.Texto.ContainsInsensitive(item.Codigo, Valor))
+            item = Declaracoes.mapper.Map<CodigoNomeComboViewModel>(Combo.Items[i]);
+            if (Funcoes._Classes.Texto.ContainsInsensitive(item.Codigo, Valor))
             {
 				Combo.SelectedIndex = i;
 				return;

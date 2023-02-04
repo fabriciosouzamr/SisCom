@@ -97,11 +97,22 @@ namespace SisCom.Aplicacao.Formularios
         {
             if (gridManifestoDocumentoEletronico.CurrentRow != null)
             {
-                string justificativa;
+                string justificativa = "";
                 using (frmTexto frmTexto = new frmTexto())
                 {
                     frmTexto.ShowDialog();
-                    justificativa = frmTexto.Texto;
+                    frmTexto.Gravar = true;
+                    frmTexto.MinimoCaracteres = 15;
+
+                    if (frmTexto.Gravou)
+                    {
+                        justificativa = frmTexto.Texto;
+                    }
+                    else
+                    {
+                        CaixaMensagem.Informacao("É preciso informar o comentário de cancelamento");
+                        return;
+                    }
                 }
 
                 using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
@@ -205,6 +216,94 @@ namespace SisCom.Aplicacao.Formularios
             else
             {
                 CaixaMensagem.Informacao("Selecione o manifesto a ser cancelado");
+            }
+        }
+
+        private async void botaoClonar_Click(object sender, EventArgs e)
+        {
+            if (gridManifestoDocumentoEletronico.CurrentRow != null)
+            {
+                if (!CaixaMensagem.Perguntar("Deseja realmente clonar esse manifesto?")) return;
+
+                using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
+                {
+                    try
+                    {
+                        var manifestoEletronicoDocumento = await manifestoEletronicoDocumentoController.PesquisarId(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()));
+                        var manifestoEletronicoDocumentoNova = await manifestoEletronicoDocumentoController.PesquisarId(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()));
+
+                        manifestoEletronicoDocumentoNova.Id = Guid.NewGuid();
+
+                        using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(this.MeuDbContext(), this._notifier))
+                        {
+                            var seriePsq = await manifestoEletronicoDocumentoSerieController.PesquisarId((Guid)manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerieId);
+
+                            if (seriePsq != null)
+                            {
+                                var serie = seriePsq.FirstOrDefault();
+
+                                if (String.IsNullOrEmpty(serie.UltimoNumeroManifestoEletronicoDocumento))
+                                {  manifestoEletronicoDocumentoNova.Numero = "1"; }
+                                else
+                                { manifestoEletronicoDocumentoNova.Numero = (Convert.ToInt16(serie.UltimoNumeroManifestoEletronicoDocumento) + 1).ToString(); }
+
+                                serie.UltimoNumeroManifestoEletronicoDocumento = manifestoEletronicoDocumentoNova.Numero;
+                                serie.UltimoManifestoEletronicoDocumento = null;
+                                await manifestoEletronicoDocumentoSerieController.Atualizar(serie.Id, serie);
+                            }
+                        }
+
+                        manifestoEletronicoDocumentoNova.Empresa = null;
+                        manifestoEletronicoDocumentoNova.EstadoCarregamento = null;
+                        manifestoEletronicoDocumentoNova.CidadeCarregamento = null;
+                        manifestoEletronicoDocumentoNova.EstadoDescarga = null;
+                        manifestoEletronicoDocumentoNova.DadoVeiculo_Placa = null;
+                        manifestoEletronicoDocumentoNova.DadoVeiculo_Estado = null;
+                        manifestoEletronicoDocumentoNova.DadoVeiculoVeiculoTerceiros_EstadoProprietario = null;
+                        manifestoEletronicoDocumentoNova.DadoVeiculo_Placa = null;
+                        manifestoEletronicoDocumentoNova.ManifestoEletronicoDocumentoSerie = null;
+                        manifestoEletronicoDocumentoNova.ManifestoEletronicoDocumentoPercursos = null;
+                        manifestoEletronicoDocumentoNova.ManifestoEletronicoDocumentoNotas = null;
+
+                        await manifestoEletronicoDocumentoController.Adicionar(manifestoEletronicoDocumentoNova);
+
+                        using (ManifestoEletronicoDocumentoNotaController manifestoEletronicoDocumentoNotaController = new ManifestoEletronicoDocumentoNotaController(this.MeuDbContext(), this._notifier))
+                        {
+                            foreach (var notas in manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas)
+                            {
+                                notas.Id = Guid.NewGuid();
+                                notas.ManifestoEletronicoDocumentoId = manifestoEletronicoDocumentoNova.Id;
+                                notas.ManifestoEletronicoDocumento = null;
+                                notas.NotaFiscalEntrada = null;
+                                notas.NotaFiscalSaida = null;
+                                notas.CidadeDescarga  = null;
+                                await manifestoEletronicoDocumentoNotaController.Adicionar(notas);
+                            }
+                        }
+
+                        using (ManifestoEletronicoDocumentoPercursoController manifestoEletronicoDocumentoPercursoController = new ManifestoEletronicoDocumentoPercursoController(this.MeuDbContext(), this._notifier))
+                        {
+                            foreach (var percurso in manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos)
+                            {
+                                percurso.Id = Guid.NewGuid();
+                                percurso.ManifestoEletronicoDocumentoId = manifestoEletronicoDocumentoNova.Id;
+                                percurso.ManifestoEletronicoDocumento = null;
+                                percurso.Estado = null;
+                                await manifestoEletronicoDocumentoPercursoController.Adicionar(percurso);
+                            }
+                        }
+
+                        CaixaMensagem.Informacao("Manifesto Clonado");
+                    }
+                    catch (Exception Ex)
+                    {
+                        CaixaMensagem.Informacao(Ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                CaixaMensagem.Informacao("Selecione o manifesto a ser transmitido");
             }
         }
     }

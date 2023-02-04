@@ -234,7 +234,7 @@ namespace SisCom.Aplicacao.Formularios
                 textIdentificacao_HoraEmissao.Text = manifestoEletronicoDocumento.DataHoraEmissao.ToString("HH:MM");
                 if (!Funcao.Nulo(manifestoEletronicoDocumento.TipoEmissao)) { comboIdentificacao_TipoEmissao.SelectedValue = manifestoEletronicoDocumento.TipoEmissao; }
                 comboIdentificacao_Serie.SelectedValue = manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerieId;
-                if (!Funcao.Nulo(manifestoEletronicoDocumento.TipoEmissao)) { textIdentificacao_Numero.Text = manifestoEletronicoDocumento.Numero; }
+                if (!Funcao.Nulo(manifestoEletronicoDocumento.Numero)) { textIdentificacao_Numero.Text = manifestoEletronicoDocumento.Numero; }
                 if (!Funcao.Nulo(manifestoEletronicoDocumento.Carga)) { textIdentificacao_Carga.Text = manifestoEletronicoDocumento.Carga; }
                 if (!Funcao.Nulo(manifestoEletronicoDocumento.EstadoDescargaId)) { comboIdentificacao_UFDescarga.SelectedValue = manifestoEletronicoDocumento.EstadoDescargaId; }
                 if (!Funcao.Nulo(manifestoEletronicoDocumento.EstadoCarregamentoId)) { comboIdentificacao_UFCarregamento.SelectedValue = manifestoEletronicoDocumento.EstadoCarregamentoId; }
@@ -242,7 +242,7 @@ namespace SisCom.Aplicacao.Formularios
                 if (!Funcao.Nulo(manifestoEletronicoDocumento.CidadeCarregamentoId)) { comboIdentificacao_CidadeCarregamento.SelectedValue = manifestoEletronicoDocumento.EstadoCarregamentoId; }
                 if (!Funcao.Nulo(manifestoEletronicoDocumento.TipoTransportador)) { comboIdentificacao_TipoTransportador.SelectedValue = manifestoEletronicoDocumento.TipoTransportador; }
                 textIdentificacao_RNTRCEmitente.Text = Funcao.NuloParaString(manifestoEletronicoDocumento.RNTRCEmitente);
-                comboDadosVeiculo_Placa.Text = Funcao.NuloParaString(manifestoEletronicoDocumento.DadoVeiculo_NumeroPlaca);
+                Combo_ComboBox.Selecionar(comboDadosVeiculo_Placa, Funcao.NuloParaString(manifestoEletronicoDocumento.DadoVeiculo_NumeroPlaca));
                 if (!Funcao.Nulo(manifestoEletronicoDocumento.DadoVeiculo_EstadoId)) { comboDadosVeiculo_UF.SelectedValue = manifestoEletronicoDocumento.DadoVeiculo_EstadoId; }
                 textDadosVeiculo_Renavam.Text = Funcao.NuloParaString(manifestoEletronicoDocumento.DadoVeiculo_Renavam);
                 numericDadosVeiculo_TaraKG.Value = (decimal)manifestoEletronicoDocumento.DadoVeiculo_TaraKG;
@@ -276,7 +276,7 @@ namespace SisCom.Aplicacao.Formularios
                 numericTotalizadores_PesoBrutoCarga.Value = manifestoEletronicoDocumento.PesoBrutoCarga;
                 if (!Funcao.Nulo(manifestoEletronicoDocumento.UnidadePeso)) { comboTotalizadores_UnidadePeso.SelectedValue = manifestoEletronicoDocumento.UnidadePeso; }
                 textCondutor_NomeCondutor.Text = Funcao.NuloParaString(manifestoEletronicoDocumento.Condutor_Nome);
-                comboCondutor_CPFCNPJCondutor.Text = Funcao.NuloParaString(manifestoEletronicoDocumento.Condutor_CPF);
+                Combo_ComboBox.Selecionar(comboCondutor_CPFCNPJCondutor, Funcao.NuloParaString(manifestoEletronicoDocumento.Condutor_CPF));
                 richInformaoeesAdicionaisInteresseFisco.Text = Funcao.NuloParaString(manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco);
                 richInformacoesComplementaresInteresseContribuinte.Text = Funcao.NuloParaString(manifestoEletronicoDocumento.InformacoesComplementaresInteresseContribuinte);
 
@@ -306,6 +306,7 @@ namespace SisCom.Aplicacao.Formularios
                         }
 
                         comboAdicionarNotasItem_Tipo.SelectedIndex = 2;
+                        await comboAdicionarNotasItem_Tipo_Tratar(comboAdicionarNotasItem_Tipo);
                         ((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_NumeroNota" + i.ToString("00"), false)[0]).SelectedValue = nota.NotaFiscalSaidaId;
                         ((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_ChaveAcesso" + i.ToString("00"), false)[0]).SelectedValue= nota.NotaFiscalSaidaId;
                         ((ComboBox)pnlAdicionarNotasItem.Controls.Find("comboAdicionarNotasItem_Cidade" + i.ToString("00"), false)[0]).SelectedValue = nota.CidadeDescargaId;
@@ -322,8 +323,8 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos.OrderBy(o => o.Ordem).ToList().ForEach(async percurso =>
                     {
-                        gridPercurso.Rows[i].Cells[0].Value = percurso.EstadoId;
                         gridPercurso.Rows.Add();
+                        gridPercurso.Rows[i].Cells[0].Value = percurso.EstadoId;
                         i++;
                     });
                 }
@@ -637,11 +638,6 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Selecione a U.F. do veículo");
                 return;
             }
-            if (String.IsNullOrEmpty(textDadosVeiculo_Renavam.Text))
-            {
-                CaixaMensagem.Informacao("Informe o renavam do veículo");
-                return;
-            }
             if (numericDadosVeiculo_TaraKG.Value == 0)
             {
                 CaixaMensagem.Informacao("Informe a tara (KG) do veículo");
@@ -762,6 +758,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             try
             {
+                manifestoEletronicoDocumento.EmpresaId = Declaracoes.dados_Empresa_Id;
                 manifestoEletronicoDocumento.DataHoraEmissao = Validacao.Data_AdicionarHora(dateIdentificacao_Emissao.Value, textIdentificacao_HoraEmissao.Text);
                 manifestoEletronicoDocumento.TipoEmissao = (MDFe_TipoEmissao)comboIdentificacao_TipoEmissao.SelectedValue;
                 manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerieId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboIdentificacao_Serie);
@@ -772,6 +769,7 @@ namespace SisCom.Aplicacao.Formularios
                 manifestoEletronicoDocumento.CidadeCarregamentoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboIdentificacao_CidadeCarregamento);
                 manifestoEletronicoDocumento.TipoTransportador = (MDFe_TipoTransportador?)comboIdentificacao_TipoTransportador.SelectedValue;
                 manifestoEletronicoDocumento.RNTRCEmitente = textIdentificacao_RNTRCEmitente.Text;
+                manifestoEletronicoDocumento.DadoVeiculo_PlacaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboDadosVeiculo_Placa);
                 manifestoEletronicoDocumento.DadoVeiculo_NumeroPlaca = comboDadosVeiculo_Placa.Text;
                 manifestoEletronicoDocumento.DadoVeiculo_EstadoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboDadosVeiculo_UF);
                 manifestoEletronicoDocumento.DadoVeiculo_Renavam = textDadosVeiculo_Renavam.Text;
@@ -810,12 +808,21 @@ namespace SisCom.Aplicacao.Formularios
 
                 using (ManifestoEletronicoDocumentoController manifestoEletronicoDocumentoController = new ManifestoEletronicoDocumentoController(this.MeuDbContext(), this._notifier))
                 {
+                    manifestoEletronicoDocumento.Empresa = null;
+                    manifestoEletronicoDocumento.EstadoCarregamento = null;
+                    manifestoEletronicoDocumento.CidadeCarregamento = null;
+                    manifestoEletronicoDocumento.EstadoDescarga = null;
+                    manifestoEletronicoDocumento.DadoVeiculo_Placa = null;
+                    manifestoEletronicoDocumento.DadoVeiculo_Estado = null;
+                    manifestoEletronicoDocumento.DadoVeiculoVeiculoTerceiros_EstadoProprietario = null;
+                    manifestoEletronicoDocumento.DadoVeiculo_Placa = null;
+                    manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerie = null;
+                    manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos = null;
+                    manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas = null;
+
                     if (manifestoEletronicoDocumento.Id == Guid.Empty)
                     {
                         manifestoEletronicoDocumento.Id = Guid.NewGuid();
-                        manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerie = null;
-                        manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos = null;
-                        manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas = null;
                         await manifestoEletronicoDocumentoController.Adicionar(manifestoEletronicoDocumento);
                     }
                     else
@@ -880,7 +887,7 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     foreach (DataGridViewRow row in gridPercurso.Rows)
                     {
-                        if ((Guid)row.Cells[0].Value != null)
+                        if (row.Cells[0].Value != null)
                         {
                             ordem++;
 
@@ -1073,9 +1080,9 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
-        private void comboIdentificacao_Serie_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboIdentificacao_Serie_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Serie_Tratar();
+            if (!CarregandoDados) { await Serie_Tratar(); }
         }
         async Task Serie_Tratar()
         {
@@ -1083,14 +1090,20 @@ namespace SisCom.Aplicacao.Formularios
             {
                 using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(this.MeuDbContext(), this._notifier))
                 {
-                    var serie = await manifestoEletronicoDocumentoSerieController.PesquisarSerie(comboIdentificacao_Serie.Text);
+                    var seriePsq = await manifestoEletronicoDocumentoSerieController.PesquisarSerie(comboIdentificacao_Serie.Text);
 
-                    if (serie != null)
+                    if (seriePsq != null)
                     {
-                        if (String.IsNullOrEmpty(serie.FirstOrDefault().UltimoNumeroManifestoEletronicoDocumento))
+                        var serie = seriePsq.FirstOrDefault();
+
+                        if (String.IsNullOrEmpty(serie.UltimoNumeroManifestoEletronicoDocumento))
                         { textIdentificacao_Numero.Text = "1"; }
                         else
-                        { textIdentificacao_Numero.Text = (Convert.ToInt16(serie.FirstOrDefault().UltimoNumeroManifestoEletronicoDocumento) + 1).ToString(); }
+                        { textIdentificacao_Numero.Text = (Convert.ToInt16(serie.UltimoNumeroManifestoEletronicoDocumento) + 1).ToString(); }
+
+                        serie.UltimoNumeroManifestoEletronicoDocumento = manifestoEletronicoDocumento.Numero;
+                        serie.UltimoManifestoEletronicoDocumento = null;
+                        await manifestoEletronicoDocumentoSerieController.Atualizar(serie.Id, seriePsq.FirstOrDefault());
                     }
                 }
             }
@@ -1104,7 +1117,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async void comboDadosVeiculo_Placa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Combo_ComboBox.Selecionado(comboDadosVeiculo_Placa))
+            if ((Combo_ComboBox.Selecionado(comboDadosVeiculo_Placa)) && (!CarregandoDados))
             {
                 using(VeiculoPlacaController veiculoPlacaController = new VeiculoPlacaController(this.MeuDbContext(), this._notifier))
                 {
@@ -1133,7 +1146,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void comboCondutor_CPFCNPJCondutor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!Combo_ComboBox.Selecionado(comboCondutor_CPFCNPJCondutor)) 
+            if ((!Combo_ComboBox.Selecionado(comboCondutor_CPFCNPJCondutor))  && (!CarregandoDados))
             { textCondutor_NomeCondutor.Text = ""; }
             else
             { textCondutor_NomeCondutor.Text = ((CodigoDescricaoComboViewModel)comboCondutor_CPFCNPJCondutor.SelectedItem).Descricao; }

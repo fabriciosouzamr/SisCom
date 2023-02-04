@@ -79,6 +79,12 @@ namespace SisCom.Aplicacao
 
                     SisCom.Aplicacao.Classes.Declaracoes.configuration = new MapperConfiguration(cfg =>
                     {
+                        #region CodigoDescricaoComboViewModel
+                        cfg.CreateMap<CodigoDescricaoComboViewModel, CodigoNomeComboViewModel>()
+                            .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
+                            .ForMember(dest => dest.Codigo, src => src.MapFrom(src => src.Codigo))
+                            .ForMember(dest => dest.Nome, src => src.MapFrom(src => src.Descricao));
+                        #endregion
                         #region Cidade
                         cfg.CreateMap<CidadeViewModel, Cidade>().ReverseMap();
                         cfg.CreateMap<Cidade, CidadeComboViewModel>();
@@ -294,6 +300,10 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region VeiculoPlaca
                         cfg.CreateMap<VeiculoPlacaViewModel, VeiculoPlaca>().ReverseMap();
+                        cfg.CreateMap<VeiculoPlacaViewModel, CodigoNomeComboViewModel>()
+                            .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
+                            .ForMember(dest => dest.Codigo, src => src.MapFrom(src => src.NumeroPlaca))
+                            .ForMember(dest => dest.Nome, src => src.MapFrom(src => src.NumeroPlaca));
                         #endregion
                         #region VinculoFiscal
                         cfg.CreateMap<VinculoFiscalViewModel, VinculoFiscal>().ReverseMap();
