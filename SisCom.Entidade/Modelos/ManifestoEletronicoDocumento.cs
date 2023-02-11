@@ -40,7 +40,7 @@ namespace SisCom.Entidade.Modelos
         public string? Autorizacao_ChaveAutenticacao { get; set; }
         public string? Autorizacao_Protocolo { get; set; }
         public DateTime? Autorizacao_DataHoraAutorizacao { get; set; }
-        public DateTime Autorizacao_DataHoraEncerramento { get; set; }
+        public DateTime? Autorizacao_DataHoraEncerramento { get; set; }
         public string? RetornoSefaz { get; set; }
         public string? RetornoSefazCodigo { get; set; }
         public DateTime? DataRetornoSefaz { get; set; }
@@ -52,6 +52,8 @@ namespace SisCom.Entidade.Modelos
         public string? InformacoesAdicionaisInteresseFisco { get; set; }
         public string? InformacoesComplementaresInteresseContribuinte { get; set; }
         public MDFe_Status Status { get; set; }
+        public DateTime? DataEncerramento { get; set; }
+        public String? RetornoEncerramento { get; set; }
 
         /* EF Relation */
         public Guid? EmpresaId { get; set; }

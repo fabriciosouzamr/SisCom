@@ -55,9 +55,16 @@ namespace SisCom.Aplicacao.Formularios
         {
             if (gridManifestoDocumentoEletronico.CurrentRow != null)
             {
-                var form = this.ServiceProvider().GetRequiredService<frmFiscal_MDFe>();
-                form.manifestoEletronicoDocumentoId = Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString());
-                form.ShowDialog(this);
+                if (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Validado.GetHashCode().ToString())
+                {
+                    var form = this.ServiceProvider().GetRequiredService<frmFiscal_MDFe>();
+                    form.manifestoEletronicoDocumentoId = Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString());
+                    form.ShowDialog(this);
+                }
+                else
+                {
+                    CaixaMensagem.Informacao("Só é permitido alterar manifesto com o status validado");
+                }
             }
             else
             {
@@ -264,6 +271,14 @@ namespace SisCom.Aplicacao.Formularios
                         manifestoEletronicoDocumentoNova.ManifestoEletronicoDocumentoSerie = null;
                         manifestoEletronicoDocumentoNova.ManifestoEletronicoDocumentoPercursos = null;
                         manifestoEletronicoDocumentoNova.ManifestoEletronicoDocumentoNotas = null;
+                        manifestoEletronicoDocumentoNova.Autorizacao_ChaveAutenticacao = null;
+                        manifestoEletronicoDocumentoNova.Autorizacao_Protocolo = null;
+                        manifestoEletronicoDocumentoNova.Autorizacao_DataHoraAutorizacao = null;
+                        manifestoEletronicoDocumentoNova.Autorizacao_DataHoraEncerramento = null;
+                        manifestoEletronicoDocumentoNova.DataRetornoSefaz = null;
+                        manifestoEletronicoDocumentoNova.RetornoSefaz = null;
+                        manifestoEletronicoDocumentoNova.RetornoSefazCodigo = null;
+                        manifestoEletronicoDocumentoNova.Status = MDFe_Status.Validado;
 
                         await manifestoEletronicoDocumentoController.Adicionar(manifestoEletronicoDocumentoNova);
 

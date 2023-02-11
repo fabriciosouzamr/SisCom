@@ -44,6 +44,7 @@ namespace SisCom.Aplicacao.Formularios
                 //Pesquisar
                 Combo_ComboBox.Formatar(comboPesquisarTipoFiltro, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoPesquisa));
                 Combo_ComboBox.Formatar(comboTipoCarroceria, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoCarroceria));
+                Combo_ComboBox.Formatar(comboTipoRodado, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoRodado));
                 Combo_ComboBox.Formatar(comboVeiculoTerceiro_TipoProprietario, "", "", ComboBoxStyle.DropDownList, null, typeof(MDFe_TipoProprietario));
 
                 comboPesquisarTipoFiltro.SelectedValue = TipoPesquisa.Placa;

@@ -59,6 +59,8 @@ namespace SisCom.Aplicacao.Formularios
                 comboIdentificacao_CidadeCarregamento.SelectedValue = Declaracoes.dados_Empresa_CidadeId;
                 textDadosVeiculo_Renavam.Text = "0";
                 numericDadosVeiculo_CapacidadeKG.Value = 0;
+                if (comboIdentificacao_Serie.Items.Count == 1)
+                comboIdentificacao_Serie.SelectedIndex = 0;
 
                 comboIdentificacao_TipoTransportador.SelectedValue = MDFe_TipoTransportador.TransportadorCargaPropria;
 
@@ -893,7 +895,7 @@ namespace SisCom.Aplicacao.Formularios
 
                             var manifestoEletronicoDocumentoPercursopesq = await manifestoEletronicoDocumentoPercursoController.ObterTodos(w => w.EstadoId == (Guid)row.Cells[0].Value);
 
-                            if (manifestoEletronicoDocumentoPercursopesq == null)
+                            if (!manifestoEletronicoDocumentoPercursopesq.Any())
                             {
                                 manifestoEletronicoDocumentoPercurso = new ManifestoEletronicoDocumentoPercursoViewModel();
 
@@ -923,7 +925,10 @@ namespace SisCom.Aplicacao.Formularios
             }
             catch (Exception Ex)
             {
-                CaixaMensagem.Informacao(Ex.Message.ToString());
+                if (Ex.InnerException == null)
+                { CaixaMensagem.Informacao(Ex.Message.ToString()); }
+                else
+                { CaixaMensagem.Informacao($"{Ex.Message.ToString()} - {Ex.InnerException.Message.ToString()}"); }                
             }
         }
 
@@ -1086,7 +1091,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         async Task Serie_Tratar()
         {
-            if (comboIdentificacao_Serie.SelectedIndex != -1)
+            if ((comboIdentificacao_Serie.SelectedIndex != -1) && (String.IsNullOrEmpty(textIdentificacao_Numero.Text)))
             {
                 using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(this.MeuDbContext(), this._notifier))
                 {
@@ -1101,7 +1106,7 @@ namespace SisCom.Aplicacao.Formularios
                         else
                         { textIdentificacao_Numero.Text = (Convert.ToInt16(serie.UltimoNumeroManifestoEletronicoDocumento) + 1).ToString(); }
 
-                        serie.UltimoNumeroManifestoEletronicoDocumento = manifestoEletronicoDocumento.Numero;
+                        serie.UltimoNumeroManifestoEletronicoDocumento = textIdentificacao_Numero.Text;
                         serie.UltimoManifestoEletronicoDocumento = null;
                         await manifestoEletronicoDocumentoSerieController.Atualizar(serie.Id, seriePsq.FirstOrDefault());
                     }

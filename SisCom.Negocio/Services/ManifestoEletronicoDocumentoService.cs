@@ -40,7 +40,11 @@ namespace SisCom.Negocio.Services
             }
             catch (Exception Ex)
             {
-                Notify("ERRO: " + Ex.Message + ".");
+                if (Ex.InnerException == null)
+                { Notify("ERRO: " + Ex.Message + "."); }
+                else
+                { Notify("ERRO: " + $"{Ex.Message.ToString()} - {Ex.InnerException.Message.ToString()}"); }
+                
             }
         }
 

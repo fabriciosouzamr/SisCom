@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230204215233_Autorizacao_DataHoraEncerramento")]
+    partial class Autorizacao_DataHoraEncerramento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -590,9 +592,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<DateTime?>("DataCancelamento")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DataEncerramento")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("DataHoraEmissao")
                         .HasColumnType("datetime2");
 
@@ -636,9 +635,6 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("varchar(10)");
 
                     b.Property<string>("RetornoCancelamento")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("RetornoEncerramento")
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("RetornoSefaz")

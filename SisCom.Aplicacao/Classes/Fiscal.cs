@@ -55,6 +55,11 @@ using MDFe.Classes.Extencoes;
 using System.Security.Policy;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using MDFe.Servicos.RetRecepcaoMDFe;
+using MDFe.Classes.Retorno.MDFeRetRecepcao;
+using NFe.Danfe.Base;
+using System.Windows.Forms;
+using MDFe.Damdfe.Fast;
+using MDFe.Damdfe.Base;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -247,7 +252,7 @@ namespace SisCom.Aplicacao.Classes
                 TipoCertificado = TipoCertificado.A1Repositorio,
                 Serial = Declaracoes.dados_Empresa_SerialNumber,
                 Senha = Declaracoes.Estacao_TRABALHO_DS_CERTIFICADO_DIGITAL_SENHA,            
-                ManterDadosEmCache = true
+                ManterDadosEmCache = false
             };
 
             MDFeConfiguracao.ConfiguracaoCertificado = configuracaoCertificado;
@@ -1870,6 +1875,7 @@ namespace SisCom.Aplicacao.Classes
                 }
                 */
 
+                if (notaFiscalSaidaViewModel.Status != NF_Status.Transmitida)
                 notaFiscalSaidaViewModel.CodigoChaveAcesso = Fiscal_ChaveNFe(oNFe);
 
                 oNFe.Valida(oConfig);
@@ -1902,115 +1908,113 @@ namespace SisCom.Aplicacao.Classes
 
             string chave = "";
 
-            if (String.IsNullOrEmpty(nrrecibo))
+            if (manifestoEletronicoDocumento != null)
             {
-                if (manifestoEletronicoDocumento != null)
+                DFe.Classes.Entidades.Estado oEstado = DFe.Classes.Entidades.Estado.MG;
+
+                MDFeTpRod dadoVeiculo_TipoRodado = MDFeTpRod.Outros;
+                MDFeTpCar dadoVeiculo_TipoCarroceria = MDFeTpCar.NaoAplicavel;
+
+                switch (manifestoEletronicoDocumento.DadoVeiculo_TipoRodado)
                 {
-                    DFe.Classes.Entidades.Estado oEstado = DFe.Classes.Entidades.Estado.MG;
+                    case MDFe_TipoRodado.Truck:
+                        dadoVeiculo_TipoRodado = MDFeTpRod.Truck;
+                        break;
+                    case MDFe_TipoRodado.Toco:
+                        dadoVeiculo_TipoRodado = MDFeTpRod.Toco;
+                        break;
+                    case MDFe_TipoRodado.CavaloMecanico:
+                        dadoVeiculo_TipoRodado = MDFeTpRod.CavaloMecanico;
+                        break;
+                    case MDFe_TipoRodado.VAN:
+                        dadoVeiculo_TipoRodado = MDFeTpRod.VAN;
+                        break;
+                    case MDFe_TipoRodado.Utilitario:
+                        dadoVeiculo_TipoRodado = MDFeTpRod.Utilitario;
+                        break;
+                    case MDFe_TipoRodado.Outros:
+                        dadoVeiculo_TipoRodado = MDFeTpRod.Outros;
+                        break;
+                }
 
-                    MDFeTpRod dadoVeiculo_TipoRodado = MDFeTpRod.Outros;
-                    MDFeTpCar dadoVeiculo_TipoCarroceria = MDFeTpCar.NaoAplicavel;
+                switch (manifestoEletronicoDocumento.DadoVeiculo_TipoCarroceria)
+                {
+                    case MDFe_TipoCarroceria.NaoAplicavel:
+                        dadoVeiculo_TipoCarroceria = MDFeTpCar.NaoAplicavel;
+                        break;
+                    case MDFe_TipoCarroceria.Aberta:
+                        dadoVeiculo_TipoCarroceria = MDFeTpCar.Aberta;
+                        break;
+                    case MDFe_TipoCarroceria.FechadaBau:
+                        dadoVeiculo_TipoCarroceria = MDFeTpCar.FechadaBau;
+                        break;
+                    case MDFe_TipoCarroceria.Granelera:
+                        dadoVeiculo_TipoCarroceria = MDFeTpCar.Granelera;
+                        break;
+                    case MDFe_TipoCarroceria.PortaContainer:
+                        dadoVeiculo_TipoCarroceria = MDFeTpCar.PortaContainer;
+                        break;
+                    case MDFe_TipoCarroceria.Sider:
+                        dadoVeiculo_TipoCarroceria = MDFeTpCar.Sider;
+                        break;
+                }
 
-                    switch (manifestoEletronicoDocumento.DadoVeiculo_TipoRodado)
+                oEstado = oEstado.SiglaParaEstado(Declaracoes.dados_Empresa_CodigoEstado);
+
+                #region (ide)
+                mdfe.InfMDFe.Ide.CUF = oEstado;
+                mdfe.InfMDFe.Ide.TpAmb = TipoAmbiente.Producao;
+                mdfe.InfMDFe.Ide.TpEmit = MDFeTipoEmitente.TransportadorCargaPropria;
+                mdfe.InfMDFe.Ide.Mod = ModeloDocumento.MDFe;
+                mdfe.InfMDFe.Ide.Serie = Convert.ToInt16(manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerie.Serie);
+                mdfe.InfMDFe.Ide.NMDF = Convert.ToInt64(manifestoEletronicoDocumento.Numero);
+                mdfe.InfMDFe.Ide.CMDF = GetRandom();
+                mdfe.InfMDFe.Ide.Modal = MDFeModal.Rodoviario;
+                mdfe.InfMDFe.Ide.DhEmi = DateTime.Now;
+                mdfe.InfMDFe.Ide.TpEmis = MDFeTipoEmissao.Normal;
+                mdfe.InfMDFe.Ide.ProcEmi = MDFeIdentificacaoProcessoEmissao.EmissaoComAplicativoContribuinte;
+                mdfe.InfMDFe.Ide.VerProc = "versao28383";
+                mdfe.InfMDFe.Ide.UFIni = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.EstadoCarregamento.Codigo);
+                mdfe.InfMDFe.Ide.UFFim = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.EstadoDescarga.Codigo);
+                mdfe.InfMDFe.Ide.DhIniViagem = DateTime.Now;
+
+                mdfe.InfMDFe.Ide.InfMunCarrega.Add(new MDFeInfMunCarrega
+                {
+                    CMunCarrega = manifestoEletronicoDocumento.CidadeCarregamento.CodigoIBGE,
+                    XMunCarrega = manifestoEletronicoDocumento.CidadeCarregamento.Nome
+                });
+                #endregion (ide)
+
+                #region dados emitente (emit)
+                mdfe.InfMDFe.Emit.CNPJ = Declaracoes.dados_Empresa_CNPJ;
+                mdfe.InfMDFe.Emit.IE = empresa.InscricaoEstadual;
+                mdfe.InfMDFe.Emit.XNome = empresa.RazaoSocial;
+                mdfe.InfMDFe.Emit.XFant = empresa.NomeFantasia;
+
+                mdfe.InfMDFe.Emit.EnderEmit.XLgr = empresa.Endereco.End_Logradouro;
+                mdfe.InfMDFe.Emit.EnderEmit.Nro = empresa.Endereco.End_Numero;
+                mdfe.InfMDFe.Emit.EnderEmit.XCpl = empresa.Endereco.End_Complemento;
+                mdfe.InfMDFe.Emit.EnderEmit.XBairro = empresa.Endereco.End_Bairro;
+                mdfe.InfMDFe.Emit.EnderEmit.CMun = Convert.ToInt64(empresa.Endereco.End_Cidade.CodigoIBGE);
+                mdfe.InfMDFe.Emit.EnderEmit.XMun = empresa.NomeFantasia;
+                mdfe.InfMDFe.Emit.EnderEmit.CEP = long.Parse(empresa.Endereco.End_CEP);
+                mdfe.InfMDFe.Emit.EnderEmit.UF = oEstado.SiglaParaEstado(empresa.Endereco.End_Cidade.Estado.Codigo);
+                if (!String.IsNullOrEmpty(empresa.Telefone)) { mdfe.InfMDFe.Emit.EnderEmit.Fone = empresa.Telefone; }
+                if (!String.IsNullOrEmpty(empresa.EMail)) { mdfe.InfMDFe.Emit.EnderEmit.Email = empresa.EMail; }
+                #endregion dados emitente (emit)
+
+                #region modal
+                mdfe.InfMDFe.InfModal.Modal = new MDFeRodo()
+                {
+                    VeicTracao = new MDFeVeicTracao
                     {
-                        case MDFe_TipoRodado.Truck:
-                            dadoVeiculo_TipoRodado = MDFeTpRod.Truck;
-                            break;
-                        case MDFe_TipoRodado.Toco:
-                            dadoVeiculo_TipoRodado = MDFeTpRod.Toco;
-                            break;
-                        case MDFe_TipoRodado.CavaloMecanico:
-                            dadoVeiculo_TipoRodado = MDFeTpRod.CavaloMecanico;
-                            break;
-                        case MDFe_TipoRodado.VAN:
-                            dadoVeiculo_TipoRodado = MDFeTpRod.VAN;
-                            break;
-                        case MDFe_TipoRodado.Utilitario:
-                            dadoVeiculo_TipoRodado = MDFeTpRod.Utilitario;
-                            break;
-                        case MDFe_TipoRodado.Outros:
-                            dadoVeiculo_TipoRodado = MDFeTpRod.Outros;
-                            break;
-                    }
-
-                    switch (manifestoEletronicoDocumento.DadoVeiculo_TipoCarroceria)
-                    {
-                        case MDFe_TipoCarroceria.NaoAplicavel:
-                            dadoVeiculo_TipoCarroceria = MDFeTpCar.NaoAplicavel;
-                            break;
-                        case MDFe_TipoCarroceria.Aberta:
-                            dadoVeiculo_TipoCarroceria = MDFeTpCar.Aberta;
-                            break;
-                        case MDFe_TipoCarroceria.FechadaBau:
-                            dadoVeiculo_TipoCarroceria = MDFeTpCar.FechadaBau;
-                            break;
-                        case MDFe_TipoCarroceria.Granelera:
-                            dadoVeiculo_TipoCarroceria = MDFeTpCar.Granelera;
-                            break;
-                        case MDFe_TipoCarroceria.PortaContainer:
-                            dadoVeiculo_TipoCarroceria = MDFeTpCar.PortaContainer;
-                            break;
-                        case MDFe_TipoCarroceria.Sider:
-                            dadoVeiculo_TipoCarroceria = MDFeTpCar.Sider;
-                            break;
-                    }
-
-                    oEstado = oEstado.SiglaParaEstado(Declaracoes.dados_Empresa_CodigoEstado);
-
-                    #region (ide)
-                    mdfe.InfMDFe.Ide.CUF = oEstado;
-                    mdfe.InfMDFe.Ide.TpAmb = TipoAmbiente.Producao;
-                    mdfe.InfMDFe.Ide.TpEmit = MDFeTipoEmitente.TransportadorCargaPropria;
-                    mdfe.InfMDFe.Ide.Mod = ModeloDocumento.MDFe;
-                    mdfe.InfMDFe.Ide.Serie = Convert.ToInt16(manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerie.Serie);
-                    mdfe.InfMDFe.Ide.NMDF = Convert.ToInt64(manifestoEletronicoDocumento.Numero);
-                    mdfe.InfMDFe.Ide.CMDF = GetRandom();
-                    mdfe.InfMDFe.Ide.Modal = MDFeModal.Rodoviario;
-                    mdfe.InfMDFe.Ide.DhEmi = DateTime.Now;
-                    mdfe.InfMDFe.Ide.TpEmis = MDFeTipoEmissao.Normal;
-                    mdfe.InfMDFe.Ide.ProcEmi = MDFeIdentificacaoProcessoEmissao.EmissaoComAplicativoContribuinte;
-                    mdfe.InfMDFe.Ide.VerProc = "versao28383";
-                    mdfe.InfMDFe.Ide.UFIni = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.EstadoCarregamento.Codigo);
-                    mdfe.InfMDFe.Ide.UFFim = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.EstadoDescarga.Codigo);
-                    mdfe.InfMDFe.Ide.DhIniViagem = DateTime.Now;
-
-                    mdfe.InfMDFe.Ide.InfMunCarrega.Add(new MDFeInfMunCarrega
-                    {
-                        CMunCarrega = manifestoEletronicoDocumento.CidadeCarregamento.CodigoIBGE,
-                        XMunCarrega = manifestoEletronicoDocumento.CidadeCarregamento.Nome
-                    });
-                    #endregion (ide)
-
-                    #region dados emitente (emit)
-                    mdfe.InfMDFe.Emit.CNPJ = Declaracoes.dados_Empresa_CNPJ;
-                    mdfe.InfMDFe.Emit.IE = empresa.InscricaoEstadual;
-                    mdfe.InfMDFe.Emit.XNome = empresa.RazaoSocial;
-                    mdfe.InfMDFe.Emit.XFant = empresa.NomeFantasia;
-
-                    mdfe.InfMDFe.Emit.EnderEmit.XLgr = empresa.Endereco.End_Logradouro;
-                    mdfe.InfMDFe.Emit.EnderEmit.Nro = empresa.Endereco.End_Numero;
-                    mdfe.InfMDFe.Emit.EnderEmit.XCpl = empresa.Endereco.End_Complemento;
-                    mdfe.InfMDFe.Emit.EnderEmit.XBairro = empresa.Endereco.End_Bairro;
-                    mdfe.InfMDFe.Emit.EnderEmit.CMun = Convert.ToInt64(empresa.Endereco.End_Cidade.CodigoIBGE);
-                    mdfe.InfMDFe.Emit.EnderEmit.XMun = empresa.NomeFantasia;
-                    mdfe.InfMDFe.Emit.EnderEmit.CEP = long.Parse(empresa.Endereco.End_CEP);
-                    mdfe.InfMDFe.Emit.EnderEmit.UF = oEstado.SiglaParaEstado(empresa.Endereco.End_Cidade.Estado.Codigo);
-                    if (!String.IsNullOrEmpty(empresa.Telefone)) { mdfe.InfMDFe.Emit.EnderEmit.Fone = empresa.Telefone; }
-                    if (!String.IsNullOrEmpty(empresa.EMail)) { mdfe.InfMDFe.Emit.EnderEmit.Email = empresa.EMail; }
-                    #endregion dados emitente (emit)
-
-                    #region modal
-                    mdfe.InfMDFe.InfModal.Modal = new MDFeRodo()
-                    {
-                        VeicTracao = new MDFeVeicTracao
-                        {
-                            Placa = manifestoEletronicoDocumento.DadoVeiculo_NumeroPlaca.Replace("-", ""),
-                            //RENAVAM = manifestoEletronicoDocumento.DadoVeiculo_Renavam,
-                            UF = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.DadoVeiculo_Estado.Codigo),
-                            Tara = (int?)manifestoEletronicoDocumento.DadoVeiculo_TaraKG,
-                            CapM3 = (int?)manifestoEletronicoDocumento.DadoVeiculo_CapacidadeM3,
-                            CapKG = (int?)manifestoEletronicoDocumento.DadoVeiculo_CapacidadeKG,
-                            Condutor = new List<MDFeCondutor>
+                        Placa = manifestoEletronicoDocumento.DadoVeiculo_NumeroPlaca.Replace("-", ""),
+                        //RENAVAM = manifestoEletronicoDocumento.DadoVeiculo_Renavam,
+                        UF = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.DadoVeiculo_Estado.Codigo),
+                        Tara = (int?)manifestoEletronicoDocumento.DadoVeiculo_TaraKG,
+                        CapM3 = (int?)manifestoEletronicoDocumento.DadoVeiculo_CapacidadeM3,
+                        CapKG = (int?)manifestoEletronicoDocumento.DadoVeiculo_CapacidadeKG,
+                        Condutor = new List<MDFeCondutor>
                         {
                             new MDFeCondutor
                             {
@@ -2018,23 +2022,23 @@ namespace SisCom.Aplicacao.Classes
                                 XNome = manifestoEletronicoDocumento.Condutor_Nome
                             }
                         },
-                            TpRod = dadoVeiculo_TipoRodado,
-                            TpCar = dadoVeiculo_TipoCarroceria
-                        },
-                        lacRodo = new List<MDFeLacre>
+                        TpRod = dadoVeiculo_TipoRodado,
+                        TpCar = dadoVeiculo_TipoCarroceria
+                    },
+                    lacRodo = new List<MDFeLacre>
                     {
                         new MDFeLacre
                         {
                             NLacre = "lacre01"
                         }
                     }
-                    };
-                    #endregion modal
+                };
+                #endregion modal
 
-                    #region infMunDescarga
-                    manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas.ForEach(n =>
-                    {
-                        mdfe.InfMDFe.InfDoc.InfMunDescarga = new List<MDFeInfMunDescarga>
+                #region infMunDescarga
+                manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas.ForEach(n =>
+                {
+                    mdfe.InfMDFe.InfDoc.InfMunDescarga = new List<MDFeInfMunDescarga>
                     {
                         new MDFeInfMunDescarga
                         {
@@ -2049,76 +2053,78 @@ namespace SisCom.Aplicacao.Classes
                             }
                         }
                     };
-                    });
-                    #endregion infMunDescarga
+                });
+                #endregion infMunDescarga
 
-                    #region Totais (tot)
-                    mdfe.InfMDFe.Tot.QNFe = manifestoEletronicoDocumento.QuantidadeNFe;
-                    mdfe.InfMDFe.Tot.vCarga = manifestoEletronicoDocumento.ValorTotalCarga;
-                    mdfe.InfMDFe.Tot.CUnid = MDFeCUnid.KG;
-                    mdfe.InfMDFe.Tot.QCarga = manifestoEletronicoDocumento.PesoBrutoCarga;
-                    #endregion Totais (tot)
+                #region Totais (tot)
+                mdfe.InfMDFe.Tot.QNFe = manifestoEletronicoDocumento.QuantidadeNFe;
+                mdfe.InfMDFe.Tot.vCarga = manifestoEletronicoDocumento.ValorTotalCarga;
+                mdfe.InfMDFe.Tot.CUnid = MDFeCUnid.KG;
+                mdfe.InfMDFe.Tot.QCarga = manifestoEletronicoDocumento.PesoBrutoCarga;
+                #endregion Totais (tot)
 
-                    #region informações adicionais (infAdic)
+                #region informações adicionais (infAdic)
+                if (!String.IsNullOrEmpty(manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco))
+                {
+                    mdfe.InfMDFe.InfAdic = new MDFeInfAdic
+                    {
+                        InfCpl = manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco
+                    };
+                }
+                #endregion
+
+                #region informações adicionais (infAdic)
+                if ((!String.IsNullOrEmpty(manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco)) ||
+                    (!String.IsNullOrEmpty(manifestoEletronicoDocumento.InformacoesComplementaresInteresseContribuinte)))
+                {
+                    mdfe.InfMDFe.InfAdic = new MDFeInfAdic();
+
+                    if (!String.IsNullOrEmpty(manifestoEletronicoDocumento.InformacoesComplementaresInteresseContribuinte))
+                    { mdfe.InfMDFe.InfAdic.InfCpl = manifestoEletronicoDocumento.InformacoesComplementaresInteresseContribuinte; }
                     if (!String.IsNullOrEmpty(manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco))
+                    { mdfe.InfMDFe.InfAdic.InfAdFisco = manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco; }
+                }
+                #endregion
+
+                if (!string.IsNullOrEmpty(empresa.Responsaveltecnico_CNPJ))
+                {
+                    #region dados responsavel tecnico 
+                    mdfe.InfMDFe.infRespTec = new infRespTec
                     {
-                        mdfe.InfMDFe.InfAdic = new MDFeInfAdic
-                        {
-                            InfCpl = manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco
-                        };
-                    }
+                        CNPJ = empresa.Responsaveltecnico_CNPJ,
+                        email = empresa.Responsaveltecnico_Email,
+                        fone = empresa.Responsaveltecnico_Fone,
+                        xContato = empresa.Responsaveltecnico_Contato
+                    };
                     #endregion
-
-                    #region informações adicionais (infAdic)
-                    if ((!String.IsNullOrEmpty(manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco)) ||
-                        (!String.IsNullOrEmpty(manifestoEletronicoDocumento.InformacoesComplementaresInteresseContribuinte)))
+                }
+                else
+                {
+                    mdfe.InfMDFe.infRespTec = new infRespTec
                     {
-                        mdfe.InfMDFe.InfAdic = new MDFeInfAdic();
+                        CNPJ = "23903417000160",
+                        email = "suporte@treeunfe.com.br",
+                        fone = "1149507020",
+                        xContato = "Elias Simao"
+                    };
+                }
 
-                        if (!String.IsNullOrEmpty(manifestoEletronicoDocumento.InformacoesComplementaresInteresseContribuinte))
-                        { mdfe.InfMDFe.InfAdic.InfCpl = manifestoEletronicoDocumento.InformacoesComplementaresInteresseContribuinte; }
-                        if (!String.IsNullOrEmpty(manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco))
-                        { mdfe.InfMDFe.InfAdic.InfAdFisco = manifestoEletronicoDocumento.InformacoesAdicionaisInteresseFisco; }
-                    }
-                    #endregion
-
-                    if (!string.IsNullOrEmpty(empresa.Responsaveltecnico_CNPJ))
+                #region Percurso
+                if (manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos != null)
+                {
+                    foreach (var percurso in manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos.OrderBy(o => o.Ordem))
                     {
-                        #region dados responsavel tecnico 
-                        mdfe.InfMDFe.infRespTec = new infRespTec
-                        {
-                            CNPJ = empresa.Responsaveltecnico_CNPJ,
-                            email = empresa.Responsaveltecnico_Email,
-                            fone = empresa.Responsaveltecnico_Fone,
-                            xContato = empresa.Responsaveltecnico_Contato
-                        };
-                        #endregion
+                        MDFeInfPercurso ipercurso = new MDFeInfPercurso();
+
+                        ipercurso.UFPer = oEstado.SiglaParaEstado(percurso.Estado.Codigo);
+
+                        mdfe.InfMDFe.Ide.InfPercurso.Add(ipercurso);
                     }
-                    else
-                    {
-                        mdfe.InfMDFe.infRespTec = new infRespTec
-                        {
-                            CNPJ = "23903417000160",
-                            email = "suporte@treeunfe.com.br",
-                            fone = "1149507020",
-                            xContato = "Elias Simao"
-                        };
-                    }
+                }
 
-                    #region Percurso
-                    if (manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos != null)
-                    {
-                        foreach (var percurso in manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos.OrderBy(o => o.Ordem))
-                        {
-                            MDFeInfPercurso ipercurso = new MDFeInfPercurso();
-
-                            ipercurso.UFPer = oEstado.SiglaParaEstado(percurso.Estado.Codigo);
-
-                            mdfe.InfMDFe.Ide.InfPercurso.Add(ipercurso);
-                        }
-                    }
-                    #endregion
-
+                #endregion
+                if (String.IsNullOrEmpty(nrrecibo))
+                {
                     var servicoRecepcao = new MDFe.Servicos.RecepcaoMDFe.ServicoMDFeRecepcao();
 
                     try
@@ -2131,17 +2137,20 @@ namespace SisCom.Aplicacao.Classes
                         if (File.Exists(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-sit.xml"))) { File.Delete(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-sit.xml")); }
 
                         manifestoEletronicoDocumento.Autorizacao_ChaveAutenticacao = chave;
-                        manifestoEletronicoDocumento.Autorizacao_Protocolo = retornoEnvio.InfRec.NRec;
                         manifestoEletronicoDocumento.RetornoSefaz = retornoEnvio.XMotivo;
                         manifestoEletronicoDocumento.RetornoSefazCodigo = retornoEnvio.CStat.ToString();
                         manifestoEletronicoDocumento.DataRetornoSefaz = retornoEnvio.InfRec.DhRecbto;
                         manifestoEletronicoDocumento.Status = MDFe_Status.Transmitido;
                         nrrecibo = retornoEnvio.InfRec.NRec;
+
+                        servicoRecepcao = null;
                     }
                     catch (Exception Ex)
                     {
                         CaixaMensagem.Informacao($"MDFe - retornoEnvio - {Ex.Message}");
                     }
+
+                    servicoRecepcao = null;
                 }
             }
 
@@ -2165,10 +2174,16 @@ namespace SisCom.Aplicacao.Classes
                         if (manifestoEletronicoDocumento.RetornoSefaz.Contains("Rejeição:"))
                         { 
                             manifestoEletronicoDocumento.Status = MDFe_Status.Transmitido;
-                            manifestoEletronicoDocumento.Autorizacao_Protocolo = retorno.ProtMdFe.InfProt.NProt;
                         }
                         else
-                        { manifestoEletronicoDocumento.Status = MDFe_Status.Autorizado; }
+                        {
+                            MDFeProcMDFe mdfeProcMDFe = new MDFeProcMDFe();
+                            mdfeProcMDFe.MDFe = mdfe;
+                            mdfeProcMDFe.ProtMDFe = retorno.ProtMdFe;
+                            FuncoesXml.ClasseParaArquivoXml(mdfeProcMDFe, Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, mdfe.Chave() + "-mdfe-protMdfe.xml"));
+                            manifestoEletronicoDocumento.Status = MDFe_Status.Autorizado;
+                            manifestoEletronicoDocumento.Autorizacao_Protocolo = retorno.ProtMdFe.InfProt.NProt;
+                        }
                         retorno.SalvarXmlEmDisco();
                     }
                     else
@@ -2221,9 +2236,14 @@ namespace SisCom.Aplicacao.Classes
                 manifestoEletronicoDocumento.DataCancelamento = retorno.InfEvento.DhRegEvento;
                 manifestoEletronicoDocumento.DescricaoCancelamento = justificativa;
                 manifestoEletronicoDocumento.RetornoCancelamento = retorno.InfEvento.XMotivo;
+                manifestoEletronicoDocumento.RetornoSefaz = manifestoEletronicoDocumento.RetornoCancelamento;
 
                 if (!manifestoEletronicoDocumento.RetornoCancelamento.Contains("Rejeição:"))
-                { manifestoEletronicoDocumento.Status = MDFe_Status.Cancelado; }
+                { 
+                    manifestoEletronicoDocumento.Status = MDFe_Status.Cancelado;
+                }
+
+                evento = null;
             }
             catch (Exception Ex)
             {
@@ -2264,18 +2284,61 @@ namespace SisCom.Aplicacao.Classes
 
                 var retorno = evento.MDFeEventoEncerramentoMDFeEventoEncerramento(mdfe, 1, manifestoEletronicoDocumento.Autorizacao_Protocolo);
 
-                manifestoEletronicoDocumento.DataEncerramento = retorno.InfEvento.DhRegEvento;
                 manifestoEletronicoDocumento.RetornoEncerramento = retorno.InfEvento.XMotivo;
+                manifestoEletronicoDocumento.RetornoSefaz = manifestoEletronicoDocumento.RetornoEncerramento;
 
-                if (!manifestoEletronicoDocumento.RetornoEncerramento.Contains("Rejeição:"))
-                { manifestoEletronicoDocumento.Status = MDFe_Status.Encerrado; }
+                if (manifestoEletronicoDocumento.RetornoEncerramento.Trim() == "Evento registrado e vinculado ao MDF-e")
+                { 
+                    manifestoEletronicoDocumento.Status = MDFe_Status.Encerrado;
+                    manifestoEletronicoDocumento.DataEncerramento = DateTime.Now;
+                }
+
+                evento = null;
             }
             catch(Exception Ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                if (Ex.InnerException == null)
+                { CaixaMensagem.Informacao(Ex.Message); }
+                else
+                { CaixaMensagem.Informacao(Ex.InnerException.Message); }
             }
 
             return manifestoEletronicoDocumento;
+        }
+        private static void Fiscal_ManifestoEletronicoDocumento_Imprimir(string Autorizacao_ChaveAutenticacao, 
+                                                                         string arquivoRelatorio, 
+                                                                         bool DocumentoEncerrado = false, 
+                                                                         bool DocumentoCancelado = false, 
+                                                                         bool QuebrarLinhasObservacao = false)
+        {
+            try
+            {
+                MDFeProcMDFe mdfe = null;
+                var caminhoXml = Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, Autorizacao_ChaveAutenticacao + "-mdfe.xml");
+
+                try
+                {
+                    mdfe = FuncoesXml.ArquivoXmlParaClasse<MDFe.Classes.Retorno.MDFeProcMDFe>(caminhoXml);
+                }
+                catch (Exception)
+                {
+                }
+
+                var rpt = new DamdfeFrMDFe(proc: mdfe,
+                    config: new ConfiguracaoDamdfe()
+                    {
+                        //Logomarca = ImageToByte(pcbLogotipo.Image),
+                        DocumentoEncerrado = DocumentoEncerrado,
+                        DocumentoCancelado = DocumentoCancelado,
+                        Desenvolvedor = Declaracoes.dados_Empresa_CNPJ,
+                        QuebrarLinhasObservacao = QuebrarLinhasObservacao
+                    },
+                    arquivoRelatorio: arquivoRelatorio);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Configurar impressão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private static total GetTotal(string sVersao, List<det> produtos)
@@ -3059,24 +3122,6 @@ namespace SisCom.Aplicacao.Classes
                 manifestoEletronicoDocumento.ManifestoEletronicoDocumentoPercursos = null;
 
                 await manifestoEletronicoDocumentoController.Atualizar(manifestoEletronicoDocumento.Id, manifestoEletronicoDocumento);
-            }
-            using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(meuDbContext, notifier))
-            {
-                var manifestoEletronicoDocumentoSerie = (await manifestoEletronicoDocumentoSerieController.PesquisarId((Guid)manifestoEletronicoDocumento.ManifestoEletronicoDocumentoSerieId)).FirstOrDefault();
-
-                if (String.IsNullOrEmpty(manifestoEletronicoDocumentoSerie.UltimoNumeroManifestoEletronicoDocumento))
-                {
-                    manifestoEletronicoDocumentoSerie.UltimoNumeroManifestoEletronicoDocumento = manifestoEletronicoDocumento.Numero;
-                }
-                else
-                {
-                    if (Convert.ToInt32(manifestoEletronicoDocumentoSerie.UltimoNumeroManifestoEletronicoDocumento) < Convert.ToInt32(manifestoEletronicoDocumento.Numero))
-                    {
-                        manifestoEletronicoDocumentoSerie.UltimoNumeroManifestoEletronicoDocumento = manifestoEletronicoDocumento.Numero;
-                    }
-                }
-
-                await manifestoEletronicoDocumentoSerieController.Atualizar(manifestoEletronicoDocumentoSerie.Id, manifestoEletronicoDocumentoSerie);
             }
         }
     }
