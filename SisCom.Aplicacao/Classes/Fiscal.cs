@@ -58,8 +58,6 @@ using MDFe.Servicos.RetRecepcaoMDFe;
 using MDFe.Classes.Retorno.MDFeRetRecepcao;
 using NFe.Danfe.Base;
 using System.Windows.Forms;
-using MDFe.Damdfe.Fast;
-using MDFe.Damdfe.Base;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -2305,35 +2303,12 @@ namespace SisCom.Aplicacao.Classes
 
             return manifestoEletronicoDocumento;
         }
-        private static void Fiscal_ManifestoEletronicoDocumento_Imprimir(string Autorizacao_ChaveAutenticacao, 
-                                                                         string arquivoRelatorio, 
-                                                                         bool DocumentoEncerrado = false, 
-                                                                         bool DocumentoCancelado = false, 
-                                                                         bool QuebrarLinhasObservacao = false)
+        public static void Fiscal_ManifestoEletronicoDocumento_Imprimir(string Autorizacao_ChaveAutenticacao, 
+                                                                        string status)
         {
             try
             {
-                MDFeProcMDFe mdfe = null;
-                var caminhoXml = Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, Autorizacao_ChaveAutenticacao + "-mdfe.xml");
-
-                try
-                {
-                    mdfe = FuncoesXml.ArquivoXmlParaClasse<MDFe.Classes.Retorno.MDFeProcMDFe>(caminhoXml);
-                }
-                catch (Exception)
-                {
-                }
-
-                var rpt = new DamdfeFrMDFe(proc: mdfe,
-                    config: new ConfiguracaoDamdfe()
-                    {
-                        //Logomarca = ImageToByte(pcbLogotipo.Image),
-                        DocumentoEncerrado = DocumentoEncerrado,
-                        DocumentoCancelado = DocumentoCancelado,
-                        Desenvolvedor = Declaracoes.dados_Empresa_CNPJ,
-                        QuebrarLinhasObservacao = QuebrarLinhasObservacao
-                    },
-                    arquivoRelatorio: arquivoRelatorio);
+                Zeus.MDFeImprimir(Autorizacao_ChaveAutenticacao, status);
             }
             catch (Exception ex)
             {

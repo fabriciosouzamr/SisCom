@@ -5,11 +5,12 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
-using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,8 +24,7 @@ namespace SisCom.Aplicacao.Formularios
         const int gridManifestoDocumentoEletronico_Numero = 3;
         const int gridManifestoDocumentoEletronico_Status = 4;
         const int gridManifestoDocumentoEletronico_RetornoSefaz = 5;
-        const int gridManifestoDocumentoEletronico_Condutor_Nome = 6;
-        const int gridManifestoDocumentoEletronico_Condutor_CNPJ_CPF = 7;
+        const int gridManifestoDocumentoEletronico_ChaveAcesso = 6;
 
         public frmFiscal_MDFe_Consulta(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
@@ -42,8 +42,7 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "Numero", "Número", Tamanho: 100);
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "Status", "Status", Tamanho: 100);
             Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "Retorno Sefaz", "RetornoSefaz", Tamanho: 100);
-            Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "NomeCondutor", "Nome Condutor", Tamanho: 150);
-            Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "CPFCondutor", "C.P.F. Condutor", Tamanho: 100);
+            Grid_DataGridView.User_ColunaAdicionar(gridManifestoDocumentoEletronico, "ChaveAcesso", "Chave de Acesso", Tamanho: 100);
 
             Carregar(dateDataEmissaoInicial.Value, dateDataEmissaoFinal.Value);
         }
@@ -186,10 +185,8 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                                               Valor = item.Status.GetDescription() },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_RetornoSefaz,
                                                                                                                                               Valor = item.RetornoSefaz },
-                                                                                                               new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_Condutor_Nome,
-                                                                                                                                              Valor = item.Condutor_Nome },
-                                                                                                               new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_Condutor_CNPJ_CPF,
-                                                                                                                                              Valor = item.Condutor_CPF }});
+                                                                                                               new Grid_DataGridView.Coluna { Indice = gridManifestoDocumentoEletronico_ChaveAcesso,
+                                                                                                                                              Valor = item.Autorizacao_ChaveAutenticacao }});
             }
 
             return true;
@@ -319,6 +316,36 @@ namespace SisCom.Aplicacao.Formularios
             else
             {
                 CaixaMensagem.Informacao("Selecione o manifesto a ser transmitido");
+            }
+        }
+
+        private void botaoImprimir_Click(object sender, EventArgs e)
+        {
+            Fiscal.Fiscal_ManifestoEletronicoDocumento_Imprimir("21230248205505000119580010000000401522422396",
+                                                                "Transmitido");
+
+            return;
+
+            if (gridManifestoDocumentoEletronico.CurrentRow != null)
+            {
+                if ((gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Transmitido.GetHashCode().ToString()) &&
+                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Cancelado.GetHashCode().ToString()) &&
+                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Encerrado.GetHashCode().ToString()))
+                {
+                    //Fiscal.Fiscal_ManifestoEletronicoDocumento_Imprimir(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_ChaveAcesso].Value.ToString(),
+                    //                                                    Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "MDFeRetrato.frx"),
+                    //                                                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Encerrado.GetHashCode().ToString()),
+                    //                                                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Cancelado.GetHashCode().ToString()),
+                    //                                                    false);
+                }
+                else
+                {
+                    CaixaMensagem.Informacao("Status não permite impressão");
+                }
+            }
+            else
+            {
+                CaixaMensagem.Informacao("Selecione o manifesto a ser impresso");
             }
         }
     }

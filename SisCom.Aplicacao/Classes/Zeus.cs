@@ -308,6 +308,13 @@ namespace SisCom.Aplicacao.Classes
             }
         }
 
+        public static void MDFeImprimir(string chaveacesso, string status)
+        {
+
+            Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "mdfeimprimir " + chaveacesso + " " +
+                                                                                          status);
+        }
+
         private static string XML_RetirarVersao(string sXML)
         {
             string ret = sXML;

@@ -1,6 +1,9 @@
 ﻿using DFe.Classes.Entidades;
 using DFe.Classes.Extensoes;
 using DFe.Utils;
+using MDFe.Classes.Retorno;
+using MDFe.Damdfe.Base;
+using MDFe.Damdfe.Fast;
 using NFe.Classes;
 using NFe.Classes.Informacoes.Identificacao.Tipos;
 using NFe.Classes.Servicos.DistribuicaoDFe.Schemas;
@@ -47,8 +50,10 @@ namespace SisCom.Aplicacao_FW
         static string _XML = "";
         static string _TXT = "";
         static string _PATH_SCHEMAS = "";
-        static string _PATH_NUVEMFISCAL = "";
+        static string _PATH_NUVEMFISCAL_Vendas = "";
+        static string _PATH_NUVEMFISCAL_MDFE = "";
         static string _PATH_DOCFISCAL = "";
+        static string _PATH_ArquivoRelatorio = "";
         static string _nFeTipoEvento = "";
         static string _protocoloAutorizacao = "";
         static int _lote = 0;
@@ -61,15 +66,18 @@ namespace SisCom.Aplicacao_FW
             //protocolar MG 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\transmitir.xml' 00B8070A04D8A768A8
             //cartacorrecao MG 31221111831939000114550010000007201100007201 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cartacorrecao.txt' 00B8070A04D8A768A8
             //cancelamento MG 31221111831939000114550010000007201100007202 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cancelamento.txt' 00B8070A04D8A768A8 131225031170016
+            //mdfeimprimir 21230248205505000119580010000000401522422396 transmitido
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             _PATH_SCHEMAS = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
-            _PATH_NUVEMFISCAL = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_Vendas");
+            _PATH_NUVEMFISCAL_Vendas = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_Vendas");
+            _PATH_NUVEMFISCAL_MDFE = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_MDFe");
+            _PATH_ArquivoRelatorio = Path.Combine(Directory.GetCurrentDirectory(), "Configuration\\MDFeRetrato.frx");
 
             if (String.IsNullOrEmpty(Properties.Settings.Default.PathDocumentoFiscal))
-            { _PATH_DOCFISCAL = _PATH_NUVEMFISCAL; }
+            { _PATH_DOCFISCAL = _PATH_NUVEMFISCAL_Vendas; }
             else
             { _PATH_DOCFISCAL = Properties.Settings.Default.PathDocumentoFiscal; }
 
@@ -88,7 +96,7 @@ namespace SisCom.Aplicacao_FW
 
                     break;
                 case "nuvemfiscal":
-                    _PATH_NUVEMFISCAL = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_Compras");
+                    _PATH_NUVEMFISCAL_Vendas = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_Compras");
                     _EnderecoEmitente_UF = args[1];
                     _cnpj = args[2];
                     if ((!String.IsNullOrEmpty(args[3])) && (args[3] != "''")) { _nsu = args[3]; }
@@ -120,6 +128,14 @@ namespace SisCom.Aplicacao_FW
                     _protocoloAutorizacao = args[6];
                     _lote = Convert.ToInt16(args[7]);
                     Cancelamento();
+                    break;
+                case "mdfeimprimir":
+                    _chaveacesso = args[1];
+                    MDFeImprimir(_chaveacesso,
+                                 (args[2].ToUpper() == "ENCERRADO"),
+                                 (args[2].ToUpper() == "CANCELADO"),
+                                 false,
+                                 "");
                     break;
                 default:
                     break;
@@ -181,7 +197,7 @@ namespace SisCom.Aplicacao_FW
 
                 if (!Directory.Exists(_PATH_DOCFISCAL)) Directory.CreateDirectory(_PATH_DOCFISCAL);
 
-                _PATH_NUVEMFISCAL = _PATH_DOCFISCAL;
+                _PATH_NUVEMFISCAL_Vendas = _PATH_DOCFISCAL;
 
                 var servicoNFe = new ServicosNFe(Configuracao());
                 var sNFe_Chave = oNFe.infNFe.Id.Substring(3);
@@ -227,7 +243,7 @@ namespace SisCom.Aplicacao_FW
                                 if (oNFe_Proc.protNFe != null)
                                 {
                                     protocolo = oNFe_Proc.protNFe.infProt.nProt;
-                                    var sNFe_Arquivo = _PATH_NUVEMFISCAL + sNFe_Chave + "-procNfe.xml";
+                                    var sNFe_Arquivo = _PATH_NUVEMFISCAL_Vendas + sNFe_Chave + "-procNfe.xml";
 
                                     FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, sNFe_Arquivo);
                                 }
@@ -270,7 +286,7 @@ namespace SisCom.Aplicacao_FW
                                         if (oNFe_Proc.protNFe != null)
                                         {
                                             protocolo = oNFe_Proc.protNFe.infProt.nProt;
-                                            var sNFe_Arquivo = _PATH_NUVEMFISCAL + sNFe_Chave + "-procNfe.xml";
+                                            var sNFe_Arquivo = _PATH_NUVEMFISCAL_Vendas + sNFe_Chave + "-procNfe.xml";
 
                                             FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, sNFe_Arquivo);
                                         }
@@ -295,7 +311,7 @@ namespace SisCom.Aplicacao_FW
                     oNFe_Proc.protNFe = new NFe.Classes.Protocolo.protNFe();
                     oNFe_Proc.protNFe = retornoConsulta.Retorno.protNFe;
                     oNFe_Proc.versao = retornoConsulta.Retorno.versao;
-                    var sNFe_Arquivo = Path.Combine(_PATH_NUVEMFISCAL, sNFe_Chave + "-procNfe.xml");
+                    var sNFe_Arquivo = Path.Combine(_PATH_NUVEMFISCAL_Vendas, sNFe_Chave + "-procNfe.xml");
                     FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, sNFe_Arquivo);
 
                     cStat = retornoConsulta.Retorno.cStat.ToString();
@@ -398,6 +414,51 @@ namespace SisCom.Aplicacao_FW
             Console.Write(retorno);
         }
 
+        private static void MDFeImprimir(string Autorizacao_ChaveAutenticacao,
+                                         bool DocumentoEncerrado = false,
+                                         bool DocumentoCancelado = false,
+                                         bool QuebrarLinhasObservacao = false,
+                                         string Desenvolvedor = "'")
+        {
+            try
+            {
+                MDFeProcMDFe mdfe = null;
+
+                var caminhoXml = Path.Combine(_PATH_NUVEMFISCAL_MDFE, Autorizacao_ChaveAutenticacao + "-mdfe-protMdfe.xml");
+
+                try
+                {
+                    mdfe = FuncoesXml.ArquivoXmlParaClasse<MDFe.Classes.Retorno.MDFeProcMDFe>(caminhoXml);
+                }
+                catch (Exception ex)
+                {
+                    log($"Configurar impressão - {ex.Message}");
+                }
+
+                var rpt = new DamdfeFrMDFe(proc: mdfe,
+                    config: new ConfiguracaoDamdfe()
+                    {
+                        //Logomarca = ImageToByte(pcbLogotipo.Image),
+                        DocumentoEncerrado = DocumentoEncerrado,
+                        DocumentoCancelado = DocumentoCancelado,
+                        Desenvolvedor = Desenvolvedor,
+                        QuebrarLinhasObservacao = QuebrarLinhasObservacao
+                    },
+                    arquivoRelatorio: _PATH_ArquivoRelatorio);
+
+                Console.Write(caminhoXml);
+
+                rpt.Visualizar(true);
+                rpt.ExportarPdf(caminhoXml.Replace(".xml", ".pdf"));
+
+                log($"Configurar impressão - {caminhoXml.Replace(".xml", ".pdf")}");
+            }
+            catch (Exception ex)
+            {
+                log($"Configurar impressão - {ex.Message}");
+            }
+        }
+
         private static ConfiguracaoServico Configuracao()
         {
             ConfiguracaoServico oConfig = new ConfiguracaoServico();
@@ -470,9 +531,18 @@ namespace SisCom.Aplicacao_FW
             oConfig.ProtocoloDeSeguranca = SecurityProtocolType.Tls12;
             oConfig.DiretorioSchemas = _PATH_SCHEMAS;
             oConfig.SalvarXmlServicos = true;
-            oConfig.DiretorioSalvarXml = _PATH_NUVEMFISCAL;
+            oConfig.DiretorioSalvarXml = _PATH_NUVEMFISCAL_Vendas;
 
             return oConfig;
+        }
+
+        private static void log(string texto)
+        {
+            StreamWriter x;
+
+            x = File.CreateText(Path.Combine(_PATH_NUVEMFISCAL_MDFE, "Aplicacao_FW_log.txt"));
+            x.WriteLine(texto);
+            x.Close();
         }
     }
 }

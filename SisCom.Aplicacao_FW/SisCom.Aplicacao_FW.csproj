@@ -39,6 +39,33 @@
     <Reference Include="DFe.Utils">
       <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Utils.dll</HintPath>
     </Reference>
+    <Reference Include="FastReport">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Bars">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\FastReport.Bars.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Editor">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\FastReport.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.OpenSource.Export.PdfSimple">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\FastReport.OpenSource.Export.PdfSimple.dll</HintPath>
+    </Reference>
+    <Reference Include="MDFe.Classes">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="MDFe.Damdfe.Base">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Damdfe.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="MDFe.Damdfe.Fast">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Damdfe.Fast.dll</HintPath>
+    </Reference>
+    <Reference Include="MDFe.Servicos">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Servicos.dll</HintPath>
+    </Reference>
+    <Reference Include="MDFe.Utils">
+      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Utils.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>

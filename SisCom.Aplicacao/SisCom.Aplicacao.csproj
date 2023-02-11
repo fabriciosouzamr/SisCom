@@ -82,19 +82,13 @@
       <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Utils.dll</HintPath>
     </Reference>
     <Reference Include="MDFe.Classes">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Classes.dll</HintPath>
-    </Reference>
-    <Reference Include="MDFe.Damdfe.Base">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Damdfe.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="MDFe.Damdfe.Fast">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Damdfe.Fast.dll</HintPath>
+      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Classes.dll</HintPath>
     </Reference>
     <Reference Include="MDFe.Servicos">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Servicos.dll</HintPath>
+      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Servicos.dll</HintPath>
     </Reference>
     <Reference Include="MDFe.Utils">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Utils.dll</HintPath>
+      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Utils.dll</HintPath>
     </Reference>
     <Reference Include="NFe.Classes">
       <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\NFe.Classes.dll</HintPath>
