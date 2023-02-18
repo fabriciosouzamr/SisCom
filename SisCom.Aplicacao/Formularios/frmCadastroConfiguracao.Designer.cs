@@ -36,11 +36,15 @@
             this.label7 = new System.Windows.Forms.Label();
             this.botaoFechar = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPais = new System.Windows.Forms.TabPage();
+            this.dataPais = new System.Windows.Forms.DataGridView();
             this.tabUnidadeMedida = new System.Windows.Forms.TabPage();
             this.dataUnidadeMedida = new System.Windows.Forms.DataGridView();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.tabControl.SuspendLayout();
+            this.tabPais.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataPais)).BeginInit();
             this.tabUnidadeMedida.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataUnidadeMedida)).BeginInit();
             this.SuspendLayout();
@@ -112,6 +116,7 @@
             // 
             // tabControl
             // 
+            this.tabControl.Controls.Add(this.tabPais);
             this.tabControl.Controls.Add(this.tabUnidadeMedida);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 72);
@@ -119,6 +124,28 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1275, 584);
             this.tabControl.TabIndex = 10;
+            // 
+            // tabPais
+            // 
+            this.tabPais.Controls.Add(this.dataPais);
+            this.tabPais.Location = new System.Drawing.Point(4, 24);
+            this.tabPais.Name = "tabPais";
+            this.tabPais.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPais.Size = new System.Drawing.Size(1267, 556);
+            this.tabPais.TabIndex = 1;
+            this.tabPais.Text = "País";
+            this.tabPais.UseVisualStyleBackColor = true;
+            // 
+            // dataPais
+            // 
+            this.dataPais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataPais.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataPais.Location = new System.Drawing.Point(3, 3);
+            this.dataPais.Name = "dataPais";
+            this.dataPais.RowTemplate.Height = 25;
+            this.dataPais.Size = new System.Drawing.Size(1261, 550);
+            this.dataPais.TabIndex = 1;
+            this.dataPais.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataPais_UserDeletingRow);
             // 
             // tabUnidadeMedida
             // 
@@ -155,6 +182,8 @@
             this.pnlMenuBotaoBotao.ResumeLayout(false);
             this.pnlMenuBotaoBotao.PerformLayout();
             this.tabControl.ResumeLayout(false);
+            this.tabPais.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataPais)).EndInit();
             this.tabUnidadeMedida.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataUnidadeMedida)).EndInit();
             this.ResumeLayout(false);
@@ -171,6 +200,8 @@
         private System.Windows.Forms.Button botaoFechar;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabUnidadeMedida;
+        private System.Windows.Forms.TabPage tabPais;
         private System.Windows.Forms.DataGridView dataUnidadeMedida;
+        private System.Windows.Forms.DataGridView dataPais;
     }
 }

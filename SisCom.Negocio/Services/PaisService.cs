@@ -11,17 +11,17 @@ namespace SisCom.Negocio.Services
 {
     public class PaisService : BaseService<Pais>, IPaisService
     {
-        private readonly IPaisRepository _PaisRepository;
+        private readonly IPaisRepository _paisRepository;
 
-        public PaisService(IPaisRepository PaisRepository,
-                                 INotifier notificador) : base(notificador, PaisRepository)
+        public PaisService(IPaisRepository _paisRepository,
+                           INotifier notificador) : base(notificador, _paisRepository)
         {
-            _PaisRepository = PaisRepository;
+            this._paisRepository = _paisRepository;
         }
 
         public Task<IPagedList<Pais>> GetPagedList(FilteredPagedListParameters parameters)
         {
-            return _PaisRepository.GetPagedList(f =>
+            return _paisRepository.GetPagedList(f =>
             (
                 parameters.Search == null || f.Nome.Contains(parameters.Search)
             ), parameters);
@@ -29,22 +29,49 @@ namespace SisCom.Negocio.Services
 
         public override void Dispose()
         {
-            _PaisRepository?.Dispose();
+            _paisRepository?.Dispose();
         }
-
-        public Task Adicionar(Pais Pais)
+        public virtual async Task Adicionar(Pais Pais)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var empresa = await _paisRepository.Search(f => f.Nome == Pais.Nome);
+
+                if (empresa.Count() != 0)
+                {
+                    Notify("Já existe um país com este nome informado.");
+                    return;
+                }
+
+                await _paisRepository.Insert(Pais);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
-
-        public Task Atualizar(Pais Pais)
+        public virtual async Task Atualizar(Pais Pais)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var exists = _paisRepository.Exists(f => (f.Nome == Pais.Nome) && (f.Id != Pais.Id));
+
+                if (exists)
+                {
+                    Notify("Já existe um país com este nome informado.");
+                    return;
+                }
+
+                await _paisRepository.Update(Pais);
+            }
+            catch (Exception Ex)
+            {
+                Notify("ERRO: " + Ex.Message + ".");
+            }
         }
-
-        public Task Remover(Guid id)
+        public async Task Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            await _paisRepository.Delete(id);
         }
 
         public Task<List<Pais>> Combo()

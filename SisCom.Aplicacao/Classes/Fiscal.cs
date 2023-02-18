@@ -65,6 +65,8 @@ namespace SisCom.Aplicacao.Classes
     {
         private static string TratarString(string texto)
         {
+            while (texto.Contains("  ")) texto = texto.Replace("  ", " ");
+
             return texto.Trim();
         }
 
@@ -1390,11 +1392,11 @@ namespace SisCom.Aplicacao.Classes
                 oNFe.infNFe.emit.xNome = TratarString(notaFiscalSaidaViewModel.Empresa.RazaoSocial);
                 oNFe.infNFe.emit.xFant = TratarString(notaFiscalSaidaViewModel.Empresa.NomeFantasia);
                 if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.InscricaoEstadual))
-                    oNFe.infNFe.emit.IE = notaFiscalSaidaViewModel.Empresa.InscricaoEstadual;
+                    oNFe.infNFe.emit.IE = TratarString(notaFiscalSaidaViewModel.Empresa.InscricaoEstadual);
                 if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.InscricaoMunicipal))
                 {
-                    oNFe.infNFe.emit.IM = notaFiscalSaidaViewModel.Empresa.InscricaoMunicipal.Trim();
-                    oNFe.infNFe.emit.CNAE = Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.InscricaoMunicipal).Trim();
+                    oNFe.infNFe.emit.IM = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.InscricaoMunicipal));
+                    oNFe.infNFe.emit.CNAE = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.InscricaoMunicipal));
                 }
 
                 oNFe.infNFe.emit.IEST = null;
@@ -1414,21 +1416,27 @@ namespace SisCom.Aplicacao.Classes
                 oNFe.infNFe.emit.enderEmit = new NFe.Classes.Informacoes.Emitente.enderEmit();
                 if (notaFiscalSaidaViewModel.Empresa.Endereco != null)
                 {
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Logradouro)) { oNFe.infNFe.emit.enderEmit.xLgr = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Logradouro)); }
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Numero)) { oNFe.infNFe.emit.enderEmit.nro = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Numero).Trim()); }
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Complemento)) { oNFe.infNFe.emit.enderEmit.xCpl = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Complemento).Trim()); }
-                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Bairro)) { oNFe.infNFe.emit.enderEmit.xBairro = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Bairro).Trim()); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Logradouro)) 
+                    { oNFe.infNFe.emit.enderEmit.xLgr = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Logradouro)); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Numero)) 
+                    { oNFe.infNFe.emit.enderEmit.nro = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Numero).Trim()); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Complemento)) 
+                    { oNFe.infNFe.emit.enderEmit.xCpl = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Complemento).Trim()); }
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Bairro)) 
+                    { oNFe.infNFe.emit.enderEmit.xBairro = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Bairro).Trim()); }
                     if (notaFiscalSaidaViewModel.Cliente.Endereco.End_Cidade != null)
                     {
-                        if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.CodigoIBGE)) { oNFe.infNFe.emit.enderEmit.cMun = Convert.ToInt32(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.CodigoIBGE).Trim()); }
+                        if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.CodigoIBGE)) 
+                        { oNFe.infNFe.emit.enderEmit.cMun = Convert.ToInt32(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.CodigoIBGE).Trim()); }
                         oNFe.infNFe.emit.enderEmit.xMun = TratarString(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Nome).Trim());
                         if (notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado != null)
                             oNFe.infNFe.emit.enderEmit.UF = EstadoDBParaEstadoZeus(Funcao.NuloParaString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado.Codigo).Trim());
                     }
                 }
-                if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_CEP)) { oNFe.infNFe.emit.enderEmit.CEP = notaFiscalSaidaViewModel.Empresa.Endereco.End_CEP.Replace("-", "").Replace(".", "").PadLeft(8, '0'); }
+                if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_CEP)) 
+                { oNFe.infNFe.emit.enderEmit.CEP = notaFiscalSaidaViewModel.Empresa.Endereco.End_CEP.Replace("-", "").Replace(".", "").PadLeft(8, '0'); }
                 oNFe.infNFe.emit.enderEmit.cPais = 1058;
-                oNFe.infNFe.emit.enderEmit.xPais = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.Nome.Trim();
+                oNFe.infNFe.emit.enderEmit.xPais = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.Nome);
 
                 if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Telefone))
                     oNFe.infNFe.emit.enderEmit.fone = Convert.ToInt32(Funcoes._Classes.Texto.SomenteNumero(notaFiscalSaidaViewModel.Empresa.Telefone));
@@ -1459,10 +1467,10 @@ namespace SisCom.Aplicacao.Classes
                         oNFe.infNFe.dest.xNome = TratarString(notaFiscalSaidaViewModel.Cliente.Nome);
 
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_EMail))
-                        oNFe.infNFe.dest.email = notaFiscalSaidaViewModel.Cliente_EMail;
+                        oNFe.infNFe.dest.email = TratarString(notaFiscalSaidaViewModel.Cliente_EMail);
 
                     if ((!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente.InscricaoEstadual)) && (notaFiscalSaidaViewModel.Cliente.InscricaoEstadual.Trim().ToUpper() != "ISENTO"))
-                        oNFe.infNFe.dest.IE = notaFiscalSaidaViewModel.Cliente.InscricaoEstadual;
+                        oNFe.infNFe.dest.IE = TratarString(notaFiscalSaidaViewModel.Cliente.InscricaoEstadual);
                 }
 
                 if ((!bClienteNaoInformado) && (notaFiscalSaidaViewModel.Cliente_Endereco != null) && (notaFiscalSaidaViewModel.TransmitirEnderecoCliente))
@@ -1482,7 +1490,7 @@ namespace SisCom.Aplicacao.Classes
                         if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_CEP))
                             oNFe.infNFe.dest.enderDest.CEP = notaFiscalSaidaViewModel.Cliente_Endereco.End_CEP.Replace("-", "").Replace(".", "").PadLeft(8, '0');
                         oNFe.infNFe.dest.enderDest.cPais = 1058;
-                        oNFe.infNFe.dest.enderDest.xPais = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.Nome;
+                        oNFe.infNFe.dest.enderDest.xPais = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.Nome);
                     }
                 }
                 if (!bClienteNaoInformado)
@@ -1566,11 +1574,11 @@ namespace SisCom.Aplicacao.Classes
 
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.VolumeTransportados_Especie))
                     {
-                        vol.esp = notaFiscalSaidaViewModel.VolumeTransportados_Especie;
+                        vol.esp = TratarString(notaFiscalSaidaViewModel.VolumeTransportados_Especie);
                     }
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.VolumeTransportados_Marca))
                     {
-                        vol.marca = notaFiscalSaidaViewModel.VolumeTransportados_Marca;
+                        vol.marca = TratarString(notaFiscalSaidaViewModel.VolumeTransportados_Marca);
                     }
 
                     oNFe.infNFe.transp.vol = new List<NFe.Classes.Informacoes.Transporte.vol>();
@@ -1604,14 +1612,14 @@ namespace SisCom.Aplicacao.Classes
                     if (String.IsNullOrEmpty(ntFSMercadoria.Mercadoria.CodigoBarra))
                         oNFE_Det.prod.cEAN = "SEM GTIN";
                     else
-                        oNFE_Det.prod.cEAN = ntFSMercadoria.Mercadoria.CodigoBarra.Trim();
+                        oNFE_Det.prod.cEAN = TratarString(ntFSMercadoria.Mercadoria.CodigoBarra);
 
                     if (oNFe.infNFe.ide.tpAmb == TipoAmbiente.Homologacao)
                         oNFE_Det.prod.xProd = "NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL";
                     else
-                        oNFE_Det.prod.xProd = ntFSMercadoria.Mercadoria.Nome.Trim();
+                        oNFE_Det.prod.xProd = TratarString(ntFSMercadoria.Mercadoria.Nome);
 
-                    oNFE_Det.prod.NCM = ntFSMercadoria.TabelaNCM.Codigo.Trim();
+                    oNFE_Det.prod.NCM = TratarString(ntFSMercadoria.TabelaNCM.Codigo);
                     oNFE_Det.prod.CFOP = Convert.ToInt32(ntFSMercadoria.TabelaCFOP.Codigo.Trim());
                     oNFE_Det.prod.uCom = ntFSMercadoria.UnidadeMedida.Codigo.Trim();
                     oNFE_Det.prod.qCom = ntFSMercadoria.Quantidade;
@@ -1764,9 +1772,7 @@ namespace SisCom.Aplicacao.Classes
                             {
                                 oNFE_Card = new NFe.Classes.Informacoes.Pagamento.card();
                                 oNFE_Card.tpIntegra = TipoIntegracaoPagamento.TipNaoIntegrado;
-                                //oNFE_Card.CNPJ = oData_02.Rows(iCont).Item("CD_CPF_CNPJ");
                                 oNFE_Card.tBand = BandeiraCartao.bcOutros;
-                                //oNFE_Card.cAut = oData_02.Rows(iCont).Item("CD_AUTORIZACAO");
                                 oNFE_Pag_Det.card = oNFE_Card;
                             }
 

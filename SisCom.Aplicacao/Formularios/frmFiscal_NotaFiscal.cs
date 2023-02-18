@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 using Texto = Funcoes._Classes.Texto;
 
 namespace SisCom.Aplicacao.Formularios
@@ -1416,7 +1417,6 @@ namespace SisCom.Aplicacao.Formularios
             notaFiscalSaida.EmpresaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEmpresa);
             notaFiscalSaida.NaturezaOperacaoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboNaturezaOperacao);
             notaFiscalSaida.NotaFiscalFinalidadeId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboFinalidade);
-            //notafiscalsaida.NotaFiscal = labelNumeroNotaFiscalSaida.Text;
             notaFiscalSaida.DataEmissao = dateDataEmissao.Value;
             notaFiscalSaida.DataSaida = dateDataSaida.Value;
             notaFiscalSaida.HoraEmissao = textHora.Text;
@@ -1430,10 +1430,10 @@ namespace SisCom.Aplicacao.Formularios
             notaFiscalSaida.Cliente_Endereco.End_CEP = textRemetenteCEP.Text;
             notaFiscalSaida.Cliente_Endereco.End_Logradouro = textRemetenteEndereco.Text;
             notaFiscalSaida.Cliente_Endereco.End_Numero = textRemetenteNumero.Text;
-            notaFiscalSaida.Cliente_Endereco.End_Bairro = textRemetenteBairro.Text;
+            notaFiscalSaida.Cliente_Endereco.End_Bairro = textRemetenteBairro.Text.Trim();
             notaFiscalSaida.Cliente_Endereco.End_CidadeId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboRemetenteCidade);
-            notaFiscalSaida.Cliente_Telefone = textRemetenteFones.Text;
-            notaFiscalSaida.Cliente_EMail = textLocalEntregaRetiradaEMail.Text;
+            notaFiscalSaida.Cliente_Telefone = textRemetenteFones.Text.Trim();
+            notaFiscalSaida.Cliente_EMail = textLocalEntregaRetiradaEMail.Text.Trim();
             notaFiscalSaida.ValorFrete = numericValorFrete.Value;
             notaFiscalSaida.ValorSeguro = numericValorSeguro.Value;
             notaFiscalSaida.OutrasDespesas = numericValorOutrasDespesas.Value;
@@ -1444,28 +1444,28 @@ namespace SisCom.Aplicacao.Formularios
             notaFiscalSaida.Transportadora_FreteConta = TipoFrete.SemOcorrenciaTransporte;
             if (Combo_ComboBox.Selecionado(comboTransportadoraFreteConta)) notaFiscalSaida.Transportadora_FreteConta = (TipoFrete)comboTransportadoraFreteConta.SelectedValue;
             notaFiscalSaida.Transportadora_CNPJ_CPF = Funcoes._Classes.Texto.SomenteNumero(maskedTransportadoraCPFCNPJ.Text);
-            notaFiscalSaida.Transportadora_Placa = textTransportadoraPlaca.Text;
+            notaFiscalSaida.Transportadora_Placa = textTransportadoraPlaca.Text.Trim();
             notaFiscalSaida.Transportadora_UFId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboTransportadoraUF);
-            notaFiscalSaida.Transportadora_RNTRC = textTransportadoraRNTC.Text;
+            notaFiscalSaida.Transportadora_RNTRC = textTransportadoraRNTC.Text.Trim();
             notaFiscalSaida.Transportadora_NumeroCarga = Funcao.NuloParaNumero(numericTransportadoraNumeroCarga.Value);
             notaFiscalSaida.VolumeTransportados_Quantidade = Funcao.NuloParaNumero(numericVolumeTransportadosQuantidade.Value);
-            notaFiscalSaida.VolumeTransportados_Especie = textVolumeTransportadosEspecie.Text;
-            notaFiscalSaida.VolumeTransportados_Marca = textVolumeTransportadosMarca.Text;
+            notaFiscalSaida.VolumeTransportados_Especie = textVolumeTransportadosEspecie.Text.Trim();
+            notaFiscalSaida.VolumeTransportados_Marca = textVolumeTransportadosMarca.Text.Trim();
             notaFiscalSaida.VolumeTransportados_Numero = Funcao.NuloParaNumero(numericVolumeTransportadosNumero.Value);
             notaFiscalSaida.VolumeTransportados_PesoBruto = Funcao.NuloParaNumero(numericVolumeTransportadosPesoBruto.Value);
             notaFiscalSaida.VolumeTransportados_PesoLiquido = Funcao.NuloParaNumero(numericVolumeTransportadosPesoLiquido.Value);
             if (Combo_ComboBox.Selecionado(comboRegimeTributario)) { notaFiscalSaida.RegimeTributario = (Entidade.Enum.RegimeTributario)comboRegimeTributario.SelectedValue; }
             notaFiscalSaida.ObservacaoDocumento = "";
-            notaFiscalSaida.InformacoesAdicionaisInteresseFisco = richInformacoesAdicionaisInteresseFisco.Text;
-            notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_Obsersacao = richInformacoesComplementaresInteresseContribuinte.Text;
+            notaFiscalSaida.InformacoesAdicionaisInteresseFisco = richInformacoesAdicionaisInteresseFisco.Text.Trim();
+            notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_Obsersacao = richInformacoesComplementaresInteresseContribuinte.Text.Trim();
             notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_UFId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboInformacoesComplementaresUF);
-            notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_Local = textInformacoesComplementaresLocal.Text;
-            notaFiscalSaida.CodigoChaveAcesso = textInfoNFeChaveNFe.Text;
-            notaFiscalSaida.Protocolo = textInfoNFeProtocolo.Text;
+            notaFiscalSaida.InformacoesComplementaresInteresseContribuinte_Local = textInformacoesComplementaresLocal.Text.Trim();
+            notaFiscalSaida.CodigoChaveAcesso = textInfoNFeChaveNFe.Text.Trim();
+            notaFiscalSaida.Protocolo = textInfoNFeProtocolo.Text.Trim();
             notaFiscalSaida.IndicaPresenca = (NF_IndicaPresenca)comboInfoNFeIndicaPresenca.SelectedValue;
             notaFiscalSaida.TipoEmissao = (NF_TipoEmissao)comboInfoNFeTipoEmissao.SelectedValue;
             notaFiscalSaida.Operacao = (NF_Operacao)comboInfoNFeOperacao.SelectedValue;
-            notaFiscalSaida.EmailDestinoXML = textEmailDestinoXML.Text;
+            notaFiscalSaida.EmailDestinoXML = textEmailDestinoXML.Text.Trim();
             if (VendaId != Guid.Empty) { notaFiscalSaida.VendaId = VendaId; }
 
             if (notaFiscalSaida.ClienteId == null)
@@ -1779,7 +1779,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void gridMercadoria_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if ((e.ColumnIndex == gridMercadoria_BTN_Impostos) && (e.RowIndex > -1))
+            if ((e.ColumnIndex == gridMercadoria_BTN_Impostos) && (e.RowIndex > -1) && (!gridMercadoria.ReadOnly))
             {
                 using (frmFiscal_NotaFiscal_Impostos form = ServiceProvider().GetRequiredService<frmFiscal_NotaFiscal_Impostos>())
                 {
@@ -2091,17 +2091,98 @@ namespace SisCom.Aplicacao.Formularios
 
         void Editar(bool editar)
         {
-            tbcGeral.Enabled = editar;
+            #region Edicao
+            grpSelecioneFiltrosFaturar.Enabled = editar;
+            comboEmpresa.Enabled = editar;
+            botaoLancarRemetenteMercadoria.Enabled = editar;
+            comboRegimeTributario.Enabled = editar;
+
+            checkValidado.Enabled = editar;
+            comboEmpresa.Enabled = editar;
+            comboNaturezaOperacao.Enabled = editar;
+            comboFinalidade.Enabled = editar;
+            botaoCadastrarNatureza.Enabled = editar;
+            textNumeroNotaFiscalSaida.ReadOnly = (!editar);
+            dateDataEmissao.Enabled = editar;
+            dateDataSaida.Enabled = editar;
+            textHora.ReadOnly = (!editar);
+            textModelo.ReadOnly = (!editar);
+            textSerie.ReadOnly = (!editar);
+            textInfoNFeNFeSubSerie.ReadOnly = (!editar);
+            comboRemetente.Enabled = editar;
+            maskedRemetenteCPFCNPJ.ReadOnly = (!editar);
+            botaoRemetente.Enabled = editar;
+            textRemetenteIE.ReadOnly = (!editar);
+
+            comboRemetenteUF.Enabled = editar;
+            comboRemetenteCidade.Enabled = editar;
+        
+            textRemetenteEndereco.ReadOnly = (!editar);
+            textRemetenteNumero.ReadOnly = (!editar);
+            textRemetenteBairro.ReadOnly = (!editar);
+            textRemetenteCEP.ReadOnly = (!editar);
+            comboRemetentePais.Enabled = editar;
+            textRemetenteFones.ReadOnly = (!editar);
+            textRemetenteEMail.ReadOnly = (!editar);
+
+            numericValorFrete.ReadOnly = (!editar);
+            numericValorSeguro.ReadOnly = (!editar);
+            numericValorOutrasDespesas.ReadOnly = (!editar);
+            numericPercentualDesconto.ReadOnly = (!editar);
+            numericValorDesconto.ReadOnly = (!editar);
+            numericPercentualAliquotaSimplesNacional.ReadOnly = (!editar);
+
+            comboTransportadora.Enabled = editar;
+            comboTransportadoraFreteConta.Enabled = editar;
+            maskedTransportadoraCPFCNPJ.ReadOnly = (!editar);
+            textTransportadoraPlaca.ReadOnly = (!editar);
+            comboTransportadoraUF.Enabled = editar;
+            textTransportadoraRNTC.ReadOnly = (!editar);
+            numericTransportadoraNumeroCarga.ReadOnly = (!editar);
+            numericVolumeTransportadosQuantidade.ReadOnly = (!editar);
+            textVolumeTransportadosEspecie.ReadOnly = (!editar);
+            textVolumeTransportadosMarca.ReadOnly = (!editar);
+            numericVolumeTransportadosNumero.ReadOnly = (!editar);
+            numericVolumeTransportadosPesoBruto.ReadOnly = (!editar);
+            numericVolumeTransportadosPesoLiquido.ReadOnly = (!editar);
+            comboRegimeTributario.Enabled = editar;
+            richInformacoesAdicionaisInteresseFisco.ReadOnly = (!editar);
+            richInformacoesComplementaresInteresseContribuinte.ReadOnly = (!editar);
+            comboInformacoesComplementaresUF.Enabled = editar;
+            textInformacoesComplementaresLocal.ReadOnly = (!editar);
+            textInfoNFeChaveNFe.ReadOnly = (!editar);
+            textInfoNFeProtocolo.ReadOnly = (!editar);
+            comboInfoNFeIndicaPresenca.Enabled = editar;
+            comboInfoNFeTipoEmissao.Enabled = editar;
+            textEmailDestinoXML.ReadOnly = (!editar);
+
+            comboInfoNFeOrigem.Enabled = editar;
+
+            comboCobrancaNotaTipoPagamento.Enabled = editar;
+            botaoCadastroObservacoes.Enabled = editar;
+            botaoAtualizarInfoComplementoObservacao.Enabled = editar;
+            comboInformacoesComplementaresUF.Enabled = editar;
+            textInformacoesComplementaresLocal.ReadOnly = (!editar);
+
+            gridMercadoria.ReadOnly = (!editar);
+            gridObservacao.ReadOnly = (!editar);
+            gridCobrancaNota.ReadOnly = (!editar);
+            gridInfoNFe.ReadOnly = (!editar);
+            #endregion
+
             botaoExportarNFe.Enabled = editar;
         }
 
         private void gridVenda_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (gridVenda.CurrentRow != null)
+            if (String.IsNullOrEmpty(gridVenda.CurrentRow.Cells[gridVenda_ID].Value.ToString()))
             {
-                var form = this.ServiceProvider().GetRequiredService<frmVendasInclusao>();
-                form.vendaId = (Guid)gridVenda.CurrentRow.Cells[gridVenda_ID].Value;
-                form.ShowDialog(this);
+                if (gridVenda.CurrentRow != null)
+                {
+                    var form = this.ServiceProvider().GetRequiredService<frmVendasInclusao>();
+                    form.vendaId = (Guid)gridVenda.CurrentRow.Cells[gridVenda_ID].Value;
+                    form.ShowDialog(this);
+                }
             }
         }
 

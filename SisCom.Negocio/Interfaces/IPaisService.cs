@@ -11,7 +11,7 @@ namespace SisCom.Negocio.Interfaces
     {
         Task Adicionar(Pais Pais);
         Task Atualizar(Pais Pais);
-        Task Remover(Guid id);
+        Task Excluir(Guid id);
         Task<List<Pais>> GetAll(Expression<Func<Pais, object>> order = null);
 
         Task<List<Pais>> Combo(Expression<Func<Pais, object>> order = null);

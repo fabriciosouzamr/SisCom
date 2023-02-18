@@ -10,17 +10,17 @@ namespace SisCom.Negocio.Services
 {
     public class NotaFiscalSaidaService : BaseService<NotaFiscalSaida>, INotaFiscalSaidaService
     {
-        private readonly INotaFiscalSaidaRepository _NotaFiscalSaidaRepository;
+        private readonly INotaFiscalSaidaRepository _notaFiscalSaidaRepository;
 
         public NotaFiscalSaidaService(INotaFiscalSaidaRepository NotaFiscalSaidaRepository,
                                      INotifier notificador) : base(notificador, NotaFiscalSaidaRepository)
         {
-            _NotaFiscalSaidaRepository = NotaFiscalSaidaRepository;
+            _notaFiscalSaidaRepository = NotaFiscalSaidaRepository;
         }
 
         public Task<IPagedList<NotaFiscalSaida>> GetPagedList(FilteredPagedListParameters parameters)
         {
-            return _NotaFiscalSaidaRepository.GetPagedList(f =>
+            return _notaFiscalSaidaRepository.GetPagedList(f =>
             (
                 parameters.Search == null || f.NotaFiscal.Contains(parameters.Search)
             ), parameters);
@@ -28,7 +28,7 @@ namespace SisCom.Negocio.Services
 
         public override void Dispose()
         {
-            _NotaFiscalSaidaRepository?.Dispose();
+            _notaFiscalSaidaRepository?.Dispose();
         }
 
         public async Task Adicionar(NotaFiscalSaida NotaFiscalSaida)
@@ -37,7 +37,7 @@ namespace SisCom.Negocio.Services
 
             try
             {
-                var _NotaFiscalSaida = await _NotaFiscalSaidaRepository.Search(f => ((f.CodigoChaveAcesso == NotaFiscalSaida.CodigoChaveAcesso) && (!String.IsNullOrEmpty(NotaFiscalSaida.CodigoChaveAcesso))));
+                var _NotaFiscalSaida = await _notaFiscalSaidaRepository.Search(f => ((f.CodigoChaveAcesso == NotaFiscalSaida.CodigoChaveAcesso) && (!String.IsNullOrEmpty(NotaFiscalSaida.CodigoChaveAcesso))));
 
                 if (_NotaFiscalSaida.Any())
                 {
@@ -45,7 +45,7 @@ namespace SisCom.Negocio.Services
                     return;
                 }
 
-                await _NotaFiscalSaidaRepository.Insert(NotaFiscalSaida);
+                await _notaFiscalSaidaRepository.Insert(NotaFiscalSaida);
             }
             catch (Exception Ex)
             {
@@ -53,20 +53,45 @@ namespace SisCom.Negocio.Services
             }
         }
 
-        public async Task Atualizar(NotaFiscalSaida NotaFiscalSaida)
+        public async Task Atualizar(NotaFiscalSaida notaFiscalSaida)
         {
             try
             {
-                var _NotaFiscalSaida = await _NotaFiscalSaidaRepository.Search(f => ((f.CodigoChaveAcesso == NotaFiscalSaida.CodigoChaveAcesso) && 
-                                                                                     (!String.IsNullOrEmpty(NotaFiscalSaida.CodigoChaveAcesso))) && (f.Id != NotaFiscalSaida.Id));
+                var _notaFiscalSaidas = await _notaFiscalSaidaRepository.Search(f => ((f.CodigoChaveAcesso == notaFiscalSaida.CodigoChaveAcesso) && 
+                                                                                     (!String.IsNullOrEmpty(notaFiscalSaida.CodigoChaveAcesso))) && (f.Id != notaFiscalSaida.Id));
 
-                if (_NotaFiscalSaida.Any())
+                if (_notaFiscalSaidas.Any())
                 {
                     Notify("Já existe uma Nota Fiscal de Saída com essa chave de acesso informado.");
                     return;
                 }
 
-                await _NotaFiscalSaidaRepository.Update(NotaFiscalSaida);
+                var _notaFiscalSaida = await _notaFiscalSaidaRepository.GetById(notaFiscalSaida.Id);
+
+                if ((_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Cancelado) &&
+                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Finalizada) &&
+                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Denegada) &&
+                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Inutilizada) &&
+                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Transmitida))
+                {
+                    _notaFiscalSaida.RetornoSefaz = notaFiscalSaida.RetornoSefaz;
+                    _notaFiscalSaida.RetornoSefazCodigo = notaFiscalSaida.RetornoSefazCodigo;
+                    _notaFiscalSaida.DataRetornoSefaz = notaFiscalSaida.DataRetornoSefaz;
+                    _notaFiscalSaida.DescricaoCartaCorrecao = notaFiscalSaida.DescricaoCartaCorrecao;
+                    _notaFiscalSaida.DataCartaCorrecao = notaFiscalSaida.DataCartaCorrecao;
+                    _notaFiscalSaida.RetornoCartaCorrecao = notaFiscalSaida.RetornoCartaCorrecao;
+                    _notaFiscalSaida.DescricaoCancelamento = notaFiscalSaida.DescricaoCancelamento;
+                    _notaFiscalSaida.DataCancelamento = notaFiscalSaida.DataCancelamento;
+                    _notaFiscalSaida.RetornoCancelamento = notaFiscalSaida.RetornoCancelamento;
+                    _notaFiscalSaida.NumeroLoteEnvioSefaz = notaFiscalSaida.NumeroLoteEnvioSefaz;
+
+                    await _notaFiscalSaidaRepository.Update(_notaFiscalSaida);
+                }
+                else
+                {
+                    await _notaFiscalSaidaRepository.Update(notaFiscalSaida);
+                }
+
             }
             catch (Exception Ex)
             {
@@ -76,7 +101,7 @@ namespace SisCom.Negocio.Services
 
         public async Task Excluir(Guid id)
         {
-            await _NotaFiscalSaidaRepository.Delete(id);
+            await _notaFiscalSaidaRepository.Delete(id);
         }
 
     }

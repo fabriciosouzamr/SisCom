@@ -158,7 +158,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.comboEmpresa = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grpSelecioneFiltrosFaturar = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.gridVenda = new System.Windows.Forms.DataGridView();
             this.label14 = new System.Windows.Forms.Label();
@@ -345,7 +345,7 @@
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.grpSelecioneFiltrosFaturar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridVenda)).BeginInit();
             this.tbsMercadorias.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -792,7 +792,7 @@
             this.tbsRemetente.Controls.Add(this.panel1);
             this.tbsRemetente.Controls.Add(this.comboEmpresa);
             this.tbsRemetente.Controls.Add(this.label16);
-            this.tbsRemetente.Controls.Add(this.groupBox1);
+            this.tbsRemetente.Controls.Add(this.grpSelecioneFiltrosFaturar);
             this.tbsRemetente.Location = new System.Drawing.Point(4, 24);
             this.tbsRemetente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbsRemetente.Name = "tbsRemetente";
@@ -1788,28 +1788,28 @@
             this.label16.TabIndex = 2;
             this.label16.Text = "Empresa:";
             // 
-            // groupBox1
+            // grpSelecioneFiltrosFaturar
             // 
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.gridVenda);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.comboOrigem);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.botaoFiltrar);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.datePeriodoFinal);
-            this.groupBox1.Controls.Add(this.datePeriodoInicial);
-            this.groupBox1.Controls.Add(this.comboCliente);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Location = new System.Drawing.Point(1, 1);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(271, 311);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Selecione os filtros a Faturar";
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.label15);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.gridVenda);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.label14);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.comboOrigem);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.label13);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.botaoFiltrar);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.label12);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.label11);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.datePeriodoFinal);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.datePeriodoInicial);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.comboCliente);
+            this.grpSelecioneFiltrosFaturar.Controls.Add(this.label10);
+            this.grpSelecioneFiltrosFaturar.Location = new System.Drawing.Point(1, 1);
+            this.grpSelecioneFiltrosFaturar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grpSelecioneFiltrosFaturar.Name = "grpSelecioneFiltrosFaturar";
+            this.grpSelecioneFiltrosFaturar.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grpSelecioneFiltrosFaturar.Size = new System.Drawing.Size(271, 311);
+            this.grpSelecioneFiltrosFaturar.TabIndex = 0;
+            this.grpSelecioneFiltrosFaturar.TabStop = false;
+            this.grpSelecioneFiltrosFaturar.Text = "Selecione os filtros a Faturar";
             // 
             // label15
             // 
@@ -3550,8 +3550,8 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grpSelecioneFiltrosFaturar.ResumeLayout(false);
+            this.grpSelecioneFiltrosFaturar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridVenda)).EndInit();
             this.tbsMercadorias.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -3667,7 +3667,7 @@
         private System.Windows.Forms.TabPage tbsNFe;
         private System.Windows.Forms.TabPage tbsLocalEntregaRetirada;
         private System.Windows.Forms.TabPage tbsAutorizarXML;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grpSelecioneFiltrosFaturar;
         private System.Windows.Forms.ComboBox comboCliente;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker datePeriodoInicial;

@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using Funcoes._Entity;
 using Funcoes.Interfaces;
 using Funcoes.Notifications;
+using SisCom.Negocio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -83,6 +84,10 @@ namespace SisCom.Negocio.Services
         public virtual async Task<List<TEntity>> ComboSearch(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> order = null)
         {
             return await _repository.ComboSearch(predicate, order);
+        }
+        public async Task Excluir(Guid id)
+        {
+            await _repository.Delete(id);
         }
 
         //public virtual Task Adicionar(TEntity entity)
