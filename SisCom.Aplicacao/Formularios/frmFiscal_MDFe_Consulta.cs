@@ -54,7 +54,8 @@ namespace SisCom.Aplicacao.Formularios
         {
             if (gridManifestoDocumentoEletronico.CurrentRow != null)
             {
-                if (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Validado.GetHashCode().ToString())
+                if ((gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == "Criado") ||
+                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == "Validado"))
                 {
                     var form = this.ServiceProvider().GetRequiredService<frmFiscal_MDFe>();
                     form.manifestoEletronicoDocumentoId = Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString());
@@ -321,22 +322,14 @@ namespace SisCom.Aplicacao.Formularios
 
         private void botaoImprimir_Click(object sender, EventArgs e)
         {
-            Fiscal.Fiscal_ManifestoEletronicoDocumento_Imprimir("21230248205505000119580010000000401522422396",
-                                                                "Transmitido");
-
-            return;
-
             if (gridManifestoDocumentoEletronico.CurrentRow != null)
             {
-                if ((gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Transmitido.GetHashCode().ToString()) &&
-                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Cancelado.GetHashCode().ToString()) &&
-                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Encerrado.GetHashCode().ToString()))
+                if ((gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Autorizado.GetDescription().ToString()) ||
+                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Cancelado.GetDescription().ToString()) ||
+                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Encerrado.GetDescription().ToString()))
                 {
-                    //Fiscal.Fiscal_ManifestoEletronicoDocumento_Imprimir(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_ChaveAcesso].Value.ToString(),
-                    //                                                    Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "MDFeRetrato.frx"),
-                    //                                                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Encerrado.GetHashCode().ToString()),
-                    //                                                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Cancelado.GetHashCode().ToString()),
-                    //                                                    false);
+                    Fiscal.Fiscal_ManifestoEletronicoDocumento_Imprimir(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_ChaveAcesso].Value.ToString(),
+                                                                        gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString());
                 }
                 else
                 {

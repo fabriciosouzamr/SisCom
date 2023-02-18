@@ -287,6 +287,13 @@ namespace SisCom.Aplicacao.Formularios
                     notaFiscalSaidaPagamento = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaPagamentoViewModel>>(item.NotaFiscalSaidaPagamento);
                     notaFiscalSaidaReferencia = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaReferenciaViewModel>>(item.NotaFiscalSaidaReferencia);
 
+                    if (Validacao.Data_AdicionarHora(notaFiscalSaidaViewModel.DataSaida, notaFiscalSaidaViewModel.HoraEmissao) < DateTime.Now)
+                    {
+                        DateTime data = DateTime.Now.AddMinutes(2);
+                        notaFiscalSaidaViewModel.DataSaida = data.Date;
+                        notaFiscalSaidaViewModel.HoraEmissao = $"{data.Hour.ToString("00")}:{data.Minute.ToString("00")}";
+                    }
+
                     Fiscal.Fiscal_DocumentoFiscal_Transmitir(eModeloDocumento: ModeloDocumento.NFe,
                                                              notaFiscalSaidaViewModel: ref notaFiscalSaidaViewModel,
                                                              notaFiscalSaidaMercadoriaViewModels: ref notaFiscalSaidaMercadoria,

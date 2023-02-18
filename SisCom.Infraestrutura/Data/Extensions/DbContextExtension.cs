@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Funcoes._Classes;
 using Funcoes._Entity;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +44,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
             }
             catch (Exception Ex)
             {
-                var ex = Ex.Message;
+                log($"{DateTime.Now.ToBinary()} - AllMigrationsApplied - {Ex.Message}");
             }
 
             return ret;
@@ -130,7 +131,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
             }
             catch (Exception Ex)
             {
-                var ex = Ex.Message;
+                log($"{DateTime.Now.ToBinary()} - AddRange - {Ex.Message}");
             }
         }
         private static void AddRangeSync<TEntity>(MeuDbContext context, string _seedPath = "") where TEntity : Entity
@@ -151,7 +152,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
             }
             catch (Exception Ex)
             {
-                var ex = Ex.Message;
+                log($"{DateTime.Now.ToBinary()} - AddRangeSync - {Ex.Message}");
             }
         }
 
@@ -163,7 +164,7 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
             }
             catch (Exception Ex)
             {
-                var ex = Ex.Message;
+                log($"{DateTime.Now.ToBinary()} - ReadFromJson - {Ex.Message}");
                 return null;
             }
         }
@@ -176,9 +177,18 @@ namespace MeuProjeto.Infrastructure.Data.Extensions
             }
             catch (Exception Ex)
             {
-                var ex = Ex.Message;
+                log($"{DateTime.Now.ToBinary()} - ReadFromJsonSync - {Ex.Message}");
                 return null;
             }
+        }
+
+        private static void log(string texto)
+        {
+            StreamWriter x;
+
+            x = File.CreateText(Path.Combine(Directory.GetCurrentDirectory(), "DbContextExtensionLog.txt"));
+            x.WriteLine(texto);
+            x.Close();
         }
     }
 }

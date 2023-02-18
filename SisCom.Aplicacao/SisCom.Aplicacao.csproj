@@ -872,6 +872,9 @@
     <None Update="Externos\SisCom.Aplicacao_FW.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\CoreCompat.System.Drawing.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Externos\SisCom.Aplicacao_FW\DFe.Classes.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -882,6 +885,36 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\SisCom.Aplicacao_FW\DFe.Wsdl.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\FastReport.Bars.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\FastReport.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\FastReport.Editor.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\FastReport.OpenSource.Export.PdfSimple.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\MDFe.Classes.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\MDFe.Damdfe.Base.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\MDFe.Damdfe.Fast.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\MDFe.Servicos.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\MDFe.Utils.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\MDFe.Wsdl.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\SisCom.Aplicacao_FW\Newtonsoft.Json.dll">
