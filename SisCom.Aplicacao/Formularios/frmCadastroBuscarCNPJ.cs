@@ -115,10 +115,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async Task comboCidade_Carregar(Guid EstadoId)
         {
-            Combo_ComboBox.Formatar(comboEnderecoCidade,
-                                    "ID", "Nome",
-                                    ComboBoxStyle.DropDownList,
-                                    await (new CidadeController(this.MeuDbContext(), this._notifier)).ComboEstado(EstadoId, p => p.Nome));
+            await Combo_ComboBox.ComboCidadeEstado_Carregar(comboEnderecoCidade, EstadoId, this.MeuDbContext(), this._notifier);
             this.MeuDbContextDispose();
         }
 

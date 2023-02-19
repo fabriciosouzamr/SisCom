@@ -70,12 +70,15 @@
             this.gridItens = new System.Windows.Forms.DataGridView();
             this.botaoConfimar = new System.Windows.Forms.Button();
             this.botaoImprimir = new System.Windows.Forms.Button();
+            this.numericSequencialEvento = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridItens)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSequencialEvento)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenuBotao
@@ -122,6 +125,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numericSequencialEvento);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.textChaveAcesso);
             this.groupBox1.Controls.Add(this.label8);
@@ -154,7 +159,7 @@
             this.textChaveAcesso.Location = new System.Drawing.Point(5, 102);
             this.textChaveAcesso.Name = "textChaveAcesso";
             this.textChaveAcesso.ReadOnly = true;
-            this.textChaveAcesso.Size = new System.Drawing.Size(714, 29);
+            this.textChaveAcesso.Size = new System.Drawing.Size(556, 29);
             this.textChaveAcesso.TabIndex = 7;
             this.textChaveAcesso.TabStop = false;
             // 
@@ -564,6 +569,23 @@
             this.botaoImprimir.UseVisualStyleBackColor = true;
             this.botaoImprimir.Click += new System.EventHandler(this.botaoImprimir_Click);
             // 
+            // numericSequencialEvento
+            // 
+            this.numericSequencialEvento.Location = new System.Drawing.Point(567, 103);
+            this.numericSequencialEvento.Name = "numericSequencialEvento";
+            this.numericSequencialEvento.Size = new System.Drawing.Size(152, 29);
+            this.numericSequencialEvento.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(567, 81);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(152, 19);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Sequencial do Evento\r\n";
+            // 
             // frmFiscal_CartaCorrecao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -589,6 +611,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridItens)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSequencialEvento)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -635,5 +658,7 @@
         private System.Windows.Forms.DataGridView gridItens;
         private System.Windows.Forms.Button botaoConfimar;
         private System.Windows.Forms.Button botaoImprimir;
+        private System.Windows.Forms.NumericUpDown numericSequencialEvento;
+        private System.Windows.Forms.Label label1;
     }
 }

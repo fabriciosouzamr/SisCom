@@ -133,10 +133,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 var id = comboIdentificacao_CidadeCarregamento.SelectedValue;
 
-                Combo_ComboBox.Formatar(comboIdentificacao_CidadeCarregamento,
-                                        "ID", "Nome",
-                                        ComboBoxStyle.DropDownList,
-                                        await (new CidadeController(this.MeuDbContext(), this._notifier)).ComboEstado(EstadoId, p => p.Nome));
+                await Combo_ComboBox.ComboCidadeEstado_Carregar(comboIdentificacao_CidadeCarregamento, EstadoId, this.MeuDbContext(), this._notifier);
 
                 if (id != null) comboIdentificacao_CidadeCarregamento.SelectedValue = id;
             }

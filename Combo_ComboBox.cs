@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using DFe.Classes.Entidades;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.Formularios;
@@ -121,9 +122,11 @@ public class Combo_ComboBox
         {
 			Combo_ComboBox.Formatar(comboCidade,
 									"ID", "Nome",
-									ComboBoxStyle.DropDownList,
+									ComboBoxStyle.DropDown,
 									await (new CidadeController(main.MeuDbContext(), _notifier)).ComboEstado((Guid)comboEstado.SelectedValue, p => p.Nome));
-			await Task.Delay(500);
+			comboCidade.AutoCompleteMode = AutoCompleteMode.Suggest;
+			comboCidade.AutoCompleteSource = AutoCompleteSource.ListItems;
+            await Task.Delay(500);
 			comboCidade.SelectedValue = CidadeId;
 
 			if (comboPais != null)
@@ -132,7 +135,7 @@ public class Combo_ComboBox
 				Combo_ComboBox.Formatar(comboPais,
 										"ID", "Nome",
 										ComboBoxStyle.DropDownList,
-										await (new PaisController(main.MeuDbContext(), _notifier)).ComboId(paisId));
+										await (new PaisController(main.MeuDbContext(), _notifier)).Combo(o => o.Nome));
 				comboPais.SelectedValue = paisId;
 			}
 		}
@@ -142,6 +145,17 @@ public class Combo_ComboBox
 		comboCidade.Enabled = true;
 		comboEstado.Enabled = true;
 		if (comboPais != null) { comboPais.Enabled = true; }
-
 	}
+
+	public async static Task<bool> ComboCidadeEstado_Carregar(ComboBox comboCidade, Guid EstadoId, MeuDbContext MeuDbContext, INotifier notifier)
+	{
+        Combo_ComboBox.Formatar(comboCidade,
+                                "ID", "Nome",
+								ComboBoxStyle.DropDown,
+                                await (new CidadeController(MeuDbContext, notifier)).ComboEstado(EstadoId, p => p.Nome));
+		comboCidade.AutoCompleteMode = AutoCompleteMode.Suggest;
+		comboCidade.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+		return true;
+    }
 }

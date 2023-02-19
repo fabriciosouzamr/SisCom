@@ -200,14 +200,9 @@ namespace SisCom.Aplicacao.Formularios
             this.panel3 = new System.Windows.Forms.Panel();
             this.labelPreco_ValorICMSFronteira = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.textObservacao = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.botaoFabricante = new System.Windows.Forms.Button();
             this.numericTributacao_ECFNFCeNFCeAliquotaICMS = new System.Windows.Forms.NumericUpDown();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.tbsPrecoEstoque = new System.Windows.Forms.TabPage();
+            this.tabPrecoEstoque = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelCalculoPrecificacao = new System.Windows.Forms.Label();
             this.label84 = new System.Windows.Forms.Label();
@@ -291,15 +286,6 @@ namespace SisCom.Aplicacao.Formularios
             this.tabImpostosICMS = new System.Windows.Forms.TabPage();
             this.gridImpostosICMS = new System.Windows.Forms.DataGridView();
             this.pnlDadosGerais = new System.Windows.Forms.Panel();
-            this.botaoSubGrupo = new System.Windows.Forms.Button();
-            this.botaoFornecedor = new System.Windows.Forms.Button();
-            this.botaoGrupoProduto = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.comboFabricante = new System.Windows.Forms.ComboBox();
-            this.comboSubGrupoMercadoria = new System.Windows.Forms.ComboBox();
-            this.comboFornecedor = new System.Windows.Forms.ComboBox();
-            this.comboGrupoMercadoria = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.textNomeMercadoria = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -333,6 +319,21 @@ namespace SisCom.Aplicacao.Formularios
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboPesquisarPesquisa = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.tabDadosGerais = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textObservacao = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.botaoFabricante = new System.Windows.Forms.Button();
+            this.botaoSubGrupo = new System.Windows.Forms.Button();
+            this.botaoFornecedor = new System.Windows.Forms.Button();
+            this.botaoGrupoProduto = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.comboFabricante = new System.Windows.Forms.ComboBox();
+            this.comboSubGrupoMercadoria = new System.Windows.Forms.ComboBox();
+            this.comboFornecedor = new System.Windows.Forms.ComboBox();
+            this.comboGrupoMercadoria = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Aliquota)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_PIS_Aliquota)).BeginInit();
             this.groupBox7.SuspendLayout();
@@ -389,7 +390,7 @@ namespace SisCom.Aplicacao.Formularios
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericTributacao_ECFNFCeNFCeAliquotaICMS)).BeginInit();
             this.tabControl.SuspendLayout();
-            this.tbsPrecoEstoque.SuspendLayout();
+            this.tabPrecoEstoque.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlPrecoEstoquePesoTributacao.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -420,6 +421,7 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlMenuBotao.SuspendLayout();
             this.pnlPesquisar.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabDadosGerais.SuspendLayout();
             this.SuspendLayout();
             // 
             // label33
@@ -2184,54 +2186,6 @@ namespace SisCom.Aplicacao.Formularios
             this.label8.TabIndex = 0;
             this.label8.Text = "Tipo Pesquisa:";
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label18.Location = new System.Drawing.Point(10, 97);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(75, 15);
-            this.label18.TabIndex = 21;
-            this.label18.Text = "Observação:";
-            // 
-            // textObservacao
-            // 
-            this.textObservacao.Location = new System.Drawing.Point(151, 97);
-            this.textObservacao.Multiline = true;
-            this.textObservacao.Name = "textObservacao";
-            this.textObservacao.Size = new System.Drawing.Size(617, 40);
-            this.textObservacao.TabIndex = 9;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label16.Location = new System.Drawing.Point(464, 78);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(68, 15);
-            this.label16.TabIndex = 19;
-            this.label16.Text = "Fabricante:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label17.Location = new System.Drawing.Point(464, 55);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(69, 15);
-            this.label17.TabIndex = 18;
-            this.label17.Text = "Sub Grupo:";
-            // 
-            // botaoFabricante
-            // 
-            this.botaoFabricante.Location = new System.Drawing.Point(745, 74);
-            this.botaoFabricante.Name = "botaoFabricante";
-            this.botaoFabricante.Size = new System.Drawing.Size(23, 23);
-            this.botaoFabricante.TabIndex = 17;
-            this.botaoFabricante.TabStop = false;
-            this.botaoFabricante.UseVisualStyleBackColor = true;
-            this.botaoFabricante.Click += new System.EventHandler(this.botaoFabricante_Click);
-            // 
             // numericTributacao_ECFNFCeNFCeAliquotaICMS
             // 
             this.numericTributacao_ECFNFCeNFCeAliquotaICMS.DecimalPlaces = 2;
@@ -2242,7 +2196,8 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.tbsPrecoEstoque);
+            this.tabControl.Controls.Add(this.tabDadosGerais);
+            this.tabControl.Controls.Add(this.tabPrecoEstoque);
             this.tabControl.Controls.Add(this.tabDetalhesFiscais);
             this.tabControl.Controls.Add(this.tabDetalhesEstoque);
             this.tabControl.Controls.Add(this.tabProducao);
@@ -2250,25 +2205,25 @@ namespace SisCom.Aplicacao.Formularios
             this.tabControl.Controls.Add(this.tabIntegracao);
             this.tabControl.Controls.Add(this.tabSimiliares);
             this.tabControl.Controls.Add(this.tabImpostosICMS);
-            this.tabControl.Location = new System.Drawing.Point(0, 269);
+            this.tabControl.Location = new System.Drawing.Point(0, 188);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(809, 480);
             this.tabControl.TabIndex = 8;
             // 
-            // tbsPrecoEstoque
+            // tabPrecoEstoque
             // 
-            this.tbsPrecoEstoque.Controls.Add(this.panel1);
-            this.tbsPrecoEstoque.Controls.Add(this.pnlPrecoEstoquePesoTributacao);
-            this.tbsPrecoEstoque.Controls.Add(this.pnlPrecoEstoquePreco);
-            this.tbsPrecoEstoque.Controls.Add(this.pnlPrecoEstoqueImpostos);
-            this.tbsPrecoEstoque.Location = new System.Drawing.Point(4, 24);
-            this.tbsPrecoEstoque.Name = "tbsPrecoEstoque";
-            this.tbsPrecoEstoque.Padding = new System.Windows.Forms.Padding(3);
-            this.tbsPrecoEstoque.Size = new System.Drawing.Size(801, 452);
-            this.tbsPrecoEstoque.TabIndex = 6;
-            this.tbsPrecoEstoque.Text = "Preço Estoque";
-            this.tbsPrecoEstoque.UseVisualStyleBackColor = true;
+            this.tabPrecoEstoque.Controls.Add(this.panel1);
+            this.tabPrecoEstoque.Controls.Add(this.pnlPrecoEstoquePesoTributacao);
+            this.tabPrecoEstoque.Controls.Add(this.pnlPrecoEstoquePreco);
+            this.tabPrecoEstoque.Controls.Add(this.pnlPrecoEstoqueImpostos);
+            this.tabPrecoEstoque.Location = new System.Drawing.Point(4, 24);
+            this.tabPrecoEstoque.Name = "tabPrecoEstoque";
+            this.tabPrecoEstoque.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPrecoEstoque.Size = new System.Drawing.Size(801, 452);
+            this.tabPrecoEstoque.TabIndex = 6;
+            this.tabPrecoEstoque.Text = "Preço Estoque";
+            this.tabPrecoEstoque.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -2679,7 +2634,7 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlPrecoEstoquePreco.Controls.Add(this.label46);
             this.pnlPrecoEstoquePreco.Location = new System.Drawing.Point(287, 10);
             this.pnlPrecoEstoquePreco.Name = "pnlPrecoEstoquePreco";
-            this.pnlPrecoEstoquePreco.Size = new System.Drawing.Size(293, 345);
+            this.pnlPrecoEstoquePreco.Size = new System.Drawing.Size(293, 339);
             this.pnlPrecoEstoquePreco.TabIndex = 62;
             // 
             // label63
@@ -3233,20 +3188,6 @@ namespace SisCom.Aplicacao.Formularios
             // pnlDadosGerais
             // 
             this.pnlDadosGerais.BackColor = System.Drawing.Color.Silver;
-            this.pnlDadosGerais.Controls.Add(this.label18);
-            this.pnlDadosGerais.Controls.Add(this.textObservacao);
-            this.pnlDadosGerais.Controls.Add(this.label16);
-            this.pnlDadosGerais.Controls.Add(this.label17);
-            this.pnlDadosGerais.Controls.Add(this.botaoFabricante);
-            this.pnlDadosGerais.Controls.Add(this.botaoSubGrupo);
-            this.pnlDadosGerais.Controls.Add(this.botaoFornecedor);
-            this.pnlDadosGerais.Controls.Add(this.botaoGrupoProduto);
-            this.pnlDadosGerais.Controls.Add(this.label15);
-            this.pnlDadosGerais.Controls.Add(this.label14);
-            this.pnlDadosGerais.Controls.Add(this.comboFabricante);
-            this.pnlDadosGerais.Controls.Add(this.comboSubGrupoMercadoria);
-            this.pnlDadosGerais.Controls.Add(this.comboFornecedor);
-            this.pnlDadosGerais.Controls.Add(this.comboGrupoMercadoria);
             this.pnlDadosGerais.Controls.Add(this.label13);
             this.pnlDadosGerais.Controls.Add(this.textNomeMercadoria);
             this.pnlDadosGerais.Controls.Add(this.label12);
@@ -3257,90 +3198,8 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlDadosGerais.Controls.Add(this.label10);
             this.pnlDadosGerais.Location = new System.Drawing.Point(0, 131);
             this.pnlDadosGerais.Name = "pnlDadosGerais";
-            this.pnlDadosGerais.Size = new System.Drawing.Size(809, 138);
+            this.pnlDadosGerais.Size = new System.Drawing.Size(809, 57);
             this.pnlDadosGerais.TabIndex = 7;
-            // 
-            // botaoSubGrupo
-            // 
-            this.botaoSubGrupo.Location = new System.Drawing.Point(745, 51);
-            this.botaoSubGrupo.Name = "botaoSubGrupo";
-            this.botaoSubGrupo.Size = new System.Drawing.Size(23, 23);
-            this.botaoSubGrupo.TabIndex = 16;
-            this.botaoSubGrupo.TabStop = false;
-            this.botaoSubGrupo.UseVisualStyleBackColor = true;
-            this.botaoSubGrupo.Click += new System.EventHandler(this.botaoSubGrupo_Click);
-            // 
-            // botaoFornecedor
-            // 
-            this.botaoFornecedor.Location = new System.Drawing.Point(439, 74);
-            this.botaoFornecedor.Name = "botaoFornecedor";
-            this.botaoFornecedor.Size = new System.Drawing.Size(23, 23);
-            this.botaoFornecedor.TabIndex = 15;
-            this.botaoFornecedor.TabStop = false;
-            this.botaoFornecedor.UseVisualStyleBackColor = true;
-            this.botaoFornecedor.Click += new System.EventHandler(this.botaoFornecedor_Click);
-            // 
-            // botaoGrupoProduto
-            // 
-            this.botaoGrupoProduto.Location = new System.Drawing.Point(439, 51);
-            this.botaoGrupoProduto.Name = "botaoGrupoProduto";
-            this.botaoGrupoProduto.Size = new System.Drawing.Size(23, 23);
-            this.botaoGrupoProduto.TabIndex = 14;
-            this.botaoGrupoProduto.TabStop = false;
-            this.botaoGrupoProduto.UseVisualStyleBackColor = true;
-            this.botaoGrupoProduto.Click += new System.EventHandler(this.botaoGrupoProduto_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(10, 78);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(74, 15);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "Fornecedor:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(10, 55);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(110, 15);
-            this.label14.TabIndex = 12;
-            this.label14.Text = "Grupo de Produto:";
-            // 
-            // comboFabricante
-            // 
-            this.comboFabricante.FormattingEnabled = true;
-            this.comboFabricante.Location = new System.Drawing.Point(539, 74);
-            this.comboFabricante.Name = "comboFabricante";
-            this.comboFabricante.Size = new System.Drawing.Size(205, 23);
-            this.comboFabricante.TabIndex = 8;
-            // 
-            // comboSubGrupoMercadoria
-            // 
-            this.comboSubGrupoMercadoria.FormattingEnabled = true;
-            this.comboSubGrupoMercadoria.Location = new System.Drawing.Point(539, 51);
-            this.comboSubGrupoMercadoria.Name = "comboSubGrupoMercadoria";
-            this.comboSubGrupoMercadoria.Size = new System.Drawing.Size(205, 23);
-            this.comboSubGrupoMercadoria.TabIndex = 6;
-            // 
-            // comboFornecedor
-            // 
-            this.comboFornecedor.FormattingEnabled = true;
-            this.comboFornecedor.Location = new System.Drawing.Point(151, 74);
-            this.comboFornecedor.Name = "comboFornecedor";
-            this.comboFornecedor.Size = new System.Drawing.Size(291, 23);
-            this.comboFornecedor.TabIndex = 7;
-            // 
-            // comboGrupoMercadoria
-            // 
-            this.comboGrupoMercadoria.FormattingEnabled = true;
-            this.comboGrupoMercadoria.Location = new System.Drawing.Point(151, 51);
-            this.comboGrupoMercadoria.Name = "comboGrupoMercadoria";
-            this.comboGrupoMercadoria.Size = new System.Drawing.Size(291, 23);
-            this.comboGrupoMercadoria.TabIndex = 5;
             // 
             // label13
             // 
@@ -3679,11 +3538,161 @@ namespace SisCom.Aplicacao.Formularios
             this.label9.TabIndex = 2;
             this.label9.Text = "Pesquisa:";
             // 
+            // tabDadosGerais
+            // 
+            this.tabDadosGerais.Controls.Add(this.label18);
+            this.tabDadosGerais.Controls.Add(this.textObservacao);
+            this.tabDadosGerais.Controls.Add(this.label16);
+            this.tabDadosGerais.Controls.Add(this.label17);
+            this.tabDadosGerais.Controls.Add(this.botaoFabricante);
+            this.tabDadosGerais.Controls.Add(this.botaoSubGrupo);
+            this.tabDadosGerais.Controls.Add(this.botaoFornecedor);
+            this.tabDadosGerais.Controls.Add(this.botaoGrupoProduto);
+            this.tabDadosGerais.Controls.Add(this.label15);
+            this.tabDadosGerais.Controls.Add(this.label14);
+            this.tabDadosGerais.Controls.Add(this.comboFabricante);
+            this.tabDadosGerais.Controls.Add(this.comboSubGrupoMercadoria);
+            this.tabDadosGerais.Controls.Add(this.comboFornecedor);
+            this.tabDadosGerais.Controls.Add(this.comboGrupoMercadoria);
+            this.tabDadosGerais.Location = new System.Drawing.Point(4, 24);
+            this.tabDadosGerais.Name = "tabDadosGerais";
+            this.tabDadosGerais.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDadosGerais.Size = new System.Drawing.Size(801, 452);
+            this.tabDadosGerais.TabIndex = 9;
+            this.tabDadosGerais.Text = "Dados Gerais";
+            this.tabDadosGerais.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label18.Location = new System.Drawing.Point(16, 64);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(75, 15);
+            this.label18.TabIndex = 35;
+            this.label18.Text = "Observação:";
+            // 
+            // textObservacao
+            // 
+            this.textObservacao.Location = new System.Drawing.Point(150, 64);
+            this.textObservacao.Multiline = true;
+            this.textObservacao.Name = "textObservacao";
+            this.textObservacao.Size = new System.Drawing.Size(625, 35);
+            this.textObservacao.TabIndex = 26;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label16.Location = new System.Drawing.Point(470, 41);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(68, 15);
+            this.label16.TabIndex = 34;
+            this.label16.Text = "Fabricante:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label17.Location = new System.Drawing.Point(470, 14);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(69, 15);
+            this.label17.TabIndex = 33;
+            this.label17.Text = "Sub Grupo:";
+            // 
+            // botaoFabricante
+            // 
+            this.botaoFabricante.Location = new System.Drawing.Point(752, 37);
+            this.botaoFabricante.Name = "botaoFabricante";
+            this.botaoFabricante.Size = new System.Drawing.Size(23, 23);
+            this.botaoFabricante.TabIndex = 32;
+            this.botaoFabricante.TabStop = false;
+            this.botaoFabricante.UseVisualStyleBackColor = true;
+            // 
+            // botaoSubGrupo
+            // 
+            this.botaoSubGrupo.Location = new System.Drawing.Point(752, 10);
+            this.botaoSubGrupo.Name = "botaoSubGrupo";
+            this.botaoSubGrupo.Size = new System.Drawing.Size(23, 23);
+            this.botaoSubGrupo.TabIndex = 31;
+            this.botaoSubGrupo.TabStop = false;
+            this.botaoSubGrupo.UseVisualStyleBackColor = true;
+            // 
+            // botaoFornecedor
+            // 
+            this.botaoFornecedor.Location = new System.Drawing.Point(445, 37);
+            this.botaoFornecedor.Name = "botaoFornecedor";
+            this.botaoFornecedor.Size = new System.Drawing.Size(23, 23);
+            this.botaoFornecedor.TabIndex = 30;
+            this.botaoFornecedor.TabStop = false;
+            this.botaoFornecedor.UseVisualStyleBackColor = true;
+            // 
+            // botaoGrupoProduto
+            // 
+            this.botaoGrupoProduto.Location = new System.Drawing.Point(445, 10);
+            this.botaoGrupoProduto.Name = "botaoGrupoProduto";
+            this.botaoGrupoProduto.Size = new System.Drawing.Size(23, 23);
+            this.botaoGrupoProduto.TabIndex = 29;
+            this.botaoGrupoProduto.TabStop = false;
+            this.botaoGrupoProduto.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label15.Location = new System.Drawing.Point(16, 41);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(74, 15);
+            this.label15.TabIndex = 28;
+            this.label15.Text = "Fornecedor:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label14.Location = new System.Drawing.Point(16, 14);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(110, 15);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "Grupo de Produto:";
+            // 
+            // comboFabricante
+            // 
+            this.comboFabricante.FormattingEnabled = true;
+            this.comboFabricante.Location = new System.Drawing.Point(545, 37);
+            this.comboFabricante.Name = "comboFabricante";
+            this.comboFabricante.Size = new System.Drawing.Size(205, 23);
+            this.comboFabricante.TabIndex = 25;
+            // 
+            // comboSubGrupoMercadoria
+            // 
+            this.comboSubGrupoMercadoria.FormattingEnabled = true;
+            this.comboSubGrupoMercadoria.Location = new System.Drawing.Point(545, 10);
+            this.comboSubGrupoMercadoria.Name = "comboSubGrupoMercadoria";
+            this.comboSubGrupoMercadoria.Size = new System.Drawing.Size(205, 23);
+            this.comboSubGrupoMercadoria.TabIndex = 23;
+            // 
+            // comboFornecedor
+            // 
+            this.comboFornecedor.FormattingEnabled = true;
+            this.comboFornecedor.Location = new System.Drawing.Point(150, 37);
+            this.comboFornecedor.Name = "comboFornecedor";
+            this.comboFornecedor.Size = new System.Drawing.Size(291, 23);
+            this.comboFornecedor.TabIndex = 24;
+            // 
+            // comboGrupoMercadoria
+            // 
+            this.comboGrupoMercadoria.FormattingEnabled = true;
+            this.comboGrupoMercadoria.Location = new System.Drawing.Point(150, 10);
+            this.comboGrupoMercadoria.Name = "comboGrupoMercadoria";
+            this.comboGrupoMercadoria.Size = new System.Drawing.Size(291, 23);
+            this.comboGrupoMercadoria.TabIndex = 22;
+            // 
             // frmCadastroMercadorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 748);
+            this.ClientSize = new System.Drawing.Size(809, 667);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.pnlDadosGerais);
@@ -3760,7 +3769,7 @@ namespace SisCom.Aplicacao.Formularios
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericTributacao_ECFNFCeNFCeAliquotaICMS)).EndInit();
             this.tabControl.ResumeLayout(false);
-            this.tbsPrecoEstoque.ResumeLayout(false);
+            this.tabPrecoEstoque.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlPrecoEstoquePesoTributacao.ResumeLayout(false);
@@ -3801,6 +3810,8 @@ namespace SisCom.Aplicacao.Formularios
             this.pnlPesquisar.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabDadosGerais.ResumeLayout(false);
+            this.tabDadosGerais.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3973,14 +3984,9 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label labelPreco_ValorICMSFronteira;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox textObservacao;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button botaoFabricante;
         private System.Windows.Forms.NumericUpDown numericTributacao_ECFNFCeNFCeAliquotaICMS;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tbsPrecoEstoque;
+        private System.Windows.Forms.TabPage tabPrecoEstoque;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelCalculoPrecificacao;
         private System.Windows.Forms.Label label84;
@@ -4062,15 +4068,6 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.NumericUpDown numericDetalhesFiscais_InfoRefNotasFiscaisSaida_ValorTributosTotal;
         private System.Windows.Forms.Label label122;
         private System.Windows.Forms.Panel pnlDadosGerais;
-        private System.Windows.Forms.Button botaoSubGrupo;
-        private System.Windows.Forms.Button botaoFornecedor;
-        private System.Windows.Forms.Button botaoGrupoProduto;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox comboFabricante;
-        private System.Windows.Forms.ComboBox comboSubGrupoMercadoria;
-        private System.Windows.Forms.ComboBox comboFornecedor;
-        private System.Windows.Forms.ComboBox comboGrupoMercadoria;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textNomeMercadoria;
         private System.Windows.Forms.Label label12;
@@ -4110,5 +4107,20 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.TextBox textDetalhesFiscais_InfoRefNotasFiscaisSaida_PISCOFINS_COFINS_Descricao;
         private System.Windows.Forms.TabPage tabImpostosICMS;
         private System.Windows.Forms.DataGridView gridImpostosICMS;
+        private System.Windows.Forms.TabPage tabDadosGerais;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textObservacao;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button botaoFabricante;
+        private System.Windows.Forms.Button botaoSubGrupo;
+        private System.Windows.Forms.Button botaoFornecedor;
+        private System.Windows.Forms.Button botaoGrupoProduto;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox comboFabricante;
+        private System.Windows.Forms.ComboBox comboSubGrupoMercadoria;
+        private System.Windows.Forms.ComboBox comboFornecedor;
+        private System.Windows.Forms.ComboBox comboGrupoMercadoria;
     }
 }

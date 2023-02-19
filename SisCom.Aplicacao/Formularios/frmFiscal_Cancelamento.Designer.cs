@@ -47,10 +47,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.richJustificativa = new System.Windows.Forms.RichTextBox();
+            this.numericSequencialEvento = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSequencialEvento)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenuBotao
@@ -122,6 +125,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numericSequencialEvento);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.textChaveAcesso);
             this.groupBox1.Controls.Add(this.label8);
@@ -154,7 +159,7 @@
             this.textChaveAcesso.Location = new System.Drawing.Point(5, 102);
             this.textChaveAcesso.Name = "textChaveAcesso";
             this.textChaveAcesso.ReadOnly = true;
-            this.textChaveAcesso.Size = new System.Drawing.Size(714, 29);
+            this.textChaveAcesso.Size = new System.Drawing.Size(556, 29);
             this.textChaveAcesso.TabIndex = 7;
             this.textChaveAcesso.TabStop = false;
             // 
@@ -243,8 +248,25 @@
             this.richJustificativa.Location = new System.Drawing.Point(3, 25);
             this.richJustificativa.Name = "richJustificativa";
             this.richJustificativa.Size = new System.Drawing.Size(719, 202);
-            this.richJustificativa.TabIndex = 0;
+            this.richJustificativa.TabIndex = 9;
             this.richJustificativa.Text = "";
+            // 
+            // numericSequencialEvento
+            // 
+            this.numericSequencialEvento.Location = new System.Drawing.Point(567, 102);
+            this.numericSequencialEvento.Name = "numericSequencialEvento";
+            this.numericSequencialEvento.Size = new System.Drawing.Size(152, 29);
+            this.numericSequencialEvento.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(567, 81);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(152, 19);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Sequencial do Evento\r\n";
             // 
             // frmFiscal_Cancelamento
             // 
@@ -265,6 +287,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericSequencialEvento)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -289,5 +312,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RichTextBox richJustificativa;
+        private System.Windows.Forms.NumericUpDown numericSequencialEvento;
+        private System.Windows.Forms.Label label1;
     }
 }

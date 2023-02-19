@@ -1489,7 +1489,7 @@ namespace SisCom.Aplicacao.Classes
                         oNFe.infNFe.dest.enderDest.UF = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Codigo;
                         if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_CEP))
                             oNFe.infNFe.dest.enderDest.CEP = notaFiscalSaidaViewModel.Cliente_Endereco.End_CEP.Replace("-", "").Replace(".", "").PadLeft(8, '0');
-                        oNFe.infNFe.dest.enderDest.cPais = 1058;
+                        oNFe.infNFe.dest.enderDest.cPais = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.CodigoSiscomex;
                         oNFe.infNFe.dest.enderDest.xPais = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.Nome);
                     }
                 }

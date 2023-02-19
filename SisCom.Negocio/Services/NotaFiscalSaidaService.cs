@@ -68,10 +68,10 @@ namespace SisCom.Negocio.Services
 
                 var _notaFiscalSaida = await _notaFiscalSaidaRepository.GetById(notaFiscalSaida.Id);
 
-                if ((_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Cancelado) &&
-                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Finalizada) &&
-                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Denegada) &&
-                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Inutilizada) &&
+                if ((_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Cancelado) ||
+                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Finalizada) ||
+                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Denegada) ||
+                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Inutilizada) ||
                     (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Transmitida))
                 {
                     _notaFiscalSaida.RetornoSefaz = notaFiscalSaida.RetornoSefaz;

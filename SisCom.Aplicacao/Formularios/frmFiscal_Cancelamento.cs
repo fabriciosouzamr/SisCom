@@ -6,6 +6,7 @@ using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
 {
@@ -58,10 +59,16 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("É preciso informar a justificativa!");
                 return;
             }
+            if (numericSequencialEvento.Value < 0)
+            {
+                CaixaMensagem.Informacao("Informe o número de sequência do evento válido!");
+                return;
+            }
 
             botaoConfimar.Enabled = false;
 
-            notaFiscalSaida.NumeroLoteEnvioSefaz++;
+            notaFiscalSaida.NumeroLoteEnvioSefaz = (int)(numericSequencialEvento.Value + 1);
+            numericSequencialEvento.Value = notaFiscalSaida.NumeroLoteEnvioSefaz;
 
             if (Fiscal.Fiscal_Cancelamento(ref notaFiscalSaida, richJustificativa.Text, strings.ToString()))
             {
@@ -136,6 +143,7 @@ namespace SisCom.Aplicacao.Formularios
                 textChaveAcesso.Text = notaFiscalSaida.CodigoChaveAcesso;
                 textSerie.Text = notaFiscalSaida.Serie;
                 textCliente.Text = notaFiscalSaida.Cliente.Nome;
+                numericSequencialEvento.Value = notaFiscalSaida.NumeroLoteEnvioSefaz;
             }
         }
     }

@@ -40,6 +40,8 @@ namespace SisCom.Aplicacao.Formularios
             this.label8 = new System.Windows.Forms.Label();
             this.panelMenuBotao = new System.Windows.Forms.Panel();
             this.panelMenuBotaoBotao = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.botaoGravar = new System.Windows.Forms.Button();
             this.label33 = new System.Windows.Forms.Label();
             this.botaoPagamentos = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -221,6 +223,8 @@ namespace SisCom.Aplicacao.Formularios
             // panelMenuBotaoBotao
             // 
             this.panelMenuBotaoBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.panelMenuBotaoBotao.Controls.Add(this.label10);
+            this.panelMenuBotaoBotao.Controls.Add(this.botaoGravar);
             this.panelMenuBotaoBotao.Controls.Add(this.label33);
             this.panelMenuBotaoBotao.Controls.Add(this.botaoPagamentos);
             this.panelMenuBotaoBotao.Controls.Add(this.label3);
@@ -238,17 +242,38 @@ namespace SisCom.Aplicacao.Formularios
             this.panelMenuBotaoBotao.Controls.Add(this.botaoPosterior);
             this.panelMenuBotaoBotao.Controls.Add(this.botaoAnterior);
             this.panelMenuBotaoBotao.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelMenuBotaoBotao.Location = new System.Drawing.Point(305, 0);
+            this.panelMenuBotaoBotao.Location = new System.Drawing.Point(233, 0);
             this.panelMenuBotaoBotao.Name = "panelMenuBotaoBotao";
-            this.panelMenuBotaoBotao.Size = new System.Drawing.Size(479, 83);
+            this.panelMenuBotaoBotao.Size = new System.Drawing.Size(551, 83);
             this.panelMenuBotaoBotao.TabIndex = 2;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(285, 56);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(33, 12);
+            this.label10.TabIndex = 39;
+            this.label10.Text = "Gravar";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoGravar
+            // 
+            this.botaoGravar.Image = ((System.Drawing.Image)(resources.GetObject("botaoGravar.Image")));
+            this.botaoGravar.Location = new System.Drawing.Point(275, 0);
+            this.botaoGravar.Name = "botaoGravar";
+            this.botaoGravar.Size = new System.Drawing.Size(53, 56);
+            this.botaoGravar.TabIndex = 38;
+            this.botaoGravar.UseVisualStyleBackColor = true;
+            this.botaoGravar.Click += new System.EventHandler(this.botaoGravar_Click);
             // 
             // label33
             // 
             this.label33.AutoSize = true;
             this.label33.BackColor = System.Drawing.Color.Transparent;
             this.label33.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label33.Location = new System.Drawing.Point(163, 56);
+            this.label33.Location = new System.Drawing.Point(169, 56);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(44, 12);
             this.label33.TabIndex = 37;
@@ -258,7 +283,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoPagamentos
             // 
             this.botaoPagamentos.Image = ((System.Drawing.Image)(resources.GetObject("botaoPagamentos.Image")));
-            this.botaoPagamentos.Location = new System.Drawing.Point(212, 0);
+            this.botaoPagamentos.Location = new System.Drawing.Point(220, 0);
             this.botaoPagamentos.Name = "botaoPagamentos";
             this.botaoPagamentos.Size = new System.Drawing.Size(53, 56);
             this.botaoPagamentos.TabIndex = 36;
@@ -269,7 +294,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(109, 56);
+            this.label3.Location = new System.Drawing.Point(113, 56);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 24);
             this.label3.TabIndex = 35;
@@ -281,7 +306,7 @@ namespace SisCom.Aplicacao.Formularios
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(208, 56);
+            this.label2.Location = new System.Drawing.Point(216, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 12);
             this.label2.TabIndex = 34;
@@ -291,7 +316,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoConsultarCNPJ
             // 
             this.botaoConsultarCNPJ.Image = ((System.Drawing.Image)(resources.GetObject("botaoConsultarCNPJ.Image")));
-            this.botaoConsultarCNPJ.Location = new System.Drawing.Point(106, 0);
+            this.botaoConsultarCNPJ.Location = new System.Drawing.Point(110, 0);
             this.botaoConsultarCNPJ.Name = "botaoConsultarCNPJ";
             this.botaoConsultarCNPJ.Size = new System.Drawing.Size(53, 56);
             this.botaoConsultarCNPJ.TabIndex = 33;
@@ -302,7 +327,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoCompras
             // 
             this.botaoCompras.Image = ((System.Drawing.Image)(resources.GetObject("botaoCompras.Image")));
-            this.botaoCompras.Location = new System.Drawing.Point(159, 0);
+            this.botaoCompras.Location = new System.Drawing.Point(165, 0);
             this.botaoCompras.Name = "botaoCompras";
             this.botaoCompras.Size = new System.Drawing.Size(53, 56);
             this.botaoCompras.TabIndex = 32;
@@ -313,7 +338,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(323, 56);
+            this.label1.Location = new System.Drawing.Point(390, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 12);
             this.label1.TabIndex = 31;
@@ -323,7 +348,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoImprimir
             // 
             this.botaoImprimir.Image = ((System.Drawing.Image)(resources.GetObject("botaoImprimir.Image")));
-            this.botaoImprimir.Location = new System.Drawing.Point(318, 0);
+            this.botaoImprimir.Location = new System.Drawing.Point(385, 0);
             this.botaoImprimir.Name = "botaoImprimir";
             this.botaoImprimir.Size = new System.Drawing.Size(53, 56);
             this.botaoImprimir.TabIndex = 30;
@@ -334,7 +359,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(433, 56);
+            this.label7.Location = new System.Drawing.Point(504, 56);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 12);
             this.label7.TabIndex = 29;
@@ -345,7 +370,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(383, 56);
+            this.label6.Location = new System.Drawing.Point(452, 56);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 28;
@@ -356,7 +381,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(275, 56);
+            this.label5.Location = new System.Drawing.Point(340, 56);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(33, 12);
             this.label5.TabIndex = 27;
@@ -366,7 +391,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoFechar
             // 
             this.botaoFechar.Image = ((System.Drawing.Image)(resources.GetObject("botaoFechar.Image")));
-            this.botaoFechar.Location = new System.Drawing.Point(424, 0);
+            this.botaoFechar.Location = new System.Drawing.Point(495, 0);
             this.botaoFechar.Name = "botaoFechar";
             this.botaoFechar.Size = new System.Drawing.Size(53, 56);
             this.botaoFechar.TabIndex = 20;
@@ -377,7 +402,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoNovo
             // 
             this.botaoNovo.Image = ((System.Drawing.Image)(resources.GetObject("botaoNovo.Image")));
-            this.botaoNovo.Location = new System.Drawing.Point(371, 0);
+            this.botaoNovo.Location = new System.Drawing.Point(440, 0);
             this.botaoNovo.Name = "botaoNovo";
             this.botaoNovo.Size = new System.Drawing.Size(53, 56);
             this.botaoNovo.TabIndex = 19;
@@ -388,7 +413,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoExcluir
             // 
             this.botaoExcluir.Image = ((System.Drawing.Image)(resources.GetObject("botaoExcluir.Image")));
-            this.botaoExcluir.Location = new System.Drawing.Point(265, 0);
+            this.botaoExcluir.Location = new System.Drawing.Point(330, 0);
             this.botaoExcluir.Name = "botaoExcluir";
             this.botaoExcluir.Size = new System.Drawing.Size(53, 56);
             this.botaoExcluir.TabIndex = 18;
@@ -399,7 +424,7 @@ namespace SisCom.Aplicacao.Formularios
             // botaoPosterior
             // 
             this.botaoPosterior.Image = ((System.Drawing.Image)(resources.GetObject("botaoPosterior.Image")));
-            this.botaoPosterior.Location = new System.Drawing.Point(53, 0);
+            this.botaoPosterior.Location = new System.Drawing.Point(55, 0);
             this.botaoPosterior.Name = "botaoPosterior";
             this.botaoPosterior.Size = new System.Drawing.Size(53, 56);
             this.botaoPosterior.TabIndex = 12;
@@ -806,7 +831,6 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // comboEnderecoCidade
             // 
-            this.comboEnderecoCidade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEnderecoCidade.FormattingEnabled = true;
             this.comboEnderecoCidade.Location = new System.Drawing.Point(396, 143);
             this.comboEnderecoCidade.Name = "comboEnderecoCidade";
@@ -1128,5 +1152,7 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.PictureBox pictureFoto;
         private System.Windows.Forms.MaskedTextBox maskedCPFCNPJ;
         private System.Windows.Forms.MaskedTextBox maskedEnderecoCEP;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button botaoGravar;
     }
 }

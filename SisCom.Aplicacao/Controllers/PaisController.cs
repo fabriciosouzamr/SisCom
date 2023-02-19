@@ -31,9 +31,9 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<PaisViewModel>>(obterTodos);
         }
 
-        public async Task<IEnumerable<PaisViewModel>> Combo()
+        public async Task<IEnumerable<PaisViewModel>> Combo(Expression<Func<Pais, object>> order = null)
         {
-            var combo = await _PaisService.Combo();
+            var combo = await _PaisService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<PaisViewModel>>(combo);
         }
 

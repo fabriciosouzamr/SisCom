@@ -21,6 +21,7 @@ namespace SisCom.Aplicacao
 
         const int GridPais_Id = 0;
         const int GridPais_Nome = 1;
+        const int GridPais_CodigoSiscomex = 2;
 
         List<string> unidadeMedidaRemover = new List<string>();
         List<string> paisRemover = new List<string>();
@@ -40,6 +41,7 @@ namespace SisCom.Aplicacao
             Grid_DataGridView.User_Formatar(dataPais, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
             Grid_DataGridView.User_ColunaAdicionar(dataPais, "ID", "ID", TipoColuna.Texto, 0);
             Grid_DataGridView.User_ColunaAdicionar(dataPais, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres, readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(dataPais, "CodigoSiscomex", "Código Siscomex", TipoColuna.Texto, 100, readOnly: false);
 
             await GridAtualizar();
         }
@@ -71,6 +73,11 @@ namespace SisCom.Aplicacao
                         CaixaMensagem.Informacao("Informe o nome de todos os paises");
                         return;
                     }
+                    if (Convert.ToInt16(row.Cells[GridPais_CodigoSiscomex].Value.ToString()) <= 0)
+                    {
+                        CaixaMensagem.Informacao("Informe o código Siscomex de todos os paises");
+                        return;
+                    }
                 }
             }
             foreach (DataGridViewRow row in dataUnidadeMedida.Rows)
@@ -99,6 +106,7 @@ namespace SisCom.Aplicacao
                         PaisViewModel pais = new PaisViewModel();
 
                         pais.Nome = row.Cells[GridPais_Nome].Value.ToString();
+                        pais.CodigoSiscomex = Convert.ToInt16(row.Cells[GridPais_CodigoSiscomex].Value);
 
                         if (row.Cells[GridPais_Id].Value == null)
                         {

@@ -150,7 +150,8 @@ namespace SisCom.Aplicacao.Formularios
                 }
             }
 
-            notaFiscalSaida.NumeroLoteEnvioSefaz++;
+            notaFiscalSaida.NumeroLoteEnvioSefaz = (int)(numericSequencialEvento.Value + 1);
+            numericSequencialEvento.Value = notaFiscalSaida.NumeroLoteEnvioSefaz;
 
             if (Fiscal.Fiscal_CartaCorrecao(ref notaFiscalSaida, strings.ToString()))
             {
@@ -198,6 +199,7 @@ namespace SisCom.Aplicacao.Formularios
                 textChaveAcesso.Text = notaFiscalSaida.CodigoChaveAcesso;
                 textSerie.Text = notaFiscalSaida.Serie;
                 textCliente.Text = notaFiscalSaida.Cliente.Nome;
+                numericSequencialEvento.Value = notaFiscalSaida.NumeroLoteEnvioSefaz;
             }
         }
     }

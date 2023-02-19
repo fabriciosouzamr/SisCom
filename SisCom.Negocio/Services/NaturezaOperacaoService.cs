@@ -63,12 +63,6 @@ namespace SisCom.Negocio.Services
             {
                 var _NotaFiscalSaida = await _NaturezaOperacaoRepository.Search(f => (f.Nome == NaturezaOperacao.Nome) && (f.Id != NaturezaOperacao.Id));
 
-                if (_NotaFiscalSaida.Any())
-                {
-                    Notify("Já existe uma Natureza de Operação com esse nome informado.");
-                    return;
-                }
-
                 await _NaturezaOperacaoRepository.Update(NaturezaOperacao);
             }
             catch (Exception Ex)

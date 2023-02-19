@@ -599,10 +599,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 var id = comboRemetenteCidade.SelectedValue;
 
-                Combo_ComboBox.Formatar(comboRemetenteCidade,
-                                        "ID", "Nome",
-                                        ComboBoxStyle.DropDownList,
-                                        await (new CidadeController(this.MeuDbContext(), this._notifier)).ComboEstado(EstadoId, p => p.Nome));
+                await Combo_ComboBox.ComboCidadeEstado_Carregar(comboRemetenteCidade, EstadoId, this.MeuDbContext(), this._notifier);
 
                 if (id != null) comboRemetenteCidade.SelectedValue = id;
             }
@@ -1258,8 +1255,6 @@ namespace SisCom.Aplicacao.Formularios
         private void botaoEditar_Click(object sender, EventArgs e)
         {
             Editar(true);
-
-            CaixaMensagem.Informacao("Hablitada a edição");
         }
         private void botaoExportarOutrasNFe_Click(object sender, EventArgs e)
         {

@@ -1,10 +1,12 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Entity;
+using Funcoes.Interfaces;
 using Funcoes.PagedList;
 using SisCom.Entidade.Modelos;
 using SisCom.Negocio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Negocio.Services
@@ -72,11 +74,6 @@ namespace SisCom.Negocio.Services
         public async Task Excluir(Guid id)
         {
             await _paisRepository.Delete(id);
-        }
-
-        public Task<List<Pais>> Combo()
-        {
-            throw new NotImplementedException();
         }
     }
 }

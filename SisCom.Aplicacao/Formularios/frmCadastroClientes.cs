@@ -255,12 +255,9 @@ namespace SisCom.Aplicacao.Formularios
         }
         async Task Navegar(Declaracoes.eNavegar Posicao)
         {
-            if (TentarGravar())
-            {
-                await Navegar_PegarTodos(pessoa.Id, Posicao);
+            await Navegar_PegarTodos(pessoa.Id, Posicao);
 
-                CarregarDados();
-            }
+            CarregarDados();
         }
         async Task Navegar_PegarTodos(Guid? Id, Declaracoes.eNavegar Posicao)
         {
@@ -339,10 +336,7 @@ namespace SisCom.Aplicacao.Formularios
         #region Combos
         private async Task comboCidade_Carregar(Guid EstadoId)
         {
-            Combo_ComboBox.Formatar(comboEnderecoCidade,
-                                    "ID", "Nome",
-                                    ComboBoxStyle.DropDownList,
-                                    await (new CidadeController(this.MeuDbContext(), this._notifier)).ComboEstado(EstadoId, p => p.Nome));
+            await Combo_ComboBox.ComboCidadeEstado_Carregar(comboEnderecoCidade, EstadoId, this.MeuDbContext(), this._notifier);
         }
         private async Task comboPais_Carregar()
         {
@@ -353,7 +347,7 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboEnderecoPais,
                                         "ID", "Nome",
                                         ComboBoxStyle.DropDownList,
-                                        await (new PaisController(this.MeuDbContext(), this._notifier)).ComboId(PaisId));
+                                        await (new PaisController(this.MeuDbContext(), this._notifier)).Combo(o => o.Nome));
 
                 comboEnderecoPais.SelectedValue = PaisId;
             }
@@ -420,9 +414,9 @@ namespace SisCom.Aplicacao.Formularios
                 FuncaoInterna.TipoContribuinte_Tratar((TipoContribuinte)comboTipoContribuinte.SelectedValue,
                                                       textInscricaoEstadual);
         }
-        private void comboEnderecoUF_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboEnderecoUF_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboEnderecoUF_Tratar();
+            await comboEnderecoUF_Tratar();
         }
         private void comboTipoPessoa_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -431,26 +425,26 @@ namespace SisCom.Aplicacao.Formularios
                 TipoPessoa_Tratar();
             }
         }
-        private void comboPesquisarTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboPesquisarTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((comboPesquisarTipoFiltro.SelectedIndex != -1) && (comboPesquisarTipoFiltro.Tag != Declaracoes.ComboBox_Carregando))
             {
                 switch (comboPesquisarTipoFiltro.SelectedValue)
                 {
                     case TipoPesquisa.Nome:
-                        comboPessoaNome_Carregar();
+                        await comboPessoaNome_Carregar();
                         break;
                     case TipoPesquisa.RazaoSocial:
-                        comboPessoaRazaoSocial_Carregar();
+                        await comboPessoaRazaoSocial_Carregar();
                         break;
                     case TipoPesquisa.Codigo:
-                        comboPessoaCodigo_Carregar();
+                        await comboPessoaCodigo_Carregar();
                         break;
                     case TipoPesquisa.CPF_CNPJ:
-                        comboPessoaCNPJCPF_Carregar();
+                        await comboPessoaCNPJCPF_Carregar();
                         break;
                     case TipoPesquisa.Telefone:
-                        comboPessoaTelefone_Carregar();
+                        await comboPessoaTelefone_Carregar();
                         break;
                 }
             }
@@ -493,17 +487,17 @@ namespace SisCom.Aplicacao.Formularios
                                          comboEnderecoUF,
                                          comboEnderecoCidade);
         }
-        private void botaotEndrecoCEP_Click(object sender, System.EventArgs e)
+        private async void botaotEndrecoCEP_Click(object sender, System.EventArgs e)
         {
-            Forms.formBuscarCEPCarregar(this._serviceProvider,
-                                        this._dbCtxFactory,
-                                        this._notifier,
-                                        maskedEnderecoCEP.Text,
-                                        textEnderecoLogradouro,
-                                        textEnderecoBairro,
-                                        comboEnderecoUF,
-                                        comboEnderecoCidade,
-                                        textEnderecoPontoReferencia);
+            await Forms.formBuscarCEPCarregar(this._serviceProvider,
+                                              this._dbCtxFactory,
+                                              this._notifier,
+                                              maskedEnderecoCEP.Text,
+                                              textEnderecoLogradouro,
+                                              textEnderecoBairro,
+                                              comboEnderecoUF,
+                                              comboEnderecoCidade,
+                                              textEnderecoPontoReferencia);
         }
         private void botaoFechar_Click(object sender, System.EventArgs e)
         {
@@ -604,14 +598,14 @@ namespace SisCom.Aplicacao.Formularios
             }
         }
 
-        private void botaoAnterior_Click(object sender, EventArgs e)
+        private async void botaoAnterior_Click(object sender, EventArgs e)
         {
-            Navegar(pessoa.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
+            await Navegar(pessoa.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Anterior);
         }
 
-        private void botaoPosterior_Click(object sender, EventArgs e)
+        private async void botaoPosterior_Click(object sender, EventArgs e)
         {
-            Navegar(pessoa.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
+            await Navegar(pessoa.Id == Guid.Empty ? Declaracoes.eNavegar.Primeiro : Declaracoes.eNavegar.Proximo);
         }
 
         private void frmCadastroClientes_FormClosing(object sender, FormClosingEventArgs e)
@@ -622,6 +616,11 @@ namespace SisCom.Aplicacao.Formularios
             }
 
             this.MeuDbContextDispose();
+        }
+
+        private void botaoGravar_Click(object sender, EventArgs e)
+        {
+            TentarGravar();
         }
     }
 }

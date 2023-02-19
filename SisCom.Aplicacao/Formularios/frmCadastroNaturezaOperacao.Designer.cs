@@ -36,6 +36,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.botaoFechar = new System.Windows.Forms.Button();
             this.gridNaturezaOperacao = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.botaoGravar = new System.Windows.Forms.Button();
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridNaturezaOperacao)).BeginInit();
@@ -48,12 +50,14 @@
             this.pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
             this.pnlMenuBotao.Name = "pnlMenuBotao";
-            this.pnlMenuBotao.Size = new System.Drawing.Size(931, 83);
+            this.pnlMenuBotao.Size = new System.Drawing.Size(931, 73);
             this.pnlMenuBotao.TabIndex = 18;
             // 
             // pnlMenuBotaoBotao
             // 
             this.pnlMenuBotaoBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.pnlMenuBotaoBotao.Controls.Add(this.label2);
+            this.pnlMenuBotaoBotao.Controls.Add(this.botaoGravar);
             this.pnlMenuBotaoBotao.Controls.Add(this.label1);
             this.pnlMenuBotaoBotao.Controls.Add(this.botaoExcluir);
             this.pnlMenuBotaoBotao.Controls.Add(this.label7);
@@ -68,7 +72,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(686, 56);
+            this.label1.Location = new System.Drawing.Point(692, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 12);
             this.label1.TabIndex = 62;
@@ -79,7 +83,7 @@
             // botaoExcluir
             // 
             this.botaoExcluir.Image = ((System.Drawing.Image)(resources.GetObject("botaoExcluir.Image")));
-            this.botaoExcluir.Location = new System.Drawing.Point(678, 0);
+            this.botaoExcluir.Location = new System.Drawing.Point(682, 0);
             this.botaoExcluir.Name = "botaoExcluir";
             this.botaoExcluir.Size = new System.Drawing.Size(53, 56);
             this.botaoExcluir.TabIndex = 59;
@@ -90,7 +94,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(739, 56);
+            this.label7.Location = new System.Drawing.Point(746, 56);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 12);
             this.label7.TabIndex = 29;
@@ -100,7 +104,7 @@
             // botaoFechar
             // 
             this.botaoFechar.Image = ((System.Drawing.Image)(resources.GetObject("botaoFechar.Image")));
-            this.botaoFechar.Location = new System.Drawing.Point(732, 0);
+            this.botaoFechar.Location = new System.Drawing.Point(737, 0);
             this.botaoFechar.Name = "botaoFechar";
             this.botaoFechar.Size = new System.Drawing.Size(52, 56);
             this.botaoFechar.TabIndex = 20;
@@ -111,13 +115,33 @@
             // 
             this.gridNaturezaOperacao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridNaturezaOperacao.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gridNaturezaOperacao.Location = new System.Drawing.Point(0, 85);
+            this.gridNaturezaOperacao.Location = new System.Drawing.Point(0, 71);
             this.gridNaturezaOperacao.Name = "gridNaturezaOperacao";
             this.gridNaturezaOperacao.RowHeadersWidth = 51;
             this.gridNaturezaOperacao.RowTemplate.Height = 25;
-            this.gridNaturezaOperacao.Size = new System.Drawing.Size(931, 466);
+            this.gridNaturezaOperacao.Size = new System.Drawing.Size(931, 480);
             this.gridNaturezaOperacao.TabIndex = 19;
-            this.gridNaturezaOperacao.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridNaturezaOperacao_CellValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(637, 56);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 12);
+            this.label2.TabIndex = 64;
+            this.label2.Text = "Gravar";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoGravar
+            // 
+            this.botaoGravar.Image = ((System.Drawing.Image)(resources.GetObject("botaoGravar.Image")));
+            this.botaoGravar.Location = new System.Drawing.Point(627, 0);
+            this.botaoGravar.Name = "botaoGravar";
+            this.botaoGravar.Size = new System.Drawing.Size(53, 56);
+            this.botaoGravar.TabIndex = 63;
+            this.botaoGravar.UseVisualStyleBackColor = true;
+            this.botaoGravar.Click += new System.EventHandler(this.botaoGravar_Click);
             // 
             // frmCadastroNaturezaOperacao
             // 
@@ -147,5 +171,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button botaoFechar;
         private System.Windows.Forms.DataGridView gridNaturezaOperacao;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button botaoGravar;
     }
 }
