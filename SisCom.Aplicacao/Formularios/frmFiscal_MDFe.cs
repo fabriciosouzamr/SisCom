@@ -73,9 +73,9 @@ namespace SisCom.Aplicacao.Formularios
                 if (manifestoEletronicoDocumentoId != Guid.Empty)
                     await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("MDF-e -  Inicializa", ex);
             }
         }
         #region Combo
@@ -197,9 +197,9 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                    dropDownWidth: 400,
                                                                                                    readOnly: false);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("MDF-e - Inicializar", ex);
             }
 
             return true;
@@ -330,9 +330,9 @@ namespace SisCom.Aplicacao.Formularios
 
                 CarregandoDados = false;
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message.ToString());
+                CaixaMensagem.Informacao("MDF-e - Carregar dados", ex);
             }
 
             return true;
@@ -920,12 +920,9 @@ namespace SisCom.Aplicacao.Formularios
 
                 CaixaMensagem.Informacao("Gravação Efetuada");
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                if (Ex.InnerException == null)
-                { CaixaMensagem.Informacao(Ex.Message.ToString()); }
-                else
-                { CaixaMensagem.Informacao($"{Ex.Message.ToString()} - {Ex.InnerException.Message.ToString()}"); }                
+                CaixaMensagem.Informacao("MDF-e - Gravar", ex);
             }
         }
 

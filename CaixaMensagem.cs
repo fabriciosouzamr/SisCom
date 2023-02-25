@@ -1,15 +1,27 @@
-﻿using SisCom.Aplicacao.Classes;
+﻿using Funcoes._Classes;
+using SisCom.Aplicacao.Classes;
 using System;
 using System.Windows.Forms;
 
 public static class CaixaMensagem
 {
-	public static void Informacao(string sMensagem)
+	public static void Informacao(string local, Exception ex)
 	{
-		MessageBox.Show(sMensagem);
-	}
+        string sMensagem = $"{local} - {ex.Message}";
 
-	public static bool Perguntar(string sMensagem)
+        if (ex.InnerException == null)
+            sMensagem = $"{sMensagem} ({ex.StackTrace})"; 
+        else
+            sMensagem = $"{sMensagem} ({ex.InnerException.Message})";
+
+        MessageBox.Show(sMensagem);
+    }
+    public static void Informacao(string sMensagem)
+    {
+        MessageBox.Show(sMensagem);
+    }
+
+    public static bool Perguntar(string sMensagem)
     {
 		return (MessageBox.Show(sMensagem, "", MessageBoxButtons.YesNo) == DialogResult.Yes);
     }

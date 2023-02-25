@@ -391,9 +391,9 @@ namespace SisCom.Aplicacao.Formularios
                     }
                 }
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("Importar XML - Gravar", ex);
             }
         }
         private void botaoSair_Click(object sender, EventArgs e)

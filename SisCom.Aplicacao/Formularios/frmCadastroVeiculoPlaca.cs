@@ -54,9 +54,9 @@ namespace SisCom.Aplicacao.Formularios
 
                 Limpar();
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("Cadastro de Place de Veículo - Inicializar", ex);
             }
         }
         private async Task<bool> comboUF_Carregar()
@@ -161,9 +161,9 @@ namespace SisCom.Aplicacao.Formularios
                     }
                 }
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("Cadastro de Placa de Veículo - Gravar", ex);
             }
         }
         private void botaoExcluir_Click(object sender, EventArgs e)

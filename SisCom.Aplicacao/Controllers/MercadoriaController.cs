@@ -23,13 +23,15 @@ namespace SisCom.Aplicacao.Controllers
         {
             this.MeuDbContext = meuDbContext;
 
-            _mercadoriaService = new MercadoriaService(new MercadoriaRepository(meuDbContext), notifier);
+            _mercadoriaService = new MercadoriaService(new MercadoriaRepository(meuDbContext),
+                                                       new NotaFiscalEntradaMercadoriaRepository(meuDbContext),
+                                                       new NotaFiscalSaidaMercadoriaRepository(meuDbContext),
+                                                       new VendaMercadoriaRepository(meuDbContext),
+                                                       notifier);
         }
         public async Task<bool> Excluir(Guid Id)
         {
-            await _mercadoriaService.Excluir(Id);
-
-            return true;
+            return (await _mercadoriaService.Excluir(Id));
         }
         public async Task<MercadoriaViewModel> Adicionar(MercadoriaViewModel MercadoriaViewModel)
         {

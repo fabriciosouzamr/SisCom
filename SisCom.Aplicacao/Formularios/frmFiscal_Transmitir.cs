@@ -72,9 +72,9 @@ namespace SisCom.Aplicacao.Formularios
 
                 await Carregar(NF_Status.Todos, DateTime.Now.Date, DateTime.Now.Date);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("Nota Fiscal - Transmitir - Inicializar", ex);
             }
 
             return true;

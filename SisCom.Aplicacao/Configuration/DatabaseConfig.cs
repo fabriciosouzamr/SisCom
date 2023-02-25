@@ -29,7 +29,7 @@ namespace SisCom.Aplicacao.Configuration
                     }
                     catch (Exception Ex)
                     {
-                        CaixaMensagem.Informacao(Ex.Message);
+                        CaixaMensagem.Informacao("BancoDadosConectavel", Ex);
                     }
                 }
             }
@@ -58,7 +58,7 @@ namespace SisCom.Aplicacao.Configuration
             }
             catch (Exception Ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("Database configure" + Ex);
             }
         }
     }

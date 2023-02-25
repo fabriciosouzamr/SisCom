@@ -308,9 +308,9 @@ namespace SisCom.Aplicacao.Formularios
 
                         CaixaMensagem.Informacao("Manifesto Clonado");
                     }
-                    catch (Exception Ex)
+                    catch (Exception ex)
                     {
-                        CaixaMensagem.Informacao(Ex.Message);
+                        CaixaMensagem.Informacao("MDF-e - Clonar", ex);
                     }
                 }
             }

@@ -345,9 +345,9 @@ namespace SisCom.Aplicacao.Formularios
 
                 notaFiscalSaida = new ViewModels.NotaFiscalSaidaViewModel();
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("Nota Fiscal - Inicializar", ex);
             }
 
             return true;
@@ -1243,9 +1243,9 @@ namespace SisCom.Aplicacao.Formularios
 
                 notaFiscalSaida.Id = Guid.Empty;
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("Nota Fiscal - Cancelar", ex);
             }
         }
         private void botaoNovo_Click(object sender, EventArgs e)

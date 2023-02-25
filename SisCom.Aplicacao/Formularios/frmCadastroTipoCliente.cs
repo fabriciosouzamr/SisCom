@@ -61,9 +61,9 @@ namespace SisCom.Aplicacao.Formularios
 
                 GravacaoEfetuada.Invoke(this, EventArgs.Empty);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("Cadastro de Tipo de Cliente - Gravar", ex);
             }
         }
         private async void Remover(Guid Id)

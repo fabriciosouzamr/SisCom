@@ -214,10 +214,11 @@ namespace SisCom.Aplicacao.Formularios
         private async void Excluir()
         {
             var pessoaController = new PessoaController(this.MeuDbContext(), this._notifier);
-            await pessoaController.Excluir(pessoa.Id);
-            pessoaController = null;
-
-            Limpar();
+            if (await pessoaController.Excluir(pessoa.Id))
+            {
+                pessoaController = null;
+                Limpar();
+            }
         }
         bool TentarGravar()
         {

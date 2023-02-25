@@ -13,12 +13,15 @@ namespace SisCom.Negocio.Services
 {
     public class PessoaService : BaseService<Pessoa>, IPessoaService
     {
-        private readonly IPessoaRepository _PessoaRepository;
+        private readonly IPessoaRepository _pessoaRepository;
+        private readonly IVendaRepository _vendaRepository;
 
-        public PessoaService(IPessoaRepository PessoaRepository,
-                             INotifier notificador) : base(notificador, PessoaRepository)
+        public PessoaService(IPessoaRepository pessoaRepository,
+                             IVendaRepository vendaRepository,
+                             INotifier notificador) : base(notificador, pessoaRepository)
         {
-            _PessoaRepository = PessoaRepository;
+            _pessoaRepository = pessoaRepository;
+            _vendaRepository = vendaRepository;
         }
 
         public async Task Adicionar(Pessoa pessoa)
@@ -29,7 +32,7 @@ namespace SisCom.Negocio.Services
             {
                 if (pessoa.TipoPessoa == Funcoes._Enum.TipoPessoaCliente.Juridica)
                 {
-                    var _pessoa = await _PessoaRepository.Search(f => f.CNPJ_CPF == pessoa.CNPJ_CPF);
+                    var _pessoa = await _pessoaRepository.Search(f => f.CNPJ_CPF == pessoa.CNPJ_CPF);
 
                     if (_pessoa.Count() != 0)
                     {
@@ -38,7 +41,7 @@ namespace SisCom.Negocio.Services
                     }
                 }
 
-                await _PessoaRepository.Insert(pessoa);
+                await _pessoaRepository.Insert(pessoa);
             }
             catch (Exception Ex)
             {
@@ -54,7 +57,7 @@ namespace SisCom.Negocio.Services
 
                 if (pessoa.TipoPessoa == Funcoes._Enum.TipoPessoaCliente.Juridica)
                 {
-                    var exists = _PessoaRepository.Exists(f => f.CNPJ_CPF == pessoa.CNPJ_CPF && f.Id != pessoa.Id);
+                    var exists = _pessoaRepository.Exists(f => f.CNPJ_CPF == pessoa.CNPJ_CPF && f.Id != pessoa.Id);
 
                     if (exists)
                     {
@@ -63,7 +66,7 @@ namespace SisCom.Negocio.Services
                     }
                 }
 
-                await _PessoaRepository.Update(pessoa);
+                await _pessoaRepository.Update(pessoa);
             }
             catch (Exception Ex)
             {
@@ -71,16 +74,24 @@ namespace SisCom.Negocio.Services
             }
         }
 
-        public async Task Excluir(Guid id)
+        public async Task<bool> Excluir(Guid id)
         {
-            await _PessoaRepository.Delete(id);
+            if ((await _vendaRepository.Search(predicate: p => p.ClienteId == id)).Any())
+            {
+                Notify("Existe venda(s) relacionada(s) a esse cliente.");
+                return false;
+            }
+
+            await _pessoaRepository.Delete(id);
 
             Notify("Exclusão Efetuada.");
+
+            return true;
         }
 
         public Task<IPagedList<Pessoa>> GetPagedList(FilteredPagedListParameters parameters)
         {
-            return _PessoaRepository.GetPagedList(f =>
+            return _pessoaRepository.GetPagedList(f =>
             (
                 parameters.Search == null || f.Nome.Contains(parameters.Search)
             ), parameters);
@@ -88,12 +99,12 @@ namespace SisCom.Negocio.Services
 
         public virtual async Task<List<Pessoa>> ComboFornecedor(Expression<Func<Pessoa, object>> order = null)
         {
-            return await _PessoaRepository.ComboSearch(f => f.Fornecedor == true, order);
+            return await _pessoaRepository.ComboSearch(f => f.Fornecedor == true, order);
         }
 
         public override void Dispose()
         {
-            _PessoaRepository?.Dispose();
+            _pessoaRepository?.Dispose();
         }
     }
 }

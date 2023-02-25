@@ -21,7 +21,7 @@ namespace SisCom.Aplicacao.Controllers
         {
             this.meuDbContext = meuDbContext;
 
-            _pessoaService = new PessoaService(new PessoaRepository(meuDbContext), notifier);
+            _pessoaService = new PessoaService(new PessoaRepository(meuDbContext), new VendaRepository(meuDbContext), notifier);
         }
 
         public async Task<PessoaViewModel> Adicionar(PessoaViewModel pessoaViewModel)
@@ -35,9 +35,7 @@ namespace SisCom.Aplicacao.Controllers
 
         public async Task<bool> Excluir(Guid Id)
         {
-            await _pessoaService.Excluir(Id);
-
-            return true;
+            return (await _pessoaService.Excluir(Id));
         }
 
         public async Task<PessoaViewModel> Atualizar(Guid id, PessoaViewModel pessoaViewModel)

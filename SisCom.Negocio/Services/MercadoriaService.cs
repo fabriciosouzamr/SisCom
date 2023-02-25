@@ -11,11 +11,20 @@ namespace SisCom.Negocio.Services
     public class MercadoriaService : BaseService<Mercadoria>, IMercadoriaService
     {
         private readonly IMercadoriaRepository mercadoriaRepository;
+        private readonly INotaFiscalEntradaMercadoriaRepository notaFiscalEntradaMercadoriaRepository;
+        private readonly INotaFiscalSaidaMercadoriaRepository notaFiscalSaidaMercadoriaRepository;
+        private readonly IVendaMercadoriaRepository vendaMercadoriaRepository;
 
         public MercadoriaService(IMercadoriaRepository MercadoriaRepository,
+                                 INotaFiscalEntradaMercadoriaRepository notaFiscalEntradaMercadoriaRepository,
+                                 INotaFiscalSaidaMercadoriaRepository notaFiscalSaidaMercadoriaRepository,
+                                 IVendaMercadoriaRepository vendaMercadoriaRepository,
                                  INotifier notificador) : base(notificador, MercadoriaRepository)
         {
-            mercadoriaRepository = MercadoriaRepository;
+            this.mercadoriaRepository = MercadoriaRepository;
+            this.notaFiscalEntradaMercadoriaRepository = notaFiscalEntradaMercadoriaRepository;
+            this.notaFiscalSaidaMercadoriaRepository = notaFiscalSaidaMercadoriaRepository;
+            this.vendaMercadoriaRepository = vendaMercadoriaRepository;
         }
 
         public Task<IPagedList<Mercadoria>> GetPagedList(FilteredPagedListParameters parameters)
@@ -70,11 +79,29 @@ namespace SisCom.Negocio.Services
             }
         }
 
-        public async Task Excluir(Guid id)
+        public async Task<bool> Excluir(Guid id)
         {
+            if ((await notaFiscalEntradaMercadoriaRepository.Search(predicate: p => p.MercadoriaId == id)).Any())
+            {
+                Notify("Existe Notas Fiscais de Entrada para essa mercadoria.");
+                return false;
+            }
+            if ((await notaFiscalSaidaMercadoriaRepository.Search(predicate: p => p.MercadoriaId == id)).Any())
+            {
+                Notify("Existe Notas Fiscais de Saída para essa mercadoria.");
+                return false;
+            }
+            if ((await vendaMercadoriaRepository.Search(predicate: p => p.MercadoriaId == id)).Any())
+            {
+                Notify("Existe Venda para essa mercadoria.");
+                return false;
+            }
+
             await mercadoriaRepository.Delete(id);
 
             Notify("Exclusão Efetuada.");
+
+            return true;
         }
 
         public override void Dispose()

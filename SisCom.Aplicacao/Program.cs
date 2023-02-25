@@ -340,9 +340,9 @@ namespace SisCom.Aplicacao
                         }
                     }
                 }
-                catch (Exception Ex)
+                catch (Exception ex)
                 {
-                    CaixaMensagem.Informacao(Ex.Message);
+                    CaixaMensagem.Informacao("Main - Inicializar", ex);
                 }
             }
             private static async void DatabaseConfig_Configure(IServiceProvider services)

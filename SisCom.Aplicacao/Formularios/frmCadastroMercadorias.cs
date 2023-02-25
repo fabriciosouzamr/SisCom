@@ -627,9 +627,9 @@ namespace SisCom.Aplicacao.Formularios
                 mercadoria = new ViewModels.MercadoriaViewModel();
                 Navegar(Declaracoes.eNavegar.Primeiro);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("Cadastro de Mercadoria - Inicializar", ex);
             }
 
             pnlDadosGerais.Enabled = true;
@@ -1275,10 +1275,9 @@ namespace SisCom.Aplicacao.Formularios
         private async void Excluir()
         {
             var mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier);
-            await mercadoriaController.Excluir(mercadoria.Id);
+            if (await mercadoriaController.Excluir(mercadoria.Id))
+            { Limpar(); }
             this.MeuDbContextDispose();
-
-            Limpar();
         }
         bool TentarGravar()
         {

@@ -301,9 +301,9 @@ namespace SisCom.Aplicacao.Classes
                     CaixaMensagem.Informacao(ret.XMotivo);
                 }
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("NF-e - Carta de Correção", ex);
             }
 
         Sair:
@@ -344,9 +344,9 @@ namespace SisCom.Aplicacao.Classes
                     CaixaMensagem.Informacao(ret.RetEvento.InfEvento.XMotivo);
                 }
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("NF-e - Cancelamento", ex);
             }
 
         Sair:
@@ -813,7 +813,7 @@ namespace SisCom.Aplicacao.Classes
             }
             catch (Exception ex)
             {
-                CaixaMensagem.Informacao("FNC_Fiscal_DFe_StatusServico - " + ex.Message);
+                CaixaMensagem.Informacao("Fiscal - Status do Serviço", ex);
                 goto Sair;
             }
 
@@ -849,7 +849,7 @@ namespace SisCom.Aplicacao.Classes
             }
             catch (Exception ex)
             {
-                CaixaMensagem.Informacao("FNC_Fiscal_DFe_InutilizarNumeracao - " + ex.Message);
+                CaixaMensagem.Informacao("NF-e Inutilizar", ex);
                 goto Sair;
             }
 
@@ -1888,10 +1888,7 @@ namespace SisCom.Aplicacao.Classes
             }
             catch (Exception ex)
             {
-                if (ex.InnerException == null)
-                    CaixaMensagem.Informacao(ex.Message + ". " + Funcao.NuloParaString(ex.StackTrace));
-                else
-                    CaixaMensagem.Informacao(ex.Message + "." + ex.InnerException.Message);
+                CaixaMensagem.Informacao("NF-e Gerar", ex);
                 return null/* TODO Change to default(_) if this is not a reference type */;
             }
         }
@@ -2149,9 +2146,9 @@ namespace SisCom.Aplicacao.Classes
 
                         servicoRecepcao = null;
                     }
-                    catch (Exception Ex)
+                    catch (Exception ex)
                     {
-                        CaixaMensagem.Informacao($"MDFe - retornoEnvio - {Ex.Message}");
+                        CaixaMensagem.Informacao("MDF-e Transmitir", ex);
                     }
 
                     servicoRecepcao = null;
@@ -2197,9 +2194,9 @@ namespace SisCom.Aplicacao.Classes
                         manifestoEletronicoDocumento.RetornoSefazCodigo = retorno.CStat.ToString();
                     }
                 }
-                catch (Exception Ex)
+                catch (Exception ex)
                 {
-                    CaixaMensagem.Informacao($"MDFe - servicoConsultaProtocolo - {Ex.Message}");
+                    CaixaMensagem.Informacao("MDF-e Transmitir", ex);
                 }
             }
 
@@ -2249,9 +2246,9 @@ namespace SisCom.Aplicacao.Classes
 
                 evento = null;
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("MDF-e Cancelar", ex);
             }
 
             return manifestoEletronicoDocumento;
@@ -2299,12 +2296,9 @@ namespace SisCom.Aplicacao.Classes
 
                 evento = null;
             }
-            catch(Exception Ex)
+            catch(Exception ex)
             {
-                if (Ex.InnerException == null)
-                { CaixaMensagem.Informacao(Ex.Message); }
-                else
-                { CaixaMensagem.Informacao(Ex.InnerException.Message); }
+                CaixaMensagem.Informacao("MDF-e Encerrar", ex);
             }
 
             return manifestoEletronicoDocumento;
@@ -2318,7 +2312,7 @@ namespace SisCom.Aplicacao.Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Configurar impressão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                CaixaMensagem.Informacao("MDF-e Imprimir", ex);
             }
         }
 
@@ -2521,7 +2515,7 @@ namespace SisCom.Aplicacao.Classes
                 oNFe_Servico = null/* TODO Change to default(_) if this is not a reference type */;
                 oNFe_Servico_RetornoNFeAutorizacao = null/* TODO Change to default(_) if this is not a reference type */;
 
-                CaixaMensagem.Informacao(ex.Message);
+                CaixaMensagem.Informacao("NF-e Transmitir", ex);
 
                 goto Sair;
             }
@@ -2608,7 +2602,7 @@ namespace SisCom.Aplicacao.Classes
                 oNFe_Servico = null/* TODO Change to default(_) if this is not a reference type */;
                 oNFe_Servico_RetornoNFeAutorizacao = null/* TODO Change to default(_) if this is not a reference type */;
 
-                CaixaMensagem.Informacao(ex.Message);
+                CaixaMensagem.Informacao("NF-e Visualizar", ex);
 
                 goto Sair;
             }
@@ -3047,9 +3041,9 @@ namespace SisCom.Aplicacao.Classes
                                                              notaFiscalSaidaViewModel.Status == NF_Status.Cancelado);
                 }
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("NF-e Visualizar", ex);
             }
         }
 

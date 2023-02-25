@@ -249,9 +249,9 @@ namespace SisCom.Aplicacao.Formularios
                 if (comboOrigemVenda.Items.Count == 1)
                     comboOrigemVenda.SelectedIndex = 0;
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                CaixaMensagem.Informacao(Ex.Message);
+                CaixaMensagem.Informacao("Vendas Inclusão - Inicializar", ex);
             }
 
             return true;
