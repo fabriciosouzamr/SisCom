@@ -53,7 +53,8 @@ namespace SisCom.Entidade.Modelos
 		public string? InformacoesComplementaresInteresseContribuinte_Local { get; set; }
 		public string? CodigoChaveAcesso { get; set; }
 		public string? Protocolo { get; set; }
-		public NF_IndicaPresenca IndicaPresenca { get; set; }
+        public string? Recibo { get; set; }
+        public NF_IndicaPresenca IndicaPresenca { get; set; }
 		public NF_TipoEmissao TipoEmissao { get; set; }
 		public NF_Operacao Operacao { get; set; }
 		public string? EmailDestinoXML { get; set; }

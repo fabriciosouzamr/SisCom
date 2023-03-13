@@ -54,7 +54,7 @@ namespace SisCom.Aplicacao.Controllers
             NotaFiscalSaidaViewModel.Transportadora_UF = null;
             NotaFiscalSaidaViewModel.Venda = null;
 
-            if (!String.IsNullOrEmpty(NotaFiscalSaidaViewModel.Protocolo) && (NotaFiscalSaidaViewModel.Status == Entidade.Enum.NF_Status.Finalizada))
+            if (!String.IsNullOrWhiteSpace(NotaFiscalSaidaViewModel.Protocolo))
             {
                 if (NotaFiscalSaidaViewModel.DataCancelamento != null)
                     NotaFiscalSaidaViewModel.Status = Entidade.Enum.NF_Status.Cancelado;

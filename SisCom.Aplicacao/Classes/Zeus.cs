@@ -1,10 +1,12 @@
 ﻿using Funcoes._Enum;
+using Microsoft.VisualBasic.Logging;
 using NFe.Utils.NFe;
 using NFe.Utils.Tributacao.Estadual;
 using NFe.Utils.Tributacao.Federal;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace SisCom.Aplicacao.Classes
@@ -145,6 +147,8 @@ namespace SisCom.Aplicacao.Classes
 
         [XmlElement(ElementName = "Protocolo")]
         public Protocolo Protocolo { get; set; }
+        [XmlElement(ElementName = "nRecibo")]
+        public string nRecibo { get; set; }
     }
 
     public static class Zeus
@@ -259,13 +263,14 @@ namespace SisCom.Aplicacao.Classes
             }
         }
 
-        public static retEnviNFe Protocolar(string xml)
+        public static retEnviNFe Protocolar(string xml, string recibo)
         {
             List<string> retorno;
 
             retorno = Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "protocolar " + Declaracoes.dados_Empresa_CodigoEstado + " " + 
                                                                                                   "'" + xml + "' " +
-                                                                                                  Declaracoes.dados_Empresa_SerialNumber);
+                                                                                                  Declaracoes.dados_Empresa_SerialNumber + " " +
+                                                                                                  recibo);
 
             if ((retorno != null) && (retorno.Count > 0))
             {

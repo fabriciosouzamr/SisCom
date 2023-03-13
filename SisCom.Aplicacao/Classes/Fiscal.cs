@@ -2476,11 +2476,25 @@ namespace SisCom.Aplicacao.Classes
 
                 if ((!String.IsNullOrEmpty(xml)) && !SomenteGerarXML)
                 {
-                    var retorno = Zeus.Protocolar(xml);
+                    string recibo = "00";
+
+                    if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Recibo))
+                        recibo = notaFiscalSaidaViewModel.Recibo;
+
+                    var retorno = Zeus.Protocolar(xml, recibo);
 
                     notaFiscalSaidaViewModel.DataRetornoSefaz = retorno.dhRegEvento;
                     notaFiscalSaidaViewModel.RetornoSefazCodigo = retorno.Protocolo.CStat.ToString();
                     notaFiscalSaidaViewModel.RetornoSefaz = retorno.Protocolo.XMotivo;
+
+                    if (retorno.nRec != 0)
+                    {
+                        notaFiscalSaidaViewModel.Recibo = retorno.nRec.ToString();
+                    }
+                    else
+                    {
+                        notaFiscalSaidaViewModel.Recibo = retorno.nRecibo.ToString();
+                    }
 
                     if (retorno.Protocolo.NProtocolo != "00")
                     {
@@ -2501,6 +2515,10 @@ namespace SisCom.Aplicacao.Classes
                             break;
                         case 100: /* Autorizado o uso da NF-e */
                             notaFiscalSaidaViewModel.Status = NF_Status.Transmitida;
+                            if (notaFiscalSaidaViewModel.DataTransmissao == null)
+                                notaFiscalSaidaViewModel.DataTransmissao = retorno.dhRegEvento;
+                            if (notaFiscalSaidaViewModel.DataTransmissao == null)
+                                notaFiscalSaidaViewModel.DataTransmissao = DateTime.Now;
                             break;
                         default:
                             notaFiscalSaidaViewModel.Status = NF_Status.Pendente;

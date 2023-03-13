@@ -33,11 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DFe.Classes">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Classes.dll</HintPath>
+    <Reference Include="DFe.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Temp\DFe.NET-master\NFe.Servicos\bin\Release\net462\DFe.Classes.dll</HintPath>
     </Reference>
-    <Reference Include="DFe.Utils">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Utils.dll</HintPath>
+    <Reference Include="DFe.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Temp\DFe.NET-master\NFe.Servicos\bin\Release\net462\DFe.Utils.dll</HintPath>
     </Reference>
     <Reference Include="FastReport">
       <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\FastReport.dll</HintPath>
@@ -51,33 +53,40 @@
     <Reference Include="FastReport.OpenSource.Export.PdfSimple">
       <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\FastReport.OpenSource.Export.PdfSimple.dll</HintPath>
     </Reference>
-    <Reference Include="MDFe.Classes">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Classes.dll</HintPath>
+    <Reference Include="MDFe.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Temp\DFe.NET-master\MDFe.Classes\bin\Release\net462\MDFe.Classes.dll</HintPath>
     </Reference>
-    <Reference Include="MDFe.Damdfe.Base">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Damdfe.Base.dll</HintPath>
+    <Reference Include="MDFe.Damdfe.Base, Version=1.0.0.772, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Temp\DFe.NET-master\MDFe.Damdfe.Base\bin\Release\net462\MDFe.Damdfe.Base.dll</HintPath>
     </Reference>
-    <Reference Include="MDFe.Damdfe.Fast">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Damdfe.Fast.dll</HintPath>
+    <Reference Include="MDFe.Damdfe.Fast, Version=1.0.0.772, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Temp\DFe.NET-master\MDFe.Damdfe.Fast\bin\Release\net462\MDFe.Damdfe.Fast.dll</HintPath>
     </Reference>
-    <Reference Include="MDFe.Servicos">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Servicos.dll</HintPath>
+    <Reference Include="MDFe.Servicos, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Servicos.dll</HintPath>
     </Reference>
-    <Reference Include="MDFe.Utils">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Utils.dll</HintPath>
+    <Reference Include="MDFe.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Temp\DFe.NET-master\MDFe.Utils\bin\Release\net462\MDFe.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NFe.Classes">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Classes.dll</HintPath>
-    </Reference>
-    <Reference Include="NFe.Servicos, Version=1.0.0.772, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="NFe.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Servicos.dll</HintPath>
+      <HintPath>C:\Temp\DFe.NET-master\NFe.Servicos\bin\Release\net462\NFe.Classes.dll</HintPath>
     </Reference>
-    <Reference Include="NFe.Utils">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Utils.dll</HintPath>
+    <Reference Include="NFe.Servicos, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Temp\DFe.NET-master\NFe.Servicos\bin\Release\net462\NFe.Servicos.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Temp\DFe.NET-master\NFe.Servicos\bin\Release\net462\NFe.Utils.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -119,12 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.Servicos\NFe.Servicos.csproj">
-      <Project>{ccfdb136-3ee3-4aed-aa69-26abbcb553c6}</Project>
-      <Name>NFe.Servicos</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
