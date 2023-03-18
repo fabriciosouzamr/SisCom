@@ -82,10 +82,19 @@ namespace SisCom.Aplicacao_FW
             _PATH_NUVEMFISCAL_MDFE = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_MDFe");
             _PATH_ArquivoRelatorio = Path.Combine(Directory.GetCurrentDirectory(), "Configuration\\MDFeRetrato.frx");
 
+            if (!System.IO.Directory.Exists(_PATH))
+                System.IO.Directory.CreateDirectory(_PATH);
+
             if (String.IsNullOrEmpty(Properties.Settings.Default.PathDocumentoFiscal))
             { _PATH_DOCFISCAL = _PATH_NUVEMFISCAL_Vendas; }
             else
             { _PATH_DOCFISCAL = Properties.Settings.Default.PathDocumentoFiscal; }
+
+            if (!System.IO.Directory.Exists(_PATH_DOCFISCAL))
+            {
+                MessageBox.Show("É necessário informar o diretório XML na Nuvem Fiscal");
+                Application.Exit();
+            }
 
             _Operacao = args[0];
 

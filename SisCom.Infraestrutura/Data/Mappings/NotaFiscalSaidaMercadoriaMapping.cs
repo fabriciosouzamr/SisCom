@@ -10,6 +10,9 @@ namespace SisCom.Infraestrutura.Data.Mappings
         {
             builder.HasKey(p => p.Id);
 
+            builder.Property(p => p.PrecoUnitario).HasColumnType("decimal(18, 8)");
+            builder.Property(p => p.PrecoTotal).HasColumnType("decimal(18, 8)");
+
             builder.ToTable("NotaFiscalSaidaMercadorias");
         }
     }

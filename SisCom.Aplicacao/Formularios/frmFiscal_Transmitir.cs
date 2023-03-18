@@ -241,102 +241,109 @@ namespace SisCom.Aplicacao.Formularios
 
         async Task Transmitir(DataGridViewRow row, Guid id, bool somenteGerarXML = false, string xml = "", bool exibirmensagem = false)
         {
-            NotaFiscalSaidaSerieViewModel notaFiscalSaidaSerieViewModel = new NotaFiscalSaidaSerieViewModel();
-            NotaFiscalSaidaViewModel notaFiscalSaidaViewModel = new NotaFiscalSaidaViewModel();
-            IEnumerable<NotaFiscalSaidaViewModel> notaFiscalSaidaViewModels;
-            IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoria;
-            IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamento = new List<NotaFiscalSaidaPagamentoViewModel>();
-            IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferencia = new List<NotaFiscalSaidaReferenciaViewModel>();
-            string sDS_PATH_XML = "";
-            bool bImpressaoNCFe = false;
+            try
+            {
+                NotaFiscalSaidaSerieViewModel notaFiscalSaidaSerieViewModel = new NotaFiscalSaidaSerieViewModel();
+                NotaFiscalSaidaViewModel notaFiscalSaidaViewModel = new NotaFiscalSaidaViewModel();
+                IEnumerable<NotaFiscalSaidaViewModel> notaFiscalSaidaViewModels;
+                IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoria;
+                IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamento = new List<NotaFiscalSaidaPagamentoViewModel>();
+                IEnumerable<NotaFiscalSaidaReferenciaViewModel> notaFiscalSaidaReferencia = new List<NotaFiscalSaidaReferenciaViewModel>();
+                string sDS_PATH_XML = "";
+                bool bImpressaoNCFe = false;
 
-            using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
-            {
-                notaFiscalSaidaViewModels = await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == id);
-                notaFiscalSaidaViewModel = notaFiscalSaidaViewModels.FirstOrDefault();
-            }
-            if (notaFiscalSaidaViewModel.Status == NF_Status.Cancelado)
-            {
-                if (exibirmensagem) CaixaMensagem.Informacao("Nota fiscal cancelada");
-            }
-            else if (notaFiscalSaidaViewModel.Status == NF_Status.Transmitida)
-            {
-                if (exibirmensagem) CaixaMensagem.Informacao("Nota fiscal já transmitida");
-            }
-            else if (notaFiscalSaidaViewModel.Status == NF_Status.Denegada)
-            {
-                if (exibirmensagem) CaixaMensagem.Informacao("Nota fiscal denegada");
-            }
-            else
-            {
-                using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
+                using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                 {
-                    notaFiscalSaidaMercadoria = await notaFiscalSaidaMercadoriaController.PesquisarId(notaFiscalSaidaViewModel.Id);
+                    notaFiscalSaidaViewModels = await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == id);
+                    notaFiscalSaidaViewModel = notaFiscalSaidaViewModels.FirstOrDefault();
                 }
-                using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
+                if (notaFiscalSaidaViewModel.Status == NF_Status.Cancelado)
                 {
-                    var notaFiscalSaidaSerieViewModels = await notaFiscalSaidaSerieController.PesquisarSerie(notaFiscalSaidaViewModel.Serie);
-                    notaFiscalSaidaSerieViewModel = notaFiscalSaidaSerieViewModels.FirstOrDefault();
+                    if (exibirmensagem) CaixaMensagem.Informacao("Nota fiscal cancelada");
                 }
-
-                notaFiscalSaidaViewModel.TransmitirEnderecoCliente = (notaFiscalSaidaViewModel.Cliente_Endereco != null);
-
-                foreach (NotaFiscalSaidaViewModel item in notaFiscalSaidaViewModels)
+                else if (notaFiscalSaidaViewModel.Status == NF_Status.Transmitida)
                 {
-                    notaFiscalSaidaViewModel = item;
-                    notaFiscalSaidaPagamento = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaPagamentoViewModel>>(item.NotaFiscalSaidaPagamento);
-                    notaFiscalSaidaReferencia = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaReferenciaViewModel>>(item.NotaFiscalSaidaReferencia);
-
-                    if (Validacao.Data_AdicionarHora(notaFiscalSaidaViewModel.DataSaida, notaFiscalSaidaViewModel.HoraEmissao) < DateTime.Now)
-                    {
-                        DateTime data = DateTime.Now.AddMinutes(2);
-                        notaFiscalSaidaViewModel.DataSaida = data.Date;
-                        notaFiscalSaidaViewModel.HoraEmissao = $"{data.Hour.ToString("00")}:{data.Minute.ToString("00")}";
-                    }
-
-                    Fiscal.Fiscal_DocumentoFiscal_Transmitir(eModeloDocumento: ModeloDocumento.NFe,
-                                                             notaFiscalSaidaViewModel: ref notaFiscalSaidaViewModel,
-                                                             notaFiscalSaidaMercadoriaViewModels: ref notaFiscalSaidaMercadoria,
-                                                             notaFiscalSaidaPagamentoViewModels: ref notaFiscalSaidaPagamento,
-                                                             notaFiscalSaidaReferenciaViewModels: ref notaFiscalSaidaReferencia,
-                                                             notaFiscalSaidaSerieViewModel: ref notaFiscalSaidaSerieViewModel,
-                                                             sDS_PATH_XML: ref sDS_PATH_XML,
-                                                             bImpressaoNCFe: ref bImpressaoNCFe,
-                                                             bImprimirDanfeNFe: false,
-                                                             SomenteGerarXML: somenteGerarXML,
-                                                             xml: xml);
+                    if (exibirmensagem) CaixaMensagem.Informacao("Nota fiscal já transmitida");
                 }
-
-                if (!somenteGerarXML)
+                else if (notaFiscalSaidaViewModel.Status == NF_Status.Denegada)
                 {
-                    if (row != null)
+                    if (exibirmensagem) CaixaMensagem.Informacao("Nota fiscal denegada");
+                }
+                else
+                {
+                    using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
                     {
-                        row.Cells[gridNotaFiscalSaida_RetornoSefaz].Value = notaFiscalSaidaViewModel.RetornoSefaz;
+                        notaFiscalSaidaMercadoria = await notaFiscalSaidaMercadoriaController.PesquisarId(notaFiscalSaidaViewModel.Id);
                     }
-
-                    using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
-                    {
-                        notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade = null;
-                        notaFiscalSaidaViewModel.Empresa = null;
-                        notaFiscalSaidaViewModel.NaturezaOperacao = null;
-                        notaFiscalSaidaViewModel.NotaFiscalFinalidade = null;
-                        notaFiscalSaidaViewModel.Cliente = null;
-                        notaFiscalSaidaViewModel.Transportadora = null;
-                        notaFiscalSaidaViewModel.Transportadora_UF = null;
-                        notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_UF = null;
-                        notaFiscalSaidaViewModel.NotaFiscalSaidaMercadoria = null;
-                        notaFiscalSaidaViewModel.NotaFiscalSaidaPagamento = null;
-                        notaFiscalSaidaViewModel.NotaFiscalSaidaReferencia = null;
-                        notaFiscalSaidaViewModel.NotaFiscalSaidaObservacao = null;
-
-                        await notaFiscalSaidaController.Atualizar(notaFiscalSaidaViewModel.Id, notaFiscalSaidaViewModel);
-                    }
-
                     using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
                     {
-                        await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerieViewModel.Id, notaFiscalSaidaSerieViewModel);
+                        var notaFiscalSaidaSerieViewModels = await notaFiscalSaidaSerieController.PesquisarSerie(notaFiscalSaidaViewModel.Serie);
+                        notaFiscalSaidaSerieViewModel = notaFiscalSaidaSerieViewModels.FirstOrDefault();
+                    }
+
+                    notaFiscalSaidaViewModel.TransmitirEnderecoCliente = (notaFiscalSaidaViewModel.Cliente_Endereco != null);
+
+                    foreach (NotaFiscalSaidaViewModel item in notaFiscalSaidaViewModels)
+                    {
+                        notaFiscalSaidaViewModel = item;
+                        notaFiscalSaidaPagamento = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaPagamentoViewModel>>(item.NotaFiscalSaidaPagamento);
+                        notaFiscalSaidaReferencia = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaReferenciaViewModel>>(item.NotaFiscalSaidaReferencia);
+
+                        if (Validacao.Data_AdicionarHora(notaFiscalSaidaViewModel.DataSaida, notaFiscalSaidaViewModel.HoraEmissao) < DateTime.Now)
+                        {
+                            DateTime data = DateTime.Now.AddMinutes(2);
+                            notaFiscalSaidaViewModel.DataSaida = data.Date;
+                            notaFiscalSaidaViewModel.HoraEmissao = $"{data.Hour.ToString("00")}:{data.Minute.ToString("00")}";
+                        }
+
+                        Fiscal.Fiscal_DocumentoFiscal_Transmitir(eModeloDocumento: ModeloDocumento.NFe,
+                                                                 notaFiscalSaidaViewModel: ref notaFiscalSaidaViewModel,
+                                                                 notaFiscalSaidaMercadoriaViewModels: ref notaFiscalSaidaMercadoria,
+                                                                 notaFiscalSaidaPagamentoViewModels: ref notaFiscalSaidaPagamento,
+                                                                 notaFiscalSaidaReferenciaViewModels: ref notaFiscalSaidaReferencia,
+                                                                 notaFiscalSaidaSerieViewModel: ref notaFiscalSaidaSerieViewModel,
+                                                                 sDS_PATH_XML: ref sDS_PATH_XML,
+                                                                 bImpressaoNCFe: ref bImpressaoNCFe,
+                                                                 bImprimirDanfeNFe: false,
+                                                                 SomenteGerarXML: somenteGerarXML,
+                                                                 xml: xml);
+                    }
+
+                    if (!somenteGerarXML)
+                    {
+                        if (row != null)
+                        {
+                            row.Cells[gridNotaFiscalSaida_RetornoSefaz].Value = notaFiscalSaidaViewModel.RetornoSefaz;
+                        }
+
+                        using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                        {
+                            notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade = null;
+                            notaFiscalSaidaViewModel.Empresa = null;
+                            notaFiscalSaidaViewModel.NaturezaOperacao = null;
+                            notaFiscalSaidaViewModel.NotaFiscalFinalidade = null;
+                            notaFiscalSaidaViewModel.Cliente = null;
+                            notaFiscalSaidaViewModel.Transportadora = null;
+                            notaFiscalSaidaViewModel.Transportadora_UF = null;
+                            notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_UF = null;
+                            notaFiscalSaidaViewModel.NotaFiscalSaidaMercadoria = null;
+                            notaFiscalSaidaViewModel.NotaFiscalSaidaPagamento = null;
+                            notaFiscalSaidaViewModel.NotaFiscalSaidaReferencia = null;
+                            notaFiscalSaidaViewModel.NotaFiscalSaidaObservacao = null;
+
+                            await notaFiscalSaidaController.Atualizar(notaFiscalSaidaViewModel.Id, notaFiscalSaidaViewModel);
+                        }
+
+                        using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
+                        {
+                            await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerieViewModel.Id, notaFiscalSaidaSerieViewModel);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                CaixaMensagem.Informacao("Fiscal Transmitir", ex);
             }
         }
 

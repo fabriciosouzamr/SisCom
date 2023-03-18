@@ -9,12 +9,24 @@ public static class CaixaMensagem
 	{
         string sMensagem = $"{local} - {ex.Message}";
 
-        if (ex.InnerException == null)
-            sMensagem = $"{sMensagem} ({ex.StackTrace})"; 
-        else
-            sMensagem = $"{sMensagem} ({ex.InnerException.Message})";
+        try
+        {
 
-        MessageBox.Show(sMensagem);
+            if (ex.InnerException == null)
+            {
+                if (!String.IsNullOrWhiteSpace(ex.StackTrace))
+                {
+                    sMensagem = $"{sMensagem} ({ex.StackTrace})";
+                }
+            }
+            else
+                sMensagem = $"{sMensagem} ({ex.InnerException.Message})";
+            MessageBox.Show(sMensagem);
+        }
+        catch (Exception ex1)
+        {
+            MessageBox.Show($"{local} - {ex1.Message}");
+        }
     }
     public static void Informacao(string sMensagem)
     {

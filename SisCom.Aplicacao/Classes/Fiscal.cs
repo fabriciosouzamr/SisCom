@@ -2445,9 +2445,11 @@ namespace SisCom.Aplicacao.Classes
             string sCD_NFCe_Token_ID = "";
             string sCD_NFCe_Token_CSC = "";
             bool bOk = false;
+            string ponto = "";
 
             try
             {
+                ponto = "Fiscal_Configuracao_NFe";
                 oConfig = Fiscal_Configuracao_NFe(eModeloDocumento);
                 if (oConfig == null)
                     goto Sair;
@@ -2456,6 +2458,7 @@ namespace SisCom.Aplicacao.Classes
 
                 if (String.IsNullOrEmpty(xml))
                 {
+                    ponto = "Fiscal_DocumentoFiscal_Gerar";
                     oNFe = Fiscal_DocumentoFiscal_Gerar(ref notaFiscalSaidaViewModel,
                                                         ref notaFiscalSaidaMercadoriaViewModels,
                                                         ref notaFiscalSaidaPagamentoViewModels,
@@ -2470,6 +2473,7 @@ namespace SisCom.Aplicacao.Classes
                     if (oNFe != null)
                     {
                         xml = Declaracoes.Aplicacao_CaminhoDiretorioTemporaria + (SomenteGerarXML ? "\\gerado.xml" : "\\transmitir.xml");
+                        ponto = "SalvarArquivoXml";
                         oNFe.SalvarArquivoXml(xml);
                     }
                 }
@@ -2481,7 +2485,9 @@ namespace SisCom.Aplicacao.Classes
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Recibo))
                         recibo = notaFiscalSaidaViewModel.Recibo;
 
+                    ponto = $"Zeus.Protocolar ({xml})";
                     var retorno = Zeus.Protocolar(xml, recibo);
+                    ponto = "Protocolado";
 
                     notaFiscalSaidaViewModel.DataRetornoSefaz = retorno.dhRegEvento;
                     notaFiscalSaidaViewModel.RetornoSefazCodigo = retorno.Protocolo.CStat.ToString();
@@ -2533,7 +2539,7 @@ namespace SisCom.Aplicacao.Classes
                 oNFe_Servico = null/* TODO Change to default(_) if this is not a reference type */;
                 oNFe_Servico_RetornoNFeAutorizacao = null/* TODO Change to default(_) if this is not a reference type */;
 
-                CaixaMensagem.Informacao("NF-e Transmitir", ex);
+                CaixaMensagem.Informacao($"NF-e Transmitir - {ponto}", ex);
 
                 goto Sair;
             }

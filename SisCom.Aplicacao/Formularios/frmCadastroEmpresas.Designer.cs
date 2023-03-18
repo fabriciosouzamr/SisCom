@@ -788,11 +788,11 @@ namespace SisCom.Aplicacao.Formularios
             this.label64.TabIndex = 158;
             this.label64.Text = "Marca:";
             // 
-            // textVolumeTransportadosMarca
+            // textMarcaPadrao
             // 
             this.textMarcaPadrao.Location = new System.Drawing.Point(144, 163);
             this.textMarcaPadrao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textMarcaPadrao.Name = "textVolumeTransportadosMarca";
+            this.textMarcaPadrao.Name = "textMarcaPadrao";
             this.textMarcaPadrao.Size = new System.Drawing.Size(185, 23);
             this.textMarcaPadrao.TabIndex = 157;
             this.textMarcaPadrao.Text = "CAFE";
@@ -805,11 +805,11 @@ namespace SisCom.Aplicacao.Formularios
             this.label63.TabIndex = 156;
             this.label63.Text = "Espécie:";
             // 
-            // textVolumeTransportadosEspecie
+            // textEspeciePadrao
             // 
             this.textEspeciePadrao.Location = new System.Drawing.Point(144, 136);
             this.textEspeciePadrao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textEspeciePadrao.Name = "textVolumeTransportadosEspecie";
+            this.textEspeciePadrao.Name = "textEspeciePadrao";
             this.textEspeciePadrao.Size = new System.Drawing.Size(185, 23);
             this.textEspeciePadrao.TabIndex = 155;
             this.textEspeciePadrao.Text = "SACAS";
@@ -1112,7 +1112,7 @@ namespace SisCom.Aplicacao.Formularios
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage7.Size = new System.Drawing.Size(718, 333);
             this.tabPage7.TabIndex = 7;
-            this.tabPage7.Text = "Nuvel Fiscal";
+            this.tabPage7.Text = "Nuvem Fiscal";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // botaoNuvemFiscalDiretorioXMLs

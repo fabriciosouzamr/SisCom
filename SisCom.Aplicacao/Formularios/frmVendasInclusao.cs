@@ -212,8 +212,8 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 400, 0, produto, "Descricao", "ID", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Medida", "Medida", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, unidadeMedida, "Nome", "ID", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Quantidade", "Quantidade", Grid_DataGridView.TipoColuna.Numero, readOnly: false);
-                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Preço", "Preço", Grid_DataGridView.TipoColuna.Valor, readOnly: false);
-                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Total", "Total", Grid_DataGridView.TipoColuna.Valor, readOnly: true);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Preço", "Preço", Grid_DataGridView.TipoColuna.Numero6 , readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Total", "Total", Grid_DataGridView.TipoColuna.Numero6, readOnly: true);
                 Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Excluir", "Excluir", Grid_DataGridView.TipoColuna.Button);
 
                 //Cabeçalho

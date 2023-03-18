@@ -281,8 +281,8 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "CFOP", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaCFOP, "Codigo", "ID", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Medida", "Medida", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, unidadeMedida, "Nome", "ID", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Quantidade", "Quantidade", Grid_DataGridView.TipoColuna.Numero, 80, readOnly: false);
-                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Preço", "Preço", Grid_DataGridView.TipoColuna.Valor, 80, readOnly: false);
-                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Total", "Total", Grid_DataGridView.TipoColuna.Valor, 80, readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Preço", "Preço", Grid_DataGridView.TipoColuna.Numero6, 80, readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Total", "Total", Grid_DataGridView.TipoColuna.Numero6, 80, readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "ICMS", "ICMS", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Valor ICMS", "ValorICMS", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Base de Calc. ICMS", "BaseCalcICMS", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
@@ -1765,7 +1765,7 @@ namespace SisCom.Aplicacao.Formularios
                          (e.ColumnIndex == gridMercadoria_Preco))
                 {
                     gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value = Funcao.NuloParaNumero(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Quantidade].Value) *
-                                                                                        Funcao.NuloParaNumero(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Preco].Value);
+                                                                                        Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Preco].Value);
                 }
             }
             catch (Exception)

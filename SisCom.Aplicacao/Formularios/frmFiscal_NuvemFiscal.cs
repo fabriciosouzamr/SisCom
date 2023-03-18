@@ -18,7 +18,7 @@ using static SisCom.Aplicacao.Classes.Declaracoes;
 
 namespace SisCom.Aplicacao.Formularios
 {
-    public partial class frmFiscal_NuvemFiscal : FormMain
+    public partial class frmFiscal_NuvemFiscal : Form
     {
         const int grdNotaFiscal_NFe = 0;
         const int grdNotaFiscal_Serie = 1;
@@ -140,7 +140,7 @@ namespace SisCom.Aplicacao.Formularios
 
         async void ConsultarNotas()
         {
-            await Assincrono.TaskAsyncAndAwaitAsync(Consultar());
+            //await Assincrono.TaskAsyncAndAwaitAsync(Consultar());
             Consultar_Carregar();
         }
 

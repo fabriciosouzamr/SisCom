@@ -19,7 +19,8 @@ public static class Grid_DataGridView
         Numero = 8,
         Percentual = 9,
         Data = 10,
-        Inteiro = 11
+        Inteiro = 11,
+        Numero6 = 12
     }
 
     public enum FormatoColuna
@@ -119,6 +120,7 @@ public static class Grid_DataGridView
                 }
             case TipoColuna.Valor:
             case TipoColuna.Numero:
+            case TipoColuna.Numero6:
             case TipoColuna.Data:
             case TipoColuna.Percentual:
                 {
@@ -192,6 +194,12 @@ public static class Grid_DataGridView
             case TipoColuna.Numero:
             case TipoColuna.Percentual:
                 Coluna.DefaultCellStyle.Format = "N2";
+                Coluna.DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("pt-BR");
+                Coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                Coluna.ValueType = typeof(double);
+                break;
+            case TipoColuna.Numero6:
+                Coluna.DefaultCellStyle.Format = "N6";
                 Coluna.DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("pt-BR");
                 Coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 Coluna.ValueType = typeof(double);
