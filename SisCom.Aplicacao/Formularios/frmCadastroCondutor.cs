@@ -82,7 +82,6 @@ namespace SisCom.Aplicacao.Formularios
                         {
                             condutor.Id = Guid.NewGuid();
                             await condutorController.Adicionar(condutor);
-                            Cadastrado = true;
                         }
                         else
                         {
@@ -91,6 +90,8 @@ namespace SisCom.Aplicacao.Formularios
                         }
                     }
                 }
+
+                Cadastrado = true;
 
                 foreach (string str in condutorRemover)
                 {

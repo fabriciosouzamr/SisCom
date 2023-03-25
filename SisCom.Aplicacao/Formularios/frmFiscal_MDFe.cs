@@ -828,6 +828,8 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         await manifestoEletronicoDocumentoController.Atualizar(manifestoEletronicoDocumento.Id, manifestoEletronicoDocumento);
                     }
+
+                    await Serie_Gravar();
                 }
 
                 ManifestoEletronicoDocumentoNotaViewModel manifestoEletronicoDocumentoNota;
@@ -1081,11 +1083,11 @@ namespace SisCom.Aplicacao.Formularios
         }
         private async void comboIdentificacao_Serie_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!CarregandoDados) { await Serie_Tratar(); }
+            if (!CarregandoDados) { await Serie_Carregar(); }
         }
-        async Task Serie_Tratar()
+        async Task Serie_Carregar()
         {
-            if ((comboIdentificacao_Serie.SelectedIndex != -1) && (String.IsNullOrEmpty(textIdentificacao_Numero.Text)) && (!CarregandoDados))
+            if ((comboIdentificacao_Serie.SelectedIndex != -1) && (String.IsNullOrEmpty(textIdentificacao_Numero.Text)))
             {
                 using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(this.MeuDbContext(), this._notifier))
                 {
@@ -1099,10 +1101,37 @@ namespace SisCom.Aplicacao.Formularios
                         { textIdentificacao_Numero.Text = "1"; }
                         else
                         { textIdentificacao_Numero.Text = (Convert.ToInt16(serie.UltimoNumeroManifestoEletronicoDocumento) + 1).ToString(); }
-
                         serie.UltimoNumeroManifestoEletronicoDocumento = textIdentificacao_Numero.Text;
                         serie.UltimoManifestoEletronicoDocumento = null;
                         await manifestoEletronicoDocumentoSerieController.Atualizar(serie.Id, seriePsq.FirstOrDefault());
+                    }
+                }
+            }
+        }
+        async Task Serie_Gravar()
+        {
+            if (!String.IsNullOrEmpty(textIdentificacao_Numero.Text))
+            {
+                using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(this.MeuDbContext(), this._notifier))
+                {
+                    var seriePsq = await manifestoEletronicoDocumentoSerieController.PesquisarSerie(comboIdentificacao_Serie.Text);
+
+                    if (seriePsq != null)
+                    {
+                        var serie = seriePsq.FirstOrDefault();
+                        int numero = 0;
+
+                        if (String.IsNullOrEmpty(serie.UltimoNumeroManifestoEletronicoDocumento))
+                        { numero = 1; }
+                        else
+                        { numero = Convert.ToInt16(serie.UltimoNumeroManifestoEletronicoDocumento) + 1; }
+
+                        if (numero < Convert.ToInt16(textIdentificacao_Numero.Text))
+                        {
+                            serie.UltimoNumeroManifestoEletronicoDocumento = textIdentificacao_Numero.Text;
+                            serie.UltimoManifestoEletronicoDocumento = null;
+                            await manifestoEletronicoDocumentoSerieController.Atualizar(serie.Id, seriePsq.FirstOrDefault());
+                        }
                     }
                 }
             }
