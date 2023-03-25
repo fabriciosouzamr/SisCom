@@ -18,7 +18,7 @@ using static SisCom.Aplicacao.Classes.Declaracoes;
 
 namespace SisCom.Aplicacao.Formularios
 {
-    public partial class frmFiscal_NuvemFiscal : Form
+    public partial class frmFiscal_NuvemFiscal : FormMain
     {
         const int grdNotaFiscal_NFe = 0;
         const int grdNotaFiscal_Serie = 1;
@@ -248,7 +248,13 @@ namespace SisCom.Aplicacao.Formularios
                             if (resEventoConteudo.NFe.infNFe.emit.CNPJ == null) { CNPJ_CPF = resEventoConteudo.NFe.infNFe.emit.CPF; } else { CNPJ_CPF = resEventoConteudo.NFe.infNFe.emit.CNPJ; }
                             if (resEventoConteudo.NFe.infNFe.emit.IE != null) IE = resEventoConteudo.NFe.infNFe.emit.IE.ToString();
                             Nome = resEventoConteudo.NFe.infNFe.emit.xNome;
-                            DHEmissao = resEventoConteudo.NFe.infNFe.ide.dEmi;
+                            if (resEventoConteudo.NFe.infNFe.ide.dEmi == new DateTime())
+                            { 
+                                if ((!String.IsNullOrEmpty(resEventoConteudo.NFe.infNFe.ide.ProxyDhEmi)))
+                                { DateTime.TryParse(resEventoConteudo.NFe.infNFe.ide.ProxyDhEmi, out DHEmissao); }
+                            }
+                            else
+                            { DHEmissao = resEventoConteudo.NFe.infNFe.ide.dEmi; }
                             VlrNFe = resEventoConteudo.NFe.infNFe.total.ICMSTot.vNF;
                             SituacaoNFe = resEventoConteudo.protNFe.infProt.xMotivo;
                         }
@@ -365,7 +371,7 @@ namespace SisCom.Aplicacao.Formularios
 
             foreach (DataGridViewRow row in gridNotaFiscal.Rows)
             {
-                if ((row.Cells[grdNotaFiscal_Chk].Value != null) && ((bool)row.Cells[grdNotaFiscal_Chk].Value == true))
+                if ((row.Cells[grdNotaFiscal_Chk].Value != null) && ((bool)row.Cells[grdNotaFiscal_Chk].Value))
                 {
                     selecionado = true;
                     sArquivo = Arquivo.DiretorioMontarCaminhoArquivo(sDiretorio, row.Cells[grdNotaFiscal_ChaveAcesso].Value.ToString() + ".xml");
@@ -398,7 +404,7 @@ namespace SisCom.Aplicacao.Formularios
 
             foreach (DataGridViewRow row in gridNotaFiscal.Rows)
             {
-                if ((row.Cells[grdNotaFiscal_Chk].Value != null) && ((bool)row.Cells[grdNotaFiscal_Chk].Value == true))
+                if ((row.Cells[grdNotaFiscal_Chk].Value != null) && ((bool)row.Cells[grdNotaFiscal_Chk].Value))
                 {
                     selecionado = true;
                     temmanifestada = ((temmanifestada) || (row.Cells[grdNotaFiscal_StatusManifestacao].Value.ToString() != StatusSemManifestar));
@@ -459,7 +465,7 @@ namespace SisCom.Aplicacao.Formularios
                             bool Valido = true;
                             Cont = row.Index;
 
-                            if ((Valido) && (Combo_ComboBox.Selecionado(comboTipoManifestacao))) Valido = (Funcao.NuloParaString(row.Cells[grdNotaFiscal_StatusManifestacao].Value) == comboTipoManifestacao.SelectedText);
+                            if ((Valido) && (Combo_ComboBox.Selecionado(comboTipoManifestacao))) Valido = ((Funcao.NuloParaString(row.Cells[grdNotaFiscal_StatusManifestacao].Value) == comboTipoManifestacao.SelectedText) || (String.IsNullOrEmpty(comboTipoManifestacao.SelectedText)));
                             if ((Valido) && (textChaveNFe.Text.Trim() != "")) Valido = (Funcao.NuloParaString(row.Cells[grdNotaFiscal_ChaveAcesso].Value) == textChaveNFe.Text.Trim());
                             if ((Valido) && (textNFe.Text.Trim() != "")) Valido = (Funcao.NuloParaString(row.Cells[grdNotaFiscal_NFe].Value) == textNFe.Text.Trim());
                             if ((Valido)) Valido = ((Funcao.StringParaData(row.Cells[grdNotaFiscal_DHEmissao].Value.ToString(), true) >= datePeriodoInicial.Value) &&

@@ -56,6 +56,7 @@ namespace SisCom.Aplicacao_FW
         static string _PATH = "";
         static string _PATH_SCHEMAS = "";
         static string _PATH_NUVEMFISCAL_Vendas = "";
+        static string _PATH_NUVEMFISCAL_Compras = "";
         static string _PATH_NUVEMFISCAL_MDFE = "";
         static string _PATH_DOCFISCAL = "";
         static string _PATH_ArquivoRelatorio = "";
@@ -80,6 +81,7 @@ namespace SisCom.Aplicacao_FW
             _PATH_SCHEMAS = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\Schemas");
             _PATH_NUVEMFISCAL_Vendas = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_Vendas");
             _PATH_NUVEMFISCAL_MDFE = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_MDFe");
+            _PATH_NUVEMFISCAL_Compras = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\\\NuvemFiscal_Compras");
             _PATH_ArquivoRelatorio = Path.Combine(Directory.GetCurrentDirectory(), "Configuration\\MDFeRetrato.frx");
 
             if (!System.IO.Directory.Exists(_PATH))
@@ -101,6 +103,9 @@ namespace SisCom.Aplicacao_FW
             switch (_Operacao)
             {
                 case "manifestar":
+                    if (!String.IsNullOrEmpty(_PATH_NUVEMFISCAL_Compras))
+                    { _PATH_DOCFISCAL = _PATH_NUVEMFISCAL_Compras; }
+
                     _EnderecoEmitente_UF = args[1];
                     _chaveacesso = args[2];
                     _cnpj = args[3];

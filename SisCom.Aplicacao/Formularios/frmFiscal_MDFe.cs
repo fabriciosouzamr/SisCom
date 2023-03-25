@@ -52,7 +52,7 @@ namespace SisCom.Aplicacao.Formularios
                 comboIdentificacao_TipoEmissao.SelectedValue = MDFe_TipoEmissao.Normal;
 
                 await Assincrono.TaskAsyncAndAwaitAsync(Inicializar());
-                await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());                
+                await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
 
                 comboIdentificacao_UFCarregamento.SelectedValue = Declaracoes.dados_Empresa_EstadoId;
                 await comboIdentificacao_UFCarregamento_Tratar();
@@ -1085,7 +1085,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         async Task Serie_Tratar()
         {
-            if ((comboIdentificacao_Serie.SelectedIndex != -1) && (String.IsNullOrEmpty(textIdentificacao_Numero.Text)))
+            if ((comboIdentificacao_Serie.SelectedIndex != -1) && (String.IsNullOrEmpty(textIdentificacao_Numero.Text)) && (!CarregandoDados))
             {
                 using (ManifestoEletronicoDocumentoSerieController manifestoEletronicoDocumentoSerieController = new ManifestoEletronicoDocumentoSerieController(this.MeuDbContext(), this._notifier))
                 {

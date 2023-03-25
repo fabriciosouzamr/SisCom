@@ -1981,27 +1981,28 @@ namespace SisCom.Aplicacao.Classes
 
                 mdfe.InfMDFe.Ide.InfMunCarrega.Add(new MDFeInfMunCarrega
                 {
-                    CMunCarrega = manifestoEletronicoDocumento.CidadeCarregamento.CodigoIBGE,
-                    XMunCarrega = manifestoEletronicoDocumento.CidadeCarregamento.Nome
+                    CMunCarrega = TratarString(manifestoEletronicoDocumento.CidadeCarregamento.CodigoIBGE),
+                    XMunCarrega = TratarString(manifestoEletronicoDocumento.CidadeCarregamento.Nome)
                 });
                 #endregion (ide)
 
                 #region dados emitente (emit)
                 mdfe.InfMDFe.Emit.CNPJ = Declaracoes.dados_Empresa_CNPJ;
-                mdfe.InfMDFe.Emit.IE = empresa.InscricaoEstadual;
-                mdfe.InfMDFe.Emit.XNome = empresa.RazaoSocial;
-                mdfe.InfMDFe.Emit.XFant = empresa.NomeFantasia;
+                mdfe.InfMDFe.Emit.IE = TratarString(empresa.InscricaoEstadual);
+                mdfe.InfMDFe.Emit.XNome = TratarString(empresa.RazaoSocial);
+                mdfe.InfMDFe.Emit.XFant = TratarString(empresa.NomeFantasia);
 
-                mdfe.InfMDFe.Emit.EnderEmit.XLgr = empresa.Endereco.End_Logradouro;
-                mdfe.InfMDFe.Emit.EnderEmit.Nro = empresa.Endereco.End_Numero;
-                mdfe.InfMDFe.Emit.EnderEmit.XCpl = empresa.Endereco.End_Complemento;
-                mdfe.InfMDFe.Emit.EnderEmit.XBairro = empresa.Endereco.End_Bairro;
+                mdfe.InfMDFe.Emit.EnderEmit.XLgr = TratarString(empresa.Endereco.End_Logradouro);
+                mdfe.InfMDFe.Emit.EnderEmit.Nro = TratarString(empresa.Endereco.End_Numero);
+                if (!String.IsNullOrWhiteSpace(empresa.Endereco.End_Complemento))
+                mdfe.InfMDFe.Emit.EnderEmit.XCpl = TratarString(empresa.Endereco.End_Complemento.ToString());
+                mdfe.InfMDFe.Emit.EnderEmit.XBairro = TratarString(empresa.Endereco.End_Bairro);
                 mdfe.InfMDFe.Emit.EnderEmit.CMun = Convert.ToInt64(empresa.Endereco.End_Cidade.CodigoIBGE);
-                mdfe.InfMDFe.Emit.EnderEmit.XMun = empresa.NomeFantasia;
+                mdfe.InfMDFe.Emit.EnderEmit.XMun = TratarString(empresa.Endereco.End_Cidade.Nome);
                 mdfe.InfMDFe.Emit.EnderEmit.CEP = long.Parse(empresa.Endereco.End_CEP);
                 mdfe.InfMDFe.Emit.EnderEmit.UF = oEstado.SiglaParaEstado(empresa.Endereco.End_Cidade.Estado.Codigo);
-                if (!String.IsNullOrEmpty(empresa.Telefone)) { mdfe.InfMDFe.Emit.EnderEmit.Fone = empresa.Telefone; }
-                if (!String.IsNullOrEmpty(empresa.EMail)) { mdfe.InfMDFe.Emit.EnderEmit.Email = empresa.EMail; }
+                if (!String.IsNullOrEmpty(empresa.Telefone)) { mdfe.InfMDFe.Emit.EnderEmit.Fone = TratarString(empresa.Telefone); }
+                if (!String.IsNullOrEmpty(empresa.EMail)) { mdfe.InfMDFe.Emit.EnderEmit.Email = TratarString(empresa.EMail); }
                 #endregion dados emitente (emit)
 
                 #region modal
@@ -2020,7 +2021,7 @@ namespace SisCom.Aplicacao.Classes
                             new MDFeCondutor
                             {
                                 CPF = Funcoes._Classes.Texto.SomenteNumero(manifestoEletronicoDocumento.Condutor_CPF),
-                                XNome = manifestoEletronicoDocumento.Condutor_Nome
+                                XNome = TratarString(manifestoEletronicoDocumento.Condutor_Nome)
                             }
                         },
                         TpRod = dadoVeiculo_TipoRodado,

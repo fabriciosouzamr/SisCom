@@ -347,7 +347,6 @@ namespace SisCom.Aplicacao.Formularios
             this.MaximizeBox = false;
             this.Name = "frmFiscal_NuvemFiscal";
             this.Text = "Nuvem Fiscal - Consulte as Notas emitidas para sua Empresa";
-            this.Load += new System.EventHandler(this.frmFiscal_NuvemFiscal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridNotaFiscal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
