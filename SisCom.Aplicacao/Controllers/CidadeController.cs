@@ -1,4 +1,5 @@
 ﻿using Funcoes.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -7,6 +8,8 @@ using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -14,12 +17,21 @@ namespace SisCom.Aplicacao.Controllers
 {
     public class CidadeController
     {
+        public class Sample
+        {
+            public string TableName { get; set; }
+            public string FieldName { get; set; }
+            public int NextNum { get; set; }
+        }
+
         static CidadeService _CidadeService;
         private readonly MeuDbContext MeuDbContext;
 
         public CidadeController(MeuDbContext MeuDbContext, INotifier notifier)
         {
             this.MeuDbContext = MeuDbContext;
+
+            this.MeuDbContext.Database.GetDbConnection();
 
             _CidadeService = new CidadeService(new CidadeRepository(this.MeuDbContext), notifier);
         }

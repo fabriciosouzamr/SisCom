@@ -58,6 +58,7 @@ using MDFe.Servicos.RetRecepcaoMDFe;
 using MDFe.Classes.Retorno.MDFeRetRecepcao;
 using NFe.Danfe.Base;
 using System.Windows.Forms;
+using SisCom.Infraestrutura.Data.Repository;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -1638,6 +1639,9 @@ namespace SisCom.Aplicacao.Classes
                     oNFE_Det.prod.vUnTrib = Convert.ToDecimal(ntFSMercadoria.PrecoUnitario);
                     // -- Detalhe Dados do Produto Totaliza
                     oNFE_Det.prod.indTot = NFe.Classes.Informacoes.Detalhe.IndicadorTotal.ValorDoItemCompoeTotalNF;
+
+                    if (!string.IsNullOrEmpty(ntFSMercadoria.NumeroPedidoCompra))
+                        oNFE_Det.prod.xPed = ntFSMercadoria.NumeroPedidoCompra;
 
                     // -- Detalhe Impostos
                     oNFE_Det.imposto = new NFe.Classes.Informacoes.Detalhe.Tributacao.imposto();

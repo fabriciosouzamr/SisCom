@@ -55,7 +55,8 @@ namespace SisCom.Aplicacao.Formularios
             if (gridManifestoDocumentoEletronico.CurrentRow != null)
             {
                 if ((gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == "Criado") ||
-                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == "Validado"))
+                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == "Validado") ||
+                    (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == "Transmitido"))
                 {
                     var form = this.ServiceProvider().GetRequiredService<frmFiscal_MDFe>();
                     form.manifestoEletronicoDocumentoId = Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString());
@@ -63,7 +64,7 @@ namespace SisCom.Aplicacao.Formularios
                 }
                 else
                 {
-                    CaixaMensagem.Informacao("Só é permitido alterar manifesto com o status validado");
+                    CaixaMensagem.Informacao("Só é permitido alterar manifesto com o status validado ou transmitido");
                 }
             }
             else

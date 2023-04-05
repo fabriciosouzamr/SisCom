@@ -114,7 +114,10 @@ namespace SisCom.Aplicacao.Formularios
 
         private void botaoImprimir_Click(object sender, EventArgs e)
         {
-
+            frmRelatorioVisualizar form = new frmRelatorioVisualizar();
+            form.param = new string[]  { notaFiscalSaida.Id.ToString() };
+            form.tipoRelatorio = TipoRelatorio.CartaCorrecao;
+            form.Show();
         }
 
         private void botaoConfimar_Click(object sender, EventArgs e)

@@ -1101,9 +1101,6 @@ namespace SisCom.Aplicacao.Formularios
                         { textIdentificacao_Numero.Text = "1"; }
                         else
                         { textIdentificacao_Numero.Text = (Convert.ToInt16(serie.UltimoNumeroManifestoEletronicoDocumento) + 1).ToString(); }
-                        serie.UltimoNumeroManifestoEletronicoDocumento = textIdentificacao_Numero.Text;
-                        serie.UltimoManifestoEletronicoDocumento = null;
-                        await manifestoEletronicoDocumentoSerieController.Atualizar(serie.Id, seriePsq.FirstOrDefault());
                     }
                 }
             }
@@ -1124,7 +1121,7 @@ namespace SisCom.Aplicacao.Formularios
                         if (String.IsNullOrEmpty(serie.UltimoNumeroManifestoEletronicoDocumento))
                         { numero = 1; }
                         else
-                        { numero = Convert.ToInt16(serie.UltimoNumeroManifestoEletronicoDocumento) + 1; }
+                        { numero = Convert.ToInt16(serie.UltimoNumeroManifestoEletronicoDocumento); }
 
                         if (numero < Convert.ToInt16(textIdentificacao_Numero.Text))
                         {
