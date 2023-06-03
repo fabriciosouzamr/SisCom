@@ -4,6 +4,7 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
+using SisCom.Negocio.Interfaces;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,12 @@ namespace SisCom.Aplicacao.Controllers
         public async Task<bool> Excluir(Guid Id)
         {
             await _NotaFiscalEntradaMercadoriaService.Excluir(Id);
+
+            return true;
+        }
+        public async Task<bool> ExcluirTodos(Guid Id)
+        {
+            await _NotaFiscalEntradaMercadoriaService.ExcluirTodas(Id);
 
             return true;
         }

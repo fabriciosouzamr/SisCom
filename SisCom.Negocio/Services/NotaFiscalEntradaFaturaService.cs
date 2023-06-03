@@ -13,7 +13,7 @@ namespace SisCom.Negocio.Services
         private readonly INotaFiscalEntradaFaturaRepository _NotaFiscalEntradaFaturaRepository;
 
         public NotaFiscalEntradaFaturaService(INotaFiscalEntradaFaturaRepository NotaFiscalEntradaFaturaRepository,
-                                     INotifier notificador) : base(notificador, NotaFiscalEntradaFaturaRepository)
+                                              INotifier notificador) : base(notificador, NotaFiscalEntradaFaturaRepository)
         {
             _NotaFiscalEntradaFaturaRepository = NotaFiscalEntradaFaturaRepository;
         }
@@ -77,6 +77,13 @@ namespace SisCom.Negocio.Services
         public async Task Excluir(Guid id)
         {
             await _NotaFiscalEntradaFaturaRepository.Delete(id);
+
+            Notify("Exclusão Efetuada.");
+        }
+
+        public async Task ExcluirTodas(Guid id)
+        {
+            await _NotaFiscalEntradaFaturaRepository.Delete(w => w.NotaFiscalEntradaId == id);
 
             Notify("Exclusão Efetuada.");
         }

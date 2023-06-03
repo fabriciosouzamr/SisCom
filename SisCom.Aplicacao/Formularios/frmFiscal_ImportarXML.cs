@@ -12,8 +12,6 @@ using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -332,6 +330,10 @@ namespace SisCom.Aplicacao.Formularios
                         notaFiscalEntradaViewModel.ValorFCPST = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vFCPST);
                         notaFiscalEntradaViewModel.Importacao_ValorPIS = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vPIS);
                         notaFiscalEntradaViewModel.Importacao_ValorCofins = Funcao.NuloParaValorD(_nfeProc.NFe.infNFe.total.ICMSTot.vCOFINS);
+                        notaFiscalEntradaViewModel.Status = NF_Status.Finalizada;
+
+                        if (_nfeProc != null)
+                            notaFiscalEntradaViewModel.xml = _nfeProc.ObterXmlString();
 
                         await notaFiscalEntradaController.Adicionar(notaFiscalEntradaViewModel);
 

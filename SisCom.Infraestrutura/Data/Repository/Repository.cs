@@ -154,6 +154,11 @@ namespace SisCom.Infraestrutura.Data.Repository
             DbSet.Remove(new TEntity { Id = id });
             await SaveChanges();
         }
+        public virtual async Task Delete(Expression<Func<TEntity, bool>> predicate)
+        {
+            DbSet.RemoveRange(DbSet.Where(predicate));
+            await SaveChanges();
+        }
         public async Task<int> SaveChanges()
         {
             return Db.SaveChanges();

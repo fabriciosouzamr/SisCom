@@ -101,9 +101,9 @@ namespace SisCom.Aplicacao.Formularios
             this.label71 = new System.Windows.Forms.Label();
             this.textNotaFiscal = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.dateDateEmissao = new System.Windows.Forms.DateTimePicker();
+            this.dateEmissao = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.dateDataEntrada = new System.Windows.Forms.DateTimePicker();
+            this.dateEntrada = new System.Windows.Forms.DateTimePicker();
             this.label69 = new System.Windows.Forms.Label();
             this.tbsImportacao = new System.Windows.Forms.TabPage();
             this.numericImportacaoCofins = new System.Windows.Forms.NumericUpDown();
@@ -509,9 +509,9 @@ namespace SisCom.Aplicacao.Formularios
             this.tbsNotaFiscal.Controls.Add(this.label71);
             this.tbsNotaFiscal.Controls.Add(this.textNotaFiscal);
             this.tbsNotaFiscal.Controls.Add(this.label9);
-            this.tbsNotaFiscal.Controls.Add(this.dateDateEmissao);
+            this.tbsNotaFiscal.Controls.Add(this.dateEmissao);
             this.tbsNotaFiscal.Controls.Add(this.label8);
-            this.tbsNotaFiscal.Controls.Add(this.dateDataEntrada);
+            this.tbsNotaFiscal.Controls.Add(this.dateEntrada);
             this.tbsNotaFiscal.Controls.Add(this.label69);
             this.tbsNotaFiscal.Location = new System.Drawing.Point(4, 24);
             this.tbsNotaFiscal.Name = "tbsNotaFiscal";
@@ -1006,11 +1006,11 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // dateDateEmissao
             // 
-            this.dateDateEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDateEmissao.Location = new System.Drawing.Point(262, 5);
-            this.dateDateEmissao.Name = "dateDateEmissao";
-            this.dateDateEmissao.Size = new System.Drawing.Size(81, 23);
-            this.dateDateEmissao.TabIndex = 2;
+            this.dateEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateEmissao.Location = new System.Drawing.Point(262, 5);
+            this.dateEmissao.Name = "dateDateEmissao";
+            this.dateEmissao.Size = new System.Drawing.Size(81, 23);
+            this.dateEmissao.TabIndex = 2;
             // 
             // label8
             // 
@@ -1024,11 +1024,11 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // dateDataEntrada
             // 
-            this.dateDataEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDataEntrada.Location = new System.Drawing.Point(90, 5);
-            this.dateDataEntrada.Name = "dateDataEntrada";
-            this.dateDataEntrada.Size = new System.Drawing.Size(81, 23);
-            this.dateDataEntrada.TabIndex = 1;
+            this.dateEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateEntrada.Location = new System.Drawing.Point(90, 5);
+            this.dateEntrada.Name = "dateDataEntrada";
+            this.dateEntrada.Size = new System.Drawing.Size(81, 23);
+            this.dateEntrada.TabIndex = 1;
             // 
             // label69
             // 
@@ -2073,9 +2073,9 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.TabPage tbsImportacao;
         private System.Windows.Forms.TabPage tbsServicosAquisicao;
         private System.Windows.Forms.TabPage tbsInformacoesAdicionais;
-        private System.Windows.Forms.DateTimePicker dateDataEntrada;
+        private System.Windows.Forms.DateTimePicker dateEntrada;
         private System.Windows.Forms.Label label69;
-        private System.Windows.Forms.DateTimePicker dateDateEmissao;
+        private System.Windows.Forms.DateTimePicker dateEmissao;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textNotaFiscal;

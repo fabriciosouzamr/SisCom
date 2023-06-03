@@ -141,8 +141,19 @@ namespace Funcoes._Classes
 				return false;
             }
 		}
-
-		public static DateTime Data_AdicionarHora(DateTime data, string hora)
+        public static bool DataValida(string data)
+		{
+			try
+			{
+				DateTime.Parse(data);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+        public static DateTime Data_AdicionarHora(DateTime data, string hora)
 		{
 			try
 			{

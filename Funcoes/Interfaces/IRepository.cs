@@ -19,6 +19,7 @@ namespace Funcoes.Interfaces
         Task<List<TEntity>> ComboSearch(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> order = null);
         Task Update(TEntity entity);
         Task Delete(Guid id);
+        Task Delete(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> order = null);
         bool Exists(Expression<Func<TEntity, bool>> predicate);
         public Task<IPagedList<TEntity>> GetPagedList(Expression<Func<TEntity, bool>> predicate, PagedListParameters parameters);

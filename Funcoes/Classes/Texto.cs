@@ -107,5 +107,41 @@ namespace Funcoes._Classes
                 return Guid.Empty;
             }
         }
+
+        public static decimal ConverterDecimal(object valor)
+        {
+            try
+            {
+                return decimal.Parse(valor.ToString());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static int ConverterInt(object valor)
+        {
+            try
+            {
+                return int.Parse(valor.ToString());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static double ConverterDouble(string valor)
+        {
+            try
+            {
+                return double.Parse(valor.ToString());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
     }
 }

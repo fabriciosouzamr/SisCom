@@ -36,6 +36,12 @@ namespace SisCom.Aplicacao.Controllers
 
             return true;
         }
+        public async Task<bool> ExcluirTodos(Guid Id)
+        {
+            await _NotaFiscalEntradaFaturaService.ExcluirTodas(Id);
+
+            return true;
+        }
         public async Task<NotaFiscalEntradaFaturaViewModel> Atualizar(Guid id, NotaFiscalEntradaFaturaViewModel NotaFiscalEntradaFaturaViewModel)
         {
             await _NotaFiscalEntradaFaturaService.Atualizar(Declaracoes.mapper.Map<NotaFiscalEntradaFatura>(NotaFiscalEntradaFaturaViewModel));

@@ -342,24 +342,17 @@ namespace SisCom.Aplicacao.Formularios
             }
             if ((e.ColumnIndex == grdNotaFiscal_Manifestar) && (e.RowIndex > -1))
             {
-//                if (StatusSemManifestar == gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_StatusManifestacao].Value.ToString())
-                //{
-                    notasFiscalManifestar = new List<NotaFiscalManifestar>();
-                    notasFiscalManifestar.Add(new NotaFiscalManifestar
-                    {
-                        Emissao = Convert.ToDateTime(gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_DHEmissao].Value),
-                        Valor = Convert.ToDouble(gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_VlrNFe].Value),
-                        NFe = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_NFe].Value.ToString(),
-                        Serie = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_Serie].Value.ToString(),
-                        ChaveAcesso = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_ChaveAcesso].Value.ToString(),
-                        CNPJ = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_CNPJ_CPF].Value.ToString()
-                    });
-                    Manifestar();
-                //}
-                //else
-                //{
-                    //CaixaMensagem.Informacao("NF-e já manifestada");
-                //}
+                notasFiscalManifestar = new List<NotaFiscalManifestar>();
+                notasFiscalManifestar.Add(new NotaFiscalManifestar
+                {
+                    Emissao = Convert.ToDateTime(gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_DHEmissao].Value),
+                    Valor = Convert.ToDouble(gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_VlrNFe].Value),
+                    NFe = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_NFe].Value.ToString(),
+                    Serie = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_Serie].Value.ToString(),
+                    ChaveAcesso = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_ChaveAcesso].Value.ToString(),
+                    CNPJ = gridNotaFiscal.Rows[e.RowIndex].Cells[grdNotaFiscal_CNPJ_CPF].Value.ToString()
+                });
+                Manifestar();
             }
         }
 

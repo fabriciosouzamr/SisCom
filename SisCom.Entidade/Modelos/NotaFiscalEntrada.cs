@@ -56,6 +56,7 @@ namespace SisCom.Entidade.Modelos
         public decimal ServicosAquisicao_ValorICMSDesoneracao { get; set; }
         public NF_Finalidade InformacaoAdicionais_Finalidade { get; set; }
         public NF_Status Status { get; set; }
+        public string xml { get; set; }
 
         /* EF Relation */
         public Guid? FornecedorId { get; set; }
