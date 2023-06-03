@@ -54,7 +54,13 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<NotaFiscalEntradaMercadoriaViewModel>> PesquisarId(Guid Id)
         {
-            var pessoa = await _NotaFiscalEntradaMercadoriaService.Search(p => p.Id == Id);
+            var pessoa = await _NotaFiscalEntradaMercadoriaService.GetAll(null,
+                                                                          p => p.NotaFiscalEntradaId  == Id, 
+                                                                          i => i.Mercadoria,
+                                                                          i => i.NCM,
+                                                                          i => i.UnidadeMedida,
+                                                                          i => i.CFOP,
+                                                                          i => i.CST);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalEntradaMercadoriaViewModel>>(pessoa);
         }
         public async Task<IEnumerable<NomeComboViewModel>> Combo(Expression<Func<NotaFiscalEntradaMercadoria, object>> order = null)

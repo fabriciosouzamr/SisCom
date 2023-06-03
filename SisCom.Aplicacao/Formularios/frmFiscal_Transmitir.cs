@@ -87,7 +87,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 IEnumerable<NotaFiscalSaidaViewModel> ret;
 
-                Grid_DataGridView.User_LinhaLimpar(gridNotaFiscalSaida);
+                gridNotaFiscalSaida.Rows.Clear();
 
                 if ((statusId != null) || (dataInicial != null) || (dataFinal != null))
                 {
@@ -179,30 +179,33 @@ namespace SisCom.Aplicacao.Formularios
 
         async void GridNotaFiscalSaida(DataGridViewCellEventArgs e)
         {
-            switch (e.ColumnIndex)
+            if (gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_CPF_CNPJ].Value.ToString() != "")
             {
-                case gridNotaFiscalSaida_BTN_Transmitir:
-                case gridNotaFiscalSaida_BTN_GerarXML:
-                    {
-                        await Transmitir(row: gridNotaFiscalSaida.Rows[e.RowIndex],
-                                         id: Guid.Parse(gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Id].Value.ToString()),
-                                         somenteGerarXML: e.ColumnIndex == gridNotaFiscalSaida_BTN_GerarXML,
-                                         exibirmensagem: true);
-                    }
+                switch (e.ColumnIndex)
+                {
+                    case gridNotaFiscalSaida_BTN_Transmitir:
+                    case gridNotaFiscalSaida_BTN_GerarXML:
+                        {
+                            await Transmitir(row: gridNotaFiscalSaida.Rows[e.RowIndex],
+                                             id: Guid.Parse(gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Id].Value.ToString()),
+                                             somenteGerarXML: e.ColumnIndex == gridNotaFiscalSaida_BTN_GerarXML,
+                                             exibirmensagem: true);
+                        }
 
-                    if (e.ColumnIndex == gridNotaFiscalSaida_BTN_GerarXML)
-                    { CaixaMensagem.Informacao("XML gerado"); }
-                    else
-                    { Carregar((NF_Status?)comboStatusVenda.SelectedValue, dateDataVendaInicial.Value, dateDataVendaFinal.Value); }
+                        if (e.ColumnIndex == gridNotaFiscalSaida_BTN_GerarXML)
+                        { CaixaMensagem.Informacao("XML gerado"); }
+                        else
+                        { Carregar((NF_Status?)comboStatusVenda.SelectedValue, dateDataVendaInicial.Value, dateDataVendaFinal.Value); }
 
-                    break;
-                case gridNotaFiscalSaida_BTN_EMail:
-                    break;
-                case gridNotaFiscalSaida_BTN_CartaCorrecao:
-                case gridNotaFiscalSaida_BTN_Cancelar:
-                    Cancamento_CartaCorrecao(Guid.Parse(gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Id].Value.ToString()), e.ColumnIndex);
-                    { Carregar((NF_Status?)comboStatusVenda.SelectedValue, dateDataVendaInicial.Value, dateDataVendaFinal.Value); }
-                    break;
+                        break;
+                    case gridNotaFiscalSaida_BTN_EMail:
+                        break;
+                    case gridNotaFiscalSaida_BTN_CartaCorrecao:
+                    case gridNotaFiscalSaida_BTN_Cancelar:
+                        Cancamento_CartaCorrecao(Guid.Parse(gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Id].Value.ToString()), e.ColumnIndex);
+                        { Carregar((NF_Status?)comboStatusVenda.SelectedValue, dateDataVendaInicial.Value, dateDataVendaFinal.Value); }
+                        break;
+                }
             }
         }
 
@@ -280,13 +283,16 @@ namespace SisCom.Aplicacao.Formularios
                         var notaFiscalSaidaSerieViewModels = await notaFiscalSaidaSerieController.PesquisarSerie(notaFiscalSaidaViewModel.Serie);
                         notaFiscalSaidaSerieViewModel = notaFiscalSaidaSerieViewModels.FirstOrDefault();
                     }
+                    using (NotaFiscalSaidaPagamentoController notaFiscalSaidaPagamentoController = new NotaFiscalSaidaPagamentoController(this.MeuDbContext(), this._notifier))
+                    {
+                        notaFiscalSaidaPagamento = await notaFiscalSaidaPagamentoController.PesquisarId(notaFiscalSaidaViewModel.Id);
+                    }
 
                     notaFiscalSaidaViewModel.TransmitirEnderecoCliente = (notaFiscalSaidaViewModel.Cliente_Endereco != null);
 
                     foreach (NotaFiscalSaidaViewModel item in notaFiscalSaidaViewModels)
                     {
                         notaFiscalSaidaViewModel = item;
-                        notaFiscalSaidaPagamento = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaPagamentoViewModel>>(item.NotaFiscalSaidaPagamento);
                         notaFiscalSaidaReferencia = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaReferenciaViewModel>>(item.NotaFiscalSaidaReferencia);
 
                         if (Validacao.Data_AdicionarHora(notaFiscalSaidaViewModel.DataSaida, notaFiscalSaidaViewModel.HoraEmissao) < DateTime.Now)

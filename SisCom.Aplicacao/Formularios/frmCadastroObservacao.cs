@@ -39,7 +39,7 @@ namespace SisCom.Aplicacao.Formularios
                                                                                        readOnly: false, 
                                                                                        Tamanho: 200);
 
-            Grid_DataGridView.User_LinhaLimpar(gridObservacao);
+            gridObservacao.Rows.Clear();
 
             using (ObservacaoController observacaoController = new ObservacaoController(this.MeuDbContext(), this._notifier))
             {

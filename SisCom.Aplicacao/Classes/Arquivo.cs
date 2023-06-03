@@ -41,6 +41,16 @@ namespace SisCom.Aplicacao.Classes
 
         public static string CarregarArquivoXML()
         {
+            return CarregarArquivo("Selecionar o XML", "XML|*.XML");
+        }
+
+        public static string CarregarArquivoMSAccess()
+        {
+            return CarregarArquivo("Selecionar o Banco de Dados", "Banco de Dados|*.mdb");
+        }
+
+        public static string CarregarArquivo(string title, string filter)
+        {
             var filePath = string.Empty;
 
             try
@@ -49,8 +59,8 @@ namespace SisCom.Aplicacao.Classes
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = Application.StartupPath;
-                    openFileDialog.Title = "Selecionar o XML";
-                    openFileDialog.Filter = "XML|*.XML";
+                    openFileDialog.Title = title;
+                    openFileDialog.Filter = filter;
                     openFileDialog.FilterIndex = 1;
                     openFileDialog.CheckFileExists = true;
                     openFileDialog.CheckPathExists = true;

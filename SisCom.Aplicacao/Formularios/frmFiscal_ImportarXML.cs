@@ -166,7 +166,7 @@ namespace SisCom.Aplicacao.Formularios
                 textInscricaoEstadual.Text = _nfeProc.NFe.infNFe.emit.IE;
                 Forms.comboFornecedor_SelecionarPorCNPJ_CPF(comboFornecedor, _nfeProc.NFe.infNFe.emit.CNPJ);
 
-                Grid_DataGridView.User_LinhaLimpar(gridProduto);
+                gridProduto.Rows.Clear();
 
                 _nfeProc.NFe.infNFe.det.ForEach(d =>
                 {
@@ -359,8 +359,8 @@ namespace SisCom.Aplicacao.Formularios
                                 notaFiscalEntradaMercadoriaViewModel.PercentualDesconto = 0;
                                 notaFiscalEntradaMercadoriaViewModel.ValorDesconto = Funcao.NuloParaValorD(prod.prod.vDesc);
                                 notaFiscalEntradaMercadoriaViewModel.PrecoTotal = Convert.ToDecimal(row.Cells[grdProduto_Total].Value);
-                                notaFiscalEntradaMercadoriaViewModel.PercentualICMS = Funcao.NuloParaValorD(Zeus.NFe_Produto_DadosICMS(prod).vICMS);
-                                notaFiscalEntradaMercadoriaViewModel.PercentualIPI = Funcao.NuloParaValorD(Zeus.NFE_Produto_DadosIPI(prod).vIPI);
+                                notaFiscalEntradaMercadoriaViewModel.PercentualICMS = Funcao.NuloParaValorD(Zeus.NFe_Produto_DadosICMS(prod) == null ? 0 : Zeus.NFe_Produto_DadosICMS(prod).vICMS);
+                                notaFiscalEntradaMercadoriaViewModel.PercentualIPI = Funcao.NuloParaValorD(Zeus.NFE_Produto_DadosIPI(prod) == null ? 0 : Zeus.NFE_Produto_DadosIPI(prod).vIPI);
                                 notaFiscalEntradaMercadoriaViewModel.NotaFiscalEntradaId = notaFiscalEntradaViewModel.Id;
                                 notaFiscalEntradaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[grdProduto_CodigoSistema].Value.ToString());
                                 

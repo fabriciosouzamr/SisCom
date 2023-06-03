@@ -33,6 +33,8 @@ namespace SisCom.Aplicacao.ViewModels
         public byte[]? ImagemLogomarca { get; set; }
         public Sped_TipoGeracaoInventario? Sped_TipoGeracaoInventario { get; set; }
         public string? MDFe_Serie { get; set; }
+        public string? NFE_InfComple_CreditoSimplesNacional { get; set; }
+        public string? NFE_InfComple_TributosTotal { get; set; }
         public AmbienteSistemas? MDFe_Ambiente { get; set; }
         public TipoEmissor? MDFe_TipoEmirssor { get; set; }
         public bool NuvemFiscal_Usar { get; set; }

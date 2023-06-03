@@ -18,6 +18,7 @@ namespace SisCom.Aplicacao.ViewModels
         public Pessoa Fornecedor { get; set; }
         public NaturezaOperacao NaturezaOperacao { get; set; }
         public TipoFrete TipoFrete { get; set; }
+        public NotaFiscalTipoPagamento TipoPagamento { get; set; }
         public double PercentualBaseICMSST { get; set; }
         public decimal ValorICMSST { get; set; }
         public decimal ValorSeguro { get; set; }
@@ -58,6 +59,7 @@ namespace SisCom.Aplicacao.ViewModels
         public decimal ServicosAquisicao_ValorISS { get; set; }
         public decimal ServicosAquisicao_ValorICMSDesoneracao { get; set; }
         public NF_Finalidade InformacaoAdicionais_Finalidade { get; set; }
+        public NF_Status Status { get; set; }
 
         /* EF Relation */
         public Guid? FornecedorId { get; set; }

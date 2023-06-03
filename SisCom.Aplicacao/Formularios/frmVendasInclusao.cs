@@ -147,7 +147,7 @@ namespace SisCom.Aplicacao.Formularios
                 textObservacao.Text = Funcoes._Classes.Texto.NuloString(venda.Observacao);
                 checkOutrosDados_PossuiEntrega.Checked = venda.PosuiEntrega;
 
-                Grid_DataGridView.User_LinhaLimpar(gridProdutos);
+                gridProdutos.Rows.Clear();
 
                 using (VendaMercadoriaController vendaMercadoriaController = new VendaMercadoriaController(this.MeuDbContext(), this._notifier))
                 {
@@ -300,7 +300,7 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboClienteCodigo,
                                         "ID", "Codigo",
                                         ComboBoxStyle.DropDownList,
-                                        await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboCodigo());
+                                        await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboCodigo(order: o => o.Codigo));
             }
 
             return true;
@@ -312,7 +312,7 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboClienteNome,
                                         "ID", "Nome",
                                         ComboBoxStyle.DropDownList,
-                                        await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboNome());
+                                        await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboNome(order: o => o.Nome));
             }
 
             return true;
@@ -462,6 +462,10 @@ namespace SisCom.Aplicacao.Formularios
             var vendaController = new VendaController(this.MeuDbContext(), this._notifier);
             VendaMercadoriaController vendaMercadoriaController;
 
+            venda.Vendedor = null;
+            venda.Empresa = null;
+            venda.TabelaOrigemVenda = null;
+            venda.Cliente = null;
             venda.DataVenda = DateTime.Parse(dateDataEntrada.Value.ToString("dd/MM/yyyy") + " " + textHora.Text);
             venda.ClienteId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboClienteCodigo);
             venda.EmpresaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEmpresa);
@@ -478,11 +482,6 @@ namespace SisCom.Aplicacao.Formularios
             venda.Observacao = textObservacao.Text.Trim() == "" ? textObservacao.Text.Trim() : null;
             //venda.EnderecoEntrega = text
             venda.PosuiEntrega = checkOutrosDados_PossuiEntrega.Checked;
-
-            venda.Vendedor = null;
-            venda.Empresa = null;
-            venda.TabelaOrigemVenda = null;
-            venda.Cliente = null;
 
             if ((venda.Id != Guid.Empty) && (!novo))
             {
@@ -578,7 +577,7 @@ namespace SisCom.Aplicacao.Formularios
             if ((Combo_ComboBox.Selecionado(comboClienteCodigo)) && (comboClienteNome.Items.Count != 0) && (!processando))
             {
                 processando = true;
-                comboClienteNome.SelectedIndex = comboClienteCodigo.SelectedIndex;
+                comboClienteNome.SelectedValue = comboClienteCodigo.SelectedValue;
                 processando = false;
             }
         }
@@ -587,7 +586,7 @@ namespace SisCom.Aplicacao.Formularios
             if ((Combo_ComboBox.Selecionado(comboClienteNome)) && (comboClienteCodigo.Items.Count != 0) && (!processando))
             {
                 processando = true;
-                comboClienteCodigo.SelectedIndex = comboClienteNome.SelectedIndex;
+                comboClienteCodigo.SelectedValue = comboClienteNome.SelectedValue;
                 processando = false;
             }
         }

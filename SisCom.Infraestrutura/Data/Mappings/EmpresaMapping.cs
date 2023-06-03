@@ -23,14 +23,14 @@ namespace SisCom.Infraestrutura.Data.Mappings
             builder.Property(p => p.NFE_VersaoEmissor).HasColumnType("varchar(20)");
             builder.Property(p => p.NFE_Serie).HasColumnType("varchar(2)");
             builder.Property(p => p.MDFe_Serie).HasColumnType("varchar(3)");
+            builder.Property(p => p.NFE_InfComple_CreditoSimplesNacional).HasColumnType("varchar(1000)");
+            builder.Property(p => p.NFE_InfComple_TributosTotal).HasColumnType("varchar(1000)");
             builder.Property(p => p.PathLogomarca).HasColumnType("varchar(200)");
             builder.Property(p => p.NuvemFiscal_Certificado).HasColumnType("varchar(8000)");
             builder.Property(p => p.NSU).HasColumnType("varchar(10)");
             builder.Property(p => p.Controle).HasColumnType("varchar(1000)");
-
             builder.Property(p => p.EspeciePadrao).HasColumnType("varchar(200)");
             builder.Property(p => p.MarcaPadrao).HasColumnType("varchar(200)");
-
             builder.Property(p => p.Responsaveltecnico_CNPJ).HasColumnType("varchar(14)");
             builder.Property(p => p.Responsaveltecnico_Email).HasColumnType("varchar(100)");
             builder.Property(p => p.Responsaveltecnico_Fone).HasColumnType("varchar(20)");

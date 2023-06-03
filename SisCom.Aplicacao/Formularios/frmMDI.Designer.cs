@@ -273,6 +273,7 @@ namespace SisCom.Aplicacao
             this.button11.Size = new System.Drawing.Size(78, 64);
             this.button11.TabIndex = 11;
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 

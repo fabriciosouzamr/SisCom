@@ -42,15 +42,25 @@ namespace SisCom.Aplicacao.Controllers
 
             return NotaFiscalEntradaViewModel;
         }
-        public async Task<IEnumerable<NotaFiscalEntradaViewModel>> ObterTodos()
+        public async Task<IEnumerable<NotaFiscalEntradaViewModel>> ObterTodos(Expression<Func<NotaFiscalEntrada, bool>> predicate = null, Expression<Func<NotaFiscalEntrada, object>> order = null)
         {
-            var obterTodos = await _notaFiscalEntradaService.GetAll(null, null, i => i.NotaFiscal);
+            var obterTodos = await _notaFiscalEntradaService.GetAll(order, predicate, i => i.Fornecedor,
+                                                                                      i => i.Fornecedor.Endereco,
+                                                                                      i => i.Fornecedor.Endereco.End_Cidade,
+                                                                                      i => i.Fornecedor.Endereco.End_Cidade.Estado,
+                                                                                      i => i.Fornecedor.Endereco.End_Cidade.Estado.Pais);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalEntradaViewModel>>(obterTodos);
 
         }
         public async Task<IEnumerable<NotaFiscalEntradaViewModel>> PesquisarId(Guid Id)
         {
-            var pessoa = await _notaFiscalEntradaService.Search(p => p.Id == Id);
+            var pessoa = await _notaFiscalEntradaService.GetAll(order: null, 
+                                                                predicate: p => p.Id == Id, 
+                                                                i => i.Fornecedor,
+                                                                     i => i.Fornecedor.Endereco,
+                                                                     i => i.Fornecedor.Endereco.End_Cidade,
+                                                                     i => i.Fornecedor.Endereco.End_Cidade.Estado,
+                                                                     i => i.Fornecedor.Endereco.End_Cidade.Estado.Pais);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalEntradaViewModel>>(pessoa);
         }
         public async Task<IEnumerable<NotaFiscalEntradaViewModel>> PesquisarChave(String Chave)

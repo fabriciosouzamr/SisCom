@@ -61,7 +61,7 @@ namespace SisCom.Aplicacao.Formularios
             checkItem_UnidadeMedidaProduto.Checked = false;
             checkItem_Vencimento.Checked = false;
             checkItem_Volume.Checked = false;
-            Grid_DataGridView.User_LinhaLimpar(gridItens);
+            gridItens.Rows.Clear();
         }
 
         private void botaoBuscar_Click(object sender, EventArgs e)
@@ -114,10 +114,17 @@ namespace SisCom.Aplicacao.Formularios
 
         private void botaoImprimir_Click(object sender, EventArgs e)
         {
-            frmRelatorioVisualizar form = new frmRelatorioVisualizar();
-            form.param = new string[]  { notaFiscalSaida.Id.ToString() };
-            form.tipoRelatorio = TipoRelatorio.CartaCorrecao;
-            form.Show();
+            if (String.IsNullOrWhiteSpace(notaFiscalSaida.DescricaoCartaCorrecao))
+            {
+                CaixaMensagem.Informacao("A carta de correção ainda não foi emitida!");
+            }
+            else
+            {
+                frmRelatorioVisualizar form = new frmRelatorioVisualizar();
+                form.param = new string[] { notaFiscalSaida.Id.ToString() };
+                form.tipoRelatorio = TipoRelatorio.CartaCorrecao;
+                form.Show();
+            }
         }
 
         private void botaoConfimar_Click(object sender, EventArgs e)

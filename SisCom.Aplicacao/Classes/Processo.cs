@@ -29,13 +29,23 @@ namespace SisCom.Aplicacao.Classes
                 {
                     linha = processo.StandardOutput.ReadLine();
 
-                    if (linha is null) { break; } else { retorno.Add(linha); }
+                    if (linha is null) { break; }
+                    else 
+                    { 
+                        if (retorno.Count == 0)
+                        { retorno.Add(linha); }
+                        else
+                        { retorno[0] = retorno[0] + linha; }
+                    }
                 }
             }
             catch (System.Exception Ex)
             {
                 var erro = Ex.Message;
             }
+
+            if (retorno.Count != 0)
+                retorno[0] = retorno[0].Replace("\n", "\r\n");
 
             return retorno;
         }

@@ -83,5 +83,29 @@ namespace Funcoes._Classes
 
             return strString;
         }
+
+        public static Guid ConverterGuid(object guid)
+        {
+            try
+            {
+                return ConverterGuid(guid.ToString());
+            }
+            catch (Exception)
+            {
+                return Guid.Empty;
+            }
+        }
+
+        public static Guid ConverterGuid(string guid)
+        {
+            try
+            {
+                return Guid.Parse(guid);
+            }
+            catch (Exception)
+            {
+                return Guid.Empty;
+            }
+        }
     }
 }

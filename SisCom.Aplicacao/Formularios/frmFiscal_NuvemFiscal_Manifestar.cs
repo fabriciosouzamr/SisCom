@@ -53,7 +53,7 @@ namespace SisCom.Aplicacao
         {
             if (gridNotaFiscal.Columns.Count == 0) { Inicializar(); }
 
-            Grid_DataGridView.User_LinhaLimpar(gridNotaFiscal);
+            gridNotaFiscal.Rows.Clear();
 
             foreach (NotaFiscalManifestar notaFiscalManifestar in NotasFiscalManifestar)
             {

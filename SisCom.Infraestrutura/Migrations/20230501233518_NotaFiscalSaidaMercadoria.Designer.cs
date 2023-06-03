@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230501233518_NotaFiscalSaidaMercadoria")]
+    partial class NotaFiscalSaidaMercadoria
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1585,13 +1587,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<int>("TipoFrete")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoPagamento")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalMercadorias")
@@ -1792,9 +1788,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<DateTime>("UltimaAtualizacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("UnidadeMedidaId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("ValorDesconto")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("decimal(18,2)")
@@ -1811,8 +1804,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasIndex("NCMId");
 
                     b.HasIndex("NotaFiscalEntradaId");
-
-                    b.HasIndex("UnidadeMedidaId");
 
                     b.ToTable("NotaFiscalEntradaMercadorias");
                 });
@@ -2160,7 +2151,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<decimal>("Quantidade")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,8)")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
                     b.Property<Guid?>("TabelaCFOPId")
@@ -2197,7 +2188,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<decimal>("ValorBaseCalculo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,8)")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorBaseIPI")
@@ -2207,7 +2198,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<decimal>("ValorBaseSubstituicaoTributaria")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,8)")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
                     b.Property<decimal>("ValorFCP")
@@ -2232,7 +2223,7 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<decimal>("ValorSubstituicaoTributaria")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,8)")
+                        .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
 
                     b.HasKey("Id");
@@ -4118,10 +4109,6 @@ namespace SisCom.Infraestrutura.Migrations
                         .WithMany()
                         .HasForeignKey("NotaFiscalEntradaId");
 
-                    b.HasOne("SisCom.Entidade.Modelos.UnidadeMedida", "UnidadeMedida")
-                        .WithMany()
-                        .HasForeignKey("UnidadeMedidaId");
-
                     b.Navigation("CFOP");
 
                     b.Navigation("CST");
@@ -4131,8 +4118,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Navigation("NCM");
 
                     b.Navigation("NotaFiscalEntrada");
-
-                    b.Navigation("UnidadeMedida");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaida", b =>

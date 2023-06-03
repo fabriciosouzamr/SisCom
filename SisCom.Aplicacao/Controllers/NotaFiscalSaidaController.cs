@@ -112,7 +112,7 @@ namespace SisCom.Aplicacao.Controllers
                                                                              i => i.Transportadora.Endereco.End_Cidade.Estado,
                                                                              i => i.Transportadora.Endereco.End_Cidade.Estado.Pais,
                                                                              i => i.NotaFiscalSaidaMercadoria, 
-                                                                             i => i.NotaFiscalSaidaPagamento, 
+                                                                             i => i.NotaFiscalSaidaPagamento,
                                                                              i => i.NotaFiscalSaidaReferencia, 
                                                                              i => i.NotaFiscalSaidaObservacao);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(nota);

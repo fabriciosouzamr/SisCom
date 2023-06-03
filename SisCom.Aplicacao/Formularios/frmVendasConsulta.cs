@@ -88,7 +88,7 @@ namespace SisCom.Aplicacao.Formularios
             var vendaController = new VendaController(this.MeuDbContext(), this._notifier);
             var vendas = await vendaController.ObterTodos(o => o.Codigo);
 
-            Grid_DataGridView.User_LinhaLimpar(gridVenda);
+            gridVenda.Rows.Clear();
 
             foreach (var venda in vendas)
             {
@@ -97,8 +97,6 @@ namespace SisCom.Aplicacao.Formularios
                 if ((valido) && (!Funcao.NuloData(dateFiltro_DataInicial.Value))) { valido = venda.DataVenda.Date >= dateFiltro_DataInicial.Value; }
                 if ((valido) && (!Funcao.NuloData(dateFiltro_DataInicial.Value))) { valido = venda.DataVenda.Date <= dateFiltro_DataFinal.Value; }
                 if ((valido) && (!String.IsNullOrEmpty(textFiltro_Pedido.Text)) && (!String.IsNullOrEmpty(venda.NumeroPedido))) { valido = venda.NumeroPedido == textFiltro_Pedido.Text; }
-                //if ((valido) && (!String.IsNullOrEmpty(textFiltro_NFCe.Text)) ) { valido = venda.NotaFiscal == textFiltro_NFCe.Text && ((NF_Modelo)Convert.ToInt16(venda.Modelo) != NF_Modelo.CupomFiscalEletronica); }
-                //if ((valido) && (!String.IsNullOrEmpty(textFiltro_NFe.Text))) { valido = venda.NotaFiscal == textFiltro_NFe.Text && ((NF_Modelo)Convert.ToInt16(venda.Modelo) != NF_Modelo.NotaFiscalEletronica); }
                 if ((valido) && (Combo_ComboBox.Selecionado(comboFiltro_Cliente))) { valido = venda.ClienteId == (Guid)comboFiltro_Cliente.SelectedValue; }
                 if ((valido) && (Combo_ComboBox.Selecionado(comboFiltro_Vendedor))) { valido = venda.VendedorId == (Guid)comboFiltro_Vendedor.SelectedValue; }
 
@@ -110,10 +108,6 @@ namespace SisCom.Aplicacao.Formularios
 
                     if (venda.VendedorId != Guid.Empty)
                         vendedor = venda.Vendedor.Nome;
-//                    if ((NF_Modelo)Convert.ToInt16(venda.Modelo) != NF_Modelo.NotaFiscalEletronica)
-                        //nFe = venda.NotaFiscal;
-                    //if ((NF_Modelo)Convert.ToInt16(venda.Modelo) != NF_Modelo.CupomFiscalEletronica)
-                        //nFCe = venda.NotaFiscal;
 
                     Grid_DataGridView.User_LinhaAdicionar(gridVenda,
                                                                    new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridVenda_ID,

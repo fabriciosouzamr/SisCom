@@ -59,6 +59,8 @@ using MDFe.Classes.Retorno.MDFeRetRecepcao;
 using NFe.Danfe.Base;
 using System.Windows.Forms;
 using SisCom.Infraestrutura.Data.Repository;
+using System.Diagnostics;
+using SisCom.Infraestrutura.Migrations;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -342,7 +344,10 @@ namespace SisCom.Aplicacao.Classes
                 }
                 else
                 {
-                    CaixaMensagem.Informacao(ret.RetEvento.InfEvento.XMotivo);
+                    if ((ret.RetEvento != null) && (ret.RetEvento.InfEvento != null))
+                    { CaixaMensagem.Informacao(ret.RetEvento.InfEvento.XMotivo); }
+                    else
+                    { CaixaMensagem.Informacao(ret.XMotivo); }
                 }
             }
             catch (Exception ex)
@@ -1139,7 +1144,8 @@ namespace SisCom.Aplicacao.Classes
             else
             {
                 oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCancelamento(1, 1, notaFiscalSaidaViewModel.Protocolo, 
-                                                                                                   notaFiscalSaidaViewModel.CodigoChaveAcesso, sJustificativa, 
+                                                                                                   notaFiscalSaidaViewModel.CodigoChaveAcesso, 
+                                                                                                   sJustificativa, 
                                                                                                    notaFiscalSaidaViewModel.Empresa.CNPJ);
 
                 var retEvento = oNFe_Servico_RetornoRecepcaoEvento.Retorno.retEvento[0];
@@ -1587,6 +1593,7 @@ namespace SisCom.Aplicacao.Classes
                 }
 
                 // -- Detalhe
+                string totaltributos = String.Empty;
                 int nItem = 0;
                 OrigemMercadoria origemMercadoriaServico;
 
@@ -1711,6 +1718,11 @@ namespace SisCom.Aplicacao.Classes
                         }
                     }
 
+                    if (ntFSMercadoria.Mercadoria.Fiscal_NFS_TributosTotal > 0)
+                        totaltributos = String.Format("{0} ({1}%)", 
+                                                      Valor.Percentagem(oNFE_Det.prod.vProd, ntFSMercadoria.Mercadoria.Fiscal_NFS_TributosTotal).ToString("C"), 
+                                                      ntFSMercadoria.Mercadoria.Fiscal_NFS_TributosTotal);
+
                     oNFe.infNFe.det.Add(oNFE_Det);
                 }
 
@@ -1742,11 +1754,36 @@ namespace SisCom.Aplicacao.Classes
                     oNFe.infNFe.cobr.fat.vLiq = oNFe.infNFe.total.ICMSTot.vNF;
                     oNFe.infNFe.cobr.fat.vOrig = oNFe.infNFe.total.ICMSTot.vNF;
                     oNFe.infNFe.cobr.fat.vDesc = 0M;
+
+                    if ((notaFiscalSaidaPagamentoViewModels != null) && (notaFiscalSaidaPagamentoViewModels.Any()))
+                    {
+                        var dups = new List<NFe.Classes.Informacoes.Cobranca.dup>();
+                        var iDup = 0;
+
+                        foreach (NotaFiscalSaidaPagamentoViewModel notaFiscalSaidaPagamentoViewModel in notaFiscalSaidaPagamentoViewModels)
+                        {
+                            if (FormaPagamentoDBParaZeus(notaFiscalSaidaPagamentoViewModel.FormaPagamento) == NFe.Classes.Informacoes.Pagamento.FormaPagamento.fpDuplicataMercantil)
+                            {
+                                iDup = iDup + 1;
+
+                                var dup = new NFe.Classes.Informacoes.Cobranca.dup();
+                                dup.dVenc = notaFiscalSaidaPagamentoViewModel.DataVecimento;
+                                dup.vDup = notaFiscalSaidaPagamentoViewModel.Valor;
+                                dup.nDup = iDup.ToString("000");
+                                dups.Add(dup);
+                            }
+                        }
+
+                        if (dups.Count > 0)
+                        {
+                            oNFe.infNFe.cobr.dup = dups;
+                        }
+                    }
                 }
 
                 if (oNFe.infNFe.ide.mod == ModeloDocumento.NFCe || (oNFe.infNFe.ide.mod == ModeloDocumento.NFe))
                 {
-                    if ((notaFiscalSaidaPagamentoViewModels == null) || (notaFiscalSaidaPagamentoViewModels.Count() == 0))
+                    if ((notaFiscalSaidaPagamentoViewModels == null) || (!notaFiscalSaidaPagamentoViewModels.Any()))
                     {
                         oNFE_Pag = new NFe.Classes.Informacoes.Pagamento.pag();
                         oNFE_Pag.detPag = new List<NFe.Classes.Informacoes.Pagamento.detPag>();
@@ -1759,13 +1796,16 @@ namespace SisCom.Aplicacao.Classes
                         oNFe.infNFe.pag.Add(oNFE_Pag);
                     }
                     else
+                    {
+                        oNFe.infNFe.pag = new List<NFe.Classes.Informacoes.Pagamento.pag>();
+                        oNFE_Pag = new NFe.Classes.Informacoes.Pagamento.pag();
+                        oNFE_Pag.detPag = new List<NFe.Classes.Informacoes.Pagamento.detPag>();
+
+                        oNFE_Pag.vTroco = 0;
+
                         foreach (NotaFiscalSaidaPagamentoViewModel notaFiscalSaidaPagamentoViewModel in notaFiscalSaidaPagamentoViewModels)
                         {
-                            oNFe.infNFe.pag = new List<NFe.Classes.Informacoes.Pagamento.pag>();
-                            oNFE_Pag = new NFe.Classes.Informacoes.Pagamento.pag();
-                            oNFE_Pag.vTroco = 0;
                             // Pagamento Detalhe
-                            oNFE_Pag.detPag = new List<NFe.Classes.Informacoes.Pagamento.detPag>();
                             oNFE_Pag_Det = new NFe.Classes.Informacoes.Pagamento.detPag();
                             oNFE_Pag_Det.tPag = FormaPagamentoDBParaZeus(notaFiscalSaidaPagamentoViewModel.FormaPagamento);
 
@@ -1781,9 +1821,10 @@ namespace SisCom.Aplicacao.Classes
                             }
 
                             oNFE_Pag.detPag.Add(oNFE_Pag_Det);
-
-                            oNFe.infNFe.pag.Add(oNFE_Pag);
                         }
+
+                        oNFe.infNFe.pag.Add(oNFE_Pag);
+                    }
                 }
 
                 if (notaFiscalSaidaReferenciaViewModels != null)
@@ -1807,6 +1848,18 @@ namespace SisCom.Aplicacao.Classes
                     }
 
                     oNFe.infNFe.ide.NFref = oListaNFref;
+                }
+
+                if ((!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.NFE_InfComple_TributosTotal)) && (!String.IsNullOrEmpty(totaltributos)))
+                {
+                    sDS_INFORMACOES_ADICIONAIS = notaFiscalSaidaViewModel.Empresa.NFE_InfComple_TributosTotal.Replace("[Trib]", totaltributos) +
+                                                 (String.IsNullOrWhiteSpace(sDS_INFORMACOES_ADICIONAIS) ? "" : ". " + sDS_INFORMACOES_ADICIONAIS);
+                }
+
+                if ((!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.NFE_InfComple_CreditoSimplesNacional)) && (notaFiscalSaidaViewModel.Empresa.CreditoSimplesNacional > 0))
+                {
+                    sDS_INFORMACOES_ADICIONAIS = notaFiscalSaidaViewModel.Empresa.NFE_InfComple_CreditoSimplesNacional.Replace("[Trib]", notaFiscalSaidaViewModel.Empresa.CreditoSimplesNacional.ToString()) +
+                                                 (String.IsNullOrWhiteSpace(sDS_INFORMACOES_ADICIONAIS) ? "" : ". " + sDS_INFORMACOES_ADICIONAIS);
                 }
 
                 if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_Obsersacao))
@@ -1883,7 +1936,7 @@ namespace SisCom.Aplicacao.Classes
                 }
                 */
 
-                if (notaFiscalSaidaViewModel.Status != NF_Status.Transmitida)
+                if ((notaFiscalSaidaViewModel.Status != NF_Status.Transmitida) && (String.IsNullOrWhiteSpace(notaFiscalSaidaViewModel.CodigoChaveAcesso)))
                 notaFiscalSaidaViewModel.CodigoChaveAcesso = Fiscal_ChaveNFe(oNFe);
 
                 oNFe.Valida(oConfig);
@@ -2489,51 +2542,66 @@ namespace SisCom.Aplicacao.Classes
 
                     if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Recibo))
                         recibo = notaFiscalSaidaViewModel.Recibo;
+                    
+                    retEnviNFe retorno = new retEnviNFe();
 
-                    ponto = $"Zeus.Protocolar ({xml})";
-                    var retorno = Zeus.Protocolar(xml, recibo);
+                    try
+                    {
+                        ponto = $"Zeus.Protocolar ({xml})";
+                        retorno = Zeus.Protocolar(xml, recibo, notaFiscalSaidaViewModel.CodigoChaveAcesso, notaFiscalSaidaViewModel.Status == NF_Status.Finalizada);
+                    }
+                    catch (Exception ex1)
+                    {
+                        CaixaMensagem.Informacao($"NF-e Transmitir - {ponto}", ex1);
+                    }
                     ponto = "Protocolado";
 
-                    notaFiscalSaidaViewModel.DataRetornoSefaz = retorno.dhRegEvento;
-                    notaFiscalSaidaViewModel.RetornoSefazCodigo = retorno.Protocolo.CStat.ToString();
-                    notaFiscalSaidaViewModel.RetornoSefaz = retorno.Protocolo.XMotivo;
+                    if (retorno != null)
+                    {
+                        notaFiscalSaidaViewModel.DataRetornoSefaz = retorno.dhRegEvento;
+                        if (retorno.Protocolo != null)
+                        {
+                            notaFiscalSaidaViewModel.RetornoSefazCodigo = retorno.Protocolo.CStat.ToString();
+                            notaFiscalSaidaViewModel.RetornoSefaz = retorno.Protocolo.XMotivo;
 
-                    if (retorno.nRec != 0)
-                    {
-                        notaFiscalSaidaViewModel.Recibo = retorno.nRec.ToString();
-                    }
-                    else
-                    {
-                        notaFiscalSaidaViewModel.Recibo = retorno.nRecibo.ToString();
-                    }
+                            if (retorno.Protocolo.NProtocolo != "00")
+                            {
+                                notaFiscalSaidaViewModel.Protocolo = retorno.Protocolo.NProtocolo;
+                                if (notaFiscalSaidaViewModel.DataTransmissao == null)
+                                    notaFiscalSaidaViewModel.DataTransmissao = retorno.dhRegEvento;
+                            }
 
-                    if (retorno.Protocolo.NProtocolo != "00")
-                    {
-                        notaFiscalSaidaViewModel.Protocolo = retorno.Protocolo.NProtocolo;
-                        if (notaFiscalSaidaViewModel.DataTransmissao == null)
-                            notaFiscalSaidaViewModel.DataTransmissao = retorno.dhRegEvento;
-                    }
-                    
-                    switch (retorno.Protocolo.CStat)
-                    {
-                        case 302: /* Uso Denegado: Irregularidade fiscal do destinatário */
-                            notaFiscalSaidaViewModel.Status = NF_Status.Denegada;
-                            break;
-                        case 101: /* Cancelamento de NF-e homologado */
-                            notaFiscalSaidaViewModel.Status = NF_Status.Cancelado;
-                            if (notaFiscalSaidaViewModel.DataCancelamento == null)
-                                notaFiscalSaidaViewModel.DataCancelamento = retorno.dhRegEvento;
-                            break;
-                        case 100: /* Autorizado o uso da NF-e */
-                            notaFiscalSaidaViewModel.Status = NF_Status.Transmitida;
-                            if (notaFiscalSaidaViewModel.DataTransmissao == null)
-                                notaFiscalSaidaViewModel.DataTransmissao = retorno.dhRegEvento;
-                            if (notaFiscalSaidaViewModel.DataTransmissao == null)
-                                notaFiscalSaidaViewModel.DataTransmissao = DateTime.Now;
-                            break;
-                        default:
-                            notaFiscalSaidaViewModel.Status = NF_Status.Pendente;
-                            break;
+                            switch (retorno.Protocolo.CStat)
+                            {
+                                case 302: /* Uso Denegado: Irregularidade fiscal do destinatário */
+                                    notaFiscalSaidaViewModel.Status = NF_Status.Denegada;
+                                    break;
+                                case 101: /* Cancelamento de NF-e homologado */
+                                    notaFiscalSaidaViewModel.Status = NF_Status.Cancelado;
+                                    if (notaFiscalSaidaViewModel.DataCancelamento == null)
+                                        notaFiscalSaidaViewModel.DataCancelamento = retorno.dhRegEvento;
+                                    break;
+                                case 100: /* Autorizado o uso da NF-e */
+                                    notaFiscalSaidaViewModel.Status = NF_Status.Transmitida;
+                                    if (notaFiscalSaidaViewModel.DataTransmissao == null)
+                                        notaFiscalSaidaViewModel.DataTransmissao = retorno.dhRegEvento;
+                                    if (notaFiscalSaidaViewModel.DataTransmissao == null)
+                                        notaFiscalSaidaViewModel.DataTransmissao = DateTime.Now;
+                                    break;
+                                default:
+                                    notaFiscalSaidaViewModel.Status = NF_Status.Pendente;
+                                    break;
+                            }
+                        }
+
+                        if (retorno.nRec != 0)
+                        {
+                            notaFiscalSaidaViewModel.Recibo = retorno.nRec.ToString();
+                        }
+                        else
+                        {
+                            notaFiscalSaidaViewModel.Recibo = retorno.nRecibo.ToString();
+                        }
                     }
                 }
             }
@@ -2551,6 +2619,16 @@ namespace SisCom.Aplicacao.Classes
 
         Sair:
             return bOk;
+        }
+
+        private static string path_DOCFISCAL_Validar(string processo, int ano, string arquivo)
+        {
+            string _PATH_DOCFISCAL = Declaracoes.dados_Path_DocumentoFiscal + "\\" + Declaracoes.dados_Path_DocumentoFiscal + "\\" + processo + "\\" + ano.ToString();
+
+            if (!System.IO.Directory.Exists(_PATH_DOCFISCAL))
+                System.IO.Directory.CreateDirectory(_PATH_DOCFISCAL);
+
+            return _PATH_DOCFISCAL + "\\" + arquivo;
         }
 
         public static bool Fiscal_DocumentoFiscal_Visualizar(ModeloDocumento eModeloDocumento,
@@ -2577,15 +2655,15 @@ namespace SisCom.Aplicacao.Classes
             try
             {
                 if (notaFiscalSaidaViewModel.Empresa.CNPJ.Length == 13)
-                { _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\Enviados\\0" + notaFiscalSaidaViewModel.Empresa.CNPJ; }
-                else
-                { _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\Enviados\\" + notaFiscalSaidaViewModel.Empresa.CNPJ; }
+                { notaFiscalSaidaViewModel.Empresa.CNPJ = "0" + notaFiscalSaidaViewModel.Empresa.CNPJ; }
+
+                _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + notaFiscalSaidaViewModel.Empresa.CNPJ + "\\NF-e\\";
 
                 if (notaFiscalSaidaViewModel.DataTransmissao != null)
                 {
                     DateTime dataTransmissao = (DateTime)notaFiscalSaidaViewModel.DataTransmissao;
 
-                    _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + dataTransmissao.Year + "\\" + dataTransmissao.Month.ToString("00") + "\\" + dataTransmissao.Day.ToString("00");
+                    _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + dataTransmissao.Year + "\\" + dataTransmissao.Month.ToString("00") + "\\";
                 }
 
                 _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + notaFiscalSaidaViewModel.CodigoChaveAcesso + "-procNfe.xml";
@@ -3051,13 +3129,16 @@ namespace SisCom.Aplicacao.Classes
                     var notaFiscalSaidaSerieViewModels = await notaFiscalSaidaSerieController.PesquisarSerie(notaFiscalSaidaViewModel.Serie);
                     notaFiscalSaidaSerieViewModel = notaFiscalSaidaSerieViewModels.FirstOrDefault();
                 }
+                using (NotaFiscalSaidaPagamentoController notaFiscalSaidaPagamentoController = new NotaFiscalSaidaPagamentoController(meuDbContext, notifier))
+                {
+                    notaFiscalSaidaPagamento = await notaFiscalSaidaPagamentoController.PesquisarId(notaFiscalSaidaViewModel.Id);
+                }
 
                 notaFiscalSaidaViewModel.TransmitirEnderecoCliente = (notaFiscalSaidaViewModel.Cliente_Endereco != null);
 
                 foreach (NotaFiscalSaidaViewModel item in notaFiscalSaidaViewModels)
                 {
                     notaFiscalSaidaViewModel = item;
-                    notaFiscalSaidaPagamento = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaPagamentoViewModel>>(item.NotaFiscalSaidaPagamento);
                     notaFiscalSaidaReferencia = Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaReferenciaViewModel>>(item.NotaFiscalSaidaReferencia);
 
                     Fiscal.Fiscal_DocumentoFiscal_Visualizar(ModeloDocumento.NFe,

@@ -18,7 +18,6 @@ namespace SisCom.Entidade.Modelos
         public decimal PercentualICMS { get; set; }
         public decimal PercentualIPI { get; set; }
         public decimal ValorFrete { get; set; }
-
         public decimal ValorBaseCalculo { set; get; }
         public decimal AliquotaICMS { set; get; }
         public decimal ValorICMS { set; get; }

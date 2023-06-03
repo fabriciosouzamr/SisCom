@@ -141,7 +141,7 @@ namespace SisCom.Aplicacao.Classes
         [XmlElement(ElementName = "infRec")]
         public RetEvento infRec { get; set; }
         [XmlElement(ElementName = "nRec")]
-        public int nRec { get; set; }
+        public Int64 nRec { get; set; }
         [XmlElement(ElementName = "tMed")]
         public int tMed { get; set; }
 
@@ -263,14 +263,17 @@ namespace SisCom.Aplicacao.Classes
             }
         }
 
-        public static retEnviNFe Protocolar(string xml, string recibo)
+        public static retEnviNFe Protocolar(string xml, string recibo, string chaveAcesso, bool forcarTransmissao)
         {
             List<string> retorno;
 
-            retorno = Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "protocolar " + Declaracoes.dados_Empresa_CodigoEstado + " " + 
-                                                                                                  "'" + xml + "' " +
-                                                                                                  Declaracoes.dados_Empresa_SerialNumber + " " +
-                                                                                                  recibo);
+            retorno = Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, (forcarTransmissao ? "transmitir " : "protocolar ") + 
+                                                                                  Declaracoes.dados_Empresa_CodigoEstado + " " + 
+                                                                                  "'" + xml + "' " +
+                                                                                  Declaracoes.dados_Empresa_SerialNumber + " " +
+                                                                                  Declaracoes.dados_Empresa_CNPJ + " " +
+                                                                                  chaveAcesso + " " +
+                                                                                  recibo);
 
             if ((retorno != null) && (retorno.Count > 0))
             {
@@ -315,18 +318,28 @@ namespace SisCom.Aplicacao.Classes
 
         public static void MDFeImprimir(string chaveacesso, string status)
         {
-
             Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "mdfeimprimir " + chaveacesso + " " +
-                                                                                          status);
+                                                                                          status + " " +
+                                                                                          Declaracoes.dados_Empresa_CNPJ);
         }
 
         private static string XML_RetirarVersao(string sXML)
         {
             string ret = sXML;
 
-            if (sXML.IndexOf("versao=") != 0)
+            if (sXML.IndexOf("versao=") > 0)
             {
                 sXML = sXML.Replace(sXML.Substring(sXML.IndexOf("versao="), sXML.IndexOf("/nfe") - sXML.IndexOf("versao=") + ("/nfe").Length + 1), "");
+            }
+            if (sXML.IndexOf("versao=") > 0)
+            {
+                try
+                {
+                    sXML = sXML.Replace(sXML.Substring(sXML.IndexOf("versao="), sXML.IndexOf("<infProt>") - sXML.IndexOf("versao=") + ("<infProt>").Length - ("<infProt>").Length - 1), "");
+                }
+                catch (Exception)
+                {
+                }
             }
 
             return sXML;
@@ -334,25 +347,53 @@ namespace SisCom.Aplicacao.Classes
 
         public static ICMSGeral NFe_Produto_DadosICMS(NFe.Classes.Informacoes.Detalhe.det oProduto)
         {
-            ICMSGeral oICMSGeral = new ICMSGeral(oProduto.imposto.ICMS.TipoICMS);
-            return oICMSGeral;
+            if ((oProduto.imposto != null) && (oProduto.imposto.ICMS != null) && (oProduto.imposto.ICMS.TipoICMS != null))
+            {
+                ICMSGeral oICMSGeral = new ICMSGeral(oProduto.imposto.ICMS.TipoICMS);
+                return oICMSGeral;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static COFINSGeral NFE_Produto_DadosCOFINS(NFe.Classes.Informacoes.Detalhe.det oProduto)
         {
-            COFINSGeral oCOFINSGeral = new COFINSGeral(oProduto.imposto.COFINS.TipoCOFINS);
-            return oCOFINSGeral;
+            if ((oProduto.imposto != null) && (oProduto.imposto.COFINS != null) && (oProduto.imposto.COFINS.TipoCOFINS != null))
+            {
+                COFINSGeral oCOFINSGeral = new COFINSGeral(oProduto.imposto.COFINS.TipoCOFINS);
+                return oCOFINSGeral;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static PISGeral NFE_Produto_DadosPIS(NFe.Classes.Informacoes.Detalhe.det oProduto)
         {
-            PISGeral oPISGeral = new PISGeral(oProduto.imposto.PIS.TipoPIS);
-            return oPISGeral;
+            if ((oProduto.imposto != null) && (oProduto.imposto.PIS != null) && (oProduto.imposto.PIS.TipoPIS != null))
+            {
+                PISGeral oPISGeral = new PISGeral(oProduto.imposto.PIS.TipoPIS);
+                return oPISGeral;
+            }
+            else
+            {
+                return null;
+            }
         }
         public static IPIGeral NFE_Produto_DadosIPI(NFe.Classes.Informacoes.Detalhe.det oProduto)
         {
-            IPIGeral oIPIGeral = new IPIGeral(oProduto.imposto.IPI.TipoIPI);
-            return oIPIGeral;
+            if ((oProduto.imposto != null) && (oProduto.imposto.IPI != null) && (oProduto.imposto.IPI.TipoIPI != null))
+            {
+                IPIGeral oIPIGeral = new IPIGeral(oProduto.imposto.IPI.TipoIPI);
+                return oIPIGeral;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

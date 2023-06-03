@@ -89,6 +89,10 @@ namespace SisCom.Aplicacao.Formularios
             this.label11 = new System.Windows.Forms.Label();
             this.textTelefone = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.textNFEInformacaoComplementar_TotalTributos = new System.Windows.Forms.RichTextBox();
+            this.textNFEInformacaoComplementar_CreditoSimplesNacional = new System.Windows.Forms.RichTextBox();
             this.label64 = new System.Windows.Forms.Label();
             this.textMarcaPadrao = new System.Windows.Forms.TextBox();
             this.label63 = new System.Windows.Forms.Label();
@@ -463,6 +467,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // numericCreditoSimplesNacional
             // 
+            this.numericCreditoSimplesNacional.DecimalPlaces = 2;
             this.numericCreditoSimplesNacional.Location = new System.Drawing.Point(535, 304);
             this.numericCreditoSimplesNacional.Name = "numericCreditoSimplesNacional";
             this.numericCreditoSimplesNacional.Size = new System.Drawing.Size(105, 23);
@@ -757,6 +762,10 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label39);
+            this.tabPage1.Controls.Add(this.label35);
+            this.tabPage1.Controls.Add(this.textNFEInformacaoComplementar_TotalTributos);
+            this.tabPage1.Controls.Add(this.textNFEInformacaoComplementar_CreditoSimplesNacional);
             this.tabPage1.Controls.Add(this.label64);
             this.tabPage1.Controls.Add(this.textMarcaPadrao);
             this.tabPage1.Controls.Add(this.label63);
@@ -779,10 +788,44 @@ namespace SisCom.Aplicacao.Formularios
             this.tabPage1.Text = "NFe";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(22, 219);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(295, 15);
+            this.label39.TabIndex = 162;
+            this.label39.Text = "Informação Complementar - Crédito Simples Nacional";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(22, 113);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(253, 15);
+            this.label35.TabIndex = 161;
+            this.label35.Text = "Informação Complementar - Toral dos tributos";
+            // 
+            // textNFEInformacaoComplementar_TotalTributos
+            // 
+            this.textNFEInformacaoComplementar_TotalTributos.Location = new System.Drawing.Point(22, 130);
+            this.textNFEInformacaoComplementar_TotalTributos.Name = "textNFEInformacaoComplementar_TotalTributos";
+            this.textNFEInformacaoComplementar_TotalTributos.Size = new System.Drawing.Size(670, 83);
+            this.textNFEInformacaoComplementar_TotalTributos.TabIndex = 160;
+            this.textNFEInformacaoComplementar_TotalTributos.Text = "";
+            // 
+            // textNFEInformacaoComplementar_CreditoSimplesNacional
+            // 
+            this.textNFEInformacaoComplementar_CreditoSimplesNacional.Location = new System.Drawing.Point(22, 236);
+            this.textNFEInformacaoComplementar_CreditoSimplesNacional.Name = "textNFEInformacaoComplementar_CreditoSimplesNacional";
+            this.textNFEInformacaoComplementar_CreditoSimplesNacional.Size = new System.Drawing.Size(670, 83);
+            this.textNFEInformacaoComplementar_CreditoSimplesNacional.TabIndex = 159;
+            this.textNFEInformacaoComplementar_CreditoSimplesNacional.Text = "";
+            // 
             // label64
             // 
             this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(85, 167);
+            this.label64.Location = new System.Drawing.Point(347, 39);
             this.label64.Name = "label64";
             this.label64.Size = new System.Drawing.Size(43, 15);
             this.label64.TabIndex = 158;
@@ -790,7 +833,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // textMarcaPadrao
             // 
-            this.textMarcaPadrao.Location = new System.Drawing.Point(144, 163);
+            this.textMarcaPadrao.Location = new System.Drawing.Point(392, 35);
             this.textMarcaPadrao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textMarcaPadrao.Name = "textMarcaPadrao";
             this.textMarcaPadrao.Size = new System.Drawing.Size(185, 23);
@@ -799,7 +842,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // label63
             // 
-            this.label63.Location = new System.Drawing.Point(82, 140);
+            this.label63.Location = new System.Drawing.Point(344, 12);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(46, 15);
             this.label63.TabIndex = 156;
@@ -807,7 +850,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // textEspeciePadrao
             // 
-            this.textEspeciePadrao.Location = new System.Drawing.Point(144, 136);
+            this.textEspeciePadrao.Location = new System.Drawing.Point(392, 8);
             this.textEspeciePadrao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textEspeciePadrao.Name = "textEspeciePadrao";
             this.textEspeciePadrao.Size = new System.Drawing.Size(185, 23);
@@ -816,7 +859,7 @@ namespace SisCom.Aplicacao.Formularios
             // 
             // textNFEUltimaNotaFiscal
             // 
-            this.textNFEUltimaNotaFiscal.Location = new System.Drawing.Point(144, 109);
+            this.textNFEUltimaNotaFiscal.Location = new System.Drawing.Point(392, 84);
             this.textNFEUltimaNotaFiscal.MaxLength = 6;
             this.textNFEUltimaNotaFiscal.Name = "textNFEUltimaNotaFiscal";
             this.textNFEUltimaNotaFiscal.Size = new System.Drawing.Size(80, 23);
@@ -825,7 +868,7 @@ namespace SisCom.Aplicacao.Formularios
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 111);
+            this.label2.Location = new System.Drawing.Point(284, 88);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 15);
             this.label2.TabIndex = 105;
@@ -1341,5 +1384,9 @@ namespace SisCom.Aplicacao.Formularios
         private System.Windows.Forms.TextBox textMarcaPadrao;
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.TextBox textEspeciePadrao;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.RichTextBox textNFEInformacaoComplementar_TotalTributos;
+        private System.Windows.Forms.RichTextBox textNFEInformacaoComplementar_CreditoSimplesNacional;
     }
 }

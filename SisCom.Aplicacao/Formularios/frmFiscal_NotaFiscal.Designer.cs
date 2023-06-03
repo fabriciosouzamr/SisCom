@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFiscal_NotaFiscal));
             this.pnlMenuBotao = new System.Windows.Forms.Panel();
             this.pnlMenuBotaoBotao = new System.Windows.Forms.Panel();
@@ -327,6 +328,7 @@
             this.label142 = new System.Windows.Forms.Label();
             this.comboPesquisarTipoFiltro = new System.Windows.Forms.ComboBox();
             this.label143 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pnlMenuBotao.SuspendLayout();
             this.pnlMenuBotaoBotao.SuspendLayout();
             this.tbcGeral.SuspendLayout();
@@ -3514,6 +3516,10 @@
             this.label143.TabIndex = 0;
             this.label143.Text = "Tipo de Pesquisa:";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmFiscal_NotaFiscal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -3931,5 +3937,6 @@
         private System.Windows.Forms.MaskedTextBox maskedTransportadoraCPFCNPJ;
         private System.Windows.Forms.ComboBox comboTransportadoraUF;
         private System.Windows.Forms.TextBox textNumeroNotaFiscalSaida;
+        private System.Windows.Forms.Timer timer1;
     }
 }

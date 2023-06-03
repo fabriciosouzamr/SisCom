@@ -6,8 +6,6 @@ using MDFe.Damdfe.Base;
 using MDFe.Damdfe.Fast;
 using NFe.Classes;
 using NFe.Classes.Informacoes.Identificacao.Tipos;
-using NFe.Classes.Servicos.DistribuicaoDFe.Schemas;
-using NFe.Classes.Servicos.Recepcao.Retorno;
 using NFe.Classes.Servicos.Tipos;
 using NFe.Servicos;
 using NFe.Utils;
@@ -19,6 +17,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
+//using static System.Net.WebRequestMethods;
 using nfeProc = NFe.Classes.nfeProc;
 using NFeZeus = NFe.Classes.NFe;
 
@@ -43,6 +42,7 @@ namespace SisCom.Aplicacao_FW
 
         }
 
+        #region variaveis
         static string _Operacao = "";
         static string _EnderecoEmitente_UF = "";
         static string _cnpj = "";
@@ -53,23 +53,25 @@ namespace SisCom.Aplicacao_FW
         static string _recibo = "";
         static string _XML = "";
         static string _TXT = "";
+        static string _PATH_DOCFISCAL = "";
         static string _PATH = "";
         static string _PATH_SCHEMAS = "";
         static string _PATH_NUVEMFISCAL_Vendas = "";
         static string _PATH_NUVEMFISCAL_Compras = "";
         static string _PATH_NUVEMFISCAL_MDFE = "";
-        static string _PATH_DOCFISCAL = "";
+        static string _PATH_NUVEMFISCAL_Config = "";
         static string _PATH_ArquivoRelatorio = "";
         static string _nFeTipoEvento = "";
         static string _protocoloAutorizacao = "";
         static int _lote = 0;
+        #endregion
 
         [STAThread]
         static void Main(string[] args)
         {
             //nuvemfiscal GO 26616809000136 1 1E7F6E6A89ADD10D
             //manifestar GO 31220702623061000130550010000004721385764234 02623061000130 210200 417B2205054DEFE4
-            //protocolar SP 'C:\\Temp\\transmitir.xml' 6672AFA877A41733 00
+            //transmitir GO 'D:\\SisCom\\transmitir.xml' 7653D23A586C3E6F 00 49535361000121
             //cartacorrecao MG 31221111831939000114550010000007201100007201 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cartacorrecao.txt' 00B8070A04D8A768A8
             //cancelamento MG 31221111831939000114550010000007201100007202 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cancelamento.txt' 00B8070A04D8A768A8 131225031170016
             //mdfeimprimir 21230248205505000119580010000000401522422396 transmitido
@@ -86,11 +88,23 @@ namespace SisCom.Aplicacao_FW
 
             if (!System.IO.Directory.Exists(_PATH))
                 System.IO.Directory.CreateDirectory(_PATH);
+            if (!System.IO.Directory.Exists(_PATH_SCHEMAS))
+                System.IO.Directory.CreateDirectory(_PATH_SCHEMAS);
+            if (!System.IO.Directory.Exists(_PATH_NUVEMFISCAL_Vendas))
+                System.IO.Directory.CreateDirectory(_PATH_NUVEMFISCAL_Vendas);
+            if (!System.IO.Directory.Exists(_PATH_NUVEMFISCAL_MDFE))
+                System.IO.Directory.CreateDirectory(_PATH_NUVEMFISCAL_MDFE);
+            if (!System.IO.Directory.Exists(_PATH_NUVEMFISCAL_Compras))
+                System.IO.Directory.CreateDirectory(_PATH_NUVEMFISCAL_Compras);
 
-            if (String.IsNullOrEmpty(Properties.Settings.Default.PathDocumentoFiscal))
-            { _PATH_DOCFISCAL = _PATH_NUVEMFISCAL_Vendas; }
-            else
-            { _PATH_DOCFISCAL = Properties.Settings.Default.PathDocumentoFiscal; }
+            try
+            {
+                if (!String.IsNullOrEmpty(Properties.Settings.Default.PathDocumentoFiscal))
+                { _PATH_DOCFISCAL = Properties.Settings.Default.PathDocumentoFiscal; }
+            }
+            catch (Exception)
+            {
+            }
 
             if (!System.IO.Directory.Exists(_PATH_DOCFISCAL))
             {
@@ -103,9 +117,7 @@ namespace SisCom.Aplicacao_FW
             switch (_Operacao)
             {
                 case "manifestar":
-                    if (!String.IsNullOrEmpty(_PATH_NUVEMFISCAL_Compras))
-                    { _PATH_DOCFISCAL = _PATH_NUVEMFISCAL_Compras; }
-
+                    _PATH_NUVEMFISCAL_Config = _PATH_NUVEMFISCAL_Vendas;
                     _EnderecoEmitente_UF = args[1];
                     _chaveacesso = args[2];
                     _cnpj = args[3];
@@ -114,21 +126,26 @@ namespace SisCom.Aplicacao_FW
                     Manifestar(_chaveacesso, _cnpj, (NFeTipoEvento)Convert.ToInt64(_nFeTipoEvento));
                     break;
                 case "nuvemfiscal":
-                    _PATH_NUVEMFISCAL_Vendas = Path.Combine(Directory.GetCurrentDirectory(), "Externos\\NuvemFiscal_Compras");
+                    _PATH_NUVEMFISCAL_Config = _PATH_NUVEMFISCAL_Compras;
                     _EnderecoEmitente_UF = args[1];
                     _cnpj = args[2];
                     if ((!String.IsNullOrEmpty(args[3])) && (args[3] != "''")) { _nsu = args[3]; }
                     _NuvemFiscal_SerialNumber = args[4];
                     NuvemFiscal(_EnderecoEmitente_UF, _cnpj, _nsu, _chnfe);
                     break;
+                case "transmitir":
                 case "protocolar":
+                    _PATH_NUVEMFISCAL_Config = _PATH_NUVEMFISCAL_Vendas;
                     _EnderecoEmitente_UF = args[1];
                     _XML = args[2];
                     _NuvemFiscal_SerialNumber = args[3];
-                    //_recibo = args[4];
+                    _cnpj = args[4];
+                    _chaveacesso = args[5];
+                    _recibo = args[6];
                     Protocolar();
                     break;
                 case "cartacorrecao":
+                    _PATH_NUVEMFISCAL_Config = _PATH_NUVEMFISCAL_Vendas;
                     _EnderecoEmitente_UF = args[1];
                     _chaveacesso = args[2];
                     _cnpj = args[3];
@@ -138,6 +155,7 @@ namespace SisCom.Aplicacao_FW
                     CartaCorrecao();
                     break;
                 case "cancelamento":
+                    _PATH_NUVEMFISCAL_Config = _PATH_NUVEMFISCAL_Vendas;
                     _EnderecoEmitente_UF = args[1];
                     _chaveacesso = args[2];
                     _cnpj = args[3];
@@ -148,7 +166,9 @@ namespace SisCom.Aplicacao_FW
                     Cancelamento();
                     break;
                 case "mdfeimprimir":
+                    _PATH_NUVEMFISCAL_Config = _PATH_NUVEMFISCAL_MDFE;
                     _chaveacesso = args[1];
+                    _cnpj = args[2];
                     MDFeImprimir(_chaveacesso,
                                  (args[2].ToUpper() == "ENCERRADO"),
                                  (args[2].ToUpper() == "CANCELADO"),
@@ -160,6 +180,17 @@ namespace SisCom.Aplicacao_FW
             }
 
             Application.Exit();
+        }
+
+        private static string path_DOCFISCAL_Validar(string processo, int ano, int mes, string arquivo)
+        {
+            _PATH_DOCFISCAL = Properties.Settings.Default.PathDocumentoFiscal;
+            _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + _cnpj + "\\" + processo + "\\" + ano.ToString() + "\\" + mes.ToString("00");
+
+            if (!System.IO.Directory.Exists(_PATH_DOCFISCAL))
+                System.IO.Directory.CreateDirectory(_PATH_DOCFISCAL);
+
+            return _PATH_DOCFISCAL + "\\" + arquivo;
         }
 
         public static void NuvemFiscal(string EnderecoEmitente_UF,
@@ -215,58 +246,52 @@ namespace SisCom.Aplicacao_FW
             {
                 var oNFe = new NFe.Classes.NFe().CarregarDeArquivoXml(_XML.Replace("'", ""));
 
-                if (oNFe.infNFe.emit.CNPJ.Length == 13)
-                { _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\Enviados\\0" + oNFe.infNFe.emit.CNPJ; }
-                else
-                { _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\Enviados\\" + oNFe.infNFe.emit.CNPJ; }
-
-                _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + oNFe.infNFe.ide.dhEmi.Year + "\\" + oNFe.infNFe.ide.dhEmi.Month.ToString("00") + "\\" + oNFe.infNFe.ide.dhEmi.Day.ToString("00");
-
-                if (!Directory.Exists(_PATH_DOCFISCAL)) Directory.CreateDirectory(_PATH_DOCFISCAL);
-
-                _PATH_NUVEMFISCAL_Vendas = _PATH_DOCFISCAL;
-
                 var servicoNFe = new ServicosNFe(Configuracao());
-                var sNFe_Chave = oNFe.infNFe.Id.Substring(3);
                 string retorno = "";
                 string mensagem = "Pendente";
                 string cStat = "00";
                 string protocolo = "00";
                 cConsulta consulta = new cConsulta();
 
+                if (String.IsNullOrEmpty(_chaveacesso))
+                    _chaveacesso = oNFe.infNFe.Id.Substring(3);
+
                 if (String.IsNullOrEmpty(_recibo))
                     _recibo = "00";
 
-                if (_recibo == "00")
+                if (_Operacao == "protocolar")
                 {
-                    var retornoConsulta = servicoNFe.NfeConsultaProtocolo(sNFe_Chave);
-
-                    consulta.cStat = retornoConsulta.Retorno.cStat;
-                    consulta.versao = retornoConsulta.Retorno.versao;
-                    consulta.xMotivo = retornoConsulta.Retorno.xMotivo;
-                    consulta.RetornoStr = retornoConsulta.RetornoStr;
-
-                    if (retornoConsulta.Retorno.protNFe != null)
+                    if (_recibo != "00")
                     {
-                        consulta.protNFe = retornoConsulta.Retorno.protNFe;
+                        var retornoConsulta = servicoNFe.NFeRetAutorizacao(_recibo);
+
+                        consulta.cStat = retornoConsulta.Retorno.cStat;
+                        consulta.versao = retornoConsulta.Retorno.versao;
+                        consulta.xMotivo = retornoConsulta.Retorno.xMotivo;
+                        consulta.RetornoStr = retornoConsulta.RetornoStr;
+
+                        if (retornoConsulta.Retorno.protNFe.Any())
+                        {
+                            consulta.protNFe = retornoConsulta.Retorno.protNFe.FirstOrDefault();
+                        }
                     }
-                }
-                else
-                {
-                    var retornoConsulta = servicoNFe.NFeRetAutorizacao(_recibo);
 
-                    consulta.cStat = retornoConsulta.Retorno.cStat;
-                    consulta.versao = retornoConsulta.Retorno.versao;
-                    consulta.xMotivo = retornoConsulta.Retorno.xMotivo;
-                    consulta.RetornoStr = retornoConsulta.RetornoStr;
-
-                    if (retornoConsulta.Retorno.protNFe.Any())
+                    if ((_recibo == "00") || (consulta.xMotivo.Contains("Rejeicao:")) || (consulta.protNFe != null && consulta.protNFe.infProt.xMotivo.Contains("Rejeicao:")))
                     {
-                        consulta.protNFe = retornoConsulta.Retorno.protNFe.FirstOrDefault();
+                        var retornoConsulta = servicoNFe.NfeConsultaProtocolo(_chaveacesso);
+
+                        consulta.cStat = retornoConsulta.Retorno.cStat;
+                        consulta.versao = retornoConsulta.Retorno.versao;
+                        consulta.xMotivo = retornoConsulta.Retorno.xMotivo;
+                        consulta.RetornoStr = retornoConsulta.RetornoStr;
+
+                        if (retornoConsulta.Retorno.protNFe != null)
+                            consulta.protNFe = retornoConsulta.Retorno.protNFe;
                     }
+                    
                 }
 
-                if (consulta.cStat == 217 /* Rejeicao: NF-e nao consta na base de dados da SEFAZ */)
+                if ((_Operacao == "transmitir")  || (consulta.xMotivo.Contains("Rejeicao:")) || (consulta.protNFe != null && consulta.protNFe.infProt.xMotivo.Contains("Rejeicao:")))
                 {
                     var nFeAutorizacao = servicoNFe.NFeAutorizacao(Convert.ToInt32("1"), IndicadorSincronizacao.Assincrono, new List<NFeZeus>(new NFeZeus[] { oNFe }), true);
                     retorno = nFeAutorizacao.RetornoStr;
@@ -304,9 +329,7 @@ namespace SisCom.Aplicacao_FW
                                 if (oNFe_Proc.protNFe != null)
                                 {
                                     protocolo = oNFe_Proc.protNFe.infProt.nProt;
-                                    var sNFe_Arquivo = _PATH_NUVEMFISCAL_Vendas + sNFe_Chave + "-procNfe.xml";
-
-                                    FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, sNFe_Arquivo);
+                                    ProtocolarSalvar(oNFe, consulta);
                                 }
                             }
                         }
@@ -404,9 +427,7 @@ namespace SisCom.Aplicacao_FW
                                         if (consulta.protNFe != null)
                                         {
                                             protocolo = consulta.protNFe.infProt.nProt;
-                                            var sNFe_Arquivo = _PATH_NUVEMFISCAL_Vendas + sNFe_Chave + "-procNfe.xml";
-
-                                            FuncoesXml.ClasseParaArquivoXml(consulta.protNFe, sNFe_Arquivo);
+                                            ProtocolarSalvar(oNFe, consulta);
                                         }
 
                                         break;
@@ -445,18 +466,11 @@ namespace SisCom.Aplicacao_FW
 
                 if ((protocolo == null) || (protocolo == "00"))
                 {
-                    protocolo = "";
+                    protocolo = " ";
                 }
                 else
                 {
-                    NFe.Classes.nfeProc oNFe_Proc;
-                    oNFe_Proc = new nfeProc();
-                    oNFe_Proc.NFe = oNFe;
-                    oNFe_Proc.protNFe = new NFe.Classes.Protocolo.protNFe();
-                    oNFe_Proc.protNFe = consulta.protNFe;
-                    oNFe_Proc.versao = consulta.versao;
-                    var sNFe_Arquivo = Path.Combine(_PATH_NUVEMFISCAL_Vendas, sNFe_Chave + "-procNfe.xml");
-                    FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, sNFe_Arquivo);
+                    ProtocolarSalvar(oNFe, consulta);
 
                     cStat = "100";
                     mensagem = consulta.xMotivo;
@@ -483,11 +497,10 @@ namespace SisCom.Aplicacao_FW
                 try
                 { 
                     if (retorno.IndexOf("<dhRecbto>") != -1)
-                    retorno = retorno.Replace("</verAplic>", "</verAplic>" + retorno.Substring(retorno.IndexOf("<dhRecbto>"), retorno.IndexOf("</dhRecbto>") - retorno.IndexOf("<dhRecbto>") + "<dhRecbto>".Length + 1)); 
+                    retorno = retorno.Replace("</verAplic>", "</verAplic>" + retorno.Substring(retorno.IndexOf("<dhRecbto>"), retorno.IndexOf("</dhRecbto>") - retorno.IndexOf("<dhRecbto>") + "<dhRecbto>".Length + 1).Replace("dhRecbto", "dhRegEvento")); 
                 }
                 catch (Exception) { }
                
-                retorno = retorno.Replace("dhRecbto", "dhRegEvento");                
                 retorno = retorno.Replace("</retEnviNFe>",
                                           "<Protocolo><cStat>" + cStat + "</cStat><xMotivo>" + mensagem + "</xMotivo><nProtocolo>" + protocolo + "</nProtocolo></Protocolo><nRecibo>" + _recibo + "</nRecibo></retEnviNFe>");
 
@@ -504,6 +517,20 @@ namespace SisCom.Aplicacao_FW
             {
                 log($"Protocolocar - {ex.Message}"); 
             }
+        }
+
+        static void ProtocolarSalvar(NFe.Classes.NFe oNFe, cConsulta consulta)
+        {
+            NFe.Classes.nfeProc oNFe_Proc;
+            oNFe_Proc = new nfeProc();
+            oNFe_Proc.NFe = oNFe;
+            oNFe_Proc.protNFe = new NFe.Classes.Protocolo.protNFe();
+            oNFe_Proc.protNFe = consulta.protNFe;
+            oNFe_Proc.versao = consulta.versao;
+            FuncoesXml.ClasseParaArquivoXml(oNFe_Proc, path_DOCFISCAL_Validar("NF-e",
+                                                                             consulta.protNFe.infProt.dhRecbto.Year,
+                                                                             consulta.protNFe.infProt.dhRecbto.Month,
+                                                                             _chaveacesso + "-procNfe.xml"));
         }
 
         public static void CartaCorrecao()
@@ -533,38 +560,47 @@ namespace SisCom.Aplicacao_FW
 
         public static void Cancelamento()
         {
-            string sDescricaoJustificativa= "";
-            string mensagem;
-            string cStat;
-            string protocolo;
+            var retorno = String.Empty;
 
-            NFe.Servicos.ServicosNFe oNFe_Servico;
-            NFe.Servicos.Retorno.RetornoRecepcaoEvento oNFe_Servico_RetornoRecepcaoEvento;
-
-            oNFe_Servico = new ServicosNFe(Configuracao());
-
-            _TXT = _TXT.Replace("\\\\", @"\").Replace("'", "");
-
-            StreamReader srArquivo = new StreamReader(_TXT);
-
-            while (srArquivo.Peek() != -1)
+            try
             {
-                sDescricaoJustificativa = srArquivo.ReadLine();
+                string sDescricaoJustificativa = "";
+                string mensagem;
+                string cStat;
+                string protocolo;
+
+                NFe.Servicos.ServicosNFe oNFe_Servico;
+                NFe.Servicos.Retorno.RetornoRecepcaoEvento oNFe_Servico_RetornoRecepcaoEvento;
+
+                oNFe_Servico = new ServicosNFe(Configuracao());
+
+                _TXT = _TXT.Replace("\\\\", @"\").Replace("'", "");
+
+                StreamReader srArquivo = new StreamReader(_TXT);
+
+                while (srArquivo.Peek() != -1)
+                {
+                    sDescricaoJustificativa = srArquivo.ReadLine();
+                }
+
+                srArquivo.Close();
+                srArquivo.Dispose();
+
+                oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCancelamento(1, _lote, _protocoloAutorizacao, _chaveacesso, sDescricaoJustificativa, _cnpj);
+
+                cStat = oNFe_Servico_RetornoRecepcaoEvento.Retorno.cStat.ToString();
+                mensagem = oNFe_Servico_RetornoRecepcaoEvento.Retorno.retEvento[0].infEvento.xMotivo;
+                protocolo = oNFe_Servico_RetornoRecepcaoEvento.Retorno.retEvento[0].infEvento.tpEvento.ToString();
+
+                retorno = oNFe_Servico_RetornoRecepcaoEvento.RetornoStr;
+                retorno = retorno.Replace("</retEnvEvento>",
+                                          "<Protocolo><cStat>" + cStat + "</cStat><xMotivo>" + mensagem + "</xMotivo><nProtocolo>" + protocolo + "</nProtocolo></Protocolo></retEnvEvento>");
+            }
+            catch (Exception ex)
+            {
+                retorno = "<retEnvEvento><idLote>0</idLote><tpAmb>1</tpAmb><verAplic>Teste</verAplic><cOrgao>0</cOrgao><cStat>000</cStat><xMotivo>" + ex.Message + "</xMotivo></retEnvEvento>";
             }
 
-            srArquivo.Close();
-            srArquivo.Dispose();
-
-            oNFe_Servico_RetornoRecepcaoEvento = oNFe_Servico.RecepcaoEventoCancelamento(1, _lote, _protocoloAutorizacao, _chaveacesso,sDescricaoJustificativa,_cnpj);
-
-
-            cStat = oNFe_Servico_RetornoRecepcaoEvento.Retorno.cStat.ToString();
-            mensagem = oNFe_Servico_RetornoRecepcaoEvento.Retorno.retEvento[0].infEvento.xMotivo;
-            protocolo = oNFe_Servico_RetornoRecepcaoEvento.Retorno.retEvento[0].infEvento.tpEvento.ToString();
-
-            var retorno = oNFe_Servico_RetornoRecepcaoEvento.RetornoStr;
-            retorno = retorno.Replace("</retEnvEvento>",
-                                      "<Protocolo><cStat>" + cStat + "</cStat><xMotivo>" + mensagem + "</xMotivo><nProtocolo>" + protocolo + "</nProtocolo></Protocolo></retEnvEvento>");
             Console.Write(retorno);
         }
 
@@ -603,7 +639,9 @@ namespace SisCom.Aplicacao_FW
                 Console.Write(caminhoXml);
 
                 rpt.Visualizar(true);
-                rpt.ExportarPdf(caminhoXml.Replace(".xml", ".pdf"));
+                
+                FileInfo fileInfo = new FileInfo(caminhoXml);
+                rpt.ExportarPdf(path_DOCFISCAL_Validar("MDF-e", mdfe.MDFe.InfMDFe.Ide.DhEmi.Year, mdfe.MDFe.InfMDFe.Ide.DhEmi.Month, fileInfo.Name.Replace(".xml", ".pdf")));
 
                 log($"Configurar impressão - {caminhoXml.Replace(".xml", ".pdf")}");
             }
@@ -685,7 +723,7 @@ namespace SisCom.Aplicacao_FW
             oConfig.ProtocoloDeSeguranca = SecurityProtocolType.Tls12;
             oConfig.DiretorioSchemas = _PATH_SCHEMAS;
             oConfig.SalvarXmlServicos = true;
-            oConfig.DiretorioSalvarXml = _PATH_NUVEMFISCAL_Vendas;
+            oConfig.DiretorioSalvarXml = _PATH_NUVEMFISCAL_Config;
 
             return oConfig;
         }

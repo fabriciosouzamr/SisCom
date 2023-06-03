@@ -233,11 +233,6 @@ public static class Grid_DataGridView
         grid.Rows[linha].Cells[coluna].Value = valor;
     }
 
-    public static void User_LinhaLimpar(this DataGridView grid)
-    {
-        grid.Rows.Clear();
-    }
-
     public static int User_Linhas(this DataGridView grid, int coluna)
     {
         int iCont = 0;

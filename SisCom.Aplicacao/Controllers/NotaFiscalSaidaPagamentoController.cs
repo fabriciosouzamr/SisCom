@@ -51,7 +51,7 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<NotaFiscalSaidaPagamentoViewModel>> PesquisarId(Guid Id)
         {
-            var pagamento = await _notaFiscalSaidaPagamentoService.GetAll(null, p => p.NotaFiscalSaidaId == Id);
+            var pagamento = await _notaFiscalSaidaPagamentoService.GetAll(predicate: p => p.NotaFiscalSaidaId == Id, order: o => o.DataVecimento, includes: i => i.FormaPagamento);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaPagamentoViewModel>>(pagamento);
         }
         public async Task Excluir(Guid id)

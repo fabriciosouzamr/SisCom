@@ -146,7 +146,7 @@ namespace SisCom.Aplicacao.Formularios
             var notaFiscalentradamercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier);
             var notaFiscalentradamercadorias = await notaFiscalentradamercadoriaController.ObterTodos();
 
-            Grid_DataGridView.User_LinhaLimpar(gridNotaFiscalEntrada);
+            gridNotaFiscalEntrada.Rows.Clear();
 
             foreach (var notaFiscalentradamercadoria in notaFiscalentradamercadorias)
             {
@@ -161,7 +161,6 @@ namespace SisCom.Aplicacao.Formularios
                 if ((valido) && (comboFiltro_Empresa.SelectedIndex != -1)) valido = (notaFiscalentradamercadoria.NotaFiscalEntrada.EmpresaId == (Guid)comboFiltro_Empresa.SelectedValue);
                 if ((valido) && (comboFiltro_CFOP.SelectedIndex != -1)) valido = (notaFiscalentradamercadoria.CFOPId == (Guid)comboFiltro_CFOP.SelectedValue);
                 if ((valido) && (comboFiltro_Estado.SelectedIndex != -1)) valido = (notaFiscalentradamercadoria.NotaFiscalEntrada.Fornecedor.Endereco.End_Cidade.EstadoId == (Guid)comboFiltro_Estado.SelectedValue);
-                //if ((valido) && (comboFiltro_Modelo.SelectedIndex != -1)) valido = (notaFiscalentradamercadoria.NotaFiscalEntrada.Modelo == (Guid)comboFiltro_Modelo.SelectedValue);
                 if ((valido) && (textFiltro_ChaveAcesso.Text.Trim() != "")) valido = (notaFiscalentradamercadoria.NotaFiscalEntrada.CodigoChaveAcesso == textFiltro_ChaveAcesso.Text);
 
                 if (valido)
@@ -202,6 +201,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 using (frmComprasInclusao form = this.ServiceProvider().GetRequiredService<frmComprasInclusao>())
                 {
+                    form.notaFiscalEntradaId = (Guid)gridNotaFiscalEntrada.CurrentRow.Cells[gridNotaFiscalEntradaId].Value;
                     form.ShowDialog(this);
                 }
 

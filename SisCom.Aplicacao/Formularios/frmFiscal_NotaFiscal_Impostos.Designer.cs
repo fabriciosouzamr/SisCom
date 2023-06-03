@@ -257,7 +257,7 @@
             // 
             // numericValorFCP
             // 
-            this.numericValorFCP.DecimalPlaces = 2;
+            this.numericValorFCP.DecimalPlaces = 6;
             this.numericValorFCP.Location = new System.Drawing.Point(212, 380);
             this.numericValorFCP.Name = "numericValorFCP";
             this.numericValorFCP.Size = new System.Drawing.Size(100, 23);
@@ -298,7 +298,7 @@
             // 
             // numericBaseCalculoFCP
             // 
-            this.numericBaseCalculoFCP.DecimalPlaces = 2;
+            this.numericBaseCalculoFCP.DecimalPlaces = 6;
             this.numericBaseCalculoFCP.Location = new System.Drawing.Point(4, 380);
             this.numericBaseCalculoFCP.Maximum = new decimal(new int[] {
             1000000,
@@ -473,7 +473,7 @@
             // 
             // numericValorBaseIPI
             // 
-            this.numericValorBaseIPI.DecimalPlaces = 2;
+            this.numericValorBaseIPI.DecimalPlaces = 6;
             this.numericValorBaseIPI.Location = new System.Drawing.Point(108, 230);
             this.numericValorBaseIPI.Maximum = new decimal(new int[] {
             1000000,
@@ -575,7 +575,7 @@
             // 
             // numericValorBaseSubstituicaoTributaria
             // 
-            this.numericValorBaseSubstituicaoTributaria.DecimalPlaces = 2;
+            this.numericValorBaseSubstituicaoTributaria.DecimalPlaces = 6;
             this.numericValorBaseSubstituicaoTributaria.Location = new System.Drawing.Point(4, 157);
             this.numericValorBaseSubstituicaoTributaria.Maximum = new decimal(new int[] {
             1000000,
@@ -688,7 +688,7 @@
             // 
             // numericValorBaseCalculo
             // 
-            this.numericValorBaseCalculo.DecimalPlaces = 2;
+            this.numericValorBaseCalculo.DecimalPlaces = 6;
             this.numericValorBaseCalculo.Location = new System.Drawing.Point(108, 84);
             this.numericValorBaseCalculo.Maximum = new decimal(new int[] {
             1000000,
@@ -702,7 +702,7 @@
             // 
             // numericPreco
             // 
-            this.numericPreco.DecimalPlaces = 2;
+            this.numericPreco.DecimalPlaces = 6;
             this.numericPreco.Location = new System.Drawing.Point(4, 84);
             this.numericPreco.Maximum = new decimal(new int[] {
             1000000,

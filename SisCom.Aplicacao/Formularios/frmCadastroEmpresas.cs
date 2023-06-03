@@ -70,6 +70,8 @@ namespace SisCom.Aplicacao.Formularios
             comboNFEAmbiente.SelectedIndex = -1;
             comboNFELayout.SelectedIndex = -1;
             textNFESerie.Text = "";
+            textNFEInformacaoComplementar_TotalTributos.Text = "";
+            textNFEInformacaoComplementar_CreditoSimplesNacional.Text = "";
             textNFEVersaoEmissor.Text = "";
             textCaminhoLogomarca.Text = "";
             pictureLogomarca.Image = null;
@@ -115,10 +117,12 @@ namespace SisCom.Aplicacao.Formularios
                 textTelefone.Text = Funcao.NuloParaString(empresa.Telefone);
                 textEmail.Text = Funcao.NuloParaString(empresa.EMail);
                 if (!Funcao.Nulo(empresa.RegimeTributario)) comboRegimeTributario.SelectedValue = empresa.RegimeTributario;
-                numericCreditoSimplesNacional.Value = Funcao.NuloParaNumero(empresa.CreditoSimplesNacional);
+                numericCreditoSimplesNacional.Value = Funcao.NuloParaValorD(empresa.CreditoSimplesNacional);
                 if (!Funcao.Nulo(empresa.NFE_Ambiente)) comboNFEAmbiente.SelectedValue = empresa.NFE_Ambiente;
                 if (!Funcao.Nulo(empresa.NFE_Layout)) comboNFELayout.SelectedValue = empresa.NFE_Layout;
                 textNFESerie.Text = Funcao.NuloParaString(empresa.NFE_Serie);
+                textNFEInformacaoComplementar_TotalTributos.Text = Funcao.NuloParaString(empresa.NFE_InfComple_TributosTotal);
+                textNFEInformacaoComplementar_CreditoSimplesNacional.Text = Funcao.NuloParaString(empresa.NFE_InfComple_CreditoSimplesNacional);
                 textNFEVersaoEmissor.Text = Funcao.NuloParaString(empresa.NFE_VersaoEmissor);
                 textCaminhoLogomarca.Text = Funcao.NuloParaString(empresa.PathLogomarca);
                 if (!Imagem.NuloImagem(empresa.ImagemLogomarca)) pictureLogomarca.Image = Imagem.ByteArrayToImage(empresa.ImagemLogomarca);
@@ -430,6 +434,8 @@ namespace SisCom.Aplicacao.Formularios
             if (Combo_ComboBox.Selecionado(comboNFEAmbiente)) { empresa.NFE_Ambiente = (AmbienteSistemas)comboNFEAmbiente.SelectedValue; } else { empresa.NFE_Ambiente = null; }
             if (Combo_ComboBox.Selecionado(comboNFELayout)) { empresa.NFE_Layout = (NFE_Layout)comboNFELayout.SelectedValue; } else { empresa.NFE_Layout = null; }
             empresa.NFE_Serie = Funcao.StringVazioParaNulo(textNFESerie.Text);
+            empresa.NFE_InfComple_CreditoSimplesNacional = Funcao.StringVazioParaNulo(textNFEInformacaoComplementar_CreditoSimplesNacional.Text);
+            empresa.NFE_InfComple_TributosTotal = Funcao.StringVazioParaNulo(textNFEInformacaoComplementar_TotalTributos.Text);
             empresa.NFE_VersaoEmissor = Funcao.StringVazioParaNulo(textNFEVersaoEmissor.Text);
             empresa.PathLogomarca = Funcao.StringVazioParaNulo(textCaminhoLogomarca.Text);
             empresa.ImagemLogomarca = Imagem.ImageToByteArray(pictureLogomarca.Image);

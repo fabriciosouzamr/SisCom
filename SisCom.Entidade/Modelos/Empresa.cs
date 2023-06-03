@@ -27,6 +27,8 @@ namespace SisCom.Entidade.Modelos
         public string? NFE_VersaoEmissor { get; set; }
         public NFE_Layout? NFE_Layout { get; set; }
         public string? NFE_Serie { get; set; }
+        public string? NFE_InfComple_CreditoSimplesNacional { get; set; }
+        public string? NFE_InfComple_TributosTotal { get; set; }
         public string? PathLogomarca { get; set; }
         public string? PathDocumentoFiscal { get; set; }
         public byte[]? ImagemLogomarca { get; set; }

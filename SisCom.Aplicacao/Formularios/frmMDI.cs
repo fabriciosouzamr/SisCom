@@ -62,5 +62,11 @@ namespace SisCom.Aplicacao
             var form = this.ServiceProvider().GetRequiredService<frmFiscal_MDFe_Consulta>();
             form.ShowDialog(this);
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmUtilitario>();
+            form.ShowDialog(this);
+        }
     }
 }

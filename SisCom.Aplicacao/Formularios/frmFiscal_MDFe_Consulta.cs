@@ -172,7 +172,7 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                        p.DataHoraEmissao.Date <= dateDataEmissaoFinal.Value.Date);
             }
 
-            Grid_DataGridView.User_LinhaLimpar(gridManifestoDocumentoEletronico);
+            gridManifestoDocumentoEletronico.Rows.Clear();
 
             foreach (ManifestoEletronicoDocumentoViewModel item in manifestoEletronicoDocumentos)
             {
