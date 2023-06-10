@@ -45,11 +45,11 @@ namespace SisCom.Negocio.Services
             }
         }
 
-        public async Task Atualizar(NotaFiscalEntradaMercadoria NotaFiscalEntradaMercadoria)
+        public async Task Atualizar(NotaFiscalEntradaMercadoria notaFiscalEntradaMercadoria)
         {
             try
             {
-                await _NotaFiscalEntradaMercadoriaRepository.Update(NotaFiscalEntradaMercadoria);
+                await _NotaFiscalEntradaMercadoriaRepository.Update(notaFiscalEntradaMercadoria);
             }
             catch (Exception Ex)
             {

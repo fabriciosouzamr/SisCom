@@ -34,6 +34,9 @@ namespace SisCom.Infraestrutura.Data.Mappings
             builder.Property(p => p.ServicosAquisicao_SubSerie)
                 .HasColumnType("varchar(3)");
 
+            builder.Property(p => p.xml)
+                .HasColumnType("varchar(max)");
+
             builder.ToTable("NotaFiscalEntradas");
         }
     }

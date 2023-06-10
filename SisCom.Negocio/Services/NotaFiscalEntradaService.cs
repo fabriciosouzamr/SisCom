@@ -53,11 +53,11 @@ namespace SisCom.Negocio.Services
             }
         }
 
-        public async Task Atualizar(NotaFiscalEntrada NotaFiscalEntrada)
+        public async Task Atualizar(NotaFiscalEntrada notaFiscalEntrada)
         {
             try
             {
-                var _NotaFiscalEntrada = await _NotaFiscalEntradaRepository.Search(f => f.CodigoChaveAcesso == NotaFiscalEntrada.CodigoChaveAcesso);
+                var _NotaFiscalEntrada = await _NotaFiscalEntradaRepository.Search(f => f.CodigoChaveAcesso == notaFiscalEntrada.CodigoChaveAcesso && f.Id != notaFiscalEntrada.Id);
 
                 if (_NotaFiscalEntrada.Count() != 0)
                 {
@@ -65,7 +65,7 @@ namespace SisCom.Negocio.Services
                     return;
                 }
 
-                await _NotaFiscalEntradaRepository.Update(NotaFiscalEntrada);
+                await _NotaFiscalEntradaRepository.Update(notaFiscalEntrada);
             }
             catch (Exception Ex)
             {

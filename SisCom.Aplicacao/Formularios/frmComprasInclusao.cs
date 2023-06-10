@@ -64,7 +64,7 @@ namespace SisCom.Aplicacao.Formularios
             Combo_ComboBox.Formatar(comboTipoPagamento, "", "", ComboBoxStyle.DropDownList, null, typeof(NotaFiscalTipoPagamento));
             Combo_ComboBox.Formatar(comboTipoFrete, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoFrete));
             Combo_ComboBox.Formatar(comboFinalidade, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Finalidade));
-            Combo_ComboBox.Formatar(comboModelo, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Modelo));
+            Combo_ComboBox.Formatar(comboModelo, "", "", ComboBoxStyle.DropDownList, null, typeof(Funcoes.Enum.NF_Modelo));
 
             await Assincrono.TaskAsyncAndAwaitAsync(Inicializar());
             await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
@@ -177,7 +177,7 @@ namespace SisCom.Aplicacao.Formularios
             textNotaFiscal.Text = "";
             textSerie.Text = "";
             comboTipoPagamento.SelectedIndex = -1;
-            comboModelo.SelectedValue = NF_Modelo.NotaFiscalEletronica;
+            comboModelo.SelectedValue = Funcoes.Enum.NF_Modelo.NotaFiscalEletronica;
 
             comboFornecedor.SelectedIndex = -1;
             labelCNPJ.Text = "";
@@ -326,8 +326,8 @@ namespace SisCom.Aplicacao.Formularios
                 textNotaFiscal.Text = Funcao.NuloParaString(notaFiscalEntrada.NotaFiscal);
                 if (!Funcao.Nulo(notaFiscalEntrada.Modelo)) comboModelo.SelectedValue = notaFiscalEntrada.Modelo;
                 textSerie.Text = Funcao.NuloParaString(notaFiscalEntrada.Serie);
-                if (!Funcao.Nulo(notaFiscalEntrada.TipoPagamento)) comboTipoPagamento.SelectedValue = notaFiscalEntrada.TipoPagamento;
-                if (!Funcao.Nulo(notaFiscalEntrada.FornecedorId)) comboFornecedor.SelectedValue = notaFiscalEntrada.FornecedorId;
+                comboTipoPagamento.SelectedValue = notaFiscalEntrada.TipoPagamento;
+                comboFornecedor.SelectedValue = notaFiscalEntrada.FornecedorId;
 
                 if (notaFiscalEntrada.Fornecedor != null)
                 {
@@ -445,13 +445,13 @@ namespace SisCom.Aplicacao.Formularios
             if (notaFiscalEntrada != null)
             {
                 botaoEditar.Enabled = ((notaFiscalEntrada.Status == NF_Status.Pendente) || (notaFiscalEntrada.Status == NF_Status.Finalizada));
-                botaoGravar.Enabled = ((notaFiscalEntrada.Status == NF_Status.Pendente) || (notaFiscalEntrada.Status == NF_Status.Finalizada));
+                botaoGravar.Enabled = false;
                 botaoExcluir.Enabled = (notaFiscalEntrada.Status != NF_Status.Cancelado);
             }
             else
             {
                 botaoEditar.Enabled = true;
-                botaoGravar.Enabled = true;
+                botaoGravar.Enabled = false;
                 botaoExcluir.Enabled = true;
             }
         }
@@ -504,6 +504,7 @@ namespace SisCom.Aplicacao.Formularios
             numericServicoAquisicaoValorISS.ReadOnly = readOnly;
             comboFinalidade.Enabled = editar;
             gridObservacao.ReadOnly = readOnly;
+            botaoGravar.Enabled = editar;
             #endregion
         }
         private void botaoImportarNFeXML_Click(object sender, System.EventArgs e)
@@ -608,7 +609,7 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Selecione a natureza de operação");
                 return;
             }
-            if (!string.IsNullOrEmpty(textChaveAcesso.Text))
+            if (string.IsNullOrEmpty(textChaveAcesso.Text))
             {
                 CaixaMensagem.Informacao("Selecione a chave de acesso");
                 return;
@@ -682,28 +683,44 @@ namespace SisCom.Aplicacao.Formularios
                     await notaFiscalEntradaController.Atualizar(notaFiscalEntrada.Id, notaFiscalEntrada);
             }
 
-            using (NotaFiscalEntradaMercadoriaController notaFiscalEntradaMercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier))
+            using (NotaFiscalEntradaMercadoriaController notaFiscalEntradaMercadoriaController = new(this.MeuDbContext(), this._notifier))
             {
                 foreach (DataGridViewRow row in gridMercadoria.Rows)
                 {
                     if (row.Cells[gridMercadoria_Mercadoria].Value != null)
                     {
-                        NotaFiscalEntradaMercadoriaViewModel notaFiscalEntradaMercadoria = new NotaFiscalEntradaMercadoriaViewModel();
+                        NotaFiscalEntradaMercadoriaViewModel notaFiscalEntradaMercadoria = new()
+                        {
+                            NotaFiscalEntradaId = notaFiscalEntradaId,
+                            Id = Texto.ConverterGuid(row.Cells[gridMercadoria_Id].Value),
+                            MercadoriaId = Texto.ConverterGuid(row.Cells[gridMercadoria_CodigoSistema].Value),
+                            CFOPId = Texto.ConverterGuid(row.Cells[gridMercadoria_CFOP].Value),
+                            NCMId = Texto.ConverterGuid(row.Cells[gridMercadoria_NCM].Value),
+                            CSTId = Texto.ConverterGuid(row.Cells[gridMercadoria_CST_CSOSN].Value),
+                            QuantidadeCaixas = Texto.ConverterInt(row.Cells[gridMercadoria_Quantidade].Value),
+                            QuantidadeUnitaria = Texto.ConverterInt(row.Cells[gridMercadoria_Quantidade].Value),
+                            PrecoPorCaixas = Texto.ConverterInt(row.Cells[gridMercadoria_Preco].Value),
+                            PrecoUnitario = Texto.ConverterInt(row.Cells[gridMercadoria_Preco].Value),
+                            PrecoTotal = Texto.ConverterInt(row.Cells[gridMercadoria_Total].Value),
+                            PercentualICMS = Texto.ConverterInt(row.Cells[gridMercadoria_ValorICMS].Value),
+                            PercentualIPI = Texto.ConverterInt(row.Cells[gridMercadoria_IPI].Value),
+                            UnidadeMedidaId = Texto.ConverterGuid(row.Cells[gridMercadoria_UnidadeMedida].Value),
+                            NotaFiscalEntrada = null,
+                            Mercadoria = null,
+                            CFOP = null,
+                            NCM = null,
+                            CST = null,
+                            UnidadeMedida = null
+                        };
 
-                        notaFiscalEntradaMercadoria.NotaFiscalEntradaId = notaFiscalEntradaId;
-                        notaFiscalEntradaMercadoria.Id = Texto.ConverterGuid(row.Cells[gridMercadoria_Id].Value);
-                        notaFiscalEntradaMercadoria.MercadoriaId = Texto.ConverterGuid(row.Cells[gridMercadoria_CodigoSistema].Value);
-                        notaFiscalEntradaMercadoria.CFOPId = Texto.ConverterGuid(row.Cells[gridMercadoria_CFOP].Value);
-                        notaFiscalEntradaMercadoria.NCMId = Texto.ConverterGuid(row.Cells[gridMercadoria_NCM].Value);
-                        notaFiscalEntradaMercadoria.CSTId = Texto.ConverterGuid(row.Cells[gridMercadoria_CST_CSOSN].Value);
-                        notaFiscalEntradaMercadoria.UnidadeMedidaId = Texto.ConverterGuid(row.Cells[gridMercadoria_UnidadeMedida].Value);
-                        notaFiscalEntradaMercadoria.QuantidadeCaixas = Texto.ConverterInt(row.Cells[gridMercadoria_Quantidade].Value);
-                        notaFiscalEntradaMercadoria.QuantidadeUnitaria = Texto.ConverterInt(row.Cells[gridMercadoria_Quantidade].Value);
-                        notaFiscalEntradaMercadoria.PrecoPorCaixas = Texto.ConverterInt(row.Cells[gridMercadoria_Preco].Value);
-                        notaFiscalEntradaMercadoria.PrecoUnitario = Texto.ConverterInt(row.Cells[gridMercadoria_Preco].Value);
-                        notaFiscalEntradaMercadoria.PrecoTotal = Texto.ConverterInt(row.Cells[gridMercadoria_Total].Value);
-                        notaFiscalEntradaMercadoria.PercentualICMS = Texto.ConverterInt(row.Cells[gridMercadoria_ValorICMS].Value);
-                        notaFiscalEntradaMercadoria.PercentualIPI = Texto.ConverterInt(row.Cells[gridMercadoria_IPI].Value);
+                        if (notaFiscalEntradaMercadoria.CFOPId == Guid.Empty)
+                            notaFiscalEntradaMercadoria.CFOPId = null;
+                        if (notaFiscalEntradaMercadoria.NCMId == Guid.Empty)
+                            notaFiscalEntradaMercadoria.NCMId = null;
+                        if (notaFiscalEntradaMercadoria.CSTId == Guid.Empty)
+                            notaFiscalEntradaMercadoria.CSTId = null;
+                        if (notaFiscalEntradaMercadoria.UnidadeMedidaId == Guid.Empty)
+                            notaFiscalEntradaMercadoria.UnidadeMedidaId = null;
 
                         if (notaFiscalEntradaMercadoria.Id == Guid.Empty)
                         {
@@ -713,7 +730,6 @@ namespace SisCom.Aplicacao.Formularios
                         }
                         else
                         { await notaFiscalEntradaMercadoriaController.Atualizar(notaFiscalEntradaMercadoria.Id, notaFiscalEntradaMercadoria); }
-
                     }
                 }
 

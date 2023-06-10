@@ -4,6 +4,7 @@ using Funcoes._Enum;
 using Funcoes.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using NFe.Classes;
+using NFe.Classes.Informacoes.Emitente;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
@@ -12,6 +13,8 @@ using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -116,6 +119,8 @@ namespace SisCom.Aplicacao.Formularios
             NCM = await (new TabelaNCMController(this.MeuDbContext(), this._notifier)).ObterTodos();
             CST_CSOSN = await (new TabelaCST_CSOSNController(this.MeuDbContext(), this._notifier)).ObterTodos();
 
+            comboEmpresa.SelectedValue = Declaracoes.dados_Empresa_Id;
+
             await CarregarComboFornecedor();
 
             if (_nfeProc != null)
@@ -164,6 +169,9 @@ namespace SisCom.Aplicacao.Formularios
                 textInscricaoEstadual.Text = _nfeProc.NFe.infNFe.emit.IE;
                 Forms.comboFornecedor_SelecionarPorCNPJ_CPF(comboFornecedor, _nfeProc.NFe.infNFe.emit.CNPJ);
 
+                if (comboFornecedor.SelectedIndex == -1)
+                    GravarFornecedor(_nfeProc.NFe.infNFe.emit);
+
                 gridProduto.Rows.Clear();
 
                 _nfeProc.NFe.infNFe.det.ForEach(d =>
@@ -211,6 +219,65 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     textProtocolo.Text = _nfeProc.protNFe.infProt.nProt;
                 }
+            }
+        }
+        async Task GravarFornecedor(NFe.Classes.Informacoes.Emitente.emit emit)
+        {
+            if (emit != null)
+            {
+                using (PessoaController pessoaController = new(this.MeuDbContext(), this._notifier))
+                {
+                    PessoaViewModel pessoaViewModel;
+                    string cnpjCpf = String.Empty;
+
+                    if (!String.IsNullOrEmpty(emit.CNPJ))
+                        cnpjCpf = emit.CNPJ;
+                    if (!String.IsNullOrEmpty(emit.CPF))
+                        cnpjCpf = emit.CPF;
+
+                    pessoaViewModel = (await pessoaController.ObterTodos(predicate: w => w.CNPJ_CPF.Trim() == cnpjCpf.Trim())).FirstOrDefault();
+
+                    if (pessoaViewModel == null)
+                    {
+                        pessoaViewModel = new()
+                        {
+                            Fornecedor = true,
+                            CNPJ_CPF = cnpjCpf,
+                            TipoPessoa = emit.CNPJ == cnpjCpf ? TipoPessoaCliente.Juridica : TipoPessoaCliente.Fisica,
+                            RazaoSocial = emit.xNome,
+                            Nome = String.IsNullOrEmpty(emit.xFant) ? emit.xNome : emit.xFant,
+                            InscricaoEstadual = emit.IE,
+                            InscricaoMunicipal = emit.IM,
+                            RegimeTributario = (RegimeTributario?)emit.CRT
+                        };
+                        if (emit.enderEmit != null)
+                        {
+                            CidadeViewModel cidadeViewModel;
+                            using (CidadeController cidadeController = new(this.MeuDbContext(), this._notifier))
+                            {
+                                cidadeViewModel = (await cidadeController.GetByIbgeCode(emit.enderEmit.cMun.ToString())).FirstOrDefault();
+                            }
+
+                            pessoaViewModel.Endereco = new();
+                            pessoaViewModel.Endereco.End_Logradouro = emit.enderEmit.xLgr;
+                            pessoaViewModel.Endereco.End_Bairro = emit.enderEmit.xBairro;
+                            if (cidadeViewModel != null) pessoaViewModel.Endereco.End_CidadeId = cidadeViewModel.Id;
+                            pessoaViewModel.Endereco.End_CEP = emit.enderEmit.CEP;
+                            pessoaViewModel.Endereco.End_Numero = emit.enderEmit.nro;
+                            pessoaViewModel.Endereco.End_Complemento = emit.enderEmit.xCpl;
+                        }
+
+                        await pessoaController.Adicionar(pessoaViewModel);
+                    }
+                    else
+                    {
+                        pessoaViewModel.Fornecedor = true;
+                        await pessoaController.Atualizar(pessoaViewModel.Id, pessoaViewModel);
+                    }
+                }
+
+                await CarregarComboFornecedor();
+                Forms.comboFornecedor_SelecionarPorCNPJ_CPF(comboFornecedor, emit.CNPJ);
             }
         }
         private void botaoImportarDanfe_Click(object sender, EventArgs e)
@@ -336,61 +403,61 @@ namespace SisCom.Aplicacao.Formularios
                             notaFiscalEntradaViewModel.xml = _nfeProc.ObterXmlString();
 
                         await notaFiscalEntradaController.Adicionar(notaFiscalEntradaViewModel);
+                    }
 
-                        using (NotaFiscalEntradaMercadoriaController notaFiscalEntradaMercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier))
+                    using (NotaFiscalEntradaMercadoriaController notaFiscalEntradaMercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier))
+                    {
+                        for (int i = 0; i < gridProduto.Rows.Count; i++)
                         {
-                            for (int i = 0; i < gridProduto.Rows.Count; i++)
-                            {
-                                var row = gridProduto.Rows[i];
-                                NFe.Classes.Informacoes.Detalhe.det prod = null;
+                            var row = gridProduto.Rows[i];
+                            NFe.Classes.Informacoes.Detalhe.det prod = null;
 
-                                foreach (NFe.Classes.Informacoes.Detalhe.det item in _nfeProc.NFe.infNFe.det)
+                            foreach (NFe.Classes.Informacoes.Detalhe.det item in _nfeProc.NFe.infNFe.det)
+                            {
+                                if (item.nItem == Convert.ToInt16(row.Cells[grdProduto_Item].Value))
                                 {
-                                    if (item.nItem == Convert.ToInt16(row.Cells[grdProduto_Item].Value))
-                                    {
-                                        prod = item;
-                                        break;
-                                    }
+                                    prod = item;
+                                    break;
+                                }
+                            }
+
+                            NotaFiscalEntradaMercadoriaViewModel notaFiscalEntradaMercadoriaViewModel = new NotaFiscalEntradaMercadoriaViewModel();
+                            notaFiscalEntradaMercadoriaViewModel.NotaFiscalEntradaId = notaFiscalEntradaViewModel.Id;
+                            notaFiscalEntradaMercadoriaViewModel.QuantidadeCaixas = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
+                            notaFiscalEntradaMercadoriaViewModel.QuantidadeUnitaria = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
+                            notaFiscalEntradaMercadoriaViewModel.PrecoPorCaixas = Convert.ToDecimal(row.Cells[grdProduto_Quantidade].Value);
+                            notaFiscalEntradaMercadoriaViewModel.PrecoUnitario = Convert.ToDecimal(row.Cells[grdProduto_Preco].Value);
+                            notaFiscalEntradaMercadoriaViewModel.PercentualDesconto = 0;
+                            notaFiscalEntradaMercadoriaViewModel.ValorDesconto = Funcao.NuloParaValorD(prod.prod.vDesc);
+                            notaFiscalEntradaMercadoriaViewModel.PrecoTotal = Convert.ToDecimal(row.Cells[grdProduto_Total].Value);
+                            notaFiscalEntradaMercadoriaViewModel.PercentualICMS = Funcao.NuloParaValorD(Zeus.NFe_Produto_DadosICMS(prod) == null ? 0 : Zeus.NFe_Produto_DadosICMS(prod).vICMS);
+                            notaFiscalEntradaMercadoriaViewModel.PercentualIPI = Funcao.NuloParaValorD(Zeus.NFE_Produto_DadosIPI(prod) == null ? 0 : Zeus.NFE_Produto_DadosIPI(prod).vIPI);
+                            notaFiscalEntradaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[grdProduto_CodigoSistema].Value.ToString());
+
+                            foreach (var item in CFOP)
+                                if (item.Codigo == prod.prod.CFOP.ToString())
+                                {
+                                    notaFiscalEntradaMercadoriaViewModel.CFOPId = item.Id;
+                                    break;
+                                }
+                            foreach (var item in NCM)
+                                if (item.Codigo.Trim() == prod.prod.NCM.Trim())
+                                {
+                                    notaFiscalEntradaMercadoriaViewModel.NCMId = item.Id;
+                                    break;
+                                }
+                            foreach (var item in CST_CSOSN)
+                                if (item.Codigo == Zeus.NFE_Produto_DadosCOFINS(prod).CST.ToString().Replace("cofins", ""))
+                                {
+                                    notaFiscalEntradaMercadoriaViewModel.CSTId = item.Id;
+                                    break;
                                 }
 
-                                NotaFiscalEntradaMercadoriaViewModel notaFiscalEntradaMercadoriaViewModel = new NotaFiscalEntradaMercadoriaViewModel();
-                                notaFiscalEntradaMercadoriaViewModel.QuantidadeCaixas = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
-                                notaFiscalEntradaMercadoriaViewModel.QuantidadeUnitaria = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
-                                notaFiscalEntradaMercadoriaViewModel.PrecoPorCaixas = Convert.ToDecimal(row.Cells[grdProduto_Quantidade].Value);
-                                notaFiscalEntradaMercadoriaViewModel.PrecoUnitario = Convert.ToDecimal(row.Cells[grdProduto_Preco].Value);
-                                notaFiscalEntradaMercadoriaViewModel.PercentualDesconto = 0;
-                                notaFiscalEntradaMercadoriaViewModel.ValorDesconto = Funcao.NuloParaValorD(prod.prod.vDesc);
-                                notaFiscalEntradaMercadoriaViewModel.PrecoTotal = Convert.ToDecimal(row.Cells[grdProduto_Total].Value);
-                                notaFiscalEntradaMercadoriaViewModel.PercentualICMS = Funcao.NuloParaValorD(Zeus.NFe_Produto_DadosICMS(prod) == null ? 0 : Zeus.NFe_Produto_DadosICMS(prod).vICMS);
-                                notaFiscalEntradaMercadoriaViewModel.PercentualIPI = Funcao.NuloParaValorD(Zeus.NFE_Produto_DadosIPI(prod) == null ? 0 : Zeus.NFE_Produto_DadosIPI(prod).vIPI);
-                                notaFiscalEntradaMercadoriaViewModel.NotaFiscalEntradaId = notaFiscalEntradaViewModel.Id;
-                                notaFiscalEntradaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[grdProduto_CodigoSistema].Value.ToString());
-                                
-                                foreach (var item in CFOP)
-                                    if (item.Codigo == prod.prod.CFOP.ToString())
-                                    {
-                                        notaFiscalEntradaMercadoriaViewModel.CFOPId = item.Id;
-                                        break;
-                                    }
-                                foreach (var item in NCM)
-                                    if (item.Codigo.Trim() == prod.prod.NCM.Trim())
-                                    {
-                                        notaFiscalEntradaMercadoriaViewModel.NCMId = item.Id;
-                                        break;
-                                    }
-                                foreach (var item in CST_CSOSN)
-                                    if (item.Codigo == Zeus.NFE_Produto_DadosCOFINS(prod).CST.ToString().Replace("cofins", ""))
-                                    {
-                                        notaFiscalEntradaMercadoriaViewModel.CSTId = item.Id;
-                                        break;
-                                    }
-
-                                await notaFiscalEntradaMercadoriaController.Adicionar(notaFiscalEntradaMercadoriaViewModel);
-                            }
+                            await notaFiscalEntradaMercadoriaController.Adicionar(notaFiscalEntradaMercadoriaViewModel);
                         }
-
-                        CaixaMensagem.Informacao("Nota gravada");
                     }
+
+                    CaixaMensagem.Informacao("Nota gravada");
                 }
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
-﻿using Funcoes.Interfaces;
+﻿using Funcoes._Entity;
+using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
@@ -44,13 +45,11 @@ namespace SisCom.Aplicacao.Controllers
 
             return pessoaViewModel;
         }
-        public async Task<IEnumerable<PessoaViewModel>> ObterTodos()
+        public async Task<IEnumerable<PessoaViewModel>> ObterTodos(Expression<Func<Pessoa, object>> order = null, Expression<Func<Pessoa, bool>> predicate = null, params Expression<Func<Pessoa, object>>[] includes)
         {
-            var obterTodos = await _pessoaService.GetAll();
+            var obterTodos = await _pessoaService.GetAll(order, predicate, includes);
             return Declaracoes.mapper.Map<IEnumerable<PessoaViewModel>>(obterTodos);
-
         }
-
         public async Task<IEnumerable<PessoaViewModel>> PesquisarCNPJCPF(string CNPJCPF)
         {
             var pessoa = await _pessoaService.Search(p => p.CNPJ_CPF == CNPJCPF);

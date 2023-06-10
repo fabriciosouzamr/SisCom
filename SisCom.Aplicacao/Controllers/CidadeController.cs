@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
 {
-    public class CidadeController
+    public class CidadeController: IDisposable
     {
         public class Sample
         {
@@ -25,15 +25,15 @@ namespace SisCom.Aplicacao.Controllers
         }
 
         static CidadeService _CidadeService;
-        private readonly MeuDbContext MeuDbContext;
+        private readonly MeuDbContext meuDbContext;
 
         public CidadeController(MeuDbContext MeuDbContext, INotifier notifier)
         {
-            this.MeuDbContext = MeuDbContext;
+            this.meuDbContext = MeuDbContext;
 
-            this.MeuDbContext.Database.GetDbConnection();
+            this.meuDbContext.Database.GetDbConnection();
 
-            _CidadeService = new CidadeService(new CidadeRepository(this.MeuDbContext), notifier);
+            _CidadeService = new CidadeService(new CidadeRepository(this.meuDbContext), notifier);
         }
 
         public async Task<CidadeViewModel> Adicionar(CidadeViewModel CidadeViewModel)
@@ -49,46 +49,46 @@ namespace SisCom.Aplicacao.Controllers
 
             return CidadeViewModel;
         }
-
         public async Task Remover(Guid id)
         {
             await _CidadeService.Remover(id);
 
             return;
         }
-
         public async Task<CidadeViewModel> GetById(Guid id)
         {
             var obter = await _CidadeService.GetById(id);
             return Declaracoes.mapper.Map<CidadeViewModel>(obter);
         }
 
-        public async Task<CidadeViewModel> GetByName(string nome)
+        public async Task<IEnumerable<CidadeViewModel>> GetByName(string nome)
         {
-            var grupo = await _CidadeService.Search(f => f.Nome == nome);
-            return Declaracoes.mapper.Map<CidadeViewModel>(grupo);
+            var cidade = await _CidadeService.Search(f => f.Nome == nome);
+            return Declaracoes.mapper.Map<IEnumerable<CidadeViewModel>>(cidade);
         }
-
+        public async Task<IEnumerable<CidadeViewModel>> GetByIbgeCode(string codigoIbge)
+        {
+            var cidade = await _CidadeService.Search(f => f.CodigoIBGE == codigoIbge);
+            return Declaracoes.mapper.Map<IEnumerable<CidadeViewModel>>(cidade);
+        }
         public async Task<IEnumerable<CidadeViewModel>> ObterTodos(Expression<Func<Cidade, object>> order = null)
         {
             var obterTodos = await _CidadeService.GetAll(order: order, includes: i => i.Estado);
             return Declaracoes.mapper.Map<IEnumerable<CidadeViewModel>>(obterTodos);
         }
-
         public async Task<IEnumerable<CidadeComboViewModel>> Combo(Expression<Func<Cidade, object>> order = null)
         {
             var combo = await _CidadeService.Combo(order);
             return Declaracoes.mapper.Map<IEnumerable<CidadeComboViewModel>>(combo);
         }
-
         public async Task<IEnumerable<CidadeComboViewModel>> ComboEstado(Guid EstadoId, Expression<Func<Cidade, object>> order = null)
         {
             var combo = await _CidadeService.ComboSearch(p => p.EstadoId == EstadoId, order);
             return Declaracoes.mapper.Map<IEnumerable<CidadeComboViewModel>>(combo);
         }
-        //public void dispose()
-        //{
-        //    meudbcontext.dispose();
-        //}
+        public void Dispose()
+        {
+            meuDbContext.Dispose();
+        }
     }
 }
