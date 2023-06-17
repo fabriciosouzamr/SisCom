@@ -8,9 +8,7 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
-using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
-using SisCom.Infraestrutura.Migrations;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,7 +25,6 @@ namespace SisCom.Aplicacao.Formularios
 
         ViewModels.NotaFiscalEntradaViewModel notaFiscalEntrada = null;
         Declaracoes.eNavegar posicaoNavegacao = Declaracoes.eNavegar.Primeiro;
-        bool carregando = false;
 
         const int gridMercadoria_Id = 0;
         const int gridMercadoria_CodigoSistema = 1;
@@ -58,8 +55,6 @@ namespace SisCom.Aplicacao.Formularios
         }
         async Task Inicializa()
         {
-            carregando = true;
-
             //Pesquisar
             Combo_ComboBox.Formatar(comboTipoPagamento, "", "", ComboBoxStyle.DropDownList, null, typeof(NotaFiscalTipoPagamento));
             Combo_ComboBox.Formatar(comboTipoFrete, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoFrete));
@@ -71,8 +66,6 @@ namespace SisCom.Aplicacao.Formularios
             await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
             await Navegar(Declaracoes.eNavegar.Ultimo);
-
-            carregando = false;
         }
 
         private async Task<bool> Inicializar()
@@ -559,6 +552,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             try
             {
+                posicaoNavegacao = posicao;
                 await Navegar_PegarTodos(notaFiscalEntrada.Id, posicao);
                 await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
             }
@@ -829,6 +823,12 @@ namespace SisCom.Aplicacao.Formularios
 
                 if (ItemRetorno != null) { notaFiscalEntrada = ItemRetorno; }
             }
+        }
+
+        private async void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            await Navegar(posicaoNavegacao);
         }
     }
 }

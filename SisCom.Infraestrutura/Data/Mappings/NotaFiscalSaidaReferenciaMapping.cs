@@ -16,7 +16,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
 
             builder.Property(p => p.CodigoChaveAcesso)
                 .IsRequired()
-                .HasColumnType("varchar(44)");
+                .HasColumnType("varchar(46)");
 
             builder.ToTable("NotaFiscalSaidaReferencias");
         }

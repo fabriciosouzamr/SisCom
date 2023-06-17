@@ -1263,6 +1263,20 @@ namespace SisCom.Aplicacao.Classes
 
             return estado;
         }
+        private static FinalidadeNFe Fiscal_DocumentoFiscal_Finalidade(Guid notaFiscalFinalidadeId)
+        {
+            if (notaFiscalFinalidadeId == Guid.Parse("62DE1978-CF9E-4EAE-995C-3DCC2381B442")) /* AJUSTE */
+                return FinalidadeNFe.fnAjuste;
+            if (notaFiscalFinalidadeId == Guid.Parse("9069252E-EEE7-4A17-88EF-6E6F2E9B4DF3")) /* COMPLEMENTAR */
+                return FinalidadeNFe.fnComplementar;
+            if (notaFiscalFinalidadeId == Guid.Parse("93844C9B-2ECD-4DDE-B8C1-7623E9072C03"))/* DEVOLUCAO */
+                return FinalidadeNFe.fnDevolucao;
+            if (notaFiscalFinalidadeId == Guid.Parse("C22B45E8-CCB4-4D85-84BD-76C7290F7905")) /* NORMAL */
+                return FinalidadeNFe.fnNormal;
+
+            return FinalidadeNFe.fnNormal;
+        }
+
         private static NFe.Classes.NFe Fiscal_DocumentoFiscal_Gerar(ref NotaFiscalSaidaViewModel notaFiscalSaidaViewModel,
                                                                     ref IEnumerable<NotaFiscalSaidaMercadoriaViewModel> notaFiscalSaidaMercadoriaViewModels,
                                                                     ref IEnumerable<NotaFiscalSaidaPagamentoViewModel> notaFiscalSaidaPagamentoViewModels,
@@ -1373,7 +1387,7 @@ namespace SisCom.Aplicacao.Classes
                 oNFe.infNFe.ide.tpImp = TipoImpressao.tiRetrato;
                 oNFe.infNFe.ide.cNF = "1" + Convert.ToInt16(notaFiscalSaidaViewModel.NotaFiscal).ToString("0000000");
                 oNFe.infNFe.ide.tpAmb = oConfig.tpAmb;
-                oNFe.infNFe.ide.finNFe = FinalidadeNFe.fnNormal;
+                oNFe.infNFe.ide.finNFe = Fiscal_DocumentoFiscal_Finalidade(notaFiscalSaidaViewModel.NotaFiscalFinalidadeId.Value);
                 oNFe.infNFe.ide.verProc = "4.000";
 
                 if (oNFe.infNFe.ide.tpEmis != NFe.Classes.Informacoes.Identificacao.Tipos.TipoEmissao.teNormal)

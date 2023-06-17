@@ -70,6 +70,7 @@ namespace SisCom.Entidade.Modelos
         public DateTime? DataCancelamento { get; set; }
         public String? RetornoCancelamento { get; set; }
         public int NumeroLoteEnvioSefaz { get; set; }
+        public NF_TipoReferencia TipoNFReferenciada { get; set; }
         public virtual List<NotaFiscalSaidaMercadoria> NotaFiscalSaidaMercadoria { get; set; }
         public virtual List<NotaFiscalSaidaPagamento> NotaFiscalSaidaPagamento { get; set; }
         public virtual List<NotaFiscalSaidaReferencia> NotaFiscalSaidaReferencia { get; set; }

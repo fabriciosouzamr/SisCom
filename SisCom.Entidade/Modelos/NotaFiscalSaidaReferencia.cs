@@ -6,7 +6,7 @@ namespace SisCom.Entidade.Modelos
 {
     public class NotaFiscalSaidaReferencia : Entity
     {
-        public NotaFiscalSaida NotaFiscalSaida { get; set; }
+        public Guid NotaFiscalEntradaId { get; set; }
         public string NotaFiscal { get; set; }
         public string CodigoChaveAcesso { get; set; }
 

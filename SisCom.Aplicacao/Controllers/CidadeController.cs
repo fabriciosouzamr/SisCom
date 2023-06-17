@@ -17,42 +17,28 @@ namespace SisCom.Aplicacao.Controllers
 {
     public class CidadeController: IDisposable
     {
-        public class Sample
-        {
-            public string TableName { get; set; }
-            public string FieldName { get; set; }
-            public int NextNum { get; set; }
-        }
-
         static CidadeService _CidadeService;
         private readonly MeuDbContext meuDbContext;
 
         public CidadeController(MeuDbContext MeuDbContext, INotifier notifier)
         {
             this.meuDbContext = MeuDbContext;
-
             this.meuDbContext.Database.GetDbConnection();
-
             _CidadeService = new CidadeService(new CidadeRepository(this.meuDbContext), notifier);
         }
-
         public async Task<CidadeViewModel> Adicionar(CidadeViewModel CidadeViewModel)
         {
             await _CidadeService.Adicionar(Declaracoes.mapper.Map<Cidade>(CidadeViewModel));
-
             return CidadeViewModel;
         }
-
         public async Task<CidadeViewModel> Atualizar(CidadeViewModel CidadeViewModel)
         {
             await _CidadeService.Atualizar(Declaracoes.mapper.Map<Cidade>(CidadeViewModel));
-
             return CidadeViewModel;
         }
         public async Task Remover(Guid id)
         {
             await _CidadeService.Remover(id);
-
             return;
         }
         public async Task<CidadeViewModel> GetById(Guid id)
@@ -60,7 +46,6 @@ namespace SisCom.Aplicacao.Controllers
             var obter = await _CidadeService.GetById(id);
             return Declaracoes.mapper.Map<CidadeViewModel>(obter);
         }
-
         public async Task<IEnumerable<CidadeViewModel>> GetByName(string nome)
         {
             var cidade = await _CidadeService.Search(f => f.Nome == nome);

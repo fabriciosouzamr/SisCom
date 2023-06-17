@@ -99,15 +99,6 @@ namespace SisCom.Aplicacao.Formularios
             [Description("OUTROS")]
             OUTROS = 3
         }
-        enum TipoNotaReferenciada
-        {
-            [Description("Cliente")]
-            Cliente = 1,
-            [Description("Fornecedor")]
-            Fornecedor = 2,
-            [Description("NFC-e")]
-            NFCe = 3
-        }
 
         Guid dadolocal_Cliente_EstadoId = Guid.Empty;
         Guid cfop_5102 = Guid.Parse("BFDC3E42-3DF4-4463-A866-07684FBAC021");
@@ -141,7 +132,7 @@ namespace SisCom.Aplicacao.Formularios
             Combo_ComboBox.Formatar(comboInfoNFeTipoEmissao, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_TipoEmissao));
             Combo_ComboBox.Formatar(comboInfoNFeNFeModelo, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Modelo));
             Combo_ComboBox.Formatar(comboCobrancaNotaTipoPagamento, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoPagamento));
-            Combo_ComboBox.Formatar(comboInfoNFeOrigem, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoNotaReferenciada));
+            Combo_ComboBox.Formatar(comboInfoNFeOrigem, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_TipoReferencia));
 
             comboInfoNFeOrigem.SelectedIndex = -1;
             comboRegimeTributario.SelectedValue = Declaracoes.dados_Empresa_RegimeTributario;
@@ -715,7 +706,7 @@ namespace SisCom.Aplicacao.Formularios
                             }
 
                             if ((!Funcao.Nulo(vendaViewModel.VeiculoPlaca01)) && (!Funcao.Nulo(vendaViewModel.VeiculoPlaca01.NumeroPlaca))) textTransportadoraPlaca.Text = vendaViewModel.VeiculoPlaca01.NumeroPlaca;
-                            if (!Funcao.Nulo(vendaViewModel.TabelaOrigemVendaId)) textLocalEntregaRetiradaEndereco.Text = vendaViewModel.EnderecoEntrega;
+                            if (!Funcao.Nulo(vendaViewModel.EnderecoEntrega)) textLocalEntregaRetiradaEndereco.Text = vendaViewModel.EnderecoEntrega;
                             comboTransportadoraFreteConta.SelectedValue = TransportadoraFreteConta.ContratacaoFreteContaRemetente_CIF;
                         }
 
@@ -863,7 +854,11 @@ namespace SisCom.Aplicacao.Formularios
                 comboInfoNFeTipoEmissao.SelectedValue = notaFiscalSaida.TipoEmissao;
                 textEmailDestinoXML.Text = Funcao.NuloParaString(notaFiscalSaida.EmailDestinoXML);
 
-                if (!Funcao.Nulo(notaFiscalSaida.TabelaOrigemVendaId)) comboInfoNFeOrigem.SelectedValue = notaFiscalSaida.TabelaOrigemVendaId;
+                if (!Funcao.Nulo(notaFiscalSaida.TipoNFReferenciada)) 
+                {
+                    comboInfoNFeOrigem.SelectedValue = notaFiscalSaida.TipoNFReferenciada;
+                    comboInfoNFeFidelidade_SelectedIndexChanged(null, null);
+                }
 
                 gridMercadoria.Rows.Clear();
 
@@ -1011,9 +1006,9 @@ namespace SisCom.Aplicacao.Formularios
                                                                               new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridInfoNFe_Id,
                                                                                                                                               Valor = referencia.Id },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridInfoNFe_NFe_NFCe,
-                                                                                                                                              Valor = referencia.NotaFiscal },
+                                                                                                                                              Valor = referencia.NotaFiscalEntradaId },
                                                                                                                new Grid_DataGridView.Coluna { Indice = gridInfoNFe_ChaveNFe_NFCe,
-                                                                                                                                              Valor = referencia.CodigoChaveAcesso }}).Index;
+                                                                                                                                              Valor = referencia.NotaFiscalEntradaId }}).Index;
                     }
                 }
 
@@ -1416,6 +1411,9 @@ namespace SisCom.Aplicacao.Formularios
             notaFiscalSaida.TipoEmissao = (NF_TipoEmissao)comboInfoNFeTipoEmissao.SelectedValue;
             notaFiscalSaida.Operacao = (NF_Operacao)comboInfoNFeOperacao.SelectedValue;
             notaFiscalSaida.EmailDestinoXML = textEmailDestinoXML.Text.Trim();
+            notaFiscalSaida.TabelaOrigemVendaId = Guid.Parse("2338A060-16AE-4B9C-AB17-18D44C40E8F6");
+            if (Combo_ComboBox.Selecionado(comboInfoNFeOrigem)) { notaFiscalSaida.TipoNFReferenciada = (Entidade.Enum.NF_TipoReferencia)comboInfoNFeOrigem.SelectedValue; }
+
             if (VendaId != Guid.Empty) { notaFiscalSaida.VendaId = VendaId; }
 
             if (notaFiscalSaida.ClienteId == null)
@@ -1591,12 +1589,13 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         NotaFiscalSaidaReferenciaViewModel notaFiscalSaidaReferenciaViewModel = new NotaFiscalSaidaReferenciaViewModel();
 
-                        if (row.Cells[gridCobrancaNota_TipoPagamento].Value != null)
+                        if (row.Cells[gridInfoNFe_NFe_NFCe].Value != null)
                         {
                             if (row.Cells[gridInfoNFe_Id].Value != null)
                                 notaFiscalSaidaReferenciaViewModel.Id = Guid.Parse(row.Cells[gridInfoNFe_Id].Value.ToString());
-                            notaFiscalSaidaReferenciaViewModel.NotaFiscal = row.Cells[gridInfoNFe_NFe_NFCe].Value.ToString();
-                            notaFiscalSaidaReferenciaViewModel.CodigoChaveAcesso = row.Cells[gridInfoNFe_ChaveNFe_NFCe].Value.ToString();
+                            notaFiscalSaidaReferenciaViewModel.NotaFiscalEntradaId = Guid.Parse(row.Cells[gridInfoNFe_NFe_NFCe].Value.ToString());
+                            notaFiscalSaidaReferenciaViewModel.NotaFiscal = row.Cells[gridInfoNFe_NFe_NFCe].FormattedValue.ToString();
+                            notaFiscalSaidaReferenciaViewModel.CodigoChaveAcesso = row.Cells[gridInfoNFe_ChaveNFe_NFCe].FormattedValue.ToString();
                             notaFiscalSaidaReferenciaViewModel.NotaFiscalSaidaId = notaFiscalSaida.Id;
 
                             if (notaFiscalSaidaReferenciaViewModel.Id == Guid.Empty)
@@ -1926,21 +1925,21 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     List<NF_ComboViewModel> comboViewModel = new List<NF_ComboViewModel>();
 
-                    switch ((TipoNotaReferenciada)comboInfoNFeOrigem.SelectedValue)
+                    switch ((NF_TipoReferencia)comboInfoNFeOrigem.SelectedValue)
                     {
-                        case TipoNotaReferenciada.Cliente:
+                        case NF_TipoReferencia.Cliente:
                             using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                             {
                                 comboViewModel = (List<NF_ComboViewModel>)await notaFiscalSaidaController.ComboDadosFiscais(o => o.CodigoChaveAcesso);
                             }
                             break;
-                        case TipoNotaReferenciada.Fornecedor:
+                        case NF_TipoReferencia.Fornecedor:
                             using (NotaFiscalEntradaController notaFiscalEntradaController = new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier))
                             {
                                 comboViewModel = (List<NF_ComboViewModel>)await notaFiscalEntradaController.ComboDadosFiscais(o => o.CodigoChaveAcesso);
                             }
                             break;
-                        case TipoNotaReferenciada.NFCe:
+                        case NF_TipoReferencia.NFCe:
                             return;
                             break;
                     }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230617193958_NotaFiscalSaidaReferenciaCodigoChaveAcesso")]
+    partial class NotaFiscalSaidaReferenciaCodigoChaveAcesso
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2017,9 +2019,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<int>("TipoEmissao")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoNFReferenciada")
-                        .HasColumnType("int");
-
                     b.Property<bool>("TransmitirCliente")
                         .HasColumnType("bit");
 
@@ -2370,9 +2369,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.Property<string>("NotaFiscal")
                         .IsRequired()
                         .HasColumnType("varchar(10)");
-
-                    b.Property<Guid>("NotaFiscalEntradaId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("NotaFiscalSaidaId")
                         .HasColumnType("uniqueidentifier");
@@ -4390,9 +4386,11 @@ namespace SisCom.Infraestrutura.Migrations
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaReferencia", b =>
                 {
-                    b.HasOne("SisCom.Entidade.Modelos.NotaFiscalSaida", null)
+                    b.HasOne("SisCom.Entidade.Modelos.NotaFiscalSaida", "NotaFiscalSaida")
                         .WithMany("NotaFiscalSaidaReferencia")
                         .HasForeignKey("NotaFiscalSaidaId");
+
+                    b.Navigation("NotaFiscalSaida");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.NotaFiscalSaidaSerie", b =>

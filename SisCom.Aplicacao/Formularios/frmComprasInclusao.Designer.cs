@@ -1004,11 +1004,11 @@ namespace SisCom.Aplicacao.Formularios
             this.label9.TabIndex = 90;
             this.label9.Text = "Nota Fiscal:";
             // 
-            // dateDateEmissao
+            // dateEmissao
             // 
             this.dateEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateEmissao.Location = new System.Drawing.Point(262, 5);
-            this.dateEmissao.Name = "dateDateEmissao";
+            this.dateEmissao.Name = "dateEmissao";
             this.dateEmissao.Size = new System.Drawing.Size(81, 23);
             this.dateEmissao.TabIndex = 2;
             // 
@@ -1022,11 +1022,11 @@ namespace SisCom.Aplicacao.Formularios
             this.label8.TabIndex = 88;
             this.label8.Text = "Data Emissão";
             // 
-            // dateDataEntrada
+            // dateEntrada
             // 
             this.dateEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateEntrada.Location = new System.Drawing.Point(90, 5);
-            this.dateEntrada.Name = "dateDataEntrada";
+            this.dateEntrada.Name = "dateEntrada";
             this.dateEntrada.Size = new System.Drawing.Size(81, 23);
             this.dateEntrada.TabIndex = 1;
             // 
@@ -1978,6 +1978,10 @@ namespace SisCom.Aplicacao.Formularios
             this.label80.Size = new System.Drawing.Size(71, 15);
             this.label80.TabIndex = 0;
             this.label80.Text = "Quantidade";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmComprasInclusao
             // 

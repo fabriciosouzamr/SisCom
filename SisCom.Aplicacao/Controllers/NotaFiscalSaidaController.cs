@@ -114,7 +114,8 @@ namespace SisCom.Aplicacao.Controllers
                                                                              i => i.NotaFiscalSaidaMercadoria, 
                                                                              i => i.NotaFiscalSaidaPagamento,
                                                                              i => i.NotaFiscalSaidaReferencia, 
-                                                                             i => i.NotaFiscalSaidaObservacao);
+                                                                             i => i.NotaFiscalSaidaObservacao,
+                                                                             i => i.NotaFiscalFinalidade);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(nota);
         }
         public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarChave(String chave)
