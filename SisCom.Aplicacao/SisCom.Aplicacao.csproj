@@ -122,6 +122,9 @@
     <None Update="Configuration\MDFeRetrato.frx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Configuration\Seed\Almoxarifado.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Configuration\Seed\Cidade.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -21,8 +21,7 @@ namespace SisCom.Aplicacao.Controllers
         {
             this.MeuDbContext = meuDbContext;
 
-            _empresaService = new EmpresaService(new EmpresaRepository(this.MeuDbContext),
-                                                 notifier);
+            _empresaService = new EmpresaService(new EmpresaRepository(this.MeuDbContext), notifier);
         }
 
         public async Task<EmpresaViewModel> Adicionar(EmpresaViewModel empresaViewModel)
