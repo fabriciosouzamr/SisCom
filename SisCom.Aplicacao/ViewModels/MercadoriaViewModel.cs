@@ -47,7 +47,6 @@ namespace SisCom.Aplicacao.ViewModels
         public decimal Preco_PrecoC { get; set; }
         public decimal Preco_CalculoPreco { get; set; }
         public decimal Preco_CalculoPrecificacao { get; set; }
-        public double Estoque_Quantidade { get; set; }
         public double Estoque_QuantidadeMinimo { get; set; }
         public UnidadeMedida Estoque_UnidadeMedida { get; set; }
         public string? Estoque_Pratileira { get; set; }

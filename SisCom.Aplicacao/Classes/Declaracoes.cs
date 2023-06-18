@@ -34,6 +34,7 @@ namespace SisCom.Aplicacao.Classes
 
         public static string sistema_UsuarioLogado = "Administrador";
         public static string sistema_Loja = "Loja Teste";
+        public static Guid sistema_almoxarifado = Guid.Parse("1F1BF45B-20EF-4E07-9BE3-C59D828C3FE3");
 
         public static object ComboBox_Carregando = 1;
 

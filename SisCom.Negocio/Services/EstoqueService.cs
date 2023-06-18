@@ -87,5 +87,10 @@ namespace SisCom.Negocio.Services
 
             return Estoque;
         }
+
+        public Task<List<Estoque>> Combo(Expression<Func<Estoque, object>> order = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

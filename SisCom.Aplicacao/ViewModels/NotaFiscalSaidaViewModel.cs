@@ -1,6 +1,4 @@
-﻿using DanfeSharp.Esquemas;
-using Funcoes.Enum;
-using SisCom.Entidade.Enum;
+﻿using SisCom.Entidade.Enum;
 using SisCom.Entidade.Modelos;
 using System;
 using System.Collections.Generic;

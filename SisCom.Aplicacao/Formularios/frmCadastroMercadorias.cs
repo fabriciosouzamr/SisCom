@@ -8,6 +8,7 @@ using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -916,7 +917,6 @@ namespace SisCom.Aplicacao.Formularios
                 labelMargem_MargemPrecoC.Text = Valor.Formatar((double)0);
                 labelMargem_ValorPrecoC.Text = Valor.Formatar((double)numericMargem_PrecoC.Value);
                 //Preço Estoque - Estoque
-                labelEstoque_Quantidade.Text = mercadoria.Estoque_Quantidade.ToString("0000");
                 numericEstoque_EstoqueMinimo.Value = (decimal)mercadoria.Estoque_QuantidadeMinimo;
                 if (!Funcao.Nulo(mercadoria.Estoque_UnidadeMedidaId)) comboEstoque_Unidade.SelectedValue = mercadoria.Estoque_UnidadeMedidaId;
                 textEstoque_Pratileira.Text = mercadoria.Estoque_Pratileira;
@@ -1076,6 +1076,14 @@ namespace SisCom.Aplicacao.Formularios
                             }
                         }
                     }
+                }
+
+                using (EstoqueController estoqueController = new EstoqueController(this.MeuDbContext(), this._notifier))
+                {
+                    var estoque = await estoqueController.Obter(w => w.MercadoriaId == mercadoria.Id);
+
+                    if (estoque.Any())
+                        labelEstoque_Quantidade.Text = estoque.Sum(s => s.QuantidadeEmEstoque).ToString("0000");
                 }
 
                 carregandoDados = false;
