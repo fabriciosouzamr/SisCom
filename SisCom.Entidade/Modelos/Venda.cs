@@ -1,4 +1,5 @@
 ﻿using Funcoes._Entity;
+using SisCom.Entidade.Enum;
 using System;
 
 namespace SisCom.Entidade.Modelos
@@ -6,6 +7,7 @@ namespace SisCom.Entidade.Modelos
 	public class Venda : Entity
 	{
         public int Codigo { get; set; }
+        public NF_TipoNotaFiscal TipoNotaFiscal { get; set; }
         public DateTime DataVenda { get; set; }
 		public Pessoa Cliente { get; set; }
 		public virtual Funcionario Vendedor { get; set; }

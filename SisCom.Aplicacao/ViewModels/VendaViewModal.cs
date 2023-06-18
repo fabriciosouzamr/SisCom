@@ -1,17 +1,15 @@
-﻿using SisCom.Entidade.Modelos;
+﻿using SisCom.Entidade.Enum;
+using SisCom.Entidade.Modelos;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.ViewModels
 {
-    public class VendaViewModel
+	public class VendaViewModel
     {
 		[Key]
 		public Guid Id { get; set; }
+        public NF_TipoNotaFiscal TipoNotaFiscal { get; set; }
         public int Codigo { get; set; }
         public DateTime DataVenda { get; set; }
 		public Pessoa Cliente { get; set; }

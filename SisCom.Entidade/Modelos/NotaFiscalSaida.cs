@@ -8,7 +8,8 @@ namespace SisCom.Entidade.Modelos
     public class NotaFiscalSaida : Entity
     {
 		public Empresa Empresa { get; set; }
-		public NaturezaOperacao NaturezaOperacao { get; set; }
+		public NF_TipoNotaFiscal TipoNotaFiscal { get; set; }
+        public NaturezaOperacao NaturezaOperacao { get; set; }
 		public NotaFiscalFinalidade NotaFiscalFinalidade { get; set; }
 		public string NotaFiscal { get; set; }
 		public DateTime DataEmissao { get; set; }

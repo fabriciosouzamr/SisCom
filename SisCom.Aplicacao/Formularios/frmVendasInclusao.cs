@@ -466,6 +466,12 @@ namespace SisCom.Aplicacao.Formularios
             venda.Empresa = null;
             venda.TabelaOrigemVenda = null;
             venda.Cliente = null;
+
+            if (radioVenda.Checked)
+                venda.TipoNotaFiscal = Entidade.Enum.NF_TipoNotaFiscal.Saida;
+            if (radioCompra.Checked)
+                venda.TipoNotaFiscal = Entidade.Enum.NF_TipoNotaFiscal.Entrada;
+
             venda.DataVenda = DateTime.Parse(dateDataEntrada.Value.ToString("dd/MM/yyyy") + " " + textHora.Text);
             venda.ClienteId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboClienteCodigo);
             venda.EmpresaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEmpresa);
@@ -511,9 +517,10 @@ namespace SisCom.Aplicacao.Formularios
 
                     row.Cells[gridProdutos_VendaId].Value = vendaMercadoriaViewModel.VendaId;
                     if (row.Cells[gridProdutos_CodigoSistema].Value != null)
-                    vendaMercadoriaViewModel.MercadoriaId = (Guid)row.Cells[gridProdutos_CodigoSistema].Value;
+                        vendaMercadoriaViewModel.Id = (Guid)row.Cells[gridProdutos_CodigoSistema].Value;
                     if (row.Cells[gridProdutos_Descricao].Value != null)
-                        vendaMercadoriaViewModel.MercadoriaId = (Guid)row.Cells[gridProdutos_Descricao].Value;
+                        vendaMercadoriaViewModel.Id = (Guid)row.Cells[gridProdutos_Descricao].Value;
+                    
                     vendaMercadoriaViewModel.UnidadeMedidaId = (Guid)row.Cells[gridProdutos_Medida].Value;
                     vendaMercadoriaViewModel.Preco = Funcao.NuloParaValorD(row.Cells[gridProdutos_Preco].Value);
                     vendaMercadoriaViewModel.Quantidade = Funcao.NuloParaValorD(row.Cells[gridProdutos_Quantidade].Value);
@@ -529,6 +536,25 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         vendaMercadoriaViewModel.Id = (Guid)row.Cells[gridProdutos_Id].Value;
                         await vendaMercadoriaController.Atualizar(vendaMercadoriaViewModel.Id, vendaMercadoriaViewModel);
+                    }
+
+                    if (radioCompra.Checked || radioVenda.Checked)
+                    {
+                        using (EstoqueLancamentoController estoqueLancamentoController = new EstoqueLancamentoController(this.MeuDbContext(), this._notifier))
+                        {
+                            if (radioCompra.Checked)
+                                await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado, 
+                                                                          vendaMercadoriaViewModel.Id, 
+                                                                          Funcoes._Enum.EntradaSaida.Saida, 
+                                                                          DateTime.Now,
+                                                                          (double)vendaMercadoriaViewModel.Quantidade);
+                            if (radioVenda.Checked)
+                                await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
+                                                                          vendaMercadoriaViewModel.Id,
+                                                                          Funcoes._Enum.EntradaSaida.Entrada,
+                                                                          DateTime.Now,
+                                                                          (double)vendaMercadoriaViewModel.Quantidade);
+                        }
                     }
                 }
             }
@@ -729,6 +755,18 @@ namespace SisCom.Aplicacao.Formularios
         private void botaoEditar_Click(object sender, EventArgs e)
         {
             Editar(true);
+        }
+        private void radioCompra_CheckedChanged(object sender, EventArgs e)
+        {
+            radioCompra.Font = new System.Drawing.Font(radioCompra.Font.FontFamily, 
+                                                       radioCompra.Font.Size, 
+                                                       radioCompra.Checked ? System.Drawing.FontStyle.Bold : System.Drawing.FontStyle.Regular);
+        }
+        private void radioVenda_CheckedChanged(object sender, EventArgs e)
+        {
+            radioVenda.Font = new System.Drawing.Font(radioVenda.Font.FontFamily,
+                                                      radioVenda.Font.Size,
+                                                      radioVenda.Checked ? System.Drawing.FontStyle.Bold : System.Drawing.FontStyle.Regular);
         }
     }
 }

@@ -10,7 +10,8 @@ namespace SisCom.Aplicacao.ViewModels
 	{
 		[Key]
 		public Guid Id { get; set; }
-		public Empresa Empresa { get; set; }
+        public NF_TipoNotaFiscal TipoNotaFiscal { get; set; }
+        public Empresa Empresa { get; set; }
 		public NaturezaOperacao NaturezaOperacao { get; set; }
 		public NotaFiscalFinalidade NotaFiscalFinalidade { get; set; }
 		public string NotaFiscal { get; set; }

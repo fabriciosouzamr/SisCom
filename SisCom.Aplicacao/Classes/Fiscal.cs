@@ -1305,6 +1305,11 @@ namespace SisCom.Aplicacao.Classes
 
             TipoNFe tipoNfe = TipoNFe.tnSaida;
 
+            if (notaFiscalSaidaViewModel.TipoNotaFiscal == NF_TipoNotaFiscal.Entrada)
+                tipoNfe = TipoNFe.tnEntrada;
+            if (notaFiscalSaidaViewModel.TipoNotaFiscal == NF_TipoNotaFiscal.Saida)
+                tipoNfe = TipoNFe.tnSaida;
+
             try
             {
                 if ((notaFiscalSaidaMercadoriaViewModels.FirstOrDefault().TabelaCFOP.GrupoCFOP.TipoOperacaoCFOP == TipoOperacaoCFOP.EntradaDentroEstado) ||

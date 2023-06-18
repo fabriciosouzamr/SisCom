@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisCom.Infraestrutura.Data.Context;
 
 namespace SisCom.Infraestrutura.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230618015420_NotaFiscalSaidaTipoNotaFiscal")]
+    partial class NotaFiscalSaidaTipoNotaFiscal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3458,9 +3460,6 @@ namespace SisCom.Infraestrutura.Migrations
 
                     b.Property<Guid?>("TabelaOrigemVendaId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("TipoNotaFiscal")
-                        .HasColumnType("int");
 
                     b.Property<Guid?>("TransportadoraId")
                         .HasColumnType("uniqueidentifier");

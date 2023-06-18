@@ -24,6 +24,8 @@ namespace SisCom.Aplicacao.Formularios
     {
         ViewModels.NotaFiscalSaidaViewModel notaFiscalSaida = null;
         public Guid VendaId;
+        NF_TipoNotaFiscal tipoNotaFiscal = NF_TipoNotaFiscal.Saida;
+
         Declaracoes.eNavegar posicaoNavegacao = Declaracoes.eNavegar.Primeiro;
 
         const int gridMercadoria_Id = 0;
@@ -672,6 +674,7 @@ namespace SisCom.Aplicacao.Formularios
 
                         foreach (VendaViewModel vendaViewModel in ret)
                         {
+                            tipoNotaFiscal = vendaViewModel.TipoNotaFiscal;
                             dateDataEmissao.Value = vendaViewModel.DataVenda;
                             if (!Funcao.Nulo(vendaViewModel.ClienteId))
                             {
@@ -1358,6 +1361,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             var notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier);
 
+            notaFiscalSaida.TipoNotaFiscal = tipoNotaFiscal;
             notaFiscalSaida.NotaFiscal = textNumeroNotaFiscalSaida.Text;
             notaFiscalSaida.EmpresaId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEmpresa);
             notaFiscalSaida.NaturezaOperacaoId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboNaturezaOperacao);
