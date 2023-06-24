@@ -403,61 +403,61 @@ namespace SisCom.Aplicacao.Formularios
                             notaFiscalEntradaViewModel.xml = _nfeProc.ObterXmlString();
 
                         await notaFiscalEntradaController.Adicionar(notaFiscalEntradaViewModel);
-                    }
 
-                    using (NotaFiscalEntradaMercadoriaController notaFiscalEntradaMercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier))
-                    {
-                        for (int i = 0; i < gridProduto.Rows.Count; i++)
+                        using (NotaFiscalEntradaMercadoriaController notaFiscalEntradaMercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier))
                         {
-                            var row = gridProduto.Rows[i];
-                            NFe.Classes.Informacoes.Detalhe.det prod = null;
-
-                            foreach (NFe.Classes.Informacoes.Detalhe.det item in _nfeProc.NFe.infNFe.det)
+                            for (int i = 0; i < gridProduto.Rows.Count; i++)
                             {
-                                if (item.nItem == Convert.ToInt16(row.Cells[grdProduto_Item].Value))
+                                var row = gridProduto.Rows[i];
+                                NFe.Classes.Informacoes.Detalhe.det prod = null;
+
+                                foreach (NFe.Classes.Informacoes.Detalhe.det item in _nfeProc.NFe.infNFe.det)
                                 {
-                                    prod = item;
-                                    break;
+                                    if (item.nItem == Convert.ToInt16(row.Cells[grdProduto_Item].Value))
+                                    {
+                                        prod = item;
+                                        break;
+                                    }
                                 }
+
+                                NotaFiscalEntradaMercadoriaViewModel notaFiscalEntradaMercadoriaViewModel = new NotaFiscalEntradaMercadoriaViewModel();
+                                notaFiscalEntradaMercadoriaViewModel.NotaFiscalEntradaId = notaFiscalEntradaViewModel.Id;
+                                notaFiscalEntradaMercadoriaViewModel.QuantidadeCaixas = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
+                                notaFiscalEntradaMercadoriaViewModel.QuantidadeUnitaria = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
+                                notaFiscalEntradaMercadoriaViewModel.PrecoPorCaixas = Convert.ToDecimal(row.Cells[grdProduto_Quantidade].Value);
+                                notaFiscalEntradaMercadoriaViewModel.PrecoUnitario = Convert.ToDecimal(row.Cells[grdProduto_Preco].Value);
+                                notaFiscalEntradaMercadoriaViewModel.PercentualDesconto = 0;
+                                notaFiscalEntradaMercadoriaViewModel.ValorDesconto = Funcao.NuloParaValorD(prod.prod.vDesc);
+                                notaFiscalEntradaMercadoriaViewModel.PrecoTotal = Convert.ToDecimal(row.Cells[grdProduto_Total].Value);
+                                notaFiscalEntradaMercadoriaViewModel.PercentualICMS = Funcao.NuloParaValorD(Zeus.NFe_Produto_DadosICMS(prod) == null ? 0 : Zeus.NFe_Produto_DadosICMS(prod).vICMS);
+                                notaFiscalEntradaMercadoriaViewModel.PercentualIPI = Funcao.NuloParaValorD(Zeus.NFE_Produto_DadosIPI(prod) == null ? 0 : Zeus.NFE_Produto_DadosIPI(prod).vIPI);
+                                notaFiscalEntradaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[grdProduto_CodigoSistema].Value.ToString());
+
+                                foreach (var item in CFOP)
+                                    if (item.Codigo == prod.prod.CFOP.ToString())
+                                    {
+                                        notaFiscalEntradaMercadoriaViewModel.CFOPId = item.Id;
+                                        break;
+                                    }
+                                foreach (var item in NCM)
+                                    if (item.Codigo.Trim() == prod.prod.NCM.Trim())
+                                    {
+                                        notaFiscalEntradaMercadoriaViewModel.NCMId = item.Id;
+                                        break;
+                                    }
+                                foreach (var item in CST_CSOSN)
+                                    if (item.Codigo == Zeus.NFE_Produto_DadosCOFINS(prod).CST.ToString().Replace("cofins", ""))
+                                    {
+                                        notaFiscalEntradaMercadoriaViewModel.CSTId = item.Id;
+                                        break;
+                                    }
+
+                                await notaFiscalEntradaMercadoriaController.Adicionar(notaFiscalEntradaMercadoriaViewModel);
                             }
-
-                            NotaFiscalEntradaMercadoriaViewModel notaFiscalEntradaMercadoriaViewModel = new NotaFiscalEntradaMercadoriaViewModel();
-                            notaFiscalEntradaMercadoriaViewModel.NotaFiscalEntradaId = notaFiscalEntradaViewModel.Id;
-                            notaFiscalEntradaMercadoriaViewModel.QuantidadeCaixas = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
-                            notaFiscalEntradaMercadoriaViewModel.QuantidadeUnitaria = Convert.ToInt32(row.Cells[grdProduto_Quantidade].Value);
-                            notaFiscalEntradaMercadoriaViewModel.PrecoPorCaixas = Convert.ToDecimal(row.Cells[grdProduto_Quantidade].Value);
-                            notaFiscalEntradaMercadoriaViewModel.PrecoUnitario = Convert.ToDecimal(row.Cells[grdProduto_Preco].Value);
-                            notaFiscalEntradaMercadoriaViewModel.PercentualDesconto = 0;
-                            notaFiscalEntradaMercadoriaViewModel.ValorDesconto = Funcao.NuloParaValorD(prod.prod.vDesc);
-                            notaFiscalEntradaMercadoriaViewModel.PrecoTotal = Convert.ToDecimal(row.Cells[grdProduto_Total].Value);
-                            notaFiscalEntradaMercadoriaViewModel.PercentualICMS = Funcao.NuloParaValorD(Zeus.NFe_Produto_DadosICMS(prod) == null ? 0 : Zeus.NFe_Produto_DadosICMS(prod).vICMS);
-                            notaFiscalEntradaMercadoriaViewModel.PercentualIPI = Funcao.NuloParaValorD(Zeus.NFE_Produto_DadosIPI(prod) == null ? 0 : Zeus.NFE_Produto_DadosIPI(prod).vIPI);
-                            notaFiscalEntradaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[grdProduto_CodigoSistema].Value.ToString());
-
-                            foreach (var item in CFOP)
-                                if (item.Codigo == prod.prod.CFOP.ToString())
-                                {
-                                    notaFiscalEntradaMercadoriaViewModel.CFOPId = item.Id;
-                                    break;
-                                }
-                            foreach (var item in NCM)
-                                if (item.Codigo.Trim() == prod.prod.NCM.Trim())
-                                {
-                                    notaFiscalEntradaMercadoriaViewModel.NCMId = item.Id;
-                                    break;
-                                }
-                            foreach (var item in CST_CSOSN)
-                                if (item.Codigo == Zeus.NFE_Produto_DadosCOFINS(prod).CST.ToString().Replace("cofins", ""))
-                                {
-                                    notaFiscalEntradaMercadoriaViewModel.CSTId = item.Id;
-                                    break;
-                                }
-
-                            await notaFiscalEntradaMercadoriaController.Adicionar(notaFiscalEntradaMercadoriaViewModel);
                         }
-                    }
 
-                    CaixaMensagem.Informacao("Nota gravada");
+                        CaixaMensagem.Informacao("Nota gravada");
+                    }
                 }
             }
             catch (Exception ex)

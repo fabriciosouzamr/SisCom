@@ -36,9 +36,9 @@ namespace SisCom.Negocio.Services
 
                 await estoqueRepository.Insert(Estoque);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                Notify("ERRO: " + Ex.Message + ".");
+                Notify("EstoqueService - Adicionar", ex);
             }
         }
 
@@ -58,9 +58,9 @@ namespace SisCom.Negocio.Services
 
                 await estoqueRepository.Update(Estoque);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                Notify("ERRO: " + Ex.Message + ".");
+                Notify("EstoqueService - Atualizar", ex);
             }
         }
 

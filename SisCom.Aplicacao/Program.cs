@@ -103,6 +103,12 @@ namespace SisCom.Aplicacao
                         cfg.CreateMap<EstadoViewModel, Estado>().ReverseMap();
                         cfg.CreateMap<Estado, CodigoNomeComboViewModel>();
                         #endregion
+                        #region Estoque
+                        cfg.CreateMap<EstoqueViewModel, Estoque>().ReverseMap();
+                        #endregion
+                        #region EstoqueLancamento
+                        cfg.CreateMap<EstoqueLancamentoViewModel, EstoqueLancamento>().ReverseMap();
+                        #endregion
                         #region Fabricante
                         cfg.CreateMap<FabricanteViewModel, Fabricante>().ReverseMap();
                         cfg.CreateMap<Fabricante, NomeComboViewModel>();

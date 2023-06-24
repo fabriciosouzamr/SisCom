@@ -69,6 +69,14 @@ namespace SisCom.Aplicacao.Configuration
             services.AddScoped<IEstadoRepository, EstadoRepository>();
             services.AddScoped<IEstadoService, EstadoService>();
             #endregion
+            #region Estoque
+            services.AddScoped<IEstoqueRepository, EstoqueRepository>();
+            services.AddScoped<IEstoqueService, EstoqueService>();
+            #endregion
+            #region EstoqueLancamento
+            services.AddScoped<IEstoqueLancamentoRepository, EstoqueLancamentoRepository>();
+            services.AddScoped<IEstoqueLancamentoService, EstoqueLancamentoService>();
+            #endregion
             #region Fabricante
             services.AddScoped<IFabricanteRepository, FabricanteRepository>();
             services.AddScoped<IFabricanteService, FabricanteService>();

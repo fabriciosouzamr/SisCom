@@ -29,7 +29,7 @@ namespace SisCom.Aplicacao.Controllers
         {
             var pesqestoque = (await estoqueService.Search(e => e.AlmoxarifadoId == estoque.AlmoxarifadoId && e.MercadoriaId == estoque.MercadoriaId)).FirstOrDefault();
 
-            if (estoque != null)
+            if (pesqestoque != null)
             {
                 pesqestoque.QuantidadeEmEstoque += estoque.QuantidadeEmEstoque;
                 pesqestoque.QuantidadeBloqueada += estoque.QuantidadeBloqueada;

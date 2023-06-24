@@ -1178,10 +1178,12 @@
             // 
             this.radioVenda.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioVenda.AutoSize = true;
+            this.radioVenda.Checked = true;
             this.radioVenda.Location = new System.Drawing.Point(75, 16);
             this.radioVenda.Name = "radioVenda";
             this.radioVenda.Size = new System.Drawing.Size(49, 25);
             this.radioVenda.TabIndex = 4;
+            this.radioVenda.TabStop = true;
             this.radioVenda.Text = "Venda";
             this.radioVenda.UseVisualStyleBackColor = true;
             this.radioVenda.CheckedChanged += new System.EventHandler(this.radioVenda_CheckedChanged);
@@ -1190,13 +1192,11 @@
             // 
             this.radioCompra.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioCompra.AutoSize = true;
-            this.radioCompra.Checked = true;
             this.radioCompra.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radioCompra.Location = new System.Drawing.Point(9, 16);
             this.radioCompra.Name = "radioCompra";
             this.radioCompra.Size = new System.Drawing.Size(60, 25);
             this.radioCompra.TabIndex = 3;
-            this.radioCompra.TabStop = true;
             this.radioCompra.Text = "Compra";
             this.radioCompra.UseVisualStyleBackColor = true;
             this.radioCompra.CheckedChanged += new System.EventHandler(this.radioCompra_CheckedChanged);
