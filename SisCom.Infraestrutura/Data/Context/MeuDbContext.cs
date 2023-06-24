@@ -31,6 +31,7 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Estado> Estados { get; set; }
         public DbSet<Estoque> Estoques { get; set; }
+        public DbSet<EstoqueUnidadeMedidaConversao> EstoqueUnidadeMedidaConversaos { get; set; }
         public DbSet<EstoqueLancamento> EstoqueLancamentos { get; set; }
         public DbSet<Fabricante> Fabricantes { get; set; }
         public DbSet<FormaPagamento> FormaPagamentos { get; set; }

@@ -6,11 +6,9 @@ using SisCom.Entidade.Enum;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
-using SisCom.Infraestrutura.Migrations;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers

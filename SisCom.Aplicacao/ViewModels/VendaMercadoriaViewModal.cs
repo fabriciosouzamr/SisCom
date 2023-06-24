@@ -16,8 +16,8 @@ namespace SisCom.Aplicacao.ViewModels
 		public decimal Total { get; set; }
 
 		/* EF Relation */
-		public Guid? VendaId { get; set; }
-		public Guid? MercadoriaId { get; set; }
-		public Guid? UnidadeMedidaId { get; set; }
+		public Guid VendaId { get; set; }
+		public Guid MercadoriaId { get; set; }
+		public Guid UnidadeMedidaId { get; set; }
 	}
 }

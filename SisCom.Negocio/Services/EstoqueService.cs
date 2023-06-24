@@ -2,7 +2,6 @@
 using Funcoes.PagedList;
 using SisCom.Entidade.Modelos;
 using SisCom.Negocio.Interfaces;
-using SisCom.Negocio.Models.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

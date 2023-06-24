@@ -6,19 +6,6 @@ namespace SisCom.Entidade.Modelos
 {
     public class Mercadoria : Entity
     {
-        //public Mercadoria()
-        //{
-        //    this.Estoques = new HashSet<Estoque>();
-        //    this.MercadoriaFornecedores = new HashSet<MercadoriaFornecedor>();
-        //    this.MercadoriaComposicaos = new HashSet<MercadoriaComposicao>();
-        //    //this.MercadoriaSimilar = new HashSet<MercadoriaSimilares>();
-        //    this.MercadoriaSimilares = new HashSet<MercadoriaSimilares>();
-        //}
-        //public virtual ICollection<Estoque> Estoques { get; set; }
-        //public virtual ICollection<MercadoriaFornecedor> MercadoriaFornecedores { get; set; }
-        //public virtual ICollection<MercadoriaSimilares> MercadoriaSimilares { get; set; }
-        //public virtual ICollection<MercadoriaComposicao> MercadoriaComposicaos { get; set; }
-
         public int Codigo { get; set; }
         public string? CodigoFabricante { get; set; }
         public string? CodigoBarra { get; set; }
@@ -59,7 +46,7 @@ namespace SisCom.Entidade.Modelos
         public decimal Preco_CalculoPreco { get; set; }
         public decimal Preco_CalculoPrecificacao { get; set; }
         public double Estoque_QuantidadeMinimo { get; set; }
-        public UnidadeMedida Estoque_UnidadeMedidaMedida { get; set; }
+        public UnidadeMedida Estoque_UnidadeMedida { get; set; }
         public string? Estoque_Pratileira { get; set; }
         public double Estoque_PesoBruto { get; set; }
         public double Estoque_PesoLiquido { get; set; }

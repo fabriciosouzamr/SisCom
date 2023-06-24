@@ -1083,7 +1083,10 @@ namespace SisCom.Aplicacao.Formularios
                     var estoque = await estoqueController.Obter(w => w.MercadoriaId == mercadoria.Id);
 
                     if (estoque.Any())
+                    {
+                        comboEstoque_Unidade.Enabled = false;
                         labelEstoque_Quantidade.Text = estoque.Sum(s => s.QuantidadeEmEstoque).ToString("0000");
+                    }
                 }
 
                 carregandoDados = false;

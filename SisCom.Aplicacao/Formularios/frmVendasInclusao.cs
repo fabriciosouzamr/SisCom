@@ -518,9 +518,9 @@ namespace SisCom.Aplicacao.Formularios
 
                     row.Cells[gridProdutos_VendaId].Value = vendaMercadoriaViewModel.VendaId;
                     if (row.Cells[gridProdutos_CodigoSistema].Value != null)
-                        vendaMercadoriaViewModel.Id = (Guid)row.Cells[gridProdutos_CodigoSistema].Value;
+                        vendaMercadoriaViewModel.MercadoriaId = (Guid)row.Cells[gridProdutos_CodigoSistema].Value;
                     if (row.Cells[gridProdutos_Descricao].Value != null)
-                        vendaMercadoriaViewModel.Id = (Guid)row.Cells[gridProdutos_Descricao].Value;
+                        vendaMercadoriaViewModel.MercadoriaId = (Guid)row.Cells[gridProdutos_Descricao].Value;
                     
                     vendaMercadoriaViewModel.UnidadeMedidaId = (Guid)row.Cells[gridProdutos_Medida].Value;
                     vendaMercadoriaViewModel.Preco = Funcao.NuloParaValorD(row.Cells[gridProdutos_Preco].Value);
@@ -545,16 +545,16 @@ namespace SisCom.Aplicacao.Formularios
                         {
                             if (radioCompra.Checked)
                                 await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado, 
-                                                                            vendaMercadoriaViewModel.Id,
+                                                                            vendaMercadoriaViewModel.MercadoriaId,
                                                                             TipoLancamentoEstoque.Movimentacao,
-                                                                            Funcoes._Enum.EntradaSaida.Saida, 
+                                                                            Funcoes._Enum.EntradaSaida.Entrada, 
                                                                             DateTime.Now,
                                                                             (double)vendaMercadoriaViewModel.Quantidade);
                             if (radioVenda.Checked)
                                 await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
-                                                                            vendaMercadoriaViewModel.Id,
+                                                                            vendaMercadoriaViewModel.MercadoriaId,
                                                                             TipoLancamentoEstoque.Movimentacao,
-                                                                            Funcoes._Enum.EntradaSaida.Entrada,
+                                                                            Funcoes._Enum.EntradaSaida.Saida,
                                                                             DateTime.Now,
                                                                             (double)vendaMercadoriaViewModel.Quantidade);
                         }

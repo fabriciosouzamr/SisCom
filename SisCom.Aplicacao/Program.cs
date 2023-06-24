@@ -106,6 +106,9 @@ namespace SisCom.Aplicacao
                         #region Estoque
                         cfg.CreateMap<EstoqueViewModel, Estoque>().ReverseMap();
                         #endregion
+                        #region EstoqueUnidadeMedidaConversaoViewModel
+                        cfg.CreateMap<EstoqueUnidadeMedidaConversaoViewModel, EstoqueUnidadeMedidaConversao>().ReverseMap();
+                        #endregion
                         #region EstoqueLancamento
                         cfg.CreateMap<EstoqueLancamentoViewModel, EstoqueLancamento>().ReverseMap();
                         #endregion

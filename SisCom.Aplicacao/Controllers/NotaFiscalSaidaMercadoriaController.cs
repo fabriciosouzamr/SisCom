@@ -85,7 +85,7 @@ namespace SisCom.Aplicacao.Controllers
                                                                                                               i => i.Mercadoria.Fiscal_SPED_TabelaSpedTipoItem,
                                                                                                               i => i.Mercadoria.Fiscal_TipoMercadoria,
                                                                                                               i => i.Mercadoria.Estoque_TributacaoNFCe_TipoServicoFiscal,
-                                                                                                              i => i.Mercadoria.Estoque_UnidadeMedidaMedida ,
+                                                                                                              i => i.Mercadoria.Estoque_UnidadeMedida,
                                                                                                               i => i.Mercadoria.Fiscal_VinculoFiscal,
                                                                                                               i => i.TabelaCFOP,
                                                                                                               i => i.TabelaCFOP.GrupoCFOP,
