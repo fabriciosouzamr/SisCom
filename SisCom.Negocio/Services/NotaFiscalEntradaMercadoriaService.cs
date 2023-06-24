@@ -39,9 +39,9 @@ namespace SisCom.Negocio.Services
             {
                 await _NotaFiscalEntradaMercadoriaRepository.Insert(NotaFiscalEntradaMercadoria);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                Notify("ERRO: " + Ex.Message + ".");
+                Notify("NotaFiscalEntradaMercadoriaService - Adicionar", ex);
             }
         }
 
@@ -51,9 +51,9 @@ namespace SisCom.Negocio.Services
             {
                 await _NotaFiscalEntradaMercadoriaRepository.Update(notaFiscalEntradaMercadoria);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                Notify("ERRO: " + Ex.Message + ".");
+                Notify("NotaFiscalEntradaMercadoriaService - Atualizar", ex);
             }
         }
 

@@ -8,7 +8,6 @@ using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
@@ -33,10 +32,11 @@ namespace SisCom.Aplicacao.Controllers
 
             await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
                                                         notaFiscalEntradaMercadoriaViewModel.MercadoriaId.Value,
+                                                        Entidade.Enum.TipoLancamentoEstoque.Movimentacao,
                                                         EntradaSaida.Entrada,
                                                         DateTime.Now,
                                                         notaFiscalEntradaMercadoriaViewModel.QuantidadeUnitaria,
-                                                        "Entrada de mercadoria");
+                                                        "Entrada de mercadoria"); ;
 
             return Declaracoes.mapper.Map<NotaFiscalEntradaMercadoriaViewModel>(NotaFiscalEntradaMercadoria);
         }
@@ -60,6 +60,7 @@ namespace SisCom.Aplicacao.Controllers
             {
                 await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
                                                             notaFiscalEntradaMercadoriaViewModel.MercadoriaId.Value,
+                                                            Entidade.Enum.TipoLancamentoEstoque.Movimentacao,
                                                             EntradaSaida.Saida,
                                                             DateTime.Now,
                                                             (notaFiscalEntradaMercadoriaExistente.QuantidadeUnitaria - notaFiscalEntradaMercadoriaViewModel.QuantidadeUnitaria),
@@ -69,6 +70,7 @@ namespace SisCom.Aplicacao.Controllers
             {
                 await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
                                                             notaFiscalEntradaMercadoriaViewModel.MercadoriaId.Value,
+                                                            Entidade.Enum.TipoLancamentoEstoque.Movimentacao,
                                                             EntradaSaida.Entrada,
                                                             DateTime.Now,
                                                             notaFiscalEntradaMercadoriaViewModel.QuantidadeUnitaria - (notaFiscalEntradaMercadoriaExistente.QuantidadeUnitaria),
@@ -85,7 +87,7 @@ namespace SisCom.Aplicacao.Controllers
                                                                                           i => i.CFOP,
                                                                                           f => f.NotaFiscalEntrada.Fornecedor,
                                                                                           fe => fe.NotaFiscalEntrada.Fornecedor.Endereco.End_Cidade.Estado,
-                                                                                          e => e.NotaFiscalEntrada.Empresa); ; ;
+                                                                                          e => e.NotaFiscalEntrada.Empresa);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalEntradaMercadoriaViewModel>>(obterTodos);
 
         }

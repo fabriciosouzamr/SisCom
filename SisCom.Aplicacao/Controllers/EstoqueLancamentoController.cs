@@ -2,6 +2,7 @@
 using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
+using SisCom.Entidade.Enum;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
@@ -28,13 +29,24 @@ namespace SisCom.Aplicacao.Controllers
 
             estoqueController = new EstoqueController(this.MeuDbContext, notifier);
         }
-        public async Task<EstoqueLancamentoViewModel> Adicionar(Guid almoxarifadoId, Guid mercadoriaId, EntradaSaida entradaSaida, DateTime data, Double quantidade, String comentario = "")
+        public async Task<EstoqueLancamentoViewModel> Adicionar(Guid almoxarifadoId, 
+                                                                Guid mercadoriaId, 
+                                                                TipoLancamentoEstoque tipoLancamentoEstoque,
+                                                                EntradaSaida entradaSaida, 
+                                                                DateTime data, 
+                                                                Double quantidade, 
+                                                                String comentario = "")
         {
             var quantidadeEmEstoque = entradaSaida == EntradaSaida.Entrada ? quantidade : quantidade * -1;
 
             var estoque = await estoqueController.Atualizar(new EstoqueViewModel() { AlmoxarifadoId = almoxarifadoId, MercadoriaId = mercadoriaId, QuantidadeEmEstoque = quantidadeEmEstoque});
 
-            var estoqueLancamentoViewModel = new EstoqueLancamento() { EstoqueId = estoque.Id, Data = data, Quantidade = quantidade, EntradaSaida = entradaSaida, Comentario = comentario };
+            var estoqueLancamentoViewModel = new EstoqueLancamento() { EstoqueId = estoque.Id,
+                                                                       TipoLancamentoEstoque = tipoLancamentoEstoque, 
+                                                                       Data = data, 
+                                                                       Quantidade = quantidade, 
+                                                                       EntradaSaida = entradaSaida, 
+                                                                       Comentario = comentario };
 
             await estoqueLancamentoService.Adicionar(estoqueLancamentoViewModel);
 

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using SisCom.Aplicacao.ViewModels;
 using System.Data;
 using System.Linq;
+using SisCom.Entidade.Enum;
 
 namespace SisCom.Aplicacao.Formularios
 {
@@ -544,16 +545,18 @@ namespace SisCom.Aplicacao.Formularios
                         {
                             if (radioCompra.Checked)
                                 await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado, 
-                                                                          vendaMercadoriaViewModel.Id, 
-                                                                          Funcoes._Enum.EntradaSaida.Saida, 
-                                                                          DateTime.Now,
-                                                                          (double)vendaMercadoriaViewModel.Quantidade);
+                                                                            vendaMercadoriaViewModel.Id,
+                                                                            TipoLancamentoEstoque.Movimentacao,
+                                                                            Funcoes._Enum.EntradaSaida.Saida, 
+                                                                            DateTime.Now,
+                                                                            (double)vendaMercadoriaViewModel.Quantidade);
                             if (radioVenda.Checked)
                                 await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
-                                                                          vendaMercadoriaViewModel.Id,
-                                                                          Funcoes._Enum.EntradaSaida.Entrada,
-                                                                          DateTime.Now,
-                                                                          (double)vendaMercadoriaViewModel.Quantidade);
+                                                                            vendaMercadoriaViewModel.Id,
+                                                                            TipoLancamentoEstoque.Movimentacao,
+                                                                            Funcoes._Enum.EntradaSaida.Entrada,
+                                                                            DateTime.Now,
+                                                                            (double)vendaMercadoriaViewModel.Quantidade);
                         }
                     }
                 }

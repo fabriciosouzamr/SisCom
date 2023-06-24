@@ -1,5 +1,6 @@
 ﻿using Funcoes._Entity;
 using Funcoes._Enum;
+using SisCom.Entidade.Enum;
 using System;
 
 namespace SisCom.Entidade.Modelos
@@ -12,6 +13,7 @@ namespace SisCom.Entidade.Modelos
         }
 
         public Estoque Estoque { get; set; }
+        public TipoLancamentoEstoque TipoLancamentoEstoque { get; set; }
         public EntradaSaida EntradaSaida { get; set; }
         public DateTime Data { get; set; }
         public Double Quantidade { get; set; }

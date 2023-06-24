@@ -22,6 +22,14 @@ namespace SisCom.Negocio.Services
             _repository = repository;
         }
 
+        protected void Notify(string mensagem)
+        {
+            if (_notifier != null)
+            {
+                _notifier.Handle(new Notification(mensagem));
+            }
+        }
+
         protected void Notify(ValidationResult validationResult)
         {
             foreach (var error in validationResult.Errors)
@@ -30,11 +38,30 @@ namespace SisCom.Negocio.Services
             }
         }
 
-        protected void Notify(string mensagem)
+        protected void Notify(string local, Exception ex)
         {
+            string sMensagem = String.Empty;
+            try
+            {
+
+                if (ex.InnerException == null)
+                {
+                    if (!String.IsNullOrWhiteSpace(ex.StackTrace))
+                    {
+                        sMensagem = $"{sMensagem} ({ex.StackTrace})";
+                    }
+                }
+                else
+                    sMensagem = $"{sMensagem} ({ex.InnerException.Message})";
+            }
+            catch (Exception ex1)
+            {
+                sMensagem = $"{local} - {ex1.Message}";
+            }
+
             if (_notifier != null)
             {
-                _notifier.Handle(new Notification(mensagem));
+                _notifier.Handle(new Notification($"ERRO: {sMensagem}"));
             }
         }
 

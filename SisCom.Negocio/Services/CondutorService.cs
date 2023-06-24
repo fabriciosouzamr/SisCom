@@ -33,9 +33,9 @@ namespace SisCom.Negocio.Services
             {
                 await condutorRepository.Insert(condutor);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                Notify("ERRO: " + Ex.Message + ".");
+                Notify("CondutorService - Adicionar" ,ex);
             }
         }
         public virtual async Task Atualizar(Condutor condutor)
