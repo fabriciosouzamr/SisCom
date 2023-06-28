@@ -356,6 +356,11 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("float")
                         .HasDefaultValue(0.0);
 
+                    b.Property<double>("QuantidadeEmEstoque")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
                     b.Property<int>("TipoLancamentoEstoque")
                         .HasColumnType("int");
 
@@ -367,31 +372,6 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasIndex("EstoqueId");
 
                     b.ToTable("EstoqueLancamentos");
-                });
-
-            modelBuilder.Entity("SisCom.Entidade.Modelos.EstoqueUnidadeMedidaConversao", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("FatorConversao")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(1.0);
-
-                    b.Property<Guid>("MercadoriaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("UltimaAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UnidadeMedidaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EstoqueUnidadeMedidaConversaos");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Fabricante", b =>
@@ -1453,6 +1433,31 @@ namespace SisCom.Infraestrutura.Migrations
                     b.HasIndex("MercadoriaId");
 
                     b.ToTable("MercadoriaImpostoEstados");
+                });
+
+            modelBuilder.Entity("SisCom.Entidade.Modelos.MercadoriaUnidadeMedidaConversao", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("FatorConversao")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(1.0);
+
+                    b.Property<Guid>("MercadoriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UnidadeMedidaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MercadoriaUnidadeMedidaConversaos");
                 });
 
             modelBuilder.Entity("SisCom.Entidade.Modelos.Motorista", b =>

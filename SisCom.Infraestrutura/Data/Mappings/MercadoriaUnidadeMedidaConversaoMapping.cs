@@ -4,9 +4,9 @@ using SisCom.Entidade.Modelos;
 
 namespace SisCom.Infraestrutura.Data.Mappings
 {
-    public class EstoqueUnidadeMedidaConversaoMapping : IEntityTypeConfiguration<EstoqueUnidadeMedidaConversao>
+    public class MercadoriaUnidadeMedidaConversaoMapping : IEntityTypeConfiguration<MercadoriaUnidadeMedidaConversao>
     {
-        public void Configure(EntityTypeBuilder<EstoqueUnidadeMedidaConversao> builder)
+        public void Configure(EntityTypeBuilder<MercadoriaUnidadeMedidaConversao> builder)
         {
             builder.HasKey(p => p.Id);
 
@@ -14,7 +14,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
                 .IsRequired()
                 .HasDefaultValue(1);
 
-            builder.ToTable("EstoqueUnidadeMedidaConversaos");
+            builder.ToTable("MercadoriaUnidadeMedidaConversaos");
         }
     }
 }

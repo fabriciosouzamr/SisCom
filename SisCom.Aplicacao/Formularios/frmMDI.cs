@@ -4,7 +4,6 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Formularios;
 using SisCom.Infraestrutura.Data.Context;
 using System;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace SisCom.Aplicacao
@@ -63,9 +62,15 @@ namespace SisCom.Aplicacao
             form.ShowDialog(this);
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void buttonUtilitario_Click(object sender, EventArgs e)
         {
             var form = this.ServiceProvider().GetRequiredService<frmUtilitario>();
+            form.ShowDialog(this);
+        }
+
+        private void buttonAjustesEstoque_Click(object sender, EventArgs e)
+        {
+            var form = this.ServiceProvider().GetRequiredService<frmCadastroEstoque>();
             form.ShowDialog(this);
         }
     }

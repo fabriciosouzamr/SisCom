@@ -55,6 +55,7 @@ namespace SisCom.Aplicacao.Configuration
             services.AddTransient<frmFiscal_Cancelamento>();
             services.AddTransient<frmFiscal_CartaCorrecao>();
             services.AddTransient<frmUtilitario>();
+            services.AddTransient<frmCadastroEstoque>();
             #endregion
 
             #region Cidade

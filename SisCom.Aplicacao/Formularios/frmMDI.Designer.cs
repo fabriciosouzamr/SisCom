@@ -47,10 +47,10 @@ namespace SisCom.Aplicacao
             this.lblCadastros = new System.Windows.Forms.Label();
             this.lblSair = new System.Windows.Forms.Label();
             this.cmdSair = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
+            this.buttonUtilitario = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.botaoNota = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.buttonAjustesEstoque = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -85,10 +85,10 @@ namespace SisCom.Aplicacao
             this.pnlMenuBotao.Controls.Add(this.lblCadastros);
             this.pnlMenuBotao.Controls.Add(this.lblSair);
             this.pnlMenuBotao.Controls.Add(this.cmdSair);
-            this.pnlMenuBotao.Controls.Add(this.button11);
+            this.pnlMenuBotao.Controls.Add(this.buttonUtilitario);
             this.pnlMenuBotao.Controls.Add(this.button12);
             this.pnlMenuBotao.Controls.Add(this.botaoNota);
-            this.pnlMenuBotao.Controls.Add(this.button6);
+            this.pnlMenuBotao.Controls.Add(this.buttonAjustesEstoque);
             this.pnlMenuBotao.Controls.Add(this.button7);
             this.pnlMenuBotao.Controls.Add(this.button8);
             this.pnlMenuBotao.Controls.Add(this.button9);
@@ -265,15 +265,15 @@ namespace SisCom.Aplicacao
             this.cmdSair.UseVisualStyleBackColor = true;
             this.cmdSair.Click += new System.EventHandler(this.cmdSair_Click);
             // 
-            // button11
+            // buttonUtilitario
             // 
-            this.button11.Image = ((System.Drawing.Image)(resources.GetObject("button11.Image")));
-            this.button11.Location = new System.Drawing.Point(858, 0);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(78, 64);
-            this.button11.TabIndex = 11;
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.buttonUtilitario.Image = ((System.Drawing.Image)(resources.GetObject("buttonUtilitario.Image")));
+            this.buttonUtilitario.Location = new System.Drawing.Point(858, 0);
+            this.buttonUtilitario.Name = "buttonUtilitario";
+            this.buttonUtilitario.Size = new System.Drawing.Size(78, 64);
+            this.buttonUtilitario.TabIndex = 11;
+            this.buttonUtilitario.UseVisualStyleBackColor = true;
+            this.buttonUtilitario.Click += new System.EventHandler(this.buttonUtilitario_Click);
             // 
             // button12
             // 
@@ -294,14 +294,15 @@ namespace SisCom.Aplicacao
             this.botaoNota.UseVisualStyleBackColor = true;
             this.botaoNota.Click += new System.EventHandler(this.botaoNota_Click);
             // 
-            // button6
+            // buttonAjustesEstoque
             // 
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.Location = new System.Drawing.Point(624, 0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(78, 64);
-            this.button6.TabIndex = 8;
-            this.button6.UseVisualStyleBackColor = true;
+            this.buttonAjustesEstoque.Image = ((System.Drawing.Image)(resources.GetObject("buttonAjustesEstoque.Image")));
+            this.buttonAjustesEstoque.Location = new System.Drawing.Point(624, 0);
+            this.buttonAjustesEstoque.Name = "buttonAjustesEstoque";
+            this.buttonAjustesEstoque.Size = new System.Drawing.Size(78, 64);
+            this.buttonAjustesEstoque.TabIndex = 8;
+            this.buttonAjustesEstoque.UseVisualStyleBackColor = true;
+            this.buttonAjustesEstoque.Click += new System.EventHandler(this.buttonAjustesEstoque_Click);
             // 
             // button7
             // 
@@ -433,12 +434,12 @@ namespace SisCom.Aplicacao
         private System.Windows.Forms.Button cmdCompras;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button botaoNota;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button buttonAjustesEstoque;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button cmdSair;
-        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button buttonUtilitario;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Label lblSair;
         private System.Windows.Forms.Label lblCadastros;

@@ -13,7 +13,6 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
-using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
 
@@ -79,6 +78,10 @@ namespace SisCom.Aplicacao
 
                     SisCom.Aplicacao.Classes.Declaracoes.configuration = new MapperConfiguration(cfg =>
                     {
+                        #region Almoxarifado
+                        cfg.CreateMap<AlmoxarifadoViewModel, Almoxarifado>().ReverseMap();
+                        cfg.CreateMap<Almoxarifado, NomeComboViewModel>();
+                        #endregion
                         #region CodigoDescricaoComboViewModel
                         cfg.CreateMap<CodigoDescricaoComboViewModel, CodigoNomeComboViewModel>()
                             .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
@@ -107,7 +110,7 @@ namespace SisCom.Aplicacao
                         cfg.CreateMap<EstoqueViewModel, Estoque>().ReverseMap();
                         #endregion
                         #region EstoqueUnidadeMedidaConversaoViewModel
-                        cfg.CreateMap<EstoqueUnidadeMedidaConversaoViewModel, EstoqueUnidadeMedidaConversao>().ReverseMap();
+                        cfg.CreateMap<MercadoriaUnidadeMedidaConversaoViewModel, MercadoriaUnidadeMedidaConversao>().ReverseMap();
                         #endregion
                         #region EstoqueLancamento
                         cfg.CreateMap<EstoqueLancamentoViewModel, EstoqueLancamento>().ReverseMap();
@@ -134,6 +137,7 @@ namespace SisCom.Aplicacao
                         #endregion
                         #region Mercadoria
                         cfg.CreateMap<MercadoriaViewModel, Mercadoria>().ReverseMap();
+                        cfg.CreateMap<Mercadoria, CodigoNomeComboViewModel>();
                         #endregion
                         #region MercadoriaImpostoEstado
                         cfg.CreateMap<MercadoriaImpostoEstadoViewModel, MercadoriaImpostoEstado>().ReverseMap();

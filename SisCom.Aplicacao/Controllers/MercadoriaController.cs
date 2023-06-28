@@ -6,6 +6,7 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
+using SisCom.Negocio.Interfaces;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,11 @@ namespace SisCom.Aplicacao.Controllers
         {
             var Mercadoria = await _mercadoriaService.Search(p => p.Id == Id);
             return Declaracoes.mapper.Map<IEnumerable<MercadoriaViewModel>>(Mercadoria);
+        }
+        public async Task<IEnumerable<CodigoNomeComboViewModel>> Combo(Expression<Func<Mercadoria, object>> order = null)
+        {
+            var combo = await _mercadoriaService.Combo(order);
+            return Declaracoes.mapper.Map<IEnumerable<CodigoNomeComboViewModel>>(combo);
         }
         public void Dispose()
         {

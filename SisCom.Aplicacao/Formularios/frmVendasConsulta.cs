@@ -2,8 +2,6 @@
 using Funcoes.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using SisCom.Aplicacao.Controllers;
-using SisCom.Entidade.Enum;
-using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Threading.Tasks;

@@ -7,7 +7,6 @@ namespace SisCom.Aplicacao.ViewModels
     {
         public Almoxarifado Almoxarifado { get; set; }
         public Mercadoria Mercadoria { get; set; }
-
         public double QuantidadeEmEstoque { get; set; }
         public double QuantidadeBloqueada { get; set; }
 

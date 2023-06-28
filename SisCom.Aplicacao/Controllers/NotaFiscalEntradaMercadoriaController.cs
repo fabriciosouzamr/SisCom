@@ -32,6 +32,7 @@ namespace SisCom.Aplicacao.Controllers
 
             await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
                                                         notaFiscalEntradaMercadoriaViewModel.MercadoriaId.Value,
+                                                        notaFiscalEntradaMercadoriaViewModel.UnidadeMedidaId.Value,
                                                         Entidade.Enum.TipoLancamentoEstoque.Movimentacao,
                                                         EntradaSaida.Entrada,
                                                         DateTime.Now,
@@ -60,6 +61,7 @@ namespace SisCom.Aplicacao.Controllers
             {
                 await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
                                                             notaFiscalEntradaMercadoriaViewModel.MercadoriaId.Value,
+                                                            notaFiscalEntradaMercadoriaViewModel.UnidadeMedidaId.Value,
                                                             Entidade.Enum.TipoLancamentoEstoque.Movimentacao,
                                                             EntradaSaida.Saida,
                                                             DateTime.Now,
@@ -70,6 +72,7 @@ namespace SisCom.Aplicacao.Controllers
             {
                 await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
                                                             notaFiscalEntradaMercadoriaViewModel.MercadoriaId.Value,
+                                                            notaFiscalEntradaMercadoriaViewModel.UnidadeMedidaId.Value,
                                                             Entidade.Enum.TipoLancamentoEstoque.Movimentacao,
                                                             EntradaSaida.Entrada,
                                                             DateTime.Now,

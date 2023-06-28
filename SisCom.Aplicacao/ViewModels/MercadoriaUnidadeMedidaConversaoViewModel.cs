@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SisCom.Aplicacao.ViewModels
 {
-    public class EstoqueUnidadeMedidaConversaoViewModel
+    public class MercadoriaUnidadeMedidaConversaoViewModel
     {
         [Key]
         public Guid Id { get; set; }

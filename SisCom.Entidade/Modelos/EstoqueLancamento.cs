@@ -17,6 +17,7 @@ namespace SisCom.Entidade.Modelos
         public EntradaSaida EntradaSaida { get; set; }
         public DateTime Data { get; set; }
         public Double Quantidade { get; set; }
+        public double QuantidadeEmEstoque { get; set; }
         public String Comentario { get; set; }
 
         /* EF Relation */

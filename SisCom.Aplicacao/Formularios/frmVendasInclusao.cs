@@ -546,6 +546,7 @@ namespace SisCom.Aplicacao.Formularios
                             if (radioCompra.Checked)
                                 await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado, 
                                                                             vendaMercadoriaViewModel.MercadoriaId,
+                                                                            vendaMercadoriaViewModel.UnidadeMedidaId,
                                                                             TipoLancamentoEstoque.Movimentacao,
                                                                             Funcoes._Enum.EntradaSaida.Entrada, 
                                                                             DateTime.Now,
@@ -553,6 +554,7 @@ namespace SisCom.Aplicacao.Formularios
                             if (radioVenda.Checked)
                                 await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
                                                                             vendaMercadoriaViewModel.MercadoriaId,
+                                                                            vendaMercadoriaViewModel.UnidadeMedidaId,
                                                                             TipoLancamentoEstoque.Movimentacao,
                                                                             Funcoes._Enum.EntradaSaida.Saida,
                                                                             DateTime.Now,

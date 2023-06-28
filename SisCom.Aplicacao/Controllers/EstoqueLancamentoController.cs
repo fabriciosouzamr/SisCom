@@ -9,6 +9,8 @@ using SisCom.Infraestrutura.Data.Repository;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SisCom.Aplicacao.Controllers
@@ -17,6 +19,7 @@ namespace SisCom.Aplicacao.Controllers
     {
         static EstoqueLancamentoService estoqueLancamentoService;
         static EstoqueController estoqueController;
+        static MercadoriaUnidadeMedidaConversaoController mercadoriaUnidadeMedidaConversaoController;
         private readonly MeuDbContext MeuDbContext;
 
         public EstoqueLancamentoController(MeuDbContext meuDbContext, INotifier notifier)
@@ -29,6 +32,7 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<EstoqueLancamentoViewModel> Adicionar(Guid almoxarifadoId, 
                                                                 Guid mercadoriaId, 
+                                                                Guid UnidadeMedidaId,
                                                                 TipoLancamentoEstoque tipoLancamentoEstoque,
                                                                 EntradaSaida entradaSaida, 
                                                                 DateTime data, 
@@ -37,12 +41,22 @@ namespace SisCom.Aplicacao.Controllers
         {
             var quantidadeEmEstoque = entradaSaida == EntradaSaida.Entrada ? quantidade : quantidade * -1;
 
+            var mercadoriaUnidadeMedidaConversao = await mercadoriaUnidadeMedidaConversaoController.Obter(w =>
+                w.MercadoriaId == mercadoriaId && w.UnidadeMedidaId == UnidadeMedidaId);
+
+            if (mercadoriaUnidadeMedidaConversao.Any())
+            {
+                quantidadeEmEstoque =
+                    quantidadeEmEstoque * mercadoriaUnidadeMedidaConversao.FirstOrDefault().FatorConversao;
+            }
+
             var estoque = await estoqueController.Atualizar(new EstoqueViewModel() { AlmoxarifadoId = almoxarifadoId, MercadoriaId = mercadoriaId, QuantidadeEmEstoque = quantidadeEmEstoque});
 
             var estoqueLancamentoViewModel = new EstoqueLancamento() { EstoqueId = estoque.Id,
                                                                        TipoLancamentoEstoque = tipoLancamentoEstoque, 
                                                                        Data = data, 
-                                                                       Quantidade = quantidade, 
+                                                                       Quantidade = quantidade,
+                                                                       QuantidadeEmEstoque = Math.Abs(quantidadeEmEstoque),
                                                                        EntradaSaida = entradaSaida, 
                                                                        Comentario = comentario };
 
@@ -60,6 +74,13 @@ namespace SisCom.Aplicacao.Controllers
         {
             var obter = await estoqueLancamentoService.GetById(id, e => e.Estoque, c => c.Estoque.Almoxarifado, c => c.Estoque.Mercadoria);
             return Declaracoes.mapper.Map<EstoqueLancamentoViewModel>(obter);
+        }
+        public async Task<IEnumerable<EstoqueLancamentoViewModel>> Obter(Expression<Func<EstoqueLancamento, object>> order = null, Expression<Func<EstoqueLancamento, bool>> predicate = null)
+        {
+            var obterTodos = await estoqueLancamentoService.GetAll(order, predicate, i => i.Estoque,
+                                                                                                                      i => i.Estoque.Almoxarifado,
+                                                                                                                      i => i.Estoque.Mercadoria);
+            return Declaracoes.mapper.Map<IEnumerable<EstoqueLancamentoViewModel>>(obterTodos);
         }
         public async Task<IEnumerable<EstoqueLancamentoViewModel>> ObterTodos()
         {

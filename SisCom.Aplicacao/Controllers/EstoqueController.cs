@@ -54,9 +54,10 @@ namespace SisCom.Aplicacao.Controllers
             var obter = await estoqueService.GetById(id, e => e.Almoxarifado, e => e.Mercadoria);
             return Declaracoes.mapper.Map<EstoqueViewModel>(obter);
         }
-        public async Task<IEnumerable<EstoqueViewModel>> Obter(Expression<Func<Estoque, object>> order = null, Expression<Func<Estoque, bool>> predicate = null, params Expression<Func<Estoque, object>>[] includes)
+        public async Task<IEnumerable<EstoqueViewModel>> Obter(Expression<Func<Estoque, object>> order = null, Expression<Func<Estoque, bool>> predicate = null)
         {
-            var obterTodos = await estoqueService.GetAll(order, predicate, includes);
+            var obterTodos = await estoqueService.GetAll(order, predicate, i => i.Mercadoria,
+                                                                                       i => i.Almoxarifado);
             return Declaracoes.mapper.Map<IEnumerable<EstoqueViewModel>>(obterTodos);
         }
         public async Task<IEnumerable<EstoqueViewModel>> ObterTodos()
