@@ -6,6 +6,7 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
+using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace SisCom.Aplicacao.Formularios
     public partial class frmFiscal_NotaFiscal : FormMain
     {
         ViewModels.NotaFiscalSaidaViewModel notaFiscalSaida = null;
-        public Guid VendaId;
+        public Guid vendaId;
         NF_TipoNotaFiscal tipoNotaFiscal = NF_TipoNotaFiscal.Saida;
 
         Declaracoes.eNavegar posicaoNavegacao = Declaracoes.eNavegar.Primeiro;
@@ -214,7 +215,7 @@ namespace SisCom.Aplicacao.Formularios
                 Texto_MaskedTextBox.FormatarTipoPessoa(TipoPessoaCliente.Juridica, maskedRemetenteCPFCNPJ);
                 Texto_MaskedTextBox.FormatarTipoPessoa(TipoPessoaCliente.Juridica, maskedTransportadoraCPFCNPJ);
 
-                Limpar();                
+                Limpar();
 
                 List<CodigoNomeComboViewModel> unidadeMedida;
                 List<CodigoComboViewModel> tabelaCFOP;
@@ -659,18 +660,18 @@ namespace SisCom.Aplicacao.Formularios
             int linha = -1;
             Guid cfop;
 
-            if (VendaId != Guid.Empty)
+            if (vendaId != Guid.Empty)
             {
                 using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                 {
-                    notaFiscalSaida = (await notaFiscalSaidaController.ObterTodos(w => w.VendaId == VendaId)).FirstOrDefault();
+                    notaFiscalSaida = (await notaFiscalSaidaController.ObterTodos(w => w.VendaId == vendaId)).FirstOrDefault();
                 }
 
                 if (notaFiscalSaida == null)
                 {
                     using (VendaController vendaController = new VendaController(this.MeuDbContext(), this._notifier))
                     {
-                        IEnumerable<VendaViewModel> ret = await vendaController.PesquisarId(VendaId);
+                        IEnumerable<VendaViewModel> ret = await vendaController.PesquisarId(vendaId);
 
                         foreach (VendaViewModel vendaViewModel in ret)
                         {
@@ -718,9 +719,19 @@ namespace SisCom.Aplicacao.Formularios
 
                     gridMercadoria.Rows.Clear();
 
+                    List<CodigoComboViewModel> tabelaCFOP;
+
+                    using (TabelaCFOPController tabelaCFOPController = new TabelaCFOPController(this.MeuDbContext(), this._notifier))
+                    {
+                        tabelaCFOP = (List<CodigoComboViewModel>)await tabelaCFOPController.Combo(entradaSaida: tipoNotaFiscal == NF_TipoNotaFiscal.Saida ? EntradaSaida.Saida : EntradaSaida.Entrada, o => o.Codigo);
+                        Task.Delay(1000);
+                    }
+
+                    ((DataGridViewComboBoxColumn)gridMercadoria.Columns[gridMercadoria_CFOP]).DataSource = tabelaCFOP;
+
                     using (VendaMercadoriaController vendaMercadoriaController = new VendaMercadoriaController(this.MeuDbContext(), this._notifier))
                     {
-                        IEnumerable<VendaMercadoriaViewModel> ret = await vendaMercadoriaController.PesquisarVendaId(VendaId);
+                        IEnumerable<VendaMercadoriaViewModel> ret = await vendaMercadoriaController.PesquisarVendaId(vendaId);
 
                         foreach (VendaMercadoriaViewModel vendaMercadoriaViewModel in ret)
                         {
@@ -758,7 +769,7 @@ namespace SisCom.Aplicacao.Formularios
                     await GravarNotaFiscalSaida(validar: false, recarregar: true);
                 }
 
-                await Assincrono.TaskAsyncAndAwaitAsync(CarregarListaVenda(VendaId));
+                await Assincrono.TaskAsyncAndAwaitAsync(CarregarListaVenda(vendaId));
                 Editar(true);
             }
 
@@ -771,6 +782,7 @@ namespace SisCom.Aplicacao.Formularios
                 if (!Funcao.Nulo(notaFiscalSaida.EmpresaId)) comboEmpresa.SelectedValue = notaFiscalSaida.EmpresaId;
                 if (!Funcao.Nulo(notaFiscalSaida.NaturezaOperacaoId)) comboNaturezaOperacao.SelectedValue = notaFiscalSaida.NaturezaOperacaoId;
                 if (!Funcao.Nulo(notaFiscalSaida.NotaFiscalFinalidadeId)) comboFinalidade.SelectedValue = notaFiscalSaida.NotaFiscalFinalidadeId;
+                tipoNotaFiscal = notaFiscalSaida.TipoNotaFiscal;
                 textNumeroNotaFiscalSaida.Text = Funcao.NuloParaString(notaFiscalSaida.NotaFiscal);
                 dateDataEmissao.Value = notaFiscalSaida.DataEmissao;
                 dateDataSaida.Value = notaFiscalSaida.DataSaida;
@@ -864,6 +876,16 @@ namespace SisCom.Aplicacao.Formularios
                 }
 
                 gridMercadoria.Rows.Clear();
+
+                List<CodigoComboViewModel> tabelaCFOP;
+
+                using (TabelaCFOPController tabelaCFOPController = new TabelaCFOPController(this.MeuDbContext(), this._notifier))
+                {
+                    tabelaCFOP = (List<CodigoComboViewModel>)await tabelaCFOPController.Combo(entradaSaida: tipoNotaFiscal == NF_TipoNotaFiscal.Saida ? EntradaSaida.Saida : EntradaSaida.Entrada, o => o.Codigo);
+                    Task.Delay(1000);
+                }
+
+                ((DataGridViewComboBoxColumn)gridMercadoria.Columns[gridMercadoria_CFOP]).DataSource = tabelaCFOP;
 
                 using (NotaFiscalSaidaMercadoriaController notaFiscalSaidaMercadoriaController = new NotaFiscalSaidaMercadoriaController(this.MeuDbContext(), this._notifier))
                 {
@@ -1019,9 +1041,9 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     await Assincrono.TaskAsyncAndAwaitAsync(CarregarListaVenda((Guid)notaFiscalSaida.VendaId));
                 }
-                else if (VendaId != Guid.Empty)
+                else if (vendaId != Guid.Empty)
                 {
-                    await Assincrono.TaskAsyncAndAwaitAsync(CarregarListaVenda(VendaId));
+                    await Assincrono.TaskAsyncAndAwaitAsync(CarregarListaVenda(vendaId));
                 }
 
                 Editar(false);
@@ -1418,7 +1440,7 @@ namespace SisCom.Aplicacao.Formularios
             notaFiscalSaida.TabelaOrigemVendaId = Guid.Parse("2338A060-16AE-4B9C-AB17-18D44C40E8F6");
             if (Combo_ComboBox.Selecionado(comboInfoNFeOrigem)) { notaFiscalSaida.TipoNFReferenciada = (Entidade.Enum.NF_TipoReferencia)comboInfoNFeOrigem.SelectedValue; }
 
-            if (VendaId != Guid.Empty) { notaFiscalSaida.VendaId = VendaId; }
+            if (vendaId != Guid.Empty) { notaFiscalSaida.VendaId = vendaId; }
 
             if (notaFiscalSaida.ClienteId == null)
                 return false;
@@ -1650,7 +1672,7 @@ namespace SisCom.Aplicacao.Formularios
             catch (Exception)
             { }
             
-            VendaId = Guid.Empty;
+            vendaId = Guid.Empty;
 
             if (recarregar)
             await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
@@ -2028,7 +2050,7 @@ namespace SisCom.Aplicacao.Formularios
                 notaFiscalSaida = (await notaFiscalSaidaController.PesquisarCompleto(p => p.Id == _notaFiscalSaida.Id)).FirstOrDefault();
             }
 
-            VendaId = Guid.Empty;
+            vendaId = Guid.Empty;
             await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
             CaixaMensagem.Informacao("Nota Fiscal Clonada");

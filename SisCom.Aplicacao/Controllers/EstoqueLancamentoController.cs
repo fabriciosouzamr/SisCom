@@ -41,14 +41,14 @@ namespace SisCom.Aplicacao.Controllers
         {
             var quantidadeEmEstoque = entradaSaida == EntradaSaida.Entrada ? quantidade : quantidade * -1;
 
-            var mercadoriaUnidadeMedidaConversao = await mercadoriaUnidadeMedidaConversaoController.Obter(w =>
-                w.MercadoriaId == mercadoriaId && w.UnidadeMedidaId == UnidadeMedidaId);
+            //var mercadoriaUnidadeMedidaConversao = await mercadoriaUnidadeMedidaConversaoController.Obter(w =>
+            //    w.MercadoriaId == mercadoriaId && w.UnidadeMedidaId == UnidadeMedidaId);
 
-            if (mercadoriaUnidadeMedidaConversao.Any())
-            {
-                quantidadeEmEstoque =
-                    quantidadeEmEstoque * mercadoriaUnidadeMedidaConversao.FirstOrDefault().FatorConversao;
-            }
+            //if (mercadoriaUnidadeMedidaConversao.Any())
+            //{
+            //    quantidadeEmEstoque =
+            //        quantidadeEmEstoque * mercadoriaUnidadeMedidaConversao.FirstOrDefault().FatorConversao;
+            //}
 
             var estoque = await estoqueController.Atualizar(new EstoqueViewModel() { AlmoxarifadoId = almoxarifadoId, MercadoriaId = mercadoriaId, QuantidadeEmEstoque = quantidadeEmEstoque});
 

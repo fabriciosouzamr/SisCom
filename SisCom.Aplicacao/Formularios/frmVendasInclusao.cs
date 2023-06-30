@@ -147,6 +147,7 @@ namespace SisCom.Aplicacao.Formularios
                 labelTotal.Tag = venda.ValorTotal;
                 textObservacao.Text = Funcoes._Classes.Texto.NuloString(venda.Observacao);
                 checkOutrosDados_PossuiEntrega.Checked = venda.PosuiEntrega;
+                radioVenda.Checked = (venda.TipoNotaFiscal == NF_TipoNotaFiscal.Saida);
 
                 gridProdutos.Rows.Clear();
 
@@ -158,14 +159,14 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         Grid_DataGridView.User_LinhaAdicionar(gridProdutos,
                                                                       new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = gridProdutos_Id, Valor = vendaMercadoriaViewModel.Id },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = gridProdutos_VendaId, Valor = vendaMercadoriaViewModel.VendaId },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = gridProdutos_CodigoSistema, Valor = vendaMercadoriaViewModel.MercadoriaId },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = gridProdutos_RefSistema, Valor = vendaMercadoriaViewModel.MercadoriaId },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = gridProdutos_Descricao, Valor = vendaMercadoriaViewModel.MercadoriaId },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = gridProdutos_Medida, Valor = vendaMercadoriaViewModel.UnidadeMedidaId },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = gridProdutos_Quantidade, Valor = vendaMercadoriaViewModel.Quantidade },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = gridProdutos_Preco, Valor = vendaMercadoriaViewModel.Preco },
-                                                                                                      new Grid_DataGridView.Coluna { Indice = gridProdutos_Total, Valor = vendaMercadoriaViewModel.Total }});
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_VendaId, Valor = vendaMercadoriaViewModel.VendaId },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_CodigoSistema, Valor = vendaMercadoriaViewModel.MercadoriaId },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_RefSistema, Valor = vendaMercadoriaViewModel.MercadoriaId },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_Descricao, Valor = vendaMercadoriaViewModel.MercadoriaId },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_Medida, Valor = vendaMercadoriaViewModel.UnidadeMedidaId },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_Quantidade, Valor = vendaMercadoriaViewModel.Quantidade },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_Preco, Valor = vendaMercadoriaViewModel.Preco },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_Total, Valor = vendaMercadoriaViewModel.Total }});
                     }
                 }
 
@@ -730,7 +731,7 @@ namespace SisCom.Aplicacao.Formularios
             }
 
             var form = this.ServiceProvider().GetRequiredService<frmFiscal_NotaFiscal>();
-            form.VendaId = venda.Id;
+            form.vendaId = venda.Id;
             form.ShowDialog(this);
         }
         private void botaoNovo_Click(object sender, EventArgs e)

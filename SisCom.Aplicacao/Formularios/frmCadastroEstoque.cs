@@ -40,6 +40,7 @@ namespace SisCom.Aplicacao.Formularios
 
             await comboAlmoxarifado_Carregar();
             await comboMercadoria_Carregar();
+            await comboUnidadeMedida_Carregar();
 
             Grid_DataGridView.User_Formatar(gridProdutoEstoque, true);
             Grid_DataGridView.User_ColunaAdicionar(gridProdutoEstoque, "", "Mercadoria", Tamanho: 500);
@@ -74,6 +75,14 @@ namespace SisCom.Aplicacao.Formularios
                 "ID", "Nome",
                 ComboBoxStyle.DropDownList,
                 await (new MercadoriaController(this.MeuDbContext(), this._notifier)).Combo(p => p.Nome));
+            this.MeuDbContextDispose();
+        }
+        private async Task comboUnidadeMedida_Carregar()
+        {
+            Combo_ComboBox.Formatar(comboUnidadeMedida,
+                "ID", "Nome",
+                ComboBoxStyle.DropDownList,
+                await (new UnidadeMedidaController(this.MeuDbContext(), this._notifier)).Combo(p => p.Nome));
             this.MeuDbContextDispose();
         }
         #endregion

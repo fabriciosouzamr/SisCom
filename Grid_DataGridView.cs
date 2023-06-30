@@ -164,7 +164,7 @@ public static class Grid_DataGridView
         }
     }
 
-    public static DataGridViewColumn User_ColunaAdicionar(DataGridView Grid, string Nome, string Titulo, TipoColuna Tipo = TipoColuna.Texto, int Tamanho = 100, int Caracteres = 0, object dataSource = null, string                                                                 dataSource_Descricao = "", string dataSource_Valor = "", bool readOnly = true, bool wordWrap = false, int dropDownWidth = 0,
+    public static DataGridViewColumn User_ColunaAdicionar(DataGridView Grid, string Nome, string Titulo, TipoColuna Tipo = TipoColuna.Texto, int Tamanho = 100, int Caracteres = 0, object dataSource = null, string                                                                   dataSource_Descricao = "", string dataSource_Valor = "", bool readOnly = true, bool wordWrap = false, int dropDownWidth = 0,
                                                           DataGridViewContentAlignment alinhamento = DataGridViewContentAlignment.NotSet)
     {
         DataGridViewColumn Coluna = User_ColunaCriar(Grid,
