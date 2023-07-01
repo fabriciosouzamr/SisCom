@@ -39,6 +39,7 @@ namespace SisCom.Aplicacao.Controllers
             {
                 pesqestoque = new Estoque()
                 {
+                    Id = Guid.NewGuid(),
                     AlmoxarifadoId = estoque.AlmoxarifadoId,
                     MercadoriaId = estoque.MercadoriaId,
                     QuantidadeEmEstoque = estoque.QuantidadeEmEstoque,

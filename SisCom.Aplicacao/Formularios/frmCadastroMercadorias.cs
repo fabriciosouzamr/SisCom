@@ -1080,12 +1080,17 @@ namespace SisCom.Aplicacao.Formularios
 
                 using (EstoqueController estoqueController = new EstoqueController(this.MeuDbContext(), this._notifier))
                 {
-                    var estoque = await estoqueController.Obter(w => w.MercadoriaId == mercadoria.Id);
+                    var estoque = await estoqueController.Obter(predicate: w => w.MercadoriaId == mercadoria.Id );
 
                     if (estoque.Any())
                     {
                         comboEstoque_Unidade.Enabled = false;
-                        labelEstoque_Quantidade.Text = estoque.Sum(s => s.QuantidadeEmEstoque).ToString("0000");
+                        labelEstoque_Quantidade.Text = estoque.Sum(s => s.QuantidadeEmEstoque).ToString();
+                    }
+                    else
+                    {
+                        comboEstoque_Unidade.Enabled = true;
+                        labelEstoque_Quantidade.Text = "0000";
                     }
                 }
 

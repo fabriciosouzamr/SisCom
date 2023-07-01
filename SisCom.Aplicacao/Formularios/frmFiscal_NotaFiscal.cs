@@ -177,7 +177,7 @@ namespace SisCom.Aplicacao.Formularios
                     var empresa = (await empresaController.GetById(Declaracoes.dados_Empresa_Id));
 
                     if (empresa != null)
-                    { 
+                    {
                         textSerie.Text = Funcao.NuloParaString(empresa.NFE_Serie);
                         if (carregarnotas) { await CarregarNotaFiscal(); }
                     }
@@ -256,9 +256,9 @@ namespace SisCom.Aplicacao.Formularios
                     tabelaCST_CSOSN = (List<CodigoDescricaoComboViewModel>)await tabelaCST_CSOSNController.Combo(o => o.Codigo, w => w.CRT == Declaracoes.dados_Empresa_RegimeTributario.GetHashCode());
                 }
 
-                foreach(CodigoComboViewModel cfop in tabelaCFOP)
+                foreach (CodigoComboViewModel cfop in tabelaCFOP)
                 {
-                    switch(cfop.Codigo)
+                    switch (cfop.Codigo)
                     {
                         case "5102":
                             cfop_5102 = cfop.Id;
@@ -296,7 +296,7 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "NotaFiscalSaidaId", "NotaFiscalSaidaId", Tamanho: 0);
 
                 //Cobrança da Nota
-                List <NomeComboViewModel> formaPagamento;
+                List<NomeComboViewModel> formaPagamento;
 
                 using (FormaPagamentoController formaPagamentoController = new FormaPagamentoController(this.MeuDbContext(), this._notifier))
                 {
@@ -869,7 +869,7 @@ namespace SisCom.Aplicacao.Formularios
                 comboInfoNFeTipoEmissao.SelectedValue = notaFiscalSaida.TipoEmissao;
                 textEmailDestinoXML.Text = Funcao.NuloParaString(notaFiscalSaida.EmailDestinoXML);
 
-                if (!Funcao.Nulo(notaFiscalSaida.TipoNFReferenciada)) 
+                if (!Funcao.Nulo(notaFiscalSaida.TipoNFReferenciada))
                 {
                     comboInfoNFeOrigem.SelectedValue = notaFiscalSaida.TipoNFReferenciada;
                     comboInfoNFeFidelidade_SelectedIndexChanged(null, null);
@@ -898,8 +898,8 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         if ((mercadoria.TabelaCFOPId == null) || (mercadoria.TabelaCFOPId == Guid.Empty))
                         {
-                            if (Declaracoes.dados_Empresa_EstadoId == dadolocal_Cliente_EstadoId )
-                            { cfop = cfop_5102;  }
+                            if (Declaracoes.dados_Empresa_EstadoId == dadolocal_Cliente_EstadoId)
+                            { cfop = cfop_5102; }
                             else
                             { cfop = cfop_6102; }
                         }
@@ -1445,9 +1445,9 @@ namespace SisCom.Aplicacao.Formularios
             if (notaFiscalSaida.ClienteId == null)
                 return false;
 
-            if ((notaFiscalSaida.Status != NF_Status.Transmitida) && 
-                (notaFiscalSaida.Status != NF_Status.Cancelado) && 
-                (notaFiscalSaida.Status != NF_Status.Denegada) && 
+            if ((notaFiscalSaida.Status != NF_Status.Transmitida) &&
+                (notaFiscalSaida.Status != NF_Status.Cancelado) &&
+                (notaFiscalSaida.Status != NF_Status.Denegada) &&
                 (notaFiscalSaida.Status != NF_Status.Inutilizada))
             {
                 if (notaFiscalSaida.Id != Guid.Empty)
@@ -1671,11 +1671,11 @@ namespace SisCom.Aplicacao.Formularios
             { notaFiscalSaidaController.Dispose(); }
             catch (Exception)
             { }
-            
+
             vendaId = Guid.Empty;
 
             if (recarregar)
-            await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
+                await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
             this.MeuDbContextDispose();
 
@@ -1751,9 +1751,9 @@ namespace SisCom.Aplicacao.Formularios
                             if (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_CST_CSOSN].Value == null)
                                 gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_CST_CSOSN].Value = mercadoria.Fiscal_TabelaCST_CSOSNId;
                             if (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_UnidadeMedida].Value == null)
-                            gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_UnidadeMedida].Value = mercadoria.Estoque_UnidadeMedidaId;
+                                gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_UnidadeMedida].Value = mercadoria.Estoque_UnidadeMedidaId;
                         }
-                    }    
+                    }
 
                     if ((gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Descricao].Value == null) &&
                         (gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Mercadoria].Value != null))
@@ -1893,7 +1893,7 @@ namespace SisCom.Aplicacao.Formularios
                         if (!Funcao.Nulo(pessoaViewModel.Endereco.End_CidadeId)) comboRemetenteCidade.SelectedValue = pessoaViewModel.Endereco.End_CidadeId;
                         textRemetenteCEP.Text = Funcao.NuloParaString(pessoaViewModel.Endereco.End_CEP);
                         textRemetenteIE.Text = Funcao.NuloParaString(pessoaViewModel.InscricaoEstadual);
-                        PossicionarNaturezaOperacao(); 
+                        PossicionarNaturezaOperacao();
                     }
                 }
 
@@ -2111,7 +2111,7 @@ namespace SisCom.Aplicacao.Formularios
 
             comboRemetenteUF.Enabled = editar;
             comboRemetenteCidade.Enabled = editar;
-        
+
             textRemetenteEndereco.ReadOnly = (!editar);
             textRemetenteNumero.ReadOnly = (!editar);
             textRemetenteBairro.ReadOnly = (!editar);
@@ -2244,7 +2244,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             if ((Combo_ComboBox.Selecionado(comboTransportadora)) && !carregando)
             {
-                using(TransportadoraController transportadoraController = new TransportadoraController(this.MeuDbContext(), this._notifier))
+                using (TransportadoraController transportadoraController = new TransportadoraController(this.MeuDbContext(), this._notifier))
                 {
                     var transportadora = (await transportadoraController.PesquisarId((Guid)comboTransportadora.SelectedValue)).FirstOrDefault();
 

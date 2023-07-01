@@ -52,7 +52,8 @@ namespace SisCom.Aplicacao.Controllers
 
             var estoque = await estoqueController.Atualizar(new EstoqueViewModel() { AlmoxarifadoId = almoxarifadoId, MercadoriaId = mercadoriaId, QuantidadeEmEstoque = quantidadeEmEstoque});
 
-            var estoqueLancamentoViewModel = new EstoqueLancamento() { EstoqueId = estoque.Id,
+            var estoqueLancamentoViewModel = new EstoqueLancamento() { Id = Guid.NewGuid(),
+                                                                       EstoqueId = estoque.Id,
                                                                        TipoLancamentoEstoque = tipoLancamentoEstoque, 
                                                                        Data = data, 
                                                                        Quantidade = quantidade,

@@ -9,6 +9,7 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
+using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,7 @@ namespace SisCom.Aplicacao.Formularios
         const int grdProduto_Item = 14;
 
         private nfeProc _nfeProc;
+        private List<CodigoNomeComboViewModel> _unidadeMedida;
 
         IEnumerable<UnidadeMedidaConversaoViewModel> unidadeMedidaConversao;
         IEnumerable<TabelaCFOPViewModel> CFOP;
@@ -84,10 +86,14 @@ namespace SisCom.Aplicacao.Formularios
                     produto.Rows.Add(item.Id, Funcao.NuloParaString(item.Nome), Funcao.NuloParaString(item.Codigo), Funcao.NuloParaString(item.CodigoFabricante));
                 }
             }
+            using (UnidadeMedidaController unidadeMedidaController = new UnidadeMedidaController(this.MeuDbContext(), this._notifier))
+            {
+                _unidadeMedida = (List<CodigoNomeComboViewModel>)await unidadeMedidaController.Combo(o => o.Nome);
+            }
 
             Grid_DataGridView.User_Formatar(gridProduto);
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Descrição");
-            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Unidade");
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "Medida", "Medida", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, _unidadeMedida, "Nome", "ID", readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Quantidade");
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Preço");
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Frete");
@@ -156,6 +162,7 @@ namespace SisCom.Aplicacao.Formularios
         { 
             decimal volumes = 0;
             decimal valores = 0;
+            Guid unidadeId;
 
             if (_nfeProc.NFe != null)
             {
@@ -178,32 +185,46 @@ namespace SisCom.Aplicacao.Formularios
                 {
                     volumes = volumes + d.prod.qCom;
                     valores = valores + d.prod.vProd;
+                    unidadeId = Guid.Empty;
+
+                    foreach (var unidade in _unidadeMedida)
+                    {
+                        if (unidade.Codigo.ToUpper() == d.prod.uCom.ToUpper())
+                        {
+                            unidadeId = unidade.Id;
+                        }
+                    }
+
+                    if (unidadeId == Guid.Empty)
+                    {
+                        CaixaMensagem.Informacao($"A unidade de medida {d.prod.uCom} não está cadastrada");
+                    }
 
                     Grid_DataGridView.User_LinhaAdicionar(gridProduto,
                                                                   new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = grdProduto_Descricao,
-                                                                                                                                 Valor = d.prod.xProd },
-                                                                                                  new Grid_DataGridView.Coluna { Indice = grdProduto_Unidade,
-                                                                                                                                 Valor = d.prod.uCom },
-                                                                                                  new Grid_DataGridView.Coluna { Indice = grdProduto_Quantidade,
-                                                                                                                                 Valor = d.prod.qCom,
-                                                                                                                                 Formato = Grid_DataGridView.FormatoColuna.Numero },
-                                                                                                  new Grid_DataGridView.Coluna { Indice = grdProduto_Preco,
-                                                                                                                                 Valor = d.prod.vUnCom,
-                                                                                                                                 Formato = Grid_DataGridView.FormatoColuna.Valor },
-                                                                                                  new Grid_DataGridView.Coluna { Indice = grdProduto_Frete,
-                                                                                                                                 Valor = 0,
-                                                                                                                                 Formato = Grid_DataGridView.FormatoColuna.Valor },
-                                                                                                  new Grid_DataGridView.Coluna { Indice = grdProduto_Total,
-                                                                                                                                 Valor = d.prod.vProd,
-                                                                                                                                 Formato = Grid_DataGridView.FormatoColuna.Valor },
-                                                                                                  new Grid_DataGridView.Coluna { Indice = grdProduto_CodigoFornecedor,
-                                                                                                                                 Valor = d.prod.cProd,
-                                                                                                                                 Formato = Grid_DataGridView.FormatoColuna.Texto },
-                                                                                                  new Grid_DataGridView.Coluna { Indice = grdProduto_QtdeCaixa,
-                                                                                                                                 Valor = d.prod.uCom == "SC" ? d.prod.qCom : Math.Round(d.prod.qCom * (decimal)0.016667, 2),
-                                                                                                                                 Formato = Grid_DataGridView.FormatoColuna.Texto },
-                                                                                                  new Grid_DataGridView.Coluna { Indice = grdProduto_Item,
-                                                                                                                                 Valor = d.nItem } });
+                                                                                                                                        Valor = d.prod.xProd },
+                                                                                                         new Grid_DataGridView.Coluna { Indice = grdProduto_Unidade,
+                                                                                                                                        Valor = unidadeId },
+                                                                                                         new Grid_DataGridView.Coluna { Indice = grdProduto_Quantidade,
+                                                                                                                                        Valor = d.prod.qCom,
+                                                                                                                                        Formato = Grid_DataGridView.FormatoColuna.Numero },
+                                                                                                         new Grid_DataGridView.Coluna { Indice = grdProduto_Preco,
+                                                                                                                                        Valor = d.prod.vUnCom,
+                                                                                                                                        Formato = Grid_DataGridView.FormatoColuna.Valor },
+                                                                                                         new Grid_DataGridView.Coluna { Indice = grdProduto_Frete,
+                                                                                                                                        Valor = 0,
+                                                                                                                                        Formato = Grid_DataGridView.FormatoColuna.Valor },
+                                                                                                         new Grid_DataGridView.Coluna { Indice = grdProduto_Total,
+                                                                                                                                        Valor = d.prod.vProd,
+                                                                                                                                        Formato = Grid_DataGridView.FormatoColuna.Valor },
+                                                                                                         new Grid_DataGridView.Coluna { Indice = grdProduto_CodigoFornecedor,
+                                                                                                                                        Valor = d.prod.cProd,
+                                                                                                                                        Formato = Grid_DataGridView.FormatoColuna.Texto },
+                                                                                                         new Grid_DataGridView.Coluna { Indice = grdProduto_QtdeCaixa,
+                                                                                                                                        Valor = d.prod.uCom == "SC" ? d.prod.qCom : Math.Round(d.prod.qCom * (decimal)0.016667, 2),
+                                                                                                                                        Formato = Grid_DataGridView.FormatoColuna.Texto },
+                                                                                                         new Grid_DataGridView.Coluna { Indice = grdProduto_Item,
+                                                                                                                                        Valor = d.nItem } });
                 });
 
                 if (_nfeProc.NFe.infNFe.det != null)
@@ -432,6 +453,7 @@ namespace SisCom.Aplicacao.Formularios
                                 notaFiscalEntradaMercadoriaViewModel.PercentualICMS = Funcao.NuloParaValorD(Zeus.NFe_Produto_DadosICMS(prod) == null ? 0 : Zeus.NFe_Produto_DadosICMS(prod).vICMS);
                                 notaFiscalEntradaMercadoriaViewModel.PercentualIPI = Funcao.NuloParaValorD(Zeus.NFE_Produto_DadosIPI(prod) == null ? 0 : Zeus.NFE_Produto_DadosIPI(prod).vIPI);
                                 notaFiscalEntradaMercadoriaViewModel.MercadoriaId = Guid.Parse(row.Cells[grdProduto_CodigoSistema].Value.ToString());
+                                notaFiscalEntradaMercadoriaViewModel.UnidadeMedidaId = Guid.Parse(row.Cells[grdProduto_Unidade].Value.ToString());
 
                                 foreach (var item in CFOP)
                                     if (item.Codigo == prod.prod.CFOP.ToString())

@@ -1750,6 +1750,7 @@ namespace SisCom.Aplicacao.Classes
                 {
                     oNFe.infNFe.total = GetTotal("4.00", oNFe.infNFe.det);
                     oNFe.infNFe.total.ICMSTot.vFrete = notaFiscalSaidaViewModel.ValorFrete;
+                    oNFe.infNFe.total.ICMSTot.vDesc = notaFiscalSaidaViewModel.ValorDesconto;
                 }
                 catch (Exception)
                 {
