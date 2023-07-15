@@ -6,7 +6,6 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
-using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.LinkLabel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Texto = Funcoes._Classes.Texto;
 
 namespace SisCom.Aplicacao.Formularios
@@ -113,6 +112,7 @@ namespace SisCom.Aplicacao.Formularios
         List<Guid> notaFiscalSaidaReferenciaExcluir;
 
         IEnumerable<MercadoriaImpostoEstadoViewModel> mercadoriaImpostoEstado;
+        private IEnumerable<PessoaComboNomeViewModel> comboRemetenteData;
 
         bool carregando = false;
         string especiePadrao = "";
@@ -200,8 +200,10 @@ namespace SisCom.Aplicacao.Formularios
                         else
                         { textNumeroNotaFiscalSaida.Text = (Convert.ToInt16(notaFiscalSaidaSerie.UltimaNotaFiscal) + 1).ToString(); }
 
-                        textNumeroNotaFiscalSaida.Tag = textNumeroNotaFiscalSaida.Text;
+                        textNumeroNotaFiscalSaida.Refresh();
                     }
+
+                    Task.Delay(1000);
                 }
             }
 
@@ -232,7 +234,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 using (MercadoriaController mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier))
                 {
-                    IEnumerable<MercadoriaViewModel> ret = await mercadoriaController.ObterTodos();
+                    IEnumerable<MercadoriaViewModel> ret = await mercadoriaController.ObterTodos(o => o.Nome);
 
                     foreach (var item in ret)
                     {
@@ -274,7 +276,7 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Id", "Id", Tamanho: 0);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "Id", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "Id", readOnly: false);
-                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Mercadoria", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "Id", readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Mercadoria", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "Id", readOnly: false, dropDownWidth: 300);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Descrição", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "NCM", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaNCM, "Codigo", "ID", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "CST/CSOSN", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaCST_CSOSN, "Codigo", "ID", readOnly: false);
@@ -356,8 +358,10 @@ namespace SisCom.Aplicacao.Formularios
         {
             Editar(false);
 
-            datePeriodoInicial.Value = DateTime.Now.Date;
+            dateDataEmissao.Value = DateTime.Now;
+            dateDataSaida.Value = DateTime.Now;
             textHora.Text = DateTime.Now.ToString("HH:mm");
+            textNumeroNotaFiscalSaida.Text = "";
 
             comboNaturezaOperacao.SelectedIndex = -1;
 
@@ -521,7 +525,7 @@ namespace SisCom.Aplicacao.Formularios
                 Combo_ComboBox.Formatar(comboOrigem,
                                         "ID", "Descricao",
                                         ComboBoxStyle.DropDownList,
-                                        await (new TabelaOrigemVendaController(this.MeuDbContext(), this._notifier)).Combo());
+                                        await (new TabelaOrigemVendaController(this.MeuDbContext(), this._notifier)).Combo(o => o.Descricao));
             }
 
             return true;
@@ -530,11 +534,12 @@ namespace SisCom.Aplicacao.Formularios
         {
             using (MeuDbContext meuDbContext = this.MeuDbContext())
             {
-                Combo_ComboBox.Formatar(comboRemetente,
-                                        "ID", "Nome",
-                                        ComboBoxStyle.DropDownList,
-                                        await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboNome());
+                comboRemetenteData = await (new PessoaController(this.MeuDbContext(), this._notifier)).ComboNome(o => o.Nome);
             }
+
+            Combo_ComboBox.Formatar(comboRemetente,
+                "ID", "Nome",
+                ComboBoxStyle.DropDown, comboRemetenteData, autoCompleteMode: AutoCompleteMode.Suggest);
 
             return true;
         }
@@ -1110,6 +1115,11 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Selecione a natureza de operação");
                 return false;
             }
+            if (!Combo_ComboBox.Selecionado(comboRemetente))
+            {
+                CaixaMensagem.Informacao("Selecione o remetente");
+                return false;
+            }
             if (!Combo_ComboBox.Selecionado(comboFinalidade))
             {
                 CaixaMensagem.Informacao("Selecione a finalidade");
@@ -1142,8 +1152,13 @@ namespace SisCom.Aplicacao.Formularios
             }
             foreach (DataGridViewRow row in gridMercadoria.Rows)
             {
-                if ((row.Cells[gridMercadoria_Descricao].Value != null) || (row.Cells[gridMercadoria_CodigoSistema].Value != null))
+                if (row.Index < gridMercadoria.Rows.Count - 1)
                 {
+                    if ((row.Cells[gridMercadoria_Descricao].Value == null) || (row.Cells[gridMercadoria_CodigoSistema].Value == null))
+                    {
+                        CaixaMensagem.Informacao("Selecione a mercadoria");
+                        return false;
+                    }
                     if (row.Cells[gridMercadoria_UnidadeMedida].Value == null)
                     {
                         CaixaMensagem.Informacao("Selecione a unidade de medida de todos as mercadorias");
@@ -1218,7 +1233,11 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoNovo_Click(object sender, EventArgs e)
         {
-
+            vendaId = Guid.Empty;
+            notaFiscalSaida = null;
+            Limpar();
+            Editar(true);
+            tbcGeral.SelectedTab = tbsRemetente;
         }
         private void botaoEditar_Click(object sender, EventArgs e)
         {
@@ -1369,7 +1388,7 @@ namespace SisCom.Aplicacao.Formularios
                 notaFiscalSaida = new ViewModels.NotaFiscalSaidaViewModel();
             }
 
-            Assincrono.TaskAsyncAndAwaitAsync(CarregarNotaFiscal());
+            await CarregarNotaFiscal();
             Assincrono.TaskAsyncAndAwaitAsync(AdicionarNotaFiscalSaida(recarregar));
 
             Editar(false);
@@ -1764,8 +1783,8 @@ namespace SisCom.Aplicacao.Formularios
                 else if ((e.ColumnIndex == gridMercadoria_Quantidade) ||
                          (e.ColumnIndex == gridMercadoria_Preco))
                 {
-                    gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value = Funcao.NuloParaNumero(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Quantidade].Value) *
-                                                                                        Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Preco].Value);
+                    gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value = Math.Round(Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Quantidade].Value) *
+                                                                                                   Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Preco].Value), 8);
                 }
             }
             catch (Exception)
@@ -2314,6 +2333,32 @@ namespace SisCom.Aplicacao.Formularios
         {
             timer1.Stop();
             await Navegar(posicaoNavegacao);
+        }
+
+        private void gridMercadoria_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            var comboBox = e.Control as DataGridViewComboBoxEditingControl;
+            if (comboBox != null)
+            {
+                comboBox.DropDownStyle = ComboBoxStyle.DropDown;
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.DroppedDown = false;
+            }
+
+            gridMercadoria.NotifyCurrentCellDirty(true);
+        }
+
+        private void comboRemetente_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            comboRemetente.DroppedDown = false;
+        }
+
+        private void gridMercadoria_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (gridMercadoria.IsCurrentCellDirty)
+            {
+                gridMercadoria.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
         }
     }
 }

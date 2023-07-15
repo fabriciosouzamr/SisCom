@@ -51,7 +51,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 Combo_ComboBox.Formatar(comboStatusVenda, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Status));
 
-                Grid_DataGridView.User_Formatar(gridNotaFiscalSaida, true);
+                Grid_DataGridView.User_Formatar(gridNotaFiscalSaida, false);
                 Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalSaida, "ID", "ID", Tamanho: 0);
                 Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalSaida, "", "...", Grid_DataGridView.TipoColuna.CheckBox, Tamanho: 30, readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridNotaFiscalSaida, "", "", Tamanho: 30);
@@ -171,7 +171,7 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
-
+        
         private void gridNotaFiscalSaida_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             GridNotaFiscalSaida(e);
@@ -179,7 +179,9 @@ namespace SisCom.Aplicacao.Formularios
 
         async void GridNotaFiscalSaida(DataGridViewCellEventArgs e)
         {
-            if (gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_CPF_CNPJ].Value.ToString() != "")
+            if (e.RowIndex != -1 &&
+                (gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_Id].Value != null) &&
+                (gridNotaFiscalSaida.Rows[e.RowIndex].Cells[gridNotaFiscalSaida_CPF_CNPJ].Value.ToString() != ""))
             {
                 switch (e.ColumnIndex)
                 {

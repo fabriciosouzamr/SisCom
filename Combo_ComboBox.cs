@@ -19,7 +19,8 @@ public class Combo_ComboBox
 							    string DisplayMember, 
 								ComboBoxStyle DropDownStyle = ComboBoxStyle.DropDown,
 								object DataSource = null,
-								Type myEnum = null)
+								Type myEnum = null,
+                                AutoCompleteMode autoCompleteMode = AutoCompleteMode.None)
 	{
 		Combo.Tag = Declaracoes.ComboBox_Carregando;
 		Combo.DataSource = null;
@@ -27,7 +28,13 @@ public class Combo_ComboBox
 		Combo.DisplayMember = DisplayMember;
 		Combo.DropDownStyle = DropDownStyle;
 
-		if (DataSource != null)
+        if (autoCompleteMode != AutoCompleteMode.None)
+        {
+            Combo.AutoCompleteMode = autoCompleteMode;
+            Combo.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        if (DataSource != null)
 		{
 			Combo.DataSource = DataSource;
 		}

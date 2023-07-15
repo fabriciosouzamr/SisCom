@@ -10,6 +10,7 @@ namespace SisCom.Infraestrutura.Data.Mappings
         {
             builder.HasKey(p => p.Id);
 
+            builder.Property(p => p.Quantidade).HasColumnType("decimal(18, 8)");
             builder.Property(p => p.Preco).HasColumnType("decimal(18, 8)");
             builder.Property(p => p.Total).HasColumnType("decimal(18, 8)");
 

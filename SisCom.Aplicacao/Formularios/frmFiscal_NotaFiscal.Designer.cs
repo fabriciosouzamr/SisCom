@@ -1413,6 +1413,7 @@
             comboRemetente.Size = new System.Drawing.Size(400, 23);
             comboRemetente.TabIndex = 30;
             comboRemetente.SelectedIndexChanged += comboRemetente_SelectedIndexChanged;
+            comboRemetente.KeyPress += comboRemetente_KeyPress;
             // 
             // label31
             // 
@@ -2303,7 +2304,9 @@
             gridMercadoria.TabIndex = 16;
             gridMercadoria.CellClick += gridMercadoria_CellClick;
             gridMercadoria.CellValueChanged += gridMercadoria_CellValueChanged;
+            gridMercadoria.CurrentCellDirtyStateChanged += gridMercadoria_CurrentCellDirtyStateChanged;
             gridMercadoria.DataError += gridMercadoria_DataError;
+            gridMercadoria.EditingControlShowing += gridMercadoria_EditingControlShowing;
             gridMercadoria.UserDeletedRow += gridMercadoria_UserDeletedRow;
             // 
             // tbsObservacoes

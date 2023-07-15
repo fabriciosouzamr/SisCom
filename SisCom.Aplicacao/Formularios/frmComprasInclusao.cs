@@ -300,7 +300,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             int linha = -1;
 
-            if (notaFiscalEntradaId != Guid.Empty)
+            if (notaFiscalEntrada.Id != Guid.Empty)
             {
                 using (NotaFiscalEntradaController notaFiscalEntradaController = new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier))
                 {
@@ -738,7 +738,7 @@ namespace SisCom.Aplicacao.Formularios
 
         private async void botaoExcluir_Click(object sender, EventArgs e)
         {
-            if (notaFiscalEntradaId == Guid.Empty)
+            if ((notaFiscalEntrada == null) || (notaFiscalEntrada.Id == Guid.Empty))
             {
                 CaixaMensagem.Informacao("Selecione a nota fiscal de entrada para exclusão");
             }

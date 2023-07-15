@@ -159,14 +159,14 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         Grid_DataGridView.User_LinhaAdicionar(gridProdutos,
                                                                       new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = gridProdutos_Id, Valor = vendaMercadoriaViewModel.Id },
-                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_VendaId, Valor = vendaMercadoriaViewModel.VendaId },
-                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_CodigoSistema, Valor = vendaMercadoriaViewModel.MercadoriaId },
-                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_RefSistema, Valor = vendaMercadoriaViewModel.MercadoriaId },
-                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_Descricao, Valor = vendaMercadoriaViewModel.MercadoriaId },
-                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_Medida, Valor = vendaMercadoriaViewModel.UnidadeMedidaId },
-                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_Quantidade, Valor = vendaMercadoriaViewModel.Quantidade },
-                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_Preco, Valor = vendaMercadoriaViewModel.Preco },
-                                                                                                              new Grid_DataGridView.Coluna { Indice = gridProdutos_Total, Valor = vendaMercadoriaViewModel.Total }});
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridProdutos_VendaId, Valor = vendaMercadoriaViewModel.VendaId },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridProdutos_CodigoSistema, Valor = vendaMercadoriaViewModel.MercadoriaId },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridProdutos_RefSistema, Valor = vendaMercadoriaViewModel.MercadoriaId },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridProdutos_Descricao, Valor = vendaMercadoriaViewModel.MercadoriaId },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridProdutos_Medida, Valor = vendaMercadoriaViewModel.UnidadeMedidaId },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridProdutos_Quantidade, Valor = vendaMercadoriaViewModel.Quantidade },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridProdutos_Preco, Valor = vendaMercadoriaViewModel.Preco },
+                                                                                                             new Grid_DataGridView.Coluna { Indice = gridProdutos_Total, Valor = vendaMercadoriaViewModel.Total }});
                     }
                 }
 
@@ -213,7 +213,7 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "ID", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 400, 0, produto, "Descricao", "ID", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Medida", "Medida", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, unidadeMedida, "Nome", "ID", readOnly: false);
-                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Quantidade", "Quantidade", Grid_DataGridView.TipoColuna.Numero, readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Quantidade", "Quantidade", Grid_DataGridView.TipoColuna.Numero6, readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Preço", "Preço", Grid_DataGridView.TipoColuna.Numero6 , readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Total", "Total", Grid_DataGridView.TipoColuna.Numero6, readOnly: true);
                 Grid_DataGridView.User_ColunaAdicionar(gridProdutos, "Excluir", "Excluir", Grid_DataGridView.TipoColuna.Button);
@@ -574,6 +574,30 @@ namespace SisCom.Aplicacao.Formularios
 
             if ((venda != null) && (venda.Id != Guid.Empty))
             {
+                using (NotaFiscalSaidaController notaFiscalSaidaController =
+                       new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                {
+                    var notafiscal = (await notaFiscalSaidaController.Pesquisar(predicate: w => w.VendaId == venda.Id)).FirstOrDefault();
+
+                    if (notafiscal != null)
+                    {
+                        if (notafiscal.Status == NF_Status.Transmitida)
+                        {
+                            CaixaMensagem.Informacao("Venda relacionada a uma nota fiscal transmitida. A mesma não poder ser excluída");
+                            return;
+                        }
+                        else
+                        {
+                            if (!new List<NF_Status>() { NF_Status.Denegada, NF_Status.Inutilizada }.Contains(notafiscal.Status))
+                            {
+                                notafiscal.Status = NF_Status.Cancelado;
+                            }
+                            notafiscal.VendaId = null;
+                            await notaFiscalSaidaController.Atualizar(notafiscal.Id, notafiscal);
+                        }
+                    }
+                }
+
                 using (VendaMercadoriaController vendaMercadoriaController = new VendaMercadoriaController(this.MeuDbContext(), this._notifier))
                 {
                     var todos = (await vendaMercadoriaController.PesquisarVendaId(venda.Id));
@@ -581,6 +605,26 @@ namespace SisCom.Aplicacao.Formularios
                     foreach (VendaMercadoriaViewModel vendaMercadoriaViewModel in todos)
                     {
                         await vendaMercadoriaController.Excluir(vendaMercadoriaViewModel.Id);
+
+                        using (EstoqueLancamentoController estoqueLancamentoController = new EstoqueLancamentoController(this.MeuDbContext(), this._notifier))
+                        {
+                            if (venda.TipoNotaFiscal == NF_TipoNotaFiscal.Saida)
+                                await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
+                                                                            vendaMercadoriaViewModel.MercadoriaId,
+                                                                            vendaMercadoriaViewModel.UnidadeMedidaId,
+                                                                            TipoLancamentoEstoque.Movimentacao,
+                                                                            Funcoes._Enum.EntradaSaida.Entrada,
+                                                                            DateTime.Now,
+                                                                            (double)vendaMercadoriaViewModel.Quantidade);
+                            if (venda.TipoNotaFiscal == NF_TipoNotaFiscal.Entrada)
+                                await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
+                                                                            vendaMercadoriaViewModel.MercadoriaId,
+                                                                            vendaMercadoriaViewModel.UnidadeMedidaId,
+                                                                            TipoLancamentoEstoque.Movimentacao,
+                                                                            Funcoes._Enum.EntradaSaida.Saida,
+                                                                            DateTime.Now,
+                                                                            (double)vendaMercadoriaViewModel.Quantidade);
+                        }
                     }
                 }
 
@@ -593,7 +637,7 @@ namespace SisCom.Aplicacao.Formularios
             this.MeuDbContextDispose();
 
             Limpar();
-            Navegar(Declaracoes.eNavegar.Primeiro);
+            Navegar(Declaracoes.eNavegar.Anterior);
         }
         private async Task<bool> GravarVenda()
         {
@@ -659,8 +703,8 @@ namespace SisCom.Aplicacao.Formularios
                 else if ((e.ColumnIndex == gridProdutos_Quantidade) ||
                          (e.ColumnIndex == gridProdutos_Preco))
                 {
-                    gridProdutos.Rows[e.RowIndex].Cells[gridProdutos_Total].Value = Funcao.NuloParaNumero(gridProdutos.Rows[e.RowIndex].Cells[gridProdutos_Quantidade].Value) *
-                                                                                    Funcao.NuloParaValorD(gridProdutos.Rows[e.RowIndex].Cells[gridProdutos_Preco].Value);
+                    gridProdutos.Rows[e.RowIndex].Cells[gridProdutos_Total].Value = Math.Round(Funcao.NuloParaValorD(gridProdutos.Rows[e.RowIndex].Cells[gridProdutos_Quantidade].Value) *
+                                                                                               Funcao.NuloParaValorD(gridProdutos.Rows[e.RowIndex].Cells[gridProdutos_Preco].Value), 6);
                 }
 
                 CalcularSubTotal();

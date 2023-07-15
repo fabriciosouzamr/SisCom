@@ -15,6 +15,7 @@ namespace SisCom.Entidade.Modelos
         public decimal Quantidade { get; set; }
         public decimal PrecoUnitario { get; set; }
         public decimal PrecoTotal { get; set; }
+        public decimal Desconto { get; set; }
         public decimal PercentualICMS { get; set; }
         public decimal PercentualIPI { get; set; }
         public decimal ValorFrete { get; set; }

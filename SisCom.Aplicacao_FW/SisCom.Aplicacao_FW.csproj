@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B3CFFC5C-1D35-4A4D-A573-C61AEC2BC7A7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SisCom.Aplicacao_FW</RootNamespace>
-    <AssemblyName>SisCom.Aplicacao_FW</AssemblyName>
+    <RootNamespace>PlenoR.Aplicacao_FW</RootNamespace>
+    <AssemblyName>PlenoR.Aplicacao_FW</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
