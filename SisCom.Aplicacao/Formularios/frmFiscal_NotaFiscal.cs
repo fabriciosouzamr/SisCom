@@ -24,7 +24,7 @@ namespace SisCom.Aplicacao.Formularios
     {
         ViewModels.NotaFiscalSaidaViewModel notaFiscalSaida = null;
         public Guid vendaId;
-        NF_TipoNotaFiscal tipoNotaFiscal = NF_TipoNotaFiscal.Saida;
+        public NF_TipoNotaFiscal tipoNotaFiscal = NF_TipoNotaFiscal.Saida;
 
         Declaracoes.eNavegar posicaoNavegacao = Declaracoes.eNavegar.Primeiro;
 
@@ -45,12 +45,13 @@ namespace SisCom.Aplicacao.Formularios
         const int gridMercadoria_BaseCalculoICMS = 14;
         const int gridMercadoria_IPI = 15;
         const int gridMercadoria_Frete = 16;
-        const int gridMercadoria_BTN_Impostos = 17;
-        const int gridMercadoria_BTN_Excluir = 18;
-        const int gridMercadoria_Impostos = 19;
-        const int gridMercadoria_PesoBruto = 20;
-        const int gridMercadoria_PesoLiquido = 21;
-        const int gridMercadoria_NotaFiscalSaidaId = 22;
+        const int gridMercadoria_Desconto = 17;
+        const int gridMercadoria_BTN_Impostos = 18;
+        const int gridMercadoria_BTN_Excluir = 19;
+        const int gridMercadoria_Impostos = 20;
+        const int gridMercadoria_PesoBruto = 21;
+        const int gridMercadoria_PesoLiquido = 22;
+        const int gridMercadoria_NotaFiscalSaidaId = 23;
 
         const int gridCobrancaNota_Id = 0;
         const int gridCobrancaNota_TipoPagamento = 1;
@@ -105,6 +106,7 @@ namespace SisCom.Aplicacao.Formularios
         Guid dadolocal_Cliente_EstadoId = Guid.Empty;
         Guid cfop_5102 = Guid.Parse("BFDC3E42-3DF4-4463-A866-07684FBAC021");
         Guid cfop_6102 = Guid.Parse("40CBC68C-DFA2-4FE2-B819-9036FF92C360");
+        Guid cfop_1102 = Guid.Parse("A0F7FCC2-BAE9-4B35-9FA0-2202646566C6");
 
         List<Guid> notaFiscalSaidaObservacaoExcluir;
         List<Guid> notaFiscalSaidaMercadoriaExcluir;
@@ -268,6 +270,9 @@ namespace SisCom.Aplicacao.Formularios
                         case "6102":
                             cfop_6102 = cfop.Id;
                             break;
+                        case "1102":
+                            cfop_1102 = cfop.Id;
+                            break;
                     }
                 }
 
@@ -275,8 +280,8 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.User_Formatar(gridMercadoria, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Id", "Id", Tamanho: 0);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "Id", readOnly: false);
-                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "Id", readOnly: false);
-                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Mercadoria", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "Id", readOnly: false, dropDownWidth: 300);
+                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 50, 0, produto, "CodigoFabricante", "Id", readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Mercadoria", Grid_DataGridView.TipoColuna.ComboBox, 250, 0, produto, "Descricao", "Id", readOnly: false, dropDownWidth: 300);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "Descrição", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "NCM", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaNCM, "Codigo", "ID", readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "", "CST/CSOSN", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, tabelaCST_CSOSN, "Codigo", "ID", readOnly: false);
@@ -290,6 +295,7 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Base de Calc. ICMS", "BaseCalcICMS", Grid_DataGridView.TipoColuna.Numero6, 80, readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "IPI", "IPI", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Frete", "Frete", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
+                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Desconto", "Desconto", Grid_DataGridView.TipoColuna.Percentual, 80, readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Grid_DataGridView.TipoColuna.Button, 80);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Excluir", "Excluir", Grid_DataGridView.TipoColuna.Button, 80);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Tamanho: 0);
@@ -322,22 +328,22 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.User_Formatar(gridObservacao, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
                 Grid_DataGridView.User_ColunaAdicionar(gridObservacao, "ID", "ID", Tamanho: 0);
                 Grid_DataGridView.User_ColunaAdicionar(gridObservacao, "Código", "Código", Grid_DataGridView.TipoColuna.ComboBox, 600, 0, dataSource: observacao,
-                                                                                                                                          dataSource_Descricao: "Descricao",
-                                                                                                                                          dataSource_Valor: "ID",
-                                                                                                                                          dropDownWidth: 400,
-                                                                                                                                          readOnly: false);
+                                                                                                                                                                      dataSource_Descricao: "Descricao",
+                                                                                                                                                                      dataSource_Valor: "ID",
+                                                                                                                                                                      dropDownWidth: 400,
+                                                                                                                                                                      readOnly: false);
 
                 //NF-e
                 Grid_DataGridView.User_Formatar(gridInfoNFe, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
                 Grid_DataGridView.User_ColunaAdicionar(gridInfoNFe, "ID", "ID", Tamanho: 0);
                 Grid_DataGridView.User_ColunaAdicionar(gridInfoNFe, "NF-e/NFC-e Nº", "NF-e/NFC-e Nº", Tamanho: 100, Tipo: Grid_DataGridView.TipoColuna.ComboBox,
-                                                                                                                            dataSource_Descricao: "NotaFiscal",
-                                                                                                                            dataSource_Valor: "ID",
-                                                                                                                            readOnly: false);
+                                                                                                                                dataSource_Descricao: "NotaFiscal",
+                                                                                                                                dataSource_Valor: "ID",
+                                                                                                                                readOnly: false);
                 Grid_DataGridView.User_ColunaAdicionar(gridInfoNFe, "Chave NF-e/NFC-e", "Chave NF-e/NFC-e", Tamanho: 500, Tipo: Grid_DataGridView.TipoColuna.ComboBox,
-                                                                                                                                  dataSource_Descricao: "CodigoChaveAcesso",
-                                                                                                                                  dataSource_Valor: "ID",
-                                                                                                                                  readOnly: false);
+                                                                                                                                      dataSource_Descricao: "CodigoChaveAcesso",
+                                                                                                                                      dataSource_Valor: "ID",
+                                                                                                                                      readOnly: false);
 
                 //Venda
                 Grid_DataGridView.User_Formatar(gridVenda, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
@@ -479,17 +485,28 @@ namespace SisCom.Aplicacao.Formularios
         {
             foreach (ComboNaturezaOperacaoViewModel item in comboNaturezaOperacao.Items)
             {
-                if ((Declaracoes.dados_Empresa_EstadoId == dadolocal_Cliente_EstadoId) || (dadolocal_Cliente_EstadoId == Guid.Empty))
+                if (tipoNotaFiscal == NF_TipoNotaFiscal.Saida)
                 {
-                    if (item.TabelaCFOPId == cfop_5102)
+                    if ((Declaracoes.dados_Empresa_EstadoId == dadolocal_Cliente_EstadoId) || (dadolocal_Cliente_EstadoId == Guid.Empty))
                     {
-                        comboNaturezaOperacao.SelectedValue = item.Id;
-                        break;
+                        if (item.TabelaCFOPId == cfop_5102)
+                        {
+                            comboNaturezaOperacao.SelectedValue = item.Id;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (item.TabelaCFOPId == cfop_6102)
+                        {
+                            comboNaturezaOperacao.SelectedValue = item.Id;
+                            break;
+                        }
                     }
                 }
                 else
                 {
-                    if (item.TabelaCFOPId == cfop_6102)
+                    if (item.TabelaCFOPId == cfop_1102)
                     {
                         comboNaturezaOperacao.SelectedValue = item.Id;
                         break;
@@ -740,10 +757,17 @@ namespace SisCom.Aplicacao.Formularios
 
                         foreach (VendaMercadoriaViewModel vendaMercadoriaViewModel in ret)
                         {
-                            if (Declaracoes.dados_Empresa_EstadoId == dadolocal_Cliente_EstadoId)
-                            { cfop = cfop_5102; }
+                            if (tipoNotaFiscal == NF_TipoNotaFiscal.Saida)
+                            {
+                                if (Declaracoes.dados_Empresa_EstadoId == dadolocal_Cliente_EstadoId)
+                                { cfop = cfop_5102; }
+                                else
+                                { cfop = cfop_6102; }
+                            }
                             else
-                            { cfop = cfop_6102; }
+                            {
+                                cfop = cfop_1102;
+                            }
 
                             linha = Grid_DataGridView.User_LinhaAdicionar(gridMercadoria,
                                                                                   new Grid_DataGridView.Coluna[] {new Grid_DataGridView.Coluna { Indice = gridMercadoria_CodigoSistema,
@@ -795,7 +819,7 @@ namespace SisCom.Aplicacao.Formularios
                 textModelo.Text = Funcao.NuloParaString(notaFiscalSaida.Modelo);
                 if (!String.IsNullOrEmpty(notaFiscalSaida.Serie)) textSerie.Text = Funcao.NuloParaString(notaFiscalSaida.Serie);
                 textInfoNFeNFeSubSerie.Text = Funcao.NuloParaString(notaFiscalSaida.SubSerie);
-                checkStatusCancelado.Checked = (notaFiscalSaida.Status == NF_Status.Cancelado);
+                checkStatusCancelado.Checked = (notaFiscalSaida.Status == NF_Status.Cancelado || notaFiscalSaida.Status == NF_Status.Excluida);
                 checkStatusFinalizada.Checked = (notaFiscalSaida.Status == NF_Status.Transmitida);
                 checkStatusDenegada.Checked = (notaFiscalSaida.Status == NF_Status.Denegada);
                 checkStatusInutilizada.Checked = (notaFiscalSaida.Status == NF_Status.Inutilizada);
@@ -903,10 +927,17 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         if ((mercadoria.TabelaCFOPId == null) || (mercadoria.TabelaCFOPId == Guid.Empty))
                         {
-                            if (Declaracoes.dados_Empresa_EstadoId == dadolocal_Cliente_EstadoId)
-                            { cfop = cfop_5102; }
+                            if (tipoNotaFiscal == NF_TipoNotaFiscal.Saida)
+                            {
+                                if (Declaracoes.dados_Empresa_EstadoId == dadolocal_Cliente_EstadoId)
+                                { cfop = cfop_5102; }
+                                else
+                                { cfop = cfop_6102; }
+                            }
                             else
-                            { cfop = cfop_6102; }
+                            {
+                                cfop = cfop_1102;
+                            }
                         }
                         else
                         {
@@ -940,6 +971,8 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                                              Valor = mercadoria.PercentualIPI },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_Frete,
                                                                                                                                              Valor = mercadoria.ValorFrete },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_Desconto,
+                                                                                                                                             Valor = mercadoria.Desconto },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_PesoBruto,
                                                                                                                                              Valor = mercadoria.Mercadoria.Estoque_PesoBruto },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_PesoLiquido,
@@ -1204,6 +1237,11 @@ namespace SisCom.Aplicacao.Formularios
             {
                 Editar(false);
 
+                if (!CaixaMensagem.Perguntar("Deseja cancelar/excluir essa nota fiscal de saída"))
+                {
+                    return;
+                }
+
                 if (notaFiscalSaida.Status == NF_Status.Transmitida)
                 {
                     var formCancelamento = this.ServiceProvider().GetRequiredService<frmFiscal_Cancelamento>();
@@ -1211,20 +1249,47 @@ namespace SisCom.Aplicacao.Formularios
                     formCancelamento.ShowDialog();
                     formCancelamento.Dispose();
                 }
+                else if (notaFiscalSaida.Status == NF_Status.Excluida || notaFiscalSaida.Status == NF_Status.Cancelado)
+                {
+                    CaixaMensagem.Informacao("Nota fiscal já cancelada ou excluída");
+                    return;
+                }
                 else
                 {
                     using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                     {
-                        notaFiscalSaida.Status = NF_Status.Cancelado;
+                        notaFiscalSaida.Status = NF_Status.Excluida;
                         notaFiscalSaida.DataCancelamento = DateTime.Now;
                         notaFiscalSaida.DescricaoCancelamento = "Exclusão de nota fiscal não transamitida";
                         await notaFiscalSaidaController.Atualizar(notaFiscalSaida.Id, notaFiscalSaida);
                     }
+
+                    using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
+                    {
+                        var notaFiscalSaidaSerie = (await notaFiscalSaidaSerieController.PesquisarSerie(notaFiscalSaida.Serie)).FirstOrDefault();
+
+                        if (notaFiscalSaidaSerie != null)
+                        {
+                            if (notaFiscalSaidaSerie.UltimaNotaFiscal.Trim() == notaFiscalSaida.NotaFiscal.Trim())
+                            {
+                                using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                                {
+                                    var notaFiscal = (await notaFiscalSaidaController.Pesquisar(predicate:w => !string.IsNullOrEmpty(w.NotaFiscal) && w.Id != notaFiscalSaida.Id && w.Status != NF_Status.Excluida)).Max(m => Convert.ToInt16(m.NotaFiscal)).ToString();
+
+                                    if (!string.IsNullOrEmpty(notaFiscal))
+                                    {
+                                        notaFiscalSaidaSerie.UltimaNotaFiscal = notaFiscal;  
+                                        await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerie.Id, notaFiscalSaidaSerie);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    await Navegar(Declaracoes.eNavegar.Ultimo);
+
+                    CaixaMensagem.Informacao("Nota fiscal excluída");
                 }
-
-                Limpar();
-
-                notaFiscalSaida.Id = Guid.Empty;
             }
             catch (Exception ex)
             {
@@ -1305,7 +1370,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 IEnumerable<NotaFiscalSaidaViewModel> data = null;
 
-                data = await notaFiscalSaidaController.ObterTodos(null, o => Convert.ToInt32(o.NotaFiscal));
+                data = await notaFiscalSaidaController.ObterTodos(w => w.Status != NF_Status.Excluida, o => Convert.ToInt32(o.NotaFiscal));
 
                 NotaFiscalSaidaViewModel ItemAnterior = null;
                 NotaFiscalSaidaViewModel ItemRetorno = null;
@@ -1519,6 +1584,7 @@ namespace SisCom.Aplicacao.Formularios
                             notaFiscalSaidaMercadoriaViewModel.PercentualICMS = Funcao.NuloParaValorD(row.Cells[gridMercadoria_ICMS].Value);
                             notaFiscalSaidaMercadoriaViewModel.PercentualIPI = Funcao.NuloParaValorD(row.Cells[gridMercadoria_IPI].Value);
                             notaFiscalSaidaMercadoriaViewModel.ValorFrete = Funcao.NuloParaValorD(row.Cells[gridMercadoria_Frete].Value);
+                            notaFiscalSaidaMercadoriaViewModel.Desconto = Funcao.NuloParaValorD(row.Cells[gridMercadoria_Desconto].Value);
 
                             if (row.Cells[gridMercadoria_Impostos].Value != null)
                             {
@@ -1666,9 +1732,11 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         var notaFiscalSaidaSerie = (await notaFiscalSaidaSerieController.PesquisarSerie(textSerie.Text)).FirstOrDefault();
 
-                        notaFiscalSaidaSerie.UltimaNotaFiscal = textNumeroNotaFiscalSaida.Text;
-
-                        await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerie.Id, notaFiscalSaidaSerie);
+                        if (Convert.ToInt16(notaFiscalSaidaSerie.UltimaNotaFiscal) < Convert.ToInt16(textNumeroNotaFiscalSaida.Text))
+                        {
+                            notaFiscalSaidaSerie.UltimaNotaFiscal = textNumeroNotaFiscalSaida.Text;
+                            await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerie.Id, notaFiscalSaidaSerie);
+                        }
                     }
                 }
                 catch (Exception)
@@ -1786,6 +1854,8 @@ namespace SisCom.Aplicacao.Formularios
                     gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value = Math.Round(Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Quantidade].Value) *
                                                                                                    Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Preco].Value), 8);
                 }
+
+                numericValorDesconto.Value = gridMercadoria.User_CalcularColunaValor(gridMercadoria_Desconto);
             }
             catch (Exception)
             {

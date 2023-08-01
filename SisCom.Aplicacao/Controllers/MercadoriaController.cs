@@ -1,12 +1,9 @@
-﻿using DFe.Utils;
-using Funcoes._Entity;
-using Funcoes.Interfaces;
+﻿using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
-using SisCom.Negocio.Interfaces;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;

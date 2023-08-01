@@ -341,11 +341,6 @@ namespace SisCom.Aplicacao.Formularios
 
                             await notaFiscalSaidaController.Atualizar(notaFiscalSaidaViewModel.Id, notaFiscalSaidaViewModel);
                         }
-
-                        using (NotaFiscalSaidaSerieController notaFiscalSaidaSerieController = new NotaFiscalSaidaSerieController(this.MeuDbContext(), this._notifier))
-                        {
-                            await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerieViewModel.Id, notaFiscalSaidaSerieViewModel);
-                        }
                     }
                 }
             }

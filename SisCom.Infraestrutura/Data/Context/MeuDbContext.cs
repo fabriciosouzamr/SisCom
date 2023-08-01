@@ -34,6 +34,7 @@ namespace SisCom.Infraestrutura.Data.Context
         public DbSet<MercadoriaUnidadeMedidaConversao> MercadoriaUnidadeMedidaConversaos { get; set; }
         public DbSet<EstoqueLancamento> EstoqueLancamentos { get; set; }
         public DbSet<Fabricante> Fabricantes { get; set; }
+        public DbSet<FiscalEstadoIcms> FiscalEstadoIcmses { get; set; }
         public DbSet<FormaPagamento> FormaPagamentos { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<GrupoMercadoria> GrupoMercadorias { get; set; }

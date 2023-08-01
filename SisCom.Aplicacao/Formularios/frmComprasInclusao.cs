@@ -8,6 +8,7 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
+using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -304,7 +305,7 @@ namespace SisCom.Aplicacao.Formularios
             {
                 using (NotaFiscalEntradaController notaFiscalEntradaController = new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier))
                 {
-                    notaFiscalEntrada = (await notaFiscalEntradaController.PesquisarId(notaFiscalEntradaId)).FirstOrDefault();
+                    notaFiscalEntrada = (await notaFiscalEntradaController.PesquisarId(notaFiscalEntrada.Id)).FirstOrDefault();
                 }
             }
 
@@ -749,16 +750,36 @@ namespace SisCom.Aplicacao.Formularios
 
                 using (NotaFiscalEntradaFaturaController notaFiscalEntradaFaturaController = new NotaFiscalEntradaFaturaController(this.MeuDbContext(), this._notifier))
                 {
-                    await notaFiscalEntradaFaturaController.ExcluirTodos(notaFiscalEntradaId);
+                    await notaFiscalEntradaFaturaController.ExcluirTodos(notaFiscalEntrada.Id);
                 }
                 using (NotaFiscalEntradaMercadoriaController notaFiscalEntradaMercadoriaController = new NotaFiscalEntradaMercadoriaController(this.MeuDbContext(), this._notifier))
                 {
-                    await notaFiscalEntradaMercadoriaController.ExcluirTodos(notaFiscalEntradaId);
+                    var todos = (await notaFiscalEntradaMercadoriaController.PesquisarId( (notaFiscalEntrada.Id)));
+
+                    foreach (NotaFiscalEntradaMercadoriaViewModel notaFiscalEntradaMercadoriaViewModel in todos)
+                    {
+                        await notaFiscalEntradaMercadoriaController.Excluir(notaFiscalEntradaMercadoriaViewModel.Id);
+
+                        using (EstoqueLancamentoController estoqueLancamentoController = new EstoqueLancamentoController(this.MeuDbContext(), this._notifier))
+                        {
+                            await estoqueLancamentoController.Adicionar(Declaracoes.sistema_almoxarifado,
+                                                                        notaFiscalEntradaMercadoriaViewModel.MercadoriaId.Value,  
+                                                                        notaFiscalEntradaMercadoriaViewModel.UnidadeMedidaId.Value,
+                                                                        TipoLancamentoEstoque.Movimentacao,
+                                                                        Funcoes._Enum.EntradaSaida.Saida,
+                                                                        DateTime.Now,
+                                                                        (double)notaFiscalEntradaMercadoriaViewModel.QuantidadeUnitaria);
+                        }
+                    }
                 }
                 using (NotaFiscalEntradaController notaFiscalEntradaController = new NotaFiscalEntradaController(this.MeuDbContext(), this._notifier))
                 {
-                    await notaFiscalEntradaController.Excluir(notaFiscalEntradaId);
+                    await notaFiscalEntradaController.Excluir(notaFiscalEntrada.Id);
                 }
+
+                await Navegar(Declaracoes.eNavegar.Ultimo);
+
+                CaixaMensagem.Informacao("Exclusão Efetuada.");
             }
 
             Limpar();

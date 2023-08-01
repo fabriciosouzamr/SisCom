@@ -1652,7 +1652,7 @@ namespace SisCom.Aplicacao.Classes
                     oNFE_Det.prod.qCom = ntFSMercadoria.Quantidade;
                     oNFE_Det.prod.vUnCom = Convert.ToDecimal(ntFSMercadoria.PrecoUnitario);
                     oNFE_Det.prod.vProd = Convert.ToDecimal(ntFSMercadoria.PrecoTotal);
-                    oNFE_Det.prod.vDesc = 0;
+                    oNFE_Det.prod.vDesc = ntFSMercadoria.Desconto;
                     oNFE_Det.prod.vFrete = Convert.ToDecimal(ntFSMercadoria.ValorFrete);
                     oNFE_Det.prod.vSeg = 0;
                     // -- Detalhe Dados do Produto Tributação
@@ -1750,11 +1750,10 @@ namespace SisCom.Aplicacao.Classes
                 {
                     oNFe.infNFe.total = GetTotal("4.00", oNFe.infNFe.det);
                     oNFe.infNFe.total.ICMSTot.vFrete = notaFiscalSaidaViewModel.ValorFrete;
-                    oNFe.infNFe.total.ICMSTot.vDesc = notaFiscalSaidaViewModel.ValorDesconto;
-                    oNFe.infNFe.total.ICMSTot.vNF -= notaFiscalSaidaViewModel.ValorDesconto;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    CaixaMensagem.Informacao(ex.Message);
                     if (oNFe.infNFe.total == null)
                     {
                         oNFe.infNFe.total = new total();
@@ -1774,7 +1773,6 @@ namespace SisCom.Aplicacao.Classes
                     oNFe.infNFe.cobr.fat.nFat = sNF;
                     oNFe.infNFe.cobr.fat.vLiq = oNFe.infNFe.total.ICMSTot.vNF;
                     oNFe.infNFe.cobr.fat.vOrig = oNFe.infNFe.total.ICMSTot.vNF;
-                    oNFe.infNFe.cobr.fat.vDesc = 0M;
 
                     if ((notaFiscalSaidaPagamentoViewModels != null) && (notaFiscalSaidaPagamentoViewModels.Any()))
                     {
@@ -2460,6 +2458,11 @@ namespace SisCom.Aplicacao.Classes
                     icmsTot.vBC = icmsTot.vBC + Funcao.NuloParaValorD(((ICMS90)produto.imposto.ICMS.TipoICMS).vBC);
                     icmsTot.vICMS = icmsTot.vICMS + Funcao.NuloParaValorD(((ICMS90)produto.imposto.ICMS.TipoICMS).vICMS);
                 }
+                if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMSSN900))
+                {
+                    icmsTot.vBC = icmsTot.vBC + Funcao.NuloParaValorD(((ICMSSN900)produto.imposto.ICMS.TipoICMS).vBC);
+                    icmsTot.vICMS = icmsTot.vICMS + Funcao.NuloParaValorD(((ICMSSN900)produto.imposto.ICMS.TipoICMS).vICMS);
+                }
 
                 if (produto.imposto.PIS.TipoPIS.GetType() == typeof(PISAliq))
                 {
@@ -3064,7 +3067,6 @@ namespace SisCom.Aplicacao.Classes
             icmsGeral.vBC = vBC;
             icmsGeral.pICMS = pICMS;
             icmsGeral.vICMS = vICMS;
-            icmsGeral.modBCST = DeterminacaoBaseIcmsSt.DbisMargemValorAgregado;
 
             return icmsGeral.ObterICMSBasico(oCrt);
         }
