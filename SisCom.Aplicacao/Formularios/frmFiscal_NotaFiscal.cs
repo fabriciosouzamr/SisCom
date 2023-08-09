@@ -6,6 +6,7 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
+using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -117,6 +118,7 @@ namespace SisCom.Aplicacao.Formularios
         private IEnumerable<PessoaComboNomeViewModel> comboRemetenteData;
 
         bool carregando = false;
+        bool prcessamentoInterno = false;
         string especiePadrao = "";
         string marcaPadrao = "";
 
@@ -682,6 +684,8 @@ namespace SisCom.Aplicacao.Formularios
             int linha = -1;
             Guid cfop;
 
+            prcessamentoInterno = true;
+
             if (vendaId != Guid.Empty)
             {
                 using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
@@ -751,6 +755,16 @@ namespace SisCom.Aplicacao.Formularios
 
                     ((DataGridViewComboBoxColumn)gridMercadoria.Columns[gridMercadoria_CFOP]).DataSource = tabelaCFOP;
 
+                    IEnumerable<FiscalEstadoIcmsViewModel> fiscalEstadoIcms = new List<FiscalEstadoIcmsViewModel>();
+
+                    if (Combo_ComboBox.Selecionado(comboRemetenteUF))
+                    {
+                        using (FiscalEstadoIcmsController fiscalEstadoIcmsController = new FiscalEstadoIcmsController(this.MeuDbContext(), this._notifier))
+                        {
+                            fiscalEstadoIcms = await fiscalEstadoIcmsController.ObterTodos(null, w => w.EstadoOrigemId == Declaracoes.dados_Empresa_EstadoId && w.EstadoDestinoId == Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboRemetenteUF));
+                        }
+                    }
+
                     using (VendaMercadoriaController vendaMercadoriaController = new VendaMercadoriaController(this.MeuDbContext(), this._notifier))
                     {
                         IEnumerable<VendaMercadoriaViewModel> ret = await vendaMercadoriaController.PesquisarVendaId(vendaId);
@@ -793,6 +807,17 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                   new Grid_DataGridView.Coluna { Indice = gridMercadoria_PesoLiquido,
                                                                                                                                                  Valor = vendaMercadoriaViewModel.Mercadoria.Estoque_PesoLiquido }}).Index;
                         }
+
+                        gridMercadoria.Rows[linha].Cells[gridMercadoria_ValorICMS].Value = 0;
+
+                        if (fiscalEstadoIcms.Any())
+                        {
+                            gridMercadoria.Rows[linha].Cells[gridMercadoria_ICMS].Value = fiscalEstadoIcms.FirstOrDefault().Icms;
+                            Thread.Sleep(1000);
+                        }
+
+                        gridMercadoria.Rows[linha].Cells[gridMercadoria_BaseCalculoICMS].Value = gridMercadoria.Rows[linha].Cells[gridMercadoria_Total].Value;
+                        gridMercadoria.Rows[linha].Cells[gridMercadoria_ValorICMS].Value = Funcao.NuloParaValorD(gridMercadoria.Rows[linha].Cells[gridMercadoria_BaseCalculoICMS].Value) * Funcao.NuloParaValorD(gridMercadoria.Rows[linha].Cells[gridMercadoria_ICMS].Value) / 100;
                     }
 
                     await GravarNotaFiscalSaida(validar: false, recarregar: true);
@@ -975,6 +1000,10 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                                              Valor = mercadoria.Desconto },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_PesoBruto,
                                                                                                                                              Valor = mercadoria.Mercadoria.Estoque_PesoBruto },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_BaseCalculoICMS,
+                                                                                                                                             Valor = mercadoria.ValorBaseCalculo },
+                                                                                                              new Grid_DataGridView.Coluna { Indice = gridMercadoria_ValorICMS,
+                                                                                                                                             Valor = mercadoria.ValorICMS},
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_PesoLiquido,
                                                                                                                                              Valor = mercadoria.Mercadoria.Estoque_PesoLiquido },
                                                                                                               new Grid_DataGridView.Coluna { Indice = gridMercadoria_NotaFiscalSaidaId,
@@ -1011,7 +1040,11 @@ namespace SisCom.Aplicacao.Formularios
                         notaFiscalMercadoriaDetalhamentoImposto.CSTCOFINS = mercadoria.TabelaCST_PIS_COFINS_PISCOFINSId;
                         gridMercadoria.Rows[linha].Cells[gridMercadoria_Impostos].Value = notaFiscalMercadoriaDetalhamentoImposto;
                         gridMercadoria.Rows[linha].Cells[gridMercadoria_BaseCalculoICMS].Value = notaFiscalMercadoriaDetalhamentoImposto.ValorBaseCalculo;
-                        gridMercadoria.Rows[linha].Cells[gridMercadoria_ValorICMS].Value = notaFiscalMercadoriaDetalhamentoImposto.ValorICMS;
+
+                        if ((Funcao.NuloParaValorD(gridMercadoria.Rows[linha].Cells[gridMercadoria_ValorICMS].Value) == 0) && (notaFiscalMercadoriaDetalhamentoImposto.ValorICMS != 0))
+                        {
+                            gridMercadoria.Rows[linha].Cells[gridMercadoria_ValorICMS].Value = notaFiscalMercadoriaDetalhamentoImposto.ValorICMS;
+                        }
                     }
                 }
 
@@ -1089,6 +1122,8 @@ namespace SisCom.Aplicacao.Formularios
 
             CalcularMercadoriaPeso();
             CalcularMercadoriaImpostos();
+
+            prcessamentoInterno = false;
 
             ValidarStatus();
 
@@ -1614,6 +1649,15 @@ namespace SisCom.Aplicacao.Formularios
                                 notaFiscalSaidaMercadoriaViewModel.TabelaCST_PIS_COFINS_PISId = notaFiscalMercadoriaDetalhamentoImposto.CSTPIS;
                                 notaFiscalSaidaMercadoriaViewModel.TabelaCST_PIS_COFINS_PISCOFINSId = notaFiscalMercadoriaDetalhamentoImposto.CSTCOFINS;
                             }
+                            else
+                            {
+                                notaFiscalSaidaMercadoriaViewModel.ValorICMS = Funcao.NuloParaValorD(row.Cells[gridMercadoria_ValorICMS].Value);
+                            }
+
+                            if ((notaFiscalSaidaMercadoriaViewModel.ValorBaseCalculo == 0) && (Funcao.NuloParaValorD(row.Cells[gridMercadoria_BaseCalculoICMS].Value) > 0))
+                            {
+                                notaFiscalSaidaMercadoriaViewModel.ValorBaseCalculo = Funcao.NuloParaValorD(row.Cells[gridMercadoria_BaseCalculoICMS].Value);
+                            }
 
                             if (notaFiscalSaidaMercadoriaViewModel.Id == Guid.Empty)
                             {
@@ -1847,12 +1891,31 @@ namespace SisCom.Aplicacao.Formularios
                     {
                         gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Descricao].Value = gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Mercadoria].EditedFormattedValue;
                     }
+
+                    if (Combo_ComboBox.Selecionado(comboRemetenteUF) && (Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value) == 0))
+                    {
+                        using (FiscalEstadoIcmsController fiscalEstadoIcmsController = new FiscalEstadoIcmsController(this.MeuDbContext(), this._notifier))
+                        {
+                            var fiscalEstadoIcms = await fiscalEstadoIcmsController.ObterTodos(null, w => w.EstadoOrigemId == Declaracoes.dados_Empresa_EstadoId && w.EstadoDestinoId == Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboRemetenteUF));
+
+                            if (fiscalEstadoIcms.Any())
+                            {
+                                gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value = fiscalEstadoIcms.FirstOrDefault().Icms;
+                            }
+                        }
+                    }                    
                 }
                 else if ((e.ColumnIndex == gridMercadoria_Quantidade) ||
                          (e.ColumnIndex == gridMercadoria_Preco))
                 {
                     gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value = Math.Round(Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Quantidade].Value) *
                                                                                                    Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Preco].Value), 8);
+                    gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_BaseCalculoICMS].Value = gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value;
+                }
+
+                if (!prcessamentoInterno)
+                {
+                    gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ValorICMS].Value = Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value) * Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value) / 100;
                 }
 
                 numericValorDesconto.Value = gridMercadoria.User_CalcularColunaValor(gridMercadoria_Desconto);
@@ -1874,10 +1937,12 @@ namespace SisCom.Aplicacao.Formularios
                     catch (Exception) { }
                     form.FormatarAsync();
                     form.ShowDialog(this);
+                    prcessamentoInterno = true;
                     gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Impostos].Value = form.notaFiscalMercadoriaDetalhamentoImposto;
                     gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value = form.notaFiscalMercadoriaDetalhamentoImposto.AliquotaICMS;
-                    gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ValorICMS].Value = form.notaFiscalMercadoriaDetalhamentoImposto.ValorICMS;
                     gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_BaseCalculoICMS].Value = form.notaFiscalMercadoriaDetalhamentoImposto.ValorBaseCalculo;
+                    gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ValorICMS].Value = form.notaFiscalMercadoriaDetalhamentoImposto.ValorICMS;
+                    prcessamentoInterno = false;
                 }
             }
 

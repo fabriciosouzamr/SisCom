@@ -43,9 +43,10 @@ namespace SisCom.Aplicacao.Controllers
             return FiscalEstadoIcmsViewModel;
         }
         public async Task<IEnumerable<FiscalEstadoIcmsViewModel>> ObterTodos(Expression<Func<FiscalEstadoIcms, object>> order = null,
-                                                                       Expression<Func<FiscalEstadoIcms, bool>> predicate = null)
+                                                                             Expression<Func<FiscalEstadoIcms, bool>> predicate = null)
         {
-            var obterTodos = await fiscalEstadoIcmsService.GetAll(order, predicate, null);
+            var obterTodos = await fiscalEstadoIcmsService.GetAll(order, predicate, i => i.EstadoDestino, 
+                                                                                    i => i.EstadoOrigem);
             return Declaracoes.mapper.Map<IEnumerable<FiscalEstadoIcmsViewModel>>(obterTodos);
         }
         public async Task<IEnumerable<FiscalEstadoIcmsViewModel>> PesquisarId(Guid Id)

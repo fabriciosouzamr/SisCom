@@ -1,4 +1,5 @@
-﻿using Funcoes._Classes;
+﻿using DFe.Utils;
+using Funcoes._Classes;
 using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
@@ -7,6 +8,7 @@ using SisCom.Aplicacao.ViewModels;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Grid_DataGridView;
@@ -43,20 +45,76 @@ namespace SisCom.Aplicacao
             Grid_DataGridView.User_ColunaAdicionar(dataPais, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres, readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(dataPais, "CodigoSiscomex", "Código Siscomex", TipoColuna.Texto, 100, readOnly: false);
 
+            Grid_DataGridView.User_Formatar(dataEstadoIcms, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
+            Grid_DataGridView.User_ColunaAdicionar(dataEstadoIcms, "ID", "ID", TipoColuna.Texto, 0, readOnly: true, alinhamento: DataGridViewContentAlignment.MiddleCenter);
+            Grid_DataGridView.User_ColunaAdicionar(dataEstadoIcms, "Codigo", " ", TipoColuna.Texto, 30, readOnly: true, alinhamento: DataGridViewContentAlignment.MiddleCenter);
+
             await GridAtualizar();
         }
         private async Task GridAtualizar()
         {
+            #region UnidadeMedida
             using (UnidadeMedidaController unidadeMedidaController = new UnidadeMedidaController(this.MeuDbContext(), this._notifier))
             {
                 object Data = await unidadeMedidaController.ObterTodos(p => p.Nome);
                 Grid_DataGridView.User_DataSource(dataUnidadeMedida, Data, true);
             }
+            #endregion
+            #region Pais
             using (PaisController paisController = new PaisController(this.MeuDbContext(), this._notifier))
             {
                 object Data = await paisController.ObterTodos(p => p.Nome);
                 Grid_DataGridView.User_DataSource(dataPais, Data, true);
             }
+            #endregion
+            #region EstadoIcms
+            IEnumerable<EstadoViewModel> estados;
+
+            using (EstadoController estadoController = new EstadoController(this.MeuDbContext(), this._notifier))
+            {
+                estados = await estadoController.ObterTodos(o => o.Codigo);
+            }
+
+            Grid_DataGridView.User_DataSource(dataEstadoIcms, estados, true);
+
+            int iColuna = 0;
+            int iLinha = 0;
+
+            foreach (var estado in estados)
+            {
+                DataGridViewColumn col = Grid_DataGridView.User_ColunaAdicionar(dataEstadoIcms, "", "", TipoColuna.Percentual, 40, readOnly: true, alinhamento: DataGridViewContentAlignment.MiddleCenter);
+                col.HeaderText = estado.Codigo;
+                col.Tag = estado.Id;
+            }
+
+            using (FiscalEstadoIcmsController fiscalEstadoIcmsController = new(this.MeuDbContext(), this._notifier))
+            {
+                var fiscalEstados = (await fiscalEstadoIcmsController.ObterTodos());
+
+                foreach (FiscalEstadoIcmsViewModel fiscalEstado in fiscalEstados)
+                {
+                    foreach (DataGridViewRow row in dataEstadoIcms.Rows)
+                    {
+                        if (row.Cells[1].Value != null)
+                        {
+                            if (row.Cells[1].Value.ToString() == fiscalEstado.EstadoOrigem.Codigo)
+                            {
+                                foreach (DataGridViewColumn col in dataEstadoIcms.Columns)
+                                {
+                                    row.Cells[col.Index].ReadOnly = false;
+                                    if (col.HeaderText == fiscalEstado.EstadoDestino.Codigo)
+                                    {
+                                        row.Cells[col.Index].Value = fiscalEstado.Icms;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            #endregion
         }
         private void botaoFechar_Click(object sender, EventArgs e)
         {
@@ -167,7 +225,7 @@ namespace SisCom.Aplicacao
                 {
                     if (CaixaMensagem.PerguntarTexto(Classes.Texto.Mensagem_UnidadeMedida_Remover,
                                                       new string[] { e.Row.Cells[GriUnidadeMedida_Nome].Value.ToString() }))
-                    { unidadeMedidaRemover.Add(e.Row.Cells[GridUnidadeMedida_Id].Value.ToString());  }
+                    { unidadeMedidaRemover.Add(e.Row.Cells[GridUnidadeMedida_Id].Value.ToString()); }
                     else
                     { e.Cancel = true; }
 

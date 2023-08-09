@@ -1,4 +1,4 @@
-﻿using DFe.Classes.Entidades;
+﻿using SisCom.Entidade.Modelos;
 using System;
 using System.ComponentModel.DataAnnotations;
 

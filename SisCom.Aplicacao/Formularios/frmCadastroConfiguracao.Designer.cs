@@ -29,165 +29,192 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCadastroConfiguracao));
-            this.pnlMenuBotao = new System.Windows.Forms.Panel();
-            this.pnlMenuBotaoBotao = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.botaoGravar = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.botaoFechar = new System.Windows.Forms.Button();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPais = new System.Windows.Forms.TabPage();
-            this.dataPais = new System.Windows.Forms.DataGridView();
-            this.tabUnidadeMedida = new System.Windows.Forms.TabPage();
-            this.dataUnidadeMedida = new System.Windows.Forms.DataGridView();
-            this.pnlMenuBotao.SuspendLayout();
-            this.pnlMenuBotaoBotao.SuspendLayout();
-            this.tabControl.SuspendLayout();
-            this.tabPais.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataPais)).BeginInit();
-            this.tabUnidadeMedida.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataUnidadeMedida)).BeginInit();
-            this.SuspendLayout();
+            pnlMenuBotao = new System.Windows.Forms.Panel();
+            pnlMenuBotaoBotao = new System.Windows.Forms.Panel();
+            label1 = new System.Windows.Forms.Label();
+            botaoGravar = new System.Windows.Forms.Button();
+            label7 = new System.Windows.Forms.Label();
+            botaoFechar = new System.Windows.Forms.Button();
+            tabControl = new System.Windows.Forms.TabControl();
+            tabPais = new System.Windows.Forms.TabPage();
+            dataPais = new System.Windows.Forms.DataGridView();
+            tabUnidadeMedida = new System.Windows.Forms.TabPage();
+            dataUnidadeMedida = new System.Windows.Forms.DataGridView();
+            tabEstadoIcms = new System.Windows.Forms.TabPage();
+            dataEstadoIcms = new System.Windows.Forms.DataGridView();
+            pnlMenuBotao.SuspendLayout();
+            pnlMenuBotaoBotao.SuspendLayout();
+            tabControl.SuspendLayout();
+            tabPais.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataPais).BeginInit();
+            tabUnidadeMedida.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataUnidadeMedida).BeginInit();
+            tabEstadoIcms.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataEstadoIcms).BeginInit();
+            SuspendLayout();
             // 
             // pnlMenuBotao
             // 
-            this.pnlMenuBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.pnlMenuBotao.Controls.Add(this.pnlMenuBotaoBotao);
-            this.pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
-            this.pnlMenuBotao.Name = "pnlMenuBotao";
-            this.pnlMenuBotao.Size = new System.Drawing.Size(1275, 72);
-            this.pnlMenuBotao.TabIndex = 9;
+            pnlMenuBotao.BackColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            pnlMenuBotao.Controls.Add(pnlMenuBotaoBotao);
+            pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
+            pnlMenuBotao.Name = "pnlMenuBotao";
+            pnlMenuBotao.Size = new System.Drawing.Size(1275, 72);
+            pnlMenuBotao.TabIndex = 9;
             // 
             // pnlMenuBotaoBotao
             // 
-            this.pnlMenuBotaoBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.pnlMenuBotaoBotao.Controls.Add(this.label1);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoGravar);
-            this.pnlMenuBotaoBotao.Controls.Add(this.label7);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoFechar);
-            this.pnlMenuBotaoBotao.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlMenuBotaoBotao.Location = new System.Drawing.Point(797, 0);
-            this.pnlMenuBotaoBotao.Name = "pnlMenuBotaoBotao";
-            this.pnlMenuBotaoBotao.Size = new System.Drawing.Size(478, 72);
-            this.pnlMenuBotaoBotao.TabIndex = 2;
+            pnlMenuBotaoBotao.BackColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            pnlMenuBotaoBotao.Controls.Add(label1);
+            pnlMenuBotaoBotao.Controls.Add(botaoGravar);
+            pnlMenuBotaoBotao.Controls.Add(label7);
+            pnlMenuBotaoBotao.Controls.Add(botaoFechar);
+            pnlMenuBotaoBotao.Dock = System.Windows.Forms.DockStyle.Right;
+            pnlMenuBotaoBotao.Location = new System.Drawing.Point(797, 0);
+            pnlMenuBotaoBotao.Name = "pnlMenuBotaoBotao";
+            pnlMenuBotaoBotao.Size = new System.Drawing.Size(478, 72);
+            pnlMenuBotaoBotao.TabIndex = 2;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(381, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 12);
-            this.label1.TabIndex = 35;
-            this.label1.Text = "Gravar";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label1.Location = new System.Drawing.Point(381, 56);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(33, 12);
+            label1.TabIndex = 35;
+            label1.Text = "Gravar";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // botaoGravar
             // 
-            this.botaoGravar.Image = ((System.Drawing.Image)(resources.GetObject("botaoGravar.Image")));
-            this.botaoGravar.Location = new System.Drawing.Point(371, 0);
-            this.botaoGravar.Name = "botaoGravar";
-            this.botaoGravar.Size = new System.Drawing.Size(53, 56);
-            this.botaoGravar.TabIndex = 34;
-            this.botaoGravar.UseVisualStyleBackColor = true;
-            this.botaoGravar.Click += new System.EventHandler(this.botaoGravar_Click);
+            botaoGravar.Image = (System.Drawing.Image)resources.GetObject("botaoGravar.Image");
+            botaoGravar.Location = new System.Drawing.Point(371, 0);
+            botaoGravar.Name = "botaoGravar";
+            botaoGravar.Size = new System.Drawing.Size(53, 56);
+            botaoGravar.TabIndex = 34;
+            botaoGravar.UseVisualStyleBackColor = true;
+            botaoGravar.Click += botaoGravar_Click;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(433, 56);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 12);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Fechar";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label7.Location = new System.Drawing.Point(433, 56);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(34, 12);
+            label7.TabIndex = 29;
+            label7.Text = "Fechar";
+            label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // botaoFechar
             // 
-            this.botaoFechar.Image = ((System.Drawing.Image)(resources.GetObject("botaoFechar.Image")));
-            this.botaoFechar.Location = new System.Drawing.Point(424, 0);
-            this.botaoFechar.Name = "botaoFechar";
-            this.botaoFechar.Size = new System.Drawing.Size(53, 56);
-            this.botaoFechar.TabIndex = 20;
-            this.botaoFechar.UseVisualStyleBackColor = true;
-            this.botaoFechar.Click += new System.EventHandler(this.botaoFechar_Click);
+            botaoFechar.Image = (System.Drawing.Image)resources.GetObject("botaoFechar.Image");
+            botaoFechar.Location = new System.Drawing.Point(424, 0);
+            botaoFechar.Name = "botaoFechar";
+            botaoFechar.Size = new System.Drawing.Size(53, 56);
+            botaoFechar.TabIndex = 20;
+            botaoFechar.UseVisualStyleBackColor = true;
+            botaoFechar.Click += botaoFechar_Click;
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.tabPais);
-            this.tabControl.Controls.Add(this.tabUnidadeMedida);
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 72);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1275, 584);
-            this.tabControl.TabIndex = 10;
+            tabControl.Controls.Add(tabPais);
+            tabControl.Controls.Add(tabUnidadeMedida);
+            tabControl.Controls.Add(tabEstadoIcms);
+            tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl.Location = new System.Drawing.Point(0, 72);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new System.Drawing.Size(1275, 584);
+            tabControl.TabIndex = 10;
             // 
             // tabPais
             // 
-            this.tabPais.Controls.Add(this.dataPais);
-            this.tabPais.Location = new System.Drawing.Point(4, 24);
-            this.tabPais.Name = "tabPais";
-            this.tabPais.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPais.Size = new System.Drawing.Size(1267, 556);
-            this.tabPais.TabIndex = 1;
-            this.tabPais.Text = "País";
-            this.tabPais.UseVisualStyleBackColor = true;
+            tabPais.Controls.Add(dataPais);
+            tabPais.Location = new System.Drawing.Point(4, 24);
+            tabPais.Name = "tabPais";
+            tabPais.Padding = new System.Windows.Forms.Padding(3);
+            tabPais.Size = new System.Drawing.Size(1267, 556);
+            tabPais.TabIndex = 1;
+            tabPais.Text = "País";
+            tabPais.UseVisualStyleBackColor = true;
             // 
             // dataPais
             // 
-            this.dataPais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataPais.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataPais.Location = new System.Drawing.Point(3, 3);
-            this.dataPais.Name = "dataPais";
-            this.dataPais.RowTemplate.Height = 25;
-            this.dataPais.Size = new System.Drawing.Size(1261, 550);
-            this.dataPais.TabIndex = 1;
-            this.dataPais.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataPais_UserDeletingRow);
+            dataPais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataPais.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataPais.Location = new System.Drawing.Point(3, 3);
+            dataPais.Name = "dataPais";
+            dataPais.RowTemplate.Height = 25;
+            dataPais.Size = new System.Drawing.Size(1261, 550);
+            dataPais.TabIndex = 1;
+            dataPais.UserDeletingRow += dataPais_UserDeletingRow;
             // 
             // tabUnidadeMedida
             // 
-            this.tabUnidadeMedida.Controls.Add(this.dataUnidadeMedida);
-            this.tabUnidadeMedida.Location = new System.Drawing.Point(4, 24);
-            this.tabUnidadeMedida.Name = "tabUnidadeMedida";
-            this.tabUnidadeMedida.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUnidadeMedida.Size = new System.Drawing.Size(1267, 556);
-            this.tabUnidadeMedida.TabIndex = 0;
-            this.tabUnidadeMedida.Text = "Unidade de Medida";
-            this.tabUnidadeMedida.UseVisualStyleBackColor = true;
+            tabUnidadeMedida.Controls.Add(dataUnidadeMedida);
+            tabUnidadeMedida.Location = new System.Drawing.Point(4, 24);
+            tabUnidadeMedida.Name = "tabUnidadeMedida";
+            tabUnidadeMedida.Padding = new System.Windows.Forms.Padding(3);
+            tabUnidadeMedida.Size = new System.Drawing.Size(1267, 556);
+            tabUnidadeMedida.TabIndex = 0;
+            tabUnidadeMedida.Text = "Unidade de Medida";
+            tabUnidadeMedida.UseVisualStyleBackColor = true;
             // 
             // dataUnidadeMedida
             // 
-            this.dataUnidadeMedida.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataUnidadeMedida.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataUnidadeMedida.Location = new System.Drawing.Point(3, 3);
-            this.dataUnidadeMedida.Name = "dataUnidadeMedida";
-            this.dataUnidadeMedida.RowTemplate.Height = 25;
-            this.dataUnidadeMedida.Size = new System.Drawing.Size(1261, 550);
-            this.dataUnidadeMedida.TabIndex = 0;
-            this.dataUnidadeMedida.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataUnidadeMedida_UserDeletingRow);
+            dataUnidadeMedida.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataUnidadeMedida.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataUnidadeMedida.Location = new System.Drawing.Point(3, 3);
+            dataUnidadeMedida.Name = "dataUnidadeMedida";
+            dataUnidadeMedida.RowTemplate.Height = 25;
+            dataUnidadeMedida.Size = new System.Drawing.Size(1261, 550);
+            dataUnidadeMedida.TabIndex = 0;
+            dataUnidadeMedida.UserDeletingRow += dataUnidadeMedida_UserDeletingRow;
+            // 
+            // tabEstadoIcms
+            // 
+            tabEstadoIcms.Controls.Add(dataEstadoIcms);
+            tabEstadoIcms.Location = new System.Drawing.Point(4, 24);
+            tabEstadoIcms.Name = "tabEstadoIcms";
+            tabEstadoIcms.Padding = new System.Windows.Forms.Padding(3);
+            tabEstadoIcms.Size = new System.Drawing.Size(1267, 556);
+            tabEstadoIcms.TabIndex = 2;
+            tabEstadoIcms.Text = "Estados Icms";
+            tabEstadoIcms.UseVisualStyleBackColor = true;
+            // 
+            // dataEstadoIcms
+            // 
+            dataEstadoIcms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataEstadoIcms.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataEstadoIcms.Location = new System.Drawing.Point(3, 3);
+            dataEstadoIcms.Name = "dataEstadoIcms";
+            dataEstadoIcms.RowTemplate.Height = 25;
+            dataEstadoIcms.Size = new System.Drawing.Size(1261, 550);
+            dataEstadoIcms.TabIndex = 1;
             // 
             // frmCadastroConfiguracao
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 656);
-            this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.pnlMenuBotao);
-            this.Name = "frmCadastroConfiguracao";
-            this.Text = "Cadastro - Configuração";
-            this.pnlMenuBotao.ResumeLayout(false);
-            this.pnlMenuBotaoBotao.ResumeLayout(false);
-            this.pnlMenuBotaoBotao.PerformLayout();
-            this.tabControl.ResumeLayout(false);
-            this.tabPais.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataPais)).EndInit();
-            this.tabUnidadeMedida.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataUnidadeMedida)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1275, 656);
+            Controls.Add(tabControl);
+            Controls.Add(pnlMenuBotao);
+            Name = "frmCadastroConfiguracao";
+            Text = "Cadastro - Configuração";
+            pnlMenuBotao.ResumeLayout(false);
+            pnlMenuBotaoBotao.ResumeLayout(false);
+            pnlMenuBotaoBotao.PerformLayout();
+            tabControl.ResumeLayout(false);
+            tabPais.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataPais).EndInit();
+            tabUnidadeMedida.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataUnidadeMedida).EndInit();
+            tabEstadoIcms.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataEstadoIcms).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -203,5 +230,7 @@
         private System.Windows.Forms.TabPage tabPais;
         private System.Windows.Forms.DataGridView dataUnidadeMedida;
         private System.Windows.Forms.DataGridView dataPais;
+        private System.Windows.Forms.TabPage tabEstadoIcms;
+        private System.Windows.Forms.DataGridView dataEstadoIcms;
     }
 }

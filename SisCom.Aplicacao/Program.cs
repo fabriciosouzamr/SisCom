@@ -119,6 +119,9 @@ namespace SisCom.Aplicacao
                         cfg.CreateMap<FabricanteViewModel, Fabricante>().ReverseMap();
                         cfg.CreateMap<Fabricante, NomeComboViewModel>();
                         #endregion
+                        #region FiscalEstado
+                        cfg.CreateMap<FiscalEstadoIcmsViewModel, FiscalEstadoIcms>().ReverseMap();
+                        #endregion
                         #region FormaPagamento
                         cfg.CreateMap<FormaPagamentoViewModel, FormaPagamento>().ReverseMap();
                         cfg.CreateMap<FormaPagamento, NomeComboViewModel>();

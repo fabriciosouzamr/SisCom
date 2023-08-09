@@ -2055,11 +2055,14 @@ namespace SisCom.Aplicacao.Classes
                 mdfe.InfMDFe.Ide.UFFim = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.EstadoDescarga.Codigo);
                 mdfe.InfMDFe.Ide.DhIniViagem = DateTime.Now;
 
-                mdfe.InfMDFe.Ide.InfMunCarrega.Add(new MDFeInfMunCarrega
+                if (manifestoEletronicoDocumento.CidadeCarregamento != null)
                 {
-                    CMunCarrega = TratarString(manifestoEletronicoDocumento.CidadeCarregamento.CodigoIBGE),
-                    XMunCarrega = TratarString(manifestoEletronicoDocumento.CidadeCarregamento.Nome)
-                });
+                    mdfe.InfMDFe.Ide.InfMunCarrega.Add(new MDFeInfMunCarrega
+                    {
+                        CMunCarrega = TratarString(manifestoEletronicoDocumento.CidadeCarregamento.CodigoIBGE),
+                        XMunCarrega = TratarString(manifestoEletronicoDocumento.CidadeCarregamento.Nome)
+                    });
+                }
                 #endregion (ide)
 
                 #region dados emitente (emit)
@@ -2414,39 +2417,39 @@ namespace SisCom.Aplicacao.Classes
             foreach (var produto in produtos)
             {
                 if (produto.imposto.IPI != null && produto.imposto.IPI.TipoIPI.GetType() == typeof(IPITrib))
-                    icmsTot.vIPI = icmsTot.vIPI + ((IPITrib)produto.imposto.IPI.TipoIPI).vIPI ?? 0;
+                    icmsTot.vIPI = Funcao.NuloParaValorD(icmsTot.vIPI + ((IPITrib)produto.imposto.IPI.TipoIPI).vIPI ?? 0);
 
                 if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS00))
                 {
-                    icmsTot.vBC = icmsTot.vBC + ((ICMS00)produto.imposto.ICMS.TipoICMS).vBC;
-                    icmsTot.vICMS = icmsTot.vICMS + ((ICMS00)produto.imposto.ICMS.TipoICMS).vICMS;
+                    icmsTot.vBC = Funcao.NuloParaValorD(icmsTot.vBC + ((ICMS00)produto.imposto.ICMS.TipoICMS).vBC);
+                    icmsTot.vICMS = Funcao.NuloParaValorD(icmsTot.vICMS + ((ICMS00)produto.imposto.ICMS.TipoICMS).vICMS);
                 }
                 if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS10))
                 {
-                    icmsTot.vBC = icmsTot.vBC + ((ICMS10)produto.imposto.ICMS.TipoICMS).vBC;
-                    icmsTot.vICMS = icmsTot.vICMS + ((ICMS10)produto.imposto.ICMS.TipoICMS).vICMS;
+                    icmsTot.vBC = Funcao.NuloParaValorD(icmsTot.vBC + ((ICMS10)produto.imposto.ICMS.TipoICMS).vBC);
+                    icmsTot.vICMS = Funcao.NuloParaValorD(icmsTot.vICMS + ((ICMS10)produto.imposto.ICMS.TipoICMS).vICMS);
                 }
                 if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS20))
                 {
-                    icmsTot.vBC = icmsTot.vBC + ((ICMS20)produto.imposto.ICMS.TipoICMS).vBC;
-                    icmsTot.vICMS = icmsTot.vICMS + ((ICMS20)produto.imposto.ICMS.TipoICMS).vICMS;
+                    icmsTot.vBC = Funcao.NuloParaValorD(icmsTot.vBC + ((ICMS20)produto.imposto.ICMS.TipoICMS).vBC);
+                    icmsTot.vICMS = Funcao.NuloParaValorD(icmsTot.vICMS + ((ICMS20)produto.imposto.ICMS.TipoICMS).vICMS);
                 }
                 if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS30))
                 {
-                    icmsTot.vBCST = icmsTot.vBCST + ((ICMS30)produto.imposto.ICMS.TipoICMS).vBCST;
+                    icmsTot.vBCST = Funcao.NuloParaValorD(icmsTot.vBCST + ((ICMS30)produto.imposto.ICMS.TipoICMS).vBCST);
                 }
                 if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS40))
                 {
-                    icmsTot.vICMSDeson = icmsTot.vICMSDeson + ((ICMS40)produto.imposto.ICMS.TipoICMS).vICMSDeson;
+                    icmsTot.vICMSDeson = Funcao.NuloParaValorD(icmsTot.vICMSDeson + ((ICMS40)produto.imposto.ICMS.TipoICMS).vICMSDeson);
                 }
                 if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS51))
                 {
-                    icmsTot.vBC = icmsTot.vBC + Funcao.NuloParaValorD(((ICMS51)produto.imposto.ICMS.TipoICMS).vBC);
-                    icmsTot.vICMS = icmsTot.vICMS + Funcao.NuloParaValorD(((ICMS51)produto.imposto.ICMS.TipoICMS).vICMS);
+                    icmsTot.vBC = Funcao.NuloParaValorD(icmsTot.vBC + Funcao.NuloParaValorD(((ICMS51)produto.imposto.ICMS.TipoICMS).vBC));
+                    icmsTot.vICMS = Funcao.NuloParaValorD(icmsTot.vICMS + Funcao.NuloParaValorD(((ICMS51)produto.imposto.ICMS.TipoICMS).vICMS));
                 }
                 if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS60))
                 {
-                    icmsTot.vFCPSTRet = icmsTot.vFCPSTRet + ((ICMS60)produto.imposto.ICMS.TipoICMS).vFCPSTRet;
+                    icmsTot.vFCPSTRet = Funcao.NuloParaValorD(icmsTot.vFCPSTRet + ((ICMS60)produto.imposto.ICMS.TipoICMS).vFCPSTRet);
                 }
                 if (produto.imposto.ICMS.TipoICMS.GetType() == typeof(ICMS70))
                 {

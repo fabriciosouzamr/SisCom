@@ -131,6 +131,9 @@
     <None Update="Configuration\Seed\Estado.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Configuration\Seed\FiscalEstadoIcms.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Configuration\Seed\FormaPagamento.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
