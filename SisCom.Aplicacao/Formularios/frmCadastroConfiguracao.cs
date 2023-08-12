@@ -1,6 +1,7 @@
 ﻿using DFe.Utils;
 using Funcoes._Classes;
 using Funcoes.Interfaces;
+using NFe.Classes.Informacoes.Transporte;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.Formularios;
@@ -9,6 +10,8 @@ using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Grid_DataGridView;
@@ -45,9 +48,9 @@ namespace SisCom.Aplicacao
             Grid_DataGridView.User_ColunaAdicionar(dataPais, "Nome", "Nome", TipoColuna.Texto, 400, Declaracoes.CampoNome_Caracteres, readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(dataPais, "CodigoSiscomex", "Código Siscomex", TipoColuna.Texto, 100, readOnly: false);
 
-            Grid_DataGridView.User_Formatar(dataEstadoIcms, AllowUserToAddRows: true, AllowUserToDeleteRows: true);
+            Grid_DataGridView.User_Formatar(dataEstadoIcms, AllowUserToAddRows: false, AllowUserToDeleteRows: false);
             Grid_DataGridView.User_ColunaAdicionar(dataEstadoIcms, "ID", "ID", TipoColuna.Texto, 0, readOnly: true, alinhamento: DataGridViewContentAlignment.MiddleCenter);
-            Grid_DataGridView.User_ColunaAdicionar(dataEstadoIcms, "Codigo", " ", TipoColuna.Texto, 30, readOnly: true, alinhamento: DataGridViewContentAlignment.MiddleCenter);
+            Grid_DataGridView.User_ColunaAdicionar(dataEstadoIcms, "Estado", " ", TipoColuna.Texto, 30, readOnly: true, alinhamento: DataGridViewContentAlignment.MiddleCenter);
 
             await GridAtualizar();
         }
@@ -75,38 +78,33 @@ namespace SisCom.Aplicacao
                 estados = await estadoController.ObterTodos(o => o.Codigo);
             }
 
-            Grid_DataGridView.User_DataSource(dataEstadoIcms, estados, true);
+            DataTable estadoIcms = new();
 
-            int iColuna = 0;
-            int iLinha = 0;
+            estadoIcms.Columns.Add("ID");
+            estadoIcms.Columns.Add("Estado");
 
             foreach (var estado in estados)
             {
-                DataGridViewColumn col = Grid_DataGridView.User_ColunaAdicionar(dataEstadoIcms, "", "", TipoColuna.Percentual, 40, readOnly: true, alinhamento: DataGridViewContentAlignment.MiddleCenter);
-                col.HeaderText = estado.Codigo;
-                col.Tag = estado.Id;
+                Grid_DataGridView.User_ColunaAdicionar(dataEstadoIcms, estado.Codigo, estado.Codigo, TipoColuna.Percentual, 40, readOnly: false, alinhamento: DataGridViewContentAlignment.MiddleCenter).Tag = estado.Id;
+                estadoIcms.Columns.Add(estado.Codigo, System.Type.GetType("System.Decimal")).Caption = estado.Codigo;
+                estadoIcms.Rows.Add(new object?[] { estado.Id, estado.Codigo });
             }
 
             using (FiscalEstadoIcmsController fiscalEstadoIcmsController = new(this.MeuDbContext(), this._notifier))
             {
                 var fiscalEstados = (await fiscalEstadoIcmsController.ObterTodos());
 
-                foreach (FiscalEstadoIcmsViewModel fiscalEstado in fiscalEstados)
+                foreach (var estado in fiscalEstados)
                 {
-                    foreach (DataGridViewRow row in dataEstadoIcms.Rows)
+                    foreach (DataRow row in estadoIcms.Rows)
                     {
-                        if (row.Cells[1].Value != null)
+                        if (row["ID"].ToString() == estado.EstadoOrigemId.ToString())
                         {
-                            if (row.Cells[1].Value.ToString() == fiscalEstado.EstadoOrigem.Codigo)
+                            foreach (DataColumn col in estadoIcms.Columns)
                             {
-                                foreach (DataGridViewColumn col in dataEstadoIcms.Columns)
+                                if (col.ColumnName == estado.EstadoDestino.Codigo)
                                 {
-                                    row.Cells[col.Index].ReadOnly = false;
-                                    if (col.HeaderText == fiscalEstado.EstadoDestino.Codigo)
-                                    {
-                                        row.Cells[col.Index].Value = fiscalEstado.Icms;
-                                        break;
-                                    }
+                                    row[col.ColumnName] = estado.Icms;
                                 }
                             }
                         }
@@ -114,6 +112,7 @@ namespace SisCom.Aplicacao
                 }
             }
 
+            Grid_DataGridView.User_DataSource(dataEstadoIcms, estadoIcms, true);
             #endregion
         }
         private void botaoFechar_Click(object sender, EventArgs e)
@@ -215,6 +214,30 @@ namespace SisCom.Aplicacao
                 }
             }
 
+            foreach (DataGridViewRow row in dataEstadoIcms.Rows)
+            {
+                foreach (DataGridViewColumn col in dataEstadoIcms.Columns)
+                {
+                    if (col.Tag != null && row.Cells[col.Index].Value != null)
+                    {
+                        Guid estadoOrigemId = Guid.Parse(row.Cells[0].Value.ToString());
+                        Guid estadoDestinoId = Guid.Parse(col.Tag.ToString());
+
+                        using (FiscalEstadoIcmsController fiscalEstadoIcmsController = new(this.MeuDbContext(), this._notifier))
+                        {
+                            var estadoIcms = (await fiscalEstadoIcmsController.ObterTodos(order: o => o.EstadoOrigemId, predicate: w => w.EstadoOrigemId == estadoOrigemId && w.EstadoDestinoId == estadoDestinoId)).FirstOrDefault();
+
+                            if (estadoIcms.Icms != (decimal)row.Cells[col.Index].Value)
+                            {
+                                estadoIcms.Icms = (decimal)row.Cells[col.Index].Value;
+
+                                await fiscalEstadoIcmsController.Atualizar(estadoIcms.Id, estadoIcms);
+                            }
+                        }
+                    }
+                }
+            }
+
             CaixaMensagem.Informacao("Gravação Efetuada");
         }
         private void dataUnidadeMedida_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -245,6 +268,33 @@ namespace SisCom.Aplicacao
                     { e.Cancel = true; }
 
                 }
+            }
+        }
+
+        private void dataEstadoIcms_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            try
+            {
+                DataGridViewCellStyle style = new DataGridViewCellStyle();
+                style.ForeColor = Color.Black;
+                style.BackColor = Color.White;
+
+                if (dataEstadoIcms.Rows[e.RowIndex].Cells[1].Value.ToString() == dataEstadoIcms.Columns[e.ColumnIndex].HeaderText)
+                {
+                    style.BackColor = Color.Cyan;
+                }
+                else
+                {
+                    if (e.RowIndex % 2 == 0)
+                    {
+                        style.BackColor = Color.LightGray;
+                    }
+                }
+
+                e.CellStyle = style;
+            }
+            catch (Exception)
+            {
             }
         }
     }

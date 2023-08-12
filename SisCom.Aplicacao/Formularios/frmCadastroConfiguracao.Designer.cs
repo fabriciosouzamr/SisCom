@@ -60,7 +60,7 @@
             pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
             pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
             pnlMenuBotao.Name = "pnlMenuBotao";
-            pnlMenuBotao.Size = new System.Drawing.Size(1275, 72);
+            pnlMenuBotao.Size = new System.Drawing.Size(1418, 72);
             pnlMenuBotao.TabIndex = 9;
             // 
             // pnlMenuBotaoBotao
@@ -71,7 +71,7 @@
             pnlMenuBotaoBotao.Controls.Add(label7);
             pnlMenuBotaoBotao.Controls.Add(botaoFechar);
             pnlMenuBotaoBotao.Dock = System.Windows.Forms.DockStyle.Right;
-            pnlMenuBotaoBotao.Location = new System.Drawing.Point(797, 0);
+            pnlMenuBotaoBotao.Location = new System.Drawing.Point(940, 0);
             pnlMenuBotaoBotao.Name = "pnlMenuBotaoBotao";
             pnlMenuBotaoBotao.Size = new System.Drawing.Size(478, 72);
             pnlMenuBotaoBotao.TabIndex = 2;
@@ -127,7 +127,7 @@
             tabControl.Location = new System.Drawing.Point(0, 72);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new System.Drawing.Size(1275, 584);
+            tabControl.Size = new System.Drawing.Size(1418, 584);
             tabControl.TabIndex = 10;
             // 
             // tabPais
@@ -136,7 +136,7 @@
             tabPais.Location = new System.Drawing.Point(4, 24);
             tabPais.Name = "tabPais";
             tabPais.Padding = new System.Windows.Forms.Padding(3);
-            tabPais.Size = new System.Drawing.Size(1267, 556);
+            tabPais.Size = new System.Drawing.Size(1410, 556);
             tabPais.TabIndex = 1;
             tabPais.Text = "País";
             tabPais.UseVisualStyleBackColor = true;
@@ -148,7 +148,7 @@
             dataPais.Location = new System.Drawing.Point(3, 3);
             dataPais.Name = "dataPais";
             dataPais.RowTemplate.Height = 25;
-            dataPais.Size = new System.Drawing.Size(1261, 550);
+            dataPais.Size = new System.Drawing.Size(1404, 550);
             dataPais.TabIndex = 1;
             dataPais.UserDeletingRow += dataPais_UserDeletingRow;
             // 
@@ -158,7 +158,7 @@
             tabUnidadeMedida.Location = new System.Drawing.Point(4, 24);
             tabUnidadeMedida.Name = "tabUnidadeMedida";
             tabUnidadeMedida.Padding = new System.Windows.Forms.Padding(3);
-            tabUnidadeMedida.Size = new System.Drawing.Size(1267, 556);
+            tabUnidadeMedida.Size = new System.Drawing.Size(1410, 556);
             tabUnidadeMedida.TabIndex = 0;
             tabUnidadeMedida.Text = "Unidade de Medida";
             tabUnidadeMedida.UseVisualStyleBackColor = true;
@@ -170,7 +170,7 @@
             dataUnidadeMedida.Location = new System.Drawing.Point(3, 3);
             dataUnidadeMedida.Name = "dataUnidadeMedida";
             dataUnidadeMedida.RowTemplate.Height = 25;
-            dataUnidadeMedida.Size = new System.Drawing.Size(1261, 550);
+            dataUnidadeMedida.Size = new System.Drawing.Size(1404, 550);
             dataUnidadeMedida.TabIndex = 0;
             dataUnidadeMedida.UserDeletingRow += dataUnidadeMedida_UserDeletingRow;
             // 
@@ -180,7 +180,7 @@
             tabEstadoIcms.Location = new System.Drawing.Point(4, 24);
             tabEstadoIcms.Name = "tabEstadoIcms";
             tabEstadoIcms.Padding = new System.Windows.Forms.Padding(3);
-            tabEstadoIcms.Size = new System.Drawing.Size(1267, 556);
+            tabEstadoIcms.Size = new System.Drawing.Size(1410, 556);
             tabEstadoIcms.TabIndex = 2;
             tabEstadoIcms.Text = "Estados Icms";
             tabEstadoIcms.UseVisualStyleBackColor = true;
@@ -192,14 +192,15 @@
             dataEstadoIcms.Location = new System.Drawing.Point(3, 3);
             dataEstadoIcms.Name = "dataEstadoIcms";
             dataEstadoIcms.RowTemplate.Height = 25;
-            dataEstadoIcms.Size = new System.Drawing.Size(1261, 550);
+            dataEstadoIcms.Size = new System.Drawing.Size(1404, 550);
             dataEstadoIcms.TabIndex = 1;
+            dataEstadoIcms.CellFormatting += dataEstadoIcms_CellFormatting;
             // 
             // frmCadastroConfiguracao
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1275, 656);
+            ClientSize = new System.Drawing.Size(1418, 656);
             Controls.Add(tabControl);
             Controls.Add(pnlMenuBotao);
             Name = "frmCadastroConfiguracao";

@@ -816,8 +816,11 @@ namespace SisCom.Aplicacao.Formularios
                             Thread.Sleep(1000);
                         }
 
-                        gridMercadoria.Rows[linha].Cells[gridMercadoria_BaseCalculoICMS].Value = gridMercadoria.Rows[linha].Cells[gridMercadoria_Total].Value;
-                        gridMercadoria.Rows[linha].Cells[gridMercadoria_ValorICMS].Value = Funcao.NuloParaValorD(gridMercadoria.Rows[linha].Cells[gridMercadoria_BaseCalculoICMS].Value) * Funcao.NuloParaValorD(gridMercadoria.Rows[linha].Cells[gridMercadoria_ICMS].Value) / 100;
+                        if (Convert.ToDecimal(gridMercadoria.Rows[linha].Cells[gridMercadoria_ICMS].Value) != 0)
+                        {
+                            gridMercadoria.Rows[linha].Cells[gridMercadoria_BaseCalculoICMS].Value = gridMercadoria.Rows[linha].Cells[gridMercadoria_Total].Value;
+                            gridMercadoria.Rows[linha].Cells[gridMercadoria_ValorICMS].Value = Funcao.NuloParaValorD(gridMercadoria.Rows[linha].Cells[gridMercadoria_BaseCalculoICMS].Value) * Funcao.NuloParaValorD(gridMercadoria.Rows[linha].Cells[gridMercadoria_ICMS].Value) / 100;
+                        }
                     }
 
                     await GravarNotaFiscalSaida(validar: false, recarregar: true);
@@ -1906,11 +1909,13 @@ namespace SisCom.Aplicacao.Formularios
                     }                    
                 }
                 else if ((e.ColumnIndex == gridMercadoria_Quantidade) ||
-                         (e.ColumnIndex == gridMercadoria_Preco))
+                         (e.ColumnIndex == gridMercadoria_Preco) ||
+                         (e.ColumnIndex == gridMercadoria_ICMS))
                 {
                     gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value = Math.Round(Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Quantidade].Value) *
                                                                                                    Funcao.NuloParaValorD(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Preco].Value), 8);
-                    gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_BaseCalculoICMS].Value = gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value;
+                    if (Convert.ToDecimal(gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value) != 0)
+                        gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_BaseCalculoICMS].Value = gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_Total].Value;
                 }
 
                 if (!prcessamentoInterno)
