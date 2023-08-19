@@ -266,7 +266,6 @@ namespace SisCom.Aplicacao
                     { paisRemover.Add(e.Row.Cells[GridPais_Id].Value.ToString()); }
                     else
                     { e.Cancel = true; }
-
                 }
             }
         }
