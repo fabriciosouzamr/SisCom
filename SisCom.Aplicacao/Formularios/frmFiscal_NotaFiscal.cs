@@ -6,7 +6,6 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
-using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Texto = Funcoes._Classes.Texto;
 
 namespace SisCom.Aplicacao.Formularios
@@ -103,6 +101,15 @@ namespace SisCom.Aplicacao.Formularios
             [Description("OUTROS")]
             OUTROS = 3
         }
+        enum TipoPesquisa
+        {
+            [Description("Todos")]
+            Todos,
+            [Description("Razão Social")]
+            RazaoSocial,
+            [Description("Número")]
+            Numero,
+        }
 
         Guid dadolocal_Cliente_EstadoId = Guid.Empty;
         Guid cfop_5102 = Guid.Parse("BFDC3E42-3DF4-4463-A866-07684FBAC021");
@@ -140,6 +147,9 @@ namespace SisCom.Aplicacao.Formularios
             Combo_ComboBox.Formatar(comboInfoNFeNFeModelo, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_Modelo));
             Combo_ComboBox.Formatar(comboCobrancaNotaTipoPagamento, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoPagamento));
             Combo_ComboBox.Formatar(comboInfoNFeOrigem, "", "", ComboBoxStyle.DropDownList, null, typeof(NF_TipoReferencia));
+
+            //Pesquisar
+            Combo_ComboBox.Formatar(comboPesquisarTipoFiltro, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoPesquisa));
 
             comboInfoNFeOrigem.SelectedIndex = -1;
             comboRegimeTributario.SelectedValue = Declaracoes.dados_Empresa_RegimeTributario;
@@ -765,6 +775,8 @@ namespace SisCom.Aplicacao.Formularios
                         }
                     }
 
+                    Task.Delay(1000);
+
                     using (VendaMercadoriaController vendaMercadoriaController = new VendaMercadoriaController(this.MeuDbContext(), this._notifier))
                     {
                         IEnumerable<VendaMercadoriaViewModel> ret = await vendaMercadoriaController.PesquisarVendaId(vendaId);
@@ -806,6 +818,8 @@ namespace SisCom.Aplicacao.Formularios
                                                                                                                                                  Valor = vendaMercadoriaViewModel.Mercadoria.Estoque_PesoBruto },
                                                                                                                   new Grid_DataGridView.Coluna { Indice = gridMercadoria_PesoLiquido,
                                                                                                                                                  Valor = vendaMercadoriaViewModel.Mercadoria.Estoque_PesoLiquido }}).Index;
+
+                            Task.Delay(1000);
                         }
 
                         gridMercadoria.Rows[linha].Cells[gridMercadoria_ValorICMS].Value = 0;
@@ -1312,11 +1326,11 @@ namespace SisCom.Aplicacao.Formularios
                             {
                                 using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                                 {
-                                    var notaFiscal = (await notaFiscalSaidaController.Pesquisar(predicate:w => !string.IsNullOrEmpty(w.NotaFiscal) && w.Id != notaFiscalSaida.Id && w.Status != NF_Status.Excluida)).Max(m => Convert.ToInt16(m.NotaFiscal)).ToString();
+                                    var notaFiscal = (await notaFiscalSaidaController.Pesquisar(predicate: w => !string.IsNullOrEmpty(w.NotaFiscal) && w.Id != notaFiscalSaida.Id && w.Status != NF_Status.Excluida)).Max(m => Convert.ToInt16(m.NotaFiscal)).ToString();
 
                                     if (!string.IsNullOrEmpty(notaFiscal))
                                     {
-                                        notaFiscalSaidaSerie.UltimaNotaFiscal = notaFiscal;  
+                                        notaFiscalSaidaSerie.UltimaNotaFiscal = notaFiscal;
                                         await notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerie.Id, notaFiscalSaidaSerie);
                                     }
                                 }
@@ -1408,7 +1422,22 @@ namespace SisCom.Aplicacao.Formularios
             {
                 IEnumerable<NotaFiscalSaidaViewModel> data = null;
 
-                data = await notaFiscalSaidaController.ObterTodos(w => w.Status != NF_Status.Excluida, o => Convert.ToInt32(o.NotaFiscal));
+                if (Combo_ComboBox.Selecionado(comboPesquisarPesquisa))
+                {
+                    switch (comboPesquisarTipoFiltro.SelectedValue)
+                    {
+                        case TipoPesquisa.RazaoSocial:
+                            data = await notaFiscalSaidaController.ObterTodos(w => w.Status != NF_Status.Excluida && w.ClienteId == Guid.Parse(comboPesquisarPesquisa.SelectedValue.ToString()), o => Convert.ToInt32(o.NotaFiscal));
+                            break;
+                        case TipoPesquisa.Numero:
+                            data = await notaFiscalSaidaController.ObterTodos(w => w.Status != NF_Status.Excluida && w.Id == Guid.Parse(comboPesquisarPesquisa.SelectedValue.ToString()), o => Convert.ToInt32(o.NotaFiscal));
+                            break;
+                    }
+                }
+                else
+                {
+                    data = await notaFiscalSaidaController.ObterTodos(w => w.Status != NF_Status.Excluida, o => Convert.ToInt32(o.NotaFiscal));
+                }
 
                 NotaFiscalSaidaViewModel ItemAnterior = null;
                 NotaFiscalSaidaViewModel ItemRetorno = null;
@@ -1906,7 +1935,7 @@ namespace SisCom.Aplicacao.Formularios
                                 gridMercadoria.Rows[e.RowIndex].Cells[gridMercadoria_ICMS].Value = fiscalEstadoIcms.FirstOrDefault().Icms;
                             }
                         }
-                    }                    
+                    }
                 }
                 else if ((e.ColumnIndex == gridMercadoria_Quantidade) ||
                          (e.ColumnIndex == gridMercadoria_Preco) ||
@@ -2499,6 +2528,47 @@ namespace SisCom.Aplicacao.Formularios
             {
                 gridMercadoria.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
+        }
+        private async void comboPesquisarTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((comboPesquisarTipoFiltro.SelectedIndex != -1) && (comboPesquisarTipoFiltro.Tag != Declaracoes.ComboBox_Carregando))
+            {
+                switch (comboPesquisarTipoFiltro.SelectedValue)
+                {
+                    case TipoPesquisa.RazaoSocial:
+                        await comboRazaoSocial_Carregar();
+                        break;
+                    case TipoPesquisa.Numero:
+                        await comboNotaFiscal_Carregar();
+                        break;
+                    default:
+                        comboPesquisarPesquisa.DataSource = null;
+                        await Navegar(Declaracoes.eNavegar.Primeiro);
+                        break;
+
+                }
+            }
+        }
+        private async Task comboRazaoSocial_Carregar()
+        {
+            Combo_ComboBox.Formatar(comboPesquisarPesquisa,
+                                    "ID", "RazaoSocial",
+                                    ComboBoxStyle.DropDown,
+                                    await (new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier)).ComboDadosFiscaisRazaoSocial(p => p.Cliente.RazaoSocial),
+                                    autoCompleteMode: AutoCompleteMode.Suggest);
+        }
+        private async Task comboNotaFiscal_Carregar()
+        {
+            Combo_ComboBox.Formatar(comboPesquisarPesquisa,
+                                    "ID", "NotaFiscal",
+                                    ComboBoxStyle.DropDown,
+                                    await (new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier)).ComboDadosFiscais(p => p.NotaFiscal),
+                                    autoCompleteMode: AutoCompleteMode.Suggest);
+        }
+
+        private async void comboPesquisarPesquisa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            await Navegar(Declaracoes.eNavegar.Primeiro);
         }
     }
 }

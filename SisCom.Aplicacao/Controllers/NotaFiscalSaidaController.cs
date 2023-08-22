@@ -1,12 +1,8 @@
-﻿using Funcoes._Entity;
-using Funcoes.Interfaces;
-using NFe.Classes;
+﻿using Funcoes.Interfaces;
 using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.ViewModels;
-using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using SisCom.Infraestrutura.Data.Repository;
-using SisCom.Infraestrutura.Migrations;
 using SisCom.Negocio.Services;
 using System;
 using System.Collections.Generic;
@@ -140,8 +136,23 @@ namespace SisCom.Aplicacao.Controllers
         }
         public async Task<IEnumerable<NF_ComboViewModel>> ComboDadosFiscais(Expression<Func<NotaFiscalSaida, object>> order = null)
         {
-            var combo = await _NotaFiscalSaidaService.ComboSearch(w => w.CodigoChaveAcesso != "", order) ;
-            return Declaracoes.mapper.Map<IEnumerable<NF_ComboViewModel>>(combo);
+            var combo = await _NotaFiscalSaidaService.GetAll(order, null, i => i.Cliente);
+            return Declaracoes.mapper.Map<IEnumerable<NF_ComboViewModel>>(combo.Select(s => new NF_ComboViewModel { RazaoSocial = s.Cliente.RazaoSocial, NotaFiscal = s.NotaFiscal, Id = s.Id, CodigoChaveAcesso = s.CodigoChaveAcesso }));
+        }
+        public async Task<IEnumerable<NF_ComboViewModel>> ComboDadosFiscaisRazaoSocial(Expression<Func<NotaFiscalSaida, object>> order = null)
+        {
+            var combo = await _NotaFiscalSaidaService.GetAll(order, null, i => i.Cliente);
+            var razao = combo.Select(s => new NF_ComboViewModel { RazaoSocial = s.Cliente.RazaoSocial, Id = s.ClienteId.Value }).Distinct();
+
+            IEnumerable<NF_ComboViewModel> retorno = new List<NF_ComboViewModel>();
+
+            foreach (var item in razao) 
+            { 
+                if (!retorno.Where(w => w.RazaoSocial == item.RazaoSocial).Any())
+                    retorno = retorno.Append(item);
+            }
+
+            return Declaracoes.mapper.Map<IEnumerable<NF_ComboViewModel>>(retorno);
         }
         public void Dispose()
         {

@@ -410,6 +410,7 @@ namespace SisCom.Aplicacao
                 var optionsBuilder = new DbContextOptionsBuilder<MeuDbContext>();
                 optionsBuilder.UseSqlServer(appSettings.ConnectionStrings.DefaultConnection);
                 optionsBuilder.EnableSensitiveDataLogging(true);
+                optionsBuilder.AddInterceptors(new Infraestrutura.Data.Interceptadores.InterceptadorComando());
 
                 return new MeuDbContext(optionsBuilder.Options);
             }

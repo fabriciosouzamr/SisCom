@@ -614,7 +614,7 @@ namespace SisCom.Aplicacao_FW
             {
                 MDFeProcMDFe mdfe = null;
 
-                var caminhoXml = Path.Combine(_PATH_NUVEMFISCAL_MDFE, Autorizacao_ChaveAutenticacao + "-mdfe-protMdfe.xml");
+                var caminhoXml = Path.Combine(_PATH_NUVEMFISCAL_Vendas, Autorizacao_ChaveAutenticacao + "-mdfe-protMdfe.xml");
 
                 try
                 {

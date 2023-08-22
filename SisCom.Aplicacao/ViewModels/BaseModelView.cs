@@ -40,5 +40,6 @@ namespace SisCom.Aplicacao.ViewModels
     {
         public string NotaFiscal { get; set; }
         public string CodigoChaveAcesso { get; set; }
+        public string RazaoSocial { get; set; }
     }
 }

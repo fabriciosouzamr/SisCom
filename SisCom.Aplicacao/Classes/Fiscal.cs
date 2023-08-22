@@ -2261,7 +2261,7 @@ namespace SisCom.Aplicacao.Classes
                             MDFeProcMDFe mdfeProcMDFe = new MDFeProcMDFe();
                             mdfeProcMDFe.MDFe = mdfe;
                             mdfeProcMDFe.ProtMDFe = retorno.ProtMdFe;
-                            FuncoesXml.ClasseParaArquivoXml(mdfeProcMDFe, Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, mdfe.Chave() + "-mdfe-protMdfe.xml"));
+                            FuncoesXml.ClasseParaArquivoXml(mdfeProcMDFe, Path.Combine(Declaracoes.externos_Path_NuvemFiscal_Vendas, mdfe.Chave() + "-mdfe-protMdfe.xml"));
                             manifestoEletronicoDocumento.Status = MDFe_Status.Autorizado;
                             manifestoEletronicoDocumento.Autorizacao_Protocolo = retorno.ProtMdFe.InfProt.NProt;
                         }

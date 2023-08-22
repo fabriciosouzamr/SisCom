@@ -3456,6 +3456,7 @@
             comboPesquisarPesquisa.Size = new System.Drawing.Size(390, 23);
             comboPesquisarPesquisa.TabIndex = 3;
             comboPesquisarPesquisa.TabStop = false;
+            comboPesquisarPesquisa.SelectedIndexChanged += comboPesquisarPesquisa_SelectedIndexChanged;
             // 
             // label142
             // 
@@ -3475,6 +3476,7 @@
             comboPesquisarTipoFiltro.Size = new System.Drawing.Size(150, 23);
             comboPesquisarTipoFiltro.TabIndex = 1;
             comboPesquisarTipoFiltro.TabStop = false;
+            comboPesquisarTipoFiltro.SelectedIndexChanged += comboPesquisarTipoFiltro_SelectedIndexChanged;
             // 
             // label143
             // 
