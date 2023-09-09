@@ -315,6 +315,8 @@ namespace SisCom.Aplicacao.Report.DataSet {
             
             private global::System.Data.DataColumn columnNaoProcessada;
             
+            private global::System.Data.DataColumn columnQuantidade;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public MercadoriasDataTable() {
@@ -494,6 +496,14 @@ namespace SisCom.Aplicacao.Report.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn QuantidadeColumn {
+                get {
+                    return this.columnQuantidade;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -547,7 +557,8 @@ namespace SisCom.Aplicacao.Report.DataSet {
                         short Denegada, 
                         short Cancelada, 
                         short Inutilizada, 
-                        short NaoProcessada) {
+                        short NaoProcessada, 
+                        double Quantidade) {
                 MercadoriasRow rowMercadoriasRow = ((MercadoriasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NaturezaOperacao,
@@ -567,7 +578,8 @@ namespace SisCom.Aplicacao.Report.DataSet {
                         Denegada,
                         Cancelada,
                         Inutilizada,
-                        NaoProcessada};
+                        NaoProcessada,
+                        Quantidade};
                 rowMercadoriasRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMercadoriasRow);
                 return rowMercadoriasRow;
@@ -608,6 +620,7 @@ namespace SisCom.Aplicacao.Report.DataSet {
                 this.columnCancelada = base.Columns["Cancelada"];
                 this.columnInutilizada = base.Columns["Inutilizada"];
                 this.columnNaoProcessada = base.Columns["NaoProcessada"];
+                this.columnQuantidade = base.Columns["Quantidade"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -649,6 +662,8 @@ namespace SisCom.Aplicacao.Report.DataSet {
                 base.Columns.Add(this.columnInutilizada);
                 this.columnNaoProcessada = new global::System.Data.DataColumn("NaoProcessada", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNaoProcessada);
+                this.columnQuantidade = new global::System.Data.DataColumn("Quantidade", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQuantidade);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1079,6 +1094,22 @@ namespace SisCom.Aplicacao.Report.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public double Quantidade {
+                get {
+                    try {
+                        return ((double)(this[this.tableMercadorias.QuantidadeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Quantidade\' in table \'Mercadorias\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMercadorias.QuantidadeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsNaturezaOperacaoNull() {
                 return this.IsNull(this.tableMercadorias.NaturezaOperacaoColumn);
             }
@@ -1291,6 +1322,18 @@ namespace SisCom.Aplicacao.Report.DataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetNaoProcessadaNull() {
                 this[this.tableMercadorias.NaoProcessadaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsQuantidadeNull() {
+                return this.IsNull(this.tableMercadorias.QuantidadeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetQuantidadeNull() {
+                this[this.tableMercadorias.QuantidadeColumn] = global::System.Convert.DBNull;
             }
         }
         

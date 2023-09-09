@@ -29,16 +29,26 @@
         private void InitializeComponent()
         {
             panel1 = new System.Windows.Forms.Panel();
-            radioButton2 = new System.Windows.Forms.RadioButton();
-            radioButton7 = new System.Windows.Forms.RadioButton();
-            radioButton6 = new System.Windows.Forms.RadioButton();
-            radioButton5 = new System.Windows.Forms.RadioButton();
-            radioButton4 = new System.Windows.Forms.RadioButton();
-            radioButton1 = new System.Windows.Forms.RadioButton();
+            radioRelatorio_Estoque = new System.Windows.Forms.RadioButton();
+            radioRelatorio_VendaNaoFiscais = new System.Windows.Forms.RadioButton();
+            radioRelatorio_ApuracaoPorCFOP = new System.Windows.Forms.RadioButton();
+            radioRelatorio_VendasSaidas = new System.Windows.Forms.RadioButton();
+            radioRelatorio_NotaFiscalSaida = new System.Windows.Forms.RadioButton();
+            radioRelatorio_NotaFiscalEntrada = new System.Windows.Forms.RadioButton();
             panel2 = new System.Windows.Forms.Panel();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            label10 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            dateDataFinal = new System.Windows.Forms.DateTimePicker();
+            dateDataInicial = new System.Windows.Forms.DateTimePicker();
+            comboPessoa = new System.Windows.Forms.ComboBox();
+            label8 = new System.Windows.Forms.Label();
+            comboCFOP = new System.Windows.Forms.ComboBox();
+            label7 = new System.Windows.Forms.Label();
+            comboCliente = new System.Windows.Forms.ComboBox();
+            label6 = new System.Windows.Forms.Label();
             comboEmpresa = new System.Windows.Forms.ComboBox();
             label5 = new System.Windows.Forms.Label();
             panel4 = new System.Windows.Forms.Panel();
@@ -46,16 +56,6 @@
             label4 = new System.Windows.Forms.Label();
             botaoCancelar = new System.Windows.Forms.Button();
             botaoConfirmar = new System.Windows.Forms.Button();
-            comboCliente = new System.Windows.Forms.ComboBox();
-            label6 = new System.Windows.Forms.Label();
-            comboCFOP = new System.Windows.Forms.ComboBox();
-            label7 = new System.Windows.Forms.Label();
-            comboPessoa = new System.Windows.Forms.ComboBox();
-            label8 = new System.Windows.Forms.Label();
-            dateDataInicial = new System.Windows.Forms.DateTimePicker();
-            dateDataFinal = new System.Windows.Forms.DateTimePicker();
-            label9 = new System.Windows.Forms.Label();
-            label10 = new System.Windows.Forms.Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -64,90 +64,90 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(radioButton2);
-            panel1.Controls.Add(radioButton7);
-            panel1.Controls.Add(radioButton6);
-            panel1.Controls.Add(radioButton5);
-            panel1.Controls.Add(radioButton4);
-            panel1.Controls.Add(radioButton1);
+            panel1.Controls.Add(radioRelatorio_Estoque);
+            panel1.Controls.Add(radioRelatorio_VendaNaoFiscais);
+            panel1.Controls.Add(radioRelatorio_ApuracaoPorCFOP);
+            panel1.Controls.Add(radioRelatorio_VendasSaidas);
+            panel1.Controls.Add(radioRelatorio_NotaFiscalSaida);
+            panel1.Controls.Add(radioRelatorio_NotaFiscalEntrada);
             panel1.Controls.Add(panel2);
             panel1.Location = new System.Drawing.Point(12, 12);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(290, 297);
             panel1.TabIndex = 0;
             // 
-            // radioButton2
+            // radioRelatorio_Estoque
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            radioButton2.Location = new System.Drawing.Point(15, 205);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new System.Drawing.Size(89, 25);
-            radioButton2.TabIndex = 8;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Estoque";
-            radioButton2.UseVisualStyleBackColor = true;
+            radioRelatorio_Estoque.AutoSize = true;
+            radioRelatorio_Estoque.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            radioRelatorio_Estoque.Location = new System.Drawing.Point(15, 205);
+            radioRelatorio_Estoque.Name = "radioRelatorio_Estoque";
+            radioRelatorio_Estoque.Size = new System.Drawing.Size(89, 25);
+            radioRelatorio_Estoque.TabIndex = 8;
+            radioRelatorio_Estoque.TabStop = true;
+            radioRelatorio_Estoque.Text = "Estoque";
+            radioRelatorio_Estoque.UseVisualStyleBackColor = true;
             // 
-            // radioButton7
+            // radioRelatorio_VendaNaoFiscais
             // 
-            radioButton7.AutoSize = true;
-            radioButton7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            radioButton7.Location = new System.Drawing.Point(15, 143);
-            radioButton7.Name = "radioButton7";
-            radioButton7.Size = new System.Drawing.Size(172, 25);
-            radioButton7.TabIndex = 7;
-            radioButton7.TabStop = true;
-            radioButton7.Text = "Vendas Não Fiscais";
-            radioButton7.UseVisualStyleBackColor = true;
+            radioRelatorio_VendaNaoFiscais.AutoSize = true;
+            radioRelatorio_VendaNaoFiscais.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            radioRelatorio_VendaNaoFiscais.Location = new System.Drawing.Point(15, 143);
+            radioRelatorio_VendaNaoFiscais.Name = "radioRelatorio_VendaNaoFiscais";
+            radioRelatorio_VendaNaoFiscais.Size = new System.Drawing.Size(172, 25);
+            radioRelatorio_VendaNaoFiscais.TabIndex = 7;
+            radioRelatorio_VendaNaoFiscais.TabStop = true;
+            radioRelatorio_VendaNaoFiscais.Text = "Vendas Não Fiscais";
+            radioRelatorio_VendaNaoFiscais.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // radioRelatorio_ApuracaoPorCFOP
             // 
-            radioButton6.AutoSize = true;
-            radioButton6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            radioButton6.Location = new System.Drawing.Point(15, 112);
-            radioButton6.Name = "radioButton6";
-            radioButton6.Size = new System.Drawing.Size(175, 25);
-            radioButton6.TabIndex = 6;
-            radioButton6.TabStop = true;
-            radioButton6.Text = "Apuração por CFOP";
-            radioButton6.UseVisualStyleBackColor = true;
+            radioRelatorio_ApuracaoPorCFOP.AutoSize = true;
+            radioRelatorio_ApuracaoPorCFOP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            radioRelatorio_ApuracaoPorCFOP.Location = new System.Drawing.Point(15, 112);
+            radioRelatorio_ApuracaoPorCFOP.Name = "radioRelatorio_ApuracaoPorCFOP";
+            radioRelatorio_ApuracaoPorCFOP.Size = new System.Drawing.Size(175, 25);
+            radioRelatorio_ApuracaoPorCFOP.TabIndex = 6;
+            radioRelatorio_ApuracaoPorCFOP.TabStop = true;
+            radioRelatorio_ApuracaoPorCFOP.Text = "Apuração por CFOP";
+            radioRelatorio_ApuracaoPorCFOP.UseVisualStyleBackColor = true;
             // 
-            // radioButton5
+            // radioRelatorio_VendasSaidas
             // 
-            radioButton5.AutoSize = true;
-            radioButton5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            radioButton5.Location = new System.Drawing.Point(15, 174);
-            radioButton5.Name = "radioButton5";
-            radioButton5.Size = new System.Drawing.Size(149, 25);
-            radioButton5.TabIndex = 5;
-            radioButton5.TabStop = true;
-            radioButton5.Text = "Vendas x Saídas";
-            radioButton5.UseVisualStyleBackColor = true;
+            radioRelatorio_VendasSaidas.AutoSize = true;
+            radioRelatorio_VendasSaidas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            radioRelatorio_VendasSaidas.Location = new System.Drawing.Point(15, 174);
+            radioRelatorio_VendasSaidas.Name = "radioRelatorio_VendasSaidas";
+            radioRelatorio_VendasSaidas.Size = new System.Drawing.Size(149, 25);
+            radioRelatorio_VendasSaidas.TabIndex = 5;
+            radioRelatorio_VendasSaidas.TabStop = true;
+            radioRelatorio_VendasSaidas.Text = "Vendas x Saídas";
+            radioRelatorio_VendasSaidas.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // radioRelatorio_NotaFiscalSaida
             // 
-            radioButton4.AutoSize = true;
-            radioButton4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            radioButton4.Location = new System.Drawing.Point(15, 81);
-            radioButton4.Name = "radioButton4";
-            radioButton4.Size = new System.Drawing.Size(135, 25);
-            radioButton4.TabIndex = 4;
-            radioButton4.TabStop = true;
-            radioButton4.Text = "Nota de Saída";
-            radioButton4.UseVisualStyleBackColor = true;
+            radioRelatorio_NotaFiscalSaida.AutoSize = true;
+            radioRelatorio_NotaFiscalSaida.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            radioRelatorio_NotaFiscalSaida.Location = new System.Drawing.Point(15, 81);
+            radioRelatorio_NotaFiscalSaida.Name = "radioRelatorio_NotaFiscalSaida";
+            radioRelatorio_NotaFiscalSaida.Size = new System.Drawing.Size(135, 25);
+            radioRelatorio_NotaFiscalSaida.TabIndex = 4;
+            radioRelatorio_NotaFiscalSaida.TabStop = true;
+            radioRelatorio_NotaFiscalSaida.Text = "Nota de Saída";
+            radioRelatorio_NotaFiscalSaida.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // radioRelatorio_NotaFiscalEntrada
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Checked = true;
-            radioButton1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            radioButton1.Location = new System.Drawing.Point(15, 50);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new System.Drawing.Size(152, 25);
-            radioButton1.TabIndex = 1;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Nota de Entrada";
-            radioButton1.UseVisualStyleBackColor = true;
+            radioRelatorio_NotaFiscalEntrada.AutoSize = true;
+            radioRelatorio_NotaFiscalEntrada.Checked = true;
+            radioRelatorio_NotaFiscalEntrada.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            radioRelatorio_NotaFiscalEntrada.Location = new System.Drawing.Point(15, 50);
+            radioRelatorio_NotaFiscalEntrada.Name = "radioRelatorio_NotaFiscalEntrada";
+            radioRelatorio_NotaFiscalEntrada.Size = new System.Drawing.Size(152, 25);
+            radioRelatorio_NotaFiscalEntrada.TabIndex = 1;
+            radioRelatorio_NotaFiscalEntrada.TabStop = true;
+            radioRelatorio_NotaFiscalEntrada.Text = "Nota de Entrada";
+            radioRelatorio_NotaFiscalEntrada.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -200,6 +200,99 @@
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(363, 297);
             panel3.TabIndex = 1;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label10.Location = new System.Drawing.Point(100, 238);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(72, 15);
+            label10.TabIndex = 22;
+            label10.Text = "Data Final: *";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label9.Location = new System.Drawing.Point(11, 238);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(79, 15);
+            label9.TabIndex = 21;
+            label9.Text = "Data Inicial: *";
+            // 
+            // dateDataFinal
+            // 
+            dateDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            dateDataFinal.Location = new System.Drawing.Point(100, 255);
+            dateDataFinal.Name = "dateDataFinal";
+            dateDataFinal.Size = new System.Drawing.Size(81, 23);
+            dateDataFinal.TabIndex = 20;
+            // 
+            // dateDataInicial
+            // 
+            dateDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            dateDataInicial.Location = new System.Drawing.Point(11, 255);
+            dateDataInicial.Name = "dateDataInicial";
+            dateDataInicial.Size = new System.Drawing.Size(81, 23);
+            dateDataInicial.TabIndex = 19;
+            // 
+            // comboPessoa
+            // 
+            comboPessoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboPessoa.FormattingEnabled = true;
+            comboPessoa.Location = new System.Drawing.Point(11, 205);
+            comboPessoa.Name = "comboPessoa";
+            comboPessoa.Size = new System.Drawing.Size(341, 23);
+            comboPessoa.TabIndex = 9;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label8.Location = new System.Drawing.Point(11, 188);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(44, 15);
+            label8.TabIndex = 8;
+            label8.Text = "Pessoa";
+            // 
+            // comboCFOP
+            // 
+            comboCFOP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboCFOP.FormattingEnabled = true;
+            comboCFOP.Location = new System.Drawing.Point(11, 159);
+            comboCFOP.Name = "comboCFOP";
+            comboCFOP.Size = new System.Drawing.Size(341, 23);
+            comboCFOP.TabIndex = 7;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label7.Location = new System.Drawing.Point(11, 142);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(45, 15);
+            label7.TabIndex = 6;
+            label7.Text = "C.F.O.P,";
+            // 
+            // comboCliente
+            // 
+            comboCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboCliente.FormattingEnabled = true;
+            comboCliente.Location = new System.Drawing.Point(11, 113);
+            comboCliente.Name = "comboCliente";
+            comboCliente.Size = new System.Drawing.Size(341, 23);
+            comboCliente.TabIndex = 5;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label6.Location = new System.Drawing.Point(11, 96);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(46, 15);
+            label6.TabIndex = 4;
+            label6.Text = "Cliente";
             // 
             // comboEmpresa
             // 
@@ -274,99 +367,6 @@
             botaoConfirmar.UseVisualStyleBackColor = true;
             botaoConfirmar.Click += botaoConfirmar_Click;
             // 
-            // comboCliente
-            // 
-            comboCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboCliente.FormattingEnabled = true;
-            comboCliente.Location = new System.Drawing.Point(11, 113);
-            comboCliente.Name = "comboCliente";
-            comboCliente.Size = new System.Drawing.Size(341, 23);
-            comboCliente.TabIndex = 5;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label6.Location = new System.Drawing.Point(11, 96);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(46, 15);
-            label6.TabIndex = 4;
-            label6.Text = "Cliente";
-            // 
-            // comboCFOP
-            // 
-            comboCFOP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboCFOP.FormattingEnabled = true;
-            comboCFOP.Location = new System.Drawing.Point(11, 159);
-            comboCFOP.Name = "comboCFOP";
-            comboCFOP.Size = new System.Drawing.Size(341, 23);
-            comboCFOP.TabIndex = 7;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label7.Location = new System.Drawing.Point(11, 142);
-            label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(45, 15);
-            label7.TabIndex = 6;
-            label7.Text = "C.F.O.P,";
-            // 
-            // comboPessoa
-            // 
-            comboPessoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboPessoa.FormattingEnabled = true;
-            comboPessoa.Location = new System.Drawing.Point(11, 205);
-            comboPessoa.Name = "comboPessoa";
-            comboPessoa.Size = new System.Drawing.Size(341, 23);
-            comboPessoa.TabIndex = 9;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label8.Location = new System.Drawing.Point(11, 188);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(44, 15);
-            label8.TabIndex = 8;
-            label8.Text = "Pessoa";
-            // 
-            // dateDataInicial
-            // 
-            dateDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            dateDataInicial.Location = new System.Drawing.Point(11, 255);
-            dateDataInicial.Name = "dateDataInicial";
-            dateDataInicial.Size = new System.Drawing.Size(81, 23);
-            dateDataInicial.TabIndex = 19;
-            // 
-            // dateDataFinal
-            // 
-            dateDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            dateDataFinal.Location = new System.Drawing.Point(100, 255);
-            dateDataFinal.Name = "dateDataFinal";
-            dateDataFinal.Size = new System.Drawing.Size(81, 23);
-            dateDataFinal.TabIndex = 20;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label9.Location = new System.Drawing.Point(11, 238);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(79, 15);
-            label9.TabIndex = 21;
-            label9.Text = "Data Inicial: *";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label10.Location = new System.Drawing.Point(100, 238);
-            label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(72, 15);
-            label10.TabIndex = 22;
-            label10.Text = "Data Final: *";
-            // 
             // frmRelatorios
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -399,12 +399,12 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioRelatorio_NotaFiscalEntrada;
+        private System.Windows.Forms.RadioButton radioRelatorio_NotaFiscalSaida;
+        private System.Windows.Forms.RadioButton radioRelatorio_VendaNaoFiscais;
+        private System.Windows.Forms.RadioButton radioRelatorio_ApuracaoPorCFOP;
+        private System.Windows.Forms.RadioButton radioRelatorio_VendasSaidas;
+        private System.Windows.Forms.RadioButton radioRelatorio_Estoque;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label3;

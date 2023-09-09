@@ -75,8 +75,8 @@ namespace SisCom.Aplicacao
         }
 
         private void botaoRelatorioGerais_Click(object sender, EventArgs e)
-        {
-            var form = new frmRelatorios();
+        { 
+            var form = this.ServiceProvider().GetRequiredService<frmRelatorios>();
             form.ShowDialog(this);
         }
     }

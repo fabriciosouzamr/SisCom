@@ -3,6 +3,7 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Entidade.Enum;
 using System;
 using System.Data;
+using System.Runtime.Intrinsics.X86;
 using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Formularios
@@ -10,7 +11,8 @@ namespace SisCom.Aplicacao.Formularios
     public enum TipoRelatorio
     {
         CartaCorrecao,
-        NotaFiscalEntrada
+        NotaFiscalEntrada,
+        NotaFiscalSaida
     }
 
     public partial class frmRelatorioVisualizar : Form
@@ -75,8 +77,8 @@ namespace SisCom.Aplicacao.Formularios
                     }
                 case TipoRelatorio.NotaFiscalEntrada:
                     {
-                        sql = "WITH NFEI (NotaFiscalEntradaId, ValorItens) AS " +
-                              "(SELECT NotaFiscalEntradaId, SUM(PrecoTotal) ValorItens FROM NotaFiscalEntradaMercadorias GROUP BY NotaFiscalEntradaId) " +
+                        sql = "WITH NFEI (NotaFiscalEntradaId, ValorItens, Quantidade) AS " +
+                              "(SELECT NotaFiscalEntradaId, SUM(PrecoTotal) ValorItens, SUM(QuantidadeCaixas) Quantidade FROM NotaFiscalEntradaMercadorias GROUP BY NotaFiscalEntradaId) " +
                               "SELECT CONCAT(CFOP.Codigo, ' ', NTOP.Nome) NaturezaOperacao," +
                                      "NFET.DataEmissao," +
                                      "NFET.DataEntrada," +
@@ -86,6 +88,7 @@ namespace SisCom.Aplicacao.Formularios
                                      "FRNC.CNPJ_CPF," +
                                      "ETFN.Codigo," +
                                      "NFEI.ValorItens," +
+                                     "NFEI.Quantidade," +
                                      "NFET.ValorDesconto," +
                                      "NFET.ValorOutrasDespesas," +
                                      "NFET.BaseCalculo BaseICMS," +
@@ -101,24 +104,84 @@ namespace SisCom.Aplicacao.Formularios
                                " INNER JOIN Pessoas FRNC on FRNC.Id = NFET.FornecedorId" +
                                " INNER JOIN NFEI on NFEI.NotaFiscalEntradaId = NFET.Id" +
                                 " LEFT JOIN Cidades CDFN on CDFN.Id = FRNC.End_CidadeId" +
-                                " LEFT JOIN Estados ETFN on ETFN.Id = CDFN.EstadoId";
+                                " LEFT JOIN Estados ETFN on ETFN.Id = CDFN.EstadoId" +
+                              " WHERE NFET.DataEntrada >= '" + param[4] + "'" +
+                                " AND NFET.DataEntrada <= '" + param[5] + "'";
+
+                        if (!string.IsNullOrEmpty(param[3].ToString()))
+                        {
+                            sql = sql + " AND NFET.FornecedorId = '" + param[3] + "'";
+                        }
+                        if (!string.IsNullOrEmpty(param[2].ToString()))
+                        {
+                            sql = sql + " AND NTOP.Id = '" + param[2] + "'";
+                        }
 
                         sql = sql +
                               " ORDER BY NFET.NotaFiscal";
                         data = DB.Executar(sql);
 
-                        this.Text = "Carta de Correção";
+                        this.Text = "Nota Fiscal de Entrada";
 
                         reportViewer1.LocalReport.ReportEmbeddedResource = "SisCom.Aplicacao.Report.Fiscal.NFEntradas.rdlc";
                         reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsGeral", data));
                         reportViewer1.LocalReport.SetParameters(new ReportParameter[] { new ReportParameter("EmpresaLogada", Declaracoes.dados_Empresa_Nome ),
                                                                                         new ReportParameter("Usuario", Declaracoes.sistema_UsuarioLogado),
                                                                                         new ReportParameter("Emissao", DateTime.Now.ToString()),
-                                                                                        new ReportParameter("Empresa", "TODOS"),
-                                                                                        new ReportParameter("CFOP", "TODOS"),
-                                                                                        new ReportParameter("Pessoa", "TODOS"),
-                                                                                        new ReportParameter("DataInicial", "TODOS"),
-                                                                                        new ReportParameter("DataFinal", "TODOS") });
+                                                                                        new ReportParameter("Empresa", string.IsNullOrEmpty(param[6]) ? "TODOS" : param[6]),
+                                                                                        new ReportParameter("CFOP", string.IsNullOrEmpty(param[8]) ? "TODOS" : param[8]),
+                                                                                        new ReportParameter("Pessoa", string.IsNullOrEmpty(param[9]) ? "TODOS" : param[9]),
+                                                                                        new ReportParameter("DataInicial", param[4]),
+                                                                                        new ReportParameter("DataFinal", param[5]),
+                                                                                        new ReportParameter("PessoaRotulo", "Fornecedor"),
+                                                                                        new ReportParameter("TipoNotaFiscal", "Entrada")});
+                        break;
+                    }
+                case TipoRelatorio.NotaFiscalSaida:
+                    {
+                        sql = "WITH NFEI (NotaFiscalSaidaId, ValorItens, Quantidade, BaseCalculo, ValorICMS, ValorNota) AS " +
+                              "(SELECT NotaFiscalSaidaId, SUM(PrecoTotal) ValorItens, SUM(Quantidade) Quantidade, Sum(ValorBaseCalculo) BaseCalculo, SUM(ValorICMS) ValorICMS, SUM(PrecoTotal) ValorNota FROM NotaFiscalSaidaMercadorias GROUP BY NotaFiscalSaidaId)" +
+                              "SELECT CONCAT(CFOP.Codigo, ' ', NTOP.Nome) NaturezaOperacao,NFET.DataEmissao,NFET.DataEmissao DataEntrada, NFET.NotaFiscal,NFET.Serie,FRNC.Nome Fornecedor, FRNC.CNPJ_CPF,ETFN.Codigo,NFEI.ValorItens,NFEI.Quantidade,NFET.ValorDesconto," +
+                                     "NFET.ValorFrete + NFET.ValorSeguro ValorOutrasDespesas,NFEI.BaseCalculo BaseICMS, NFEI.ValorICMS,NFEI.ValorNota,IIF(NFET.Status = 2, 1, 0) Cancelada,IIF(NFET.Status = 4, 1, 0) Denegada,IIF(NFET.Status = 5, 1, 0) Inutilizada," + 
+                                     "IIF(NFET.Status NOT IN(5, 2, 4), 1, 0) NaoProcessada" +
+                              " FROM NotaFiscalSaidas NFET" +
+                               " INNER JOIN NaturezaOperacoes NTOP on NTOP.Id = NFET.NaturezaOperacaoId" +
+                               " INNER JOIN TabelaCFOPs CFOP on CFOP.Id = NTOP.TabelaCFOPId" +
+                               " INNER JOIN Pessoas FRNC on FRNC.Id = NFET.ClienteId" +
+                               " INNER JOIN NFEI on NFEI.NotaFiscalSaidaId = NFET.Id" +
+                                " LEFT JOIN Cidades CDFN on CDFN.Id = FRNC.End_CidadeId" +
+                                " LEFT JOIN Estados ETFN on ETFN.Id = CDFN.EstadoId" +
+                              " WHERE CAST(NFET.DataEmissao AS DATE) >= '" + param[4] + "'" +
+                                " AND CAST(NFET.DataEmissao AS DATE) <= '" + param[5] + "'";
+
+                        if (!string.IsNullOrEmpty(param[1].ToString()))
+                        {
+                            sql = sql + " AND NFET.ClienteId = '" + param[1] + "'";
+                        }
+                        if (!string.IsNullOrEmpty(param[2].ToString()))
+                        {
+                            sql = sql + " AND NTOP.Id = '" + param[2] + "'";
+                        }
+
+                        sql = sql +
+                              " ORDER BY NFET.NotaFiscal";
+                        data = DB.Executar(sql);
+
+                        this.Text = "Nota Fiscal de Saída";
+
+                        reportViewer1.LocalReport.ReportEmbeddedResource = "SisCom.Aplicacao.Report.Fiscal.NFEntradas.rdlc";
+                        reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsGeral", data));
+                        reportViewer1.LocalReport.SetParameters(new ReportParameter[] { new ReportParameter("EmpresaLogada", Declaracoes.dados_Empresa_Nome ),
+                                                                                        new ReportParameter("Usuario", Declaracoes.sistema_UsuarioLogado),
+                                                                                        new ReportParameter("Emissao", DateTime.Now.ToString()),
+                                                                                        new ReportParameter("Empresa", string.IsNullOrEmpty(param[6]) ? "TODOS" : param[6]),
+                                                                                        new ReportParameter("CFOP", string.IsNullOrEmpty(param[8]) ? "TODOS" : param[8]),
+                                                                                        new ReportParameter("Pessoa", string.IsNullOrEmpty(param[7]) ? "TODOS" : param[9]),
+                                                                                        new ReportParameter("DataInicial", param[4]),
+                                                                                        new ReportParameter("DataFinal", param[5]),
+                                                                                        new ReportParameter("PessoaRotulo", "Cliente"),
+                                                                                        new ReportParameter("TipoNotaFiscal", "Saída") });
+
                         break;
                     }
                 default:

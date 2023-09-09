@@ -71,9 +71,9 @@ namespace SisCom.Aplicacao.Controllers
             return Declaracoes.mapper.Map<IEnumerable<PessoaComboNomeViewModel>>(combo);
         }
 
-        public async Task<IEnumerable<PessoaComboRazaoViewModel>> ComboRazaoSocial(Expression<Func<Pessoa, object>> order = null)
+        public async Task<IEnumerable<PessoaComboRazaoViewModel>> ComboRazaoSocial(Expression<Func<Pessoa, object>> order = null, Expression<Func<Pessoa, bool>> predicate = null)
         {
-            var combo = await _pessoaService.Combo(order);
+            var combo = await _pessoaService.GetAll(order, predicate);
             return Declaracoes.mapper.Map<IEnumerable<PessoaComboRazaoViewModel>>(combo);
         }
 
