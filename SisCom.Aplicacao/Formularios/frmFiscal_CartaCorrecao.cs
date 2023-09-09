@@ -184,9 +184,9 @@ namespace SisCom.Aplicacao.Formularios
             if (checkBox.Checked)
             {
                 Grid_DataGridView.User_LinhaAdicionar(gridItens, new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridItens_Nome,
-                                                                                                                                         Valor = checkBox.Text },
-                                                                                                          new Grid_DataGridView.Coluna { Indice = gridItens_Descricao,
-                                                                                                                                         Valor = "" }});
+                                                                                                                                 Valor = checkBox.Text },
+                                                                                                  new Grid_DataGridView.Coluna { Indice = gridItens_Descricao,
+                                                                                                                                 Valor = "" }});
             }
             else
             {

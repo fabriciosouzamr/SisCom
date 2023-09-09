@@ -30,399 +30,397 @@ namespace SisCom.Aplicacao
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMDI));
-            this.pnlMenuBotao = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.cmdMDFe = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblCadastros = new System.Windows.Forms.Label();
-            this.lblSair = new System.Windows.Forms.Label();
-            this.cmdSair = new System.Windows.Forms.Button();
-            this.buttonUtilitario = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.botaoNota = new System.Windows.Forms.Button();
-            this.buttonAjustesEstoque = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.cmdVendas = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.cmdCompras = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.cmdCadastro = new System.Windows.Forms.Button();
-            this.statusRodape = new System.Windows.Forms.StatusStrip();
-            this.toolUsuario = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolScreen = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pnlMenuBotao.SuspendLayout();
-            this.statusRodape.SuspendLayout();
-            this.SuspendLayout();
+            pnlMenuBotao = new System.Windows.Forms.Panel();
+            label12 = new System.Windows.Forms.Label();
+            cmdMDFe = new System.Windows.Forms.Button();
+            label11 = new System.Windows.Forms.Label();
+            label10 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            lblCadastros = new System.Windows.Forms.Label();
+            lblSair = new System.Windows.Forms.Label();
+            cmdSair = new System.Windows.Forms.Button();
+            buttonUtilitario = new System.Windows.Forms.Button();
+            botaoRelatorioGerais = new System.Windows.Forms.Button();
+            botaoNota = new System.Windows.Forms.Button();
+            buttonAjustesEstoque = new System.Windows.Forms.Button();
+            button7 = new System.Windows.Forms.Button();
+            button8 = new System.Windows.Forms.Button();
+            button9 = new System.Windows.Forms.Button();
+            cmdVendas = new System.Windows.Forms.Button();
+            button3 = new System.Windows.Forms.Button();
+            cmdCompras = new System.Windows.Forms.Button();
+            button1 = new System.Windows.Forms.Button();
+            cmdCadastro = new System.Windows.Forms.Button();
+            statusRodape = new System.Windows.Forms.StatusStrip();
+            toolUsuario = new System.Windows.Forms.ToolStripStatusLabel();
+            toolScreen = new System.Windows.Forms.ToolStripStatusLabel();
+            pnlMenuBotao.SuspendLayout();
+            statusRodape.SuspendLayout();
+            SuspendLayout();
             // 
             // pnlMenuBotao
             // 
-            this.pnlMenuBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.pnlMenuBotao.Controls.Add(this.label12);
-            this.pnlMenuBotao.Controls.Add(this.cmdMDFe);
-            this.pnlMenuBotao.Controls.Add(this.label11);
-            this.pnlMenuBotao.Controls.Add(this.label10);
-            this.pnlMenuBotao.Controls.Add(this.label9);
-            this.pnlMenuBotao.Controls.Add(this.label8);
-            this.pnlMenuBotao.Controls.Add(this.label7);
-            this.pnlMenuBotao.Controls.Add(this.label6);
-            this.pnlMenuBotao.Controls.Add(this.label5);
-            this.pnlMenuBotao.Controls.Add(this.label4);
-            this.pnlMenuBotao.Controls.Add(this.label3);
-            this.pnlMenuBotao.Controls.Add(this.label2);
-            this.pnlMenuBotao.Controls.Add(this.label1);
-            this.pnlMenuBotao.Controls.Add(this.lblCadastros);
-            this.pnlMenuBotao.Controls.Add(this.lblSair);
-            this.pnlMenuBotao.Controls.Add(this.cmdSair);
-            this.pnlMenuBotao.Controls.Add(this.buttonUtilitario);
-            this.pnlMenuBotao.Controls.Add(this.button12);
-            this.pnlMenuBotao.Controls.Add(this.botaoNota);
-            this.pnlMenuBotao.Controls.Add(this.buttonAjustesEstoque);
-            this.pnlMenuBotao.Controls.Add(this.button7);
-            this.pnlMenuBotao.Controls.Add(this.button8);
-            this.pnlMenuBotao.Controls.Add(this.button9);
-            this.pnlMenuBotao.Controls.Add(this.cmdVendas);
-            this.pnlMenuBotao.Controls.Add(this.button3);
-            this.pnlMenuBotao.Controls.Add(this.cmdCompras);
-            this.pnlMenuBotao.Controls.Add(this.button1);
-            this.pnlMenuBotao.Controls.Add(this.cmdCadastro);
-            this.pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
-            this.pnlMenuBotao.Name = "pnlMenuBotao";
-            this.pnlMenuBotao.Size = new System.Drawing.Size(1275, 99);
-            this.pnlMenuBotao.TabIndex = 0;
+            pnlMenuBotao.BackColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            pnlMenuBotao.Controls.Add(label12);
+            pnlMenuBotao.Controls.Add(cmdMDFe);
+            pnlMenuBotao.Controls.Add(label11);
+            pnlMenuBotao.Controls.Add(label10);
+            pnlMenuBotao.Controls.Add(label9);
+            pnlMenuBotao.Controls.Add(label8);
+            pnlMenuBotao.Controls.Add(label7);
+            pnlMenuBotao.Controls.Add(label6);
+            pnlMenuBotao.Controls.Add(label5);
+            pnlMenuBotao.Controls.Add(label4);
+            pnlMenuBotao.Controls.Add(label3);
+            pnlMenuBotao.Controls.Add(label2);
+            pnlMenuBotao.Controls.Add(label1);
+            pnlMenuBotao.Controls.Add(lblCadastros);
+            pnlMenuBotao.Controls.Add(lblSair);
+            pnlMenuBotao.Controls.Add(cmdSair);
+            pnlMenuBotao.Controls.Add(buttonUtilitario);
+            pnlMenuBotao.Controls.Add(botaoRelatorioGerais);
+            pnlMenuBotao.Controls.Add(botaoNota);
+            pnlMenuBotao.Controls.Add(buttonAjustesEstoque);
+            pnlMenuBotao.Controls.Add(button7);
+            pnlMenuBotao.Controls.Add(button8);
+            pnlMenuBotao.Controls.Add(button9);
+            pnlMenuBotao.Controls.Add(cmdVendas);
+            pnlMenuBotao.Controls.Add(button3);
+            pnlMenuBotao.Controls.Add(cmdCompras);
+            pnlMenuBotao.Controls.Add(button1);
+            pnlMenuBotao.Controls.Add(cmdCadastro);
+            pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
+            pnlMenuBotao.Name = "pnlMenuBotao";
+            pnlMenuBotao.Size = new System.Drawing.Size(1275, 99);
+            pnlMenuBotao.TabIndex = 0;
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(953, 64);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(45, 15);
-            this.label12.TabIndex = 27;
-            this.label12.Text = "MDF-e";
+            label12.AutoSize = true;
+            label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label12.Location = new System.Drawing.Point(953, 64);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(45, 15);
+            label12.TabIndex = 27;
+            label12.Text = "MDF-e";
             // 
             // cmdMDFe
             // 
-            this.cmdMDFe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cmdMDFe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.cmdMDFe.Location = new System.Drawing.Point(936, 0);
-            this.cmdMDFe.Name = "cmdMDFe";
-            this.cmdMDFe.Size = new System.Drawing.Size(78, 64);
-            this.cmdMDFe.TabIndex = 26;
-            this.cmdMDFe.Text = "MDF-e";
-            this.cmdMDFe.UseVisualStyleBackColor = true;
-            this.cmdMDFe.Click += new System.EventHandler(this.cmdMDFe_Click);
+            cmdMDFe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            cmdMDFe.ForeColor = System.Drawing.Color.FromArgb(255, 128, 0);
+            cmdMDFe.Location = new System.Drawing.Point(936, 0);
+            cmdMDFe.Name = "cmdMDFe";
+            cmdMDFe.Size = new System.Drawing.Size(78, 64);
+            cmdMDFe.TabIndex = 26;
+            cmdMDFe.Text = "MDF-e";
+            cmdMDFe.UseVisualStyleBackColor = true;
+            cmdMDFe.Click += cmdMDFe_Click;
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(869, 64);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(56, 15);
-            this.label11.TabIndex = 25;
-            this.label11.Text = "Utiliários";
+            label11.AutoSize = true;
+            label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label11.Location = new System.Drawing.Point(869, 64);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(56, 15);
+            label11.TabIndex = 25;
+            label11.Text = "Utiliários";
             // 
             // label10
             // 
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(788, 64);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(63, 30);
-            this.label10.TabIndex = 24;
-            this.label10.Text = "Relatórios Gerais";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label10.Location = new System.Drawing.Point(788, 64);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(63, 30);
+            label10.TabIndex = 24;
+            label10.Text = "Relatórios Gerais";
+            label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label9
             // 
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(723, 64);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 30);
-            this.label9.TabIndex = 23;
-            this.label9.Text = "Nota Fiscal";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label9.Location = new System.Drawing.Point(723, 64);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(36, 30);
+            label9.TabIndex = 23;
+            label9.Text = "Nota Fiscal";
+            label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
             // 
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(638, 64);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 30);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "Ajustes Estoque";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label8.Location = new System.Drawing.Point(638, 64);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(51, 30);
+            label8.TabIndex = 22;
+            label8.Text = "Ajustes Estoque";
+            label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
             // 
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(558, 64);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 30);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "Contas a Receber";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label7.Location = new System.Drawing.Point(558, 64);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(54, 30);
+            label7.TabIndex = 21;
+            label7.Text = "Contas a Receber";
+            label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label6
             // 
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(484, 64);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 31);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Contas a Pagar";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label6.Location = new System.Drawing.Point(484, 64);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(47, 31);
+            label6.TabIndex = 20;
+            label6.Text = "Contas a Pagar";
+            label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(402, 64);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 30);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Consulta Preços";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label5.Location = new System.Drawing.Point(402, 64);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(54, 30);
+            label5.TabIndex = 19;
+            label5.Text = "Consulta Preços";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(328, 64);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 15);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Vendas";
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label4.Location = new System.Drawing.Point(328, 64);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(46, 15);
+            label4.TabIndex = 18;
+            label4.Text = "Vendas";
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(238, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 30);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Orçamento DAV";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label3.Location = new System.Drawing.Point(238, 64);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(70, 30);
+            label3.TabIndex = 17;
+            label3.Text = "Orçamento DAV";
+            label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(168, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 15);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Compras";
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label2.Location = new System.Drawing.Point(168, 64);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(55, 15);
+            label2.TabIndex = 16;
+            label2.Text = "Compras";
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(75, 64);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 30);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Ordem Fornecimento";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label1.Location = new System.Drawing.Point(75, 64);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(85, 30);
+            label1.TabIndex = 15;
+            label1.Text = "Ordem Fornecimento";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblCadastros
             // 
-            this.lblCadastros.AutoSize = true;
-            this.lblCadastros.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblCadastros.Location = new System.Drawing.Point(9, 64);
-            this.lblCadastros.Name = "lblCadastros";
-            this.lblCadastros.Size = new System.Drawing.Size(60, 15);
-            this.lblCadastros.TabIndex = 14;
-            this.lblCadastros.Text = "Cadastros";
+            lblCadastros.AutoSize = true;
+            lblCadastros.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblCadastros.Location = new System.Drawing.Point(9, 64);
+            lblCadastros.Name = "lblCadastros";
+            lblCadastros.Size = new System.Drawing.Size(60, 15);
+            lblCadastros.TabIndex = 14;
+            lblCadastros.Text = "Cadastros";
             // 
             // lblSair
             // 
-            this.lblSair.AutoSize = true;
-            this.lblSair.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSair.Location = new System.Drawing.Point(1039, 64);
-            this.lblSair.Name = "lblSair";
-            this.lblSair.Size = new System.Drawing.Size(28, 15);
-            this.lblSair.TabIndex = 13;
-            this.lblSair.Text = "Sair";
+            lblSair.AutoSize = true;
+            lblSair.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblSair.Location = new System.Drawing.Point(1039, 64);
+            lblSair.Name = "lblSair";
+            lblSair.Size = new System.Drawing.Size(28, 15);
+            lblSair.TabIndex = 13;
+            lblSair.Text = "Sair";
             // 
             // cmdSair
             // 
-            this.cmdSair.Image = ((System.Drawing.Image)(resources.GetObject("cmdSair.Image")));
-            this.cmdSair.Location = new System.Drawing.Point(1014, 0);
-            this.cmdSair.Name = "cmdSair";
-            this.cmdSair.Size = new System.Drawing.Size(78, 64);
-            this.cmdSair.TabIndex = 12;
-            this.cmdSair.UseVisualStyleBackColor = true;
-            this.cmdSair.Click += new System.EventHandler(this.cmdSair_Click);
+            cmdSair.Image = (System.Drawing.Image)resources.GetObject("cmdSair.Image");
+            cmdSair.Location = new System.Drawing.Point(1014, 0);
+            cmdSair.Name = "cmdSair";
+            cmdSair.Size = new System.Drawing.Size(78, 64);
+            cmdSair.TabIndex = 12;
+            cmdSair.UseVisualStyleBackColor = true;
+            cmdSair.Click += cmdSair_Click;
             // 
             // buttonUtilitario
             // 
-            this.buttonUtilitario.Image = ((System.Drawing.Image)(resources.GetObject("buttonUtilitario.Image")));
-            this.buttonUtilitario.Location = new System.Drawing.Point(858, 0);
-            this.buttonUtilitario.Name = "buttonUtilitario";
-            this.buttonUtilitario.Size = new System.Drawing.Size(78, 64);
-            this.buttonUtilitario.TabIndex = 11;
-            this.buttonUtilitario.UseVisualStyleBackColor = true;
-            this.buttonUtilitario.Click += new System.EventHandler(this.buttonUtilitario_Click);
+            buttonUtilitario.Image = (System.Drawing.Image)resources.GetObject("buttonUtilitario.Image");
+            buttonUtilitario.Location = new System.Drawing.Point(858, 0);
+            buttonUtilitario.Name = "buttonUtilitario";
+            buttonUtilitario.Size = new System.Drawing.Size(78, 64);
+            buttonUtilitario.TabIndex = 11;
+            buttonUtilitario.UseVisualStyleBackColor = true;
+            buttonUtilitario.Click += buttonUtilitario_Click;
             // 
-            // button12
+            // botaoRelatorioGerais
             // 
-            this.button12.Image = ((System.Drawing.Image)(resources.GetObject("button12.Image")));
-            this.button12.Location = new System.Drawing.Point(780, 0);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(78, 64);
-            this.button12.TabIndex = 10;
-            this.button12.UseVisualStyleBackColor = true;
+            botaoRelatorioGerais.Image = (System.Drawing.Image)resources.GetObject("botaoRelatorioGerais.Image");
+            botaoRelatorioGerais.Location = new System.Drawing.Point(780, 0);
+            botaoRelatorioGerais.Name = "botaoRelatorioGerais";
+            botaoRelatorioGerais.Size = new System.Drawing.Size(78, 64);
+            botaoRelatorioGerais.TabIndex = 10;
+            botaoRelatorioGerais.UseVisualStyleBackColor = true;
+            botaoRelatorioGerais.Click += botaoRelatorioGerais_Click;
             // 
             // botaoNota
             // 
-            this.botaoNota.Image = ((System.Drawing.Image)(resources.GetObject("botaoNota.Image")));
-            this.botaoNota.Location = new System.Drawing.Point(702, 0);
-            this.botaoNota.Name = "botaoNota";
-            this.botaoNota.Size = new System.Drawing.Size(78, 64);
-            this.botaoNota.TabIndex = 9;
-            this.botaoNota.UseVisualStyleBackColor = true;
-            this.botaoNota.Click += new System.EventHandler(this.botaoNota_Click);
+            botaoNota.Image = (System.Drawing.Image)resources.GetObject("botaoNota.Image");
+            botaoNota.Location = new System.Drawing.Point(702, 0);
+            botaoNota.Name = "botaoNota";
+            botaoNota.Size = new System.Drawing.Size(78, 64);
+            botaoNota.TabIndex = 9;
+            botaoNota.UseVisualStyleBackColor = true;
+            botaoNota.Click += botaoNota_Click;
             // 
             // buttonAjustesEstoque
             // 
-            this.buttonAjustesEstoque.Image = ((System.Drawing.Image)(resources.GetObject("buttonAjustesEstoque.Image")));
-            this.buttonAjustesEstoque.Location = new System.Drawing.Point(624, 0);
-            this.buttonAjustesEstoque.Name = "buttonAjustesEstoque";
-            this.buttonAjustesEstoque.Size = new System.Drawing.Size(78, 64);
-            this.buttonAjustesEstoque.TabIndex = 8;
-            this.buttonAjustesEstoque.UseVisualStyleBackColor = true;
-            this.buttonAjustesEstoque.Click += new System.EventHandler(this.buttonAjustesEstoque_Click);
+            buttonAjustesEstoque.Image = (System.Drawing.Image)resources.GetObject("buttonAjustesEstoque.Image");
+            buttonAjustesEstoque.Location = new System.Drawing.Point(624, 0);
+            buttonAjustesEstoque.Name = "buttonAjustesEstoque";
+            buttonAjustesEstoque.Size = new System.Drawing.Size(78, 64);
+            buttonAjustesEstoque.TabIndex = 8;
+            buttonAjustesEstoque.UseVisualStyleBackColor = true;
+            buttonAjustesEstoque.Click += buttonAjustesEstoque_Click;
             // 
             // button7
             // 
-            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
-            this.button7.Location = new System.Drawing.Point(546, 0);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(78, 64);
-            this.button7.TabIndex = 7;
-            this.button7.UseVisualStyleBackColor = true;
+            button7.Image = (System.Drawing.Image)resources.GetObject("button7.Image");
+            button7.Location = new System.Drawing.Point(546, 0);
+            button7.Name = "button7";
+            button7.Size = new System.Drawing.Size(78, 64);
+            button7.TabIndex = 7;
+            button7.UseVisualStyleBackColor = true;
             // 
             // button8
             // 
-            this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
-            this.button8.Location = new System.Drawing.Point(468, 0);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(78, 64);
-            this.button8.TabIndex = 6;
-            this.button8.UseVisualStyleBackColor = true;
+            button8.Image = (System.Drawing.Image)resources.GetObject("button8.Image");
+            button8.Location = new System.Drawing.Point(468, 0);
+            button8.Name = "button8";
+            button8.Size = new System.Drawing.Size(78, 64);
+            button8.TabIndex = 6;
+            button8.UseVisualStyleBackColor = true;
             // 
             // button9
             // 
-            this.button9.Image = ((System.Drawing.Image)(resources.GetObject("button9.Image")));
-            this.button9.Location = new System.Drawing.Point(390, 0);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(78, 64);
-            this.button9.TabIndex = 5;
-            this.button9.UseVisualStyleBackColor = true;
+            button9.Image = (System.Drawing.Image)resources.GetObject("button9.Image");
+            button9.Location = new System.Drawing.Point(390, 0);
+            button9.Name = "button9";
+            button9.Size = new System.Drawing.Size(78, 64);
+            button9.TabIndex = 5;
+            button9.UseVisualStyleBackColor = true;
             // 
             // cmdVendas
             // 
-            this.cmdVendas.Image = ((System.Drawing.Image)(resources.GetObject("cmdVendas.Image")));
-            this.cmdVendas.Location = new System.Drawing.Point(312, 0);
-            this.cmdVendas.Name = "cmdVendas";
-            this.cmdVendas.Size = new System.Drawing.Size(78, 64);
-            this.cmdVendas.TabIndex = 4;
-            this.cmdVendas.UseVisualStyleBackColor = true;
-            this.cmdVendas.Click += new System.EventHandler(this.cmdVendas_Click);
+            cmdVendas.Image = (System.Drawing.Image)resources.GetObject("cmdVendas.Image");
+            cmdVendas.Location = new System.Drawing.Point(312, 0);
+            cmdVendas.Name = "cmdVendas";
+            cmdVendas.Size = new System.Drawing.Size(78, 64);
+            cmdVendas.TabIndex = 4;
+            cmdVendas.UseVisualStyleBackColor = true;
+            cmdVendas.Click += cmdVendas_Click;
             // 
             // button3
             // 
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(234, 0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(78, 64);
-            this.button3.TabIndex = 3;
-            this.button3.UseVisualStyleBackColor = true;
+            button3.Image = (System.Drawing.Image)resources.GetObject("button3.Image");
+            button3.Location = new System.Drawing.Point(234, 0);
+            button3.Name = "button3";
+            button3.Size = new System.Drawing.Size(78, 64);
+            button3.TabIndex = 3;
+            button3.UseVisualStyleBackColor = true;
             // 
             // cmdCompras
             // 
-            this.cmdCompras.Image = ((System.Drawing.Image)(resources.GetObject("cmdCompras.Image")));
-            this.cmdCompras.Location = new System.Drawing.Point(156, 0);
-            this.cmdCompras.Name = "cmdCompras";
-            this.cmdCompras.Size = new System.Drawing.Size(78, 64);
-            this.cmdCompras.TabIndex = 2;
-            this.cmdCompras.UseVisualStyleBackColor = true;
-            this.cmdCompras.Click += new System.EventHandler(this.cmdCompras_Click);
+            cmdCompras.Image = (System.Drawing.Image)resources.GetObject("cmdCompras.Image");
+            cmdCompras.Location = new System.Drawing.Point(156, 0);
+            cmdCompras.Name = "cmdCompras";
+            cmdCompras.Size = new System.Drawing.Size(78, 64);
+            cmdCompras.TabIndex = 2;
+            cmdCompras.UseVisualStyleBackColor = true;
+            cmdCompras.Click += cmdCompras_Click;
             // 
             // button1
             // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(78, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 64);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = true;
+            button1.Image = (System.Drawing.Image)resources.GetObject("button1.Image");
+            button1.Location = new System.Drawing.Point(78, 0);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(78, 64);
+            button1.TabIndex = 1;
+            button1.UseVisualStyleBackColor = true;
             // 
             // cmdCadastro
             // 
-            this.cmdCadastro.Image = ((System.Drawing.Image)(resources.GetObject("cmdCadastro.Image")));
-            this.cmdCadastro.Location = new System.Drawing.Point(0, 0);
-            this.cmdCadastro.Name = "cmdCadastro";
-            this.cmdCadastro.Size = new System.Drawing.Size(78, 64);
-            this.cmdCadastro.TabIndex = 0;
-            this.cmdCadastro.UseVisualStyleBackColor = true;
-            this.cmdCadastro.Click += new System.EventHandler(this.cmdCadastro_Click);
+            cmdCadastro.Image = (System.Drawing.Image)resources.GetObject("cmdCadastro.Image");
+            cmdCadastro.Location = new System.Drawing.Point(0, 0);
+            cmdCadastro.Name = "cmdCadastro";
+            cmdCadastro.Size = new System.Drawing.Size(78, 64);
+            cmdCadastro.TabIndex = 0;
+            cmdCadastro.UseVisualStyleBackColor = true;
+            cmdCadastro.Click += cmdCadastro_Click;
             // 
             // statusRodape
             // 
-            this.statusRodape.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusRodape.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolUsuario,
-            this.toolScreen});
-            this.statusRodape.Location = new System.Drawing.Point(0, 428);
-            this.statusRodape.Name = "statusRodape";
-            this.statusRodape.Size = new System.Drawing.Size(1275, 22);
-            this.statusRodape.TabIndex = 2;
-            this.statusRodape.Text = "statusStrip1";
+            statusRodape.ImageScalingSize = new System.Drawing.Size(20, 20);
+            statusRodape.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolUsuario, toolScreen });
+            statusRodape.Location = new System.Drawing.Point(0, 428);
+            statusRodape.Name = "statusRodape";
+            statusRodape.Size = new System.Drawing.Size(1275, 22);
+            statusRodape.TabIndex = 2;
+            statusRodape.Text = "statusStrip1";
             // 
             // toolUsuario
             // 
-            this.toolUsuario.AutoSize = false;
-            this.toolUsuario.Name = "toolUsuario";
-            this.toolUsuario.Size = new System.Drawing.Size(118, 17);
-            this.toolUsuario.Text = "toolStripStatusLabel1";
+            toolUsuario.AutoSize = false;
+            toolUsuario.Name = "toolUsuario";
+            toolUsuario.Size = new System.Drawing.Size(118, 17);
+            toolUsuario.Text = "toolStripStatusLabel1";
             // 
             // toolScreen
             // 
-            this.toolScreen.Name = "toolScreen";
-            this.toolScreen.Size = new System.Drawing.Size(118, 17);
-            this.toolScreen.Text = "toolStripStatusLabel1";
+            toolScreen.Name = "toolScreen";
+            toolScreen.Size = new System.Drawing.Size(118, 17);
+            toolScreen.Text = "toolStripStatusLabel1";
             // 
             // frmMDI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 450);
-            this.Controls.Add(this.statusRodape);
-            this.Controls.Add(this.pnlMenuBotao);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.IsMdiContainer = true;
-            this.Name = "frmMDI";
-            this.Text = "frmMDI";
-            this.Load += new System.EventHandler(this.frmMDI_Load);
-            this.pnlMenuBotao.ResumeLayout(false);
-            this.pnlMenuBotao.PerformLayout();
-            this.statusRodape.ResumeLayout(false);
-            this.statusRodape.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1275, 450);
+            Controls.Add(statusRodape);
+            Controls.Add(pnlMenuBotao);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            IsMdiContainer = true;
+            Name = "frmMDI";
+            Text = "frmMDI";
+            Load += frmMDI_Load;
+            pnlMenuBotao.ResumeLayout(false);
+            pnlMenuBotao.PerformLayout();
+            statusRodape.ResumeLayout(false);
+            statusRodape.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -440,7 +438,7 @@ namespace SisCom.Aplicacao
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button cmdSair;
         private System.Windows.Forms.Button buttonUtilitario;
-        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button botaoRelatorioGerais;
         private System.Windows.Forms.Label lblSair;
         private System.Windows.Forms.Label lblCadastros;
         private System.Windows.Forms.Label label11;

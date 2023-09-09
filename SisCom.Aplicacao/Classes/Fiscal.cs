@@ -1647,6 +1647,10 @@ namespace SisCom.Aplicacao.Classes
                         oNFE_Det.prod.xProd = TratarString(ntFSMercadoria.Mercadoria.Nome);
 
                     oNFE_Det.prod.NCM = TratarString(ntFSMercadoria.TabelaNCM.Codigo);
+                    if ((ntFSMercadoria.Mercadoria != null) && (ntFSMercadoria.Mercadoria.Fiscal_TabelaCEST != null) && (!string.IsNullOrEmpty(ntFSMercadoria.Mercadoria.Fiscal_TabelaCEST.Codigo)))
+                    {
+                        oNFE_Det.prod.CEST = TratarString(ntFSMercadoria.Mercadoria.Fiscal_TabelaCEST.Codigo);
+                    }
                     oNFE_Det.prod.CFOP = Convert.ToInt32(ntFSMercadoria.TabelaCFOP.Codigo.Trim());
                     oNFE_Det.prod.uCom = ntFSMercadoria.UnidadeMedida.Codigo.Trim();
                     oNFE_Det.prod.qCom = ntFSMercadoria.Quantidade;

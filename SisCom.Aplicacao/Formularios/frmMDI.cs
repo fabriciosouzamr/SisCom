@@ -73,5 +73,11 @@ namespace SisCom.Aplicacao
             var form = this.ServiceProvider().GetRequiredService<frmCadastroEstoque>();
             form.ShowDialog(this);
         }
+
+        private void botaoRelatorioGerais_Click(object sender, EventArgs e)
+        {
+            var form = new frmRelatorios();
+            form.ShowDialog(this);
+        }
     }
 }

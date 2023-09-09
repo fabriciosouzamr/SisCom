@@ -263,6 +263,7 @@ namespace SisCom.Aplicacao.Formularios
                 Declaracoes.dados_Empresa_SerialNumber = empresa.NuvemFiscal_SerialNumber;
                 Declaracoes.dados_Path_DocumentoFiscal = empresa.PathDocumentoFiscal;
                 Declaracoes.dados_Empresa_CNPJ = empresa.CNPJ;
+                Declaracoes.dados_Empresa_Nome = empresa.RazaoSocial;
                 if (empresa.RegimeTributario != null)
                 Declaracoes.dados_Empresa_RegimeTributario = (RegimeTributario)empresa.RegimeTributario;
             }

@@ -32,7 +32,7 @@ namespace SisCom.Aplicacao.Controllers
 
         public async Task<IEnumerable<CodigoDescricaoComboViewModel>> Combo(Guid tabelaNCMId, Expression<Func<TabelaCEST, object>> order = null)
         {
-            var combo = await _TabelaCESTService.ComboSearch(p => p.TabelaNCMId == tabelaNCMId, order);
+            var combo = await _TabelaCESTService.ComboSearch(p => p.TabelaNCMId == tabelaNCMId || p.TabelaNCMId == null, order);
             return Declaracoes.mapper.Map<IEnumerable<CodigoDescricaoComboViewModel>>(combo);
         }
     }

@@ -53,6 +53,7 @@ namespace SisCom.Aplicacao.Classes
         public static string dados_Empresa_CodigoEstado;
         public static string dados_Empresa_SerialNumber;
         public static string dados_Empresa_CNPJ;
+        public static string dados_Empresa_Nome;
         public static RegimeTributario dados_Empresa_RegimeTributario = RegimeTributario.SimplesNacional;
         public static FuncionarioViewModel dados_funcionario;
         public static string dados_Path_DocumentoFiscal = "";

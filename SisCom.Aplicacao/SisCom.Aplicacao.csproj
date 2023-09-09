@@ -15,6 +15,7 @@
     <None Remove="Configuration\Seed\NotaFiscalFinalidade.json" />
     <None Remove="Configuration\Seed\Pasta1.json" />
     <None Remove="Report\Fiscal\CartaCorrecao.rdlc" />
+    <None Remove="Report\Fiscal\NFEntradas.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\API_Consultas.cs" Link="Compartilhado\API_Consultas.cs" />
@@ -66,6 +67,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="Report\DataSet\NFEntradas.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NFEntradas.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
@@ -76,6 +82,11 @@
   <ItemGroup>
     <Folder Include="Compartilhado\" />
     <Folder Include="Externos\NuvemFiscal\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Report\Fiscal\NFEntradas.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DanfeSharp">
@@ -974,6 +985,10 @@
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Report\DataSet\NFEntradas.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NFEntradas.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties configuration_4seed_4unidademedida_1json__JsonSchema="https://citation-file-format.github.io/1.2.0/schema.json" /></VisualStudio></ProjectExtensions>
