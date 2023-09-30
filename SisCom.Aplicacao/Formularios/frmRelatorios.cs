@@ -33,6 +33,10 @@ namespace SisCom.Aplicacao.Formularios
             {
                 form.tipoRelatorio = TipoRelatorio.NotaFiscalSaida;
             }
+            else if (radioRelatorio_ApuracaoPorCFOP.Checked)
+            {
+                form.tipoRelatorio = TipoRelatorio.ApuracaoICMS;
+            }
 
             form.param = new string[] { Funcao.NuloParaString(comboEmpresa.SelectedValue),
                                         Funcao.NuloParaString(comboCliente.SelectedValue),

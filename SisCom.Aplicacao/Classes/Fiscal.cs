@@ -99,6 +99,7 @@ namespace SisCom.Aplicacao.Classes
             //End If
 
             oDanfe.Rodape = "Gerado pelo DixMed";
+            oDanfe.CasaDecimaisQuantidadeVolumes = 0;
             oDanfe.ImprimirCancelado = imprimirCancelado;
             oDanfe.Gerar();
             oDanfe.Salvar(sDanfe);

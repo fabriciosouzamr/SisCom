@@ -118,13 +118,13 @@
                   <Width>2.2cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.2cm</Width>
+                  <Width>1.52218cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.9cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>6.84865cm</Width>
+                  <Width>6.52647cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.1cm</Width>
@@ -1859,7 +1859,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!ValorItens.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1880,7 +1880,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1897,7 +1896,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!ValorDesconto.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1918,7 +1917,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1935,7 +1933,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!ValorOutrasDespesas.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1956,7 +1954,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1973,7 +1970,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!BaseICMS.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1994,7 +1991,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -2011,7 +2007,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!ValorICMS.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2032,7 +2028,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -2049,7 +2044,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!ValorNota.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2070,7 +2065,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -2653,7 +2647,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!ValorItens.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2674,7 +2668,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -2691,7 +2684,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!ValorDesconto.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2712,7 +2705,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -2729,7 +2721,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!ValorOutrasDespesas.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2750,7 +2742,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -2767,7 +2758,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!BaseICMS.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2788,7 +2779,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -2805,7 +2795,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!ValorICMS.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2826,7 +2816,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -2843,7 +2832,7 @@ Itens</Value>
                                   <Value>=Sum(Fields!ValorNota.Value)</Value>
                                   <Style>
                                     <FontSize>7pt</FontSize>
-                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2864,7 +2853,6 @@ Itens</Value>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
-                            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -4173,6 +4161,8 @@ Itens</Value>
         </PageFooter>
         <PageHeight>21cm</PageHeight>
         <PageWidth>29.7cm</PageWidth>
+        <InteractiveHeight>29.7cm</InteractiveHeight>
+        <InteractiveWidth>21cm</InteractiveWidth>
         <LeftMargin>2cm</LeftMargin>
         <RightMargin>2cm</RightMargin>
         <TopMargin>2cm</TopMargin>

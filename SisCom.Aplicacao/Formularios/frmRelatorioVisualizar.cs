@@ -10,6 +10,7 @@ namespace SisCom.Aplicacao.Formularios
 {
     public enum TipoRelatorio
     {
+        ApuracaoICMS,
         CartaCorrecao,
         NotaFiscalEntrada,
         NotaFiscalSaida
@@ -105,8 +106,8 @@ namespace SisCom.Aplicacao.Formularios
                                " INNER JOIN NFEI on NFEI.NotaFiscalEntradaId = NFET.Id" +
                                 " LEFT JOIN Cidades CDFN on CDFN.Id = FRNC.End_CidadeId" +
                                 " LEFT JOIN Estados ETFN on ETFN.Id = CDFN.EstadoId" +
-                              " WHERE NFET.DataEntrada >= '" + param[4] + "'" +
-                                " AND NFET.DataEntrada <= '" + param[5] + "'";
+                              " WHERE NFET.DataEmissao >= '" + param[4] + "'" +
+                                " AND NFET.DataEmissao <= '" + param[5] + "'";
 
                         if (!string.IsNullOrEmpty(param[3].ToString()))
                         {
@@ -181,6 +182,73 @@ namespace SisCom.Aplicacao.Formularios
                                                                                         new ReportParameter("DataFinal", param[5]),
                                                                                         new ReportParameter("PessoaRotulo", "Cliente"),
                                                                                         new ReportParameter("TipoNotaFiscal", "Saída") });
+
+                        break;
+                    }
+                case TipoRelatorio.ApuracaoICMS:
+                    {
+                        decimal ValorEntrada = 0;
+                        decimal ValorSaida = 0;
+                        decimal Saldo  = 0;
+
+                        sql = @$"select iif(TipoOperacaoCFOP < 4, 'ENTRADAS', 'SAÍDAS') Tipo,
+                                        cfop.Codigo CFOP,
+                                        sum(merc.PrecoTotal) ValorItens, 0 ValorOutros, 0 ValorDesconto,
+                                        sum(merc.PrecoTotal) ValorTotal,
+                                        sum(merc.PercentualICMS) ValorICMS,
+                                        sum(merc.PrecoTotal) ValorBaseICMS
+                                 from NotaFiscalEntradas nfe
+                                  inner join NotaFiscalEntradaMercadorias merc on merc.NotaFiscalEntradaId = nfe.Id
+                                  inner join TabelaCFOPs cfop on cfop.Id = merc.CFOPId
+                                  inner join GrupoCFOPs grp on grp.Id = cfop.GrupoCFOPId
+                                 WHERE CAST(nfe.DataEmissao AS DATE) >= '{param[4]}'
+                                   AND CAST(nfe.DataEmissao AS DATE) <= '{param[5]}'
+                                 group by iif(TipoOperacaoCFOP < 4, 'ENTRADAS', 'SAÍDAS'), cfop.Codigo
+                                 union all
+                                 select iif(TipoOperacaoCFOP < 4, 'ENTRADAS', 'SAÍDAS') Tipo,
+                                        cfop.Codigo CFOP,
+                                        sum(merc.PrecoTotal) ValorItens, 0 ValorOutros, 0 ValorDesconto,
+                                        sum(merc.PrecoTotal) ValorTotal,
+                                        sum(merc.ValorICMS) ValorICMS,
+                                        sum(merc.ValorBaseCalculo) ValorBaseICMS
+                                  from NotaFiscalSaidas nfe
+                                   inner join NotaFiscalSaidaMercadorias merc on merc.NotaFiscalSaidaId = nfe.Id
+                                   inner join TabelaCFOPs cfop on cfop.Id = merc.TabelaCFOPId
+                                  inner join GrupoCFOPs grp on grp.Id = cfop.GrupoCFOPId
+                                 WHERE CAST(nfe.DataEmissao AS DATE) >= '{param[4]}'
+                                   AND CAST(nfe.DataEmissao AS DATE) <= '{param[5]}'
+                                  group by iif(TipoOperacaoCFOP < 4, 'ENTRADAS', 'SAÍDAS'), cfop.Codigo";
+                        data = DB.Executar(sql);
+
+                        this.Text = "Apuração de ICMS";
+
+                        foreach (DataRow row in data.Rows)
+                        {
+                            if (row["Tipo"].ToString() == "ENTRADAS")
+                            {
+                                ValorEntrada += Convert.ToDecimal(row["ValorICMS"]);
+                            }
+                            else
+                            {
+                                ValorSaida += Convert.ToDecimal(row["ValorICMS"]);
+                            }
+                        }
+
+                        Saldo = ValorEntrada - ValorSaida;
+
+                        reportViewer1.LocalReport.ReportEmbeddedResource = "SisCom.Aplicacao.Report.Fiscal.Apuracao.rdlc";
+                        reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsGeral", data));
+                        reportViewer1.LocalReport.SetParameters(new ReportParameter[] { new ReportParameter("EmpresaLogada", Declaracoes.dados_Empresa_Nome ),
+                                                                                        new ReportParameter("Usuario", Declaracoes.sistema_UsuarioLogado),
+                                                                                        new ReportParameter("Emissao", DateTime.Now.ToString()),
+                                                                                        new ReportParameter("Empresa", string.IsNullOrEmpty(param[6]) ? "TODOS" : param[6]),
+                                                                                        new ReportParameter("CFOP", string.IsNullOrEmpty(param[8]) ? "TODOS" : param[8]),
+                                                                                        new ReportParameter("Pessoa", string.IsNullOrEmpty(param[7]) ? "TODOS" : param[9]),
+                                                                                        new ReportParameter("DataInicial", param[4]),
+                                                                                        new ReportParameter("DataFinal", param[5]),
+                                                                                        new ReportParameter("ValorEntrada", ValorEntrada.ToString("C")),
+                                                                                        new ReportParameter("ValorSaida", ValorSaida.ToString("C")),
+                                                                                        new ReportParameter("Saldo", Saldo.ToString("C")) });
 
                         break;
                     }

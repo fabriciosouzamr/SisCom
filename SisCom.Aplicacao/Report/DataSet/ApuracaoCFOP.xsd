@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ApuracaoCFOP" targetNamespace="http://tempuri.org/ApuracaoCFOP.xsd" xmlns:mstns="http://tempuri.org/ApuracaoCFOP.xsd" xmlns="http://tempuri.org/ApuracaoCFOP.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ApuracaoCFOP" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="ApuracaoCFOP" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ApuracaoCFOP">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Apuracao" msprop:Generator_RowClassName="ApuracaoRow" msprop:Generator_RowEvHandlerName="ApuracaoRowChangeEventHandler" msprop:Generator_RowDeletedName="ApuracaoRowDeleted" msprop:Generator_RowDeletingName="ApuracaoRowDeleting" msprop:Generator_RowEvArgName="ApuracaoRowChangeEvent" msprop:Generator_TablePropName="Apuracao" msprop:Generator_RowChangedName="ApuracaoRowChanged" msprop:Generator_UserTableName="Apuracao" msprop:Generator_RowChangingName="ApuracaoRowChanging" msprop:Generator_TableClassName="ApuracaoDataTable" msprop:Generator_TableVarName="tableApuracao">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CFOP" msprop:Generator_UserColumnName="CFOP" msprop:Generator_ColumnPropNameInTable="CFOPColumn" msprop:Generator_ColumnPropNameInRow="CFOP" msprop:Generator_ColumnVarNameInTable="columnCFOP" type="xs:string" minOccurs="0" />
+              <xs:element name="Tipo" msprop:Generator_UserColumnName="Tipo" msprop:Generator_ColumnPropNameInTable="TipoColumn" msprop:Generator_ColumnPropNameInRow="Tipo" msprop:Generator_ColumnVarNameInTable="columnTipo" type="xs:string" minOccurs="0" />
+              <xs:element name="ValorItens" msprop:Generator_UserColumnName="ValorItens" msprop:Generator_ColumnPropNameInTable="ValorItensColumn" msprop:Generator_ColumnPropNameInRow="ValorItens" msprop:Generator_ColumnVarNameInTable="columnValorItens" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ValorOutros" msprop:Generator_UserColumnName="ValorOutros" msprop:Generator_ColumnPropNameInTable="ValorOutrosColumn" msprop:Generator_ColumnPropNameInRow="ValorOutros" msprop:Generator_ColumnVarNameInTable="columnValorOutros" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ValorDesconto" msprop:Generator_UserColumnName="ValorDesconto" msprop:Generator_ColumnPropNameInTable="ValorDescontoColumn" msprop:Generator_ColumnPropNameInRow="ValorDesconto" msprop:Generator_ColumnVarNameInTable="columnValorDesconto" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ValorTotal" msprop:Generator_UserColumnName="ValorTotal" msprop:Generator_ColumnPropNameInTable="ValorTotalColumn" msprop:Generator_ColumnPropNameInRow="ValorTotal" msprop:Generator_ColumnVarNameInTable="columnValorTotal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ValorICMS" msprop:Generator_UserColumnName="ValorICMS" msprop:Generator_ColumnPropNameInTable="ValorICMSColumn" msprop:Generator_ColumnPropNameInRow="ValorICMS" msprop:Generator_ColumnVarNameInTable="columnValorICMS" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ValorBaseICMS" msprop:Generator_UserColumnName="ValorBaseICMS" msprop:Generator_ColumnPropNameInTable="ValorBaseICMSColumn" msprop:Generator_ColumnPropNameInRow="ValorBaseICMS" msprop:Generator_ColumnVarNameInTable="columnValorBaseICMS" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
