@@ -56,7 +56,7 @@ namespace SisCom.Negocio.Services
             }
             catch (Exception Ex)
             {
-                Notify("ERRO: " + Ex.Message + ".");
+                Notify("ManifestoEletronicoDocumentoService", Ex);
             }
         }
 

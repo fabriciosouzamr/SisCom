@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using NFe.Danfe.Base.NFCe;
 using NFe.Utils.NFe;
 using DFe.Classes.Flags;
 using NFe.Classes;
@@ -39,28 +38,15 @@ using NFe.Classes.Servicos.Evento;
 using SisCom.Aplicacao.Controllers;
 using Funcoes.Interfaces;
 using SisCom.Infraestrutura.Data.Context;
-using SisCom.Entidade.Modelos;
 using MDFe.Classes.Flags;
 using MDFe.Classes.Informacoes;
 using MDFe.Utils.Configuracoes;
-using DFe.Classes.Entidades;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices.WindowsRuntime;
 using MDFe.Classes.Retorno;
 using MDFe.Classes.Servicos.Autorizacao;
 using MDFe.Servicos.EventosMDFe;
-using MDFe.Servicos.ConsultaProtocoloMDFe;
 using MDFe.Classes.Extencoes;
-using System.Security.Policy;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using MDFe.Servicos.RetRecepcaoMDFe;
-using MDFe.Classes.Retorno.MDFeRetRecepcao;
-using NFe.Danfe.Base;
-using System.Windows.Forms;
-using SisCom.Infraestrutura.Data.Repository;
-using System.Diagnostics;
-using SisCom.Infraestrutura.Migrations;
 
 namespace SisCom.Aplicacao.Classes
 {

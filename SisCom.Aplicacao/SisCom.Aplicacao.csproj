@@ -102,37 +102,37 @@
       <HintPath>..\..\Aplicação de Terceiros\DLLs\DanfeSharp\DanfeSharp.dll</HintPath>
     </Reference>
     <Reference Include="DFe.Classes">
-      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\DFe.Classes.dll</HintPath>
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.AppTeste\bin\Release\DFe.Classes.dll</HintPath>
     </Reference>
     <Reference Include="DFe.Utils">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\DFe.Utils.dll</HintPath>
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.AppTeste\bin\Release\DFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Wsdl">
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.AppTeste\bin\Release\DFe.Wsdl.dll</HintPath>
     </Reference>
     <Reference Include="MDFe.Classes">
-      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Classes.dll</HintPath>
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\MDFe.AppTeste\bin\Release\MDFe.Classes.dll</HintPath>
     </Reference>
     <Reference Include="MDFe.Servicos">
-      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Servicos.dll</HintPath>
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\MDFe.AppTeste\bin\Release\MDFe.Servicos.dll</HintPath>
     </Reference>
     <Reference Include="MDFe.Utils">
-      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\MDFe.Utils.dll</HintPath>
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\MDFe.AppTeste\bin\Release\MDFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="MDFe.Wsdl">
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\MDFe.AppTeste\bin\Release\MDFe.Wsdl.dll</HintPath>
     </Reference>
     <Reference Include="NFe.Classes">
-      <HintPath>..\..\Aplicação de Terceiros\DLLs\Zeus\NFe.Classes.dll</HintPath>
-    </Reference>
-    <Reference Include="NFe.Danfe.Base">
-      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.Danfe.Base\bin\Release\NFe.Danfe.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="NFe.Danfe.Nativo">
-      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.Danfe.Nativo\bin\Release\NFe.Danfe.Nativo.dll</HintPath>
-    </Reference>
-    <Reference Include="NFe.Servicos">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Servicos.dll</HintPath>
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.AppTeste\bin\Release\NFe.Classes.dll</HintPath>
     </Reference>
     <Reference Include="NFe.Servicos">
       <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Servicos.dll</HintPath>
     </Reference>
     <Reference Include="NFe.Utils">
-      <HintPath>..\Aplicação de Terceiros\DLLs\Zeus\NFe.Utils.dll</HintPath>
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.AppTeste\bin\Release\NFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Wsdl">
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.AppTeste\bin\Release\NFe.Wsdl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

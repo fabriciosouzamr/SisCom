@@ -718,7 +718,7 @@ namespace SisCom.Infraestrutura.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("RetornoSefaz")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(8000)");
 
                     b.Property<string>("RetornoSefazCodigo")
                         .HasColumnType("varchar(100)");

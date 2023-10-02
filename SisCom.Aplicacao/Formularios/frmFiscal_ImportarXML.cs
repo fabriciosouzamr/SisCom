@@ -9,13 +9,11 @@ using SisCom.Aplicacao.Classes;
 using SisCom.Aplicacao.Controllers;
 using SisCom.Aplicacao.ViewModels;
 using SisCom.Entidade.Enum;
-using SisCom.Entidade.Modelos;
 using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -46,6 +44,8 @@ namespace SisCom.Aplicacao.Formularios
         IEnumerable<TabelaCFOPViewModel> CFOP;
         IEnumerable<TabelaNCMViewModel> NCM;
         IEnumerable<TabelaCST_CSOSNViewModel> CST_CSOSN;
+
+        bool processamento = false;
 
         public frmFiscal_ImportarXML(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
@@ -92,7 +92,7 @@ namespace SisCom.Aplicacao.Formularios
             }
 
             Grid_DataGridView.User_Formatar(gridProduto);
-            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Descrição");
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Descrição", Tamanho: 300);
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "Medida", "Medida", Grid_DataGridView.TipoColuna.ComboBox, 80, 0, _unidadeMedida, "Nome", "ID", readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Quantidade");
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Preço");
@@ -101,7 +101,7 @@ namespace SisCom.Aplicacao.Formularios
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Código Fornecedor", readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Código Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Codigo", "ID", readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Ref.Sistema", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "CodigoFabricante", "ID", readOnly: false);
-            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 100, 0, produto, "Descricao", "ID", readOnly: false);
+            Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Descrição", Grid_DataGridView.TipoColuna.ComboBox, 300, 0, produto, "Descricao", "ID", readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Qtde.por Caixa", readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Grupo", Grid_DataGridView.TipoColuna.ComboBox, readOnly: false);
             Grid_DataGridView.User_ColunaAdicionar(gridProduto, "", "Status");
@@ -503,26 +503,28 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void GridProduto_SelecionarProduto(int iLinha, int Coluna, string valor)
         {
+            if (processamento)
+                return;
+
             try
             {
-                if ((Coluna == grdProduto_CodigoSistema) &&
-                    (Funcao.NuloParaString(gridProduto.Rows[iLinha].Cells[grdProduto_CodigoFornecedor].Value) != valor))
+                processamento = true;
+                if (Coluna == grdProduto_CodigoSistema)
                 {
                     gridProduto.Rows[iLinha].Cells[grdProduto_DescricaoSistema].Value = Guid.Parse(valor);
                     gridProduto.Rows[iLinha].Cells[grdProduto_RefSistema].Value = Guid.Parse(valor);
                 }
-                if ((Coluna == grdProduto_DescricaoSistema) &&
-                    (Funcao.NuloParaString(gridProduto.Rows[iLinha].Cells[grdProduto_DescricaoSistema].Value) != valor))
+                if (Coluna == grdProduto_DescricaoSistema)
                 {
                     gridProduto.Rows[iLinha].Cells[grdProduto_RefSistema].Value = Guid.Parse(valor);
                     gridProduto.Rows[iLinha].Cells[grdProduto_CodigoSistema].Value = Guid.Parse(valor);
                 }
-                if ((Coluna == grdProduto_RefSistema) &&
-                    (Funcao.NuloParaString(gridProduto.Rows[iLinha].Cells[grdProduto_RefSistema].Value) != valor))
+                if (Coluna == grdProduto_RefSistema)
                 {
                     gridProduto.Rows[iLinha].Cells[grdProduto_DescricaoSistema].Value = Guid.Parse(valor);
                     gridProduto.Rows[iLinha].Cells[grdProduto_CodigoSistema].Value = Guid.Parse(valor);
                 }
+                processamento = false;
             }
             catch (Exception)
             {

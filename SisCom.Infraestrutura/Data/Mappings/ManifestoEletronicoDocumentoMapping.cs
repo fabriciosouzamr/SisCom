@@ -27,6 +27,8 @@ namespace SisCom.Infraestrutura.Data.Mappings
             builder.Property(p => p.Condutor_Nome).HasColumnType("varchar(100)");
             builder.Property(p => p.InformacoesAdicionaisInteresseFisco).HasColumnType("varchar(8000)");
             builder.Property(p => p.InformacoesComplementaresInteresseContribuinte).HasColumnType("varchar(8000)");
+            ;
+            builder.Property(p => p.RetornoSefaz).HasColumnType("varchar(8000)");
 
             builder.ToTable("ManifestoEletronicoDocumentos");
         }
