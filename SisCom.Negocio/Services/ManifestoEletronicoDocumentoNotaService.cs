@@ -59,8 +59,6 @@ namespace SisCom.Negocio.Services
         public async Task Excluir(Guid id)
         {
             await _ManifestoEletronicoDocumentoNotaRepository.Delete(id);
-
-            Notify("Exclusão Efetuada.");
         }
 
     }

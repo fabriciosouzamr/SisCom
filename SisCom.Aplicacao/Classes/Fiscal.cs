@@ -1973,6 +1973,8 @@ namespace SisCom.Aplicacao.Classes
 
             string nrrecibo = manifestoEletronicoDocumento.Autorizacao_Protocolo;
             var mdfe = new MDFeEletronico();
+            mdfe.InfMDFe = new();
+            mdfe.InfMDFe.Ide = new();
 
             string chave = "";
 
@@ -2108,24 +2110,19 @@ namespace SisCom.Aplicacao.Classes
                 #endregion modal
 
                 #region infMunDescarga
-                manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas.ForEach(n =>
-                {
-                    mdfe.InfMDFe.InfDoc.InfMunDescarga = new List<MDFeInfMunDescarga>
+                mdfe.InfMDFe.InfDoc.InfMunDescarga = manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas
+                    .Select(n => new MDFeInfMunDescarga
                     {
-                        new MDFeInfMunDescarga
+                        XMunDescarga = n.CidadeDescarga.Nome,
+                        CMunDescarga = n.CidadeDescarga.CodigoIBGE,
+                        InfNFe = new List<MDFeInfNFe>
                         {
-                            XMunDescarga = n.CidadeDescarga.Nome,
-                            CMunDescarga = n.CidadeDescarga.CodigoIBGE,
-                            InfNFe = new List<MDFeInfNFe>
+                            new MDFeInfNFe
                             {
-                                new MDFeInfNFe
-                                {
-                                    ChNFe = n.ChaveAcesso
-                                }
+                                ChNFe = n.ChaveAcesso
                             }
                         }
-                    };
-                });
+                    }).ToList();
                 #endregion infMunDescarga
 
                 #region Totais (tot)
@@ -3193,11 +3190,6 @@ namespace SisCom.Aplicacao.Classes
                 CaixaMensagem.Informacao("MDF-e cancelado");
                 return;
             }
-            //if (manifestoEletronicoDocumento.Status == MDFe_Status.Validado)
-            //{
-            //    CaixaMensagem.Informacao("MDF-e ainda não validado");
-            //    return;
-            //}
 
             using (ManifestoEletronicoDocumentoPercursoController manifestoEletronicoDocumentoPercursoController = new ManifestoEletronicoDocumentoPercursoController(meuDbContext, notifier))
             {
