@@ -1972,6 +1972,7 @@ namespace SisCom.Aplicacao.Classes
             Fiscal_Configuracao_MDFe();
 
             string nrrecibo = manifestoEletronicoDocumento.Autorizacao_Protocolo;
+            string path = PATH_DOCFISCAL(empresa.CNPJ, manifestoEletronicoDocumento.DataHoraEmissao, "MDF-e");
             var mdfe = new MDFeEletronico();
             mdfe.InfMDFe = new();
             mdfe.InfMDFe.Ide = new();
@@ -2190,7 +2191,6 @@ namespace SisCom.Aplicacao.Classes
                         mdfe.InfMDFe.Ide.InfPercurso.Add(ipercurso);
                     }
                 }
-
                 #endregion
                 if (String.IsNullOrEmpty(nrrecibo))
                 {
@@ -2202,8 +2202,8 @@ namespace SisCom.Aplicacao.Classes
 
                         chave = mdfe.Chave();
 
-                        if (File.Exists(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-ped-sit.xml"))) { File.Delete(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-ped-sit.xml")); }
-                        if (File.Exists(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-sit.xml"))) { File.Delete(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-sit.xml")); }
+                        if (File.Exists(Path.Combine(path, chave + "-ped-sit.xml"))) { File.Delete(Path.Combine(path, chave + "-ped-sit.xml")); }
+                        if (File.Exists(Path.Combine(path, chave + "-sit.xml"))) { File.Delete(Path.Combine(path, chave + "-sit.xml")); }
 
                         manifestoEletronicoDocumento.Autorizacao_ChaveAutenticacao = chave;
                         manifestoEletronicoDocumento.RetornoSefaz = retornoEnvio.XMotivo;
@@ -2227,8 +2227,8 @@ namespace SisCom.Aplicacao.Classes
             {
                 try
                 {
-                    if (File.Exists(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-ped-sit.xml"))) { File.Delete(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-ped-sit.xml")); }
-                    if (File.Exists(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-sit.xml"))) { File.Delete(Path.Combine(Declaracoes.externos_Path_NuvemFiscal_MDFe, chave + "-sit.xml")); }
+                    if (File.Exists(Path.Combine(path, chave + "-ped-sit.xml"))) { File.Delete(Path.Combine(path, chave + "-ped-sit.xml")); }
+                    if (File.Exists(Path.Combine(path, chave + "-sit.xml"))) { File.Delete(Path.Combine(path, chave + "-sit.xml")); }
 
                     var servicoConsultaProtocolo = new ServicoMDFeRetRecepcao();
                     var retorno = servicoConsultaProtocolo.MDFeRetRecepcao(nrrecibo);
@@ -2249,7 +2249,7 @@ namespace SisCom.Aplicacao.Classes
                             MDFeProcMDFe mdfeProcMDFe = new MDFeProcMDFe();
                             mdfeProcMDFe.MDFe = mdfe;
                             mdfeProcMDFe.ProtMDFe = retorno.ProtMdFe;
-                            FuncoesXml.ClasseParaArquivoXml(mdfeProcMDFe, Path.Combine(Declaracoes.externos_Path_NuvemFiscal_Vendas, mdfe.Chave() + "-mdfe-protMdfe.xml"));
+                            FuncoesXml.ClasseParaArquivoXml(mdfeProcMDFe, Path.Combine(path, mdfe.Chave() + "-mdfe-protMdfe.xml"));
                             manifestoEletronicoDocumento.Status = MDFe_Status.Autorizado;
                             manifestoEletronicoDocumento.Autorizacao_Protocolo = retorno.ProtMdFe.InfProt.NProt;
                         }
@@ -2372,11 +2372,12 @@ namespace SisCom.Aplicacao.Classes
             return manifestoEletronicoDocumento;
         }
         public static void Fiscal_ManifestoEletronicoDocumento_Imprimir(string Autorizacao_ChaveAutenticacao, 
-                                                                        string status)
+                                                                        string status,
+                                                                        DateTime dtEmissao)
         {
             try
             {
-                Zeus.MDFeImprimir(Autorizacao_ChaveAutenticacao, status);
+                Zeus.MDFeImprimir(Autorizacao_ChaveAutenticacao, status, dtEmissao);
             }
             catch (Exception ex)
             {
@@ -2636,14 +2637,32 @@ namespace SisCom.Aplicacao.Classes
             return bOk;
         }
 
-        private static string path_DOCFISCAL_Validar(string processo, int ano, string arquivo)
+        private static string CriarDiretorio(string diretorio)
         {
-            string _PATH_DOCFISCAL = Declaracoes.dados_Path_DocumentoFiscal + "\\" + Declaracoes.dados_Path_DocumentoFiscal + "\\" + processo + "\\" + ano.ToString();
+            if (!System.IO.Directory.Exists(diretorio))
+            {
+                System.IO.Directory.CreateDirectory(diretorio);
+            }
 
-            if (!System.IO.Directory.Exists(_PATH_DOCFISCAL))
-                System.IO.Directory.CreateDirectory(_PATH_DOCFISCAL);
+            return diretorio;
+        }
 
-            return _PATH_DOCFISCAL + "\\" + arquivo;
+        public static string PATH_DOCFISCAL(string empresaCNPJ, DateTime? data, string pasta)
+        {
+            string _PATH_DOCFISCAL = Declaracoes.dados_Path_DocumentoFiscal;
+
+            _PATH_DOCFISCAL = CriarDiretorio(Path.Combine(_PATH_DOCFISCAL, empresaCNPJ));
+            _PATH_DOCFISCAL = CriarDiretorio(Path.Combine(_PATH_DOCFISCAL, pasta));
+
+            if (data.HasValue)
+            {
+                _PATH_DOCFISCAL = CriarDiretorio(Path.Combine(_PATH_DOCFISCAL, data.Value.Year.ToString()));
+                _PATH_DOCFISCAL = CriarDiretorio(Path.Combine(_PATH_DOCFISCAL, data.Value.Month.ToString("00")));
+            }
+
+            _PATH_DOCFISCAL = _PATH_DOCFISCAL.Replace("\\\\", "\\");
+
+            return _PATH_DOCFISCAL;
         }
 
         public static bool Fiscal_DocumentoFiscal_Visualizar(ModeloDocumento eModeloDocumento,
@@ -2665,25 +2684,19 @@ namespace SisCom.Aplicacao.Classes
             string sCD_NFCe_Token_ID = "";
             string sCD_NFCe_Token_CSC = "";
             bool bOk = false;
-            string _PATH_DOCFISCAL = "";
+            string _PATH_DOCFISCAL = PATH_DOCFISCAL(notaFiscalSaidaViewModel.Empresa.CNPJ, notaFiscalSaidaViewModel.DataTransmissao, "NF-e");
 
             try
             {
                 if (notaFiscalSaidaViewModel.Empresa.CNPJ.Length == 13)
                 { notaFiscalSaidaViewModel.Empresa.CNPJ = "0" + notaFiscalSaidaViewModel.Empresa.CNPJ; }
 
-                _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + notaFiscalSaidaViewModel.Empresa.CNPJ + "\\NF-e\\";
-
                 if (notaFiscalSaidaViewModel.DataTransmissao != null)
                 {
                     DateTime dataTransmissao = (DateTime)notaFiscalSaidaViewModel.DataTransmissao;
-
-                    _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + dataTransmissao.Year + "\\" + dataTransmissao.Month.ToString("00") + "\\";
                 }
 
                 _PATH_DOCFISCAL = _PATH_DOCFISCAL + "\\" + notaFiscalSaidaViewModel.CodigoChaveAcesso + "-procNfe.xml";
-                _PATH_DOCFISCAL = Declaracoes.dados_Path_DocumentoFiscal + "\\" + _PATH_DOCFISCAL;
-                _PATH_DOCFISCAL = _PATH_DOCFISCAL.Replace("\\\\", "\\");
 
                 if (File.Exists(_PATH_DOCFISCAL))
                 {

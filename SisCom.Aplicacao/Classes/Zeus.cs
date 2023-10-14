@@ -316,11 +316,12 @@ namespace SisCom.Aplicacao.Classes
             }
         }
 
-        public static void MDFeImprimir(string chaveacesso, string status)
+        public static void MDFeImprimir(string chaveacesso, string status, DateTime dtEmissao)
         {
             Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "mdfeimprimir " + chaveacesso + " " +
                                                                                           status + " " +
-                                                                                          Declaracoes.dados_Empresa_CNPJ);
+                                                                                          Declaracoes.dados_Empresa_CNPJ + " " +
+                                                                                          dtEmissao.ToString("yyyyMM"));
         }
 
         private static string XML_RetirarVersao(string sXML)

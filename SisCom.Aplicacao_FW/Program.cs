@@ -49,6 +49,7 @@ namespace SisCom.Aplicacao_FW
         static string _nsu = "";
         static string _chnfe = "";
         static string _chaveacesso = "";
+        static string _MDFeAnoMes = "";
         static string _NuvemFiscal_SerialNumber = "";
         static string _recibo = "";
         static string _XML = "";
@@ -168,7 +169,8 @@ namespace SisCom.Aplicacao_FW
                 case "mdfeimprimir":
                     _PATH_NUVEMFISCAL_Config = _PATH_NUVEMFISCAL_MDFE;
                     _chaveacesso = args[1];
-                    _cnpj = args[2];
+                    _cnpj = args[3];
+                    _MDFeAnoMes = args[4];
                     MDFeImprimir(_chaveacesso,
                                  (args[2].ToUpper() == "ENCERRADO"),
                                  (args[2].ToUpper() == "CANCELADO"),
@@ -614,7 +616,7 @@ namespace SisCom.Aplicacao_FW
             {
                 MDFeProcMDFe mdfe = null;
 
-                var caminhoXml = Path.Combine(_PATH_NUVEMFISCAL_Vendas, Autorizacao_ChaveAutenticacao + "-mdfe-protMdfe.xml");
+                var caminhoXml = path_DOCFISCAL_Validar("MDF-e", Convert.ToInt32(_MDFeAnoMes.Substring(0, 4)), Convert.ToInt32(_MDFeAnoMes.Substring(4, 2)), Autorizacao_ChaveAutenticacao + "-mdfe-protMdfe.xml");
 
                 try
                 {

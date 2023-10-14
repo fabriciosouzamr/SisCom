@@ -495,6 +495,9 @@ namespace SisCom.Aplicacao.Formularios
 
         private void PossicionarNaturezaOperacao()
         {
+            if (comboNaturezaOperacao.SelectedIndex != -1)
+                return;
+
             foreach (ComboNaturezaOperacaoViewModel item in comboNaturezaOperacao.Items)
             {
                 if (tipoNotaFiscal == NF_TipoNotaFiscal.Saida)

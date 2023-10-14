@@ -328,7 +328,8 @@ namespace SisCom.Aplicacao.Formularios
                     (gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString() == MDFe_Status.Encerrado.GetDescription().ToString()))
                 {
                     Fiscal.Fiscal_ManifestoEletronicoDocumento_Imprimir(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_ChaveAcesso].Value.ToString(),
-                                                                        gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString());
+                                                                        gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value.ToString(),
+                                                                        Convert.ToDateTime(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_DataHoraEmissao].Value));
                 }
                 else
                 {
