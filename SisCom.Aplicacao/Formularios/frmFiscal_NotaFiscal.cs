@@ -156,11 +156,11 @@ namespace SisCom.Aplicacao.Formularios
 
             await Assincrono.TaskAsyncAndAwaitAsync(Inicializar());
             await Assincrono.TaskAsyncAndAwaitAsync(InicializarCombos());
+            await CarregarDadosEmpresa();
             await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
 
             await Navegar(Declaracoes.eNavegar.Ultimo);
             await CarregarSerie(false);
-            await CarregarDadosEmpresa();
 
             carregando = false;
         }
@@ -1987,11 +1987,14 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void CalcularMercadoriaPeso()
         {
-            numericVolumeTransportadosPesoBruto.Value = Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade) *
-                                                        Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_PesoBruto);
-            numericVolumeTransportadosPesoLiquido.Value = Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade) *
+            if (numericVolumeTransportadosPesoBruto.Value == 0)
+                numericVolumeTransportadosPesoBruto.Value = Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade) *
+                                                            Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_PesoBruto);
+            if (numericVolumeTransportadosPesoLiquido.Value == 0)
+                numericVolumeTransportadosPesoLiquido.Value = Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade) *
                                                           Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_PesoLiquido);
-            numericVolumeTransportadosQuantidade.Value = Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade);
+            if (numericVolumeTransportadosQuantidade.Value == 0)
+                numericVolumeTransportadosQuantidade.Value = Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade);
         }
         private void CalcularMercadoriaImpostos()
         {

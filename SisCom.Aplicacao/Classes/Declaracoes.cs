@@ -52,6 +52,7 @@ namespace SisCom.Aplicacao.Classes
         public static Guid dados_Empresa_CidadeId;
         public static string dados_Empresa_CodigoEstado;
         public static string dados_Empresa_SerialNumber;
+        public static TipoEmissor dados_Empresa_TipoEmirssor = TipoEmissor.Normal;
         public static string dados_Empresa_CNPJ;
         public static string dados_Empresa_Nome;
         public static RegimeTributario dados_Empresa_RegimeTributario = RegimeTributario.SimplesNacional;

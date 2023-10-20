@@ -56,6 +56,7 @@ namespace SisCom.Aplicacao.Formularios
                             }
                             Declaracoes.dados_Empresa_Id = empresa.Id;
                             Declaracoes.dados_Empresa_SerialNumber = empresa.NuvemFiscal_SerialNumber;
+                            Declaracoes.dados_Empresa_TipoEmirssor = empresa.NuvemFiscal_TipoEmirssor.HasValue ? empresa.NuvemFiscal_TipoEmirssor.Value : TipoEmissor.Normal;
                             Declaracoes.dados_Empresa_CNPJ = empresa.CNPJ;
                             Declaracoes.dados_Empresa_Nome = empresa.RazaoSocial;
                             if (empresa.RegimeTributario != null)

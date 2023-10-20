@@ -36,11 +36,11 @@ namespace SisCom.Aplicacao.ViewModels
         public string? NFE_InfComple_CreditoSimplesNacional { get; set; }
         public string? NFE_InfComple_TributosTotal { get; set; }
         public AmbienteSistemas? MDFe_Ambiente { get; set; }
-        public TipoEmissor? MDFe_TipoEmirssor { get; set; }
         public bool NuvemFiscal_Usar { get; set; }
         public AmbienteSistemas? NuvemFiscal_AmbienteWebService { get; set; }
         public string? NuvemFiscal_Certificado { get; set; }
         public string? NuvemFiscal_SerialNumber { get; set; }
+        public TipoEmissor? NuvemFiscal_TipoEmirssor { get; set; }
         public string NSU { get; set; }
         public string? Controle { get; set; }
         public string? Responsaveltecnico_CNPJ { get; set; }

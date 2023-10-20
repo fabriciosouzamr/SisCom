@@ -36,7 +36,7 @@ namespace SisCom.Aplicacao.Formularios
             Combo_ComboBox.Formatar(comboNFELayout, "", "", ComboBoxStyle.DropDownList, null, typeof(NFE_Layout));
             Combo_ComboBox.Formatar(comboSpedGrupoInventario, "", "", ComboBoxStyle.DropDownList, null, typeof(Sped_TipoGeracaoInventario));
             Combo_ComboBox.Formatar(comboMDFeAmbiente, "", "", ComboBoxStyle.DropDownList, null, typeof(AmbienteSistemas));
-            Combo_ComboBox.Formatar(comboMDFeTipoEmissor, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoEmissor));
+            Combo_ComboBox.Formatar(comboNuvemFiscalTipoEmissor, "", "", ComboBoxStyle.DropDownList, null, typeof(TipoEmissor));
             Combo_ComboBox.Formatar(comboNuvemFiscalAmbienteWebService, "", "", ComboBoxStyle.DropDownList, null, typeof(AmbienteSistemas));
 
             Limpar();
@@ -78,7 +78,7 @@ namespace SisCom.Aplicacao.Formularios
             comboSpedGrupoInventario.SelectedIndex = -1;
             textMDFeSerie.Text = "";
             comboMDFeAmbiente.SelectedIndex = -1;
-            comboMDFeTipoEmissor.SelectedIndex = -1;
+            comboNuvemFiscalTipoEmissor.SelectedIndex = -1;
             textNuvemFiscalCertificado.Text = "";
             checkUtilizarNuvemFiscal.Checked = false;
             comboNuvemFiscalAmbienteWebService.SelectedIndex = -1;
@@ -101,6 +101,8 @@ namespace SisCom.Aplicacao.Formularios
             {
                 if (empresa.Endereco == null)
                     empresa.Endereco = new Endereco();
+                if (!empresa.NuvemFiscal_TipoEmirssor.HasValue)
+                    empresa.NuvemFiscal_TipoEmirssor = TipoEmissor.Normal;
 
                 labelEmpresa.Text = empresa.Unidade;
                 textUnidade.Text = empresa.Unidade;
@@ -129,10 +131,9 @@ namespace SisCom.Aplicacao.Formularios
                 if (!Funcao.Nulo(empresa.Sped_TipoGeracaoInventario)) comboSpedGrupoInventario.SelectedValue = empresa.Sped_TipoGeracaoInventario;
                 textMDFeSerie.Text = Funcao.NuloParaString(empresa.MDFe_Serie);
                 if (!Funcao.Nulo(empresa.MDFe_Ambiente)) comboMDFeAmbiente.SelectedValue = empresa.MDFe_Ambiente;
-                if (!Funcao.Nulo(empresa.MDFe_TipoEmirssor)) comboMDFeTipoEmissor.SelectedValue = empresa.MDFe_TipoEmirssor;
                 textNuvemFiscalCertificado.Text = Funcao.NuloParaString(empresa.NuvemFiscal_Certificado);
                 checkUtilizarNuvemFiscal.Checked = empresa.NuvemFiscal_Usar;
-                if (!Funcao.Nulo(empresa.MDFe_TipoEmirssor)) comboMDFeTipoEmissor.SelectedValue = empresa.MDFe_TipoEmirssor;
+                if (!Funcao.Nulo(empresa.NuvemFiscal_TipoEmirssor)) comboNuvemFiscalTipoEmissor.SelectedValue = empresa.NuvemFiscal_TipoEmirssor;
                 textNuvemFiscalDiretorioXMLs.Text = Funcao.NuloParaString(empresa.PathDocumentoFiscal);
                 if (!Funcao.Nulo(empresa.PathDocumentoFiscal)) textNuvemFiscalDiretorioXMLs.Text = empresa.PathDocumentoFiscal;
                 if (!Funcao.Nulo(empresa.NuvemFiscal_SerialNumber)) serialNumber = empresa.NuvemFiscal_SerialNumber;
@@ -186,8 +187,8 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Selecione o regime tributário");
                 return;
             }
-            if (String.IsNullOrEmpty(textEnderecoLogradouro.Text) || 
-                String.IsNullOrEmpty(textNumero.Text) || 
+            if (String.IsNullOrEmpty(textEnderecoLogradouro.Text) ||
+                String.IsNullOrEmpty(textNumero.Text) ||
                 String.IsNullOrEmpty(textEnderecoBairro.Text) ||
                 String.IsNullOrEmpty(maskedEnderecoCEP.Text) ||
                 !Combo_ComboBox.Selecionado(comboEnderecoUF) ||
@@ -225,7 +226,7 @@ namespace SisCom.Aplicacao.Formularios
                     else
                     {
                         notaFiscalSaidaSerieViewModel.Id = notaFiscalSaidaSerie.Id;
-                        notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerieViewModel.Id, notaFiscalSaidaSerieViewModel); 
+                        notaFiscalSaidaSerieController.Atualizar(notaFiscalSaidaSerieViewModel.Id, notaFiscalSaidaSerieViewModel);
                     }
                 }
             }
@@ -245,7 +246,7 @@ namespace SisCom.Aplicacao.Formularios
                     if (manifestoEletronicoDocumentoSerie == null)
                     {
                         manifestoEletronicoDocumentoSerieViewModel.Id = Guid.NewGuid();
-                        manifestoEletronicoDocumentoSerieController.Adicionar(manifestoEletronicoDocumentoSerieViewModel); 
+                        manifestoEletronicoDocumentoSerieController.Adicionar(manifestoEletronicoDocumentoSerieViewModel);
                     }
                     else
                     {
@@ -261,11 +262,12 @@ namespace SisCom.Aplicacao.Formularios
                 Declaracoes.dados_Empresa_CidadeId = empresa.Endereco.End_Cidade.Id;
                 Declaracoes.dados_Empresa_CodigoEstado = empresa.Endereco.End_Cidade.Estado.Codigo;
                 Declaracoes.dados_Empresa_SerialNumber = empresa.NuvemFiscal_SerialNumber;
+                Declaracoes.dados_Empresa_TipoEmirssor = empresa.NuvemFiscal_TipoEmirssor.Value;
                 Declaracoes.dados_Path_DocumentoFiscal = empresa.PathDocumentoFiscal;
                 Declaracoes.dados_Empresa_CNPJ = empresa.CNPJ;
                 Declaracoes.dados_Empresa_Nome = empresa.RazaoSocial;
                 if (empresa.RegimeTributario != null)
-                Declaracoes.dados_Empresa_RegimeTributario = (RegimeTributario)empresa.RegimeTributario;
+                    Declaracoes.dados_Empresa_RegimeTributario = (RegimeTributario)empresa.RegimeTributario;
             }
 
             empresaController = null;
@@ -443,7 +445,7 @@ namespace SisCom.Aplicacao.Formularios
             if (Combo_ComboBox.Selecionado(comboSpedGrupoInventario)) { empresa.Sped_TipoGeracaoInventario = (Sped_TipoGeracaoInventario)comboSpedGrupoInventario.SelectedValue; } else { empresa.Sped_TipoGeracaoInventario = null; }
             empresa.MDFe_Serie = Funcao.StringVazioParaNulo(textMDFeSerie.Text);
             if (Combo_ComboBox.Selecionado(comboMDFeAmbiente)) { empresa.MDFe_Ambiente = (AmbienteSistemas)comboMDFeAmbiente.SelectedValue; } else { empresa.MDFe_Ambiente = null; }
-            if (Combo_ComboBox.Selecionado(comboMDFeTipoEmissor)) { empresa.MDFe_TipoEmirssor = (TipoEmissor)comboMDFeTipoEmissor.SelectedValue; } else { empresa.MDFe_TipoEmirssor = null; }
+            if (Combo_ComboBox.Selecionado(comboNuvemFiscalTipoEmissor)) { empresa.NuvemFiscal_TipoEmirssor = (TipoEmissor)comboNuvemFiscalTipoEmissor.SelectedValue; } else { empresa.NuvemFiscal_TipoEmirssor = TipoEmissor.Normal; }
             empresa.NuvemFiscal_SerialNumber = serialNumber;
             empresa.NuvemFiscal_Certificado = Funcao.StringVazioParaNulo(textNuvemFiscalCertificado.Text);
             empresa.NuvemFiscal_Usar = checkUtilizarNuvemFiscal.Checked;
@@ -458,8 +460,8 @@ namespace SisCom.Aplicacao.Formularios
             string diretorioXMLs = "<SisCom.Aplicacao_FW.Properties.Settings><setting name=\"PathDocumentoFiscal\" serializeAs=\"String\"><value>" + textNuvemFiscalDiretorioXMLs.Text + "</value></setting></SisCom.Aplicacao_FW.Properties.Settings>";
 
             var data = File.ReadAllText(config.FilePath);
-            data = data.Replace(data.Substring(data.IndexOf("<SisCom.Aplicacao_FW.Properties.Settings>"), data.IndexOf("</SisCom.Aplicacao_FW.Properties.Settings>") - 
-                                                                                                          data.IndexOf("<SisCom.Aplicacao_FW.Properties.Settings>") + 
+            data = data.Replace(data.Substring(data.IndexOf("<SisCom.Aplicacao_FW.Properties.Settings>"), data.IndexOf("</SisCom.Aplicacao_FW.Properties.Settings>") -
+                                                                                                          data.IndexOf("<SisCom.Aplicacao_FW.Properties.Settings>") +
                                                                                                           ("</SisCom.Aplicacao_FW.Properties.Settings>").Length), diretorioXMLs);
 
             StreamWriter sw = new StreamWriter(config.FilePath);
