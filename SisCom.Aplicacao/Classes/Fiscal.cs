@@ -47,6 +47,7 @@ using MDFe.Classes.Servicos.Autorizacao;
 using MDFe.Servicos.EventosMDFe;
 using MDFe.Classes.Extencoes;
 using MDFe.Servicos.RetRecepcaoMDFe;
+using SisCom.Entidade.Modelos;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -2127,19 +2128,23 @@ namespace SisCom.Aplicacao.Classes
                 #endregion modal
 
                 #region infMunDescarga
-                mdfe.InfMDFe.InfDoc.InfMunDescarga = manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas
-                    .Select(n => new MDFeInfMunDescarga
+                if (manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas != null && manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas.Any())
+                {
+                    mdfe.InfMDFe.InfDoc.InfMunDescarga = new();
+
+                    foreach (Cidade cidade in manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas.Select(s => new Cidade() { Id = s.CidadeDescarga.Id, Nome = s.CidadeDescarga.Nome, CodigoIBGE = s.CidadeDescarga.CodigoIBGE }).Distinct())
                     {
-                        XMunDescarga = n.CidadeDescarga.Nome,
-                        CMunDescarga = n.CidadeDescarga.CodigoIBGE,
-                        InfNFe = new List<MDFeInfNFe>
-                        {
-                            new MDFeInfNFe
+                        var mdfEInfMunDescarga = new MDFeInfMunDescarga() { XMunDescarga = cidade.Nome, CMunDescarga = cidade.CodigoIBGE };
+
+                        mdfEInfMunDescarga.InfNFe = manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas.Where(w => w.CidadeDescargaId == cidade.Id)
+                            .Select(n => new MDFeInfNFe
                             {
                                 ChNFe = n.ChaveAcesso
-                            }
-                        }
-                    }).ToList();
+                            }).ToList();
+
+                        mdfe.InfMDFe.InfDoc.InfMunDescarga.Add(mdfEInfMunDescarga);
+                    }
+                }
                 #endregion infMunDescarga
 
                 #region Totais (tot)
