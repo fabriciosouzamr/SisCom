@@ -7,6 +7,7 @@ using SisCom.Infraestrutura.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Xml.Serialization;
 
 namespace SisCom.Aplicacao.Classes
@@ -57,6 +58,8 @@ namespace SisCom.Aplicacao.Classes
         public static string dados_Empresa_Nome;
         public static RegimeTributario dados_Empresa_RegimeTributario = RegimeTributario.SimplesNacional;
         public static FuncionarioViewModel dados_funcionario;
+        public static byte[]? dados_Empresa_Logotipo;
+        public static string dados_Empresa_PathLogomarca = "";
         public static string dados_Path_DocumentoFiscal = "";
         public static bool login_Valido = false;
 

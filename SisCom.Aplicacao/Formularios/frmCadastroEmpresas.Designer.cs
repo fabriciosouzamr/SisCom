@@ -125,6 +125,8 @@ namespace SisCom.Aplicacao.Formularios
             textCaminhoLogomarca = new System.Windows.Forms.TextBox();
             label28 = new System.Windows.Forms.Label();
             tabPage7 = new System.Windows.Forms.TabPage();
+            label32 = new System.Windows.Forms.Label();
+            comboNuvemFiscalTipoEmissor = new System.Windows.Forms.ComboBox();
             botaoNuvemFiscalDiretorioXMLs = new System.Windows.Forms.Button();
             textNuvemFiscalDiretorioXMLs = new System.Windows.Forms.TextBox();
             label3 = new System.Windows.Forms.Label();
@@ -134,8 +136,6 @@ namespace SisCom.Aplicacao.Formularios
             label37 = new System.Windows.Forms.Label();
             label38 = new System.Windows.Forms.Label();
             comboNuvemFiscalAmbienteWebService = new System.Windows.Forms.ComboBox();
-            label32 = new System.Windows.Forms.Label();
-            comboNuvemFiscalTipoEmissor = new System.Windows.Forms.ComboBox();
             pnlMenuBotao.SuspendLayout();
             pnlMenuBotaoBotao.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -1139,6 +1139,24 @@ namespace SisCom.Aplicacao.Formularios
             tabPage7.Text = "Nuvem Fiscal";
             tabPage7.UseVisualStyleBackColor = true;
             // 
+            // label32
+            // 
+            label32.AutoSize = true;
+            label32.Location = new System.Drawing.Point(22, 122);
+            label32.Name = "label32";
+            label32.Size = new System.Drawing.Size(94, 15);
+            label32.TabIndex = 407;
+            label32.Text = "Tipo do Emissor:";
+            // 
+            // comboNuvemFiscalTipoEmissor
+            // 
+            comboNuvemFiscalTipoEmissor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboNuvemFiscalTipoEmissor.FormattingEnabled = true;
+            comboNuvemFiscalTipoEmissor.Location = new System.Drawing.Point(155, 118);
+            comboNuvemFiscalTipoEmissor.Name = "comboNuvemFiscalTipoEmissor";
+            comboNuvemFiscalTipoEmissor.Size = new System.Drawing.Size(130, 23);
+            comboNuvemFiscalTipoEmissor.TabIndex = 408;
+            // 
             // botaoNuvemFiscalDiretorioXMLs
             // 
             botaoNuvemFiscalDiretorioXMLs.Location = new System.Drawing.Point(684, 89);
@@ -1221,24 +1239,6 @@ namespace SisCom.Aplicacao.Formularios
             comboNuvemFiscalAmbienteWebService.Size = new System.Drawing.Size(130, 23);
             comboNuvemFiscalAmbienteWebService.TabIndex = 402;
             comboNuvemFiscalAmbienteWebService.TextChanged += textoTextChanged;
-            // 
-            // label32
-            // 
-            label32.AutoSize = true;
-            label32.Location = new System.Drawing.Point(22, 122);
-            label32.Name = "label32";
-            label32.Size = new System.Drawing.Size(94, 15);
-            label32.TabIndex = 407;
-            label32.Text = "Tipo do Emissor:";
-            // 
-            // comboNuvemFiscalTipoEmissor
-            // 
-            comboNuvemFiscalTipoEmissor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboNuvemFiscalTipoEmissor.FormattingEnabled = true;
-            comboNuvemFiscalTipoEmissor.Location = new System.Drawing.Point(155, 118);
-            comboNuvemFiscalTipoEmissor.Name = "comboNuvemFiscalTipoEmissor";
-            comboNuvemFiscalTipoEmissor.Size = new System.Drawing.Size(130, 23);
-            comboNuvemFiscalTipoEmissor.TabIndex = 408;
             // 
             // frmCadastroEmpresas
             // 

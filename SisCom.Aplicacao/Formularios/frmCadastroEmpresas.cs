@@ -20,8 +20,8 @@ namespace SisCom.Aplicacao.Formularios
     public partial class frmCadastroEmpresas : FormMain
     {
         ViewModels.EmpresaViewModel empresa = null;
-        private bool editado = false;
         string serialNumber = "";
+        bool editado = false;
 
         public frmCadastroEmpresas(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier _notifier) : base(serviceProvider, dbCtxFactory, _notifier)
         {
@@ -266,6 +266,8 @@ namespace SisCom.Aplicacao.Formularios
                 Declaracoes.dados_Path_DocumentoFiscal = empresa.PathDocumentoFiscal;
                 Declaracoes.dados_Empresa_CNPJ = empresa.CNPJ;
                 Declaracoes.dados_Empresa_Nome = empresa.RazaoSocial;
+                Declaracoes.dados_Empresa_Logotipo = empresa.ImagemLogomarca;
+                Declaracoes.dados_Empresa_PathLogomarca = empresa.PathLogomarca;
                 if (empresa.RegimeTributario != null)
                     Declaracoes.dados_Empresa_RegimeTributario = (RegimeTributario)empresa.RegimeTributario;
             }
@@ -380,7 +382,7 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void botaoBuscarLogomarca_Click(object sender, EventArgs e)
         {
-            Imagem.CarregarFoto(pictureLogomarca);
+            textCaminhoLogomarca.Text = Imagem.CarregarFoto(pictureLogomarca);
         }
         private void botaoRetirarLogomarca_Click(object sender, EventArgs e)
         {
@@ -400,6 +402,11 @@ namespace SisCom.Aplicacao.Formularios
             if (!Validacao.CPFCNPJ_Valido(TipoPessoa.Juridica, Funcoes._Classes.Texto.SomenteNumero(maskedCPFCNPJ.Text)))
             {
                 CaixaMensagem.Informacao("Informe o C.N.P.J!");
+                return;
+            }
+            if (string.IsNullOrEmpty(textInscricaoEstadual.Text.Trim()))
+            {
+                CaixaMensagem.Informacao("Informe o número da Inscrição Estadual!");
                 return;
             }
             if (textNomeFantasia.Text.Trim() == string.Empty)

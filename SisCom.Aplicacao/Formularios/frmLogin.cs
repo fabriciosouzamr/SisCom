@@ -59,6 +59,8 @@ namespace SisCom.Aplicacao.Formularios
                             Declaracoes.dados_Empresa_TipoEmirssor = empresa.NuvemFiscal_TipoEmirssor.HasValue ? empresa.NuvemFiscal_TipoEmirssor.Value : TipoEmissor.Normal;
                             Declaracoes.dados_Empresa_CNPJ = empresa.CNPJ;
                             Declaracoes.dados_Empresa_Nome = empresa.RazaoSocial;
+                            Declaracoes.dados_Empresa_Logotipo = empresa.ImagemLogomarca;
+                            Declaracoes.dados_Empresa_PathLogomarca = empresa.PathLogomarca;
                             if (empresa.RegimeTributario != null)
                                 Declaracoes.dados_Empresa_RegimeTributario = (RegimeTributario)empresa.RegimeTributario;
                             if (!String.IsNullOrEmpty(empresa.PathDocumentoFiscal))

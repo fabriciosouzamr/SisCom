@@ -79,11 +79,14 @@ namespace SisCom.Aplicacao.Classes
 
             oDanfe = new DanfeSharp.Danfe(oModelo);
 
-            //If FNC_NVL(sEMPRESA_DS_PATH_IMAGEM, "") <> "" Then
-            //    Dim stream As New System.IO.FileStream(sEMPRESA_DS_PATH_IMAGEM, System.IO.FileMode.Open)
-            //    'oDanfe.AdicionarLogoImagem(sEMPRESA_DS_PATH_IMAGEM)
-            //    oDanfe.AdicionarLogoImagem(stream)
-            //End If
+            if (!string.IsNullOrEmpty(Declaracoes.dados_Empresa_PathLogomarca) && System.IO.File.Exists(Declaracoes.dados_Empresa_PathLogomarca))
+            {
+                oDanfe.AdicionarLogoImagem(Imagem.FilePathToStream(Declaracoes.dados_Empresa_PathLogomarca, 0, 0));
+            }
+            else if (Declaracoes.dados_Empresa_Logotipo != null)
+            {
+                oDanfe.AdicionarLogoImagem(Imagem.ByteArrayToSteam(Declaracoes.dados_Empresa_Logotipo));
+            }
 
             oDanfe.Rodape = "Gerado pelo DixMed";
             oDanfe.CasaDecimaisQuantidadeVolumes = 0;
@@ -1277,14 +1280,10 @@ namespace SisCom.Aplicacao.Classes
                                                                     ref string sCD_NFCe_Token_CSC)
         {
             NFe.Classes.NFe oNFe;
-            NFe.Classes.Informacoes.Detalhe.det oNFE_Det;
-            NFe.Classes.Informacoes.Cobranca.dup oNFE_Dup = null;
-            NFe.Classes.Informacoes.Pagamento.pag oNFE_Pag;
-            NFe.Classes.Informacoes.Pagamento.card oNFE_Card;
-            NFe.Classes.Informacoes.Pagamento.detPag oNFE_Pag_Det;
+            det oNFE_Det;
+            card oNFE_Card;
+            detPag oNFE_Pag_Det;
             NFe.Classes.Informacoes.autXML oNFE_autXML;
-            string sDS_PATH_XML;
-            string sAux;
             bool bClienteNaoInformado = false;
 
             string sNF;
@@ -1810,6 +1809,7 @@ namespace SisCom.Aplicacao.Classes
 
                 if (oNFe.infNFe.ide.mod == ModeloDocumento.NFCe || (oNFe.infNFe.ide.mod == ModeloDocumento.NFe))
                 {
+                    NFe.Classes.Informacoes.Pagamento.pag oNFE_Pag;
                     if ((notaFiscalSaidaPagamentoViewModels == null) || (!notaFiscalSaidaPagamentoViewModels.Any()))
                     {
                         oNFE_Pag = new NFe.Classes.Informacoes.Pagamento.pag();
@@ -2132,7 +2132,7 @@ namespace SisCom.Aplicacao.Classes
                 {
                     mdfe.InfMDFe.InfDoc.InfMunDescarga = new();
 
-                    foreach (Cidade cidade in manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas.Select(s => new Cidade() { Id = s.CidadeDescarga.Id, Nome = s.CidadeDescarga.Nome, CodigoIBGE = s.CidadeDescarga.CodigoIBGE }).Distinct())
+                    foreach (var cidade in manifestoEletronicoDocumento.ManifestoEletronicoDocumentoNotas.Select(s => new { s.CidadeDescarga.Id, s.CidadeDescarga.Nome, s.CidadeDescarga.CodigoIBGE }).Distinct())
                     {
                         var mdfEInfMunDescarga = new MDFeInfMunDescarga() { XMunDescarga = cidade.Nome, CMunDescarga = cidade.CodigoIBGE };
 
