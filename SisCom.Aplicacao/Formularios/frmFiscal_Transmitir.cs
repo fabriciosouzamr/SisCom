@@ -171,7 +171,7 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
-        
+
         private void gridNotaFiscalSaida_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             GridNotaFiscalSaida(e);
@@ -414,7 +414,7 @@ namespace SisCom.Aplicacao.Formularios
                     if (((NF_Status)Convert.ToInt16(row.Cells[gridNotaFiscalSaida_ID_Status].Value) == NF_Status.Pendente) ||
                         ((NF_Status)Convert.ToInt16(row.Cells[gridNotaFiscalSaida_ID_Status].Value) == NF_Status.Finalizada))
                     {
-                        await Transmitir(row: row, 
+                        await Transmitir(row: row,
                                          id: (Guid)row.Cells[gridNotaFiscalSaida_Id].Value,
                                          exibirmensagem: true);
                     }
@@ -492,6 +492,15 @@ namespace SisCom.Aplicacao.Formularios
                                      exibirmensagem: true);
                 }
             }
+        }
+
+        private async void uscTipoEmissor_TipoEmissorSelecionado(object sender, TipoEmissor tipoEmissor)
+        {
+            var empresa = await (new EmpresaController(this.MeuDbContext(), this._notifier)).GetById(Declaracoes.dados_Empresa_Id);
+
+            empresa.NuvemFiscal_TipoEmirssor = tipoEmissor;
+
+            await (new EmpresaController(this.MeuDbContext(), this._notifier)).Atualizar(empresa.Id, empresa);
         }
     }
 }

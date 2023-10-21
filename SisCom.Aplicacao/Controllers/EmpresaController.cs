@@ -90,7 +90,6 @@ namespace SisCom.Aplicacao.Controllers
         public void Dispose()
         {
             _empresaService.Dispose();
-            MeuDbContext.Dispose();
         }
     }
 }

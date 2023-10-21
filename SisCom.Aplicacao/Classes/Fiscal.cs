@@ -1375,7 +1375,23 @@ namespace SisCom.Aplicacao.Classes
                 oNFe.infNFe.ide.nNF = Convert.ToInt16(sNF);
                 oNFe.infNFe.ide.tpNF = tipoNfe;
                 oNFe.infNFe.ide.cMunFG = Convert.ToInt32(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.CodigoIBGE);
-                oNFe.infNFe.ide.tpEmis = TipoEmissao.teNormal;
+
+                if (Declaracoes.dados_Empresa_TipoEmirssor == TipoEmissor.Normal)
+                {
+                    oNFe.infNFe.ide.tpEmis = TipoEmissao.teNormal;
+                }
+                else
+                {
+                    if (new string[] { "AM", "BA", "GO", "MA", "MS", "MT", "PE", "PR" }.Contains(Declaracoes.dados_Empresa_CodigoEstado) )
+                    {
+                        oNFe.infNFe.ide.tpEmis = TipoEmissao.teSVCRS;
+                    }
+                    else
+                    {
+                        oNFe.infNFe.ide.tpEmis = TipoEmissao.teSVCAN;
+                    }
+                }
+
                 oNFe.infNFe.ide.tpImp = TipoImpressao.tiRetrato;
                 oNFe.infNFe.ide.cNF = "1" + Convert.ToInt16(notaFiscalSaidaViewModel.NotaFiscal).ToString("0000000");
                 oNFe.infNFe.ide.tpAmb = oConfig.tpAmb;
@@ -2042,7 +2058,7 @@ namespace SisCom.Aplicacao.Classes
                 mdfe.InfMDFe.Ide.CMDF = GetRandom();
                 mdfe.InfMDFe.Ide.Modal = MDFeModal.Rodoviario;
                 mdfe.InfMDFe.Ide.DhEmi = DateTime.Now;
-                mdfe.InfMDFe.Ide.TpEmis = MDFeTipoEmissao.Normal;
+                mdfe.InfMDFe.Ide.TpEmis = Declaracoes.dados_Empresa_TipoEmirssor == TipoEmissor.Normal ? MDFeTipoEmissao.Normal : MDFeTipoEmissao.Contingencia;
                 mdfe.InfMDFe.Ide.ProcEmi = MDFeIdentificacaoProcessoEmissao.EmissaoComAplicativoContribuinte;
                 mdfe.InfMDFe.Ide.VerProc = "versao28383";
                 mdfe.InfMDFe.Ide.UFIni = oEstado.SiglaParaEstado(manifestoEletronicoDocumento.EstadoCarregamento.Codigo);

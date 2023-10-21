@@ -29,432 +29,443 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFiscal_MDFe_Consulta));
-            this.botaoDesmarcarTodos = new System.Windows.Forms.Button();
-            this.botaoMarcarTodos = new System.Windows.Forms.Button();
-            this.botaoLimparFiltros = new System.Windows.Forms.Button();
-            this.botaoAplicarFiltros = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dateDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
-            this.dateDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
-            this.labelValidade = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pnlMenuBotao = new System.Windows.Forms.Panel();
-            this.pnlMenuBotaoBotao = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.botaoClonar = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.botaoEncerramento = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.botaoCancelar = new System.Windows.Forms.Button();
-            this.botaoEditar = new System.Windows.Forms.Button();
-            this.label38 = new System.Windows.Forms.Label();
-            this.botaoTransmitir = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.botaoNovo = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.botaoFechar = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panelStatusServico = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.gridManifestoDocumentoEletronico = new System.Windows.Forms.DataGridView();
-            this.label11 = new System.Windows.Forms.Label();
-            this.botaoImprimir = new System.Windows.Forms.Button();
-            this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.pnlMenuBotao.SuspendLayout();
-            this.pnlMenuBotaoBotao.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridManifestoDocumentoEletronico)).BeginInit();
-            this.SuspendLayout();
+            botaoDesmarcarTodos = new System.Windows.Forms.Button();
+            botaoMarcarTodos = new System.Windows.Forms.Button();
+            botaoLimparFiltros = new System.Windows.Forms.Button();
+            botaoAplicarFiltros = new System.Windows.Forms.Button();
+            label10 = new System.Windows.Forms.Label();
+            dateDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
+            label9 = new System.Windows.Forms.Label();
+            dateDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
+            labelValidade = new System.Windows.Forms.Label();
+            panel3 = new System.Windows.Forms.Panel();
+            panel1 = new System.Windows.Forms.Panel();
+            label6 = new System.Windows.Forms.Label();
+            pnlMenuBotao = new System.Windows.Forms.Panel();
+            pnlMenuBotaoBotao = new System.Windows.Forms.Panel();
+            label11 = new System.Windows.Forms.Label();
+            botaoImprimir = new System.Windows.Forms.Button();
+            label5 = new System.Windows.Forms.Label();
+            botaoClonar = new System.Windows.Forms.Button();
+            label4 = new System.Windows.Forms.Label();
+            botaoEncerramento = new System.Windows.Forms.Button();
+            label2 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            botaoCancelar = new System.Windows.Forms.Button();
+            botaoEditar = new System.Windows.Forms.Button();
+            label38 = new System.Windows.Forms.Label();
+            botaoTransmitir = new System.Windows.Forms.Button();
+            label3 = new System.Windows.Forms.Label();
+            botaoNovo = new System.Windows.Forms.Button();
+            label7 = new System.Windows.Forms.Label();
+            botaoFechar = new System.Windows.Forms.Button();
+            panel2 = new System.Windows.Forms.Panel();
+            panelStatusServico = new System.Windows.Forms.Panel();
+            label8 = new System.Windows.Forms.Label();
+            gridManifestoDocumentoEletronico = new System.Windows.Forms.DataGridView();
+            uscTipoEmissor = new uscTipoEmissor();
+            panel3.SuspendLayout();
+            panel1.SuspendLayout();
+            pnlMenuBotao.SuspendLayout();
+            pnlMenuBotaoBotao.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridManifestoDocumentoEletronico).BeginInit();
+            SuspendLayout();
             // 
             // botaoDesmarcarTodos
             // 
-            this.botaoDesmarcarTodos.Location = new System.Drawing.Point(107, 79);
-            this.botaoDesmarcarTodos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.botaoDesmarcarTodos.Name = "botaoDesmarcarTodos";
-            this.botaoDesmarcarTodos.Size = new System.Drawing.Size(118, 20);
-            this.botaoDesmarcarTodos.TabIndex = 101;
-            this.botaoDesmarcarTodos.Text = "Desmarcar Todos";
-            this.botaoDesmarcarTodos.UseVisualStyleBackColor = true;
-            this.botaoDesmarcarTodos.Click += new System.EventHandler(this.botaoDesmarcarTodos_Click);
+            botaoDesmarcarTodos.Location = new System.Drawing.Point(107, 79);
+            botaoDesmarcarTodos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            botaoDesmarcarTodos.Name = "botaoDesmarcarTodos";
+            botaoDesmarcarTodos.Size = new System.Drawing.Size(118, 20);
+            botaoDesmarcarTodos.TabIndex = 101;
+            botaoDesmarcarTodos.Text = "Desmarcar Todos";
+            botaoDesmarcarTodos.UseVisualStyleBackColor = true;
+            botaoDesmarcarTodos.Click += botaoDesmarcarTodos_Click;
             // 
             // botaoMarcarTodos
             // 
-            this.botaoMarcarTodos.Location = new System.Drawing.Point(5, 79);
-            this.botaoMarcarTodos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.botaoMarcarTodos.Name = "botaoMarcarTodos";
-            this.botaoMarcarTodos.Size = new System.Drawing.Size(96, 20);
-            this.botaoMarcarTodos.TabIndex = 100;
-            this.botaoMarcarTodos.Text = "Marcar Todos";
-            this.botaoMarcarTodos.UseVisualStyleBackColor = true;
-            this.botaoMarcarTodos.Click += new System.EventHandler(this.botaoMarcarTodos_Click);
+            botaoMarcarTodos.Location = new System.Drawing.Point(5, 79);
+            botaoMarcarTodos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            botaoMarcarTodos.Name = "botaoMarcarTodos";
+            botaoMarcarTodos.Size = new System.Drawing.Size(96, 20);
+            botaoMarcarTodos.TabIndex = 100;
+            botaoMarcarTodos.Text = "Marcar Todos";
+            botaoMarcarTodos.UseVisualStyleBackColor = true;
+            botaoMarcarTodos.Click += botaoMarcarTodos_Click;
             // 
             // botaoLimparFiltros
             // 
-            this.botaoLimparFiltros.Image = ((System.Drawing.Image)(resources.GetObject("botaoLimparFiltros.Image")));
-            this.botaoLimparFiltros.Location = new System.Drawing.Point(1205, 54);
-            this.botaoLimparFiltros.Name = "botaoLimparFiltros";
-            this.botaoLimparFiltros.Size = new System.Drawing.Size(100, 45);
-            this.botaoLimparFiltros.TabIndex = 99;
-            this.botaoLimparFiltros.TabStop = false;
-            this.botaoLimparFiltros.UseVisualStyleBackColor = true;
-            this.botaoLimparFiltros.Click += new System.EventHandler(this.botaoLimparFiltros_Click);
+            botaoLimparFiltros.Image = (System.Drawing.Image)resources.GetObject("botaoLimparFiltros.Image");
+            botaoLimparFiltros.Location = new System.Drawing.Point(1205, 54);
+            botaoLimparFiltros.Name = "botaoLimparFiltros";
+            botaoLimparFiltros.Size = new System.Drawing.Size(100, 45);
+            botaoLimparFiltros.TabIndex = 99;
+            botaoLimparFiltros.TabStop = false;
+            botaoLimparFiltros.UseVisualStyleBackColor = true;
+            botaoLimparFiltros.Click += botaoLimparFiltros_Click;
             // 
             // botaoAplicarFiltros
             // 
-            this.botaoAplicarFiltros.Image = ((System.Drawing.Image)(resources.GetObject("botaoAplicarFiltros.Image")));
-            this.botaoAplicarFiltros.Location = new System.Drawing.Point(1205, 5);
-            this.botaoAplicarFiltros.Name = "botaoAplicarFiltros";
-            this.botaoAplicarFiltros.Size = new System.Drawing.Size(100, 45);
-            this.botaoAplicarFiltros.TabIndex = 98;
-            this.botaoAplicarFiltros.TabStop = false;
-            this.botaoAplicarFiltros.UseVisualStyleBackColor = true;
-            this.botaoAplicarFiltros.Click += new System.EventHandler(this.botaoAplicarFiltros_Click);
+            botaoAplicarFiltros.Image = (System.Drawing.Image)resources.GetObject("botaoAplicarFiltros.Image");
+            botaoAplicarFiltros.Location = new System.Drawing.Point(1205, 5);
+            botaoAplicarFiltros.Name = "botaoAplicarFiltros";
+            botaoAplicarFiltros.Size = new System.Drawing.Size(100, 45);
+            botaoAplicarFiltros.TabIndex = 98;
+            botaoAplicarFiltros.TabStop = false;
+            botaoAplicarFiltros.UseVisualStyleBackColor = true;
+            botaoAplicarFiltros.Click += botaoAplicarFiltros_Click;
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(88, 26);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(13, 15);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "a";
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(88, 26);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(13, 15);
+            label10.TabIndex = 5;
+            label10.Text = "a";
             // 
             // dateDataEmissaoFinal
             // 
-            this.dateDataEmissaoFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDataEmissaoFinal.Location = new System.Drawing.Point(103, 22);
-            this.dateDataEmissaoFinal.Name = "dateDataEmissaoFinal";
-            this.dateDataEmissaoFinal.Size = new System.Drawing.Size(81, 23);
-            this.dateDataEmissaoFinal.TabIndex = 4;
+            dateDataEmissaoFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            dateDataEmissaoFinal.Location = new System.Drawing.Point(103, 22);
+            dateDataEmissaoFinal.Name = "dateDataEmissaoFinal";
+            dateDataEmissaoFinal.Size = new System.Drawing.Size(81, 23);
+            dateDataEmissaoFinal.TabIndex = 4;
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(5, 5);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(110, 15);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Período de Emissão";
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(5, 5);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(110, 15);
+            label9.TabIndex = 3;
+            label9.Text = "Período de Emissão";
             // 
             // dateDataEmissaoInicial
             // 
-            this.dateDataEmissaoInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDataEmissaoInicial.Location = new System.Drawing.Point(5, 22);
-            this.dateDataEmissaoInicial.Name = "dateDataEmissaoInicial";
-            this.dateDataEmissaoInicial.Size = new System.Drawing.Size(81, 23);
-            this.dateDataEmissaoInicial.TabIndex = 2;
+            dateDataEmissaoInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            dateDataEmissaoInicial.Location = new System.Drawing.Point(5, 22);
+            dateDataEmissaoInicial.Name = "dateDataEmissaoInicial";
+            dateDataEmissaoInicial.Size = new System.Drawing.Size(81, 23);
+            dateDataEmissaoInicial.TabIndex = 2;
             // 
             // labelValidade
             // 
-            this.labelValidade.AutoSize = true;
-            this.labelValidade.Location = new System.Drawing.Point(355, 93);
-            this.labelValidade.Name = "labelValidade";
-            this.labelValidade.Size = new System.Drawing.Size(132, 15);
-            this.labelValidade.TabIndex = 109;
-            this.labelValidade.Tag = "Validade do Certificado:";
-            this.labelValidade.Text = "Validade do Certificado:";
+            labelValidade.AutoSize = true;
+            labelValidade.Location = new System.Drawing.Point(355, 93);
+            labelValidade.Name = "labelValidade";
+            labelValidade.Size = new System.Drawing.Size(132, 15);
+            labelValidade.TabIndex = 109;
+            labelValidade.Tag = "Validade do Certificado:";
+            labelValidade.Text = "Validade do Certificado:";
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.Silver;
-            this.panel3.Controls.Add(this.botaoDesmarcarTodos);
-            this.panel3.Controls.Add(this.botaoMarcarTodos);
-            this.panel3.Controls.Add(this.botaoLimparFiltros);
-            this.panel3.Controls.Add(this.botaoAplicarFiltros);
-            this.panel3.Controls.Add(this.label10);
-            this.panel3.Controls.Add(this.dateDataEmissaoFinal);
-            this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.dateDataEmissaoInicial);
-            this.panel3.Location = new System.Drawing.Point(0, 112);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1314, 104);
-            this.panel3.TabIndex = 107;
+            panel3.BackColor = System.Drawing.Color.Silver;
+            panel3.Controls.Add(botaoDesmarcarTodos);
+            panel3.Controls.Add(botaoMarcarTodos);
+            panel3.Controls.Add(botaoLimparFiltros);
+            panel3.Controls.Add(botaoAplicarFiltros);
+            panel3.Controls.Add(label10);
+            panel3.Controls.Add(dateDataEmissaoFinal);
+            panel3.Controls.Add(label9);
+            panel3.Controls.Add(dateDataEmissaoInicial);
+            panel3.Location = new System.Drawing.Point(0, 112);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(1314, 104);
+            panel3.TabIndex = 107;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Location = new System.Drawing.Point(0, 87);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(350, 26);
-            this.panel1.TabIndex = 104;
+            panel1.Controls.Add(label6);
+            panel1.Location = new System.Drawing.Point(0, 87);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(350, 26);
+            panel1.TabIndex = 104;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(5, 5);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(265, 15);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Produção - NORMAL - Layout NF-e: 4.00";
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label6.Location = new System.Drawing.Point(5, 5);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(265, 15);
+            label6.TabIndex = 0;
+            label6.Text = "Produção - NORMAL - Layout NF-e: 4.00";
             // 
             // pnlMenuBotao
             // 
-            this.pnlMenuBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.pnlMenuBotao.Controls.Add(this.pnlMenuBotaoBotao);
-            this.pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
-            this.pnlMenuBotao.Name = "pnlMenuBotao";
-            this.pnlMenuBotao.Size = new System.Drawing.Size(1319, 83);
-            this.pnlMenuBotao.TabIndex = 103;
+            pnlMenuBotao.BackColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            pnlMenuBotao.Controls.Add(uscTipoEmissor);
+            pnlMenuBotao.Controls.Add(pnlMenuBotaoBotao);
+            pnlMenuBotao.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlMenuBotao.Location = new System.Drawing.Point(0, 0);
+            pnlMenuBotao.Name = "pnlMenuBotao";
+            pnlMenuBotao.Size = new System.Drawing.Size(1319, 83);
+            pnlMenuBotao.TabIndex = 103;
             // 
             // pnlMenuBotaoBotao
             // 
-            this.pnlMenuBotaoBotao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.pnlMenuBotaoBotao.Controls.Add(this.label11);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoImprimir);
-            this.pnlMenuBotaoBotao.Controls.Add(this.label5);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoClonar);
-            this.pnlMenuBotaoBotao.Controls.Add(this.label4);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoEncerramento);
-            this.pnlMenuBotaoBotao.Controls.Add(this.label2);
-            this.pnlMenuBotaoBotao.Controls.Add(this.label1);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoCancelar);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoEditar);
-            this.pnlMenuBotaoBotao.Controls.Add(this.label38);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoTransmitir);
-            this.pnlMenuBotaoBotao.Controls.Add(this.label3);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoNovo);
-            this.pnlMenuBotaoBotao.Controls.Add(this.label7);
-            this.pnlMenuBotaoBotao.Controls.Add(this.botaoFechar);
-            this.pnlMenuBotaoBotao.Location = new System.Drawing.Point(656, 0);
-            this.pnlMenuBotaoBotao.Name = "pnlMenuBotaoBotao";
-            this.pnlMenuBotaoBotao.Size = new System.Drawing.Size(649, 83);
-            this.pnlMenuBotaoBotao.TabIndex = 2;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(270, 56);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(33, 12);
-            this.label5.TabIndex = 75;
-            this.label5.Text = "Clonar";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // botaoClonar
-            // 
-            this.botaoClonar.Location = new System.Drawing.Point(260, 1);
-            this.botaoClonar.Name = "botaoClonar";
-            this.botaoClonar.Size = new System.Drawing.Size(53, 56);
-            this.botaoClonar.TabIndex = 74;
-            this.botaoClonar.UseVisualStyleBackColor = true;
-            this.botaoClonar.Click += new System.EventHandler(this.botaoClonar_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(418, 56);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 12);
-            this.label4.TabIndex = 73;
-            this.label4.Text = "Encerramento";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // botaoEncerramento
-            // 
-            this.botaoEncerramento.Location = new System.Drawing.Point(425, 1);
-            this.botaoEncerramento.Name = "botaoEncerramento";
-            this.botaoEncerramento.Size = new System.Drawing.Size(53, 56);
-            this.botaoEncerramento.TabIndex = 72;
-            this.botaoEncerramento.UseVisualStyleBackColor = true;
-            this.botaoEncerramento.Click += new System.EventHandler(this.botaoEncerramento_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(324, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 24);
-            this.label2.TabIndex = 71;
-            this.label2.Text = "Alterar\r\nMDF-e";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(485, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 12);
-            this.label1.TabIndex = 70;
-            this.label1.Text = "Cancelar";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // botaoCancelar
-            // 
-            this.botaoCancelar.Image = ((System.Drawing.Image)(resources.GetObject("botaoCancelar.Image")));
-            this.botaoCancelar.Location = new System.Drawing.Point(480, 1);
-            this.botaoCancelar.Name = "botaoCancelar";
-            this.botaoCancelar.Size = new System.Drawing.Size(53, 56);
-            this.botaoCancelar.TabIndex = 69;
-            this.botaoCancelar.UseVisualStyleBackColor = true;
-            this.botaoCancelar.Click += new System.EventHandler(this.botaoCancelar_Click);
-            // 
-            // botaoEditar
-            // 
-            this.botaoEditar.Image = ((System.Drawing.Image)(resources.GetObject("botaoEditar.Image")));
-            this.botaoEditar.Location = new System.Drawing.Point(315, 1);
-            this.botaoEditar.Name = "botaoEditar";
-            this.botaoEditar.Size = new System.Drawing.Size(53, 56);
-            this.botaoEditar.TabIndex = 68;
-            this.botaoEditar.UseVisualStyleBackColor = true;
-            this.botaoEditar.Click += new System.EventHandler(this.botaoEditar_Click);
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label38.Location = new System.Drawing.Point(373, 56);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(46, 12);
-            this.label38.TabIndex = 67;
-            this.label38.Text = "Transmitir";
-            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // botaoTransmitir
-            // 
-            this.botaoTransmitir.Image = ((System.Drawing.Image)(resources.GetObject("botaoTransmitir.Image")));
-            this.botaoTransmitir.Location = new System.Drawing.Point(370, 1);
-            this.botaoTransmitir.Name = "botaoTransmitir";
-            this.botaoTransmitir.Size = new System.Drawing.Size(53, 56);
-            this.botaoTransmitir.TabIndex = 66;
-            this.botaoTransmitir.UseVisualStyleBackColor = true;
-            this.botaoTransmitir.Click += new System.EventHandler(this.botaoTransmitir_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(541, 56);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 24);
-            this.label3.TabIndex = 65;
-            this.label3.Text = "Novo\r\n(ALT+N)";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // botaoNovo
-            // 
-            this.botaoNovo.Image = ((System.Drawing.Image)(resources.GetObject("botaoNovo.Image")));
-            this.botaoNovo.Location = new System.Drawing.Point(535, 1);
-            this.botaoNovo.Name = "botaoNovo";
-            this.botaoNovo.Size = new System.Drawing.Size(53, 56);
-            this.botaoNovo.TabIndex = 64;
-            this.botaoNovo.UseVisualStyleBackColor = true;
-            this.botaoNovo.Click += new System.EventHandler(this.botaoNovo_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(599, 56);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 12);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Fechar";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // botaoFechar
-            // 
-            this.botaoFechar.Image = ((System.Drawing.Image)(resources.GetObject("botaoFechar.Image")));
-            this.botaoFechar.Location = new System.Drawing.Point(590, 1);
-            this.botaoFechar.Name = "botaoFechar";
-            this.botaoFechar.Size = new System.Drawing.Size(53, 56);
-            this.botaoFechar.TabIndex = 20;
-            this.botaoFechar.UseVisualStyleBackColor = true;
-            this.botaoFechar.Click += new System.EventHandler(this.botaoFechar_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.panelStatusServico);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Location = new System.Drawing.Point(1121, 87);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(184, 26);
-            this.panel2.TabIndex = 105;
-            // 
-            // panelStatusServico
-            // 
-            this.panelStatusServico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.panelStatusServico.Location = new System.Drawing.Point(133, 5);
-            this.panelStatusServico.Name = "panelStatusServico";
-            this.panelStatusServico.Size = new System.Drawing.Size(15, 15);
-            this.panelStatusServico.TabIndex = 1;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(5, 5);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(122, 15);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Status do Serviço:";
-            // 
-            // gridManifestoDocumentoEletronico
-            // 
-            this.gridManifestoDocumentoEletronico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridManifestoDocumentoEletronico.Location = new System.Drawing.Point(0, 222);
-            this.gridManifestoDocumentoEletronico.Name = "gridManifestoDocumentoEletronico";
-            this.gridManifestoDocumentoEletronico.RowHeadersWidth = 51;
-            this.gridManifestoDocumentoEletronico.RowTemplate.Height = 25;
-            this.gridManifestoDocumentoEletronico.Size = new System.Drawing.Size(1314, 343);
-            this.gridManifestoDocumentoEletronico.TabIndex = 106;
+            pnlMenuBotaoBotao.BackColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            pnlMenuBotaoBotao.Controls.Add(label11);
+            pnlMenuBotaoBotao.Controls.Add(botaoImprimir);
+            pnlMenuBotaoBotao.Controls.Add(label5);
+            pnlMenuBotaoBotao.Controls.Add(botaoClonar);
+            pnlMenuBotaoBotao.Controls.Add(label4);
+            pnlMenuBotaoBotao.Controls.Add(botaoEncerramento);
+            pnlMenuBotaoBotao.Controls.Add(label2);
+            pnlMenuBotaoBotao.Controls.Add(label1);
+            pnlMenuBotaoBotao.Controls.Add(botaoCancelar);
+            pnlMenuBotaoBotao.Controls.Add(botaoEditar);
+            pnlMenuBotaoBotao.Controls.Add(label38);
+            pnlMenuBotaoBotao.Controls.Add(botaoTransmitir);
+            pnlMenuBotaoBotao.Controls.Add(label3);
+            pnlMenuBotaoBotao.Controls.Add(botaoNovo);
+            pnlMenuBotaoBotao.Controls.Add(label7);
+            pnlMenuBotaoBotao.Controls.Add(botaoFechar);
+            pnlMenuBotaoBotao.Location = new System.Drawing.Point(656, 0);
+            pnlMenuBotaoBotao.Name = "pnlMenuBotaoBotao";
+            pnlMenuBotaoBotao.Size = new System.Drawing.Size(649, 83);
+            pnlMenuBotaoBotao.TabIndex = 2;
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(210, 56);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(42, 12);
-            this.label11.TabIndex = 77;
-            this.label11.Text = "Imprimir";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label11.AutoSize = true;
+            label11.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label11.Location = new System.Drawing.Point(210, 56);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(42, 12);
+            label11.TabIndex = 77;
+            label11.Text = "Imprimir";
+            label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // botaoImprimir
             // 
-            this.botaoImprimir.Location = new System.Drawing.Point(205, 1);
-            this.botaoImprimir.Name = "botaoImprimir";
-            this.botaoImprimir.Size = new System.Drawing.Size(53, 56);
-            this.botaoImprimir.TabIndex = 76;
-            this.botaoImprimir.UseVisualStyleBackColor = true;
-            this.botaoImprimir.Click += new System.EventHandler(this.botaoImprimir_Click);
+            botaoImprimir.Location = new System.Drawing.Point(205, 1);
+            botaoImprimir.Name = "botaoImprimir";
+            botaoImprimir.Size = new System.Drawing.Size(53, 56);
+            botaoImprimir.TabIndex = 76;
+            botaoImprimir.UseVisualStyleBackColor = true;
+            botaoImprimir.Click += botaoImprimir_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label5.Location = new System.Drawing.Point(270, 56);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(33, 12);
+            label5.TabIndex = 75;
+            label5.Text = "Clonar";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoClonar
+            // 
+            botaoClonar.Location = new System.Drawing.Point(260, 1);
+            botaoClonar.Name = "botaoClonar";
+            botaoClonar.Size = new System.Drawing.Size(53, 56);
+            botaoClonar.TabIndex = 74;
+            botaoClonar.UseVisualStyleBackColor = true;
+            botaoClonar.Click += botaoClonar_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label4.Location = new System.Drawing.Point(418, 56);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(66, 12);
+            label4.TabIndex = 73;
+            label4.Text = "Encerramento";
+            label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoEncerramento
+            // 
+            botaoEncerramento.Location = new System.Drawing.Point(425, 1);
+            botaoEncerramento.Name = "botaoEncerramento";
+            botaoEncerramento.Size = new System.Drawing.Size(53, 56);
+            botaoEncerramento.TabIndex = 72;
+            botaoEncerramento.UseVisualStyleBackColor = true;
+            botaoEncerramento.Click += botaoEncerramento_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label2.Location = new System.Drawing.Point(324, 56);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(35, 24);
+            label2.TabIndex = 71;
+            label2.Text = "Alterar\r\nMDF-e";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label1.Location = new System.Drawing.Point(485, 56);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(42, 12);
+            label1.TabIndex = 70;
+            label1.Text = "Cancelar";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoCancelar
+            // 
+            botaoCancelar.Image = (System.Drawing.Image)resources.GetObject("botaoCancelar.Image");
+            botaoCancelar.Location = new System.Drawing.Point(480, 1);
+            botaoCancelar.Name = "botaoCancelar";
+            botaoCancelar.Size = new System.Drawing.Size(53, 56);
+            botaoCancelar.TabIndex = 69;
+            botaoCancelar.UseVisualStyleBackColor = true;
+            botaoCancelar.Click += botaoCancelar_Click;
+            // 
+            // botaoEditar
+            // 
+            botaoEditar.Image = (System.Drawing.Image)resources.GetObject("botaoEditar.Image");
+            botaoEditar.Location = new System.Drawing.Point(315, 1);
+            botaoEditar.Name = "botaoEditar";
+            botaoEditar.Size = new System.Drawing.Size(53, 56);
+            botaoEditar.TabIndex = 68;
+            botaoEditar.UseVisualStyleBackColor = true;
+            botaoEditar.Click += botaoEditar_Click;
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label38.Location = new System.Drawing.Point(373, 56);
+            label38.Name = "label38";
+            label38.Size = new System.Drawing.Size(46, 12);
+            label38.TabIndex = 67;
+            label38.Text = "Transmitir";
+            label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoTransmitir
+            // 
+            botaoTransmitir.Image = (System.Drawing.Image)resources.GetObject("botaoTransmitir.Image");
+            botaoTransmitir.Location = new System.Drawing.Point(370, 1);
+            botaoTransmitir.Name = "botaoTransmitir";
+            botaoTransmitir.Size = new System.Drawing.Size(53, 56);
+            botaoTransmitir.TabIndex = 66;
+            botaoTransmitir.UseVisualStyleBackColor = true;
+            botaoTransmitir.Click += botaoTransmitir_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label3.Location = new System.Drawing.Point(541, 56);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(40, 24);
+            label3.TabIndex = 65;
+            label3.Text = "Novo\r\n(ALT+N)";
+            label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoNovo
+            // 
+            botaoNovo.Image = (System.Drawing.Image)resources.GetObject("botaoNovo.Image");
+            botaoNovo.Location = new System.Drawing.Point(535, 1);
+            botaoNovo.Name = "botaoNovo";
+            botaoNovo.Size = new System.Drawing.Size(53, 56);
+            botaoNovo.TabIndex = 64;
+            botaoNovo.UseVisualStyleBackColor = true;
+            botaoNovo.Click += botaoNovo_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label7.Location = new System.Drawing.Point(599, 56);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(34, 12);
+            label7.TabIndex = 29;
+            label7.Text = "Fechar";
+            label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // botaoFechar
+            // 
+            botaoFechar.Image = (System.Drawing.Image)resources.GetObject("botaoFechar.Image");
+            botaoFechar.Location = new System.Drawing.Point(590, 1);
+            botaoFechar.Name = "botaoFechar";
+            botaoFechar.Size = new System.Drawing.Size(53, 56);
+            botaoFechar.TabIndex = 20;
+            botaoFechar.UseVisualStyleBackColor = true;
+            botaoFechar.Click += botaoFechar_Click;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(panelStatusServico);
+            panel2.Controls.Add(label8);
+            panel2.Location = new System.Drawing.Point(1121, 87);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(184, 26);
+            panel2.TabIndex = 105;
+            // 
+            // panelStatusServico
+            // 
+            panelStatusServico.BackColor = System.Drawing.Color.FromArgb(0, 192, 0);
+            panelStatusServico.Location = new System.Drawing.Point(133, 5);
+            panelStatusServico.Name = "panelStatusServico";
+            panelStatusServico.Size = new System.Drawing.Size(15, 15);
+            panelStatusServico.TabIndex = 1;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label8.Location = new System.Drawing.Point(5, 5);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(122, 15);
+            label8.TabIndex = 0;
+            label8.Text = "Status do Serviço:";
+            // 
+            // gridManifestoDocumentoEletronico
+            // 
+            gridManifestoDocumentoEletronico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridManifestoDocumentoEletronico.Location = new System.Drawing.Point(0, 222);
+            gridManifestoDocumentoEletronico.Name = "gridManifestoDocumentoEletronico";
+            gridManifestoDocumentoEletronico.RowHeadersWidth = 51;
+            gridManifestoDocumentoEletronico.RowTemplate.Height = 25;
+            gridManifestoDocumentoEletronico.Size = new System.Drawing.Size(1314, 343);
+            gridManifestoDocumentoEletronico.TabIndex = 106;
+            // 
+            // uscTipoEmissor
+            // 
+            uscTipoEmissor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            uscTipoEmissor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            uscTipoEmissor.Location = new System.Drawing.Point(5, 4);
+            uscTipoEmissor.Name = "uscTipoEmissor";
+            uscTipoEmissor.Size = new System.Drawing.Size(161, 74);
+            uscTipoEmissor.TabIndex = 5;
+            uscTipoEmissor.TipoEmissorSelecionado += uscTipoEmissor_TipoEmissorSelecionado;
             // 
             // frmFiscal_MDFe_Consulta
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1319, 570);
-            this.Controls.Add(this.labelValidade);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnlMenuBotao);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.gridManifestoDocumentoEletronico);
-            this.Name = "frmFiscal_MDFe_Consulta";
-            this.Text = "Nota Fiscal - MDF-e - Consultar";
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.pnlMenuBotao.ResumeLayout(false);
-            this.pnlMenuBotaoBotao.ResumeLayout(false);
-            this.pnlMenuBotaoBotao.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridManifestoDocumentoEletronico)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1319, 570);
+            Controls.Add(labelValidade);
+            Controls.Add(panel3);
+            Controls.Add(panel1);
+            Controls.Add(pnlMenuBotao);
+            Controls.Add(panel2);
+            Controls.Add(gridManifestoDocumentoEletronico);
+            Name = "frmFiscal_MDFe_Consulta";
+            Text = "Nota Fiscal - MDF-e - Consultar";
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            pnlMenuBotao.ResumeLayout(false);
+            pnlMenuBotaoBotao.ResumeLayout(false);
+            pnlMenuBotaoBotao.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gridManifestoDocumentoEletronico).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -492,5 +503,6 @@
         private System.Windows.Forms.Button botaoClonar;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button botaoImprimir;
+        private uscTipoEmissor uscTipoEmissor;
     }
 }

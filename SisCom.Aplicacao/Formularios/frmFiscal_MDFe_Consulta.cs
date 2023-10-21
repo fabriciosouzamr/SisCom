@@ -27,8 +27,8 @@ namespace SisCom.Aplicacao.Formularios
         public frmFiscal_MDFe_Consulta(IServiceProvider serviceProvider, IServiceScopeFactory<MeuDbContext> dbCtxFactory, INotifier notifier) : base(serviceProvider, dbCtxFactory, notifier)
         {
             InitializeComponent();
-            Inicializa(); 
-            
+            Inicializa();
+
             labelValidade.Text = labelValidade.Text + " " + Fiscal.Certificado_DataExpiracao();
         }
         async Task Inicializa()
@@ -85,7 +85,7 @@ namespace SisCom.Aplicacao.Formularios
                     empresa = await empresaController.GetById(Declaracoes.dados_Empresa_Id);
                 }
 
-                await Fiscal.MDFe_Transmitir(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()), 
+                await Fiscal.MDFe_Transmitir(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()),
                                              this.MeuDbContext(), this._notifier, empresa);
 
                 gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Status].Value = MDFe_Status.Transmitido.GetDescription();
@@ -126,7 +126,7 @@ namespace SisCom.Aplicacao.Formularios
                     var manifestoEletronicoDocumento = await manifestoEletronicoDocumentoController.PesquisarId(Guid.Parse(gridManifestoDocumentoEletronico.CurrentRow.Cells[gridManifestoDocumentoEletronico_Id].Value.ToString()));
 
                     Fiscal.Fiscal_ManifestoEletronicoDocumento_Cancelar(manifestoEletronicoDocumento, justificativa);
-                    
+
                     await manifestoEletronicoDocumentoController.Atualizar(manifestoEletronicoDocumento.Id, manifestoEletronicoDocumento);
                 }
             }
@@ -247,7 +247,7 @@ namespace SisCom.Aplicacao.Formularios
                                 var serie = seriePsq.FirstOrDefault();
 
                                 if (String.IsNullOrEmpty(serie.UltimoNumeroManifestoEletronicoDocumento))
-                                {  manifestoEletronicoDocumentoNova.Numero = "1"; }
+                                { manifestoEletronicoDocumentoNova.Numero = "1"; }
                                 else
                                 { manifestoEletronicoDocumentoNova.Numero = (Convert.ToInt16(serie.UltimoNumeroManifestoEletronicoDocumento) + 1).ToString(); }
 
@@ -288,7 +288,7 @@ namespace SisCom.Aplicacao.Formularios
                                 notas.ManifestoEletronicoDocumento = null;
                                 notas.NotaFiscalEntrada = null;
                                 notas.NotaFiscalSaida = null;
-                                notas.CidadeDescarga  = null;
+                                notas.CidadeDescarga = null;
                                 await manifestoEletronicoDocumentoNotaController.Adicionar(notas);
                             }
                         }
@@ -340,6 +340,15 @@ namespace SisCom.Aplicacao.Formularios
             {
                 CaixaMensagem.Informacao("Selecione o manifesto a ser impresso");
             }
+        }
+
+        private async void uscTipoEmissor_TipoEmissorSelecionado(object sender, TipoEmissor tipoEmissor)
+        {
+            var empresa = await(new EmpresaController(this.MeuDbContext(), this._notifier)).GetById(Declaracoes.dados_Empresa_Id);
+
+            empresa.NuvemFiscal_TipoEmirssor = tipoEmissor;
+
+            await(new EmpresaController(this.MeuDbContext(), this._notifier)).Atualizar(empresa.Id, empresa);
         }
     }
 }
