@@ -449,9 +449,23 @@ namespace SisCom.Aplicacao.Formularios
 
             return true;
         }
-        private void comboPesquisarPesquisa_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboPesquisarPesquisa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CarregarDados();
+            if (comboPesquisarPesquisa.SelectedIndex != -1)
+            {
+                MercadoriaViewModel mercadoriaBusca;
+
+                using (MercadoriaController mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier))
+                {
+                    mercadoriaBusca = (await mercadoriaController.PesquisarId((Guid)comboPesquisarPesquisa.SelectedValue)).FirstOrDefault();
+                }
+
+                if (mercadoriaBusca != null)
+                {
+                    mercadoria = mercadoriaBusca;
+                    await CarregarDados();
+                }
+            }
         }
         private void comboDetalhesFiscais_InfoRefNotasFiscaisEntrada_PIS_Codigo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -689,8 +703,8 @@ namespace SisCom.Aplicacao.Formularios
 
             foreach (EstadoViewModel estado in estados)
             {
-                Grid_DataGridView.User_ColunaAdicionar(gridImpostosICMS, estado.Codigo, estado.Codigo, Tamanho: 40, 
-                                                                                                               Tipo: Grid_DataGridView.TipoColuna.Numero, 
+                Grid_DataGridView.User_ColunaAdicionar(gridImpostosICMS, estado.Codigo, estado.Codigo, Tamanho: 40,
+                                                                                                               Tipo: Grid_DataGridView.TipoColuna.Numero,
                                                                                                                readOnly: false,
                                                                                                                alinhamento: DataGridViewContentAlignment.MiddleCenter).Tag = estado.Id;
                 Grid_DataGridView.User_LinhaAdicionar(gridImpostosICMS, new Grid_DataGridView.Coluna[] { new Grid_DataGridView.Coluna { Indice = gridImpostosICMS_ID,
@@ -1065,7 +1079,7 @@ namespace SisCom.Aplicacao.Formularios
                                 {
                                     celula.Tag = null;
                                     celula.Value = null;
-                                        
+
                                     if ((mercadoriaImpostoEstado.EstadoOrigemId == Guid.Parse(row.Tag.ToString())) &&
                                         (mercadoriaImpostoEstado.EstadoDestinoId == Guid.Parse(gridImpostosICMS.Columns[celula.ColumnIndex].Tag.ToString())))
                                     {
@@ -1080,7 +1094,7 @@ namespace SisCom.Aplicacao.Formularios
 
                 using (EstoqueController estoqueController = new EstoqueController(this.MeuDbContext(), this._notifier))
                 {
-                    var estoque = await estoqueController.Obter(predicate: w => w.MercadoriaId == mercadoria.Id );
+                    var estoque = await estoqueController.Obter(predicate: w => w.MercadoriaId == mercadoria.Id);
 
                     if (estoque.Any())
                     {
@@ -1334,15 +1348,15 @@ namespace SisCom.Aplicacao.Formularios
         {
             using (MercadoriaController mercadoriaController = new MercadoriaController(this.MeuDbContext(), this._notifier))
             {
-                IEnumerable<MercadoriaViewModel> Data = null;
+                IEnumerable<MercadoriaViewModel> data = null;
 
-                Data = await mercadoriaController.ObterTodos();
+                data = await mercadoriaController.ObterTodos();
 
                 MercadoriaViewModel ItemAnterior = null;
                 MercadoriaViewModel ItemRetorno = null;
                 bool Proximo = false;
 
-                foreach (MercadoriaViewModel Item in Data)
+                foreach (MercadoriaViewModel Item in data)
                 {
                     if (Posicao == Declaracoes.eNavegar.Primeiro)
                     {
@@ -1588,6 +1602,54 @@ namespace SisCom.Aplicacao.Formularios
         private void botaoGeradorEtiquetas_Click(object sender, EventArgs e)
         {
             TentarGravar();
+        }
+
+        private async void comboPesquisarTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((comboPesquisarTipoFiltro.SelectedIndex != -1) && (comboPesquisarTipoFiltro.Tag != Declaracoes.ComboBox_Carregando))
+            {
+                switch (comboPesquisarTipoFiltro.SelectedValue)
+                {
+                    case TipoPesquisa.Codigo:
+                        Combo_ComboBox.Formatar(comboPesquisarPesquisa,
+                                                "ID", "Codigo",
+                                                ComboBoxStyle.DropDownList,
+                                                await(new MercadoriaController(this.MeuDbContext(), this._notifier)).ObterTodos(order: o => o.Codigo)); 
+                        break;
+                    case TipoPesquisa.Referencia:
+                        Combo_ComboBox.Formatar(comboPesquisarPesquisa,
+                                                "ID", "CodigoFabricante",
+                                                ComboBoxStyle.DropDownList,
+                                                await (new MercadoriaController(this.MeuDbContext(), this._notifier)).ObterTodos(order: o => o.CodigoFabricante, predicate: p => !string.IsNullOrEmpty(p.CodigoFabricante)));
+                        break;
+                    case TipoPesquisa.Mercadoria:
+                        Combo_ComboBox.Formatar(comboPesquisarPesquisa,
+                                                "ID", "Nome",
+                                                ComboBoxStyle.DropDownList,
+                                                await (new MercadoriaController(this.MeuDbContext(), this._notifier)).ObterTodos(order: o => o.Nome));
+                        break;
+                    case TipoPesquisa.Observacao:
+                        Combo_ComboBox.Formatar(comboPesquisarPesquisa,
+                                                "ID", "Observacao",
+                                                ComboBoxStyle.DropDownList,
+                                                await (new MercadoriaController(this.MeuDbContext(), this._notifier)).ObterTodos(order: o => o.Observacao, predicate: p => !string.IsNullOrEmpty(p.Observacao)));
+                        break;
+                }
+            }
+        }
+
+        private async void botaoClonarMercadoria_Click(object sender, EventArgs e)
+        {
+            if (mercadoria == null)
+            {
+                CaixaMensagem.Informacao("Carregue uma mercadoria antes de inicia a clonagem");
+                return;
+            }
+
+            Limpar();
+            mercadoria.Codigo = 0;
+            mercadoria.Id = Guid.Empty;
+            await CarregarDados();
         }
     }
 }

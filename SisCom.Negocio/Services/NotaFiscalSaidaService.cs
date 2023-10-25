@@ -68,11 +68,12 @@ namespace SisCom.Negocio.Services
 
                 var _notaFiscalSaida = await _notaFiscalSaidaRepository.GetById(notaFiscalSaida.Id);
 
-                if ((_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Cancelado) ||
-                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Denegada) ||
-                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Inutilizada) ||
-                    (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Transmitida) ||
-                    ((_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Finalizada) && (!String.IsNullOrWhiteSpace(notaFiscalSaida.Protocolo))))
+                if (_notaFiscalSaida.Status == Entidade.Enum.NF_Status.Cancelado ||
+                    _notaFiscalSaida.Status == Entidade.Enum.NF_Status.Denegada ||
+                    _notaFiscalSaida.Status == Entidade.Enum.NF_Status.Inutilizada ||
+                    _notaFiscalSaida.Status == Entidade.Enum.NF_Status.Transmitida ||
+                    _notaFiscalSaida.Status == Entidade.Enum.NF_Status.Finalizada ||
+                    !String.IsNullOrWhiteSpace(_notaFiscalSaida.Protocolo))
                 {
                     _notaFiscalSaida.RetornoSefaz = notaFiscalSaida.RetornoSefaz;
                     _notaFiscalSaida.RetornoSefazCodigo = notaFiscalSaida.RetornoSefazCodigo;
@@ -85,7 +86,8 @@ namespace SisCom.Negocio.Services
                     _notaFiscalSaida.RetornoCancelamento = notaFiscalSaida.RetornoCancelamento;
                     _notaFiscalSaida.NumeroLoteEnvioSefaz = notaFiscalSaida.NumeroLoteEnvioSefaz;
                     _notaFiscalSaida.Recibo = notaFiscalSaida.Recibo;
-                    _notaFiscalSaida.Protocolo = notaFiscalSaida.Protocolo;
+                    if (string.IsNullOrEmpty(_notaFiscalSaida.Protocolo))
+                    { _notaFiscalSaida.Protocolo = notaFiscalSaida.Protocolo; }
                     _notaFiscalSaida.DataTransmissao = notaFiscalSaida.DataTransmissao;
 
                     if (!String.IsNullOrWhiteSpace(notaFiscalSaida.CodigoChaveAcesso))

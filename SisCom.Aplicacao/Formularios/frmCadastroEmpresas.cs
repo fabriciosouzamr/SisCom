@@ -404,12 +404,11 @@ namespace SisCom.Aplicacao.Formularios
                 CaixaMensagem.Informacao("Informe o C.N.P.J!");
                 return;
             }
-            if (string.IsNullOrEmpty(textInscricaoEstadual.Text.Trim()))
+            if (string.IsNullOrEmpty(textInscricaoEstadual.Text.Trim()) && !CaixaMensagem.Perguntar("Inscrição Estadual em branco deseja gravar mesmo assim?"))
             {
-                CaixaMensagem.Informacao("Informe o número da Inscrição Estadual!");
                 return;
             }
-            if (textNomeFantasia.Text.Trim() == string.Empty)
+            if (string.IsNullOrEmpty(textNomeFantasia.Text))
             {
                 CaixaMensagem.Informacao("Informe o nome de fantasia!");
                 return;
@@ -420,10 +419,8 @@ namespace SisCom.Aplicacao.Formularios
                 return;
             }
 
-            if (empresa == null)
-                empresa = new ViewModels.EmpresaViewModel();
-            if (empresa.Endereco == null)
-                empresa.Endereco = new Endereco();
+            empresa ??= new ViewModels.EmpresaViewModel();
+            empresa.Endereco ??= new Endereco();
 
             empresa.Unidade = Funcao.StringVazioParaNulo(textUnidade.Text);
             empresa.RazaoSocial = Funcao.StringVazioParaNulo(textRazaoSocial.Text);
