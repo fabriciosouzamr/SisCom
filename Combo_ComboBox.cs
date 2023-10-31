@@ -98,7 +98,7 @@ public class Combo_ComboBox
 		}
 	}
 
-	public async static void ComboCidade_Carregar(IServiceProvider serviceProvider,
+	public async static Task ComboCidade_Carregar(IServiceProvider serviceProvider,
 												  IServiceScopeFactory<MeuDbContext> dbCtxFactory,
 												  INotifier _notifier, 
 												  Guid? CidadeId, 
@@ -119,7 +119,7 @@ public class Combo_ComboBox
 
             throw;
         }
-		FormMain main = new FormMain(serviceProvider, dbCtxFactory, _notifier);
+		FormMain main = new(serviceProvider, dbCtxFactory, _notifier);
 
 		Guid estadoId = (await (new CidadeController(main.MeuDbContext(), _notifier)).GetById((Guid)CidadeId)).EstadoId;
 		string estadoCodigo = (await (new EstadoController(main.MeuDbContext(), _notifier)).GetById(estadoId)).Codigo;

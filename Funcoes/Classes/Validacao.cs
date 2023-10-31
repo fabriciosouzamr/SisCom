@@ -14,15 +14,18 @@ namespace Funcoes._Classes
 
         public static bool CPFCNPJ_Valido(TipoPessoa tipoPessoa, string CPFCNPJ)
         {
-			bool ret = false;
+            bool ret;
 
-			switch(tipoPessoa)
+            switch (tipoPessoa)
             {
 				case TipoPessoa.Juridica:
 					ret = CNPJ_Valido(CPFCNPJ);
 					break;
-				default:
-					ret = CPF_Valido(CPFCNPJ);
+                case TipoPessoa.Fisica:
+                    ret = CPF_Valido(CPFCNPJ);
+                    break;
+                default:
+					ret = true;
 					break;
 			}
 

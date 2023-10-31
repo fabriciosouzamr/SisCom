@@ -619,6 +619,14 @@ namespace SisCom.Aplicacao.Formularios
                                         "ID", "Codigo",
                                         ComboBoxStyle.DropDownList,
                                         await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Nome));
+
+            }
+            using (MeuDbContext meuDbContext = this.MeuDbContext())
+            { 
+                    Combo_ComboBox.Formatar(comboInformacoesComplementaresUF,
+                                        "ID", "Codigo",
+                                        ComboBoxStyle.DropDownList,
+                                        await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Nome));
             }
             using (MeuDbContext meuDbContext = this.MeuDbContext())
             {

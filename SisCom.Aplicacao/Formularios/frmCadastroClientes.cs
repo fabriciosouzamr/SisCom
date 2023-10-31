@@ -143,12 +143,12 @@ namespace SisCom.Aplicacao.Formularios
                     if (Carregar)
                     {
                         pessoa = pessoai;
-                        CarregarDados();
+                        await CarregarDados();
                     }
                 }
             }
         }
-        private async void CarregarDados()
+        private async Task CarregarDados()
         {
             if (!FuncaoInterna.NuloModelView(pessoa))
             {
@@ -182,14 +182,20 @@ namespace SisCom.Aplicacao.Formularios
                 textEMail.Text = Funcao.NuloParaString(pessoa.EMail);
                 textObservacoes.Text = Funcao.NuloParaString(pessoa.Observacoes);
 
-                if (pessoa.Endereco != null)
-                if (!Funcao.Nulo(pessoa.Endereco.End_CidadeId)) Combo_ComboBox.ComboCidade_Carregar(this._serviceProvider,
-                                                                                                    this._dbCtxFactory,
-                                                                                                    this._notifier, 
-                                                                                                    pessoa.Endereco.End_CidadeId,
-                                                                                                    comboEnderecoCidade,
-                                                                                                    comboEnderecoUF,
-                                                                                                    comboEnderecoPais);
+                if (pessoa.Endereco != null && pessoa.Endereco.End_CidadeId.HasValue && !Funcao.Nulo(pessoa.Endereco.End_CidadeId))
+                { 
+                    await Combo_ComboBox.ComboCidade_Carregar(this._serviceProvider,
+                                                                this._dbCtxFactory,
+                                                                this._notifier,
+                                                                pessoa.Endereco.End_CidadeId,
+                                                                comboEnderecoCidade,
+                                                                comboEnderecoUF,
+                                                                comboEnderecoPais);
+                }
+                if (pessoa.Endereco.End_PaisId.HasValue)
+                {
+                    comboEnderecoPais.SelectedValue = pessoa.Endereco.End_PaisId;
+                }
             }
         }
         private async void AdicionarPessoa()
@@ -258,7 +264,7 @@ namespace SisCom.Aplicacao.Formularios
         {
             await Navegar_PegarTodos(pessoa.Id, Posicao);
 
-            CarregarDados();
+            await CarregarDados();
         }
         async Task Navegar_PegarTodos(Guid? Id, Declaracoes.eNavegar Posicao)
         {
@@ -532,13 +538,11 @@ namespace SisCom.Aplicacao.Formularios
                 return;
             }
 
-            if (pessoa == null)
-                pessoa = new ViewModels.PessoaViewModel();
-            if (pessoa.Endereco == null)
-                pessoa.Endereco = new Endereco();
+            pessoa ??= new ViewModels.PessoaViewModel();
+            pessoa.Endereco ??= new Endereco();
 
             pessoa.TipoPessoa = (TipoPessoaCliente)comboTipoPessoa.SelectedValue;
-            pessoa.CNPJ_CPF = Funcoes._Classes.Texto.SomenteNumero(maskedCPFCNPJ.Text);
+            pessoa.CNPJ_CPF = pessoa.TipoPessoa == TipoPessoaCliente.Especial ? maskedCPFCNPJ.Text : Funcoes._Classes.Texto.SomenteNumero(maskedCPFCNPJ.Text);
             pessoa.RG = Funcao.StringVazioParaNulo(textRG.Text.Trim());
             pessoa.DatCadastro = dateCadastro.Value;
             pessoa.TipoContribuinte = (TipoContribuinte)comboTipoContribuinte.SelectedValue;
@@ -546,11 +550,14 @@ namespace SisCom.Aplicacao.Formularios
             pessoa.InscricaoMunicipal = Funcao.StringVazioParaNulo(textInscricaoMunicipal.Text);
             pessoa.Nome = Funcao.StringVazioParaNulo(textNome.Text);
             pessoa.RazaoSocial = Funcao.StringVazioParaNulo(textRazaoSocial.Text);
+            pessoa.Endereco.End_Cidade = null;
+            pessoa.Endereco.End_Pais = null;
             pessoa.Endereco.End_CEP = Funcao.StringVazioParaNulo(Funcoes._Classes.Texto.SomenteNumero(maskedEnderecoCEP.Text));
             pessoa.Endereco.End_Logradouro = Funcao.StringVazioParaNulo(textEnderecoLogradouro.Text);
             pessoa.Endereco.End_Numero = Funcao.StringVazioParaNulo(textEnderecoNumero.Text);
             pessoa.Endereco.End_Bairro = Funcao.StringVazioParaNulo(textEnderecoBairro.Text);
             pessoa.Endereco.End_CidadeId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEnderecoCidade);
+            pessoa.Endereco.End_PaisId = Combo_ComboBox.NaoSelecionadoParaNuloGuid(comboEnderecoPais);
             pessoa.Endereco.End_PontoReferencia = Funcao.StringVazioParaNulo(textEnderecoPontoReferencia.Text);
             pessoa.NomeContato = Funcao.StringVazioParaNulo(textNomeContato.Text);
             pessoa.DataNascimento = Funcao.DataVazioParaNulo(dateNascimento.Value);

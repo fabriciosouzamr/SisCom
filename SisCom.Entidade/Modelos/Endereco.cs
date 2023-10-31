@@ -20,8 +20,10 @@ namespace SisCom.Entidade.Modelos
         public string End_PontoReferencia { get; set; }
         [Column("End_CidadeId")]
         public Nullable<Guid> End_CidadeId { get; set; }
+        [Column("End_PaisId")]
+        public Nullable<Guid> End_PaisId { get; set; }
         /* EF Relation */
         public Cidade End_Cidade { get; set; }
-
+        public Pais End_Pais { get; set; }
     }
 }

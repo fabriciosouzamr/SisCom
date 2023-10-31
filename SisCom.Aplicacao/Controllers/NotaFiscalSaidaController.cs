@@ -95,6 +95,7 @@ namespace SisCom.Aplicacao.Controllers
                                                                              i => i.Empresa.Endereco.End_Cidade,
                                                                              i => i.Empresa.Endereco.End_Cidade.Estado,
                                                                              i => i.Empresa.Endereco.End_Cidade.Estado.Pais,
+                                                                             i => i.Empresa.Endereco.End_Pais,
                                                                              i => i.Cliente,
                                                                              i => i.Cliente.Endereco,
                                                                              i => i.Cliente.Endereco.End_Cidade,
@@ -111,7 +112,8 @@ namespace SisCom.Aplicacao.Controllers
                                                                              i => i.NotaFiscalSaidaPagamento,
                                                                              i => i.NotaFiscalSaidaReferencia, 
                                                                              i => i.NotaFiscalSaidaObservacao,
-                                                                             i => i.NotaFiscalFinalidade);
+                                                                             i => i.NotaFiscalFinalidade,
+                                                                             i => i.InformacoesComplementaresInteresseContribuinte_UF);
             return Declaracoes.mapper.Map<IEnumerable<NotaFiscalSaidaViewModel>>(nota);
         }
         public async Task<IEnumerable<NotaFiscalSaidaViewModel>> PesquisarChave(String chave)
