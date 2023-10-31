@@ -1532,7 +1532,7 @@ namespace SisCom.Aplicacao.Formularios
             }
 
             await CarregarNotaFiscal();
-            Assincrono.TaskAsyncAndAwaitAsync(AdicionarNotaFiscalSaida(recarregar));
+            await AdicionarNotaFiscalSaida(recarregar);
 
             Editar(false);
             checkValidado.Checked = true;
@@ -1849,7 +1849,7 @@ namespace SisCom.Aplicacao.Formularios
             vendaId = Guid.Empty;
 
             if (recarregar)
-                await Assincrono.TaskAsyncAndAwaitAsync(CarregarDados());
+                await CarregarDados();
 
             this.MeuDbContextDispose();
 
@@ -2180,18 +2180,18 @@ namespace SisCom.Aplicacao.Formularios
                 }
             }
         }
-        private void botaoExportarNFe_Click(object sender, EventArgs e)
+        private async void botaoExportarNFe_Click(object sender, EventArgs e)
         {
-            ExportarNFe();
+            await ExportarNFe();
         }
         async Task ExportarNFe()
         {
             await GravarNotaFiscalSaida(mensagemexportada: true, recarregar: false);
         }
 
-        private void botaoTransmitir_Click(object sender, EventArgs e)
+        private async void botaoTransmitir_Click(object sender, EventArgs e)
         {
-            Transmitir();
+            await Transmitir();
         }
         async Task Transmitir()
         {
