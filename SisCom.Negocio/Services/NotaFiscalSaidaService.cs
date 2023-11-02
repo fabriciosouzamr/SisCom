@@ -72,7 +72,6 @@ namespace SisCom.Negocio.Services
                     _notaFiscalSaida.Status == Entidade.Enum.NF_Status.Denegada ||
                     _notaFiscalSaida.Status == Entidade.Enum.NF_Status.Inutilizada ||
                     _notaFiscalSaida.Status == Entidade.Enum.NF_Status.Transmitida ||
-                    _notaFiscalSaida.Status == Entidade.Enum.NF_Status.Finalizada ||
                     !String.IsNullOrEmpty(_notaFiscalSaida.Protocolo))
                 {
                     _notaFiscalSaida.RetornoSefaz = notaFiscalSaida.RetornoSefaz;

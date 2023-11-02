@@ -2345,6 +2345,7 @@
             // 
             textInformacoesComplementaresLocal.Location = new System.Drawing.Point(141, 397);
             textInformacoesComplementaresLocal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            textInformacoesComplementaresLocal.MaxLength = 60;
             textInformacoesComplementaresLocal.Name = "textInformacoesComplementaresLocal";
             textInformacoesComplementaresLocal.Size = new System.Drawing.Size(594, 23);
             textInformacoesComplementaresLocal.TabIndex = 48;

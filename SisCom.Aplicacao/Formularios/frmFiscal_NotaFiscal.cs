@@ -622,11 +622,11 @@ namespace SisCom.Aplicacao.Formularios
 
             }
             using (MeuDbContext meuDbContext = this.MeuDbContext())
-            { 
-                    Combo_ComboBox.Formatar(comboInformacoesComplementaresUF,
-                                        "ID", "Codigo",
-                                        ComboBoxStyle.DropDownList,
-                                        await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Nome));
+            {
+                Combo_ComboBox.Formatar(comboInformacoesComplementaresUF,
+                                    "ID", "Codigo",
+                                    ComboBoxStyle.DropDownList,
+                                    await (new EstadoController(this.MeuDbContext(), this._notifier)).ComboCodigo(p => p.Nome));
             }
             using (MeuDbContext meuDbContext = this.MeuDbContext())
             {
@@ -1161,26 +1161,32 @@ namespace SisCom.Aplicacao.Formularios
         }
         async Task<bool> CarregarStatusNotaFiscal()
         {
-            if (notaFiscalSaida != null)
+            try
             {
-                using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                if (notaFiscalSaida != null)
                 {
-                    notaFiscalSaida = (NotaFiscalSaidaViewModel)await notaFiscalSaidaController.PesquisarId(notaFiscalSaida.Id);
-                    ValidarStatus();
-                }
-            }
-            else if (String.IsNullOrEmpty(textNumeroNotaFiscalSaida.Text))
-            {
-                using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
-                {
-                    var notaFiscalSaidas = await notaFiscalSaidaController.PesquisarNotaFiscal(textNumeroNotaFiscalSaida.Text);
-
-                    if (notaFiscalSaidas != null)
+                    using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
                     {
-                        notaFiscalSaida = notaFiscalSaidas.FirstOrDefault();
+                        notaFiscalSaida = (NotaFiscalSaidaViewModel)await notaFiscalSaidaController.PesquisarId(notaFiscalSaida.Id);
                         ValidarStatus();
                     }
                 }
+                else if (String.IsNullOrEmpty(textNumeroNotaFiscalSaida.Text))
+                {
+                    using (NotaFiscalSaidaController notaFiscalSaidaController = new NotaFiscalSaidaController(this.MeuDbContext(), this._notifier))
+                    {
+                        var notaFiscalSaidas = await notaFiscalSaidaController.PesquisarNotaFiscal(textNumeroNotaFiscalSaida.Text);
+
+                        if (notaFiscalSaidas != null)
+                        {
+                            notaFiscalSaida = notaFiscalSaidas.FirstOrDefault();
+                            ValidarStatus();
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
             }
 
             return true;

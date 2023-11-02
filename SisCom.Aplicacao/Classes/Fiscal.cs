@@ -1363,18 +1363,23 @@ namespace SisCom.Aplicacao.Classes
                     return null;
                 }
 
-                oNFe = new NFe.Classes.NFe();
-
-                oNFe.infNFe = new NFe.Classes.Informacoes.infNFe();
-                oNFe.infNFe.versao = "4.00";
-                oNFe.infNFe.ide = new NFe.Classes.Informacoes.Identificacao.ide();
-                oNFe.infNFe.ide.cUF = (DFe.Classes.Entidades.Estado)Convert.ToInt16(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado.CodigoIBGE);
-                oNFe.infNFe.ide.natOp = TratarString(notaFiscalSaidaViewModel.NaturezaOperacao.Nome);
-                oNFe.infNFe.ide.mod = (ModeloDocumento)Convert.ToInt16(notaFiscalSaidaViewModel.Modelo);
-                oNFe.infNFe.ide.serie = Convert.ToInt16(notaFiscalSaidaViewModel.Serie);
-                oNFe.infNFe.ide.nNF = Convert.ToInt16(sNF);
-                oNFe.infNFe.ide.tpNF = tipoNfe;
-                oNFe.infNFe.ide.cMunFG = Convert.ToInt32(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.CodigoIBGE);
+                oNFe = new NFe.Classes.NFe
+                {
+                    infNFe = new NFe.Classes.Informacoes.infNFe
+                    {
+                        versao = "4.00",
+                        ide = new NFe.Classes.Informacoes.Identificacao.ide()
+                        {
+                            cUF = (DFe.Classes.Entidades.Estado)Convert.ToInt16(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado.CodigoIBGE),
+                            natOp = TratarString(notaFiscalSaidaViewModel.NaturezaOperacao.Nome),
+                            mod = (ModeloDocumento)Convert.ToInt16(notaFiscalSaidaViewModel.Modelo),
+                            serie = Convert.ToInt16(notaFiscalSaidaViewModel.Serie),
+                            nNF = Convert.ToInt16(sNF),
+                            tpNF = tipoNfe,
+                            cMunFG = Convert.ToInt32(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.CodigoIBGE)
+                        }
+                    }
+                };
 
                 if (Declaracoes.dados_Empresa_TipoEmirssor == TipoEmissor.Normal)
                 {
@@ -1400,7 +1405,7 @@ namespace SisCom.Aplicacao.Classes
 
                 if (oNFe.infNFe.ide.tpEmis != NFe.Classes.Informacoes.Identificacao.Tipos.TipoEmissao.teNormal)
                 {
-                    oNFe.infNFe.ide.dhCont = DateTime.Now;
+                    oNFe.infNFe.ide.dhCont = notaFiscalSaidaViewModel.DataEmissao;
                     oNFe.infNFe.ide.xJust = "TESTE DE CONTIGÊNCIA PARA NFe/NFCe";
                 }
 
@@ -1464,15 +1469,15 @@ namespace SisCom.Aplicacao.Classes
                 }
                 if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Endereco.End_CEP)) 
                 { oNFe.infNFe.emit.enderEmit.CEP = notaFiscalSaidaViewModel.Empresa.Endereco.End_CEP.Replace("-", "").Replace(".", "").PadLeft(8, '0'); }
-                if (notaFiscalSaidaViewModel.Empresa.Endereco.End_Pais == null)
+                if (notaFiscalSaidaViewModel.Empresa.Endereco.End_Pais == null && notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade != null && notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado != null && notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado.Pais != null)
                 {
-                    oNFe.infNFe.emit.enderEmit.cPais = notaFiscalSaidaViewModel.Cliente_Endereco.End_Pais.CodigoSiscomex;
-                    oNFe.infNFe.emit.enderEmit.xPais = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Pais.Nome);
+                    oNFe.infNFe.emit.enderEmit.cPais = notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado.Pais.CodigoSiscomex;
+                    oNFe.infNFe.emit.enderEmit.xPais = TratarString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Cidade.Estado.Pais.Nome);
                 }
                 else
                 {
-                    oNFe.infNFe.emit.enderEmit.cPais = notaFiscalSaidaViewModel.Cliente_Endereco.End_Pais.CodigoSiscomex == 0 ? 1058 : notaFiscalSaidaViewModel.Cliente_Endereco.End_Pais.CodigoSiscomex;
-                    oNFe.infNFe.emit.enderEmit.xPais = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.Nome);
+                    oNFe.infNFe.emit.enderEmit.cPais = notaFiscalSaidaViewModel.Empresa.Endereco.End_Pais.CodigoSiscomex == 0 ? 1058 : notaFiscalSaidaViewModel.Empresa.Endereco.End_Pais.CodigoSiscomex;
+                    oNFe.infNFe.emit.enderEmit.xPais = TratarString(notaFiscalSaidaViewModel.Empresa.Endereco.End_Pais.Nome);
                 }
 
                 if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Empresa.Telefone))
@@ -1534,8 +1539,16 @@ namespace SisCom.Aplicacao.Classes
                         oNFe.infNFe.dest.enderDest.UF = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Codigo;
                         if (!String.IsNullOrEmpty(notaFiscalSaidaViewModel.Cliente_Endereco.End_CEP))
                             oNFe.infNFe.dest.enderDest.CEP = notaFiscalSaidaViewModel.Cliente_Endereco.End_CEP.Replace("-", "").Replace(".", "").PadLeft(8, '0');
-                        oNFe.infNFe.dest.enderDest.cPais = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.CodigoSiscomex;
-                        oNFe.infNFe.dest.enderDest.xPais = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.Nome);
+                        if (notaFiscalSaidaViewModel.Cliente.Endereco.End_Pais == null)
+                        {
+                            oNFe.infNFe.dest.enderDest.cPais = notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.CodigoSiscomex;
+                            oNFe.infNFe.dest.enderDest.xPais = TratarString(notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Pais.Nome);
+                        }
+                        else
+                        {
+                            oNFe.infNFe.dest.enderDest.cPais = notaFiscalSaidaViewModel.Cliente.Endereco.End_Pais.CodigoSiscomex;
+                            oNFe.infNFe.dest.enderDest.xPais = TratarString(notaFiscalSaidaViewModel.Cliente.Endereco.End_Pais.Nome);
+                        }
                     }
                 }
                 if (!bClienteNaoInformado)
@@ -1642,8 +1655,8 @@ namespace SisCom.Aplicacao.Classes
                     oNFe.infNFe.exporta = new NFe.Classes.Informacoes.exporta
                     {
                         UFSaidaPais = notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_UF.Codigo,
-                        xLocDespacho = notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_Obsersacao,
-                        xLocExporta = notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_Obsersacao
+                        xLocDespacho = notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_Local,
+                        xLocExporta = notaFiscalSaidaViewModel.InformacoesComplementaresInteresseContribuinte_Local
                     };
                 }
                 #endregion
