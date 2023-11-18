@@ -269,7 +269,9 @@ namespace SisCom.Aplicacao.Formularios
                 }
                 using (TabelaCST_CSOSNController tabelaCST_CSOSNController = new TabelaCST_CSOSNController(this.MeuDbContext(), this._notifier))
                 {
-                    tabelaCST_CSOSN = (List<CodigoDescricaoComboViewModel>)await tabelaCST_CSOSNController.Combo(o => o.Codigo, w => w.CRT == Declaracoes.dados_Empresa_RegimeTributario.GetHashCode());
+                    RegimeTributario regimeTributario = Declaracoes.dados_Empresa_RegimeTributario == RegimeTributario.SimplesNacional_ExcessoSublimiteReceitaBruta ? RegimeTributario.RegimeNormal : Declaracoes.dados_Empresa_RegimeTributario;
+                    
+                    tabelaCST_CSOSN = (List<CodigoDescricaoComboViewModel>)await tabelaCST_CSOSNController.Combo(o => o.Codigo, w => w.CRT == regimeTributario.GetHashCode());
                 }
 
                 foreach (CodigoComboViewModel cfop in tabelaCFOP)

@@ -1,4 +1,5 @@
 ﻿using Funcoes._Enum;
+using Funcoes.Enum;
 using Microsoft.VisualBasic.Logging;
 using NFe.Utils.NFe;
 using NFe.Utils.Tributacao.Estadual;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -314,6 +316,11 @@ namespace SisCom.Aplicacao.Classes
             {
                 return null;
             }
+        }
+
+        public static void GerarDanfe(string sXMLPath, string slogomarca, string imprimirCancelado)
+        {
+            Processo.Executar(Declaracoes.externos_SisCom_Aplicacao_FW, "danfe " + "'" + sXMLPath + "' '" + slogomarca + "' " + imprimirCancelado);
         }
 
         public static void MDFeImprimir(string chaveacesso, string status, DateTime dtEmissao)

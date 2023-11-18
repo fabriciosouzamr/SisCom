@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DanfeSharp">
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\DanfeSharp-dev\DanfeSharp\bin\Debug\DanfeSharp.dll</HintPath>
+    </Reference>
     <Reference Include="DFe.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Temp\DFe.NET-master\NFe.Servicos\bin\Release\net462\DFe.Classes.dll</HintPath>

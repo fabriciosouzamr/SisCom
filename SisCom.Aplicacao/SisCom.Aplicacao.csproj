@@ -99,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DanfeSharp">
-      <HintPath>..\..\Aplicação de Terceiros\DLLs\DanfeSharp\DanfeSharp.dll</HintPath>
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\DanfeSharp-dev\DanfeSharp\bin\Debug\DanfeSharp.dll</HintPath>
     </Reference>
     <Reference Include="DFe.Classes">
       <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.AppTeste\bin\Release\DFe.Classes.dll</HintPath>
@@ -905,6 +905,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\SisCom.Aplicacao_FW\CoreCompat.System.Drawing.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\DanfeSharp.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Externos\SisCom.Aplicacao_FW\DanfeSharp.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Externos\SisCom.Aplicacao_FW\DFe.Classes.dll">

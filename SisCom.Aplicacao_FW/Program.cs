@@ -1,4 +1,5 @@
-﻿using DFe.Classes.Entidades;
+﻿using DanfeSharp.Modelo;
+using DFe.Classes.Entidades;
 using DFe.Classes.Extensoes;
 using DFe.Utils;
 using MDFe.Classes.Retorno;
@@ -12,6 +13,9 @@ using NFe.Utils;
 using NFe.Utils.NFe;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -76,6 +80,7 @@ namespace SisCom.Aplicacao_FW
             //cartacorrecao MG 31221111831939000114550010000007201100007201 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cartacorrecao.txt' 00B8070A04D8A768A8
             //cancelamento MG 31221111831939000114550010000007201100007202 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cancelamento.txt' 00B8070A04D8A768A8 131225031170016
             //mdfeimprimir 21230248205505000119580010000000401522422396 transmitido
+            //danfe D:\SisCom\Projeto\SisCom.Aplicacao\bin\Debug\net6.0-windows\temp\Danfe.xml [] N
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -176,6 +181,9 @@ namespace SisCom.Aplicacao_FW
                                  (args[2].ToUpper() == "CANCELADO"),
                                  false,
                                  "");
+                    break;
+                case "danfe":
+                    GerarDanfe(args[1], args[2], args[3] == "S");
                     break;
                 default:
                     break;
@@ -737,6 +745,87 @@ namespace SisCom.Aplicacao_FW
             x = File.CreateText(Path.Combine(_PATH, "Aplicacao_FW_log.txt"));
             x.WriteLine(texto);
             x.Close();
+        }
+        public static void GerarDanfe(string sXMLPath, string slogomarca, bool imprimirCancelado)
+        {
+            try
+            {
+                sXMLPath = sXMLPath.Replace("\\\\", @"\").Replace("'", "");
+                slogomarca = slogomarca.Replace("\\\\", @"\").Replace("'", "");
+
+                DanfeViewModel oModelo = DanfeViewModel.CreateFromXmlFile(sXMLPath);
+                DanfeSharp.Danfe oDanfe;
+
+                oDanfe = new DanfeSharp.Danfe(oModelo);
+
+                if (!string.IsNullOrEmpty(slogomarca) && slogomarca != "[]" && System.IO.File.Exists(slogomarca))
+                {
+                    oDanfe.AdicionarLogoImagem(FilePathToStream(slogomarca, 0, 0));
+                }
+
+                //            oDanfe.Rodape = "Gerado pelo DixMed";
+                oDanfe.CasaDecimaisQuantidadeVolumes = 0;
+                oDanfe.ImprimirCancelado = imprimirCancelado;
+                oDanfe.Gerar();
+                oDanfe.Salvar(sXMLPath.Replace(".xml", ".pdf"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public static Stream FilePathToStream(string pathLogomarca, int newWidth = 0, int newHeight = 0)
+        {
+            try
+            {
+                if (newWidth == 0 || newHeight == 0)
+                {
+                    System.IO.FileStream stream = new FileStream(pathLogomarca, System.IO.FileMode.Open);
+                    return stream;
+                }
+                else
+                {
+                    using (Image originalImage = Image.FromFile(pathLogomarca))
+                    {
+                        using (Image resizedImage = new Bitmap(newWidth, newHeight))
+                        {
+                            using (Graphics graphics = Graphics.FromImage(resizedImage))
+                            {
+                                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                                graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+                                graphics.DrawImage(originalImage, 0, 0, newWidth, newHeight);
+
+                                EncoderParameters encoderParameters = new EncoderParameters(1);
+                                encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, 100);
+
+                                ImageCodecInfo jpegCodec = GetEncoderInfo(ImageFormat.Jpeg);
+
+                                var ms = new MemoryStream();
+                                resizedImage.Save(ms, jpegCodec, encoderParameters);
+                                return ms;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"FilePathToStream - {ex.Message}");
+                return null;
+            }
+        }
+        private static ImageCodecInfo GetEncoderInfo(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
         }
     }
 }

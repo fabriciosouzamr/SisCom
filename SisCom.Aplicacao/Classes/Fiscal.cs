@@ -1,5 +1,4 @@
-﻿using DanfeSharp.Modelo;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -47,7 +46,7 @@ using MDFe.Classes.Servicos.Autorizacao;
 using MDFe.Servicos.EventosMDFe;
 using MDFe.Classes.Extencoes;
 using MDFe.Servicos.RetRecepcaoMDFe;
-using SisCom.Entidade.Modelos;
+using DanfeSharp.Modelo;
 
 namespace SisCom.Aplicacao.Classes
 {
@@ -64,6 +63,7 @@ namespace SisCom.Aplicacao.Classes
         {
             string sXML_Local = Arquivo.DiretorioMontarCaminhoArquivo(Declaracoes.Aplicacao_CaminhoDiretorioTemporaria, "Danfe.xml");
             string sDanfe = Arquivo.ArquivoTemporario("Danfe.pdf");
+            string slogomarca = "[]";
 
             if (File.Exists(sXML_Local)) { File.Delete(sXML_Local); }
             if (File.Exists(sDanfe)) { File.Delete(sDanfe); }
@@ -74,25 +74,32 @@ namespace SisCom.Aplicacao.Classes
             writer.Write(sXML);
             writer.Close();
 
-            DanfeViewModel oModelo = DanfeViewModel.CreateFromXmlFile(sXML_Local);
-            DanfeSharp.Danfe oDanfe;
-
-            oDanfe = new DanfeSharp.Danfe(oModelo);
-
             if (!string.IsNullOrEmpty(Declaracoes.dados_Empresa_PathLogomarca) && System.IO.File.Exists(Declaracoes.dados_Empresa_PathLogomarca))
             {
-                oDanfe.AdicionarLogoImagem(Imagem.FilePathToStream(Declaracoes.dados_Empresa_PathLogomarca, 0, 0));
-            }
-            else if (Declaracoes.dados_Empresa_Logotipo != null)
-            {
-                oDanfe.AdicionarLogoImagem(Imagem.ByteArrayToSteam(Declaracoes.dados_Empresa_Logotipo));
+                slogomarca= Declaracoes.dados_Empresa_PathLogomarca;
             }
 
-            oDanfe.Rodape = "Gerado pelo DixMed";
-            oDanfe.CasaDecimaisQuantidadeVolumes = 0;
-            oDanfe.ImprimirCancelado = imprimirCancelado;
-            oDanfe.Gerar();
-            oDanfe.Salvar(sDanfe);
+            Zeus.GerarDanfe(sXML_Local, slogomarca, (imprimirCancelado ? "S" : "N"));
+
+//            DanfeViewModel oModelo = DanfeViewModel.CreateFromXmlFile(sXML_Local);
+//            DanfeSharp.Danfe oDanfe;
+
+//            oDanfe = new DanfeSharp.Danfe(oModelo);
+
+//            if (!string.IsNullOrEmpty(Declaracoes.dados_Empresa_PathLogomarca) && System.IO.File.Exists(Declaracoes.dados_Empresa_PathLogomarca))
+//            {
+//                oDanfe.AdicionarLogoImagem(Imagem.FilePathToStream(Declaracoes.dados_Empresa_PathLogomarca, 0, 0));
+//            }
+//            else if (Declaracoes.dados_Empresa_Logotipo != null)
+//            {
+//                oDanfe.AdicionarLogoImagem(Imagem.ByteArrayToSteam(Declaracoes.dados_Empresa_Logotipo));
+//            }
+
+////            oDanfe.Rodape = "Gerado pelo DixMed";
+//            //oDanfe.CasaDecimaisQuantidadeVolumes = 0;
+//            //oDanfe.ImprimirCancelado = imprimirCancelado;
+//            oDanfe.Gerar();
+//            oDanfe.Salvar(sDanfe);
 
             if(abrirArquivo) { System.Diagnostics.Process.Start(@"C:\Windows\explorer.exe", sDanfe); }
         }
