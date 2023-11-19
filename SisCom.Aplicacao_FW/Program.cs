@@ -80,7 +80,7 @@ namespace SisCom.Aplicacao_FW
             //cartacorrecao MG 31221111831939000114550010000007201100007201 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cartacorrecao.txt' 00B8070A04D8A768A8
             //cancelamento MG 31221111831939000114550010000007201100007202 11831939000114 'D:\\SisCom\\Projeto\\SisCom.Aplicacao\\bin\\Debug\\net6.0-windows\\temp\\cancelamento.txt' 00B8070A04D8A768A8 131225031170016
             //mdfeimprimir 21230248205505000119580010000000401522422396 transmitido
-            //danfe D:\SisCom\Projeto\SisCom.Aplicacao\bin\Debug\net6.0-windows\temp\Danfe.xml [] N
+            //danfe 'D:\SisCom\Projeto\SisCom.Aplicacao\bin\Debug\net6.0-windows\temp\Danfe.xml' 'C:\Users\PC\Downloads\LOGO CAFEEIRA FERNANDES_page-0001.jpg' N
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -183,7 +183,7 @@ namespace SisCom.Aplicacao_FW
                                  "");
                     break;
                 case "danfe":
-                    GerarDanfe(args[1], args[2], args[3] == "S");
+                    GerarDanfe(String.Join(" ", args).Split('|')[1], String.Join(" ", args).Split('|')[2], String.Join(" ", args).Split('|')[3] == "S");
                     break;
                 default:
                     break;
@@ -750,9 +750,6 @@ namespace SisCom.Aplicacao_FW
         {
             try
             {
-                sXMLPath = sXMLPath.Replace("\\\\", @"\").Replace("'", "");
-                slogomarca = slogomarca.Replace("\\\\", @"\").Replace("'", "");
-
                 DanfeViewModel oModelo = DanfeViewModel.CreateFromXmlFile(sXMLPath);
                 DanfeSharp.Danfe oDanfe;
 
