@@ -279,6 +279,7 @@ namespace SisCom.Aplicacao_FW
                         consulta.versao = retornoConsulta.Retorno.versao;
                         consulta.xMotivo = retornoConsulta.Retorno.xMotivo;
                         consulta.RetornoStr = retornoConsulta.RetornoStr;
+                        mensagem = retornoConsulta.Retorno.xMotivo;
 
                         if (retornoConsulta.Retorno.protNFe.Any())
                         {
@@ -294,6 +295,7 @@ namespace SisCom.Aplicacao_FW
                         consulta.versao = retornoConsulta.Retorno.versao;
                         consulta.xMotivo = retornoConsulta.Retorno.xMotivo;
                         consulta.RetornoStr = retornoConsulta.RetornoStr;
+                        mensagem = retornoConsulta.Retorno.xMotivo;
 
                         if (retornoConsulta.Retorno.protNFe != null)
                             consulta.protNFe = retornoConsulta.Retorno.protNFe;

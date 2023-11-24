@@ -91,6 +91,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Temp\DFe.NET-master\NFe.Servicos\bin\Release\net462\NFe.Utils.dll</HintPath>
     </Reference>
+    <Reference Include="NFe.Wsdl">
+      <HintPath>..\..\..\Aplicação de Terceiros\Fiscal\Zeus\NFe.AppTeste\bin\Release\NFe.Wsdl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

@@ -46,7 +46,7 @@ using MDFe.Classes.Servicos.Autorizacao;
 using MDFe.Servicos.EventosMDFe;
 using MDFe.Classes.Extencoes;
 using MDFe.Servicos.RetRecepcaoMDFe;
-using DanfeSharp.Modelo;
+using System.Windows.Forms;
 
 namespace SisCom.Aplicacao.Classes
 {
