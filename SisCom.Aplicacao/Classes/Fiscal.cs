@@ -1571,6 +1571,7 @@ namespace SisCom.Aplicacao.Classes
                 if (notaFiscalSaidaViewModel.Cliente.TipoPessoa == Funcoes._Enum.TipoPessoaCliente.Especial || notaFiscalSaidaViewModel.Cliente_Endereco.End_Cidade.Estado.Codigo == "EX")
                 {
                     oNFe.infNFe.dest.indIEDest = NFe.Classes.Informacoes.Destinatario.indIEDest.NaoContribuinte;
+                    oNFe.infNFe.ide.idDest = DestinoOperacao.doExterior;
                 }
                 else
                 {
