@@ -313,8 +313,8 @@ namespace SisCom.Aplicacao.Formularios
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Grid_DataGridView.TipoColuna.Button, 80);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Excluir", "Excluir", Grid_DataGridView.TipoColuna.Button, 80);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "Impostos", "Impostos", Tamanho: 0);
-                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "PesoBruto", "PesoBruto", Tamanho: 0, Tipo: Grid_DataGridView.TipoColuna.Valor);
-                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "PesoLiquido", "PesoLiquido", Tamanho: 0, Tipo: Grid_DataGridView.TipoColuna.Valor);
+                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "PesoBruto", "PesoBruto", Tamanho: 100, Tipo: Grid_DataGridView.TipoColuna.Numero, readOnly: true);
+                Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "PesoLiquido", "PesoLiquido", Tamanho: 100, Tipo: Grid_DataGridView.TipoColuna.Numero, readOnly: true);
                 Grid_DataGridView.User_ColunaAdicionar(gridMercadoria, "NotaFiscalSaidaId", "NotaFiscalSaidaId", Tamanho: 0);
 
                 //Cobrança da Nota
@@ -2003,14 +2003,36 @@ namespace SisCom.Aplicacao.Formularios
         }
         private void CalcularMercadoriaPeso()
         {
+            bool volumeTransportadosPesoBruto = false;
+            bool volumeTransportadosPesoLiquido = false;
+            bool volumeTransportadosQuantidade = false;
+
             if (numericVolumeTransportadosPesoBruto.Value == 0)
-                numericVolumeTransportadosPesoBruto.Value = Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade) *
-                                                            Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_PesoBruto);
+            {
+                numericVolumeTransportadosPesoBruto.Value = 0;
+                volumeTransportadosPesoBruto = true;
+            }
             if (numericVolumeTransportadosPesoLiquido.Value == 0)
-                numericVolumeTransportadosPesoLiquido.Value = Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade) *
-                                                          Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_PesoLiquido);
+            {
+                numericVolumeTransportadosPesoLiquido.Value = 0;
+                volumeTransportadosPesoLiquido = true;
+            }
             if (numericVolumeTransportadosQuantidade.Value == 0)
-                numericVolumeTransportadosQuantidade.Value = Grid_DataGridView.User_CalcularColunaValor(gridMercadoria, gridMercadoria_Quantidade);
+            {
+                numericVolumeTransportadosQuantidade.Value = 0;
+                volumeTransportadosQuantidade = true;
+            }
+
+            foreach (DataGridViewRow row in gridMercadoria.Rows)
+            {
+                if (volumeTransportadosPesoBruto)
+                    numericVolumeTransportadosPesoBruto.Value += Convert.ToDecimal(row.Cells[gridMercadoria_Quantidade].Value) * Convert.ToDecimal(row.Cells[gridMercadoria_PesoBruto].Value);
+                if (volumeTransportadosPesoLiquido)
+                    numericVolumeTransportadosPesoLiquido.Value += Convert.ToDecimal(row.Cells[gridMercadoria_Quantidade].Value) * Convert.ToDecimal(row.Cells[gridMercadoria_PesoLiquido].Value);
+                if (volumeTransportadosQuantidade)
+                    numericVolumeTransportadosQuantidade.Value += Convert.ToDecimal(row.Cells[gridMercadoria_Quantidade].Value);
+            }
+
         }
         private void CalcularMercadoriaImpostos()
         {
